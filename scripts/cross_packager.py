@@ -197,10 +197,11 @@ def main() -> None:
         shutil.rmtree(out_dir)
     out_dir.mkdir(parents=True)
 
-    manifest = copy_manifest(skill_dir, out_dir)
-    generated = [str(manifest)]
+    generated = []
     failures = []
     try:
+        manifest = copy_manifest(skill_dir, out_dir)
+        generated.append(str(manifest))
         for platform in (args.platform or ["generic"]):
             generated.append(str(write_adapter(skill_dir, out_dir, platform)))
         if args.zip:

@@ -1,0 +1,16 @@
+{
+  "name": "yao-meta-skill",
+  "description": "Create, refactor, evaluate, and package agent skills from workflows, transcripts, prompts, docs, or rough notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, optimize skill triggering, add evals, or prepare a skill for team reuse. Relevant for meta-skills, skill factories, skill templates, skill QA, and cross-platform skill packaging.",
+  "version": "1.0.0",
+  "platform": "generic",
+  "skill_root": "yao-meta-skill",
+  "display_name": "Yao Meta Skill",
+  "short_description": "Create robust, trigger-aware agent skills",
+  "default_prompt": "Use $yao-meta-skill to turn my workflow, prompt set, or rough notes into a production-ready skill with strong triggering, lean structure, and an eval plan.",
+  "canonical_metadata": "agents/interface.yaml",
+  "adapter_targets": [
+    "openai",
+    "claude",
+    "generic"
+  ]
+}

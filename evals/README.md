@@ -17,4 +17,14 @@ Use:
 python3 scripts/trigger_eval.py --description-file evals/improved_description.txt --cases evals/trigger_cases.json --threshold 0.35
 python3 scripts/trigger_eval.py --description-file evals/improved_description.txt --cases evals/trigger_cases.json --baseline-description-file evals/baseline_description.txt --threshold 0.35
 python3 scripts/cross_packager.py . --platform openai --platform claude --expectations evals/packaging_expectations.json --zip
+python3 tests/verify_packager_failures.py
 ```
+
+Regression scope now includes:
+
+- direct positives
+- direct negatives
+- near neighbors
+- long-context positives
+- mixed-intent negatives
+- explicit "do not build a skill" negatives

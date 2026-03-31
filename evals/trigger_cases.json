@@ -1,5 +1,5 @@
 {
-  "recommended_threshold": 0.42,
+  "recommended_threshold": 0.37,
   "negative_patterns": [
     "one-off",
     "do not turn",
@@ -17,7 +17,10 @@
     "Convert this operations checklist into a reusable skill.",
     "Refactor this prompt into a proper skill package.",
     "Add trigger evals to this skill before sharing it with the team.",
-    "Create a meta-skill for packaging internal workflows."
+    "Create a meta-skill for packaging internal workflows.",
+    "We have a messy release runbook, export process, and a prompt history; turn all of that into one reusable skill package with evals and packaging checks.",
+    "Build a reusable skill from this long internal process note, and make sure it has references, scripts, and a trigger description.",
+    "Take this existing skill draft, tighten the trigger boundary, add near-neighbor evals, and package it for distribution."
   ],
   "should_not_trigger": [
     "Explain what a workflow is.",
@@ -26,7 +29,10 @@
     "Just explain what a skill is.",
     "Draft a blog title for this article.",
     "Translate this README into Japanese.",
-    "Give me ideas for improving our process."
+    "Give me ideas for improving our process.",
+    "I pasted a long process description below, but I only want a summary, not a reusable skill.",
+    "Review this note and tell me what it means in plain English.",
+    "Help me brainstorm several ways to improve packaging, but do not generate any skill files."
   ],
   "near_neighbor": [
     "Create a one-off prompt for this task.",
@@ -35,6 +41,9 @@
     "Make a checklist for this task, but not a reusable skill.",
     "Review this process note and explain it, no packaging needed.",
     "Help me shape an idea before we decide whether to build a skill.",
-    "Write a custom answer for this request without creating a skill package."
+    "Write a custom answer for this request without creating a skill package.",
+    "Turn this into a checklist and template, but stop short of making a full skill.",
+    "Package this explanation as a document, not as an agent skill.",
+    "Create an outline for a possible future skill, but do not build the skill yet."
   ]
 }

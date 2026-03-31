@@ -35,6 +35,13 @@ Minimum commands:
 python3 scripts/trigger_eval.py --description-file evals/improved_description.txt --cases evals/trigger_cases.json
 python3 scripts/context_sizer.py .
 python3 scripts/cross_packager.py . --platform openai --platform claude --platform generic --expectations evals/packaging_expectations.json --zip
+python3 tests/verify_packager_failures.py
+```
+
+Or run everything together:
+
+```bash
+make test
 ```
 
 ## What It Does
@@ -113,6 +120,7 @@ Three end-to-end examples showing raw workflow input, design summary, and final 
 - The sample trigger report now covers a larger positive, negative, and near-neighbor set rather than a tiny demo set.
 - Packaging validation now uses explicit contracts and YAML parsing, but it is still a lightweight local validation layer rather than a full platform integration suite.
 - `evals/failure-cases.md` captures known weak spots that should remain part of regression checks.
+- `tests/verify_packager_failures.py` checks that invalid metadata, invalid YAML, and unsupported targets fail clearly.
 
 ### `templates/`
 
@@ -183,6 +191,7 @@ This project is best for:
 - Examples: [examples/README.md](examples/README.md)
 - Evals: [evals/README.md](evals/README.md)
 - Packaging contracts: [references/packaging-contracts.md](references/packaging-contracts.md)
+- Failure fixtures: [tests/fixtures](tests/fixtures)
 
 ## License
 

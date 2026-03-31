@@ -1,0 +1,7 @@
+interface:
+  display_name: "Broken Skill"
+  short_description: "Missing default prompt on purpose"
+compatibility:
+  canonical_format: "agent-skills"
+  adapter_targets:
+    - "openai"
