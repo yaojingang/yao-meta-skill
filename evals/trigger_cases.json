@@ -1,18 +1,40 @@
 {
+  "recommended_threshold": 0.42,
+  "negative_patterns": [
+    "one-off",
+    "do not turn",
+    "without building",
+    "brainstorm",
+    "just explain",
+    "headline",
+    "summarize"
+  ],
   "should_trigger": [
     "Create a skill from this repeated workflow.",
     "Improve this skill description and add evals.",
     "Turn this runbook into a reusable agent skill.",
-    "Package this skill for team reuse."
+    "Package this skill for team reuse.",
+    "Convert this operations checklist into a reusable skill.",
+    "Refactor this prompt into a proper skill package.",
+    "Add trigger evals to this skill before sharing it with the team.",
+    "Create a meta-skill for packaging internal workflows."
   ],
   "should_not_trigger": [
     "Explain what a workflow is.",
     "Write a product headline for this landing page.",
-    "Summarize this random note."
+    "Summarize this random note.",
+    "Just explain what a skill is.",
+    "Draft a blog title for this article.",
+    "Translate this README into Japanese.",
+    "Give me ideas for improving our process."
   ],
   "near_neighbor": [
     "Create a one-off prompt for this task.",
     "Help me brainstorm process ideas without building a skill.",
-    "Improve this README but do not turn it into a skill."
+    "Improve this README but do not turn it into a skill.",
+    "Make a checklist for this task, but not a reusable skill.",
+    "Review this process note and explain it, no packaging needed.",
+    "Help me shape an idea before we decide whether to build a skill.",
+    "Write a custom answer for this request without creating a skill package."
   ]
 }

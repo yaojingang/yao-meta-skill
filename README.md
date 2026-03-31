@@ -29,6 +29,14 @@ It turns rough workflows, transcripts, prompts, notes, and runbooks into reusabl
 4. Export compatibility artifacts for the clients you care about.
 5. Compare the result against the examples in `examples/`.
 
+Minimum commands:
+
+```bash
+python3 scripts/trigger_eval.py --description-file evals/improved_description.txt --cases evals/trigger_cases.json
+python3 scripts/context_sizer.py .
+python3 scripts/cross_packager.py . --platform openai --platform claude --platform generic --expectations evals/packaging_expectations.json --zip
+```
+
 ## What It Does
 
 This project helps you create, refactor, evaluate, and package skills as durable capability bundles rather than one-off prompts.
@@ -98,6 +106,13 @@ Reusable trigger and packaging checks, including baseline and improved descripti
 ### `examples/`
 
 Three end-to-end examples showing raw workflow input, design summary, and final generated skill shape.
+
+## Validation Notes
+
+- Trigger evaluation is stronger than the original overlap-only version, but it is still heuristic.
+- The sample trigger report now covers a larger positive, negative, and near-neighbor set rather than a tiny demo set.
+- Packaging validation now uses explicit contracts and YAML parsing, but it is still a lightweight local validation layer rather than a full platform integration suite.
+- `evals/failure-cases.md` captures known weak spots that should remain part of regression checks.
 
 ### `templates/`
 

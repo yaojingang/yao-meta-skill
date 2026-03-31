@@ -4,53 +4,23 @@ import json
 import shutil
 import zipfile
 from pathlib import Path
+import yaml
 
 
 def read_simple_yaml(path: Path) -> dict:
-    lines = path.read_text(encoding="utf-8").splitlines()
-    data: dict = {}
-    stack: list[tuple[int, dict]] = [(0, data)]
-    for raw_line in lines:
-        if not raw_line.strip() or raw_line.lstrip().startswith("#"):
-            continue
-        indent = len(raw_line) - len(raw_line.lstrip(" "))
-        line = raw_line.strip()
-        while len(stack) > 1 and indent <= stack[-1][0]:
-            stack.pop()
-        parent = stack[-1][1]
-        if line.startswith("- "):
-            item = line[2:].strip().strip("'\"")
-            existing = parent.setdefault("__list__", [])
-            existing.append(item)
-            continue
-        if ":" not in line:
-            continue
-        key, value = line.split(":", 1)
-        key = key.strip()
-        value = value.strip()
-        if value == "":
-            child: dict = {}
-            parent[key] = child
-            stack.append((indent, child))
-        else:
-            parent[key] = value.strip("'\"")
-    return data
+    return yaml.safe_load(path.read_text(encoding="utf-8")) or {}
 
 
 def read_frontmatter(skill_md: Path) -> dict:
+    if not skill_md.exists():
+        raise FileNotFoundError(f"Missing required file: {skill_md}")
     text = skill_md.read_text(encoding="utf-8")
     if not text.startswith("---"):
         return {}
     parts = text.split("---", 2)
     if len(parts) < 3:
         return {}
-    data = {}
-    for line in parts[1].splitlines():
-        if ":" not in line:
-            continue
-        key, value = line.split(":", 1)
-        data[key.strip()] = value.strip().strip("'\"")
-    return data
+    return yaml.safe_load(parts[1]) or {}
 
 
 def read_interface(skill_dir: Path) -> dict:
@@ -58,18 +28,22 @@ def read_interface(skill_dir: Path) -> dict:
     if not path.exists():
         return {}
     raw = read_simple_yaml(path)
-    compatibility = raw.get("compatibility", {})
-    targets = compatibility.get("adapter_targets", {})
-    if isinstance(targets, dict) and "__list__" in targets:
-        compatibility["adapter_targets"] = targets["__list__"]
-    raw["compatibility"] = compatibility
     return raw
+
+
+def require_fields(payload: dict, fields: list[str], label: str) -> None:
+    missing = [field for field in fields if not payload.get(field)]
+    if missing:
+        raise ValueError(f"Missing required {label} fields: {', '.join(missing)}")
 
 
 def build_manifest(skill_dir: Path, platform: str) -> dict:
     frontmatter = read_frontmatter(skill_dir / "SKILL.md")
-    interface = read_interface(skill_dir).get("interface", {})
-    compatibility = read_interface(skill_dir).get("compatibility", {})
+    interface_doc = read_interface(skill_dir)
+    interface = interface_doc.get("interface", {})
+    compatibility = interface_doc.get("compatibility", {})
+    require_fields(frontmatter, ["name", "description"], "frontmatter")
+    require_fields(interface, ["display_name", "short_description", "default_prompt"], "interface")
     return {
         "name": frontmatter.get("name", skill_dir.name),
         "description": frontmatter.get("description", ""),
@@ -127,6 +101,8 @@ def write_yaml_like(path: Path, payload: dict) -> None:
 def write_adapter(skill_dir: Path, out_dir: Path, platform: str) -> Path:
     target_dir = out_dir / "targets" / platform
     target_dir.mkdir(parents=True, exist_ok=True)
+    if platform not in PLATFORM_CONTRACTS:
+        raise ValueError(f"Unsupported platform: {platform}")
     payload = build_manifest(skill_dir, platform)
     if platform == "openai":
         meta_dir = target_dir / "agents"
@@ -223,13 +199,17 @@ def main() -> None:
 
     manifest = copy_manifest(skill_dir, out_dir)
     generated = [str(manifest)]
-    for platform in (args.platform or ["generic"]):
-        generated.append(str(write_adapter(skill_dir, out_dir, platform)))
-    if args.zip:
-        generated.append(str(make_zip(skill_dir, out_dir)))
+    failures = []
+    try:
+        for platform in (args.platform or ["generic"]):
+            generated.append(str(write_adapter(skill_dir, out_dir, platform)))
+        if args.zip:
+            generated.append(str(make_zip(skill_dir, out_dir)))
+    except (FileNotFoundError, ValueError, yaml.YAMLError) as exc:
+        failures.append(str(exc))
 
     expectations = load_expectations(Path(args.expectations).resolve()) if args.expectations else {}
-    validation = validate_exports(out_dir, expectations) if expectations else None
+    validation = validate_exports(out_dir, expectations) if expectations and not failures else None
     report = {
         "output_dir": str(out_dir),
         "generated": generated,
@@ -238,10 +218,13 @@ def main() -> None:
         "failure_handling": {
             "missing_required_file": "exit with code 2 when expectations are provided and validation fails",
             "missing_required_field": "exit with code 2 when expectations are provided and validation fails",
+            "invalid_yaml_or_frontmatter": "exit with code 2 when parsing fails",
+            "unsupported_platform": "exit with code 2 when the platform is not defined in PLATFORM_CONTRACTS",
         },
+        "failures": failures,
     }
     print(json.dumps(report, ensure_ascii=False, indent=2))
-    if validation and not validation["ok"]:
+    if failures or (validation and not validation["ok"]):
         raise SystemExit(2)
 
 

@@ -3,6 +3,7 @@ import argparse
 import json
 import re
 from pathlib import Path
+from collections import Counter
 
 
 WORD_RE = re.compile(r"[a-zA-Z0-9][a-zA-Z0-9_-]*")
@@ -37,12 +38,67 @@ def score_prompt(description_words: set[str], prompt: str) -> float:
     return len(overlap) / len(prompt_words)
 
 
+def token_frequencies(cases: dict, buckets: tuple[str, ...]) -> Counter:
+    freq: Counter = Counter()
+    for bucket in buckets:
+        for prompt in cases.get(bucket, []):
+            freq.update(words(prompt))
+    return freq
+
+
+def compile_negative_patterns(cases: dict) -> list[re.Pattern[str]]:
+    return [re.compile(pattern, re.IGNORECASE) for pattern in cases.get("negative_patterns", [])]
+
+
+def score_prompt_weighted(description_words: set[str], prompt: str, positive_freq: Counter, negative_freq: Counter, negative_patterns: list[re.Pattern[str]]) -> tuple[float, dict]:
+    prompt_words = words(prompt)
+    if not prompt_words:
+        return 0.0, {"matched_positive_tokens": [], "matched_negative_tokens": [], "matched_negative_patterns": []}
+
+    overlap = description_words & prompt_words
+    base_score = len(overlap) / len(prompt_words)
+
+    weighted_bonus = 0.0
+    matched_positive_tokens = []
+    matched_negative_tokens = []
+    for token in overlap:
+        pos = positive_freq.get(token, 0)
+        neg = negative_freq.get(token, 0)
+        if pos > neg:
+            weighted_bonus += 0.06
+            matched_positive_tokens.append(token)
+
+    weighted_penalty = 0.0
+    for token in prompt_words:
+        neg = negative_freq.get(token, 0)
+        pos = positive_freq.get(token, 0)
+        if neg > pos and token not in overlap:
+            weighted_penalty += 0.04
+            matched_negative_tokens.append(token)
+
+    matched_negative_patterns = [pattern.pattern for pattern in negative_patterns if pattern.search(prompt)]
+    pattern_penalty = 0.18 * len(matched_negative_patterns)
+
+    score = max(0.0, min(1.0, base_score + weighted_bonus - weighted_penalty - pattern_penalty))
+    return score, {
+        "matched_positive_tokens": sorted(set(matched_positive_tokens)),
+        "matched_negative_tokens": sorted(set(matched_negative_tokens)),
+        "matched_negative_patterns": matched_negative_patterns,
+        "base_score": round(base_score, 3),
+        "weighted_bonus": round(weighted_bonus, 3),
+        "weighted_penalty": round(weighted_penalty + pattern_penalty, 3),
+    }
+
+
 def classify_bucket(bucket: str) -> bool:
     return bucket == "should_trigger"
 
 
 def evaluate(description: str, cases: dict, threshold: float) -> dict:
     desc_words = words(description)
+    positive_freq = token_frequencies(cases, ("should_trigger",))
+    negative_freq = token_frequencies(cases, ("should_not_trigger", "near_neighbor"))
+    negative_patterns = compile_negative_patterns(cases)
     results = {"should_trigger": [], "should_not_trigger": [], "near_neighbor": []}
     fp = 0
     fn = 0
@@ -54,7 +110,7 @@ def evaluate(description: str, cases: dict, threshold: float) -> dict:
         total = 0
         passed_count = 0
         for prompt in cases.get(bucket, []):
-            score = score_prompt(desc_words, prompt)
+            score, score_detail = score_prompt_weighted(desc_words, prompt, positive_freq, negative_freq, negative_patterns)
             predicted = score >= threshold
             passed = predicted == expected
             total += 1
@@ -70,6 +126,7 @@ def evaluate(description: str, cases: dict, threshold: float) -> dict:
                 "predicted_trigger": predicted,
                 "expected_trigger": expected,
                 "passed": passed,
+                "score_detail": score_detail,
             }
             if 0.75 * threshold <= score <= 1.25 * threshold:
                 record["boundary_case"] = True
@@ -81,6 +138,7 @@ def evaluate(description: str, cases: dict, threshold: float) -> dict:
                         "prompt": prompt,
                         "score": round(score, 3),
                         "reason": "false_negative" if expected else "false_positive",
+                        "matched_negative_patterns": score_detail["matched_negative_patterns"],
                     }
                 )
         bucket_stats[bucket] = {
@@ -95,7 +153,7 @@ def evaluate(description: str, cases: dict, threshold: float) -> dict:
 
     return {
         "threshold": threshold,
-        "threshold_explanation": "Prompts at or above the threshold are treated as trigger matches. Scores near the threshold should be reviewed as boundary cases.",
+        "threshold_explanation": "Prompts at or above the threshold are treated as trigger matches. Final scores combine token overlap, positive-token bonuses, negative-token penalties, and explicit negative-pattern penalties. Scores near the threshold should be reviewed as boundary cases.",
         "false_positives": fp,
         "false_negatives": fn,
         "precision": round(precision, 3) if precision is not None else None,
@@ -128,7 +186,7 @@ def main() -> None:
     parser.add_argument("--baseline-description", help="Baseline description string to compare against")
     parser.add_argument("--baseline-description-file", help="Read baseline description from file")
     parser.add_argument("--cases", required=True, help="JSON file with should_trigger and should_not_trigger arrays")
-    parser.add_argument("--threshold", type=float, default=0.18, help="Token overlap threshold")
+    parser.add_argument("--threshold", type=float, default=None, help="Trigger threshold override")
     args = parser.parse_args()
 
     description = args.description
@@ -138,13 +196,14 @@ def main() -> None:
         raise SystemExit("Provide --description or --description-file")
 
     cases = load_cases(Path(args.cases))
-    report = evaluate(description, cases, args.threshold)
+    threshold = args.threshold if args.threshold is not None else cases.get("recommended_threshold", 0.35)
+    report = evaluate(description, cases, threshold)
 
     baseline = args.baseline_description
     if args.baseline_description_file:
         baseline = extract_description(Path(args.baseline_description_file).read_text(encoding="utf-8"))
     if baseline:
-        report["comparison"] = compare_reports(evaluate(baseline, cases, args.threshold), report)
+        report["comparison"] = compare_reports(evaluate(baseline, cases, threshold), report)
 
     print(json.dumps(report, ensure_ascii=False, indent=2))
     if report["false_positives"] > 2:

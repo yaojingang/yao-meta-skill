@@ -8,6 +8,7 @@ Contents:
 - `baseline_description.txt`: intentionally weaker trigger description
 - `improved_description.txt`: current stronger trigger description
 - `sample_trigger_report.json`: example comparison output using threshold `0.35`
+- `failure-cases.md`: current weak spots and regression targets
 - `packaging_expectations.json`: required packaging behaviors for supported targets
 
 Use:

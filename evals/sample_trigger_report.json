@@ -1,36 +1,36 @@
 {
-  "threshold": 0.35,
-  "threshold_explanation": "Prompts at or above the threshold are treated as trigger matches. Scores near the threshold should be reviewed as boundary cases.",
-  "false_positives": 2,
+  "threshold": 0.42,
+  "threshold_explanation": "Prompts at or above the threshold are treated as trigger matches. Final scores combine token overlap, positive-token bonuses, negative-token penalties, and explicit negative-pattern penalties. Scores near the threshold should be reviewed as boundary cases.",
+  "false_positives": 0,
   "false_negatives": 0,
-  "precision": 0.667,
+  "precision": 1.0,
   "recall": 1.0,
   "bucket_stats": {
     "should_trigger": {
-      "total": 4,
-      "passed": 4,
+      "total": 8,
+      "passed": 8,
       "pass_rate": 1.0
     },
     "should_not_trigger": {
-      "total": 3,
-      "passed": 3,
+      "total": 7,
+      "passed": 7,
       "pass_rate": 1.0
     },
     "near_neighbor": {
-      "total": 3,
-      "passed": 1,
-      "pass_rate": 0.333
+      "total": 7,
+      "passed": 7,
+      "pass_rate": 1.0
     }
   },
   "comparison": {
     "baseline_false_positives": 0,
-    "baseline_false_negatives": 4,
-    "improved_false_positives": 2,
+    "baseline_false_negatives": 8,
+    "improved_false_positives": 0,
     "improved_false_negatives": 0,
-    "false_positive_delta": 2,
-    "false_negative_delta": -4,
+    "false_positive_delta": 0,
+    "false_negative_delta": -8,
     "baseline_precision": null,
-    "improved_precision": 0.667,
+    "improved_precision": 1.0,
     "baseline_recall": 0.0,
     "improved_recall": 1.0
   }
