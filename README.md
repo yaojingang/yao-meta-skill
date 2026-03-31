@@ -15,6 +15,12 @@ It turns rough workflows, transcripts, prompts, notes, and runbooks into reusabl
 - optional references, scripts, and evals
 - neutral source metadata plus client-specific adapters
 
+## Quick Start
+
+1. Describe the workflow, prompt set, or repeated task you want to turn into a skill.
+2. Use `yao-meta-skill` to generate or improve the package in scaffold, production, or library mode.
+3. Run `context_sizer.py`, `trigger_eval.py`, and `cross_packager.py` as needed to validate and export the result.
+
 ## What It Does
 
 This project helps you create, refactor, evaluate, and package skills as durable capability bundles rather than one-off prompts.

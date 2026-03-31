@@ -9,6 +9,12 @@
 - 可选的 references、scripts 和 evals
 - 中性的源元数据以及面向不同客户端的适配层
 
+## Quick Start
+
+1. 先描述你想沉淀成 skill 的 workflow、prompt 集合或重复任务。
+2. 使用 `yao-meta-skill` 以 scaffold、production 或 library 模式生成或改进 skill 包。
+3. 按需要运行 `context_sizer.py`、`trigger_eval.py` 和 `cross_packager.py` 来检查并导出结果。
+
 ## 它能做什么
 
 这个项目帮助你把 skill 从一次性 prompt，升级成可创建、可重构、可评估、可打包的长期能力包。

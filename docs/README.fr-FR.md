@@ -9,6 +9,12 @@ Il transforme des workflows bruts, des transcripts, des prompts, des notes et de
 - des references, scripts et evals optionnels
 - des métadonnées sources neutres et des adaptateurs spécifiques au client
 
+## Quick Start
+
+1. Décrivez le workflow, l'ensemble de prompts ou la tâche répétée que vous voulez transformer en skill.
+2. Utilisez `yao-meta-skill` pour générer ou améliorer le paquet en mode scaffold, production ou library.
+3. Exécutez `context_sizer.py`, `trigger_eval.py` et `cross_packager.py` selon le besoin pour valider et exporter le résultat.
+
 ## Ce que fait le projet
 
 Ce projet permet de créer, refactoriser, évaluer et empaqueter des skills comme des briques de capacité durables plutôt que comme des prompts ponctuels.

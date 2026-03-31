@@ -9,6 +9,12 @@
 - 必要に応じた references、scripts、evals
 - 中立的なソースメタデータとクライアント別アダプタ
 
+## Quick Start
+
+1. skill 化したい workflow、prompt 集合、または反復タスクを説明します。
+2. `yao-meta-skill` を使って scaffold、production、library のいずれかのモードでパッケージを生成または改善します。
+3. 必要に応じて `context_sizer.py`、`trigger_eval.py`、`cross_packager.py` を実行し、検証と出力を行います。
+
 ## 何をするものか
 
 このプロジェクトは、skill を単発の prompt ではなく、作成・改善・評価・配布できる持続的な能力パッケージとして扱えるようにします。
