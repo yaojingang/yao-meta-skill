@@ -1,0 +1,5 @@
+{
+  "platform": "openai",
+  "canonical_metadata": "agents/interface.yaml",
+  "required_generated_file": "targets/openai/agents/openai.yaml"
+}

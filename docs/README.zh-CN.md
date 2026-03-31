@@ -15,6 +15,13 @@
 2. 使用 `yao-meta-skill` 以 scaffold、production 或 library 模式生成或改进 skill 包。
 3. 按需要运行 `context_sizer.py`、`trigger_eval.py` 和 `cross_packager.py` 来检查并导出结果。
 
+## Results
+
+- 当前 `make test` 可通过
+- 当前回归集下 trigger eval 为 `0` 误触发、`0` 漏触发
+- train / dev / holdout 三层评测均通过
+- `openai`、`claude`、`generic` 三个目标的 packaging contract 校验通过
+
 ## 它能做什么
 
 这个项目帮助你把 skill 从一次性 prompt，升级成可创建、可重构、可评估、可打包的长期能力包。

@@ -1,0 +1,5 @@
+{
+  "platform": "claude",
+  "canonical_metadata": "agents/interface.yaml",
+  "required_generated_file": "targets/claude/README.md"
+}

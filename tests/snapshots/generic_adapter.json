@@ -1,0 +1,5 @@
+{
+  "platform": "generic",
+  "canonical_metadata": "agents/interface.yaml",
+  "required_generated_file": "targets/generic/adapter.json"
+}

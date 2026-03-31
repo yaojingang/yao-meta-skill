@@ -3,3 +3,4 @@ dist/
 *.zip
 __pycache__/
 tests/tmp/
+tests/tmp_snapshot/

@@ -15,6 +15,13 @@ Il transforme des workflows bruts, des transcripts, des prompts, des notes et de
 2. Utilisez `yao-meta-skill` pour générer ou améliorer le paquet en mode scaffold, production ou library.
 3. Exécutez `context_sizer.py`, `trigger_eval.py` et `cross_packager.py` selon le besoin pour valider et exporter le résultat.
 
+## Results
+
+- `make test` passe actuellement
+- sur le jeu de régression courant, trigger eval a `0` faux positifs et `0` faux négatifs
+- les suites train / dev / holdout passent toutes
+- les contrats de packaging `openai`, `claude` et `generic` sont validés
+
 ## Ce que fait le projet
 
 Ce projet permet de créer, refactoriser, évaluer et empaqueter des skills comme des briques de capacité durables plutôt que comme des prompts ponctuels.

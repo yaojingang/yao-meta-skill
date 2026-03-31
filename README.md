@@ -44,6 +44,14 @@ Or run everything together:
 make test
 ```
 
+## Results
+
+- `make test` passes locally
+- trigger eval: `0` false positives, `0` false negatives on the current regression set
+- eval suite: train / dev / holdout all pass
+- packaging validation: `openai`, `claude`, and `generic` targets pass contract checks
+- packaging failure fixtures: invalid metadata, invalid YAML, and unsupported targets fail as expected
+
 ## What It Does
 
 This project helps you create, refactor, evaluate, and package skills as durable capability bundles rather than one-off prompts.
@@ -198,7 +206,9 @@ This project is best for:
 - Examples: [examples/README.md](examples/README.md)
 - Evals: [evals/README.md](evals/README.md)
 - Packaging contracts: [references/packaging-contracts.md](references/packaging-contracts.md)
+- Platform capability matrix: [references/platform-capability-matrix.md](references/platform-capability-matrix.md)
 - Failure fixtures: [tests/fixtures](tests/fixtures)
+- Adapter snapshots: [tests/snapshots](tests/snapshots)
 - Evolution example: [examples/evolution-frontend-review/README.md](examples/evolution-frontend-review/README.md)
 
 ## License

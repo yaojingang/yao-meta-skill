@@ -15,6 +15,13 @@
 2. Используйте `yao-meta-skill`, чтобы сгенерировать или улучшить пакет в режиме scaffold, production или library.
 3. При необходимости запустите `context_sizer.py`, `trigger_eval.py` и `cross_packager.py`, чтобы проверить и экспортировать результат.
 
+## Results
+
+- `make test` сейчас проходит
+- на текущем regression-наборе trigger eval дает `0` false positives и `0` false negatives
+- все три набора train / dev / holdout проходят
+- packaging contracts для `openai`, `claude` и `generic` проходят проверку
+
 ## Что делает проект
 
 Этот проект помогает создавать, перерабатывать, оценивать и упаковывать skills как долговечные capability-пакеты, а не как одноразовые prompts.

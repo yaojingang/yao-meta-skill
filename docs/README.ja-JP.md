@@ -15,6 +15,13 @@
 2. `yao-meta-skill` を使って scaffold、production、library のいずれかのモードでパッケージを生成または改善します。
 3. 必要に応じて `context_sizer.py`、`trigger_eval.py`、`cross_packager.py` を実行し、検証と出力を行います。
 
+## Results
+
+- 現在 `make test` は通過
+- 現在の回帰セットでは trigger eval が `0` false positives / `0` false negatives
+- train / dev / holdout の 3 層評価が通過
+- `openai`、`claude`、`generic` の packaging contract が通過
+
 ## 何をするものか
 
 このプロジェクトは、skill を単発の prompt ではなく、作成・改善・評価・配布できる持続的な能力パッケージとして扱えるようにします。
