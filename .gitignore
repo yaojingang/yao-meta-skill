@@ -2,3 +2,4 @@
 dist/
 *.zip
 __pycache__/
+tests/tmp/
