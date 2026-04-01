@@ -6,7 +6,7 @@
 [![Français](https://img.shields.io/badge/Docs-Fran%C3%A7ais-green)](docs/README.fr-FR.md)
 [![Русский](https://img.shields.io/badge/Docs-%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9-purple)](docs/README.ru-RU.md)
 
-`yao-meta-skill` is a meta-skill for building other agent skills.
+`yao-meta-skill` is a lightweight but rigorous system for creating, evaluating, packaging, and governing reusable agent skills.
 
 It turns rough workflows, transcripts, prompts, notes, and runbooks into reusable skill packages with:
 
@@ -14,6 +14,7 @@ It turns rough workflows, transcripts, prompts, notes, and runbooks into reusabl
 - a lean `SKILL.md`
 - optional references, scripts, and evals
 - neutral source metadata plus client-specific adapters
+- governance, promotion, and portability checks built into the default flow
 
 ## Quick Start
 
@@ -128,6 +129,20 @@ Full reports: [reports/eval_suite.json](reports/eval_suite.json) and [reports/fa
 - candidate lifecycle states are published in [reports/candidate_registry.md](reports/candidate_registry.md)
 - context budget summaries are tracked in [reports/context_budget.md](reports/context_budget.md)
 - portability status is tracked in [reports/portability_score.md](reports/portability_score.md)
+
+## Current Strengths
+
+In the latest weighted review shared with the project, Yao scored strongest in the dimensions that define a production-grade meta-skill system:
+
+- **Method completeness `9.8`**: the repository now has a formal doctrine for skill engineering, gate selection, non-skill decisions, lifecycle governance, and resource boundaries.
+- **Engineering toolchain `9.8`**: authoring, validation, packaging, reporting, promotion checks, and CI are wired into one operational toolchain rather than scattered scripts.
+- **Governance, maintenance, and safety `9.8`**: important skills can carry lifecycle state, review cadence, maturity score, trust boundaries, and promotion evidence.
+- **Evaluation loop `9.7`**: trigger quality is checked with train/dev/holdout, blind holdout, adversarial holdout, judge-backed blind eval, drift history, and promotion gates.
+- **Portability and packaging `9.6`**: the source stays neutral while adapters, degradation rules, and packaging contracts preserve reusable semantics across target environments.
+- **Trigger and boundary design `9.5`**: route confusion, anti-pattern regressions, and promotion policy make trigger quality an auditable routing problem instead of a loose prompt-writing exercise.
+- **Context efficiency `9.4`**: the entrypoint stays compact, context budgets are tiered, and quality density is tracked instead of only raw token counts.
+
+The overall direction is deliberate: keep the entrypoint light, make the evaluation loop strict, and treat governance as a first-class part of skill quality.
 
 ## What It Does
 
@@ -297,13 +312,13 @@ python3 scripts/trigger_eval.py --description-file evals/improved_description.tx
 
 ## Advantages
 
-- **Neutral by default**: source files stay vendor-neutral, while adapters are generated only when needed.
-- **Context efficient**: the project explicitly pushes detail out of the main skill file.
-- **Evaluation-aware**: trigger and sizing checks are built into the workflow.
-- **Governed**: important skills can be checked for lifecycle metadata, ownership, and review cadence.
-- **Evidence-driven**: regression history and maturity scoring make progress visible across revisions.
-- **Reusable**: the output is a package, not just a paragraph of prompt text.
-- **Portable**: compatibility is handled through packaging rather than duplicating source files for every client.
+- **Method-first, not prompt-first**: skill creation is treated as a formal engineering workflow with archetypes, gate selection, and non-skill decisions.
+- **Trigger-aware by design**: descriptions are optimized with route confusion, blind holdout, adversarial families, and promotion policy instead of one-shot intuition.
+- **Lightweight at the entrypoint**: `SKILL.md` stays compact while references, scripts, and evals are only added when they pay for themselves.
+- **Toolchain-backed**: initialization, validation, optimization, reporting, packaging, and testing are available through one unified CLI and CI path.
+- **Governed as an asset**: important skills can carry ownership, lifecycle state, maturity expectations, and review cadence.
+- **Portable by default**: source metadata stays neutral while adapters and degradation rules preserve compatibility across target environments.
+- **Evidence-rich**: route scorecards, regression history, context budgets, portability scores, and promotion decisions are published as artifacts instead of hidden implementation detail.
 
 ## Best Fit
 

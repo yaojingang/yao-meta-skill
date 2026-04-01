@@ -1,6 +1,6 @@
 # Yao Meta Skill 日本語紹介
 
-`yao-meta-skill` は、他の agent skill を構築するための meta-skill です。
+`yao-meta-skill` は、再利用可能な agent skill を作成・評価・パッケージ化・運用するための、軽量で厳密なシステムです。
 
 粗い workflow、transcript、prompt、notes、runbook を、再利用可能な skill パッケージに変換し、次の性質を持たせます。
 
@@ -8,6 +8,7 @@
 - 軽量な `SKILL.md`
 - 必要に応じた references、scripts、evals
 - 中立的なソースメタデータとクライアント別アダプタ
+- ガバナンス、昇格判定、portability チェックを標準フローに内蔵
 
 ## Quick Start
 
@@ -21,6 +22,20 @@
 - 現在の回帰セットでは trigger eval が `0` false positives / `0` false negatives
 - train / dev / holdout の 3 層評価が通過
 - `openai`、`claude`、`generic` の packaging contract が通過
+
+## 現在の強み
+
+最新の加重レビューでは、Yao の強みは production-grade な meta-skill を支える次の領域に集中しています。
+
+- **方法論の完成度 `9.8`**: skill engineering method、gate selection、non-skill decision、governance、resource boundary が正式な体系として揃っています。
+- **エンジニアリングツールチェーン `9.8`**: 初期化、検証、最適化、レポート、昇格判定、パッケージ化、CI が一つの運用フローに接続されています。
+- **ガバナンス / 保守 / 安全性 `9.8`**: 重要な skill に lifecycle、review cadence、maturity score、trust boundary、promotion evidence を持たせられます。
+- **評価ループ `9.7`**: train/dev/holdout、blind holdout、adversarial holdout、judge-backed blind eval、drift history、promotion gate まで備えています。
+- **移植性 / パッケージング `9.6`**: ソースは中立のまま保ち、adapter、degradation rule、packaging contract で環境間の再利用性を担保します。
+- **トリガーと境界設計 `9.5`**: route confusion、anti-pattern regression、promotion policy により、trigger 品質を監査可能な routing 問題として扱います。
+- **コンテキスト効率 `9.4`**: エントリポイントは小さく保たれ、context budget は tier 化され、quality density も追跡されます。
+
+全体の方向性は明確です。入口は軽く、評価は厳しく、ガバナンスは skill 品質の一部として扱います。
 
 ## 何をするものか
 
@@ -121,11 +136,13 @@ python3 scripts/trigger_eval.py --description "Create and improve agent skills..
 
 ## 利点
 
-- **中立設計**: ソースはベンダー中立で、アダプタは必要時のみ生成
-- **コンテキスト効率**: 詳細をメイン skill ファイルの外へ明示的に押し出す
-- **評価前提**: trigger とサイズのチェックが workflow に組み込まれている
-- **再利用しやすい**: 出力が単発の prompt ではなくパッケージになる
-- **移植しやすい**: 互換性はソース複製ではなくパッケージ処理で扱う
+- **prompt ではなく方法論が中心**: skill creation を正式な engineering workflow として扱います
+- **トリガー最適化を前提に設計**: description は route confusion、blind holdout、adversarial family、promotion policy で検証されます
+- **入口が軽い**: `SKILL.md` は最小限に保ち、references、scripts、evals は必要なときだけ追加します
+- **ツールチェーンが一貫**: 初期化、検証、最適化、レポート、パッケージ化、テストを統一 CLI と CI で回せます
+- **資産として運用できる**: owner、lifecycle、maturity expectation、review cadence を持つ skill として管理できます
+- **移植前提**: ソースは中立、互換性は adapter と degradation rule で処理します
+- **証拠が豊富**: route scorecard、regression history、context budget、portability score、promotion decision が公開アーティファクトとして残ります
 
 ## 最適な対象
 

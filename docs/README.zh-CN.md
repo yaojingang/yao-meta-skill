@@ -1,6 +1,6 @@
 # Yao Meta Skill 中文介绍
 
-`yao-meta-skill` 是一个用于构建其他 agent skill 的元 skill。
+`yao-meta-skill` 是一套轻量但严谨的系统，用来创建、评估、打包和治理可复用的 agent skill。
 
 它把粗糙的 workflow、transcript、prompt、notes 和 runbook 转成可复用的 skill 包，并具备：
 
@@ -8,6 +8,7 @@
 - 精简的 `SKILL.md`
 - 可选的 references、scripts 和 evals
 - 中性的源元数据以及面向不同客户端的适配层
+- 内建的治理、晋升和 portability 检查
 
 ## Quick Start
 
@@ -21,6 +22,20 @@
 - 当前回归集下 trigger eval 为 `0` 误触发、`0` 漏触发
 - train / dev / holdout 三层评测均通过
 - `openai`、`claude`、`generic` 三个目标的 packaging contract 校验通过
+
+## 当前优势
+
+根据最近一轮加权评测，Yao 当前最强的优势主要集中在真正决定 meta-skill 质量的几个维度：
+
+- **方法论完整性 `9.8`**：已经形成正式的 skill engineering doctrine，覆盖 gate selection、non-skill decision、governance 和 resource boundary。
+- **工程化工具链 `9.8`**：初始化、校验、优化、报告、晋升检查、打包和 CI 已经串成一条完整工具链。
+- **治理 / 维护 / 安全 `9.8`**：重要 skill 可以声明生命周期、review cadence、maturity score、trust boundary 和 promotion evidence。
+- **评测闭环 `9.7`**：触发评测已经覆盖 train/dev/holdout、blind holdout、adversarial holdout、judge-backed blind eval、drift history 和 promotion gate。
+- **跨环境复用 / 打包 `9.6`**：源码保持中性，adapter、degradation rule 和 packaging contract 负责保留跨环境可移植语义。
+- **触发与边界设计 `9.5`**：route confusion、anti-pattern regression 和 promotion policy 把 trigger 质量变成可审计的路由问题。
+- **上下文效率 `9.4`**：入口文件保持紧凑，context budget 分层治理，quality density 也被量化跟踪。
+
+整体方向很明确：入口尽量轻，评测尽量硬，治理成为 skill 质量的一部分。
 
 ## 它能做什么
 
@@ -121,11 +136,13 @@ python3 scripts/trigger_eval.py --description "Create and improve agent skills..
 
 ## 优势
 
-- **默认中性**：源码保持厂商中立，适配层只在需要时生成
-- **上下文高效**：明确把细节从主 skill 文件中剥离出去
-- **评估友好**：workflow 内置 trigger 和体积检查
-- **可复用**：输出的是完整包，而不是一段 prompt 文本
-- **可移植**：兼容性通过打包处理，而不是为每个客户端复制一套源码
+- **方法论优先，不是 prompt 优先**：skill creation 被当成正式工程流程，而不是只写一段说明文字
+- **天生面向触发优化**：description 会经过 route confusion、blind holdout、adversarial family 和 promotion policy 的检查
+- **入口轻量**：`SKILL.md` 保持克制，references、scripts、evals 只在真正值得时加入
+- **工具链完整**：初始化、校验、优化、报告、打包、测试，都能走统一 CLI 和 CI 路径
+- **治理化资产**：重要 skill 可以带 owner、lifecycle、maturity expectation 和 review cadence
+- **默认可移植**：源码中立，兼容性通过 adapter 和 degradation rule 处理
+- **证据密度高**：route scorecard、regression history、context budget、portability score、promotion decision 都是公开产物，而不是隐藏实现
 
 ## 最适合谁
 

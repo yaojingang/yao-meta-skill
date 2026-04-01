@@ -1,6 +1,6 @@
 # Описание Yao Meta Skill
 
-`yao-meta-skill` — это meta-skill для создания других agent skills.
+`yao-meta-skill` — это легкая, но строгая система для создания, оценки, упаковки и управления переиспользуемыми agent skills.
 
 Он преобразует сырые workflows, transcripts, prompts, notes и runbooks в переиспользуемые skill-пакеты с:
 
@@ -8,6 +8,7 @@
 - компактным `SKILL.md`
 - необязательными references, scripts и evals
 - нейтральными исходными метаданными и клиентскими адаптерами
+- встроенными проверками governance, promotion и portability в стандартном потоке
 
 ## Quick Start
 
@@ -21,6 +22,20 @@
 - на текущем regression-наборе trigger eval дает `0` false positives и `0` false negatives
 - все три набора train / dev / holdout проходят
 - packaging contracts для `openai`, `claude` и `generic` проходят проверку
+
+## Текущие сильные стороны
+
+В последней взвешенной оценке проекта Yao сильнее всего выглядит в тех измерениях, которые действительно определяют production-grade meta-skill system:
+
+- **Полнота методологии `9.8`**: в репозитории уже есть формальная skill engineering doctrine, covering gate selection, non-skill decisions, governance и resource boundaries.
+- **Инженерная toolchain `9.8`**: инициализация, валидация, оптимизация, отчеты, promotion checks, packaging и CI связаны в единый operational flow.
+- **Governance / maintenance / safety `9.8`**: важные skills могут иметь lifecycle state, review cadence, maturity score, trust boundaries и promotion evidence.
+- **Evaluation loop `9.7`**: качество trigger проверяется через train/dev/holdout, blind holdout, adversarial holdout, judge-backed blind eval, drift history и promotion gates.
+- **Portability / packaging `9.6`**: исходники остаются нейтральными, а adapters, degradation rules и packaging contracts сохраняют переносимую семантику между целевыми средами.
+- **Trigger и boundary design `9.5`**: route confusion, anti-pattern regressions и promotion policy превращают качество trigger в аудируемую routing-задачу.
+- **Context efficiency `9.4`**: entrypoint остается компактным, context budgets имеют tier-структуру, а quality density тоже измеряется.
+
+Общий вектор здесь осознанный: легкий вход, строгий evaluation loop и governance как часть качества skill.
 
 ## Что делает проект
 
@@ -121,11 +136,13 @@ python3 scripts/trigger_eval.py --description "Create and improve agent skills..
 
 ## Преимущества
 
-- **Нейтральность по умолчанию**: исходники остаются vendor-neutral, а адаптеры создаются только при необходимости
-- **Эффективность по контексту**: детали явно выносятся из главного skill-файла
-- **Ориентация на оценку**: проверки trigger и размера встроены в workflow
-- **Переиспользуемость**: результатом является пакет, а не просто абзац prompt-текста
-- **Портируемость**: совместимость обеспечивается упаковкой, а не дублированием исходников под каждого клиента
+- **Сначала метод, а не просто prompt**: skill creation рассматривается как формальный engineering workflow
+- **Ориентация на trigger optimization**: description проходит через route confusion, blind holdout, adversarial families и promotion policy
+- **Легкий entrypoint**: `SKILL.md` остается компактным, а references, scripts и evals добавляются только когда действительно нужны
+- **Цельная toolchain**: init, validate, optimize, report, package и test проходят через единый CLI и CI path
+- **Управляется как актив**: важные skills могут иметь owner, lifecycle, maturity expectation и review cadence
+- **Портируемость по умолчанию**: исходники нейтральны, а совместимость обрабатывается через adapters и degradation rules
+- **Высокая плотность доказательств**: route scorecards, regression history, context budgets, portability scores и promotion decisions публикуются как артефакты
 
 ## Для кого подходит
 

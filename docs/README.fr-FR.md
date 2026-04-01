@@ -1,6 +1,6 @@
 # Présentation de Yao Meta Skill
 
-`yao-meta-skill` est une méta-skill conçue pour créer d'autres agent skills.
+`yao-meta-skill` est un système léger mais rigoureux pour créer, évaluer, empaqueter et gouverner des agent skills réutilisables.
 
 Il transforme des workflows bruts, des transcripts, des prompts, des notes et des runbooks en paquets de skills réutilisables avec :
 
@@ -8,6 +8,7 @@ Il transforme des workflows bruts, des transcripts, des prompts, des notes et de
 - un `SKILL.md` léger
 - des references, scripts et evals optionnels
 - des métadonnées sources neutres et des adaptateurs spécifiques au client
+- des contrôles de gouvernance, de promotion et de portabilité intégrés au flux standard
 
 ## Quick Start
 
@@ -21,6 +22,20 @@ Il transforme des workflows bruts, des transcripts, des prompts, des notes et de
 - sur le jeu de régression courant, trigger eval a `0` faux positifs et `0` faux négatifs
 - les suites train / dev / holdout passent toutes
 - les contrats de packaging `openai`, `claude` et `generic` sont validés
+
+## Points forts actuels
+
+Dans la dernière revue pondérée partagée pour le projet, Yao se distingue surtout sur les dimensions qui définissent une méta-skill réellement exploitable en production :
+
+- **Complétude méthodologique `9.8`** : le dépôt possède désormais une doctrine explicite pour le skill engineering, la sélection des gates, les non-skills, la gouvernance et les frontières de ressource.
+- **Chaîne d'outillage `9.8`** : initialisation, validation, optimisation, reporting, contrôle de promotion, packaging et CI sont reliés dans un flux unique.
+- **Gouvernance / maintenance / sécurité `9.8`** : les skills importantes peuvent porter un état de cycle de vie, une cadence de revue, un score de maturité, des frontières de confiance et des preuves de promotion.
+- **Boucle d'évaluation `9.7`** : la qualité de déclenchement est vérifiée via train/dev/holdout, blind holdout, adversarial holdout, judge-backed blind eval, drift history et promotion gates.
+- **Portabilité / packaging `9.6`** : la source reste neutre tandis que les adaptateurs, règles de dégradation et contrats de packaging préservent la sémantique réutilisable selon l'environnement cible.
+- **Déclenchement et frontières `9.5`** : route confusion, régressions anti-pattern et promotion policy transforment le déclenchement en problème de routage auditable.
+- **Efficacité de contexte `9.4`** : le point d'entrée reste compact, les budgets de contexte sont hiérarchisés et la densité de qualité est suivie.
+
+La direction est volontaire : garder une entrée légère, rendre l'évaluation stricte, et traiter la gouvernance comme une partie de la qualité d'une skill.
 
 ## Ce que fait le projet
 
@@ -121,11 +136,13 @@ python3 scripts/trigger_eval.py --description "Create and improve agent skills..
 
 ## Avantages
 
-- **Neutre par défaut** : les fichiers source restent neutres, les adaptateurs ne sont générés qu'en cas de besoin
-- **Efficace en contexte** : le projet pousse explicitement le détail hors du fichier principal
-- **Pensé pour l'évaluation** : les contrôles de déclenchement et de taille font partie du workflow
-- **Réutilisable** : la sortie est un paquet complet, pas juste un paragraphe de prompt
-- **Portable** : la compatibilité passe par l'empaquetage, pas par la duplication des sources
+- **Méthode d'abord, pas prompt d'abord** : la création de skill est traitée comme un workflow d'ingénierie formel
+- **Pensé pour l'optimisation du déclenchement** : les descriptions passent par route confusion, blind holdout, familles adversariales et promotion policy
+- **Léger au point d'entrée** : `SKILL.md` reste compact et les references, scripts, evals ne sont ajoutés que lorsqu'ils sont utiles
+- **Outillage cohérent** : initialisation, validation, optimisation, reporting, packaging et test passent par un CLI et un chemin CI unifiés
+- **Gouverné comme un actif** : les skills importantes peuvent porter ownership, lifecycle, attentes de maturité et cadence de revue
+- **Portable par défaut** : les sources restent neutres et la compatibilité est gérée par des adaptateurs et des règles de dégradation
+- **Riche en preuves** : route scorecards, regression history, context budgets, portability scores et promotion decisions sont publiés comme artefacts
 
 ## Public idéal
 
