@@ -37,6 +37,13 @@
 
 全体の方向性は明確です。入口は軽く、評価は厳しく、ガバナンスは skill 品質の一部として扱います。
 
+## なぜ Yao なのか
+
+- **軽量**: エントリポイントは小さく保たれ、context budget は明示され、追加構造は本当に価値がある場合にだけ導入されます。
+- **厳密**: trigger 品質は family regression、blind holdout、adversarial holdout、route confusion、judge-backed blind eval、promotion gate で検証されます。
+- **ガバナンス可能**: 重要な skill は lifecycle、maturity expectation、owner、review cadence を持つ保守対象の資産として扱われます。
+- **移植可能**: ソースメタデータは中立のまま保たれ、adapter、degradation rule、packaging contract が環境間の再利用意味論を保持します。
+
 ## 何をするものか
 
 このプロジェクトは、skill を単発の prompt ではなく、作成・改善・評価・配布できる持続的な能力パッケージとして扱えるようにします。

@@ -37,6 +37,13 @@ Dans la dernière revue pondérée partagée pour le projet, Yao se distingue su
 
 La direction est volontaire : garder une entrée légère, rendre l'évaluation stricte, et traiter la gouvernance comme une partie de la qualité d'une skill.
 
+## Pourquoi Yao
+
+- **Léger** : le point d'entrée reste compact, les budgets de contexte sont explicites, et la structure supplémentaire n'est ajoutée que lorsqu'elle apporte une vraie valeur.
+- **Rigoureux** : la qualité de déclenchement est vérifiée par family regressions, blind holdout, adversarial holdout, route confusion, judge-backed blind eval et promotion gates.
+- **Gouvernable** : les skills importantes sont traitées comme des actifs maintenables avec lifecycle, attentes de maturité, ownership et cadence de revue.
+- **Portable** : les métadonnées source restent neutres, tandis que les adaptateurs, règles de dégradation et contrats de packaging préservent une sémantique réutilisable entre environnements.
+
 ## Ce que fait le projet
 
 Ce projet permet de créer, refactoriser, évaluer et empaqueter des skills comme des briques de capacité durables plutôt que comme des prompts ponctuels.

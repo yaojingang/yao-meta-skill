@@ -144,6 +144,13 @@ In the latest weighted review shared with the project, Yao scored strongest in t
 
 The overall direction is deliberate: keep the entrypoint light, make the evaluation loop strict, and treat governance as a first-class part of skill quality.
 
+## Why Yao
+
+- **Lightweight**: the entrypoint stays compact, context budgets are explicit, and extra structure is added only when it pays for itself.
+- **Rigorous**: trigger quality is checked with family regressions, blind holdout, adversarial holdout, route confusion, judge-backed blind eval, and promotion gates.
+- **Governed**: important skills are treated as maintainable assets with lifecycle state, maturity expectations, ownership, and review cadence.
+- **Portable**: source metadata stays neutral while adapters, degradation rules, and packaging contracts preserve reusable semantics across environments.
+
 ## What It Does
 
 This project helps you create, refactor, evaluate, and package skills as durable capability bundles rather than one-off prompts.

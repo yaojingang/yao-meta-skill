@@ -37,6 +37,13 @@
 
 Общий вектор здесь осознанный: легкий вход, строгий evaluation loop и governance как часть качества skill.
 
+## Почему Yao
+
+- **Легкий**: entrypoint остается компактным, context budgets заданы явно, а дополнительная структура добавляется только тогда, когда она действительно окупается.
+- **Строгий**: качество trigger проверяется через family regressions, blind holdout, adversarial holdout, route confusion, judge-backed blind eval и promotion gates.
+- **Управляемый**: важные skills рассматриваются как поддерживаемые активы с lifecycle, maturity expectation, owner и review cadence.
+- **Портируемый**: source metadata остается нейтральной, а adapters, degradation rules и packaging contracts сохраняют переносимую семантику между средами.
+
 ## Что делает проект
 
 Этот проект помогает создавать, перерабатывать, оценивать и упаковывать skills как долговечные capability-пакеты, а не как одноразовые prompts.

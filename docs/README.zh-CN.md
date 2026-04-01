@@ -37,6 +37,13 @@
 
 整体方向很明确：入口尽量轻，评测尽量硬，治理成为 skill 质量的一部分。
 
+## 为什么是 Yao
+
+- **轻量**：入口保持紧凑，context budget 明确分层，只有在真正值得时才增加额外结构。
+- **严谨**：trigger 质量会经过 family regression、blind holdout、adversarial holdout、route confusion、judge-backed blind eval 和 promotion gate 的联合检查。
+- **可治理**：重要 skill 被当成可维护资产处理，具备 lifecycle、maturity expectation、owner 和 review cadence。
+- **可移植**：源码元数据保持中性，adapter、degradation rule 和 packaging contract 负责保留跨环境可复用语义。
+
 ## 它能做什么
 
 这个项目帮助你把 skill 从一次性 prompt，升级成可创建、可重构、可评估、可打包的长期能力包。
