@@ -37,7 +37,7 @@ Lecture en 10 secondes :
 ## Quick Start
 
 1. Décrivez le workflow, l'ensemble de prompts ou la tâche répétée que vous voulez transformer en skill.
-2. Lancez un court reference scan pour extraire les bons patterns sans copier la lourdeur des sources.
+2. Lancez un court reference scan en privilégiant GitHub et les objets publics de référence ; les fichiers locaux ne servent ensuite qu'à l'ajustement, à la confidentialité et à la compatibilité.
 3. Utilisez `yao-meta-skill` pour générer ou améliorer le paquet en mode scaffold, production ou library.
 4. Chaque nouveau skill reçoit aussi `reports/skill-overview.html` et `reports/reference-scan.md`, pour comprendre rapidement son architecture, sa logique, son usage et ses références utiles.
 

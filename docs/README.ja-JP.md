@@ -37,7 +37,7 @@ flowchart LR
 ## Quick Start
 
 1. skill 化したい workflow、prompt 集合、または反復タスクを説明します。
-2. まず短い reference scan を行い、借りるべき pattern だけを抽出します。
+2. まず短い reference scan を行い、GitHub や世界トップ級の公開対象を主参照にし、ローカル資産は適合確認と privacy 調整だけに使います。
 3. `yao-meta-skill` を使って scaffold、production、library のいずれかのモードでパッケージを生成または改善します。
 4. 新しく作成した skill には `reports/skill-overview.html` と `reports/reference-scan.md` が付き、構造、ロジック、使い方、参考対象をすぐ確認できます。
 

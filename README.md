@@ -47,7 +47,7 @@ Read it in 10 seconds:
 ## Quick Start
 
 1. Describe the workflow, prompt set, or repeated task you want to turn into a skill.
-2. Run a short reference scan so the package can borrow strong patterns without copying extra weight.
+2. Run a short reference scan with external benchmarks first, then use local files only for fit and privacy checks.
 3. Use `yao-meta-skill` to generate or improve the package in scaffold, production, or library mode.
 4. Run `context_sizer.py`, `resource_boundary_check.py`, `governance_check.py`, `trigger_eval.py`, and `cross_packager.py` as needed to validate and export the result.
 
@@ -55,7 +55,9 @@ Or use the unified authoring CLI:
 
 ```bash
 python3 scripts/yao.py init my-skill --description "Describe what the skill does."
-python3 scripts/yao.py reference-scan my-skill --reference "World Class Method::method::Borrow a tight evaluation loop.::Do not copy heavy process."
+python3 scripts/yao.py reference-scan my-skill \
+  --external-reference "World Class Method::method::Borrow a tight evaluation loop.::Do not copy heavy process." \
+  --local-constraint "Current Library Naming::structure::Keep naming aligned with the local skill library.::Do not inherit private references."
 python3 scripts/yao.py skill-report my-skill
 python3 scripts/yao.py package . --platform generic --output-dir dist
 ```

@@ -228,6 +228,10 @@ def command_skill_report(args: argparse.Namespace) -> int:
 def command_reference_scan(args: argparse.Namespace) -> int:
     skill_dir = str(Path(args.skill_dir).resolve())
     cmd = [skill_dir]
+    for reference in args.external_reference:
+        cmd.extend(["--external-reference", reference])
+    for constraint in args.local_constraint:
+        cmd.extend(["--local-constraint", constraint])
     for reference in args.reference:
         cmd.extend(["--reference", reference])
     if args.output_md:
@@ -454,6 +458,8 @@ def build_parser() -> argparse.ArgumentParser:
     )
     reference_scan_cmd.add_argument("skill_dir", nargs="?", default=".")
     reference_scan_cmd.add_argument("--reference", action="append", default=[])
+    reference_scan_cmd.add_argument("--external-reference", action="append", default=[])
+    reference_scan_cmd.add_argument("--local-constraint", action="append", default=[])
     reference_scan_cmd.add_argument("--output-md")
     reference_scan_cmd.add_argument("--output-json")
     reference_scan_cmd.set_defaults(func=command_reference_scan)

@@ -50,8 +50,10 @@ def main() -> None:
     reference_scan_result = run(
         "reference-scan",
         str(created),
-        "--reference",
+        "--external-reference",
         "World Class Method::method::Borrow the smallest repeatable evaluation loop.::Do not copy heavy ceremony.",
+        "--local-constraint",
+        "Local Naming::structure::Keep folder naming aligned with the local library.::Do not inherit private references.",
     )
     assert reference_scan_result["ok"], reference_scan_result
     assert reference_scan_result["payload"]["artifacts"]["markdown"].endswith("reports/reference-scan.md"), reference_scan_result

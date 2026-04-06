@@ -58,6 +58,8 @@ Boundary work comes before polishing prose.
 Run a short benchmark pass before deep authoring.
 
 - scan `3-5` reference objects at most
+- prioritize external GitHub and official benchmark sources first
+- use local files second, only for fit, privacy, and compatibility calibration
 - choose from method, structure, execution, portability, and domain patterns
 - extract only what improves reliability or clarity
 - record what not to borrow so the new skill stays light

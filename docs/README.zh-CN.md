@@ -37,7 +37,7 @@ flowchart LR
 ## Quick Start
 
 1. 先描述你想沉淀成 skill 的 workflow、prompt 集合或重复任务。
-2. 先做一轮简短的参考扫描，提炼可借鉴模式，而不是直接复制现成做法。
+2. 先做一轮简短的参考扫描，以 GitHub 和世界级公开对象为主来源，本地文件只做适配和隐私校准。
 3. 使用 `yao-meta-skill` 以 scaffold、production 或 library 模式生成或改进 skill 包。
 4. 新建 skill 后，会默认附带 `reports/skill-overview.html` 和 `reports/reference-scan.md`，方便理解架构、逻辑、使用方法和可借鉴对象。
 

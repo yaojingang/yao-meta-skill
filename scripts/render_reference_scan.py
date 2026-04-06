@@ -38,7 +38,7 @@ def extract_title(body: str, fallback: str) -> str:
     return fallback
 
 
-def parse_reference(value: str) -> dict:
+def parse_reference(value: str, source: str) -> dict:
     parts = [part.strip() for part in value.split("::")]
     while len(parts) < 4:
         parts.append("")
@@ -48,6 +48,7 @@ def parse_reference(value: str) -> dict:
         "category": category or "general",
         "borrow": borrow or "Capture the reusable pattern, not the prose.",
         "avoid": avoid or "Do not copy source-specific language or unnecessary weight.",
+        "source": source,
     }
 
 
@@ -83,6 +84,12 @@ def infer_scan_focus(skill_dir: Path, description: str) -> list[dict]:
     return checks[:4]
 
 
+def split_references(references: list[dict]) -> tuple[list[dict], list[dict]]:
+    externals = [item for item in references if item.get("source") == "external"]
+    locals_ = [item for item in references if item.get("source") == "local"]
+    return externals, locals_
+
+
 def build_summary(skill_dir: Path, references: list[dict]) -> dict:
     skill_text = (skill_dir / "SKILL.md").read_text(encoding="utf-8")
     frontmatter, body = parse_frontmatter(skill_text)
@@ -90,28 +97,32 @@ def build_summary(skill_dir: Path, references: list[dict]) -> dict:
     description = frontmatter.get("description", "No description found.")
     title = extract_title(body, name.replace("-", " ").title())
     focus = infer_scan_focus(skill_dir, description)
+    external_references, local_constraints = split_references(references)
 
     borrow_plan = [
-        "Method: borrow the smallest repeatable loop that improves reliability.",
-        "Structure: borrow directory or metadata patterns only when they reduce ambiguity.",
-        "Execution: borrow operator-facing flow, not source-specific ceremony.",
-        "Portability: borrow neutral metadata and degradation ideas, not client-specific lock-in.",
+        "External benchmark first: let world-class references define the upper bound for method, structure, execution, or portability.",
+        "Local fit second: use local assets only to detect naming conflicts, private dependencies, or compatibility constraints.",
+        "Borrow patterns, not prose: extract loops, boundaries, metadata, and operator flow without copying source-specific language.",
+        "Keep the package light: reject any borrowed pattern that increases context cost faster than it increases reliability.",
     ]
 
-    if references:
-        borrow_plan.append("Apply only the parts that fit the chosen archetype, gates, and context budget.")
+    if external_references:
+        borrow_plan.append("Apply only the benchmark patterns that fit the chosen archetype, gates, and context budget.")
 
     return {
         "skill_name": name,
         "title": title,
         "description": description,
         "scan_focus": focus,
-        "references": references,
+        "external_references": external_references,
+        "local_constraints": local_constraints,
         "borrow_plan": borrow_plan,
+        "priority_rule": "External benchmark objects set the pattern ceiling. Local files only calibrate fit, risk, and compatibility.",
         "non_goals": [
             "Do not copy source prose or branding into the new skill.",
             "Do not import gates that cost more context than they save.",
             "Do not use benchmark scanning to justify scope creep.",
+            "Do not let local historical habits outrank stronger public benchmarks.",
         ],
     }
 
@@ -124,7 +135,7 @@ def render_markdown(summary: dict) -> str:
         "",
         "## Why This Step Exists",
         "",
-        "Use a short benchmark pass before authoring the package in depth. The goal is to borrow durable patterns from strong reference objects without copying their prose or carrying their weight into the new skill.",
+        "Use a short benchmark pass before authoring the package in depth. External benchmark objects should define the pattern ceiling. Local files are used afterward only to calibrate fit, privacy, naming, and compatibility.",
         "",
         "## Current Skill Anchor",
         "",
@@ -137,9 +148,11 @@ def render_markdown(summary: dict) -> str:
     for item in summary["scan_focus"]:
         lines.append(f"- **{item['label']}**: {item['reason']}")
 
-    lines.extend(["", "## Reference Objects", ""])
-    if summary["references"]:
-        for ref in summary["references"]:
+    lines.extend(["", "## Priority Rule", "", f"- {summary['priority_rule']}", ""])
+
+    lines.extend(["## External Benchmark Objects", ""])
+    if summary["external_references"]:
+        for ref in summary["external_references"]:
             lines.extend(
                 [
                     f"### {ref['name']}",
@@ -152,9 +165,30 @@ def render_markdown(summary: dict) -> str:
     else:
         lines.extend(
             [
-                "- No explicit reference objects recorded yet.",
-                "- Recommended: capture 3 to 5 references at most.",
+                "- No explicit external benchmark objects recorded yet.",
+                "- Recommended: capture 2 to 5 external references at most.",
                 "- Suggested mix: one method reference, one structure reference, one execution or portability reference.",
+                "",
+            ]
+        )
+
+    lines.extend(["## Local Fit Check", ""])
+    if summary["local_constraints"]:
+        for ref in summary["local_constraints"]:
+            lines.extend(
+                [
+                    f"### {ref['name']}",
+                    f"- Category: `{ref['category']}`",
+                    f"- Keep in mind: {ref['borrow']}",
+                    f"- Do not inherit: {ref['avoid']}",
+                    "",
+                ]
+            )
+    else:
+        lines.extend(
+            [
+                "- No local constraints recorded yet.",
+                "- Use this section for naming collisions, private dependencies, compatibility limits, or existing library conventions.",
                 "",
             ]
         )
@@ -195,12 +229,15 @@ def render_reference_scan(skill_dir: Path, references: list[dict], output_md: Pa
 def main() -> None:
     parser = argparse.ArgumentParser(description="Render a benchmark-oriented reference scan for a skill package.")
     parser.add_argument("skill_dir", nargs="?", default=".")
-    parser.add_argument("--reference", action="append", default=[], help="Format: name::category::borrow::avoid")
+    parser.add_argument("--external-reference", action="append", default=[], help="Format: name::category::borrow::avoid")
+    parser.add_argument("--local-constraint", action="append", default=[], help="Format: name::category::borrow::avoid")
+    parser.add_argument("--reference", action="append", default=[], help="Legacy alias for --external-reference.")
     parser.add_argument("--output-md")
     parser.add_argument("--output-json")
     args = parser.parse_args()
 
-    refs = [parse_reference(item) for item in args.reference]
+    refs = [parse_reference(item, "external") for item in [*args.external_reference, *args.reference]]
+    refs.extend(parse_reference(item, "local") for item in args.local_constraint)
     result = render_reference_scan(
         Path(args.skill_dir),
         refs,

@@ -38,10 +38,12 @@ def main() -> None:
             sys.executable,
             str(SCRIPT),
             str(created),
-            "--reference",
+            "--external-reference",
             "Top Method::method::Borrow a tight benchmark loop.::Avoid copying source-specific branding.",
-            "--reference",
+            "--external-reference",
             "Portable System::portability::Borrow neutral metadata and degradation rules.::Avoid target lock-in.",
+            "--local-constraint",
+            "Current Team Naming::structure::Keep naming compatible with the current library.::Avoid inheriting private examples.",
         ],
         cwd=ROOT,
         capture_output=True,
@@ -58,10 +60,12 @@ def main() -> None:
     report_text = md_path.read_text(encoding="utf-8")
     assert "# Reference Scan" in report_text, report_text[:200]
     assert "Top Method" in report_text, report_text[:300]
+    assert "Local Fit Check" in report_text, report_text[:700]
     assert "Borrow Plan" in report_text, report_text[:500]
 
     summary = json.loads(json_path.read_text(encoding="utf-8"))
-    assert len(summary["references"]) == 2, summary
+    assert len(summary["external_references"]) == 2, summary
+    assert len(summary["local_constraints"]) == 1, summary
 
     print(json.dumps({"ok": True}, ensure_ascii=False, indent=2))
 

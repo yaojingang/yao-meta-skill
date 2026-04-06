@@ -28,7 +28,7 @@ Mode rules: [Operating Modes](references/operating-modes.md), [QA Ladder](refere
 ## Compact Workflow
 
 1. Decide whether the request should become a skill, then choose the lightest archetype.
-2. Run a short reference scan to borrow patterns from strong benchmark objects without copying their prose or weight.
+2. Run a short reference scan with external benchmark objects first, then use local files only for fit, privacy, and compatibility calibration.
 3. Capture the recurring job, outputs, trigger phrases, and exclusions.
 4. Write the `description` early, then test route quality before expanding the package.
 5. Add only the folders and gates that earn their keep: `trigger_eval.py`, `optimize_description.py`, `judge_blind_eval.py`, `resource_boundary_check.py`, `governance_check.py`, `cross_packager.py`.
