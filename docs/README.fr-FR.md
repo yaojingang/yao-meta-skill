@@ -9,6 +9,7 @@ Il transforme des workflows bruts, des transcripts, des prompts, des notes et de
 - une surface de déclenchement claire
 - un `SKILL.md` léger
 - des references, scripts et evals optionnels
+- un benchmark/reference scan contrôlé avant l'authoring profond
 - un rapport HTML minimaliste en fond blanc généré automatiquement pour chaque nouveau skill
 - des métadonnées sources neutres et des adaptateurs spécifiques au client
 - des contrôles de gouvernance, de promotion et de portabilité intégrés au flux standard
@@ -36,8 +37,9 @@ Lecture en 10 secondes :
 ## Quick Start
 
 1. Décrivez le workflow, l'ensemble de prompts ou la tâche répétée que vous voulez transformer en skill.
-2. Utilisez `yao-meta-skill` pour générer ou améliorer le paquet en mode scaffold, production ou library.
-3. Chaque nouveau skill reçoit aussi `reports/skill-overview.html`, pour comprendre rapidement son architecture, sa logique, son usage et ses points forts.
+2. Lancez un court reference scan pour extraire les bons patterns sans copier la lourdeur des sources.
+3. Utilisez `yao-meta-skill` pour générer ou améliorer le paquet en mode scaffold, production ou library.
+4. Chaque nouveau skill reçoit aussi `reports/skill-overview.html` et `reports/reference-scan.md`, pour comprendre rapidement son architecture, sa logique, son usage et ses références utiles.
 
 ## Results
 

@@ -9,6 +9,7 @@
 - 清晰的触发面
 - 精简的 `SKILL.md`
 - 可选的 references、scripts 和 evals
+- 深度起草前先做一轮受控的 benchmark/reference scan
 - 新建 skill 时自动生成一份极简白底 HTML 可视化说明
 - 中性的源元数据以及面向不同客户端的适配层
 - 内建的治理、晋升和 portability 检查
@@ -36,8 +37,9 @@ flowchart LR
 ## Quick Start
 
 1. 先描述你想沉淀成 skill 的 workflow、prompt 集合或重复任务。
-2. 使用 `yao-meta-skill` 以 scaffold、production 或 library 模式生成或改进 skill 包。
-3. 新建 skill 后，会默认附带 `reports/skill-overview.html`，方便快速理解架构、逻辑、使用方法和优势。
+2. 先做一轮简短的参考扫描，提炼可借鉴模式，而不是直接复制现成做法。
+3. 使用 `yao-meta-skill` 以 scaffold、production 或 library 模式生成或改进 skill 包。
+4. 新建 skill 后，会默认附带 `reports/skill-overview.html` 和 `reports/reference-scan.md`，方便理解架构、逻辑、使用方法和可借鉴对象。
 
 ## Results
 

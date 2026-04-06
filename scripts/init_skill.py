@@ -4,6 +4,7 @@ import json
 from datetime import date
 from pathlib import Path
 
+from render_reference_scan import render_reference_scan
 from render_skill_overview import render_skill_overview
 
 
@@ -82,7 +83,7 @@ def build_manifest(name: str) -> dict:
         "maturity_tier": "scaffold",
         "lifecycle_stage": "scaffold",
         "context_budget_tier": "scaffold",
-        "review_cadence": "ad-hoc",
+        "review_cadence": "per-release",
         "target_platforms": [
             "openai",
             "claude",
@@ -130,6 +131,7 @@ def main() -> None:
         encoding="utf-8",
     )
     overview = render_skill_overview(root)
+    reference_scan = render_reference_scan(root, [])
     print(
         json.dumps(
             {
@@ -139,6 +141,7 @@ def main() -> None:
                     "readme": str(root / "README.md"),
                     "manifest": str(root / "manifest.json"),
                     **overview["artifacts"],
+                    **reference_scan["artifacts"],
                 },
             },
             ensure_ascii=False,

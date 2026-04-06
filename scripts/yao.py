@@ -225,6 +225,20 @@ def command_skill_report(args: argparse.Namespace) -> int:
     return 0 if result["ok"] else 2
 
 
+def command_reference_scan(args: argparse.Namespace) -> int:
+    skill_dir = str(Path(args.skill_dir).resolve())
+    cmd = [skill_dir]
+    for reference in args.reference:
+        cmd.extend(["--reference", reference])
+    if args.output_md:
+        cmd.extend(["--output-md", args.output_md])
+    if args.output_json:
+        cmd.extend(["--output-json", args.output_json])
+    result = run_script("render_reference_scan.py", cmd)
+    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
+    return 0 if result["ok"] else 2
+
+
 def command_review(args: argparse.Namespace) -> int:
     target_name = resolve_promotion_target(args.target)
     bundle_dir = ROOT / "reports" / "iteration_bundles" / target_name
@@ -433,6 +447,16 @@ def build_parser() -> argparse.ArgumentParser:
     skill_report_cmd.add_argument("--output-html")
     skill_report_cmd.add_argument("--output-json")
     skill_report_cmd.set_defaults(func=command_skill_report)
+
+    reference_scan_cmd = subparsers.add_parser(
+        "reference-scan",
+        help="Render a controlled benchmark scan report for a skill package.",
+    )
+    reference_scan_cmd.add_argument("skill_dir", nargs="?", default=".")
+    reference_scan_cmd.add_argument("--reference", action="append", default=[])
+    reference_scan_cmd.add_argument("--output-md")
+    reference_scan_cmd.add_argument("--output-json")
+    reference_scan_cmd.set_defaults(func=command_reference_scan)
 
     package_cmd = subparsers.add_parser("package", help="Export compatibility artifacts for selected targets.")
     package_cmd.add_argument("skill_dir", nargs="?", default=".")

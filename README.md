@@ -19,6 +19,7 @@ It turns rough workflows, transcripts, prompts, notes, and runbooks into reusabl
 - a clear trigger surface
 - a lean `SKILL.md`
 - optional references, scripts, and evals
+- a controlled benchmark scan before deep authoring
 - a generated visual HTML overview for each newly initialized skill
 - neutral source metadata plus client-specific adapters
 - governance, promotion, and portability checks built into the default flow
@@ -46,13 +47,15 @@ Read it in 10 seconds:
 ## Quick Start
 
 1. Describe the workflow, prompt set, or repeated task you want to turn into a skill.
-2. Use `yao-meta-skill` to generate or improve the package in scaffold, production, or library mode.
-3. Run `context_sizer.py`, `resource_boundary_check.py`, `governance_check.py`, `trigger_eval.py`, and `cross_packager.py` as needed to validate and export the result.
+2. Run a short reference scan so the package can borrow strong patterns without copying extra weight.
+3. Use `yao-meta-skill` to generate or improve the package in scaffold, production, or library mode.
+4. Run `context_sizer.py`, `resource_boundary_check.py`, `governance_check.py`, `trigger_eval.py`, and `cross_packager.py` as needed to validate and export the result.
 
 Or use the unified authoring CLI:
 
 ```bash
 python3 scripts/yao.py init my-skill --description "Describe what the skill does."
+python3 scripts/yao.py reference-scan my-skill --reference "World Class Method::method::Borrow a tight evaluation loop.::Do not copy heavy process."
 python3 scripts/yao.py skill-report my-skill
 python3 scripts/yao.py package . --platform generic --output-dir dist
 ```
@@ -196,6 +199,7 @@ The design logic is simple:
 The repository now treats method as a first-class asset instead of scattered guidance.
 
 - [Skill Engineering Method](references/skill-engineering-method.md)
+- [Reference Scan Strategy](references/reference-scan.md)
 - [Skill Archetypes](references/skill-archetypes.md)
 - [Gate Selection](references/gate-selection.md)
 - [Non-Skill Decision Tree](references/non-skill-decision-tree.md)

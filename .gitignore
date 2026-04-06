@@ -7,4 +7,5 @@ tests/tmp_snapshot/
 tests/tmp_cli/
 tests/tmp_skill_overview/
 tests/tmp_skill_preview/
+tests/tmp_reference_scan/
 reports/release_snapshots/

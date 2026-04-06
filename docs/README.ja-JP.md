@@ -9,6 +9,7 @@
 - 明確なトリガー面
 - 軽量な `SKILL.md`
 - 必要に応じた references、scripts、evals
+- 深い authoring の前に、制御された benchmark/reference scan を 1 回行う
 - 新しい skill ごとに、白背景の簡潔な HTML overview を自動生成
 - 中立的なソースメタデータとクライアント別アダプタ
 - ガバナンス、昇格判定、portability チェックを標準フローに内蔵
@@ -36,8 +37,9 @@ flowchart LR
 ## Quick Start
 
 1. skill 化したい workflow、prompt 集合、または反復タスクを説明します。
-2. `yao-meta-skill` を使って scaffold、production、library のいずれかのモードでパッケージを生成または改善します。
-3. 新しく作成した skill には `reports/skill-overview.html` が付き、構造、ロジック、使い方、強みをすぐ確認できます。
+2. まず短い reference scan を行い、借りるべき pattern だけを抽出します。
+3. `yao-meta-skill` を使って scaffold、production、library のいずれかのモードでパッケージを生成または改善します。
+4. 新しく作成した skill には `reports/skill-overview.html` と `reports/reference-scan.md` が付き、構造、ロジック、使い方、参考対象をすぐ確認できます。
 
 ## Results
 

@@ -37,6 +37,7 @@ def main() -> None:
     assert (created / "SKILL.md").exists(), created
     assert (created / "README.md").exists(), created
     assert (created / "reports" / "skill-overview.html").exists(), created
+    assert (created / "reports" / "reference-scan.md").exists(), created
 
     validate_result = run("validate", str(created))
     assert validate_result["ok"], validate_result
@@ -45,6 +46,15 @@ def main() -> None:
     skill_report_result = run("skill-report", str(created))
     assert skill_report_result["ok"], skill_report_result
     assert skill_report_result["payload"]["artifacts"]["html"].endswith("reports/skill-overview.html"), skill_report_result
+
+    reference_scan_result = run(
+        "reference-scan",
+        str(created),
+        "--reference",
+        "World Class Method::method::Borrow the smallest repeatable evaluation loop.::Do not copy heavy ceremony.",
+    )
+    assert reference_scan_result["ok"], reference_scan_result
+    assert reference_scan_result["payload"]["artifacts"]["markdown"].endswith("reports/reference-scan.md"), reference_scan_result
 
     optimize_result = run("optimize-description", "--target", "root")
     assert optimize_result["ok"], optimize_result

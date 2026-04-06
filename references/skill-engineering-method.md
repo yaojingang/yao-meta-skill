@@ -53,7 +53,18 @@ Every skill should answer four questions clearly:
 
 Boundary work comes before polishing prose.
 
-## Phase 4: Trigger-First Authoring
+## Phase 4: Reference Scan
+
+Run a short benchmark pass before deep authoring.
+
+- scan `3-5` reference objects at most
+- choose from method, structure, execution, portability, and domain patterns
+- extract only what improves reliability or clarity
+- record what not to borrow so the new skill stays light
+
+See [Reference Scan Strategy](reference-scan.md).
+
+## Phase 5: Trigger-First Authoring
 
 Author the frontmatter `description` before expanding the body.
 
@@ -71,7 +82,7 @@ Trigger quality is improved through:
 - adversarial holdout
 - route confusion
 
-## Phase 5: Gate Selection
+## Phase 6: Gate Selection
 
 Add gates by risk, not by habit.
 
@@ -82,7 +93,7 @@ Add gates by risk, not by habit.
 
 See [Gate Selection](gate-selection.md).
 
-## Phase 6: Promotion
+## Phase 7: Promotion
 
 A candidate route or package is promotable only when:
 
