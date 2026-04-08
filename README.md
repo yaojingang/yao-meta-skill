@@ -181,6 +181,32 @@ In the latest weighted review shared with the project, Yao scored strongest in t
 
 The overall direction is deliberate: keep the entrypoint light, make the evaluation loop strict, and treat governance as a first-class part of skill quality.
 
+## Comparison Snapshot
+
+This is a scenario-oriented benchmark shared with the project. It is most useful when deciding which system fits a workflow, not as a universal claim that one approach beats every other approach in every context.
+
+| Dimension | skill-creator | yao-meta-skill | What it means |
+| --- | ---: | ---: | --- |
+| Onboarding friction | 9 | 6 | `skill-creator` is friendlier and more conversational; `yao-meta-skill` has more concepts and a steeper learning curve. |
+| Flexibility | 9 | 7 | `skill-creator` is more free-form; `yao-meta-skill` uses a more explicit process. |
+| Method depth | 5 | 9.5 | `yao-meta-skill` has a fuller engineering doctrine with archetypes, gate selection, governance, and resource boundaries. |
+| Evaluation rigor | 7 | 9.5 | `yao-meta-skill` emphasizes layered holdouts, route confusion, adversarial checks, and promotion gates. |
+| Human review experience | 9 | 5 | `skill-creator` has the more intuitive review UX; `yao-meta-skill` is still mostly report-driven. |
+| Governance and lifecycle | 2 | 9.5 | `yao-meta-skill` treats important skills as managed assets with maturity, review cadence, and promotion evidence. |
+| Cross-environment portability | 4 | 9 | `yao-meta-skill` is built around neutral metadata, adapters, degradation rules, and portability checks. |
+| Toolchain completeness | 6 | 9.5 | `yao-meta-skill` ships with a much broader toolchain, unified CLI, CI, and report generation. |
+| Iteration speed | 8 | 7 | `skill-creator` can feel faster for quick cycles; `yao-meta-skill` spends more effort on gates and evidence. |
+| Documentation quality | 7 | 9 | `yao-meta-skill` offers multi-language docs, examples, failure cases, and method doctrine. |
+| Best for solo use | 9 | 6 | `skill-creator` is easier for fast personal iteration. |
+| Best for teams and organizations | 5 | 9.5 | `yao-meta-skill` fits team reuse, governance, CI, and long-term maintenance better. |
+| Overall | 6.7 | 8.0 | The tradeoff is straightforward: lighter conversation flow versus stronger engineering and governance. |
+
+## Best-Fit Scenarios
+
+- Choose **skill-creator** when the main goal is fast solo ideation, flexible interaction, and quick iteration with a lighter process.
+- Choose **yao-meta-skill** when the goal is to build a reusable asset with explicit boundaries, evaluation gates, governance, portability, and long-term maintainability.
+- A practical hybrid pattern is: use a conversational creator to get a first draft, then use `yao-meta-skill` to harden the package, add evidence, and make it team-ready.
+
 ## Why Yao
 
 - **Lightweight**: the entrypoint stays compact, context budgets are explicit, and extra structure is added only when it pays for itself.

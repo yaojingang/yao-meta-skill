@@ -65,6 +65,32 @@ flowchart LR
 
 整体方向很明确：入口尽量轻，评测尽量硬，治理成为 skill 质量的一部分。
 
+## 对比快照
+
+下面这个表更适合拿来判断“哪种系统更适合当前场景”，而不是把它理解成适用于所有场景的绝对结论。
+
+| 评分维度 | skill-creator | yao-meta-skill | 说明 |
+| --- | ---: | ---: | --- |
+| 上手门槛 | 9 | 6 | `skill-creator` 语言更亲切、对话更直觉；`yao-meta-skill` 概念更多，学习曲线更陡。 |
+| 灵活性 | 9 | 7 | `skill-creator` 更自由；`yao-meta-skill` 的流程更明确、更结构化。 |
+| 方法论深度 | 5 | 9.5 | `yao-meta-skill` 有更完整的 skill engineering doctrine、archetypes、gate selection、governance 和 resource boundaries。 |
+| 评估严谨度 | 7 | 9.5 | `yao-meta-skill` 更强调 layered holdout、route confusion、adversarial checks 和 promotion gates。 |
+| 人工评审体验 | 9 | 5 | `skill-creator` 的人工评审体验更直观；`yao-meta-skill` 目前仍以报告驱动为主。 |
+| 治理与生命周期 | 2 | 9.5 | `yao-meta-skill` 把重要 skill 当成可治理资产，具备 maturity、review cadence 和 promotion evidence。 |
+| 跨环境复用 | 4 | 9 | `yao-meta-skill` 采用中性元数据、adapter、degradation rule 和 portability checks。 |
+| 工具链完整度 | 6 | 9.5 | `yao-meta-skill` 提供更完整的工具链、统一 CLI、CI 和报告系统。 |
+| 迭代效率 | 8 | 7 | `skill-creator` 在快速小循环上更轻；`yao-meta-skill` 会为了质量门和证据多付出一些流程成本。 |
+| 文档质量 | 7 | 9 | `yao-meta-skill` 现在提供多语言文档、案例、失败案例库和方法论文档。 |
+| 适合个人使用 | 9 | 6 | `skill-creator` 更适合个人快速试作。 |
+| 适合团队/组织 | 5 | 9.5 | `yao-meta-skill` 更适合团队复用、治理、CI 和长期维护。 |
+| 综合 | 6.7 | 8.0 | 核心取舍很清楚：一个偏轻量对话流，一个偏工程化和治理化。 |
+
+## 适用场景
+
+- 如果你要的是**个人快速试作、边聊边做、轻量起稿**，更适合 `skill-creator`。
+- 如果你要的是**团队复用、显式边界、质量门、治理、可移植性和长期维护**，更适合 `yao-meta-skill`。
+- 一个很实用的组合方式是：先用更对话式的系统做第一版，再用 `yao-meta-skill` 把它加固成团队可复用的正式资产。
+
 ## 为什么是 Yao
 
 - **轻量**：入口保持紧凑，context budget 明确分层，只有在真正值得时才增加额外结构。

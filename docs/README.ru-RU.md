@@ -65,6 +65,32 @@ flowchart LR
 
 Общий вектор здесь осознанный: легкий вход, строгий evaluation loop и governance как часть качества skill.
 
+## Сравнительный снимок
+
+Ниже — scenario-oriented benchmark. Он полезен для выбора подходящего инструмента под конкретный контекст, а не как универсальное заявление о том, что один подход лучше другого всегда и везде.
+
+| Измерение | skill-creator | yao-meta-skill | Что это означает |
+| --- | ---: | ---: | --- |
+| Порог входа | 9 | 6 | `skill-creator` более дружелюбен и разговорен; `yao-meta-skill` содержит больше концепций и требует большего входного усилия. |
+| Гибкость | 9 | 7 | `skill-creator` более свободный по стилю; `yao-meta-skill` опирается на более явный процесс. |
+| Глубина методологии | 5 | 9.5 | `yao-meta-skill` имеет более полную doctrine: archetypes, gate selection, governance и resource boundaries. |
+| Строгость оценки | 7 | 9.5 | `yao-meta-skill` делает акцент на layered holdout, route confusion, adversarial checks и promotion gates. |
+| Опыт ручного ревью | 9 | 5 | У `skill-creator` более удобный review UX; `yao-meta-skill` пока в основном опирается на отчеты. |
+| Governance и lifecycle | 2 | 9.5 | `yao-meta-skill` рассматривает важные skills как управляемые активы с maturity, review cadence и promotion evidence. |
+| Переносимость между средами | 4 | 9 | `yao-meta-skill` строится вокруг neutral metadata, adapters, degradation rules и portability checks. |
+| Полнота toolchain | 6 | 9.5 | `yao-meta-skill` дает более широкую toolchain с unified CLI, CI и системой отчетов. |
+| Скорость итераций | 8 | 7 | `skill-creator` может быть быстрее в коротких циклах; `yao-meta-skill` сознательно тяжелее ради quality gates и evidence. |
+| Качество документации | 7 | 9 | `yao-meta-skill` уже имеет многоязычную документацию, examples, failure library и formal method docs. |
+| Лучше для индивидуального использования | 9 | 6 | `skill-creator` лучше подходит для быстрого личного прототипирования. |
+| Лучше для команд / организаций | 5 | 9.5 | `yao-meta-skill` лучше подходит для командного reuse, CI, governance и долгосрочной поддержки. |
+| Итог | 6.7 | 8.0 | Компромисс прямой: более легкий conversational flow против более сильной engineering и governance системы. |
+
+## Подходящие сценарии
+
+- Выбирайте **skill-creator**, если вам важнее быстрое solo-идеирование, гибкий диалог и легкий процесс.
+- Выбирайте **yao-meta-skill**, если нужен переиспользуемый актив с явными границами, evaluation gates, governance, portability и долгосрочной поддержкой.
+- Практичный гибридный вариант: сначала получить первый черновик через conversation-driven creator, а затем использовать `yao-meta-skill`, чтобы усилить пакет и сделать его team-ready.
+
 ## Почему Yao
 
 - **Легкий**: entrypoint остается компактным, context budgets заданы явно, а дополнительная структура добавляется только тогда, когда она действительно окупается.
