@@ -36,6 +36,32 @@ flowchart LR
 - **実行**: 統一 CLI で作成、検証、最適化、昇格を進めます。
 - **出力**: 最終的に skill package と、評価・ガバナンス・移植性の証拠が残ります。
 
+## 比較スナップショット
+
+この表は「どちらが今の目的に合っているか」を判断するための scenario-oriented benchmark です。あらゆる場面で一方が絶対的に優れていると主張するものではありません。
+
+| 評価軸 | skill-creator | yao-meta-skill | 意味 |
+| --- | ---: | ---: | --- |
+| 立ち上がりやすさ | 9 | 6 | `skill-creator` は会話的で直感的。`yao-meta-skill` は概念が多く学習コストが高めです。 |
+| 柔軟性 | 9 | 7 | `skill-creator` の方が自由度が高く、`yao-meta-skill` は手順がより明示的です。 |
+| 方法論の深さ | 5 | 9.5 | `yao-meta-skill` は doctrine、archetypes、gate selection、governance、resource boundaries がより揃っています。 |
+| 評価の厳密さ | 7 | 9.5 | `yao-meta-skill` は layered holdout、route confusion、adversarial checks、promotion gates を重視します。 |
+| 人間によるレビュー体験 | 9 | 5 | `skill-creator` の方がレビュー UX は直感的で、`yao-meta-skill` はまだ report 中心です。 |
+| ガバナンスとライフサイクル | 2 | 9.5 | `yao-meta-skill` は重要な skill を maturity、review cadence、promotion evidence を持つ管理対象として扱います。 |
+| クロス環境の移植性 | 4 | 9 | `yao-meta-skill` は neutral metadata、adapter、degradation rule、portability checks を備えています。 |
+| ツールチェーンの完成度 | 6 | 9.5 | `yao-meta-skill` は統一 CLI、CI、レポート生成まで含む広い toolchain を持ちます。 |
+| 反復の速さ | 8 | 7 | `skill-creator` は軽い反復が速く、`yao-meta-skill` は品質ゲートの分だけ少し重くなります。 |
+| 文書品質 | 7 | 9 | `yao-meta-skill` は多言語 docs、examples、failure library、method doctrine を持ちます。 |
+| 個人利用への適性 | 9 | 6 | `skill-creator` は個人の素早い試作に向いています。 |
+| チーム / 組織への適性 | 5 | 9.5 | `yao-meta-skill` はチーム再利用、CI、ガバナンス、長期保守に向いています。 |
+| 総合 | 6.7 | 8.0 | トレードオフは明快です。軽い会話フローか、より強い engineering と governance か、の違いです。 |
+
+## 適したシナリオ
+
+- **個人で素早く試作したい、会話しながら固めたい、軽く始めたい**なら `skill-creator` が向いています。
+- **チーム再利用、明確な境界、評価ゲート、ガバナンス、移植性、長期保守**を重視するなら `yao-meta-skill` が向いています。
+- 実務的な組み合わせとしては、会話的な creator で初稿を作り、その後 `yao-meta-skill` で harden して team-ready な asset にする、という流れが有効です。
+
 ## Quick Start
 
 1. skill 化したい workflow、prompt 集合、または反復タスクを説明します。
@@ -64,32 +90,6 @@ flowchart LR
 - **コンテキスト効率 `9.4`**: エントリポイントは小さく保たれ、context budget は tier 化され、quality density も追跡されます。
 
 全体の方向性は明確です。入口は軽く、評価は厳しく、ガバナンスは skill 品質の一部として扱います。
-
-## 比較スナップショット
-
-この表は「どちらが今の目的に合っているか」を判断するための scenario-oriented benchmark です。あらゆる場面で一方が絶対的に優れていると主張するものではありません。
-
-| 評価軸 | skill-creator | yao-meta-skill | 意味 |
-| --- | ---: | ---: | --- |
-| 立ち上がりやすさ | 9 | 6 | `skill-creator` は会話的で直感的。`yao-meta-skill` は概念が多く学習コストが高めです。 |
-| 柔軟性 | 9 | 7 | `skill-creator` の方が自由度が高く、`yao-meta-skill` は手順がより明示的です。 |
-| 方法論の深さ | 5 | 9.5 | `yao-meta-skill` は doctrine、archetypes、gate selection、governance、resource boundaries がより揃っています。 |
-| 評価の厳密さ | 7 | 9.5 | `yao-meta-skill` は layered holdout、route confusion、adversarial checks、promotion gates を重視します。 |
-| 人間によるレビュー体験 | 9 | 5 | `skill-creator` の方がレビュー UX は直感的で、`yao-meta-skill` はまだ report 中心です。 |
-| ガバナンスとライフサイクル | 2 | 9.5 | `yao-meta-skill` は重要な skill を maturity、review cadence、promotion evidence を持つ管理対象として扱います。 |
-| クロス環境の移植性 | 4 | 9 | `yao-meta-skill` は neutral metadata、adapter、degradation rule、portability checks を備えています。 |
-| ツールチェーンの完成度 | 6 | 9.5 | `yao-meta-skill` は統一 CLI、CI、レポート生成まで含む広い toolchain を持ちます。 |
-| 反復の速さ | 8 | 7 | `skill-creator` は軽い反復が速く、`yao-meta-skill` は品質ゲートの分だけ少し重くなります。 |
-| 文書品質 | 7 | 9 | `yao-meta-skill` は多言語 docs、examples、failure library、method doctrine を持ちます。 |
-| 個人利用への適性 | 9 | 6 | `skill-creator` は個人の素早い試作に向いています。 |
-| チーム / 組織への適性 | 5 | 9.5 | `yao-meta-skill` はチーム再利用、CI、ガバナンス、長期保守に向いています。 |
-| 総合 | 6.7 | 8.0 | トレードオフは明快です。軽い会話フローか、より強い engineering と governance か、の違いです。 |
-
-## 適したシナリオ
-
-- **個人で素早く試作したい、会話しながら固めたい、軽く始めたい**なら `skill-creator` が向いています。
-- **チーム再利用、明確な境界、評価ゲート、ガバナンス、移植性、長期保守**を重視するなら `yao-meta-skill` が向いています。
-- 実務的な組み合わせとしては、会話的な creator で初稿を作り、その後 `yao-meta-skill` で harden して team-ready な asset にする、という流れが有効です。
 
 ## なぜ Yao なのか
 

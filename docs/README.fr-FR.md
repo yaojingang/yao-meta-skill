@@ -36,6 +36,32 @@ Lecture en 10 secondes :
 - **Exécution** : la CLI unifiée construit, valide, optimise et promeut le skill.
 - **Sorties** : on obtient un skill package réutilisable avec ses preuves d'évaluation, de gouvernance et de portabilité.
 
+## Comparatif rapide
+
+Le tableau ci-dessous est un benchmark orienté scénario. Il aide à choisir le bon système selon le contexte, plutôt qu'à prétendre qu'une approche domine toutes les autres dans tous les cas.
+
+| Dimension | skill-creator | yao-meta-skill | Ce que cela signifie |
+| --- | ---: | ---: | --- |
+| Facilité de prise en main | 9 | 6 | `skill-creator` est plus conversationnel et intuitif ; `yao-meta-skill` demande plus d'apprentissage. |
+| Flexibilité | 9 | 7 | `skill-creator` est plus libre ; `yao-meta-skill` suit un processus plus explicite. |
+| Profondeur méthodologique | 5 | 9.5 | `yao-meta-skill` possède une doctrine plus complète : archetypes, gates, governance et resource boundaries. |
+| Rigueur d'évaluation | 7 | 9.5 | `yao-meta-skill` insiste sur les holdouts multiples, la route confusion, l'adversarial et les promotion gates. |
+| Expérience de revue humaine | 9 | 5 | `skill-creator` offre une expérience de revue plus directe ; `yao-meta-skill` reste surtout piloté par des rapports. |
+| Gouvernance et cycle de vie | 2 | 9.5 | `yao-meta-skill` traite les skills importantes comme des actifs gérés avec maturité, cadence de revue et preuves de promotion. |
+| Portabilité inter-environnements | 4 | 9 | `yao-meta-skill` repose sur des métadonnées neutres, des adaptateurs, des règles de dégradation et des contrôles de portabilité. |
+| Complétude de la toolchain | 6 | 9.5 | `yao-meta-skill` apporte une toolchain plus large avec CLI unifiée, CI et génération de rapports. |
+| Vitesse d'itération | 8 | 7 | `skill-creator` paraît plus rapide pour les petites boucles ; `yao-meta-skill` accepte plus de friction pour gagner en preuves. |
+| Qualité de la documentation | 7 | 9 | `yao-meta-skill` fournit docs multilingues, exemples, failure library et méthode formalisée. |
+| Pertinence pour un usage individuel | 9 | 6 | `skill-creator` est plus naturel pour un usage personnel rapide. |
+| Pertinence pour une équipe / organisation | 5 | 9.5 | `yao-meta-skill` est mieux adapté à la réutilisation en équipe, à la CI, à la gouvernance et à la maintenance longue. |
+| Global | 6.7 | 8.0 | Le compromis est clair : flux conversationnel léger d'un côté, ingénierie et gouvernance plus fortes de l'autre. |
+
+## Scénarios recommandés
+
+- Choisissez **skill-creator** si votre besoin principal est l'idéation rapide en solo, l'interaction souple et un processus léger.
+- Choisissez **yao-meta-skill** si vous voulez un actif réutilisable avec frontières explicites, gates d'évaluation, gouvernance, portabilité et maintenance à long terme.
+- Un schéma hybride utile consiste à produire un premier jet avec un creator conversationnel, puis à utiliser `yao-meta-skill` pour durcir le package et le rendre prêt pour une équipe.
+
 ## Quick Start
 
 1. Décrivez le workflow, l'ensemble de prompts ou la tâche répétée que vous voulez transformer en skill.
@@ -64,32 +90,6 @@ Dans la dernière revue pondérée partagée pour le projet, Yao se distingue su
 - **Efficacité de contexte `9.4`** : le point d'entrée reste compact, les budgets de contexte sont hiérarchisés et la densité de qualité est suivie.
 
 La direction est volontaire : garder une entrée légère, rendre l'évaluation stricte, et traiter la gouvernance comme une partie de la qualité d'une skill.
-
-## Comparatif rapide
-
-Le tableau ci-dessous est un benchmark orienté scénario. Il aide à choisir le bon système selon le contexte, plutôt qu'à prétendre qu'une approche domine toutes les autres dans tous les cas.
-
-| Dimension | skill-creator | yao-meta-skill | Ce que cela signifie |
-| --- | ---: | ---: | --- |
-| Facilité de prise en main | 9 | 6 | `skill-creator` est plus conversationnel et intuitif ; `yao-meta-skill` demande plus d'apprentissage. |
-| Flexibilité | 9 | 7 | `skill-creator` est plus libre ; `yao-meta-skill` suit un processus plus explicite. |
-| Profondeur méthodologique | 5 | 9.5 | `yao-meta-skill` possède une doctrine plus complète : archetypes, gates, governance et resource boundaries. |
-| Rigueur d'évaluation | 7 | 9.5 | `yao-meta-skill` insiste sur les holdouts multiples, la route confusion, l'adversarial et les promotion gates. |
-| Expérience de revue humaine | 9 | 5 | `skill-creator` offre une expérience de revue plus directe ; `yao-meta-skill` reste surtout piloté par des rapports. |
-| Gouvernance et cycle de vie | 2 | 9.5 | `yao-meta-skill` traite les skills importantes comme des actifs gérés avec maturité, cadence de revue et preuves de promotion. |
-| Portabilité inter-environnements | 4 | 9 | `yao-meta-skill` repose sur des métadonnées neutres, des adaptateurs, des règles de dégradation et des contrôles de portabilité. |
-| Complétude de la toolchain | 6 | 9.5 | `yao-meta-skill` apporte une toolchain plus large avec CLI unifiée, CI et génération de rapports. |
-| Vitesse d'itération | 8 | 7 | `skill-creator` paraît plus rapide pour les petites boucles ; `yao-meta-skill` accepte plus de friction pour gagner en preuves. |
-| Qualité de la documentation | 7 | 9 | `yao-meta-skill` fournit docs multilingues, exemples, failure library et méthode formalisée. |
-| Pertinence pour un usage individuel | 9 | 6 | `skill-creator` est plus naturel pour un usage personnel rapide. |
-| Pertinence pour une équipe / organisation | 5 | 9.5 | `yao-meta-skill` est mieux adapté à la réutilisation en équipe, à la CI, à la gouvernance et à la maintenance longue. |
-| Global | 6.7 | 8.0 | Le compromis est clair : flux conversationnel léger d'un côté, ingénierie et gouvernance plus fortes de l'autre. |
-
-## Scénarios recommandés
-
-- Choisissez **skill-creator** si votre besoin principal est l'idéation rapide en solo, l'interaction souple et un processus léger.
-- Choisissez **yao-meta-skill** si vous voulez un actif réutilisable avec frontières explicites, gates d'évaluation, gouvernance, portabilité et maintenance à long terme.
-- Un schéma hybride utile consiste à produire un premier jet avec un creator conversationnel, puis à utiliser `yao-meta-skill` pour durcir le package et le rendre prêt pour une équipe.
 
 ## Pourquoi Yao
 
