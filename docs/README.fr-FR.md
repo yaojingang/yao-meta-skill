@@ -38,7 +38,7 @@ Lecture en 10 secondes :
 
 ## Comparatif rapide
 
-Le tableau ci-dessous est un benchmark orienté scénario. Il aide à choisir le bon système selon le contexte, plutôt qu'à prétendre qu'une approche domine toutes les autres dans tous les cas.
+Le tableau ci-dessous est un comparatif orienté scénario. Il aide à choisir le bon système selon le contexte, plutôt qu'à prétendre qu'une approche domine toutes les autres dans tous les cas.
 
 | Dimension | skill-creator | yao-meta-skill | Ce que cela signifie |
 | --- | ---: | ---: | --- |
@@ -62,7 +62,7 @@ Le tableau ci-dessous est un benchmark orienté scénario. Il aide à choisir le
 - Choisissez **yao-meta-skill** si vous voulez un actif réutilisable avec frontières explicites, gates d'évaluation, gouvernance, portabilité et maintenance à long terme.
 - Un schéma hybride utile consiste à produire un premier jet avec un creator conversationnel, puis à utiliser `yao-meta-skill` pour durcir le package et le rendre prêt pour une équipe.
 
-## Quick Start
+## Démarrage rapide
 
 1. Décrivez le workflow, l'ensemble de prompts ou la tâche répétée que vous voulez transformer en skill.
 2. Commencez par un court dialogue d'intention pour clarifier le vrai job, les sorties, les exclusions et les contraintes.
@@ -70,7 +70,7 @@ Le tableau ci-dessous est un benchmark orienté scénario. Il aide à choisir le
 4. Utilisez `yao-meta-skill` pour générer ou améliorer le paquet en mode scaffold, production ou library.
 5. Chaque nouveau skill reçoit aussi `reports/intent-dialogue.md`, `reports/skill-overview.html`, `reports/reference-scan.md` et `reports/iteration-directions.md`.
 
-## Results
+## Résultats actuels
 
 - `make test` passe actuellement
 - sur le jeu de régression courant, trigger eval a `0` faux positifs et `0` faux négatifs

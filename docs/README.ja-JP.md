@@ -38,7 +38,7 @@ flowchart LR
 
 ## 比較スナップショット
 
-この表は「どちらが今の目的に合っているか」を判断するための scenario-oriented benchmark です。あらゆる場面で一方が絶対的に優れていると主張するものではありません。
+この表は「どちらが今の目的に合っているか」を判断するためのシナリオ指向の比較スナップショットです。あらゆる場面で一方が絶対的に優れていると主張するものではありません。
 
 | 評価軸 | skill-creator | yao-meta-skill | 意味 |
 | --- | ---: | ---: | --- |
@@ -62,7 +62,7 @@ flowchart LR
 - **チーム再利用、明確な境界、評価ゲート、ガバナンス、移植性、長期保守**を重視するなら `yao-meta-skill` が向いています。
 - 実務的な組み合わせとしては、会話的な creator で初稿を作り、その後 `yao-meta-skill` で harden して team-ready な asset にする、という流れが有効です。
 
-## Quick Start
+## クイックスタート
 
 1. skill 化したい workflow、prompt 集合、または反復タスクを説明します。
 2. まず短い intent dialogue で、実際の job、outputs、boundary、constraints を明確にします。
@@ -70,7 +70,7 @@ flowchart LR
 4. `yao-meta-skill` を使って scaffold、production、library のいずれかのモードでパッケージを生成または改善します。
 5. 新しく作成した skill には `reports/intent-dialogue.md`、`reports/skill-overview.html`、`reports/reference-scan.md`、`reports/iteration-directions.md` が付きます。
 
-## Results
+## 現在の結果
 
 - 現在 `make test` は通過
 - 現在の回帰セットでは trigger eval が `0` false positives / `0` false negatives

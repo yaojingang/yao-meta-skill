@@ -38,7 +38,7 @@ flowchart LR
 
 ## Сравнительный снимок
 
-Ниже — scenario-oriented benchmark. Он полезен для выбора подходящего инструмента под конкретный контекст, а не как универсальное заявление о том, что один подход лучше другого всегда и везде.
+Ниже — сравнительный снимок, ориентированный на сценарии использования. Он полезен для выбора подходящего инструмента под конкретный контекст, а не как универсальное заявление о том, что один подход лучше другого всегда и везде.
 
 | Измерение | skill-creator | yao-meta-skill | Что это означает |
 | --- | ---: | ---: | --- |
@@ -62,7 +62,7 @@ flowchart LR
 - Выбирайте **yao-meta-skill**, если нужен переиспользуемый актив с явными границами, evaluation gates, governance, portability и долгосрочной поддержкой.
 - Практичный гибридный вариант: сначала получить первый черновик через conversation-driven creator, а затем использовать `yao-meta-skill`, чтобы усилить пакет и сделать его team-ready.
 
-## Quick Start
+## Быстрый старт
 
 1. Опишите workflow, набор prompts или повторяющуюся задачу, которую хотите превратить в skill.
 2. Сначала проведите короткий intent dialogue, чтобы уточнить реальную job-to-be-done, outputs, exclusions и constraints.
@@ -70,7 +70,7 @@ flowchart LR
 4. Используйте `yao-meta-skill`, чтобы сгенерировать или улучшить пакет в режиме scaffold, production или library.
 5. Каждый новый skill также получает `reports/intent-dialogue.md`, `reports/skill-overview.html`, `reports/reference-scan.md` и `reports/iteration-directions.md`.
 
-## Results
+## Текущие результаты
 
 - `make test` сейчас проходит
 - на текущем regression-наборе trigger eval дает `0` false positives и `0` false negatives

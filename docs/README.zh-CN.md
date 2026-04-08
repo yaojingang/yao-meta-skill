@@ -38,7 +38,7 @@ flowchart LR
 
 ## 对比快照
 
-下面这个表更适合拿来判断“哪种系统更适合当前场景”，而不是把它理解成适用于所有场景的绝对结论。
+下面这个表更适合拿来判断“哪种系统更适合当前场景”。它是一个面向场景的比较快照，不是适用于所有情境的绝对结论。
 
 | 评分维度 | skill-creator | yao-meta-skill | 说明 |
 | --- | ---: | ---: | --- |
@@ -62,7 +62,7 @@ flowchart LR
 - 如果你要的是**团队复用、显式边界、质量门、治理、可移植性和长期维护**，更适合 `yao-meta-skill`。
 - 一个很实用的组合方式是：先用更对话式的系统做第一版，再用 `yao-meta-skill` 把它加固成团队可复用的正式资产。
 
-## Quick Start
+## 快速开始
 
 1. 先描述你想沉淀成 skill 的 workflow、prompt 集合或重复任务。
 2. 先做一轮简短的意图对话，把真实任务、输出物、边界和约束说清楚。
@@ -70,7 +70,7 @@ flowchart LR
 4. 使用 `yao-meta-skill` 以 scaffold、production 或 library 模式生成或改进 skill 包。
 5. 新建 skill 后，会默认附带 `reports/intent-dialogue.md`、`reports/skill-overview.html`、`reports/reference-scan.md` 和 `reports/iteration-directions.md`，方便理解架构、逻辑、使用方法、可借鉴对象以及下一步最值的 3 个迭代方向。
 
-## Results
+## 当前结果
 
 - 当前 `make test` 可通过
 - 当前回归集下 trigger eval 为 `0` 误触发、`0` 漏触发
