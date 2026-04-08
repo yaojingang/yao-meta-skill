@@ -101,10 +101,16 @@ MODE_CONFIG = {
         "context_budget_tier": "library",
         "review_cadence": "quarterly",
     },
+    "governed": {
+        "maturity_tier": "governed",
+        "lifecycle_stage": "governed",
+        "context_budget_tier": "governed",
+        "review_cadence": "monthly",
+    },
 }
 
 
-def build_manifest(name: str, mode: str) -> dict:
+def build_manifest(name: str, mode: str, archetype: str) -> dict:
     mode_payload = MODE_CONFIG.get(mode, MODE_CONFIG["scaffold"])
     return {
         "name": name,
@@ -116,6 +122,7 @@ def build_manifest(name: str, mode: str) -> dict:
         "lifecycle_stage": mode_payload["lifecycle_stage"],
         "context_budget_tier": mode_payload["context_budget_tier"],
         "review_cadence": mode_payload["review_cadence"],
+        "skill_archetype": archetype,
         "target_platforms": [
             "openai",
             "claude",
@@ -130,7 +137,14 @@ def build_manifest(name: str, mode: str) -> dict:
     }
 
 
-def initialize_skill(name: str, description: str, title: str | None = None, output_dir: str = ".", mode: str = "scaffold") -> dict:
+def initialize_skill(
+    name: str,
+    description: str,
+    title: str | None = None,
+    output_dir: str = ".",
+    mode: str = "scaffold",
+    archetype: str = "scaffold",
+) -> dict:
     title = title or name.replace("-", " ").title()
     root = Path(output_dir).resolve() / name
     (root / "agents").mkdir(parents=True, exist_ok=True)
@@ -155,7 +169,7 @@ def initialize_skill(name: str, description: str, title: str | None = None, outp
         encoding="utf-8",
     )
     (root / "manifest.json").write_text(
-        json.dumps(build_manifest(name, mode), ensure_ascii=False, indent=2),
+        json.dumps(build_manifest(name, mode, archetype), ensure_ascii=False, indent=2),
         encoding="utf-8",
     )
     overview = render_skill_overview(root)
@@ -167,6 +181,7 @@ def initialize_skill(name: str, description: str, title: str | None = None, outp
         "ok": True,
         "root": str(root),
         "mode": mode,
+        "archetype": archetype,
         "artifacts": {
             "readme": str(root / "README.md"),
             "manifest": str(root / "manifest.json"),
@@ -191,8 +206,9 @@ def main() -> None:
     parser.add_argument("--title", default=None)
     parser.add_argument("--output-dir", default=".")
     parser.add_argument("--mode", choices=sorted(MODE_CONFIG.keys()), default="scaffold")
+    parser.add_argument("--archetype", choices=sorted(MODE_CONFIG.keys()), default="scaffold")
     args = parser.parse_args()
-    result = initialize_skill(args.name, args.description, args.title, args.output_dir, args.mode)
+    result = initialize_skill(args.name, args.description, args.title, args.output_dir, args.mode, args.archetype)
     print(json.dumps(result, ensure_ascii=False, indent=2))
 
 

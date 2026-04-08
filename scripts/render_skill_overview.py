@@ -210,6 +210,7 @@ def build_summary(skill_dir: Path) -> dict:
             "canonical_format": interface_data.get("compatibility", {}).get("canonical_format", "agent-skills"),
             "targets": interface_data.get("compatibility", {}).get("adapter_targets", []),
             "maturity_tier": manifest.get("maturity_tier", "scaffold"),
+            "skill_archetype": manifest.get("skill_archetype", manifest.get("maturity_tier", "scaffold")),
             "updated_at": manifest.get("updated_at", str(date.today())),
         },
     }

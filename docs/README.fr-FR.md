@@ -16,6 +16,7 @@ Il transforme des workflows bruts, des transcripts, des prompts, des notes et de
 - un review viewer HTML compact pour accélérer la première revue humaine
 - un feedback log léger pour éviter de lancer tout le flux de promotion à chaque tour
 - un rapport with-skill vs baseline pour visualiser rapidement le gain incrémental
+- un quickstart sensible aux archetypes pour orienter un nouveau skill vers scaffold, production, library ou governed
 - des métadonnées sources neutres et des adaptateurs spécifiques au client
 - des contrôles de gouvernance, de promotion et de portabilité intégrés au flux standard
 
@@ -70,7 +71,7 @@ Le tableau ci-dessous est un comparatif orienté scénario. Il aide à choisir l
 1. Décrivez le workflow, l'ensemble de prompts ou la tâche répétée que vous voulez transformer en skill.
 2. Commencez par un court dialogue d'intention pour clarifier le vrai job, les sorties, les exclusions et les contraintes.
 3. Lancez ensuite un short reference scan en privilégiant GitHub et les objets publics de référence ; les fichiers locaux ne servent ensuite qu'à l'ajustement, à la confidentialité et à la compatibilité.
-4. Utilisez `yao-meta-skill` pour générer ou améliorer le paquet en mode scaffold, production ou library.
+4. Utilisez le `quickstart` sensible aux archetypes ou le flux complet d'authoring pour générer ou améliorer le paquet en mode scaffold, production, library ou governed.
 5. Chaque nouveau skill reçoit aussi `reports/intent-dialogue.md`, `reports/skill-overview.html`, `reports/review-viewer.html`, `reports/reference-scan.md` et `reports/iteration-directions.md`. Ensuite, le feedback log et le baseline compare permettent de boucler rapidement sans lancer tout le flux de promotion.
 
 ## Résultats actuels

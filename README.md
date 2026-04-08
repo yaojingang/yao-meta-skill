@@ -26,6 +26,7 @@ It turns rough workflows, transcripts, prompts, notes, and runbooks into reusabl
 - three high-value next iteration directions after the first package is created
 - a lightweight feedback log that does not require a full promotion cycle
 - a baseline compare report for with-skill vs baseline review
+- an archetype-aware quickstart that steers new packages toward scaffold, production, library, or governed fits
 - neutral source metadata plus client-specific adapters
 - governance, promotion, and portability checks built into the default flow
 
@@ -80,7 +81,7 @@ This is a scenario-oriented benchmark shared with the project. It is most useful
 1. Describe the workflow, prompt set, or repeated task you want to turn into a skill.
 2. Start with a short intent dialogue so the real job, outputs, exclusions, and constraints are explicit.
 3. Run a short reference scan with external benchmarks first, then use local files only for fit and privacy checks.
-4. Use `yao-meta-skill` to generate or improve the package in scaffold, production, or library mode.
+4. Use the archetype-aware `quickstart` or the full authoring flow to generate or improve the package in scaffold, production, library, or governed mode.
 5. Review the generated `reports/intent-dialogue.md`, `reports/skill-overview.html`, and `reports/iteration-directions.md` before adding more structure.
 
 Or use the unified authoring CLI:

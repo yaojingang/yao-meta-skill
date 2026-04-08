@@ -26,6 +26,23 @@ def load_baseline_summary(skill_dir: Path) -> dict:
     return payload if isinstance(payload, dict) else {}
 
 
+def load_specific_compare(skill_dir: Path) -> dict:
+    candidates = [
+        skill_dir / "reports" / "description_optimization.json",
+        skill_dir.parent / "optimization" / "reports" / "description_optimization.json",
+    ]
+    for path in candidates:
+        payload = load_json(path)
+        if isinstance(payload, dict) and payload:
+            return payload
+    return {}
+
+
+def load_specific_promotion(skill_dir: Path) -> dict:
+    payload = load_json(skill_dir / "reports" / "promotion_decisions.json")
+    return payload if isinstance(payload, dict) else {}
+
+
 def ensure_report_inputs(skill_dir: Path) -> dict:
     overview_json = skill_dir / "reports" / "skill-overview.json"
     intent_json = skill_dir / "reports" / "intent-dialogue.json"
@@ -43,6 +60,8 @@ def ensure_report_inputs(skill_dir: Path) -> dict:
     iteration = directions_payload.get("summary", {}) or render_iteration_directions(skill_dir)["summary"]
     feedback = load_feedback_summary(skill_dir)
     baseline = load_baseline_summary(skill_dir)
+    compare = load_specific_compare(skill_dir)
+    promotion = load_specific_promotion(skill_dir)
     return {
         "overview": overview,
         "intent": intent,
@@ -50,6 +69,8 @@ def ensure_report_inputs(skill_dir: Path) -> dict:
         "iteration": directions_payload if directions_payload else {"summary": iteration, "directions": []},
         "feedback": feedback,
         "baseline": baseline,
+        "compare": compare,
+        "promotion": promotion,
     }
 
 
@@ -65,6 +86,32 @@ def architecture_steps(overview: dict) -> list[dict]:
     ]
 
 
+def compare_rows(compare: dict) -> list[dict]:
+    if not compare:
+        return []
+    rows = []
+    items = [
+        ("Baseline", compare.get("baseline", {})),
+        ("Current", compare.get("current_candidate", {})),
+        (compare.get("winner", {}).get("label", "Winner"), compare.get("winner", {})),
+    ]
+    for label, payload in items:
+        if not payload:
+            continue
+        dev = payload.get("dev", {})
+        holdout = payload.get("holdout", {})
+        rows.append(
+            {
+                "label": label,
+                "tokens": payload.get("estimated_tokens", 0),
+                "dev_errors": dev.get("total_errors", 0),
+                "holdout_errors": holdout.get("total_errors", 0),
+                "strategy": payload.get("strategy", "existing"),
+            }
+        )
+    return rows
+
+
 def render_html(report: dict) -> str:
     overview = report["overview"]
     intent = report["intent"]
@@ -73,7 +120,10 @@ def render_html(report: dict) -> str:
     directions = iteration.get("directions", [])[:3]
     feedback = report.get("feedback", {})
     baseline = report.get("baseline", {})
+    compare = report.get("compare", {})
+    promotion = report.get("promotion", {})
     architecture = architecture_steps(overview)
+    compare_table_rows = compare_rows(compare)
 
     strength_items = "".join(f"<li>{html.escape(item)}</li>" for item in overview.get("strengths", []))
     logic_items = "".join(f"<li>{html.escape(item)}</li>" for item in overview.get("logic_steps", []))
@@ -134,7 +184,22 @@ def render_html(report: dict) -> str:
         feedback_html = "<li>No lightweight feedback captured yet. Use `yao.py feedback` to record quick review notes.</li>"
 
     baseline_html = ""
-    if baseline:
+    if compare_table_rows:
+        compare_rows_html = "".join(
+            f"<tr><td>{html.escape(item['label'])}</td><td>{html.escape(str(item['tokens']))}</td><td>{html.escape(str(item['dev_errors']))}</td><td>{html.escape(str(item['holdout_errors']))}</td><td>{html.escape(item['strategy'])}</td></tr>"
+            for item in compare_table_rows
+        )
+        selection_logic = compare.get("selection_logic", "Choose the smallest candidate that improves routing without adding unnecessary weight.")
+        winner_label = compare.get("summary", {}).get("winner_label", compare.get("winner", {}).get("label", "Current"))
+        baseline_html = (
+            "<div class='baseline-box'>"
+            f"<p><strong>Winner:</strong> {html.escape(str(winner_label))}</p>"
+            f"<p class='minor'>{html.escape(str(selection_logic))}</p>"
+            "<table><thead><tr><th>Variant</th><th>Tokens</th><th>Dev Errors</th><th>Holdout Errors</th><th>Strategy</th></tr></thead>"
+            f"<tbody>{compare_rows_html}</tbody></table>"
+            "</div>"
+        )
+    elif baseline:
         summary = baseline.get("summary", {})
         baseline_html = (
             "<div class='baseline-box'>"
@@ -146,6 +211,19 @@ def render_html(report: dict) -> str:
         )
     else:
         baseline_html = "<p class='minor'>No baseline comparison has been recorded for this package yet.</p>"
+
+    promotion_html = ""
+    if promotion:
+        summary = promotion.get("summary", {})
+        promotion_html = (
+            "<div class='baseline-box'>"
+            f"<p><strong>Promote:</strong> {html.escape(str(summary.get('promote', 0)))}</p>"
+            f"<p><strong>Keep current:</strong> {html.escape(str(summary.get('keep_current', 0)))}</p>"
+            f"<p><strong>Blocked:</strong> {html.escape(str(summary.get('blocked', 0)))}</p>"
+            "</div>"
+        )
+    else:
+        promotion_html = "<p class='minor'>No promotion summary is attached to this package yet.</p>"
 
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -259,6 +337,24 @@ def render_html(report: dict) -> str:
       color: var(--muted);
       font-size: 13px;
     }}
+    table {{
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+      font-size: 14px;
+    }}
+    th, td {{
+      border-top: 1px solid var(--line);
+      text-align: left;
+      padding: 10px 8px;
+      vertical-align: top;
+    }}
+    th {{
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+    }}
     @media (max-width: 1000px) {{
       .arch-grid, .direction-grid, .grid {{
         grid-template-columns: 1fr;
@@ -274,6 +370,7 @@ def render_html(report: dict) -> str:
       <p class="lede">{html.escape(overview.get('description', ''))}</p>
       <div class="meta">
         <span>maturity: {html.escape(str(overview.get('metadata', {}).get('maturity_tier', 'scaffold')))}</span>
+        <span>archetype: {html.escape(str(overview.get('metadata', {}).get('skill_archetype', 'scaffold')))}</span>
         <span>format: {html.escape(str(overview.get('metadata', {}).get('canonical_format', 'agent-skills')))}</span>
         <span>updated: {html.escape(str(overview.get('metadata', {}).get('updated_at', 'n/a')))}</span>
       </div>
@@ -312,7 +409,7 @@ def render_html(report: dict) -> str:
         <ul>{reference_items}</ul>
       </div>
       <div class="panel">
-        <h2>Baseline compare</h2>
+        <h2>Compare view</h2>
         {baseline_html}
       </div>
     </section>
@@ -328,8 +425,24 @@ def render_html(report: dict) -> str:
         <ul>{feedback_html}</ul>
       </div>
       <div class="panel">
+        <h2>Promotion status</h2>
+        {promotion_html}
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="panel">
         <h2>Package map</h2>
         <ul>{"".join(f"<li><strong>{html.escape(item['path'])}</strong> — {html.escape(item['label'])}</li>" for item in overview.get('package_map', [])[:8])}</ul>
+      </div>
+      <div class="panel">
+        <h2>First-pass review frame</h2>
+        <ul>
+          <li>Does the trigger stay narrow enough for the intended job?</li>
+          <li>Does the archetype match the real reuse level?</li>
+          <li>Are we adding structure faster than we are adding reliability?</li>
+          <li>Should the next step be trigger tightening, execution assets, or portability hardening?</li>
+        </ul>
       </div>
     </section>
   </div>

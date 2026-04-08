@@ -44,6 +44,7 @@ def main() -> None:
     assert json_path.exists(), json_path
     html_text = html_path.read_text(encoding="utf-8")
     assert "Architecture at a glance" in html_text, html_text[:500]
+    assert "Compare view" in html_text, html_text[:500]
     assert "Top three next moves" in html_text, html_text[:500]
     print(json.dumps({"ok": True}, ensure_ascii=False, indent=2))
 

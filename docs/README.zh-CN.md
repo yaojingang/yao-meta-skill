@@ -16,6 +16,7 @@
 - 提供一个紧凑的 HTML review viewer，方便第一次人工理解和评审
 - 提供一个轻量 feedback log，不必每次都走完整 promotion 流程
 - 提供一个 with-skill vs baseline 的对比报告，便于快速看增量收益
+- 提供一个 archetype-aware 的 quickstart，引导新 skill 落到 scaffold、production、library 或 governed 的合适形态
 - 中性的源元数据以及面向不同客户端的适配层
 - 内建的治理、晋升和 portability 检查
 
@@ -70,7 +71,7 @@ flowchart LR
 1. 先描述你想沉淀成 skill 的 workflow、prompt 集合或重复任务。
 2. 先做一轮简短的意图对话，把真实任务、输出物、边界和约束说清楚。
 3. 再做一轮参考扫描，以 GitHub 和世界级公开对象为主来源，本地文件只做适配和隐私校准。
-4. 使用 `yao-meta-skill` 以 scaffold、production 或 library 模式生成或改进 skill 包。
+4. 使用 archetype-aware 的 `quickstart` 或完整作者流，在 scaffold、production、library 或 governed 模式下生成或改进 skill 包。
 5. 新建 skill 后，会默认附带 `reports/intent-dialogue.md`、`reports/skill-overview.html`、`reports/review-viewer.html`、`reports/reference-scan.md` 和 `reports/iteration-directions.md`；后续还可以通过 feedback log 和 baseline compare 快速收集意见、查看增量收益，而不必每次都走完整 promotion 流程。
 
 ## 当前结果

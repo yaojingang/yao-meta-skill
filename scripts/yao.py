@@ -121,6 +121,47 @@ def prompt_with_default(label: str, default: str) -> str:
     return value or default
 
 
+ARCHETYPE_MODE = {
+    "scaffold": "scaffold",
+    "production": "production",
+    "library": "library",
+    "governed": "governed",
+}
+
+
+def infer_archetype(job: str, description: str) -> tuple[str, str]:
+    text = f"{job} {description}".lower()
+    if any(token in text for token in ("incident", "compliance", "security", "release", "govern", "audit", "policy")):
+        return "governed", "The request looks operationally sensitive, so governed is the safest default."
+    if any(token in text for token in ("shared", "cross-team", "library", "portable", "platform", "reusable across")):
+        return "library", "The request signals multi-team reuse or portability, so library is the better fit."
+    if any(token in text for token in ("review", "checklist", "team", "workflow", "process", "standardize")):
+        return "production", "The request looks team-reused and repeatable, so production fits better than scaffold."
+    return "scaffold", "The request still looks exploratory or lightweight, so scaffold keeps the first package lean."
+
+
+def archetype_guidance(archetype: str) -> dict:
+    mapping = {
+        "scaffold": {
+            "first_gate": "trigger and exclusions",
+            "focus": "keep the first package small and avoid governance overhead",
+        },
+        "production": {
+            "first_gate": "trigger plus one execution or eval asset",
+            "focus": "make the package reliable for team reuse",
+        },
+        "library": {
+            "first_gate": "trigger, portability, and packaging semantics",
+            "focus": "treat the package as a shared capability with visible evidence",
+        },
+        "governed": {
+            "first_gate": "trigger, governance, and review cadence",
+            "focus": "treat the package as a high-trust asset from the start",
+        },
+    }
+    return mapping.get(archetype, mapping["scaffold"])
+
+
 def command_init(args: argparse.Namespace) -> int:
     result = run_script(
         "init_skill.py",
@@ -132,6 +173,8 @@ def command_init(args: argparse.Namespace) -> int:
             args.output_dir,
             "--mode",
             args.mode,
+            "--archetype",
+            args.archetype,
             *(["--title", args.title] if args.title else []),
         ],
     )
@@ -143,10 +186,15 @@ def command_quickstart(args: argparse.Namespace) -> int:
     name = args.name or prompt_with_default("Skill name", "my-skill")
     job = args.job or prompt_with_default("Recurring job", "Turn a repeated workflow into a reusable skill.")
     primary_output = args.primary_output or prompt_with_default("Primary output", "A reusable skill package.")
-    mode = args.mode or prompt_with_default("Mode (scaffold/production/library)", "scaffold")
-    mode = mode if mode in {"scaffold", "production", "library"} else "scaffold"
     description = args.description or f"{job.rstrip('.')} Primary output: {primary_output.rstrip('.')}."
+    inferred_archetype, archetype_reason = infer_archetype(job, description)
+    archetype = args.archetype or prompt_with_default("Archetype (scaffold/production/library/governed)", inferred_archetype)
+    archetype = archetype if archetype in ARCHETYPE_MODE else inferred_archetype
+    default_mode = ARCHETYPE_MODE[archetype]
+    mode = args.mode or prompt_with_default("Mode (scaffold/production/library/governed)", default_mode)
+    mode = mode if mode in ARCHETYPE_MODE.values() else default_mode
     title = args.title or name.replace("-", " ").title()
+    guidance = archetype_guidance(archetype)
     result = run_script(
         "init_skill.py",
         [
@@ -159,6 +207,8 @@ def command_quickstart(args: argparse.Namespace) -> int:
             args.output_dir,
             "--mode",
             mode,
+            "--archetype",
+            archetype,
         ],
     )
     payload = result["payload"] if result["payload"] is not None else result
@@ -166,13 +216,17 @@ def command_quickstart(args: argparse.Namespace) -> int:
         "ok": result["ok"],
         "root": payload.get("root"),
         "mode": mode,
+        "archetype": archetype,
         "artifacts": payload.get("artifacts", {}),
         "guidance": {
+            "archetype_reason": archetype_reason,
             "why_this_mode": (
                 "Scaffold mode keeps the first package light and lets you postpone governance-heavy work until reuse becomes real."
                 if mode == "scaffold"
                 else "This mode expects stronger lifecycle metadata, validation, and review discipline."
             ),
+            "first_gate": guidance["first_gate"],
+            "focus": guidance["focus"],
             "next_steps": [
                 "Open reports/intent-dialogue.md and tighten the real job, outputs, and exclusions.",
                 "Open reports/review-viewer.html to explain the package to a first-time reviewer.",
@@ -525,7 +579,8 @@ def build_parser() -> argparse.ArgumentParser:
     init_cmd.add_argument("--description", default="Describe what the skill does and when to use it.")
     init_cmd.add_argument("--title")
     init_cmd.add_argument("--output-dir", default=".")
-    init_cmd.add_argument("--mode", choices=["scaffold", "production", "library"], default="scaffold")
+    init_cmd.add_argument("--mode", choices=["scaffold", "production", "library", "governed"], default="scaffold")
+    init_cmd.add_argument("--archetype", choices=["scaffold", "production", "library", "governed"], default="scaffold")
     init_cmd.set_defaults(func=command_init)
 
     quickstart_cmd = subparsers.add_parser(
@@ -538,7 +593,8 @@ def build_parser() -> argparse.ArgumentParser:
     quickstart_cmd.add_argument("--description")
     quickstart_cmd.add_argument("--title")
     quickstart_cmd.add_argument("--output-dir", default=".")
-    quickstart_cmd.add_argument("--mode", choices=["scaffold", "production", "library"])
+    quickstart_cmd.add_argument("--mode", choices=["scaffold", "production", "library", "governed"])
+    quickstart_cmd.add_argument("--archetype", choices=["scaffold", "production", "library", "governed"])
     quickstart_cmd.set_defaults(func=command_quickstart)
 
     validate_cmd = subparsers.add_parser("validate", help="Run validate, lint, governance, and resource checks.")

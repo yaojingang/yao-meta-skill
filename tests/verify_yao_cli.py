@@ -47,11 +47,12 @@ def main() -> None:
         "quickstart",
         "--output-dir",
         str(tmp_root),
-        input_text="quickstart-skill\nTurn rough notes into a reusable package.\nA reusable markdown workflow.\nscaffold\n",
+        input_text="quickstart-skill\nTurn rough notes into a reusable package.\nA reusable markdown workflow.\nproduction\nproduction\n",
     )
     assert quickstart_result["ok"], quickstart_result
     quickstart_root = Path(quickstart_result["payload"]["root"])
     assert (quickstart_root / "reports" / "review-viewer.html").exists(), quickstart_root
+    assert quickstart_result["payload"]["archetype"] == "production", quickstart_result
 
     validate_result = run("validate", str(created))
     assert validate_result["ok"], validate_result

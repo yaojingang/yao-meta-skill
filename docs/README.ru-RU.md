@@ -16,6 +16,7 @@
 - компактным HTML review viewer для быстрой первой ручной оценки
 - легким feedback log, чтобы не запускать полный promotion flow на каждом цикле
 - отчетом with-skill vs baseline для быстрого сравнения инкрементальной пользы
+- archetype-aware quickstart, который помогает выбрать scaffold, production, library или governed форму
 - нейтральными исходными метаданными и клиентскими адаптерами
 - встроенными проверками governance, promotion и portability в стандартном потоке
 
@@ -70,7 +71,7 @@ flowchart LR
 1. Опишите workflow, набор prompts или повторяющуюся задачу, которую хотите превратить в skill.
 2. Сначала проведите короткий intent dialogue, чтобы уточнить реальную job-to-be-done, outputs, exclusions и constraints.
 3. Затем выполните короткий reference scan, где основными источниками будут GitHub и сильные публичные эталоны, а локальные файлы будут использоваться только для адаптации, приватности и совместимости.
-4. Используйте `yao-meta-skill`, чтобы сгенерировать или улучшить пакет в режиме scaffold, production или library.
+4. Используйте archetype-aware `quickstart` или полный authoring flow, чтобы сгенерировать или улучшить пакет в режиме scaffold, production, library или governed.
 5. Каждый новый skill также получает `reports/intent-dialogue.md`, `reports/skill-overview.html`, `reports/review-viewer.html`, `reports/reference-scan.md` и `reports/iteration-directions.md`. После этого feedback log и baseline compare позволяют запускать короткий цикл улучшений без полного promotion flow.
 
 ## Текущие результаты
