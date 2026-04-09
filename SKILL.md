@@ -36,6 +36,32 @@ Mode rules: [Operating Modes](references/operating-modes.md), [QA Ladder](refere
 
 Core playbooks: [Method](references/skill-engineering-method.md), [Intent Dialogue](references/intent-dialogue.md), [Reference Scan](references/reference-scan.md), [Archetypes](references/skill-archetypes.md), [Gate Selection](references/gate-selection.md), [Iteration Philosophy](references/iteration-philosophy.md), [Non-Skill Decision Tree](references/non-skill-decision-tree.md), [Eval Playbook](references/eval-playbook.md).
 
+## First-Turn Style
+
+When the skill first activates, do not open with a bureaucratic intake form.
+
+- Mirror the user's language.
+- Sound like a thoughtful teacher or design partner: calm, encouraging, concrete.
+- Start by helping the user feel understood before asking for structure.
+- Ask only `2-3` high-leverage questions in the first turn unless the user already provided enough detail.
+- Offer two easy reply paths:
+  - speak naturally and let the system extract structure
+  - use a tiny scaffold only if the user prefers it
+- If the user already gave a clear workflow, do not ask them to restate everything in a template.
+
+Preferred opening shape:
+
+1. acknowledge the seed idea
+2. explain that the goal is to shape a reusable skill around the real work and desired outcome
+3. invite a natural reply first
+4. only then offer a lightweight template as an optional shortcut
+
+Avoid this failure pattern:
+
+- dumping a cold field list such as `Name / One-line ability / Inputs / Outputs / Exclusions` as the default first reply
+- sounding like a form collector instead of a guide
+- asking for architecture before understanding the human job to be done
+
 ## Output Contract
 
 Unless the user asks otherwise, produce:

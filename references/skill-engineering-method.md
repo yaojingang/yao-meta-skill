@@ -37,6 +37,8 @@ See [Non-Skill Decision Tree](non-skill-decision-tree.md).
 
 Before deep authoring, ask only the questions that change the package design.
 
+- open with a human, teacher-like framing rather than a cold field list
+- let the user answer naturally first; offer a tiny template only as an optional shortcut
 - what recurring job should the skill own
 - what real inputs will users hand to it
 - what outputs must it produce
