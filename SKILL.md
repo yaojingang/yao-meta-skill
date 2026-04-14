@@ -23,56 +23,43 @@ Build reusable skill packages, not long prompts.
 - `Production`: team reuse with focused gates.
 - `Library`: shared infrastructure or meta skill.
 
-Mode rules: [Operating Modes](references/operating-modes.md), [QA Ladder](references/qa-ladder.md), [Resource Boundary Spec](references/resource-boundaries.md), [Skill Engineering Method](references/skill-engineering-method.md).
+Mode rules: [Operating Modes](references/operating-modes.md), [QA Ladder](references/qa-ladder.md), [Resource Boundary Spec](references/resource-boundaries.md), [Method](references/skill-engineering-method.md).
 
 ## Compact Workflow
 
-1. Decide whether the request should become a skill, then choose the lightest archetype.
-2. Begin with a short, human intent dialogue to capture the recurring job, outputs, trigger phrases, exclusions, constraints, and the user's taste or standards.
-3. Run a short reference scan with high-quality external benchmark objects first, then ask whether the user has references worth learning from; use local files only for fit, privacy, and compatibility calibration.
-4. Write the `description` early, then test route quality before expanding the package.
-5. Add only the folders and gates that earn their keep: `trigger_eval.py`, `optimize_description.py`, `judge_blind_eval.py`, `resource_boundary_check.py`, `governance_check.py`, `cross_packager.py`.
-6. After the first package exists, surface the top three next iteration directions instead of expanding the skill in every direction at once.
+1. Decide whether the request should become a skill, then choose the lightest fit.
+2. Run a short intent dialogue to capture the real job, outputs, exclusions, constraints, and standards.
+3. Run a reference scan: external benchmarks first, user references second, local fit checks third.
+4. Write the `description` early and test route quality before expanding the package.
+5. Add only the folders and gates that earn their keep.
+6. After the first package exists, surface the top three next iteration directions.
 
-Core playbooks: [Method](references/skill-engineering-method.md), [Intent Dialogue](references/intent-dialogue.md), [Reference Scan](references/reference-scan.md), [Archetypes](references/skill-archetypes.md), [Gate Selection](references/gate-selection.md), [Iteration Philosophy](references/iteration-philosophy.md), [Non-Skill Decision Tree](references/non-skill-decision-tree.md), [Eval Playbook](references/eval-playbook.md).
+Core playbooks: [Method](references/skill-engineering-method.md), [Intent Dialogue](references/intent-dialogue.md), [Reference Scan](references/reference-scan.md), [Archetypes](references/skill-archetypes.md), [Gate Selection](references/gate-selection.md), [Iteration Philosophy](references/iteration-philosophy.md), [Non-Skill Decision Tree](references/non-skill-decision-tree.md).
 
 ## First-Turn Style
 
-When the skill first activates, do not open with a bureaucratic intake form.
+When the skill first activates:
 
-- Mirror the user's language.
-- Sound like a thoughtful teacher or design partner: warm, calm, encouraging, concrete.
-- Start by helping the user feel understood before asking for structure.
-- Ask only `2-3` high-leverage questions in the first turn unless the user already provided enough detail.
-- Offer two easy reply paths:
-  - speak naturally and let the system extract structure
-  - use a tiny scaffold only if the user prefers it
-- If the user already gave a clear workflow, do not ask them to restate everything in a template.
-- When speaking Chinese, prefer soft, human, companion-like openings over abstract process language.
+- open warmly, like a thoughtful teacher or design partner
+- start from the user's work and desired outcome before asking for structure
+- ask only `2-3` high-leverage questions unless the user already gave enough detail
+- let the user answer naturally first; offer a tiny scaffold only as an optional shortcut
+- do not default to cold field lists such as `Name / Capability / Inputs / Outputs`
 
-Preferred opening shape:
+Chinese conversations should sound soft and companion-like rather than procedural.
 
-1. acknowledge the seed idea
-2. explain that the goal is to shape a reusable skill around the real work and desired outcome
-3. invite a natural reply first
-4. only then offer a lightweight template as an optional shortcut
-
-Avoid this failure pattern:
-
-- dumping a cold field list such as `Name / One-line ability / Inputs / Outputs / Exclusions` as the default first reply
-- sounding like a form collector instead of a guide
-- asking for architecture before understanding the human job to be done
+For concrete opening patterns, see [Intent Dialogue](references/intent-dialogue.md).
 
 ## Output Contract
 
 Unless the user asks otherwise, produce:
 
 1. a working skill directory
-2. a trigger-aware `SKILL.md`
+2. a `SKILL.md`
 3. aligned `agents/interface.yaml`
 4. optional `references/`, `scripts/`, `evals/`, `reports/`, and `manifest.json` only when justified
-5. a short summary of boundary, exclusions, benchmark objects, gates, and next steps
+5. a short summary of boundary, exclusions, references, gates, and next steps
 
 ## Reference Map
 
-Primary references: [Method](references/skill-engineering-method.md), [Reference Scan](references/reference-scan.md), [Intent Dialogue](references/intent-dialogue.md), [Archetypes](references/skill-archetypes.md), [Gate Selection](references/gate-selection.md), [Iteration Philosophy](references/iteration-philosophy.md), [Governance](references/governance.md), [Resource Boundaries](references/resource-boundaries.md), [Eval Playbook](references/eval-playbook.md).
+Primary references: [Method](references/skill-engineering-method.md), [Reference Scan](references/reference-scan.md), [Intent Dialogue](references/intent-dialogue.md), [Governance](references/governance.md), [Resource Boundaries](references/resource-boundaries.md).
