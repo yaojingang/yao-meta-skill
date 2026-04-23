@@ -62,7 +62,7 @@ def main() -> None:
             "consistency, portability\n"
             "production\n"
             "production\n"
-            "A top-tier internal workflow product\n"
+            "\n"
             "privacy and naming\n"
         ),
     )
@@ -73,11 +73,14 @@ def main() -> None:
     assert (quickstart_root / "reports" / "intent-confidence.md").exists(), quickstart_root
     assert (quickstart_root / "reports" / "reference-synthesis.md").exists(), quickstart_root
     assert quickstart_result["payload"]["archetype"] == "production", quickstart_result
-    assert len(quickstart_result["payload"]["references"]["benchmark_repositories"]) == 3, quickstart_result
-    assert quickstart_result["payload"]["references"]["user_references"] == ["A top-tier internal workflow product"], quickstart_result
     assert quickstart_result["payload"]["guidance"]["experience_note"], quickstart_result
     assert quickstart_result["payload"]["intent_confidence"]["score"] >= 70, quickstart_result
-    assert quickstart_result["payload"]["reference_synthesis"]["synthesis"]["borrow_now"], quickstart_result
+    assert quickstart_result["payload"]["recommendation"]["summary"], quickstart_result
+    assert quickstart_result["payload"]["reference_mode"]["mode"] == "silent", quickstart_result
+    assert quickstart_result["payload"]["reviewer_evidence"]["artifacts"]["reference_synthesis"].endswith(
+        "reports/reference-synthesis.md"
+    ), quickstart_result
+    assert "uncertainty_or_conflict" not in quickstart_result["payload"], quickstart_result
 
     validate_result = run("validate", str(created))
     assert validate_result["ok"], validate_result

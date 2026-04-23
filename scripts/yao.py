@@ -213,6 +213,40 @@ def discovery_summary(job: str, primary_output: str, archetype: str, guidance: d
     )
 
 
+def reference_visibility(reference_synthesis: dict, user_references: list[str]) -> dict:
+    synthesis = reference_synthesis.get("synthesis", {}) if isinstance(reference_synthesis, dict) else {}
+    visibility = synthesis.get("visibility", {}) if isinstance(synthesis, dict) else {}
+    reasons = list(visibility.get("reasons", []))
+    if user_references and "user_reference_alignment" not in reasons:
+        reasons.append("user_reference_alignment")
+    mode = "explicit" if reasons else visibility.get("mode", "silent")
+    return {
+        "mode": mode,
+        "user_decision_required": mode == "explicit",
+        "reasons": reasons,
+    }
+
+
+def recommendation_from_synthesis(reference_synthesis: dict, visibility: dict) -> dict:
+    synthesis = reference_synthesis.get("synthesis", {}) if isinstance(reference_synthesis, dict) else {}
+    recommendation = synthesis.get("recommendation", {}) if isinstance(synthesis, dict) else {}
+    borrow_now = recommendation.get("borrow_now") or synthesis.get("borrow_now", [])
+    avoid_now = recommendation.get("avoid_for_now") or synthesis.get("avoid_now", [])
+    summary = recommendation.get("summary") or (
+        f"Start with {borrow_now[0]} Avoid {avoid_now[0]} for the first pass."
+        if borrow_now and avoid_now
+        else "Start with the smallest high-confidence pattern and keep the first pass light."
+    )
+    why = recommendation.get("why") or "This recommendation comes from the benchmark synthesis and current intent confidence."
+    return {
+        "summary": summary,
+        "borrow_now": borrow_now[:2],
+        "avoid_for_now": avoid_now[:2],
+        "why": why,
+        "user_decision_required": visibility["user_decision_required"],
+    }
+
+
 def command_init(args: argparse.Namespace) -> int:
     cmd = [
         args.name,
@@ -259,7 +293,7 @@ def command_init(args: argparse.Namespace) -> int:
 def command_quickstart(args: argparse.Namespace) -> int:
     sys.stderr.write("Let's start gently. You do not need a polished brief here.\n")
     sys.stderr.write("Give me the real work in your own words, and I will help turn it into a clean first-pass skill.\n")
-    sys.stderr.write("Before we deepen the package, I will also look at a few strong public GitHub references, then layer in official, research, and principle tracks so we borrow patterns without copying them.\n")
+    sys.stderr.write("While we shape the first pass, I will quietly check a few strong public patterns in the background and only surface them if there is real uncertainty or a design conflict.\n")
     name = args.name or prompt_with_default("Skill name", "my-skill")
     job = args.job or prompt_with_default(
         "In your own words, what repeated work do you most want this skill to reliably handle",
@@ -330,8 +364,6 @@ def command_quickstart(args: argparse.Namespace) -> int:
     intent_context["constraints"] = local_constraints
     confidence = assess_intent_confidence(intent_context)
     github_query = args.github_query or build_query(" ".join(filter(None, [job, primary_output, description])))
-    sys.stderr.write(f"GitHub benchmark query: {github_query}\n")
-    sys.stderr.write("I will use that query to pull three strong public examples, then surface only the patterns worth borrowing or avoiding, plus a compact synthesis from official, research, and principle tracks.\n")
     title = args.title or name.replace("-", " ").title()
     guidance = archetype_guidance(archetype)
     cmd = [
@@ -375,31 +407,50 @@ def command_quickstart(args: argparse.Namespace) -> int:
         cmd.extend(["--local-constraint", constraint])
     result = run_script("init_skill.py", cmd)
     payload = result["payload"] if result["payload"] is not None else result
-    benchmark_scan = payload.get("github_benchmark_scan") or {}
-    benchmark_repositories = [
-        {
-            "name": repo.get("full_name"),
-            "stars": repo.get("stars"),
-            "url": repo.get("html_url"),
-        }
-        for repo in benchmark_scan.get("repositories", [])
+    reference_synthesis = payload.get("reference_synthesis") or {}
+    visibility = reference_visibility(reference_synthesis, user_references)
+    recommendation = recommendation_from_synthesis(reference_synthesis, visibility)
+    sys.stderr.write(f"\nRecommendation: {recommendation['summary']}\n")
+    if visibility["user_decision_required"]:
+        sys.stderr.write("I am surfacing this because intent is still settling or a user reference needs a deliberate call.\n")
+    else:
+        sys.stderr.write("I will keep the underlying benchmark evidence in the reviewer reports and move ahead with this recommendation.\n")
+
+    next_steps = [
+        "Open reports/intent-dialogue.md and tighten the real job, outputs, and exclusions.",
+        "Open reports/review-viewer.html to explain the package to a first-time reviewer.",
+        "Use reports/iteration-directions.md to choose only one high-value next move before adding more files.",
     ]
+    if visibility["user_decision_required"]:
+        next_steps.insert(
+            1,
+            "Open reports/reference-synthesis.md if you want to inspect why the recommendation was surfaced and which tradeoff needs a call.",
+        )
     report = {
         "ok": result["ok"],
         "root": payload.get("root"),
         "mode": mode,
         "archetype": archetype,
-        "references": {
-            "github_query": github_query,
-            "benchmark_repositories": benchmark_repositories,
-            "external_benchmarks": external_references,
-            "user_references": user_references,
-            "local_constraints": local_constraints,
-        },
         "artifacts": payload.get("artifacts", {}),
-        "github_benchmark_scan": benchmark_scan,
-        "intent_confidence": confidence,
-        "reference_synthesis": payload.get("reference_synthesis"),
+        "intent_confidence": {
+            "score": confidence["score"],
+            "band": confidence["band"],
+            "gate_passed": confidence["gate_passed"],
+            "recommended_action": confidence["recommended_action"],
+        },
+        "recommendation": recommendation,
+        "reference_mode": {
+            "mode": visibility["mode"],
+            "user_decision_required": visibility["user_decision_required"],
+        },
+        "reviewer_evidence": {
+            "visibility": "full evidence in reports and review-viewer",
+            "artifacts": {
+                "benchmark_scan": payload.get("artifacts", {}).get("github_benchmark_scan_md"),
+                "reference_synthesis": payload.get("artifacts", {}).get("reference_synthesis_md"),
+                "review_viewer": payload.get("artifacts", {}).get("review_viewer_html"),
+            },
+        },
         "guidance": {
             "archetype_reason": archetype_reason,
             "why_this_mode": (
@@ -409,19 +460,18 @@ def command_quickstart(args: argparse.Namespace) -> int:
             ),
             "first_gate": guidance["first_gate"],
             "focus": guidance["focus"],
-            "next_steps": [
-                "Open reports/intent-dialogue.md and tighten the real job, outputs, and exclusions.",
-                "Open reports/intent-confidence.md and close the biggest unresolved intent gap before deepening the package.",
-                "Open reports/github-benchmark-scan.md and review the top three public benchmark repositories plus their borrow and avoid notes.",
-                "Open reports/reference-synthesis.md and decide which GitHub, official, research, or principle tracks are worth borrowing now.",
-                "Open reports/reference-scan.md and decide which benchmark patterns to borrow and which user references set the quality bar.",
-                "Open reports/review-viewer.html to explain the package to a first-time reviewer.",
-                "Use reports/iteration-directions.md to choose only one high-value next move before adding more files.",
-            ],
-            "borrow_prompt": benchmark_scan.get("borrow_prompt"),
-            "experience_note": "The first pass should feel more like guided co-creation than filling out a worksheet. Use the reports to explain, choose, and only then deepen the package.",
+            "next_steps": next_steps,
+            "experience_note": (
+                "The first pass should feel more like guided co-creation than a worksheet. "
+                "The system should make benchmark and pattern calls quietly unless there is a real reason to ask you to choose."
+            ),
         },
     }
+    if visibility["user_decision_required"]:
+        report["uncertainty_or_conflict"] = {
+            "reasons": visibility["reasons"],
+            "note": "A design decision still needs your input before the package should be deepened.",
+        }
     print(json.dumps(report, ensure_ascii=False, indent=2))
     return 0 if result["ok"] else 2
 

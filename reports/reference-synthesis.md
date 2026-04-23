@@ -43,6 +43,19 @@ Skill: `yao-meta-skill`
 - Do not create experimental overhead that exceeds the skill's real risk tier.
 - Do not expand execution assets until route boundaries stay clean.
 
+## Default Recommendation
+
+- Summary: Start by borrowing this pattern: Borrow a first-time operator flow that explains itself before it asks for more structure. Avoid this for the first pass: Do not mimic product polish that adds UI bulk without improving clarity.
+- Why: Intent still has gaps, so the system should surface the recommendation and ask for correction before deepening the package.
+- User decision required: `True`
+
+## Visibility Mode
+
+- Mode: `explicit`
+- Reasons: intent_uncertain
+- User note: Surface the recommendation because intent is still settling or a user reference needs to be reconciled.
+- Reviewer note: Keep the full benchmark and synthesis evidence visible for authors and reviewers.
+
 ## Quality Lift Thesis
 
 - Use GitHub repositories for concrete package and workflow patterns.
@@ -52,4 +65,4 @@ Skill: `yao-meta-skill`
 
 ## Decision Prompt
 
-I pulled concrete GitHub benchmarks and layered them with curated official, research, and principle tracks. Do you want the next draft to borrow one or two of these patterns now, or keep the first pass lighter?
+Use the recommendation by default. Only surface the underlying benchmark tradeoffs when intent is uncertain or a user reference needs a deliberate call.

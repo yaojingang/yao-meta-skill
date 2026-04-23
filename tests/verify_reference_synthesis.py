@@ -59,9 +59,12 @@ def main() -> None:
     assert len(synthesis["github_benchmarks"]) == 3, synthesis
     assert len(synthesis["source_tracks"]) == 3, synthesis
     assert synthesis["synthesis"]["borrow_now"], synthesis
+    assert synthesis["synthesis"]["recommendation"]["summary"], synthesis
+    assert synthesis["synthesis"]["visibility"]["mode"] == "explicit", synthesis
     markdown = (skill_dir / "reports" / "reference-synthesis.md").read_text(encoding="utf-8")
     assert "Curated World-Class Pattern Tracks" in markdown, markdown[:600]
     assert "Borrow Now" in markdown, markdown[:900]
+    assert "Default Recommendation" in markdown, markdown[:1200]
     print(json.dumps({"ok": True}, ensure_ascii=False, indent=2))
 
 

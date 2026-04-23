@@ -21,6 +21,15 @@ Reference scan has two layers, and they must not be treated equally:
 
 External sources should lead. User references should sharpen direction. Local files should calibrate.
 
+## Default Visibility
+
+Reference synthesis should be silent by default.
+
+- do the benchmark scan and pattern synthesis in the background
+- convert the result into a recommendation for the user
+- surface the full evidence only to authors and reviewers
+- only expose the underlying tradeoffs to the user when intent is still uncertain or a real design conflict needs a decision
+
 ## Why This Step Exists
 
 A new skill often fails because it starts from an isolated idea instead of a proven pattern. A controlled reference scan improves the package before it grows:

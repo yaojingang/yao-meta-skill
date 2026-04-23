@@ -160,6 +160,48 @@ def unique_items(items: list[str], limit: int) -> list[str]:
     return output
 
 
+def build_visibility(intent_payload: dict[str, Any], user_refs: list[dict[str, Any]]) -> dict[str, Any]:
+    reasons = []
+    if not intent_payload.get("gate_passed", False):
+        reasons.append("intent_uncertain")
+    if user_refs:
+        reasons.append("user_reference_alignment")
+    mode = "explicit" if reasons else "silent"
+    return {
+        "mode": mode,
+        "user_decision_required": mode == "explicit",
+        "reasons": reasons,
+        "user_note": (
+            "Surface the recommendation because intent is still settling or a user reference needs to be reconciled."
+            if mode == "explicit"
+            else "Apply the synthesis quietly unless uncertainty or a real design conflict appears."
+        ),
+        "reviewer_note": "Keep the full benchmark and synthesis evidence visible for authors and reviewers.",
+    }
+
+
+def build_recommendation(
+    borrow_now: list[str],
+    avoid_now: list[str],
+    intent_payload: dict[str, Any],
+    visibility: dict[str, Any],
+) -> dict[str, Any]:
+    primary_borrow = borrow_now[0] if borrow_now else "Keep the entrypoint lean and boundary-first."
+    primary_avoid = avoid_now[0] if avoid_now else "Do not add weight that the first pass does not yet need."
+    why = (
+        "Intent is clear enough, so the system should make the first pattern call quietly."
+        if intent_payload.get("gate_passed", False)
+        else "Intent still has gaps, so the system should surface the recommendation and ask for correction before deepening the package."
+    )
+    return {
+        "summary": f"Start by borrowing this pattern: {primary_borrow} Avoid this for the first pass: {primary_avoid}",
+        "borrow_now": borrow_now[:2],
+        "avoid_for_now": avoid_now[:2],
+        "why": why,
+        "user_decision_required": visibility["user_decision_required"],
+    }
+
+
 def build_summary(skill_dir: Path) -> dict[str, Any]:
     skill_text = (skill_dir / "SKILL.md").read_text(encoding="utf-8")
     frontmatter, _ = parse_frontmatter(skill_text)
@@ -200,6 +242,8 @@ def build_summary(skill_dir: Path) -> dict[str, Any]:
         ],
         4,
     )
+    visibility = build_visibility(intent_payload, user_refs)
+    recommendation = build_recommendation(borrow_now, avoid_now, intent_payload, visibility)
 
     return {
         "skill_name": frontmatter.get("name", skill_dir.name),
@@ -223,9 +267,10 @@ def build_summary(skill_dir: Path) -> dict[str, Any]:
             "borrow_now": borrow_now,
             "avoid_now": avoid_now,
             "quality_risers": quality_risers,
+            "recommendation": recommendation,
+            "visibility": visibility,
             "decision_prompt": (
-                "I pulled concrete GitHub benchmarks and layered them with curated official, research, and principle tracks. "
-                "Do you want the next draft to borrow one or two of these patterns now, or keep the first pass lighter?"
+                "Use the recommendation by default. Only surface the underlying benchmark tradeoffs when intent is uncertain or a user reference needs a deliberate call."
             ),
             "source_mix": {
                 "github_benchmarks": len(github_repos),
@@ -284,6 +329,18 @@ def render_markdown(summary: dict[str, Any]) -> str:
     lines.extend(["", "## Avoid Now", ""])
     for item in summary["synthesis"]["avoid_now"]:
         lines.append(f"- {item}")
+
+    lines.extend(["", "## Default Recommendation", ""])
+    lines.append(f"- Summary: {summary['synthesis']['recommendation']['summary']}")
+    lines.append(f"- Why: {summary['synthesis']['recommendation']['why']}")
+    lines.append(f"- User decision required: `{summary['synthesis']['recommendation']['user_decision_required']}`")
+
+    lines.extend(["", "## Visibility Mode", ""])
+    lines.append(f"- Mode: `{summary['synthesis']['visibility']['mode']}`")
+    if summary["synthesis"]["visibility"]["reasons"]:
+        lines.append(f"- Reasons: {', '.join(summary['synthesis']['visibility']['reasons'])}")
+    lines.append(f"- User note: {summary['synthesis']['visibility']['user_note']}")
+    lines.append(f"- Reviewer note: {summary['synthesis']['visibility']['reviewer_note']}")
 
     lines.extend(["", "## Quality Lift Thesis", ""])
     for item in summary["synthesis"]["quality_risers"]:

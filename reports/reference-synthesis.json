@@ -59,7 +59,29 @@
       "Use research tracks to justify the smallest evaluation loop that still catches regressions.",
       "Use principle tracks to keep the package small, boundary-aware, and outcome-driven."
     ],
-    "decision_prompt": "I pulled concrete GitHub benchmarks and layered them with curated official, research, and principle tracks. Do you want the next draft to borrow one or two of these patterns now, or keep the first pass lighter?",
+    "recommendation": {
+      "summary": "Start by borrowing this pattern: Borrow a first-time operator flow that explains itself before it asks for more structure. Avoid this for the first pass: Do not mimic product polish that adds UI bulk without improving clarity.",
+      "borrow_now": [
+        "Borrow a first-time operator flow that explains itself before it asks for more structure.",
+        "Borrow a small hypothesis-test-learn loop so the first revision is evidence-backed."
+      ],
+      "avoid_for_now": [
+        "Do not mimic product polish that adds UI bulk without improving clarity.",
+        "Do not create experimental overhead that exceeds the skill's real risk tier."
+      ],
+      "why": "Intent still has gaps, so the system should surface the recommendation and ask for correction before deepening the package.",
+      "user_decision_required": true
+    },
+    "visibility": {
+      "mode": "explicit",
+      "user_decision_required": true,
+      "reasons": [
+        "intent_uncertain"
+      ],
+      "user_note": "Surface the recommendation because intent is still settling or a user reference needs to be reconciled.",
+      "reviewer_note": "Keep the full benchmark and synthesis evidence visible for authors and reviewers."
+    },
+    "decision_prompt": "Use the recommendation by default. Only surface the underlying benchmark tradeoffs when intent is uncertain or a user reference needs a deliberate call.",
     "source_mix": {
       "github_benchmarks": 0,
       "curated_tracks": 3,
