@@ -63,12 +63,21 @@ CURATED_TRACKS = [
     },
 ]
 
+LIGHTWEIGHT_KEYWORDS = ["light", "lean", "minimal", "small", "simple", "fast", "speed", "quick", "scaffold"]
+GOVERNED_KEYWORDS = ["govern", "audit", "review", "approval", "compliance", "risk", "trust", "policy", "cadence"]
+POLISH_KEYWORDS = ["polish", "beautiful", "ui", "ux", "experience", "operator flow", "product", "viewer", "ergonomic"]
+EVAL_HEAVY_KEYWORDS = ["benchmark", "holdout", "regression", "evidence", "test", "compare", "review checkpoint"]
+
 
 def load_json(path: Path) -> dict[str, Any]:
     if not path.exists():
         return {}
     payload = json.loads(path.read_text(encoding="utf-8"))
     return payload if isinstance(payload, dict) else {}
+
+
+def load_manifest(skill_dir: Path) -> dict[str, Any]:
+    return load_json(skill_dir / "manifest.json")
 
 
 def parse_frontmatter(text: str) -> tuple[dict, str]:
@@ -160,19 +169,136 @@ def unique_items(items: list[str], limit: int) -> list[str]:
     return output
 
 
-def build_visibility(intent_payload: dict[str, Any], user_refs: list[dict[str, Any]]) -> dict[str, Any]:
+def join_text(parts: list[str]) -> str:
+    return " ".join(part for part in parts if part).lower()
+
+
+def has_any(text: str, keywords: list[str]) -> bool:
+    normalized = re.sub(r"[^a-z0-9]+", " ", text.lower()).strip()
+    tokens = set(normalized.split())
+    for keyword in keywords:
+        normalized_keyword = re.sub(r"[^a-z0-9]+", " ", keyword.lower()).strip()
+        if not normalized_keyword:
+            continue
+        if " " in normalized_keyword:
+            if normalized_keyword in normalized:
+                return True
+        elif normalized_keyword in tokens:
+            return True
+    return False
+
+
+def detect_conflicts(
+    intent_payload: dict[str, Any],
+    user_refs: list[dict[str, Any]],
+    manifest: dict[str, Any],
+    source_tracks: list[dict[str, Any]],
+    borrow_now: list[str],
+    avoid_now: list[str],
+) -> list[dict[str, Any]]:
+    context = intent_payload.get("context", {}) if isinstance(intent_payload, dict) else {}
+    preference_text = join_text(
+        [
+            str(context.get("job", "")),
+            str(context.get("primary_output", "")),
+            str(context.get("description", "")),
+            " ".join(context.get("constraints", []) or []),
+            " ".join(context.get("standards", []) or []),
+            " ".join(context.get("exclusions", []) or []),
+            str(manifest.get("skill_archetype", "")),
+            str(manifest.get("maturity_tier", "")),
+            " ".join(
+                " ".join(
+                    str(ref.get(key, "")) for key in ("name", "borrow", "avoid", "category")
+                )
+                for ref in user_refs
+            ),
+        ]
+    )
+    benchmark_text = join_text(
+        [
+            *borrow_now,
+            *avoid_now,
+            *[
+                " ".join(
+                    [
+                        str(track.get("name", "")),
+                        str(track.get("borrow", "")),
+                        str(track.get("avoid", "")),
+                    ]
+                )
+                for track in source_tracks
+            ],
+        ]
+    )
+
+    conflicts = []
+    wants_lightweight = has_any(preference_text, LIGHTWEIGHT_KEYWORDS)
+    wants_governed = has_any(preference_text, GOVERNED_KEYWORDS)
+    wants_polish = has_any(preference_text, POLISH_KEYWORDS)
+    benchmark_heavy = has_any(benchmark_text, GOVERNED_KEYWORDS + EVAL_HEAVY_KEYWORDS)
+    benchmark_minimal = has_any(benchmark_text, LIGHTWEIGHT_KEYWORDS)
+    benchmark_anti_polish = any("polish" in item.lower() or "ui bulk" in item.lower() for item in avoid_now)
+
+    if wants_lightweight and benchmark_heavy:
+        conflicts.append(
+            {
+                "key": "lightweight_vs_governance",
+                "summary": "The stated preference leans lightweight or speed-first, while the benchmark mix leans toward governance, review, or heavier evaluation structure.",
+                "user_preference": "lightweight or speed-first",
+                "benchmark_pressure": "governance or evaluation-heavy patterns",
+            }
+        )
+    if wants_polish and benchmark_anti_polish:
+        conflicts.append(
+            {
+                "key": "polish_vs_minimal_structure",
+                "summary": "The stated preference leans toward product polish or richer operator experience, while the benchmark recommendation is trying to keep the first pass structurally minimal.",
+                "user_preference": "product polish or richer operator experience",
+                "benchmark_pressure": "minimum-structure first pass",
+            }
+        )
+    if wants_governed and manifest.get("skill_archetype") == "scaffold":
+        conflicts.append(
+            {
+                "key": "governance_vs_scaffold",
+                "summary": "The stated preference leans toward governance or auditability, but the current archetype is still scaffold-level.",
+                "user_preference": "governance or auditability",
+                "benchmark_pressure": "scaffold-first package shape",
+            }
+        )
+    if wants_governed and benchmark_minimal and not benchmark_heavy:
+        conflicts.append(
+            {
+                "key": "governance_vs_minimal_structure",
+                "summary": "The stated preference leans toward governance or auditability, while the benchmark recommendation is still biased toward a lightweight first pass.",
+                "user_preference": "governance or auditability",
+                "benchmark_pressure": "lightweight first-pass structure",
+            }
+        )
+    seen = set()
+    deduped = []
+    for conflict in conflicts:
+        if conflict["key"] in seen:
+            continue
+        seen.add(conflict["key"])
+        deduped.append(conflict)
+    return deduped
+
+
+def build_visibility(intent_payload: dict[str, Any], conflicts: list[dict[str, Any]]) -> dict[str, Any]:
     reasons = []
     if not intent_payload.get("gate_passed", False):
         reasons.append("intent_uncertain")
-    if user_refs:
-        reasons.append("user_reference_alignment")
+    if conflicts:
+        reasons.append("design_conflict")
     mode = "explicit" if reasons else "silent"
     return {
         "mode": mode,
         "user_decision_required": mode == "explicit",
         "reasons": reasons,
         "user_note": (
-            "Surface the recommendation because intent is still settling or a user reference needs to be reconciled."
+            "Surface the recommendation because intent is still settling or there is a real design conflict that needs a user call."
             if mode == "explicit"
             else "Apply the synthesis quietly unless uncertainty or a real design conflict appears."
         ),
@@ -185,14 +311,16 @@ def build_recommendation(
     avoid_now: list[str],
     intent_payload: dict[str, Any],
     visibility: dict[str, Any],
+    conflicts: list[dict[str, Any]],
 ) -> dict[str, Any]:
     primary_borrow = borrow_now[0] if borrow_now else "Keep the entrypoint lean and boundary-first."
     primary_avoid = avoid_now[0] if avoid_now else "Do not add weight that the first pass does not yet need."
-    why = (
-        "Intent is clear enough, so the system should make the first pattern call quietly."
-        if intent_payload.get("gate_passed", False)
-        else "Intent still has gaps, so the system should surface the recommendation and ask for correction before deepening the package."
-    )
+    if conflicts:
+        why = f"There is a real design conflict to resolve: {conflicts[0]['summary']}"
+    elif intent_payload.get("gate_passed", False):
+        why = "Intent is clear enough, so the system should make the first pattern call quietly."
+    else:
+        why = "Intent still has gaps, so the system should surface the recommendation and ask for correction before deepening the package."
     return {
         "summary": f"Start by borrowing this pattern: {primary_borrow} Avoid this for the first pass: {primary_avoid}",
         "borrow_now": borrow_now[:2],
@@ -208,6 +336,7 @@ def build_summary(skill_dir: Path) -> dict[str, Any]:
     benchmark = load_json(skill_dir / "reports" / "github-benchmark-scan.json")
     intent_payload = load_json(skill_dir / "reports" / "intent-confidence.json")
     reference_scan = load_json(skill_dir / "reports" / "reference-scan.json")
+    manifest = load_manifest(skill_dir)
 
     source_tracks = select_source_tracks(anchor_text(skill_dir, benchmark, intent_payload))
     github_repos = benchmark.get("repositories", [])[:3]
@@ -242,8 +371,9 @@ def build_summary(skill_dir: Path) -> dict[str, Any]:
         ],
         4,
     )
-    visibility = build_visibility(intent_payload, user_refs)
-    recommendation = build_recommendation(borrow_now, avoid_now, intent_payload, visibility)
+    conflicts = detect_conflicts(intent_payload, user_refs, manifest, source_tracks, borrow_now, avoid_now)
+    visibility = build_visibility(intent_payload, conflicts)
+    recommendation = build_recommendation(borrow_now, avoid_now, intent_payload, visibility, conflicts)
 
     return {
         "skill_name": frontmatter.get("name", skill_dir.name),
@@ -267,10 +397,11 @@ def build_summary(skill_dir: Path) -> dict[str, Any]:
             "borrow_now": borrow_now,
             "avoid_now": avoid_now,
             "quality_risers": quality_risers,
+            "conflicts": conflicts,
             "recommendation": recommendation,
             "visibility": visibility,
             "decision_prompt": (
-                "Use the recommendation by default. Only surface the underlying benchmark tradeoffs when intent is uncertain or a user reference needs a deliberate call."
+                "Use the recommendation by default. Only surface the underlying benchmark tradeoffs when intent is uncertain or a real design conflict needs a deliberate call."
             ),
             "source_mix": {
                 "github_benchmarks": len(github_repos),
@@ -341,6 +472,13 @@ def render_markdown(summary: dict[str, Any]) -> str:
         lines.append(f"- Reasons: {', '.join(summary['synthesis']['visibility']['reasons'])}")
     lines.append(f"- User note: {summary['synthesis']['visibility']['user_note']}")
     lines.append(f"- Reviewer note: {summary['synthesis']['visibility']['reviewer_note']}")
+
+    lines.extend(["", "## Conflict Check", ""])
+    if summary["synthesis"]["conflicts"]:
+        for conflict in summary["synthesis"]["conflicts"]:
+            lines.append(f"- **{conflict['key']}**: {conflict['summary']}")
+    else:
+        lines.append("- No material design conflict detected. Keep the synthesis silent for the user.")
 
     lines.extend(["", "## Quality Lift Thesis", ""])
     for item in summary["synthesis"]["quality_risers"]:

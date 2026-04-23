@@ -213,17 +213,16 @@ def discovery_summary(job: str, primary_output: str, archetype: str, guidance: d
     )
 
 
-def reference_visibility(reference_synthesis: dict, user_references: list[str]) -> dict:
+def reference_visibility(reference_synthesis: dict) -> dict:
     synthesis = reference_synthesis.get("synthesis", {}) if isinstance(reference_synthesis, dict) else {}
     visibility = synthesis.get("visibility", {}) if isinstance(synthesis, dict) else {}
     reasons = list(visibility.get("reasons", []))
-    if user_references and "user_reference_alignment" not in reasons:
-        reasons.append("user_reference_alignment")
-    mode = "explicit" if reasons else visibility.get("mode", "silent")
+    mode = visibility.get("mode", "explicit" if reasons else "silent")
     return {
         "mode": mode,
         "user_decision_required": mode == "explicit",
         "reasons": reasons,
+        "conflicts": synthesis.get("conflicts", []),
     }
 
 
@@ -408,11 +407,14 @@ def command_quickstart(args: argparse.Namespace) -> int:
     result = run_script("init_skill.py", cmd)
     payload = result["payload"] if result["payload"] is not None else result
     reference_synthesis = payload.get("reference_synthesis") or {}
-    visibility = reference_visibility(reference_synthesis, user_references)
+    visibility = reference_visibility(reference_synthesis)
     recommendation = recommendation_from_synthesis(reference_synthesis, visibility)
     sys.stderr.write(f"\nRecommendation: {recommendation['summary']}\n")
     if visibility["user_decision_required"]:
-        sys.stderr.write("I am surfacing this because intent is still settling or a user reference needs a deliberate call.\n")
+        if visibility["conflicts"]:
+            sys.stderr.write(f"I am surfacing this because there is a real design conflict: {visibility['conflicts'][0]['summary']}\n")
+        else:
+            sys.stderr.write("I am surfacing this because intent is still settling and the package should not deepen on guesswork.\n")
     else:
         sys.stderr.write("I will keep the underlying benchmark evidence in the reviewer reports and move ahead with this recommendation.\n")
 
@@ -470,6 +472,7 @@ def command_quickstart(args: argparse.Namespace) -> int:
     if visibility["user_decision_required"]:
         report["uncertainty_or_conflict"] = {
             "reasons": visibility["reasons"],
+            "conflicts": visibility["conflicts"],
             "note": "A design decision still needs your input before the package should be deepened.",
         }
     print(json.dumps(report, ensure_ascii=False, indent=2))

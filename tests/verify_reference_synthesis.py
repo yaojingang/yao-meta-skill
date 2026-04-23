@@ -25,12 +25,16 @@ def main() -> None:
             "Turn repeated release notes into a portable governed release skill.",
             "--output-dir",
             str(tmp_root),
+            "--mode",
+            "governed",
+            "--archetype",
+            "governed",
             "--github-query",
             "release workflow evaluation portability",
             "--github-fixture-dir",
             str(BENCHMARK_FIXTURE_DIR),
             "--user-reference",
-            "A trusted workflow product::taste::Learn the calm operating shape.::Do not copy wording.",
+            "Minimal vibe helper::taste::Keep the first pass fast, minimal, and lightweight.::Do not add review, governance, or approval steps.",
             "--intent-job",
             "Turn repeated release notes into a portable governed release skill.",
             "--intent-real-input",
@@ -61,10 +65,13 @@ def main() -> None:
     assert synthesis["synthesis"]["borrow_now"], synthesis
     assert synthesis["synthesis"]["recommendation"]["summary"], synthesis
     assert synthesis["synthesis"]["visibility"]["mode"] == "explicit", synthesis
+    assert "design_conflict" in synthesis["synthesis"]["visibility"]["reasons"], synthesis
+    assert synthesis["synthesis"]["conflicts"], synthesis
     markdown = (skill_dir / "reports" / "reference-synthesis.md").read_text(encoding="utf-8")
     assert "Curated World-Class Pattern Tracks" in markdown, markdown[:600]
     assert "Borrow Now" in markdown, markdown[:900]
     assert "Default Recommendation" in markdown, markdown[:1200]
+    assert "Conflict Check" in markdown, markdown[:1500]
     print(json.dumps({"ok": True}, ensure_ascii=False, indent=2))
 
 

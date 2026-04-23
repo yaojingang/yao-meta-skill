@@ -53,8 +53,12 @@ Skill: `yao-meta-skill`
 
 - Mode: `explicit`
 - Reasons: intent_uncertain
-- User note: Surface the recommendation because intent is still settling or a user reference needs to be reconciled.
+- User note: Surface the recommendation because intent is still settling or there is a real design conflict that needs a user call.
 - Reviewer note: Keep the full benchmark and synthesis evidence visible for authors and reviewers.
+
+## Conflict Check
+
+- No material design conflict detected. Keep the synthesis silent for the user.
 
 ## Quality Lift Thesis
 
@@ -65,4 +69,4 @@ Skill: `yao-meta-skill`
 
 ## Decision Prompt
 
-Use the recommendation by default. Only surface the underlying benchmark tradeoffs when intent is uncertain or a user reference needs a deliberate call.
+Use the recommendation by default. Only surface the underlying benchmark tradeoffs when intent is uncertain or a real design conflict needs a deliberate call.

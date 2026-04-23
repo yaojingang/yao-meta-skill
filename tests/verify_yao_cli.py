@@ -82,6 +82,30 @@ def main() -> None:
     ), quickstart_result
     assert "uncertainty_or_conflict" not in quickstart_result["payload"], quickstart_result
 
+    quickstart_conflict_result = run(
+        "quickstart",
+        "--output-dir",
+        str(tmp_root),
+        "--github-fixture-dir",
+        str(BENCHMARK_FIXTURE_DIR),
+        input_text=(
+            "quickstart-conflict-skill\n"
+            "Turn repeated release notes into a governed release command skill.\n"
+            "release notes, changelog snippets\n"
+            "A governed release packet.\n"
+            "looks right\n"
+            "It should not publish blog posts or send email.\n"
+            "auditability, portability\n"
+            "governed\n"
+            "governed\n"
+            "Minimal vibe helper::taste::Keep the first pass fast, minimal, and lightweight.::Do not add review, governance, or approval steps.\n"
+            "privacy and naming\n"
+        ),
+    )
+    assert quickstart_conflict_result["ok"], quickstart_conflict_result
+    assert quickstart_conflict_result["payload"]["reference_mode"]["mode"] == "explicit", quickstart_conflict_result
+    assert quickstart_conflict_result["payload"]["uncertainty_or_conflict"]["conflicts"], quickstart_conflict_result
+
     validate_result = run("validate", str(created))
     assert validate_result["ok"], validate_result
     assert len(validate_result["payload"]["steps"]) == 4, validate_result

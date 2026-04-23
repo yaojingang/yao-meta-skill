@@ -59,6 +59,7 @@
       "Use research tracks to justify the smallest evaluation loop that still catches regressions.",
       "Use principle tracks to keep the package small, boundary-aware, and outcome-driven."
     ],
+    "conflicts": [],
     "recommendation": {
       "summary": "Start by borrowing this pattern: Borrow a first-time operator flow that explains itself before it asks for more structure. Avoid this for the first pass: Do not mimic product polish that adds UI bulk without improving clarity.",
       "borrow_now": [
@@ -78,10 +79,10 @@
       "reasons": [
         "intent_uncertain"
       ],
-      "user_note": "Surface the recommendation because intent is still settling or a user reference needs to be reconciled.",
+      "user_note": "Surface the recommendation because intent is still settling or there is a real design conflict that needs a user call.",
       "reviewer_note": "Keep the full benchmark and synthesis evidence visible for authors and reviewers."
     },
-    "decision_prompt": "Use the recommendation by default. Only surface the underlying benchmark tradeoffs when intent is uncertain or a user reference needs a deliberate call.",
+    "decision_prompt": "Use the recommendation by default. Only surface the underlying benchmark tradeoffs when intent is uncertain or a real design conflict needs a deliberate call.",
     "source_mix": {
       "github_benchmarks": 0,
       "curated_tracks": 3,
