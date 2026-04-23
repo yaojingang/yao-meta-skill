@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640">
+  <rect width="1280" height="640" fill="#FFFFFF"/>
+  <text x="92" y="142" font-family="Georgia, serif" font-size="74" fill="#111111">YAO</text>
+  <text x="92" y="206" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="34" fill="#111111">Yielding AI Outcomes</text>
+  <text x="92" y="266" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="21" fill="#111111">A rigorous engineering, evaluation, governance, and portability system</text>
+  <text x="92" y="300" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="21" fill="#111111">for reusable agent skills.</text>
+  <line x1="92" y1="362" x2="1188" y2="362" stroke="#D9DDE3" stroke-width="2"/>
+  <rect x="92" y="396" width="250" height="118" rx="18" fill="#FFFFFF" stroke="#D9DDE3" stroke-width="2"/>
+  <text x="114" y="430" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" fill="#4B5563">Weighted Score</text>
+  <text x="114" y="478" font-family="Georgia, serif" font-size="42" fill="#111111">91.5</text>
+  <text x="228" y="492" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" fill="#4B5563">/ 100</text>
+  <text x="114" y="514" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="16" fill="#4B5563">Method 9.5 · Eval 9.5 · Governance 9.5</text>
+
+  <rect x="378" y="400" width="400" height="68" rx="16" fill="#FFFFFF" stroke="#D9DDE3" stroke-width="2"/>
+  <text x="396" y="428" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" fill="#111111">Engineering</text>
+  <text x="396" y="452" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="16" fill="#4B5563">Unified CLI, CI, validation, reporting, and packaging.</text>
+
+  <rect x="802" y="400" width="400" height="68" rx="16" fill="#FFFFFF" stroke="#D9DDE3" stroke-width="2"/>
+  <text x="820" y="428" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" fill="#111111">Evaluation</text>
+  <text x="820" y="452" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="16" fill="#4B5563">Holdouts, route confusion, judge-backed blind evals.</text>
+
+  <rect x="378" y="486" width="400" height="68" rx="16" fill="#FFFFFF" stroke="#D9DDE3" stroke-width="2"/>
+  <text x="396" y="514" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" fill="#111111">Governance</text>
+  <text x="396" y="538" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="16" fill="#4B5563">Lifecycle, maturity, promotion, and review evidence.</text>
+
+  <rect x="802" y="486" width="400" height="68" rx="16" fill="#FFFFFF" stroke="#D9DDE3" stroke-width="2"/>
+  <text x="820" y="514" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" fill="#111111">Portability</text>
+  <text x="820" y="538" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="16" fill="#4B5563">Neutral metadata, adapters, contracts, and degradation.</text>
+
+  <line x1="92" y1="530" x2="1188" y2="530" stroke="transparent"/>
+  <line x1="92" y1="556" x2="1188" y2="556" stroke="#D9DDE3" stroke-width="2"/>
+  <text x="92" y="598" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="16" fill="#4B5563">Reusable agent skills with explicit boundaries, strict evaluation, visible governance, and local reliability.</text>
+</svg>
