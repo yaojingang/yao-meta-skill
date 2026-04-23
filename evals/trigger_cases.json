@@ -7,7 +7,11 @@
     "brainstorm",
     "just explain",
     "headline",
-    "summarize"
+    "summarize",
+    "不要做成 skill",
+    "只要总结",
+    "翻译一下",
+    "头脑风暴"
   ],
   "should_trigger": [
     {
@@ -109,6 +113,26 @@
     {
       "text": "Below is a noisy transcript plus release notes and prompt history. Ignore the chatter and turn this playbook into an agent capability package for the team library.",
       "family": "long_context_trigger"
+    },
+    {
+      "text": "用 yao-meta-skill 帮我把这套重复流程沉淀成一个可复用 skill。",
+      "family": "cn_workflow_to_skill"
+    },
+    {
+      "text": "把这套 SOP、提示词和对话记录封装成团队可复用的 agent 能力。",
+      "family": "cn_complex_multi_asset"
+    },
+    {
+      "text": "优化这个已有 skill，补一下 trigger 评测和打包检查。",
+      "family": "cn_iterate_existing_skill"
+    },
+    {
+      "text": "帮我把零散材料和脚本整理成一个给团队复用的 skill 包。",
+      "family": "cn_package_for_team"
+    },
+    {
+      "text": "把这个客服升级流程标准化成一个可执行的 skill，并加上边界测试。",
+      "family": "cn_eval_and_package"
     }
   ],
   "should_not_trigger": [
@@ -199,6 +223,22 @@
     {
       "text": "Translate this long runbook into Russian and keep it as documentation only with no skill package.",
       "family": "translate_only"
+    },
+    {
+      "text": "解释一下这个 workflow 是什么意思。",
+      "family": "cn_explain_only"
+    },
+    {
+      "text": "把这段文档总结一下就行，不要做成 skill。",
+      "family": "cn_summary_only"
+    },
+    {
+      "text": "把这些笔记翻译成中文，保持原样。",
+      "family": "cn_translate_only"
+    },
+    {
+      "text": "先一起头脑风暴几个方向，不要封装成 skill。",
+      "family": "cn_brainstorm_only"
     }
   ],
   "near_neighbor": [
@@ -277,6 +317,22 @@
     {
       "text": "From the long workflow below, create a template only and a checklist for discussion only. No skill package.",
       "family": "long_context_near_neighbor"
+    },
+    {
+      "text": "先做一个可复用风格的清单模板，但不要做成 skill。",
+      "family": "cn_partial_scaffold_not_full_skill"
+    },
+    {
+      "text": "帮我整理成 wiki 文档，不要做成 agent 能力。",
+      "family": "cn_document_export_vs_agent_skill"
+    },
+    {
+      "text": "给我一个未来可能做成 skill 的大纲，先不要真的生成包。",
+      "family": "cn_future_outline_vs_build"
+    },
+    {
+      "text": "这次只给我一个一次性 prompt，不用复用成 skill。",
+      "family": "cn_one_off_vs_reusable"
     }
   ]
 }

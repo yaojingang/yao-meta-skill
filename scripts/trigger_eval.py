@@ -5,13 +5,13 @@ import re
 from pathlib import Path
 
 
-WORD_RE = re.compile(r"[a-z0-9][a-z0-9_-]*")
+WORD_RE = re.compile(r"[\w\u4e00-\u9fff]+", re.UNICODE)
 DEFAULT_CONFIG_PATH = Path("evals/semantic_config.json")
 
 
 def normalize(text: str) -> str:
     text = text.lower()
-    text = re.sub(r"[^a-z0-9]+", " ", text)
+    text = re.sub(r"[^\w\u4e00-\u9fff]+", " ", text, flags=re.UNICODE)
     return re.sub(r"\s+", " ", text).strip()
 
 
@@ -52,6 +52,8 @@ def phrase_present(text: str, phrase: str) -> bool:
     phrase = normalize(phrase)
     if not phrase:
         return False
+    if re.search(r"[\u4e00-\u9fff]", phrase):
+        return phrase in text
     return f" {phrase} " in f" {text} "
 
 

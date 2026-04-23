@@ -6,27 +6,46 @@
       "prompts",
       "transcripts",
       "docs",
-      "notes"
+      "notes",
+      "流程",
+      "提示词",
+      "对话记录",
+      "文档",
+      "笔记"
     ],
     "trigger_actions": [
       "create a skill",
       "turn a repeated process into a reusable skill",
       "improve an existing skill",
       "add evals",
-      "package a skill for team reuse"
+      "package a skill for team reuse",
+      "做一个 skill",
+      "把流程沉淀成可复用 skill",
+      "优化现有 skill",
+      "补 trigger 评测",
+      "封装成团队可复用 skill"
     ],
     "exclusions": [
       "summary-only requests",
       "translation-only requests",
       "plain documentation tasks",
-      "brainstorming without building a skill"
+      "brainstorming without building a skill",
+      "只要总结",
+      "只做翻译",
+      "只做文档",
+      "先 brainstorm 不建 skill"
     ],
     "artifacts": [
       "workflows",
       "prompts",
       "transcripts",
       "docs",
-      "rough notes"
+      "rough notes",
+      "流程",
+      "提示词",
+      "转录",
+      "文档",
+      "零散笔记"
     ]
   },
   "fallback_positive_concepts": [
@@ -55,7 +74,20 @@
         "operationalize this workflow as a reusable skill",
         "formalize this process into a reusable capability",
         "turn this playbook into an agent capability package",
-        "convert this into a maintained skill"
+        "convert this into a maintained skill",
+        "做一个 skill",
+        "创建一个 skill",
+        "新建一个 skill",
+        "帮我做个 skill",
+        "做成一个 skill",
+        "封装成一个 skill",
+        "沉淀成一个 skill",
+        "整理成一个 skill",
+        "抽成一个 skill",
+        "可复用 skill",
+        "agent 能力包",
+        "能力包",
+        "skill 包"
       ]
     },
     "transform_workflow": {
@@ -77,7 +109,19 @@
         "release notes",
         "onboarding flow",
         "support escalation routine",
-        "quarterly release routine"
+        "quarterly release routine",
+        "流程",
+        "工作流",
+        "操作流程",
+        "做事流程",
+        "方法",
+        "经验",
+        "sop 文档",
+        "会议纪要",
+        "对话记录",
+        "零散材料",
+        "提示词",
+        "话术"
       ]
     },
     "reuse_package": {
@@ -97,7 +141,19 @@
         "team library",
         "ops library",
         "maintained",
-        "operationalize"
+        "operationalize",
+        "可复用",
+        "复用",
+        "封装",
+        "沉淀",
+        "标准化",
+        "标准化下来",
+        "团队复用",
+        "给团队用",
+        "方法包",
+        "团队能力包",
+        "沉淀下来",
+        "skill 包"
       ]
     },
     "eval_optimize": {
@@ -115,7 +171,18 @@
         "false negatives",
         "stress test",
         "route boundary",
-        "hardening"
+        "hardening",
+        "评测",
+        "补评测",
+        "补 eval",
+        "触发测试",
+        "收紧触发边界",
+        "路由边界",
+        "误触发",
+        "漏触发",
+        "质量门",
+        "打包检查",
+        "边界测试"
       ]
     },
     "iterate_existing_skill": {
@@ -132,7 +199,18 @@
         "tighten the boundary",
         "revise this skill",
         "draft skill",
-        "harden this skill for library reuse"
+        "harden this skill for library reuse",
+        "优化这个 skill",
+        "改进这个 skill",
+        "重构这个 skill",
+        "补一下评测",
+        "补 trigger 测试",
+        "加强路由判断",
+        "让它适合团队复用",
+        "收紧这个 skill 的边界",
+        "已有 skill",
+        "现有 skill",
+        "优化已有 skill"
       ]
     },
     "multi_asset": {
@@ -143,7 +221,13 @@
         "manifest",
         "folder",
         "directory",
-        "files"
+        "files",
+        "参考资料",
+        "脚本",
+        "目录",
+        "文件夹",
+        "文档",
+        "话术"
       ]
     },
     "team_operationalize": {
@@ -155,7 +239,13 @@
         "shared",
         "distribution",
         "sharing it with the team",
-        "team reuse"
+        "team reuse",
+        "团队",
+        "内部",
+        "统一标准",
+        "共用",
+        "给团队用",
+        "团队共享"
       ]
     }
   },
@@ -170,7 +260,12 @@
         "explain this",
         "in simpler language",
         "tell me what it means",
-        "plain english"
+        "plain english",
+        "解释一下",
+        "给我讲讲",
+        "什么意思",
+        "说清楚一点",
+        "帮我理解一下"
       ]
     },
     "summarize_only": {
@@ -180,7 +275,11 @@
         "summary",
         "summarize",
         "only want a summary",
-        "recap"
+        "recap",
+        "总结一下",
+        "概括一下",
+        "提炼重点",
+        "简单总结"
       ]
     },
     "translate_only": {
@@ -190,7 +289,11 @@
         "translate",
         "into japanese",
         "into french",
-        "into russian"
+        "into russian",
+        "翻译",
+        "译成中文",
+        "译成英文",
+        "译成日文"
       ]
     },
     "brainstorm_only": {
@@ -200,7 +303,11 @@
         "brainstorm",
         "ideas",
         "improve packaging",
-        "shape an idea"
+        "shape an idea",
+        "头脑风暴",
+        "给点想法",
+        "一起想想",
+        "先想方向"
       ]
     },
     "one_off_request": {
@@ -210,7 +317,11 @@
         "one-off",
         "custom answer",
         "for this request",
-        "just this task"
+        "just this task",
+        "一次性",
+        "就这一次",
+        "只处理这次",
+        "不用复用"
       ]
     },
     "no_build_directive": {
@@ -229,6 +340,9 @@
         "do not package it",
         "stop short of making a full skill",
         "not a skill yet",
+        "not now",
+        "later but not now",
+        "maybe build later",
         "plain note",
         "keep it as a plain note",
         "no packaging needed",
@@ -236,7 +350,15 @@
         "no skill package",
         "do not convert it into a reusable capability",
         "keep it as documentation only",
-        "discussion only"
+        "discussion only",
+        "先不要做成 skill",
+        "不要做成 skill",
+        "不用封装",
+        "不要打包",
+        "不要沉淀成能力",
+        "先别做成可复用能力",
+        "只做文档",
+        "只做说明"
       ]
     },
     "document_only": {
@@ -254,7 +376,12 @@
         "landing page",
         "reference document",
         "knowledge base",
-        "template only"
+        "template only",
+        "文档",
+        "说明文档",
+        "知识库",
+        "文章",
+        "汇报"
       ]
     },
     "future_outline": {
@@ -267,7 +394,9 @@
         "outline for a possible future skill",
         "maybe later",
         "for later",
-        "future-ready outline"
+        "future-ready outline",
+        "not now",
+        "later but not now"
       ]
     }
   }
