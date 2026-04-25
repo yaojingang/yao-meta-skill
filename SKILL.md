@@ -23,7 +23,7 @@ Build reusable skill packages, not long prompts.
 - `Production`: team reuse with focused gates.
 - `Library`: shared infrastructure or meta skill.
 
-Mode rules: [Operating Modes](references/operating-modes.md), [QA Ladder](references/qa-ladder.md), [Resource Boundaries](references/resource-boundaries.md), [Method](references/skill-engineering-method.md).
+Mode rules: [Method](references/skill-engineering-method.md), [Operating Modes](references/operating-modes.md), [Resource Boundaries](references/resource-boundaries.md), [Authoring Discipline](references/authoring-discipline.md).
 
 ## Compact Workflow
 
@@ -34,7 +34,7 @@ Mode rules: [Operating Modes](references/operating-modes.md), [QA Ladder](refere
 5. Add only the folders and gates that earn their keep.
 6. After the first package exists, surface the top three next iteration directions.
 
-Core playbooks: [Method](references/skill-engineering-method.md), [Intent Dialogue](references/intent-dialogue.md), [Reference Scan](references/reference-scan.md), [Archetypes](references/skill-archetypes.md), [Gate Selection](references/gate-selection.md), [Iteration Philosophy](references/iteration-philosophy.md), [Non-Skill Decision Tree](references/non-skill-decision-tree.md).
+Core playbooks: [Method](references/skill-engineering-method.md), [Intent Dialogue](references/intent-dialogue.md), [Reference Scan](references/reference-scan.md), [Authoring Discipline](references/authoring-discipline.md).
 
 ## First-Turn Style
 
@@ -62,4 +62,4 @@ Unless the user asks otherwise, produce:
 
 ## Reference Map
 
-Primary references: [Method](references/skill-engineering-method.md), [Reference Scan](references/reference-scan.md), [Intent Dialogue](references/intent-dialogue.md), [Governance](references/governance.md), [Resource Boundaries](references/resource-boundaries.md).
+Primary references: [Method](references/skill-engineering-method.md), [Authoring Discipline](references/authoring-discipline.md), [Reference Scan](references/reference-scan.md), [Intent Dialogue](references/intent-dialogue.md), [Governance](references/governance.md), [Resource Boundaries](references/resource-boundaries.md).

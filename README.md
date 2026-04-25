@@ -243,6 +243,7 @@ The repository now treats method as a first-class asset instead of scattered gui
 - [Skill Engineering Method](references/skill-engineering-method.md)
 - [Intent Dialogue](references/intent-dialogue.md)
 - [Reference Scan Strategy](references/reference-scan.md)
+- [Authoring Discipline](references/authoring-discipline.md)
 - [Skill Archetypes](references/skill-archetypes.md)
 - [Gate Selection](references/gate-selection.md)
 - [Iteration Philosophy](references/iteration-philosophy.md)

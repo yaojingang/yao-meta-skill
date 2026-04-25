@@ -709,6 +709,27 @@ def render_html(report: dict) -> str:
         </ul>
       </div>
     </section>
+
+    <section class="grid">
+      <div class="panel">
+        <h2>Authoring discipline</h2>
+        <ul>
+          <li>Name unresolved assumptions before deepening the package.</li>
+          <li>Keep the package no larger than the recurring job requires.</li>
+          <li>Touch only files that directly support the requested change.</li>
+          <li>Tie every meaningful new artifact to a check or reviewer note.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h2>Reviewer guardrails</h2>
+        <ul>
+          <li>Block speculative features that are not backed by real workflow variation.</li>
+          <li>Move unverifiable ideas into next-step candidates instead of baseline structure.</li>
+          <li>Reject decorative folders, reports, or governance that do not reduce risk.</li>
+          <li>Ask for one high-leverage clarification when job, output, or exclusion is still fuzzy.</li>
+        </ul>
+      </div>
+    </section>
   </div>
 </body>
 </html>

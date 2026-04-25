@@ -9,9 +9,10 @@ This doctrine defines the default method for turning messy workflow material int
 3. Choose the smallest viable archetype.
 4. Set one clear capability boundary.
 5. Write and test the trigger description before expanding the body.
-6. Add only the gates that match the risk.
-7. Ship the first routeable package, then pick the three highest-value next iteration directions.
-8. Package and govern the skill only as far as real reuse demands.
+6. Apply authoring discipline: name unresolved assumptions, keep scope small, and tie meaningful changes to checks.
+7. Add only the gates that match the risk.
+8. Ship the first routeable package, then pick the three highest-value next iteration directions.
+9. Package and govern the skill only as far as real reuse demands.
 
 ## Phase 1: Qualification
 
@@ -32,6 +33,17 @@ Reject skill creation when the request is only:
 - a one-off answer with no reuse value
 
 See [Non-Skill Decision Tree](non-skill-decision-tree.md).
+
+## Phase 1.5: Authoring Discipline
+
+Before expanding the package, apply the execution discipline that keeps the work grounded.
+
+- clarify only the assumptions that change the package design
+- do not add speculative features, generic configurability, or decorative structure
+- when editing an existing skill, touch only files that directly serve the requested change
+- connect each meaningful change to a check: route evidence, sample run, resource-boundary check, governance check, or reviewer note
+
+See [Authoring Discipline](authoring-discipline.md).
 
 ## Phase 2: Intent Dialogue
 
@@ -121,8 +133,9 @@ The first package is a routeable baseline, not the final answer.
 - add one execution asset before adding many documents
 - surface the three highest-value next moves so authors do not expand in every direction at once
 - prefer the smallest step that increases reliability more than context cost
+- move unverifiable ideas into next-step candidates instead of shipping them as baseline structure
 
-See [Iteration Philosophy](iteration-philosophy.md).
+See [Iteration Philosophy](iteration-philosophy.md) and [Authoring Discipline](authoring-discipline.md).
 
 ## Phase 9: Promotion
 

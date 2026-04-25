@@ -6,6 +6,8 @@ This spec defines where information belongs inside a skill package.
 
 Keep the main skill small enough to route and execute clearly. Move detail out of `SKILL.md` as soon as it stops helping routing or branch selection.
 
+Do not add structure for imagined future needs. A folder, script, eval, or governance file belongs in the package only when it reduces current ambiguity, execution burden, route risk, or maintenance risk.
+
 ## Context Budget Tiers
 
 Use the lightest budget that still fits the package.
@@ -60,6 +62,8 @@ Avoid these:
 - adding `evals/` for one-off or disposable skills
 - creating every folder by default even when empty
 - keeping folders that are neither referenced in `SKILL.md` nor declared as factory components
+- adding broad configuration knobs before a real variation exists
+- adding governance or reports to make a scaffold look mature when no reuse pressure exists
 
 ## Heuristics
 
@@ -112,3 +116,5 @@ Higher density means the package is staying lean while still proving quality.
 ## Quality Intent
 
 The best skill is not the one with the most files. The best skill is the smallest package that still makes the recurring job reliable, reusable, and auditable.
+
+See [Authoring Discipline](authoring-discipline.md) for the author and reviewer rules that keep resource growth tied to a real user goal.

@@ -33,6 +33,14 @@ Use this template when a description candidate is ready for human review after a
 - does it avoid stealing sibling routes?
 - does it stay short enough for the target maturity tier?
 
+## Authoring Discipline
+
+- are unresolved assumptions named or clarified before deepening the package?
+- is the package no larger than the real recurring job requires?
+- do changed files trace directly to the requested improvement?
+- did the author avoid speculative features, decorative folders, and generic configuration?
+- does each new artifact have a verification reason?
+
 ## Decision
 
 - approve promotion

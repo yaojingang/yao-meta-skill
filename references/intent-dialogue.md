@@ -32,6 +32,7 @@ Ask only the questions that change the package design.
 - ask boundary questions early
 - ask output questions before architecture questions
 - stop once the skill can be described clearly in one sentence
+- do not enter deep authoring until the recurring job, target output, and exclusion boundary are clear enough to defend
 
 ## First Message Pattern
 
@@ -127,6 +128,8 @@ Do not continue into full authoring when the dialogue still leaves these unresol
 - whether the request is really reusable
 - which near-neighbor requests should not trigger
 - what concrete deliverable the skill must return
+
+If one of these is unresolved, ask the smallest possible follow-up that will unlock the design. Do not compensate by adding extra references, scripts, or governance.
 
 Also treat these as dialogue failures:
 
