@@ -440,6 +440,17 @@ ACTION_GUIDANCE: dict[str, dict[str, str]] = {
         ],
         "verification": "python3 scripts/trust_check.py .",
     },
+    "python-compat": {
+        "summary": "修复 Python 3.11 语法兼容问题，尤其是 f-string 表达式内的反斜杠转义。",
+        "why": "目标运行环境可能仍停留在 Python 3.11，语法漂移会让 CLI、报告生成和 CI 在发布后直接失败。",
+        "source_fix": "reports/python_compatibility.md + scripts/*.py + tests/*.py",
+        "source_paths": [
+            {"path": "reports/python_compatibility.md", "label": "Python compatibility", "kind": "report", "patterns": ["# Python"]},
+            {"path": "scripts/python_compat_check.py", "label": "compatibility checker", "kind": "source", "patterns": ["SCRIPT_INTERFACE"]},
+            {"path": ".github/workflows/test.yml", "label": "CI test workflow", "kind": "ci", "patterns": ["python"]},
+        ],
+        "verification": "python3 scripts/yao.py python-compat .",
+    },
     "permission-gates": {
         "summary": "补齐高权限能力的 reviewer、scope、reason、expires_at 和目标端 enforcement 说明。",
         "why": "权限契约只有在批准人、有效期和目标端处置方式明确时，才能支撑 governed release。",

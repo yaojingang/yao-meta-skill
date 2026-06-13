@@ -259,6 +259,38 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
         )
     )
 
+    python_compat = data["python_compatibility"]
+    python_compat_summary = python_compat.get("summary", {})
+    if not python_compat:
+        python_compat_status = "warn"
+        python_compat_detail = "Python compatibility report is missing"
+    else:
+        issue_count = int(python_compat_summary.get("issue_count", 0) or 0)
+        syntax_error_count = int(python_compat_summary.get("syntax_error_count", 0) or 0)
+        fstring_violation_count = int(python_compat_summary.get("fstring_311_violation_count", 0) or 0)
+        python_compat_status = (
+            "block"
+            if not python_compat.get("ok", True) or issue_count or syntax_error_count or fstring_violation_count
+            else "pass"
+        )
+        python_compat_detail = (
+            f"Python {python_compat_summary.get('target_python', '3.11')}; "
+            f"{python_compat_summary.get('file_count', 0)} files; "
+            f"{issue_count} compatibility issues; "
+            f"{syntax_error_count} syntax; "
+            f"{fstring_violation_count} f-string 3.11 hazards"
+        )
+    gates.append(
+        gate(
+            "python-compat",
+            "Python 兼容",
+            python_compat_status,
+            python_compat_detail,
+            "reports/python_compatibility.json",
+            _report_link(output_html, skill_dir, "reports/python_compatibility.md"),
+        )
+    )
+
     permission_governance = trust.get("permission_governance", {}) if isinstance(trust.get("permission_governance", {}), dict) else {}
     if trust and not permission_governance:
         permission_governance = fallback_permission_governance(skill_dir)
@@ -533,6 +565,7 @@ def weighted_score(gates: list[dict[str, str]]) -> int:
         "context-budget": 10,
         "runtime-matrix": 10,
         "trust-report": 10,
+        "python-compat": 10,
         "permission-gates": 10,
         "permission-runtime": 10,
         "skill-atlas": 10,

@@ -262,7 +262,7 @@ def main() -> None:
     assert payload["ok"], payload
     assert payload["schema_version"] == "2.0", payload
     assert payload["summary"]["decision"] == "review", payload
-    assert payload["summary"]["gate_count"] == 14, payload
+    assert payload["summary"]["gate_count"] == 15, payload
     assert payload["summary"]["world_class_score"] == 90, payload
     assert payload["summary"]["warning_count"] == 3, payload
     assert payload["summary"]["blocker_count"] == 0, payload
@@ -272,7 +272,7 @@ def main() -> None:
     assert payload["summary"]["action_count"] == payload["summary"]["warning_count"] + payload["summary"]["blocker_count"], payload
     assert {item["gate_key"] for item in payload["review_actions"]} == {"output-lab", "review-waivers", "world-class-evidence"}, payload
     gate_keys = {item["key"] for item in payload["gates"]}
-    assert {"intent-canvas", "trigger-lab", "output-lab", "runtime-matrix", "trust-report", "permission-gates", "permission-runtime", "skill-atlas", "operations-loop", "review-waivers", "world-class-evidence", "registry-audit", "release-notes"} <= gate_keys, payload
+    assert {"intent-canvas", "trigger-lab", "output-lab", "runtime-matrix", "trust-report", "python-compat", "permission-gates", "permission-runtime", "skill-atlas", "operations-loop", "review-waivers", "world-class-evidence", "registry-audit", "release-notes"} <= gate_keys, payload
     output_gate = next(item for item in payload["gates"] if item["key"] == "output-lab")
     assert output_gate["status"] == "warn", output_gate
     assert "5/5 cases" in output_gate["detail"], output_gate
@@ -293,6 +293,12 @@ def main() -> None:
     assert trust_gate["status"] == "pass", trust_gate
     assert "3 network-capable scripts" in trust_gate["detail"], trust_gate
     assert "0 help smoke failures" in trust_gate["detail"], trust_gate
+    python_compat_gate = next(item for item in payload["gates"] if item["key"] == "python-compat")
+    assert python_compat_gate["status"] == "pass", python_compat_gate
+    assert "Python 3.11" in python_compat_gate["detail"], python_compat_gate
+    assert "0 compatibility issues" in python_compat_gate["detail"], python_compat_gate
+    assert "0 f-string 3.11 hazards" in python_compat_gate["detail"], python_compat_gate
+    assert python_compat_gate["evidence"] == "reports/python_compatibility.json", python_compat_gate
     permission_gate = next(item for item in payload["gates"] if item["key"] == "permission-gates")
     assert permission_gate["status"] == "pass", permission_gate
     assert "permissions approved" in permission_gate["detail"], permission_gate

@@ -24,7 +24,7 @@ This report maps the Skill OS 2.0 upgrade blueprint to concrete local artifacts,
 | Trust Security | `pass` | 82 scripts; secrets 0; help failures 0 | `python3 scripts/yao.py trust .` | `python3 tests/verify_trust_check.py` |
 | Skill Atlas | `pass` | 12 scanned skills; actionable collisions 0 | `python3 scripts/yao.py skill-atlas --workspace-root .` | `python3 tests/verify_skill_atlas.py` |
 | Registry Distribution | `pass` | archive entries 547; install failures 0 | `python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip && python3 scripts/yao.py registry-audit .` | `python3 tests/verify_registry_audit.py` |
-| Review Studio | `pass` | 14 gates; decision review; warnings 3 | `python3 scripts/yao.py review-studio .` | `python3 tests/verify_review_studio.py` |
+| Review Studio | `pass` | 15 gates; decision review; warnings 3 | `python3 scripts/yao.py review-studio .` | `python3 tests/verify_review_studio.py` |
 | Telemetry Drift | `pass` | events 1; recipes 5; risk low | `python3 scripts/yao.py telemetry-hooks . && python3 scripts/yao.py adoption-drift .` | `python3 tests/verify_telemetry_hooks.py` |
 
 ## Recommended PR Coverage
@@ -41,7 +41,7 @@ This report maps the Skill OS 2.0 upgrade blueprint to concrete local artifacts,
 | Trust Check | `pass` | secret findings 0 | `make ci-test` | `tests/verify_trust_check.py` |
 | Skill Atlas Generator | `pass` | 12 scanned skills | `make ci-test` | `tests/verify_skill_atlas.py` |
 | Registry Package Format | `pass` | registry ok True | `make ci-test` | `tests/verify_registry_audit.py` |
-| Review Studio 2.0 | `pass` | 14 review gates | `make ci-test` | `tests/verify_review_studio.py` |
+| Review Studio 2.0 | `pass` | 15 review gates | `make ci-test` | `tests/verify_review_studio.py` |
 | Migration V2 Docs | `pass` | migration guide present | `make ci-test` | `docs review` |
 
 ## Next Highest-Leverage Moves
