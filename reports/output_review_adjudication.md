@@ -46,6 +46,7 @@ Expected winners stay hidden until a valid reviewer decision is recorded.
 
 #### Commands
 
+- prepare_review_kit: `python3 scripts/yao.py output-review-kit`
 - write_template: `python3 scripts/adjudicate_output_review.py --write-template`
 - adjudicate: `python3 scripts/yao.py output-review`
 - refresh_review_studio: `python3 scripts/yao.py review-studio .`
@@ -72,6 +73,7 @@ Expected winners stay hidden until a valid reviewer decision is recorded.
 
 #### Commands
 
+- prepare_review_kit: `python3 scripts/yao.py output-review-kit`
 - write_template: `python3 scripts/adjudicate_output_review.py --write-template`
 - adjudicate: `python3 scripts/yao.py output-review`
 - refresh_review_studio: `python3 scripts/yao.py review-studio .`
@@ -98,6 +100,7 @@ Expected winners stay hidden until a valid reviewer decision is recorded.
 
 #### Commands
 
+- prepare_review_kit: `python3 scripts/yao.py output-review-kit`
 - write_template: `python3 scripts/adjudicate_output_review.py --write-template`
 - adjudicate: `python3 scripts/yao.py output-review`
 - refresh_review_studio: `python3 scripts/yao.py review-studio .`
@@ -124,6 +127,7 @@ Expected winners stay hidden until a valid reviewer decision is recorded.
 
 #### Commands
 
+- prepare_review_kit: `python3 scripts/yao.py output-review-kit`
 - write_template: `python3 scripts/adjudicate_output_review.py --write-template`
 - adjudicate: `python3 scripts/yao.py output-review`
 - refresh_review_studio: `python3 scripts/yao.py review-studio .`
@@ -150,6 +154,7 @@ Expected winners stay hidden until a valid reviewer decision is recorded.
 
 #### Commands
 
+- prepare_review_kit: `python3 scripts/yao.py output-review-kit`
 - write_template: `python3 scripts/adjudicate_output_review.py --write-template`
 - adjudicate: `python3 scripts/yao.py output-review`
 - refresh_review_studio: `python3 scripts/yao.py review-studio .`

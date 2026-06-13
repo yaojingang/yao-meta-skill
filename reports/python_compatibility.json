@@ -5,7 +5,7 @@
   "root": ".",
   "summary": {
     "target_python": "3.11",
-    "file_count": 152,
+    "file_count": 154,
     "issue_count": 0,
     "syntax_error_count": 0,
     "fstring_311_violation_count": 0,
@@ -162,6 +162,12 @@
     },
     {
       "path": "scripts/optimize_description.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "scripts/prepare_output_review_kit.py",
       "ok": true,
       "issue_count": 0,
       "issues": []
@@ -702,6 +708,12 @@
     },
     {
       "path": "tests/verify_output_review_adjudication.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "tests/verify_output_review_kit.py",
       "ok": true,
       "issue_count": 0,
       "issues": []

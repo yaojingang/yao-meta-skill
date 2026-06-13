@@ -92,6 +92,7 @@
       "blind_pack_path": "reports/output_blind_review_pack.json",
       "decisions_path": "reports/output_review_decisions.json",
       "commands": {
+        "prepare_review_kit": "python3 scripts/yao.py output-review-kit",
         "write_template": "python3 scripts/adjudicate_output_review.py --write-template",
         "adjudicate": "python3 scripts/yao.py output-review",
         "refresh_review_studio": "python3 scripts/yao.py review-studio ."
@@ -118,6 +119,7 @@
       "blind_pack_path": "reports/output_blind_review_pack.json",
       "decisions_path": "reports/output_review_decisions.json",
       "commands": {
+        "prepare_review_kit": "python3 scripts/yao.py output-review-kit",
         "write_template": "python3 scripts/adjudicate_output_review.py --write-template",
         "adjudicate": "python3 scripts/yao.py output-review",
         "refresh_review_studio": "python3 scripts/yao.py review-studio ."
@@ -144,6 +146,7 @@
       "blind_pack_path": "reports/output_blind_review_pack.json",
       "decisions_path": "reports/output_review_decisions.json",
       "commands": {
+        "prepare_review_kit": "python3 scripts/yao.py output-review-kit",
         "write_template": "python3 scripts/adjudicate_output_review.py --write-template",
         "adjudicate": "python3 scripts/yao.py output-review",
         "refresh_review_studio": "python3 scripts/yao.py review-studio ."
@@ -170,6 +173,7 @@
       "blind_pack_path": "reports/output_blind_review_pack.json",
       "decisions_path": "reports/output_review_decisions.json",
       "commands": {
+        "prepare_review_kit": "python3 scripts/yao.py output-review-kit",
         "write_template": "python3 scripts/adjudicate_output_review.py --write-template",
         "adjudicate": "python3 scripts/yao.py output-review",
         "refresh_review_studio": "python3 scripts/yao.py review-studio ."
@@ -196,6 +200,7 @@
       "blind_pack_path": "reports/output_blind_review_pack.json",
       "decisions_path": "reports/output_review_decisions.json",
       "commands": {
+        "prepare_review_kit": "python3 scripts/yao.py output-review-kit",
         "write_template": "python3 scripts/adjudicate_output_review.py --write-template",
         "adjudicate": "python3 scripts/yao.py output-review",
         "refresh_review_studio": "python3 scripts/yao.py review-studio ."

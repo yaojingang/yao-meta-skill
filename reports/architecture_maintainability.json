@@ -4,12 +4,12 @@
   "generated_at": "2026-06-13",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 149,
-    "script_file_count": 92,
-    "test_file_count": 57,
+    "python_file_count": 151,
+    "script_file_count": 93,
+    "test_file_count": 58,
     "internal_module_count": 19,
-    "cli_script_count": 74,
-    "command_handler_count": 33,
+    "cli_script_count": 75,
+    "command_handler_count": 34,
     "warn_line_threshold": 900,
     "block_line_threshold": 1500,
     "largest_file_lines": 898,
@@ -27,21 +27,21 @@
     },
     {
       "path": "tests/verify_yao_cli.py",
-      "lines": 891,
+      "lines": 893,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
       "path": "scripts/yao.py",
-      "lines": 841,
+      "lines": 862,
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator."
     },
     {
       "path": "scripts/skill_report_model.py",
-      "lines": 782,
+      "lines": 792,
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
@@ -54,6 +54,13 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
+      "path": "scripts/yao_cli_parser.py",
+      "lines": 726,
+      "kind": "internal-module",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
       "path": "scripts/optimize_description.py",
       "lines": 723,
       "kind": "cli-script",
@@ -62,13 +69,6 @@
     },
     {
       "path": "scripts/trust_check.py",
-      "lines": 714,
-      "kind": "internal-module",
-      "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
-      "path": "scripts/yao_cli_parser.py",
       "lines": 714,
       "kind": "internal-module",
       "severity": "pass",

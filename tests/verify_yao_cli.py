@@ -89,6 +89,7 @@ def main() -> None:
     assert "world-class-submission-review" in parser_help, parser_help
     assert "world-class-claim-guard" in parser_help, parser_help
     assert "benchmark-reproducibility" in parser_help, parser_help
+    assert "output-review-kit" in parser_help, parser_help
     assert "telemetry-import" in parser_help, parser_help
     assert "telemetry-emit" in parser_help, parser_help
     assert "telemetry-hooks" in parser_help, parser_help
@@ -757,6 +758,7 @@ def main() -> None:
     assert "prompt_quality_profile" in report_result["payload"]["artifacts"], report_result
     assert "compiled_targets" in report_result["payload"]["artifacts"], report_result
     assert "output_execution" in report_result["payload"]["artifacts"], report_result
+    assert "output_review_kit" in report_result["payload"]["artifacts"], report_result
     assert "output_review_adjudication" in report_result["payload"]["artifacts"], report_result
     assert "adoption_drift" in report_result["payload"]["artifacts"], report_result
     assert "review_annotations" in report_result["payload"]["artifacts"], report_result

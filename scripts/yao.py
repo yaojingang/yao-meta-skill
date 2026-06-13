@@ -167,6 +167,7 @@ def command_report(args: argparse.Namespace) -> int:
             run_script("compile_skill.py", [str(ROOT)]),
             run_script("run_output_eval.py", []),
             run_script("run_output_execution.py", ["--runner-command", local_output_runner_command()]),
+            run_script("prepare_output_review_kit.py", []),
             run_script("adjudicate_output_review.py", []),
             run_script("render_adoption_drift_report.py", [str(ROOT)]),
             run_script("render_telemetry_hook_recipes.py", [str(ROOT)]),
@@ -201,6 +202,7 @@ def command_report(args: argparse.Namespace) -> int:
             "system_model": "reports/system-model.json",
             "compiled_targets": "reports/compiled_targets.json",
             "output_execution": "reports/output_execution_runs.json",
+            "output_review_kit": "reports/output_review_kit.json",
             "output_review_adjudication": "reports/output_review_adjudication.json",
             "adoption_drift": "reports/adoption_drift_report.json",
             "telemetry_hooks": "reports/telemetry_hook_recipes.json",
@@ -497,6 +499,25 @@ def command_output_execution(args: argparse.Namespace) -> int:
     if args.timeout_seconds is not None:
         cmd.extend(["--timeout-seconds", str(args.timeout_seconds)])
     result = run_script("run_output_execution.py", cmd)
+    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
+    return 0 if result["ok"] else 2
+
+
+def command_output_review_kit(args: argparse.Namespace) -> int:
+    cmd = []
+    if args.blind_pack_json:
+        cmd.extend(["--blind-pack-json", args.blind_pack_json])
+    if args.blind_pack_md:
+        cmd.extend(["--blind-pack-md", args.blind_pack_md])
+    if args.decisions:
+        cmd.extend(["--decisions", args.decisions])
+    if args.output_json:
+        cmd.extend(["--output-json", args.output_json])
+    if args.output_md:
+        cmd.extend(["--output-md", args.output_md])
+    if args.write_template:
+        cmd.append("--write-template")
+    result = run_script("prepare_output_review_kit.py", cmd)
     print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
     return 0 if result["ok"] else 2
 

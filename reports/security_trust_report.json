@@ -2,8 +2,8 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 176,
-    "script_count": 92,
+    "scanned_files": 177,
+    "script_count": 93,
     "internal_module_count": 17,
     "secret_findings": 0,
     "dependency_files": [
@@ -12,18 +12,18 @@
     "network_script_count": 3,
     "network_policy_covered_count": 3,
     "network_policy_missing_count": 0,
-    "file_write_script_count": 62,
+    "file_write_script_count": 63,
     "permission_required_count": 3,
     "permission_approved_count": 3,
     "permission_missing_count": 0,
     "permission_invalid_count": 0,
     "permission_expired_count": 0,
-    "help_smoke_checked_count": 75,
+    "help_smoke_checked_count": 76,
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 176,
-    "package_sha256": "68a0228b56de8c9e9e94d64d7c1e386bf3dff55c0f6228b65f91e75d02525926"
+    "package_hash_file_count": 177,
+    "package_sha256": "33ca97e8df3e3c75228595ab8bd06d65c697ef708723a0a53637bd8f22bbcfda"
   },
   "failures": [],
   "warnings": [],
@@ -328,6 +328,20 @@
       "uses_input": false,
       "uses_network": false,
       "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
+      "path": "scripts/prepare_output_review_kit.py",
+      "interface": "cli",
+      "interface_declared": false,
+      "interface_reason": "Default CLI classification; add SCRIPT_INTERFACE for internal modules.",
+      "has_argparse": true,
+      "has_main_guard": true,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": true,
       "uses_subprocess": false,
       "network_urls": [],
       "network_hosts": []
@@ -1365,9 +1379,9 @@
   "help_smoke": {
     "enabled": true,
     "timeout_seconds": 5.0,
-    "candidate_count": 75,
-    "checked_count": 75,
-    "passed_count": 75,
+    "candidate_count": 76,
+    "checked_count": 76,
+    "passed_count": 76,
     "failed_count": 0,
     "skipped_count": 17,
     "failed_scripts": [],
@@ -1580,6 +1594,16 @@
         "passed": true,
         "has_help_text": true,
         "stdout_excerpt": "usage: optimize_description.py [-h] --description-file DESCRIPTION_FILE\n                               [--baseline-description-file BASELINE_DESCRIPTION_FILE]\n                               --dev-cases DEV_CASES\n                            ",
+        "stderr_excerpt": ""
+      },
+      {
+        "path": "scripts/prepare_output_review_kit.py",
+        "command": "python3 scripts/prepare_output_review_kit.py --help",
+        "returncode": 0,
+        "timed_out": false,
+        "passed": true,
+        "has_help_text": true,
+        "stdout_excerpt": "usage: prepare_output_review_kit.py [-h] [--blind-pack-json BLIND_PACK_JSON]\n                                    [--blind-pack-md BLIND_PACK_MD]\n                                    [--decisions DECISIONS]\n                                   ",
         "stderr_excerpt": ""
       },
       {
@@ -2260,6 +2284,7 @@
           "scripts/github_benchmark_scan.py",
           "scripts/import_telemetry_events.py",
           "scripts/init_skill.py",
+          "scripts/prepare_output_review_kit.py",
           "scripts/prepare_world_class_submission_kit.py",
           "scripts/probe_runtime_permissions.py",
           "scripts/promotion_checker.py",

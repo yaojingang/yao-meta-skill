@@ -85,6 +85,7 @@
           "scripts/lint_skill.py",
           "scripts/local_output_eval_runner.py",
           "scripts/optimize_description.py",
+          "scripts/prepare_output_review_kit.py",
           "scripts/prepare_world_class_submission_kit.py",
           "scripts/probe_runtime_permissions.py",
           "scripts/promotion_checker.py",

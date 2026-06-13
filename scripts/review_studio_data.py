@@ -63,6 +63,7 @@ def evidence_paths(skill_dir: Path) -> dict[str, str]:
         "output_eval": "reports/output_quality_scorecard.md",
         "output_execution": "reports/output_execution_runs.md",
         "output_blind_review": "reports/output_blind_review_pack.md",
+        "output_review_kit": "reports/output_review_kit.md",
         "output_review_decisions": "reports/output_review_decisions.json",
         "output_review_adjudication": "reports/output_review_adjudication.md",
         "benchmark_reproducibility": "reports/benchmark_reproducibility.md",
@@ -103,6 +104,7 @@ def load_review_data(skill_dir: Path) -> dict[str, dict[str, Any]]:
         "output_quality": load_json(reports / "output_quality_scorecard.json"),
         "output_execution": load_json(reports / "output_execution_runs.json"),
         "output_blind_review": load_json(reports / "output_blind_review_pack.json"),
+        "output_review_kit": load_json(reports / "output_review_kit.json"),
         "output_review_adjudication": load_json(reports / "output_review_adjudication.json"),
         "skill_os2_coverage": load_json(reports / "skill_os2_coverage.json"),
         "compiled_targets": load_json(reports / "compiled_targets.json"),
@@ -136,6 +138,7 @@ def insight_cards(data: dict[str, dict[str, Any]]) -> list[dict[str, str]]:
     output = data["output_quality"].get("summary", {})
     output_execution = data["output_execution"].get("summary", {})
     output_blind = data["output_blind_review"].get("summary", {})
+    output_review_kit = data["output_review_kit"].get("summary", {})
     output_review = data["output_review_adjudication"].get("summary", {})
     blueprint = data["skill_os2_coverage"].get("summary", {})
     compiled = data["compiled_targets"].get("summary", {})
@@ -183,6 +186,11 @@ def insight_cards(data: dict[str, dict[str, Any]]) -> list[dict[str, str]]:
             "label": "Blind A/B",
             "value": str(output_blind.get("pair_count", 0)),
             "detail": "review pairs hide baseline vs with-skill labels",
+        },
+        {
+            "label": "Review Kit",
+            "value": f"{output_review_kit.get('ready_for_adjudication_count', 0)}/{output_review_kit.get('case_count', 0)}",
+            "detail": f"pending {output_review_kit.get('pending_decision_count', 0)}; answer key hidden",
         },
         {
             "label": "Review A/B",

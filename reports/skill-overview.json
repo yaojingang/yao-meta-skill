@@ -16,9 +16,10 @@
       "reports/output_quality_scorecard.md",
       "reports/output_execution_runs.md",
       "reports/output_blind_review_pack.md",
-      "reports/output_blind_answer_key.json",
+      "reports/output_review_kit.md",
       "reports/output_review_adjudication.md",
       "reports/benchmark_reproducibility.md",
+      "reports/output_blind_answer_key.json",
       "reports/conformance_matrix.md",
       "reports/security_trust_report.md",
       "reports/runtime_permission_probes.md",
@@ -436,7 +437,7 @@
         "path": "scripts",
         "label": "Deterministic helpers or local tooling",
         "kind": "folder",
-        "file_count": 92
+        "file_count": 93
       },
       {
         "path": "evals",
@@ -448,10 +449,10 @@
         "path": "reports",
         "label": "Generated evidence and overview artifacts",
         "kind": "folder",
-        "file_count": 197
+        "file_count": 199
       }
     ],
-    "file_count": 353,
+    "file_count": 356,
     "folder_count": 4,
     "distribution": [
       {
@@ -476,7 +477,7 @@
       },
       {
         "label": "scripts",
-        "value": 92
+        "value": 93
       },
       {
         "label": "evals",
@@ -484,7 +485,7 @@
       },
       {
         "label": "reports",
-        "value": 197
+        "value": 199
       }
     ]
   },
@@ -605,7 +606,7 @@
       "path": "scripts",
       "label": "Deterministic helpers or local tooling",
       "kind": "folder",
-      "file_count": 92
+      "file_count": 93
     },
     {
       "path": "evals",
@@ -617,7 +618,7 @@
       "path": "reports",
       "label": "Generated evidence and overview artifacts",
       "kind": "folder",
-      "file_count": 197
+      "file_count": 199
     }
   ],
   "strengths": [
@@ -865,6 +866,30 @@
     "pair_count": 5,
     "answer_key_separate": true
   },
+  "output_review_kit": {
+    "ok": true,
+    "summary": {
+      "case_count": 5,
+      "ready_for_adjudication_count": 0,
+      "pending_decision_count": 5,
+      "invalid_decision_count": 0,
+      "reviewer_metadata_present": false,
+      "answer_key_hidden": true,
+      "answer_key_path_exposed": false,
+      "ready_to_run_adjudication": false,
+      "failure_count": 0
+    },
+    "artifacts": {
+      "reviewer_kit_json": "reports/output_review_kit.json",
+      "reviewer_kit_markdown": "reports/output_review_kit.md",
+      "blind_pack_json": "reports/output_blind_review_pack.json",
+      "blind_pack_markdown": "reports/output_blind_review_pack.md",
+      "decisions": "reports/output_review_decisions.json",
+      "adjudication_json": "reports/output_review_adjudication.json",
+      "adjudication_markdown": "reports/output_review_adjudication.md"
+    },
+    "failures": []
+  },
   "output_review_adjudication": {
     "ok": true,
     "summary": {
@@ -909,9 +934,9 @@
       "world_class_task_count": 4,
       "world_class_ledger_pending_count": 4,
       "working_tree_dirty": true,
-      "changed_file_count": 56
+      "changed_file_count": 59
     },
-    "commit": "30539bed7a29dd88c2f289dd0c115da9834dd5d9",
+    "commit": "ecdb16dd90025bcca3051be4c6a1b5b723c7ec75",
     "missing_artifacts": [],
     "limitations": [
       "Local command-runner evidence is reproducible but does not replace provider-backed model holdout evidence.",
@@ -986,8 +1011,8 @@
     "failures": []
   },
   "trust_security": {
-    "scanned_files": 176,
-    "script_count": 92,
+    "scanned_files": 177,
+    "script_count": 93,
     "internal_module_count": 17,
     "secret_findings": 0,
     "dependency_files": [
@@ -996,18 +1021,18 @@
     "network_script_count": 3,
     "network_policy_covered_count": 3,
     "network_policy_missing_count": 0,
-    "file_write_script_count": 62,
+    "file_write_script_count": 63,
     "permission_required_count": 3,
     "permission_approved_count": 3,
     "permission_missing_count": 0,
     "permission_invalid_count": 0,
     "permission_expired_count": 0,
-    "help_smoke_checked_count": 75,
+    "help_smoke_checked_count": 76,
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 176,
-    "package_sha256": "6298aa08d70a1e36956df32bcbb7a0bc778e8125f5449630cebf966b1c06a5f7"
+    "package_hash_file_count": 177,
+    "package_sha256": "7645bfc56829c3d6888e792b170b2e734d041c930c31f7f285c0d59e49d7de1b"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -1045,7 +1070,7 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "6298aa08d70a1e36956df32bcbb7a0bc778e8125f5449630cebf966b1c06a5f7",
+        "package_sha256": "7645bfc56829c3d6888e792b170b2e734d041c930c31f7f285c0d59e49d7de1b",
         "archive_sha256": "cb1ac8c62bc5dee942a88f18eb5d71c93ae58f854ac19f3d912f9c9c3a4ec24e"
       },
       "compatibility": {
@@ -1082,7 +1107,7 @@
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
       },
-      "generated_at": "2026-06-14"
+      "generated_at": "2026-06-13"
     },
     "failures": [],
     "warnings": []
@@ -1105,7 +1130,7 @@
     "ok": true,
     "summary": {
       "archive_present": true,
-      "archive_entry_count": 563,
+      "archive_entry_count": 567,
       "archive_extracted": true,
       "entrypoint_loaded": true,
       "manifest_loaded": true,
@@ -1177,7 +1202,7 @@
         {
           "field": "package_sha256",
           "from": "0000000000000000000000000000000000000000000000000000000000000000",
-          "to": "6298aa08d70a1e36956df32bcbb7a0bc778e8125f5449630cebf966b1c06a5f7"
+          "to": "7645bfc56829c3d6888e792b170b2e734d041c930c31f7f285c0d59e49d7de1b"
         }
       ]
     },
@@ -1349,8 +1374,9 @@
         "current": "0/5 decisions; pending 5",
         "objective": "Record real blind A/B reviewer decisions before claiming human output review completion.",
         "runbook": [
+          "python3 scripts/yao.py output-review-kit --write-template",
+          "Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.",
           "python3 scripts/adjudicate_output_review.py --write-template",
-          "Open reports/output_blind_review_pack.md and choose A or B for each pair without opening the answer key.",
           "Edit reports/output_review_decisions.json with winner_variant values and reviewer metadata.",
           "python3 scripts/yao.py output-review",
           "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
@@ -1365,6 +1391,7 @@
         ],
         "evidence_artifacts": [
           "reports/output_blind_review_pack.md",
+          "reports/output_review_kit.md",
           "reports/output_review_decisions.json",
           "reports/output_review_adjudication.json",
           "reports/output_review_adjudication.md",
@@ -1556,6 +1583,7 @@
         ],
         "evidence_artifacts": [
           "reports/output_blind_review_pack.md",
+          "reports/output_review_kit.md",
           "reports/output_review_decisions.json",
           "reports/output_review_adjudication.json",
           "reports/output_review_adjudication.md",

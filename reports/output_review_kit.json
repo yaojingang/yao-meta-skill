@@ -1,0 +1,267 @@
+{
+  "schema_version": "1.0",
+  "ok": true,
+  "summary": {
+    "case_count": 5,
+    "ready_for_adjudication_count": 0,
+    "pending_decision_count": 5,
+    "invalid_decision_count": 0,
+    "reviewer_metadata_present": false,
+    "answer_key_hidden": true,
+    "answer_key_path_exposed": false,
+    "ready_to_run_adjudication": false,
+    "failure_count": 0
+  },
+  "artifacts": {
+    "reviewer_kit_json": "reports/output_review_kit.json",
+    "reviewer_kit_markdown": "reports/output_review_kit.md",
+    "blind_pack_json": "reports/output_blind_review_pack.json",
+    "blind_pack_markdown": "reports/output_blind_review_pack.md",
+    "decisions": "reports/output_review_decisions.json",
+    "adjudication_json": "reports/output_review_adjudication.json",
+    "adjudication_markdown": "reports/output_review_adjudication.md"
+  },
+  "template_written": false,
+  "review_contract": {
+    "reviewer_steps": [
+      "Open reports/output_blind_review_pack.md or this kit and compare Variant A vs Variant B for each case.",
+      "Record choices in reports/output_review_decisions.json without opening the answer key.",
+      "Use winner_variant A or B, confidence from 0 to 1, and a short reason for every case.",
+      "Run python3 scripts/yao.py output-review after choices are recorded.",
+      "Refresh python3 scripts/yao.py review-studio . before asking for release approval."
+    ],
+    "required_fields": {
+      "reviewer": "Human reviewer name or review group.",
+      "reviewed_at": "Review date or timestamp.",
+      "winner_variant": "A or B for every case.",
+      "confidence": "Optional numeric confidence from 0 to 1.",
+      "reason": "Short rationale based on the rubric, not on hidden labels."
+    },
+    "privacy_contract": [
+      "The answer key is intentionally withheld from this kit.",
+      "Do not inspect hidden labels or expected winners before decisions are recorded.",
+      "Do not paste private user data into decision reasons.",
+      "Pending decisions must stay pending instead of being counted as human agreement."
+    ]
+  },
+  "cases": [
+    {
+      "case_id": "skill-package-contract",
+      "prompt": "Turn this repeated workflow into a reusable team skill package.",
+      "input_files": [],
+      "review_instruction": "Pick A or B based only on the rubric. Do not infer which output came from the skill.",
+      "rubric": [
+        {
+          "id": "has-entrypoint",
+          "description": "Output names the routeable Skill entrypoint.",
+          "weight": 1.0
+        },
+        {
+          "id": "has-interface",
+          "description": "Output includes neutral interface metadata.",
+          "weight": 1.0
+        },
+        {
+          "id": "has-report",
+          "description": "Output points reviewer to generated overview report.",
+          "weight": 1.0
+        },
+        {
+          "id": "has-resource-boundary",
+          "description": "Output preserves entrypoint/resource separation.",
+          "weight": 1.0
+        }
+      ],
+      "variant_a": {
+        "blind_id": "skill-package-contract:A",
+        "output": "Create a routeable SKILL.md, agents/interface.yaml, reports/skill-overview.html, and a focused eval plan. Keep the root entrypoint lean, move durable guidance into references/, scripts into scripts/, and evidence into reports/."
+      },
+      "variant_b": {
+        "blind_id": "skill-package-contract:B",
+        "output": "I can write a prompt for that workflow and include a short checklist."
+      },
+      "decision_state": {
+        "status": "awaiting-decision",
+        "winner_variant_recorded": false,
+        "confidence_recorded": false,
+        "reason_recorded": false,
+        "blocking_reason": "Decision template exists but this row is still blank."
+      }
+    },
+    {
+      "case_id": "output-eval-expectation",
+      "prompt": "Upgrade this production skill so we know whether the generated output is better than baseline.",
+      "input_files": [],
+      "review_instruction": "Pick A or B based only on the rubric. Do not infer which output came from the skill.",
+      "rubric": [
+        {
+          "id": "has-baseline-comparison",
+          "description": "Output explicitly compares with-skill and baseline outputs.",
+          "weight": 1.0
+        },
+        {
+          "id": "has-assertion-grading",
+          "description": "Output includes objective assertion grading.",
+          "weight": 1.0
+        },
+        {
+          "id": "has-scorecard",
+          "description": "Output produces a scorecard report path.",
+          "weight": 1.0
+        },
+        {
+          "id": "has-failure-taxonomy",
+          "description": "Output records failure taxonomy.",
+          "weight": 1.0
+        }
+      ],
+      "variant_a": {
+        "blind_id": "output-eval-expectation:A",
+        "output": "Add Output Eval Lab cases with baseline_output and with_skill_output, run assertion grading, report with-skill vs baseline pass-rate delta, and record failure taxonomy plus next fixes in reports/output_quality_scorecard.md."
+      },
+      "variant_b": {
+        "blind_id": "output-eval-expectation:B",
+        "output": "Add more examples and run the trigger eval again."
+      },
+      "decision_state": {
+        "status": "awaiting-decision",
+        "winner_variant_recorded": false,
+        "confidence_recorded": false,
+        "reason_recorded": false,
+        "blocking_reason": "Decision template exists but this row is still blank."
+      }
+    },
+    {
+      "case_id": "ir-before-packaging",
+      "prompt": "Package this skill for OpenAI, Claude, Agent Skills, and generic targets.",
+      "input_files": [],
+      "review_instruction": "Pick A or B based only on the rubric. Do not infer which output came from the skill.",
+      "rubric": [
+        {
+          "id": "has-ir-first",
+          "description": "Output requires Skill IR before packaging.",
+          "weight": 1.0
+        },
+        {
+          "id": "has-core-ir-fields",
+          "description": "Output lists core IR contract fields.",
+          "weight": 1.0
+        },
+        {
+          "id": "has-targets",
+          "description": "Output names requested runtime targets.",
+          "weight": 1.0
+        },
+        {
+          "id": "has-semantic-preservation",
+          "description": "Output says targets must preserve the capability contract.",
+          "weight": 1.0
+        }
+      ],
+      "variant_a": {
+        "blind_id": "ir-before-packaging:A",
+        "output": "Export folders for each platform and adjust files as needed."
+      },
+      "variant_b": {
+        "blind_id": "ir-before-packaging:B",
+        "output": "Export Skill IR first with job_to_be_done, trigger_surface, workflow, resources, eval_plan, risk, and governance. Then compile or package targets from the IR so OpenAI, Claude, Agent Skills, and generic packages preserve the same capability contract."
+      },
+      "decision_state": {
+        "status": "awaiting-decision",
+        "winner_variant_recorded": false,
+        "confidence_recorded": false,
+        "reason_recorded": false,
+        "blocking_reason": "Decision template exists but this row is still blank."
+      }
+    },
+    {
+      "case_id": "near-neighbor-boundary",
+      "prompt": "I only need a one-off summary of these notes, not a reusable process.",
+      "input_files": [],
+      "review_instruction": "Pick A or B based only on the rubric. Do not infer which output came from the skill.",
+      "rubric": [
+        {
+          "id": "declines-skill",
+          "description": "Output refuses unnecessary skill creation for one-off work.",
+          "weight": 1.0
+        },
+        {
+          "id": "names-near-neighbor",
+          "description": "Output labels the request as near-neighbor instead of owned work.",
+          "weight": 1.0
+        },
+        {
+          "id": "requires-reuse-signal",
+          "description": "Output asks for repeat-use evidence before packaging.",
+          "weight": 1.0
+        }
+      ],
+      "variant_a": {
+        "blind_id": "near-neighbor-boundary:A",
+        "output": "Create a SKILL.md and a reusable workflow anyway so future notes can use it."
+      },
+      "variant_b": {
+        "blind_id": "near-neighbor-boundary:B",
+        "output": "Do not create a skill for this one-off request. Treat it as a near-neighbor: answer the summary directly unless the user confirms repeated use, shared ownership, or a reusable output contract."
+      },
+      "decision_state": {
+        "status": "awaiting-decision",
+        "winner_variant_recorded": false,
+        "confidence_recorded": false,
+        "reason_recorded": false,
+        "blocking_reason": "Decision template exists but this row is still blank."
+      }
+    },
+    {
+      "case_id": "file-backed-governed-package",
+      "prompt": "Turn the attached release brief source into a governed skill package.",
+      "input_files": [
+        "fixtures/release-brief-source.md"
+      ],
+      "review_instruction": "Pick A or B based only on the rubric. Do not infer which output came from the skill.",
+      "rubric": [
+        {
+          "id": "uses-file-backed-evidence",
+          "description": "Output names file-backed source evidence.",
+          "weight": 1.0
+        },
+        {
+          "id": "has-governance",
+          "description": "Output preserves governed ownership metadata.",
+          "weight": 1.0
+        },
+        {
+          "id": "has-output-contract",
+          "description": "Output preserves output and rollback boundaries.",
+          "weight": 1.0
+        },
+        {
+          "id": "has-trust-and-scorecard",
+          "description": "Output requires trust and output scorecard artifacts.",
+          "weight": 1.0
+        },
+        {
+          "id": "does-not-invent-evidence",
+          "description": "Output forbids invented launch evidence.",
+          "weight": 1.0
+        }
+      ],
+      "variant_a": {
+        "blind_id": "file-backed-governed-package:A",
+        "output": "Draft a release announcement with the changelog, support notes, and owner name."
+      },
+      "variant_b": {
+        "blind_id": "file-backed-governed-package:B",
+        "output": "Use the file-backed fixture as source evidence, then create a governed skill package with SKILL.md, agents/interface.yaml, owner, review cadence, input_files, output contract, rollback boundary, trust report, and reports/output_quality_scorecard.md. Mark missing launch metrics as missing evidence instead of inventing them."
+      },
+      "decision_state": {
+        "status": "awaiting-decision",
+        "winner_variant_recorded": false,
+        "confidence_recorded": false,
+        "reason_recorded": false,
+        "blocking_reason": "Decision template exists but this row is still blank."
+      }
+    }
+  ],
+  "failures": []
+}

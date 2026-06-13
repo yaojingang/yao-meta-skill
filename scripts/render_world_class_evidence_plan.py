@@ -41,8 +41,9 @@ TASK_TEMPLATES: dict[str, dict[str, Any]] = {
         "owner": "human reviewer",
         "objective": "Record real blind A/B reviewer decisions before claiming human output review completion.",
         "runbook": [
+            "python3 scripts/yao.py output-review-kit --write-template",
+            "Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.",
             "python3 scripts/adjudicate_output_review.py --write-template",
-            "Open reports/output_blind_review_pack.md and choose A or B for each pair without opening the answer key.",
             "Edit reports/output_review_decisions.json with winner_variant values and reviewer metadata.",
             "python3 scripts/yao.py output-review",
             "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
@@ -55,6 +56,7 @@ TASK_TEMPLATES: dict[str, dict[str, Any]] = {
         ],
         "evidence_artifacts": [
             "reports/output_blind_review_pack.md",
+            "reports/output_review_kit.md",
             "reports/output_review_decisions.json",
             "reports/output_review_adjudication.json",
             "reports/output_review_adjudication.md",

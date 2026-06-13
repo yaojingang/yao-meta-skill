@@ -63,8 +63,9 @@ This report is an execution plan for the remaining world-class evidence gaps. It
 
 ### Runbook
 
+- `python3 scripts/yao.py output-review-kit --write-template`
+- Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.
 - `python3 scripts/adjudicate_output_review.py --write-template`
-- Open reports/output_blind_review_pack.md and choose A or B for each pair without opening the answer key.
 - Edit reports/output_review_decisions.json with winner_variant values and reviewer metadata.
 - `python3 scripts/yao.py output-review`
 - `python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>`
@@ -81,6 +82,7 @@ This report is an execution plan for the remaining world-class evidence gaps. It
 ### Evidence Artifacts
 
 - `reports/output_blind_review_pack.md`
+- `reports/output_review_kit.md`
 - `reports/output_review_decisions.json`
 - `reports/output_review_adjudication.json`
 - `reports/output_review_adjudication.md`

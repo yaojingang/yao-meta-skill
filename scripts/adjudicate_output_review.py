@@ -245,6 +245,7 @@ def build_reviewer_checklist(
                 "blind_pack_path": display_path(blind_pack_path),
                 "decisions_path": display_path(decisions_path),
                 "commands": {
+                    "prepare_review_kit": "python3 scripts/yao.py output-review-kit",
                     "write_template": "python3 scripts/adjudicate_output_review.py --write-template",
                     "adjudicate": "python3 scripts/yao.py output-review",
                     "refresh_review_studio": "python3 scripts/yao.py review-studio .",

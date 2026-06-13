@@ -6,10 +6,10 @@
     "context_budget_tier": "production",
     "context_budget_limit": 1000,
     "skill_body_tokens": 751,
-    "other_text_tokens": 1129811,
+    "other_text_tokens": 1145183,
     "estimated_initial_load_tokens": 944,
-    "estimated_total_text_tokens": 1130562,
-    "relevant_file_count": 484,
+    "estimated_total_text_tokens": 1145934,
+    "relevant_file_count": 490,
     "unused_resource_dirs": [],
     "quality_signal_points": 130,
     "quality_density": 137.7

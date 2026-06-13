@@ -40,6 +40,7 @@ DEFAULT_TARGETS = [
     "compiler-check",
     "output-eval-check",
     "output-execution-check",
+    "output-review-kit-check",
     "output-review-adjudication-check",
     "runtime-conformance-check",
     "runtime-permission-check",

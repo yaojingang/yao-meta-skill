@@ -475,6 +475,7 @@ def build_report_model(skill_dir: Path) -> dict:
     output_quality = load_json(skill_dir / "reports" / "output_quality_scorecard.json")
     output_execution = load_json(skill_dir / "reports" / "output_execution_runs.json")
     output_blind_review = load_json(skill_dir / "reports" / "output_blind_review_pack.json")
+    output_review_kit = load_json(skill_dir / "reports" / "output_review_kit.json")
     output_review_adjudication = load_json(skill_dir / "reports" / "output_review_adjudication.json")
     benchmark_reproducibility = load_json(skill_dir / "reports" / "benchmark_reproducibility.json")
     conformance = load_json(skill_dir / "reports" / "conformance_matrix.json")
@@ -550,8 +551,11 @@ def build_report_model(skill_dir: Path) -> dict:
     if (skill_dir / "reports" / "output_blind_answer_key.json").exists():
         insert_after = deliverables.index("reports/output_blind_review_pack.md") + 1 if "reports/output_blind_review_pack.md" in deliverables else deliverables.index("reports/output_quality_scorecard.md") + 1
         deliverables.insert(insert_after, "reports/output_blind_answer_key.json")
+    if (skill_dir / "reports" / "output_review_kit.md").exists():
+        insert_after = deliverables.index("reports/output_blind_review_pack.md") + 1 if "reports/output_blind_review_pack.md" in deliverables else deliverables.index("reports/output_quality_scorecard.md") + 1
+        deliverables.insert(insert_after, "reports/output_review_kit.md")
     if (skill_dir / "reports" / "output_review_adjudication.md").exists():
-        insert_after = deliverables.index("reports/output_blind_answer_key.json") + 1 if "reports/output_blind_answer_key.json" in deliverables else deliverables.index("reports/output_quality_scorecard.md") + 1
+        insert_after = deliverables.index("reports/output_review_kit.md") + 1 if "reports/output_review_kit.md" in deliverables else deliverables.index("reports/output_quality_scorecard.md") + 1
         deliverables.insert(insert_after, "reports/output_review_adjudication.md")
     if (skill_dir / "reports" / "benchmark_reproducibility.md").exists():
         insert_after = deliverables.index("reports/output_review_adjudication.md") + 1 if "reports/output_review_adjudication.md" in deliverables else deliverables.index("reports/output_quality_scorecard.md") + 1
@@ -679,6 +683,12 @@ def build_report_model(skill_dir: Path) -> dict:
             "seed": output_blind_review.get("seed", ""),
             "pair_count": output_blind_review.get("summary", {}).get("pair_count", 0),
             "answer_key_separate": output_blind_review.get("summary", {}).get("answer_key_separate", False),
+        },
+        "output_review_kit": {
+            "ok": output_review_kit.get("ok", False),
+            "summary": output_review_kit.get("summary", {}),
+            "artifacts": output_review_kit.get("artifacts", {}),
+            "failures": output_review_kit.get("failures", []),
         },
         "output_review_adjudication": {
             "ok": output_review_adjudication.get("ok", False),

@@ -587,6 +587,18 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     output_eval_cmd.add_argument("--blind-answer-key-json")
     output_eval_cmd.set_defaults(func=_handler(command_handlers, "command_output_eval"))
 
+    output_review_kit_cmd = subparsers.add_parser(
+        "output-review-kit",
+        help="Prepare a reviewer-facing blind A/B output review kit without exposing the answer key.",
+    )
+    output_review_kit_cmd.add_argument("--blind-pack-json")
+    output_review_kit_cmd.add_argument("--blind-pack-md")
+    output_review_kit_cmd.add_argument("--decisions")
+    output_review_kit_cmd.add_argument("--output-json")
+    output_review_kit_cmd.add_argument("--output-md")
+    output_review_kit_cmd.add_argument("--write-template", action="store_true")
+    output_review_kit_cmd.set_defaults(func=_handler(command_handlers, "command_output_review_kit"))
+
     output_execution_cmd = subparsers.add_parser(
         "output-exec",
         help="Record output-eval execution evidence, timing, and token usage.",

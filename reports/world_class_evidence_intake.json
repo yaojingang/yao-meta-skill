@@ -134,6 +134,7 @@
         ],
         "evidence_artifacts": [
           "reports/output_blind_review_pack.md",
+          "reports/output_review_kit.md",
           "reports/output_review_decisions.json",
           "reports/output_review_adjudication.json",
           "reports/output_review_adjudication.md",

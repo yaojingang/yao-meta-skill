@@ -107,6 +107,7 @@ This report validates the intake contract for human and external evidence. A val
   - reports/skill_os2_audit.json item human-adjudication status becomes pass
 - evidence_artifacts:
   - reports/output_blind_review_pack.md
+  - reports/output_review_kit.md
   - reports/output_review_decisions.json
   - reports/output_review_adjudication.json
   - reports/output_review_adjudication.md

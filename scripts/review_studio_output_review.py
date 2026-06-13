@@ -78,7 +78,7 @@ def render_output_review_section(adjudication: dict[str, Any]) -> str:
     return (
         "<section>"
         "<h2>评审清单</h2>"
-        "<p class='muted'>每张卡片对应一个 blind A/B case，说明当前是否待判、答案是否仍隐藏、应填写的决策文件、有效字段和复跑命令。</p>"
+        "<p class='muted'>先打开 reports/output_review_kit.md；每张卡片对应一个 blind A/B case，说明当前是否待判、答案是否仍隐藏、应填写的决策文件、有效字段和复跑命令。</p>"
         f"{render_output_review_checklist(adjudication)}"
         "</section>"
     )
