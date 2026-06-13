@@ -23,6 +23,7 @@ It turns rough workflows, transcripts, prompts, notes, and runbooks into reusabl
 - a silent-by-default GitHub benchmark scan plus reference synthesis that studies top public repositories and world-class pattern tracks, then surfaces only real conflicts or uncertainty to the user
 - a generated visual HTML overview for each newly initialized skill
 - a Review Studio 2.0 HTML gate page that combines intent, trigger, output eval, context, runtime, trust, atlas, adoption drift, reviewer waivers, reviewer annotations, release evidence, and per-warning fix actions
+- a Skill OS 2.0 audit that maps each world-class requirement to current evidence, human-required gaps, and external-required gaps
 - Output Eval Lab evidence with assertion grading, execution/timing/token evidence, a blind A/B review pack, a separate answer key, and reviewer adjudication reports
 - a runtime permission probe report that checks packaged target adapters for explicit permission metadata, native-enforcement flags, metadata fallback notes, and residual risks
 - a side-by-side HTML review studio for first-pass human review
@@ -392,7 +393,7 @@ Utility scripts that make the meta-skill operational:
 - `run_description_optimization_suite.py`: runs description optimization across the root skill and governed examples, then writes reusable reports and optional drift snapshots with calibration and family summaries
 - `promotion_checker.py`: applies promotion policy to current description candidates, writes promotion decisions, builds candidate registries, and emits iteration bundles with review stubs
 - `create_iteration_snapshot.py`: freezes the current promotion decision into a versioned release snapshot with review, route, and context evidence
-- `yao.py`: unified authoring CLI that exposes init, validate, optimize-description, promote-check, review, release-snapshot, workspace-flow, report, skill-ir, compile-skill, output-exec, output-review, telemetry-emit, telemetry-hooks, telemetry-import, package, registry-audit, package-verify, install-simulate, upgrade-check, review-waivers, and test as one entrypoint
+- `yao.py`: unified authoring CLI that exposes init, validate, optimize-description, promote-check, review, release-snapshot, workspace-flow, report, skill-ir, compile-skill, output-exec, output-review, skill-os2-audit, telemetry-emit, telemetry-hooks, telemetry-import, package, registry-audit, package-verify, install-simulate, upgrade-check, review-waivers, and test as one entrypoint
 - `render_description_drift_history.py`: turns description-optimization snapshots into a readable drift-history report
 - `build_confusion_matrix.py`: scores route confusion across tracked sibling skills and `no_route` cases, then writes a route scorecard and optional milestone snapshot
 - `render_iteration_ledger.py`: compresses regression milestones, description optimization drift, and route scorecards into one iteration-facing ledger
@@ -401,6 +402,7 @@ Utility scripts that make the meta-skill operational:
 - `governance_check.py`: validates owner, review cadence, lifecycle stage, and maturity metadata
 - `render_context_reports.py`: generates root and example context-budget reports plus a shared context summary
 - `render_regression_history.py`: turns milestone snapshots into a readable regression history report
+- `render_skill_os2_audit.py`: renders a requirement-by-requirement Skill OS 2.0 audit that separates landed local evidence from human-required and external-required gaps
 - `cross_packager.py`: builds client-specific export artifacts from Skill IR plus neutral metadata, with explicit platform contracts and validation
 - `render_portability_report.py`: scores cross-environment portability from neutral metadata, degradation rules, and consumer validation coverage
 - `render_skill_overview.py`: generates the white-background bilingual HTML skill audit report with sticky four-character Chinese navigation, top-right language switch, v2 scorecard, inline SVG charts, contract boundary, quality review, risk governance, assets, and iteration roadmap

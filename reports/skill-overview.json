@@ -433,7 +433,7 @@
         "path": "scripts",
         "label": "Deterministic helpers or local tooling",
         "kind": "folder",
-        "file_count": 74
+        "file_count": 75
       },
       {
         "path": "evals",
@@ -445,10 +445,10 @@
         "path": "reports",
         "label": "Generated evidence and overview artifacts",
         "kind": "folder",
-        "file_count": 173
+        "file_count": 175
       }
     ],
-    "file_count": 311,
+    "file_count": 314,
     "folder_count": 4,
     "distribution": [
       {
@@ -473,7 +473,7 @@
       },
       {
         "label": "scripts",
-        "value": 74
+        "value": 75
       },
       {
         "label": "evals",
@@ -481,7 +481,7 @@
       },
       {
         "label": "reports",
-        "value": 173
+        "value": 175
       }
     ]
   },
@@ -602,7 +602,7 @@
       "path": "scripts",
       "label": "Deterministic helpers or local tooling",
       "kind": "folder",
-      "file_count": 74
+      "file_count": 75
     },
     {
       "path": "evals",
@@ -614,7 +614,7 @@
       "path": "reports",
       "label": "Generated evidence and overview artifacts",
       "kind": "folder",
-      "file_count": 173
+      "file_count": 175
     }
   ],
   "strengths": [
@@ -948,8 +948,8 @@
     "failures": []
   },
   "trust_security": {
-    "scanned_files": 158,
-    "script_count": 74,
+    "scanned_files": 159,
+    "script_count": 75,
     "internal_module_count": 10,
     "secret_findings": 0,
     "dependency_files": [
@@ -958,18 +958,18 @@
     "network_script_count": 3,
     "network_policy_covered_count": 3,
     "network_policy_missing_count": 0,
-    "file_write_script_count": 51,
+    "file_write_script_count": 52,
     "permission_required_count": 3,
     "permission_approved_count": 3,
     "permission_missing_count": 0,
     "permission_invalid_count": 0,
     "permission_expired_count": 0,
-    "help_smoke_checked_count": 64,
+    "help_smoke_checked_count": 65,
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 158,
-    "package_sha256": "e42a9c4cf0f22cd6fc047dff3da1a380f5cc9e17157a48d8a1ac2071f7c84fbc"
+    "package_hash_file_count": 159,
+    "package_sha256": "224450e2cc3e2689a08ac5b53228b5fb6608faedeb3abf004156acac5674bd8e"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -1007,8 +1007,8 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "e42a9c4cf0f22cd6fc047dff3da1a380f5cc9e17157a48d8a1ac2071f7c84fbc",
-        "archive_sha256": "7494bf9b978d58b663cc0e8b6ffe2531a84602385f6f517774320197d30170d3"
+        "package_sha256": "224450e2cc3e2689a08ac5b53228b5fb6608faedeb3abf004156acac5674bd8e",
+        "archive_sha256": "d3c12ca273f8e386d37bf3f23e4458bf3a38a81aee68adf099e4fc74f2d2b37a"
       },
       "compatibility": {
         "openai": "pass",
@@ -1039,7 +1039,7 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "7494bf9b978d58b663cc0e8b6ffe2531a84602385f6f517774320197d30170d3",
+        "archive_sha256": "d3c12ca273f8e386d37bf3f23e4458bf3a38a81aee68adf099e4fc74f2d2b37a",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
@@ -1055,8 +1055,8 @@
       "target_count": 4,
       "adapter_count": 4,
       "archive_present": true,
-      "archive_sha256": "7494bf9b978d58b663cc0e8b6ffe2531a84602385f6f517774320197d30170d3",
-      "archive_entry_count": 505,
+      "archive_sha256": "d3c12ca273f8e386d37bf3f23e4458bf3a38a81aee68adf099e4fc74f2d2b37a",
+      "archive_entry_count": 509,
       "failure_count": 0,
       "warning_count": 0
     },
@@ -1067,7 +1067,7 @@
     "ok": true,
     "summary": {
       "archive_present": true,
-      "archive_entry_count": 505,
+      "archive_entry_count": 509,
       "archive_extracted": true,
       "entrypoint_loaded": true,
       "manifest_loaded": true,
@@ -1077,7 +1077,7 @@
       "installer_permission_failure_count": 0,
       "permission_target_count": 4,
       "permission_capability_count": 3,
-      "install_root_is_temp": false,
+      "install_root_is_temp": true,
       "failure_count": 0,
       "warning_count": 0
     },
@@ -1134,12 +1134,12 @@
         {
           "field": "archive_sha256",
           "from": "",
-          "to": "7494bf9b978d58b663cc0e8b6ffe2531a84602385f6f517774320197d30170d3"
+          "to": "d3c12ca273f8e386d37bf3f23e4458bf3a38a81aee68adf099e4fc74f2d2b37a"
         },
         {
           "field": "package_sha256",
           "from": "0000000000000000000000000000000000000000000000000000000000000000",
-          "to": "e42a9c4cf0f22cd6fc047dff3da1a380f5cc9e17157a48d8a1ac2071f7c84fbc"
+          "to": "224450e2cc3e2689a08ac5b53228b5fb6608faedeb3abf004156acac5674bd8e"
         }
       ]
     },

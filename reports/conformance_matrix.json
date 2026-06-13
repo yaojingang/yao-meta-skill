@@ -152,7 +152,7 @@
         "manifest.status exists",
         "manifest.maturity_tier exists",
         "manifest.review_cadence exists",
-        "manifest declares vscode via agent-skills-compatible",
+        "manifest declares vscode",
         "interface.display_name exists",
         "interface.short_description exists",
         "interface.default_prompt exists",

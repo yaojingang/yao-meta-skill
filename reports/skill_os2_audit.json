@@ -1,0 +1,417 @@
+{
+  "schema_version": "1.0",
+  "ok": true,
+  "generated_at": "2026-06-13",
+  "skill_dir": ".",
+  "summary": {
+    "item_count": 14,
+    "pass_count": 10,
+    "warn_count": 0,
+    "human_required_count": 1,
+    "external_required_count": 3,
+    "missing_count": 0,
+    "open_gap_count": 4,
+    "local_foundation_ready": true,
+    "world_class_ready": false,
+    "decision": "continue-iteration"
+  },
+  "status_counts": {
+    "pass": 10,
+    "warn": 0,
+    "human_required": 1,
+    "external_required": 3,
+    "missing": 0
+  },
+  "items": [
+    {
+      "key": "skill-ir",
+      "label": "Skill IR",
+      "status": "pass",
+      "current": "schema 2.0.0; targets 5",
+      "target": "2.0 schema, root export, and target-neutral contract evidence",
+      "evidence": [
+        {
+          "path": "skill-ir/schema.json",
+          "exists": true
+        },
+        {
+          "path": "skill-ir/examples/yao-meta-skill.json",
+          "exists": true
+        },
+        {
+          "path": "references/skill-ir-method.md",
+          "exists": true
+        }
+      ],
+      "next_action": "Keep IR as the source before target packaging."
+    },
+    {
+      "key": "target-compiler",
+      "label": "Target Compiler",
+      "status": "pass",
+      "current": "5/5 targets pass",
+      "target": "OpenAI, Claude, generic, Agent Skills compatible, and VS Code contracts generated from IR",
+      "evidence": [
+        {
+          "path": "scripts/compile_skill.py",
+          "exists": true
+        },
+        {
+          "path": "reports/compiled_targets.json",
+          "exists": true
+        },
+        {
+          "path": "tests/verify_compile_skill.py",
+          "exists": true
+        }
+      ],
+      "next_action": "Deepen target-native transforms when provider clients expose stronger runtime APIs."
+    },
+    {
+      "key": "output-eval-lab",
+      "label": "Output Eval Lab",
+      "status": "pass",
+      "current": "5 cases; delta 100.0; exec 10; blind 5",
+      "target": "with-skill/baseline, assertions, execution evidence, blind A/B, failure taxonomy",
+      "evidence": [
+        {
+          "path": "evals/output/cases.jsonl",
+          "exists": true
+        },
+        {
+          "path": "scripts/run_output_eval.py",
+          "exists": true
+        },
+        {
+          "path": "scripts/run_output_execution.py",
+          "exists": true
+        },
+        {
+          "path": "reports/output_quality_scorecard.json",
+          "exists": true
+        },
+        {
+          "path": "reports/output_execution_runs.json",
+          "exists": true
+        },
+        {
+          "path": "reports/output_blind_review_pack.json",
+          "exists": true
+        }
+      ],
+      "next_action": "Add more real-file and adversarial holdout cases as usage grows."
+    },
+    {
+      "key": "provider-holdout",
+      "label": "Provider Holdout",
+      "status": "external_required",
+      "current": "model-executed 0; token-observed 0",
+      "target": "At least one real provider-backed holdout run with observed model/timing/token metadata",
+      "evidence": [
+        {
+          "path": "scripts/provider_output_eval_runner.py",
+          "exists": true
+        },
+        {
+          "path": "reports/output_execution_runs.json",
+          "exists": true
+        }
+      ],
+      "next_action": "Run provider-backed holdout cases with real credentials and commit only aggregate evidence."
+    },
+    {
+      "key": "human-adjudication",
+      "label": "Human Adjudication",
+      "status": "human_required",
+      "current": "0/5 decisions; pending 5",
+      "target": "Real reviewer decisions recorded before claiming output review completion",
+      "evidence": [
+        {
+          "path": "reports/output_review_decisions.json",
+          "exists": true
+        },
+        {
+          "path": "reports/output_review_adjudication.json",
+          "exists": true
+        },
+        {
+          "path": "scripts/adjudicate_output_review.py",
+          "exists": true
+        }
+      ],
+      "next_action": "Record real A/B choices in the decision template, then regenerate adjudication."
+    },
+    {
+      "key": "runtime-conformance",
+      "label": "Runtime Conformance",
+      "status": "pass",
+      "current": "5/5 targets pass",
+      "target": "Target package structure, metadata, relative paths, and degradation notes pass",
+      "evidence": [
+        {
+          "path": "runtime/conformance/schema.json",
+          "exists": true
+        },
+        {
+          "path": "scripts/run_conformance_suite.py",
+          "exists": true
+        },
+        {
+          "path": "reports/conformance_matrix.json",
+          "exists": true
+        }
+      ],
+      "next_action": "Keep target conformance fixtures updated as platform contracts change."
+    },
+    {
+      "key": "trust-security",
+      "label": "Trust Security",
+      "status": "pass",
+      "current": "secrets 0; scripts 75; help failures 0",
+      "target": "Secrets, scripts, dependencies, permissions, and package hash are reviewable",
+      "evidence": [
+        {
+          "path": "scripts/trust_check.py",
+          "exists": true
+        },
+        {
+          "path": "reports/security_trust_report.json",
+          "exists": true
+        },
+        {
+          "path": "security/permission_policy.json",
+          "exists": true
+        }
+      ],
+      "next_action": "Keep high-permission approvals scoped, expiring, and target-mapped."
+    },
+    {
+      "key": "runtime-permission-metadata",
+      "label": "Permission Metadata",
+      "status": "pass",
+      "current": "4/4 target probes pass; metadata fallback 4",
+      "target": "Packaged adapters expose explicit permission metadata and residual risks",
+      "evidence": [
+        {
+          "path": "scripts/probe_runtime_permissions.py",
+          "exists": true
+        },
+        {
+          "path": "reports/runtime_permission_probes.json",
+          "exists": true
+        }
+      ],
+      "next_action": "Preserve residual-risk notes until real native enforcement exists."
+    },
+    {
+      "key": "native-permission-enforcement",
+      "label": "Native Permission Enforcement",
+      "status": "external_required",
+      "current": "native-enforced targets 0",
+      "target": "At least one target/client enforces approved permissions at runtime",
+      "evidence": [
+        {
+          "path": "reports/runtime_permission_probes.json",
+          "exists": true
+        },
+        {
+          "path": "security/permission_policy.json",
+          "exists": true
+        }
+      ],
+      "next_action": "Integrate a real client or installer runtime guard before claiming native permission enforcement."
+    },
+    {
+      "key": "skill-atlas",
+      "label": "Skill Atlas",
+      "status": "pass",
+      "current": "12 skills; actionable collisions 0",
+      "target": "Workspace catalog, route overlap, stale/owner gaps, drift, and no-route opportunities",
+      "evidence": [
+        {
+          "path": "scripts/build_skill_atlas.py",
+          "exists": true
+        },
+        {
+          "path": "skill_atlas/catalog.json",
+          "exists": true
+        },
+        {
+          "path": "reports/skill_atlas.json",
+          "exists": true
+        },
+        {
+          "path": "skill_atlas/policy.json",
+          "exists": true
+        }
+      ],
+      "next_action": "Feed real drift data into Atlas once client telemetry is installed."
+    },
+    {
+      "key": "registry-distribution",
+      "label": "Registry Distribution",
+      "status": "pass",
+      "current": "zip entries 509; install failures 0; permission failures 0",
+      "target": "Package metadata, archive checksum, package verification, and install simulation pass",
+      "evidence": [
+        {
+          "path": "registry/packages/yao-meta-skill.json",
+          "exists": true
+        },
+        {
+          "path": "reports/package_verification.json",
+          "exists": true
+        },
+        {
+          "path": "reports/install_simulation.json",
+          "exists": true
+        }
+      ],
+      "next_action": "Regenerate registry after package verification so checksums stay aligned."
+    },
+    {
+      "key": "review-studio",
+      "label": "Review Studio",
+      "status": "pass",
+      "current": "decision review; warnings 2; score 92",
+      "target": "One page shows gates, evidence paths, blockers, warnings, actions, waivers, and annotations",
+      "evidence": [
+        {
+          "path": "scripts/render_review_studio.py",
+          "exists": true
+        },
+        {
+          "path": "reports/review-studio.json",
+          "exists": true
+        },
+        {
+          "path": "reports/review-studio.html",
+          "exists": true
+        }
+      ],
+      "next_action": "Resolve human/external warning gates before claiming full release readiness."
+    },
+    {
+      "key": "telemetry-drift",
+      "label": "Telemetry Drift",
+      "status": "pass",
+      "current": "events 1; risk low; recipes 5",
+      "target": "Local-first metadata-only event contract, aggregate drift report, hook recipes, and import path",
+      "evidence": [
+        {
+          "path": "reports/adoption_drift_report.json",
+          "exists": true
+        },
+        {
+          "path": "reports/telemetry_hook_recipes.json",
+          "exists": true
+        },
+        {
+          "path": "scripts/import_telemetry_events.py",
+          "exists": true
+        }
+      ],
+      "next_action": "Keep raw JSONL out of distributed packages and use aggregate reports for Atlas."
+    },
+    {
+      "key": "native-client-telemetry",
+      "label": "Native Client Telemetry",
+      "status": "external_required",
+      "current": "external source events 0; adoption samples 0",
+      "target": "A real Browser/Chrome/provider client sends production metadata events",
+      "evidence": [
+        {
+          "path": "scripts/telemetry_native_host.py",
+          "exists": true
+        },
+        {
+          "path": "reports/adoption_drift_report.json",
+          "exists": true
+        }
+      ],
+      "next_action": "Install a real client against the native host and import production metadata-only events."
+    }
+  ],
+  "next_highest_leverage": [
+    {
+      "key": "provider-holdout",
+      "label": "Provider Holdout",
+      "status": "external_required",
+      "current": "model-executed 0; token-observed 0",
+      "target": "At least one real provider-backed holdout run with observed model/timing/token metadata",
+      "evidence": [
+        {
+          "path": "scripts/provider_output_eval_runner.py",
+          "exists": true
+        },
+        {
+          "path": "reports/output_execution_runs.json",
+          "exists": true
+        }
+      ],
+      "next_action": "Run provider-backed holdout cases with real credentials and commit only aggregate evidence."
+    },
+    {
+      "key": "human-adjudication",
+      "label": "Human Adjudication",
+      "status": "human_required",
+      "current": "0/5 decisions; pending 5",
+      "target": "Real reviewer decisions recorded before claiming output review completion",
+      "evidence": [
+        {
+          "path": "reports/output_review_decisions.json",
+          "exists": true
+        },
+        {
+          "path": "reports/output_review_adjudication.json",
+          "exists": true
+        },
+        {
+          "path": "scripts/adjudicate_output_review.py",
+          "exists": true
+        }
+      ],
+      "next_action": "Record real A/B choices in the decision template, then regenerate adjudication."
+    },
+    {
+      "key": "native-permission-enforcement",
+      "label": "Native Permission Enforcement",
+      "status": "external_required",
+      "current": "native-enforced targets 0",
+      "target": "At least one target/client enforces approved permissions at runtime",
+      "evidence": [
+        {
+          "path": "reports/runtime_permission_probes.json",
+          "exists": true
+        },
+        {
+          "path": "security/permission_policy.json",
+          "exists": true
+        }
+      ],
+      "next_action": "Integrate a real client or installer runtime guard before claiming native permission enforcement."
+    },
+    {
+      "key": "native-client-telemetry",
+      "label": "Native Client Telemetry",
+      "status": "external_required",
+      "current": "external source events 0; adoption samples 0",
+      "target": "A real Browser/Chrome/provider client sends production metadata events",
+      "evidence": [
+        {
+          "path": "scripts/telemetry_native_host.py",
+          "exists": true
+        },
+        {
+          "path": "reports/adoption_drift_report.json",
+          "exists": true
+        }
+      ],
+      "next_action": "Install a real client against the native host and import production metadata-only events."
+    }
+  ],
+  "artifacts": {
+    "json": "reports/skill_os2_audit.json",
+    "markdown": "reports/skill_os2_audit.md"
+  }
+}

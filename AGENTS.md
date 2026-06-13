@@ -66,6 +66,7 @@ Clean test-only scratch directories after verification with `find tests -maxdept
 - `scripts/review_studio_layout.py`: Review Studio static layout and CSS contract.
 - `scripts/review_studio_formatting.py`: Review Studio dictionary-to-panel formatting and Chinese metric labels.
 - `scripts/review_studio_gates.py`: Review Studio gate evaluation, release decision scoring, and gate status labels.
+- `scripts/render_skill_os2_audit.py`: requirement-by-requirement Skill OS 2.0 completion audit. Keep local evidence, human-required gaps, and external-required gaps separate so reports do not overclaim world-class readiness.
 - `scripts/skill_report_model.py`, `scripts/skill_report_metrics.py`, `scripts/skill_report_charts.py`: skill overview data model, scoring, and inline SVG chart generation.
 - `scripts/yao_cli_config.py`: CLI target maps, archetype heuristics, diagnosis copy, and side-effect-free shaping helpers.
 - `scripts/yao_cli_parser.py`: CLI argparse command surface, flags, choices, and command handler binding.

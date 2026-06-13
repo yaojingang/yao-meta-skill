@@ -48,6 +48,7 @@ DEFAULT_TARGETS = [
     "upgrade-check",
     "review-viewer-check",
     "review-studio-check",
+    "skill-os2-audit-check",
     "feedback-check",
     "adoption-drift-check",
     "telemetry-import-check",

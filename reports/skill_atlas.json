@@ -109,6 +109,7 @@
           "scripts/render_review_studio.py",
           "scripts/render_review_viewer.py",
           "scripts/render_review_waivers.py",
+          "scripts/render_skill_os2_audit.py",
           "scripts/render_skill_overview.py",
           "scripts/render_social_preview.py",
           "scripts/render_system_model.py",

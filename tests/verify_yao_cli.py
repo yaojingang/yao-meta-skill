@@ -73,6 +73,7 @@ def main() -> None:
     parser_help = yao_cli_module.build_parser().format_help()
     assert "quickstart" in parser_help, parser_help
     assert "review-studio" in parser_help, parser_help
+    assert "skill-os2-audit" in parser_help, parser_help
     assert "telemetry-import" in parser_help, parser_help
     assert "telemetry-emit" in parser_help, parser_help
     assert "telemetry-hooks" in parser_help, parser_help
@@ -148,6 +149,20 @@ def main() -> None:
     assert telemetry_events[1]["command"] == "output-exec", telemetry_events
     assert telemetry_events[1]["outcome"] == "failed", telemetry_events
     assert telemetry_events[1]["failure_type"] == "script_error", telemetry_events
+
+    skill_os2_audit_result = run(
+        "skill-os2-audit",
+        str(ROOT),
+        "--output-json",
+        str(tmp_root / "skill_os2_audit.json"),
+        "--output-md",
+        str(tmp_root / "skill_os2_audit.md"),
+        "--generated-at",
+        "2026-06-13",
+    )
+    assert skill_os2_audit_result["ok"], skill_os2_audit_result
+    assert skill_os2_audit_result["payload"]["summary"]["decision"] == "continue-iteration", skill_os2_audit_result
+    assert skill_os2_audit_result["payload"]["summary"]["world_class_ready"] is False, skill_os2_audit_result
 
     quickstart_result = run(
         "quickstart",

@@ -194,7 +194,7 @@
         <span>archetype: governed</span>
         <span>format: agent-skills</span>
         <span>updated: 2026-03-31</span>
-        <span>intent confidence: 30 / 100</span>
+        <span>intent confidence: 100 / 100</span>
       </div>
     </section>
 
@@ -221,7 +221,7 @@
       </div>
       <div class="panel">
         <h2>Why this package is strong</h2>
-        <ul><li>触发面保持精简，并锚定在 frontmatter description。</li><li>已打包 agents/interface.yaml，便于后续做跨平台适配。</li><li>长指导被拆到 references 中，入口文件可以保持轻量。</li><li>确定性辅助逻辑放在 scripts 中，而不是藏在提示词里。</li><li>包内包含可随 Skill 迁移的质量门禁或触发检查。</li></ul>
+        <ul><li>触发面保持精简，并锚定在 frontmatter description。</li><li>已生成 Skill IR，核心语义可先于平台打包被审查和迁移。</li><li>已生成目标编译报告，可审查 IR 到 OpenAI、Claude、generic 等目标契约的映射。</li><li>已生成 Output Eval Lab scorecard，可比较 with-skill 与 baseline 输出质量。</li><li>已生成 Output Execution Runs，可区分记录样本、命令执行和模型执行证据。</li><li>已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。</li></ul>
       </div>
     </section>
 
@@ -245,7 +245,7 @@
       <div class="panel">
         <h2>Evidence readiness</h2>
         <p class="minor">Readiness score: 85/100</p>
-        <ul><li><strong>Intent clarity</strong> · needs review<br><span>30/100 intent confidence.</span></li><li><strong>Benchmark coverage</strong> · ready<br><span>3 GitHub benchmark repositories attached.</span></li><li><strong>Pattern gate</strong> · ready<br><span>3 accepted, 3 deferred using threshold 4/4.</span></li><li><strong>Conflict handling</strong> · ready<br><span>No material conflicts detected.</span></li><li><strong>Output risk profile</strong> · ready<br><span>5 output risk families attached.</span></li><li><strong>Artifact design profile</strong> · ready<br><span>High-trust editorial report with a clear first-screen thesis, compact evidence blocks, and decisions separated from supporting detail.</span></li><li><strong>Prompt quality profile</strong> · ready<br><span>82.0/100 prompt-facing quality score.</span></li></ul>
+        <ul><li><strong>Intent clarity</strong> · ready<br><span>100/100 intent confidence.</span></li><li><strong>Benchmark coverage</strong> · ready<br><span>3 GitHub benchmark repositories attached.</span></li><li><strong>Pattern gate</strong> · ready<br><span>5 accepted, 1 deferred using threshold 4/4.</span></li><li><strong>Conflict handling</strong> · decision needed<br><span>The stated preference leans lightweight or speed-first, while the benchmark mix leans toward governance, review, or heavier evaluation structure.</span></li><li><strong>Output risk profile</strong> · ready<br><span>5 output risk families attached.</span></li><li><strong>Artifact design profile</strong> · ready<br><span>Execution-focused technical artifact with environment assumptions, copyable commands, expected outputs, and side effects made explicit.</span></li><li><strong>Prompt quality profile</strong> · ready<br><span>89.0/100 prompt-facing quality score.</span></li></ul>
       </div>
       <div class="panel">
         <h2>Honest boundary check</h2>
@@ -271,24 +271,24 @@
     <section class="grid">
       <div class="panel">
         <h2>Artifact design profile</h2>
-        <p class="minor">Design system: content-led editorial</p>
-        <ul><li><strong>Report or brief</strong><br><span>High-trust editorial report with a clear first-screen thesis, compact evidence blocks, and decisions separated from supporting detail.</span></li><li><strong>Code, CLI, or implementation guide</strong><br><span>Execution-focused technical artifact with environment assumptions, copyable commands, expected outputs, and side effects made explicit.</span></li></ul>
+        <p class="minor">Design system: metric editorial</p>
+        <ul><li><strong>Code, CLI, or implementation guide</strong><br><span>Execution-focused technical artifact with environment assumptions, copyable commands, expected outputs, and side effects made explicit.</span></li><li><strong>Report or brief</strong><br><span>High-trust editorial report with a clear first-screen thesis, compact evidence blocks, and decisions separated from supporting detail.</span></li><li><strong>Review viewer</strong><br><span>Side-by-side reviewer studio with explicit tradeoffs, evidence readiness, and fast paths for approving, blocking, or requesting one focused fix.</span></li></ul>
       </div>
       <div class="panel">
         <h2>Visual quality gates</h2>
-        <ul><li>Keep the first screen useful without requiring the reader to parse every detail.</li><li>Use tables only for comparisons; move explanations below the table.</li><li>Keep source notes readable without flooding the body with markers.</li><li>Name the working directory and required inputs for commands.</li><li>Mark destructive, networked, or external side-effect operations.</li></ul>
+        <ul><li>Name the working directory and required inputs for commands.</li><li>Mark destructive, networked, or external side-effect operations.</li><li>Prefer the smallest runnable snippet over broad framework scaffolding.</li><li>Keep the first screen useful without requiring the reader to parse every detail.</li><li>Use tables only for comparisons; move explanations below the table.</li></ul>
       </div>
     </section>
 
     <section class="grid">
       <div class="panel">
         <h2>Prompt quality profile</h2>
-        <p class="minor">Relevance: prompt-heavy · score 82.0 / 100 · complexity complex</p>
-        <ul><li><strong>Completeness</strong> · 80 / 100<br><span>Name missing inputs, outputs, constraints, or success standards before deepening the package.</span></li><li><strong>Clarity</strong> · 80 / 100<br><span>Replace broad verbs with observable actions and define what done means.</span></li><li><strong>Consistency</strong> · 90 / 100<br><span>Check that role, task, format, exclusions, and examples do not contradict each other.</span></li><li><strong>Practicality</strong> · 90 / 100<br><span>Add runnable steps, examples, or verification cues instead of abstract advice.</span></li><li><strong>Specificity</strong> · 70 / 100<br><span>Anchor wording in the user&#x27;s audience, domain nouns, and target outcome.</span></li></ul>
+        <p class="minor">Relevance: prompt-heavy · score 89.0 / 100 · complexity expert</p>
+        <ul><li><strong>Completeness</strong> · 100 / 100<br><span>Name missing inputs, outputs, constraints, or success standards before deepening the package.</span></li><li><strong>Clarity</strong> · 85 / 100<br><span>Replace broad verbs with observable actions and define what done means.</span></li><li><strong>Consistency</strong> · 90 / 100<br><span>Check that role, task, format, exclusions, and examples do not contradict each other.</span></li><li><strong>Practicality</strong> · 90 / 100<br><span>Add runnable steps, examples, or verification cues instead of abstract advice.</span></li><li><strong>Specificity</strong> · 80 / 100<br><span>Anchor wording in the user&#x27;s audience, domain nouns, and target outcome.</span></li></ul>
       </div>
       <div class="panel">
         <h2>RTF to skill mapping</h2>
-        <ul><li><strong>Role</strong><br><span>Use a conversational role that asks only high-leverage questions and remembers the user&#x27;s goal.</span></li><li><strong>Task</strong><br><span>Clarify intent, resolve uncertainty, and converge toward a recommendation instead of a long option list.</span></li><li><strong>Format</strong><br><span>Return concise prompts, decision points, and reviewer-visible assumptions.</span></li></ul>
+        <ul><li><strong>Role</strong><br><span>Use an operator role with explicit boundaries, inputs, outputs, and failure handling.</span></li><li><strong>Task</strong><br><span>Convert the job into ordered steps with validation checks and stop conditions.</span></li><li><strong>Format</strong><br><span>Return a runbook-like handoff with commands, checks, owners, and next actions when relevant.</span></li></ul>
       </div>
     </section>
 
@@ -310,11 +310,11 @@
     <section class="grid">
       <div class="panel">
         <h2>Reference synthesis</h2>
-        <div class="direction-grid"><div class='direction-card'><h3>Official workflow product ergonomics</h3><p><strong>Borrow now</strong></p><ul><li>Borrow a first-time operator flow that explains itself before it asks for more structure.</li></ul><p><strong>Avoid</strong></p><ul><li>Do not mimic product polish that adds UI bulk without improving clarity.</li></ul></div><div class='direction-card'><h3>Hypothesis-test-learn loop</h3><p><strong>Borrow now</strong></p><ul><li>Borrow a small hypothesis-test-learn loop so the first revision is evidence-backed.</li></ul><p><strong>Avoid</strong></p><ul><li>Do not create experimental overhead that exceeds the skill&#x27;s real risk tier.</li></ul></div><div class='direction-card'><h3>Boundary-first design</h3><p><strong>Borrow now</strong></p><ul><li>Borrow the discipline of defining what the skill should not own before growing the package.</li></ul><p><strong>Avoid</strong></p><ul><li>Do not expand execution assets until route boundaries stay clean.</li></ul></div></div>
+        <div class="direction-grid"><div class='direction-card'><h3>Official skill anatomy and context discipline</h3><p><strong>Borrow now</strong></p><ul><li>Borrow progressive disclosure: keep the entrypoint lean and move depth into references or scripts.</li></ul><p><strong>Avoid</strong></p><ul><li>Do not let packaging or platform concerns swallow the core job boundary.</li></ul></div><div class='direction-card'><h3>Human-in-the-loop verification</h3><p><strong>Borrow now</strong></p><ul><li>Borrow a review checkpoint wherever trust matters more than raw speed.</li></ul><p><strong>Avoid</strong></p><ul><li>Do not force every skill through heavyweight review when the risk is low.</li></ul></div><div class='direction-card'><h3>Boundary-first design</h3><p><strong>Borrow now</strong></p><ul><li>Borrow the discipline of defining what the skill should not own before growing the package.</li></ul><p><strong>Avoid</strong></p><ul><li>Do not expand execution assets until route boundaries stay clean.</li></ul></div></div>
       </div>
       <div class="panel">
         <h2>Borrow now</h2>
-        <ul><li>Borrow a first-time operator flow that explains itself before it asks for more structure.</li><li>Borrow a small hypothesis-test-learn loop so the first revision is evidence-backed.</li><li>Borrow the discipline of defining what the skill should not own before growing the package.</li><li>Borrow the way it turns a messy workflow into a repeatable operating path.</li></ul>
+        <ul><li>Borrow progressive disclosure: keep the entrypoint lean and move depth into references or scripts.</li><li>Borrow a review checkpoint wherever trust matters more than raw speed.</li><li>Borrow the discipline of defining what the skill should not own before growing the package.</li><li>Borrow the way it turns a messy workflow into a repeatable operating path.</li></ul>
         <p class="minor">Use the recommendation by default. Only surface the underlying benchmark tradeoffs when intent is uncertain or a real design conflict needs a deliberate call.</p>
       </div>
     </section>

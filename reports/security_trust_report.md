@@ -1,22 +1,22 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `158`
-- Scripts: `74`
+- Scanned files: `159`
+- Scripts: `75`
 - Internal script modules: `10`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
 - Network policy missing scripts: `0`
-- File-write scripts: `51`
+- File-write scripts: `52`
 - Permission approvals: `3 / 3`
 - Permission approval gaps: `0`
-- CLI help smoke checked: `64`
+- CLI help smoke checked: `65`
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `158`
-- Package SHA256: `e42a9c4cf0f22cd6fc047dff3da1a380f5cc9e17157a48d8a1ac2071f7c84fbc`
+- Package hash files: `159`
+- Package SHA256: `224450e2cc3e2689a08ac5b53228b5fb6608faedeb3abf004156acac5674bd8e`
 
 ## Failures
 
@@ -54,8 +54,8 @@
 
 - Enabled: `True`
 - Timeout seconds: `5.0`
-- Checked scripts: `64`
-- Passed scripts: `64`
+- Checked scripts: `65`
+- Passed scripts: `65`
 - Failed scripts: `none`
 
 ## Script Surface
@@ -107,6 +107,7 @@
 | scripts/render_review_studio.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/render_review_viewer.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/render_review_waivers.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
+| scripts/render_skill_os2_audit.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/render_skill_overview.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/render_social_preview.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/render_system_model.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |

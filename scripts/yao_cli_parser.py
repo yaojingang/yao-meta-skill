@@ -132,6 +132,16 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     review_studio_cmd.add_argument("--output-json")
     review_studio_cmd.set_defaults(func=_handler(command_handlers, "command_review_studio"))
 
+    skill_os2_audit_cmd = subparsers.add_parser(
+        "skill-os2-audit",
+        help="Render a requirement-by-requirement Skill OS 2.0 completion audit.",
+    )
+    skill_os2_audit_cmd.add_argument("skill_dir", nargs="?", default=".")
+    skill_os2_audit_cmd.add_argument("--output-json")
+    skill_os2_audit_cmd.add_argument("--output-md")
+    skill_os2_audit_cmd.add_argument("--generated-at")
+    skill_os2_audit_cmd.set_defaults(func=_handler(command_handlers, "command_skill_os2_audit"))
+
     reference_scan_cmd = subparsers.add_parser(
         "reference-scan",
         help="Render a controlled benchmark scan report for a skill package.",

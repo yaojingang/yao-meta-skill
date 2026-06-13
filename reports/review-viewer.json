@@ -12,6 +12,25 @@
       "deliverables": [
         "SKILL.md",
         "agents/interface.yaml",
+        "reports/skill-ir.json",
+        "reports/compiled_targets.md",
+        "reports/output_quality_scorecard.md",
+        "reports/output_execution_runs.md",
+        "reports/output_blind_review_pack.md",
+        "reports/output_blind_answer_key.json",
+        "reports/output_review_adjudication.md",
+        "reports/conformance_matrix.md",
+        "reports/security_trust_report.md",
+        "reports/runtime_permission_probes.md",
+        "reports/skill_atlas.html",
+        "reports/registry_audit.md",
+        "reports/package_verification.md",
+        "reports/install_simulation.md",
+        "reports/upgrade_check.md",
+        "reports/adoption_drift_report.md",
+        "reports/review_waivers.md",
+        "reports/review_annotations.md",
+        "reports/review-studio.html",
         "reports/skill-overview.html"
       ],
       "flow": [
@@ -45,20 +64,19 @@
       },
       "evidence_score": {
         "label": "证据充分",
-        "score": 75,
+        "score": 100,
         "reasons": [
-          "已生成 6 / 8 类报告证据。",
-          "intent-confidence.json 已存在。",
-          "reference-synthesis.json 已存在。",
-          "artifact-design-profile.json 已存在。",
-          "证据不足：缺少 intent-dialogue.json, output-risk-profile.json。"
+          "已生成 20 / 20 类报告证据。",
+          "skill-ir.json 已存在。",
+          "compiled_targets.json 已存在。",
+          "intent-dialogue.json 已存在。"
         ]
       },
       "maintainability_score": {
         "label": "可维护性",
         "score": 100,
         "reasons": [
-          "SKILL.md 约 362 个词/字。",
+          "SKILL.md 约 350 个词/字。",
           "入口文件保持克制，可维护性较好。",
           "references/ 已承载扩展指导。",
           "scripts/ 已承载确定性逻辑。",
@@ -79,7 +97,7 @@
         "label": "上下文成本",
         "score": 42,
         "reasons": [
-          "入口约 362 个词/字，references 约 10018 个词/字。",
+          "入口约 350 个词/字，references 约 15316 个词/字。",
           "分数越高代表上下文成本越低。",
           "上下文成本偏高，建议压缩入口或拆分 references。"
         ]
@@ -87,7 +105,7 @@
     },
     "capability_profile": {
       "archetype": "governed",
-      "task_family": "Dialogue interaction",
+      "task_family": "Execution operation",
       "maturity": "governed",
       "trigger_strength": "手动触发 + description 路由",
       "reuse_scope": "跨平台",
@@ -100,7 +118,7 @@
       "nodes": [
         {
           "title": "意图澄清",
-          "body": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse."
+          "body": "Turn repeated workflows, prompts, transcripts, runbooks, documents, or existing skill packages into routeable, evaluable, packageable, and governable agent skills for personal, team, library, or governed reuse."
         },
         {
           "title": "边界路由",
@@ -120,7 +138,7 @@
         },
         {
           "title": "杠杆升级",
-          "body": "Ask one focused question and update intent context before adding assets."
+          "body": "Name the recurring job, expected input, output, and strongest non-goal in compact language."
         }
       ],
       "layers": [
@@ -139,13 +157,13 @@
         "shell": "bash"
       },
       "inputs": [
-        "用户提供的工作流、提示词、文档、记录或散乱笔记",
-        "期望沉淀的复用场景、排除项、约束和质量标准"
+        "rough workflow notes, SOPs, runbooks, prompts, transcripts, documents, or repeated task descriptions",
+        "an existing skill directory that needs refactor, evaluation, packaging, or governance hardening",
+        "target platform requirements such as OpenAI, Claude, generic Agent Skills, or team distribution",
+        "benchmark references, local constraints, desired maturity tier, and review standards"
       ],
       "outputs": [
-        "可路由的 SKILL.md",
-        "agents/interface.yaml 元数据",
-        "必要的 references、scripts、evals、reports 证据",
+        "A working skill package with lean SKILL.md, aligned agents/interface.yaml, justified references, scripts only when useful, eval evidence, reports, packaging metadata, and clear next iteration recommendations.",
         "结构化 Skill 目录，共 8 类关键资产。"
       ],
       "should_trigger": [
@@ -176,13 +194,14 @@
     "quality_review": {
       "strengths": [
         "触发面保持精简，并锚定在 frontmatter description。",
-        "已打包 agents/interface.yaml，便于后续做跨平台适配。",
-        "长指导被拆到 references 中，入口文件可以保持轻量。",
-        "确定性辅助逻辑放在 scripts 中，而不是藏在提示词里。",
-        "包内包含可随 Skill 迁移的质量门禁或触发检查。"
+        "已生成 Skill IR，核心语义可先于平台打包被审查和迁移。",
+        "已生成目标编译报告，可审查 IR 到 OpenAI、Claude、generic 等目标契约的映射。",
+        "已生成 Output Eval Lab scorecard，可比较 with-skill 与 baseline 输出质量。",
+        "已生成 Output Execution Runs，可区分记录样本、命令执行和模型执行证据。",
+        "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
       ],
       "gaps": [
-        "上下文成本需要补强：入口约 362 个词/字，references 约 10018 个词/字。"
+        "上下文成本需要补强：入口约 350 个词/字，references 约 15316 个词/字。"
       ],
       "recommendations": [
         "先改触发边界，再扩展工作流。",
@@ -190,33 +209,33 @@
         "每次升级后重新生成报告并检查分数原因。"
       ],
       "artifact_design": {
-        "design_system": "content-led editorial",
+        "design_system": "metric editorial",
         "highlights": [
-          "High-trust editorial report with a clear first-screen thesis, compact evidence blocks, and decisions separated from supporting detail.",
-          "Keep the first screen useful without requiring the reader to parse every detail.",
-          "Use tables only for comparisons; move explanations below the table.",
-          "Keep source notes readable without flooding the body with markers."
+          "Execution-focused technical artifact with environment assumptions, copyable commands, expected outputs, and side effects made explicit.",
+          "Name the working directory and required inputs for commands.",
+          "Mark destructive, networked, or external side-effect operations.",
+          "Prefer the smallest runnable snippet over broad framework scaffolding."
         ]
       },
       "prompt_quality": {
-        "overall_quality_score": 82.0,
+        "overall_quality_score": 89.0,
         "highlights": [
-          "Primary prompt task family: Dialogue interaction.",
-          "Complexity: complex — multiple inputs, constraints, or task families require tradeoff handling",
-          "Completeness: 80/100.",
-          "Clarity: 80/100."
+          "Primary prompt task family: Execution operation.",
+          "Complexity: expert — multiple task families plus governance, evaluation, or expert-level constraints",
+          "Completeness: 100/100.",
+          "Clarity: 85/100."
         ]
       },
       "system_model": {
         "stability": {
-          "score": 78,
-          "band": "stable-first-pass"
+          "score": 100,
+          "band": "system-ready"
         },
         "highlights": [
-          "Stability: stable-first-pass (78/100).",
-          "Owned job: Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
-          "Leverage: Clarify the real job boundary — Ask one focused question and update intent context before adding assets.",
-          "Leverage: Tune the frontmatter description — Name the recurring job, expected input, output, and strongest non-goal in compact language."
+          "Stability: system-ready (100/100).",
+          "Owned job: Turn repeated workflows, prompts, transcripts, runbooks, documents, or existing skill packages into routeable, evaluable, packageable, and governable agent skills for personal, team, library, or governed reuse.",
+          "Leverage: Tune the frontmatter description — Name the recurring job, expected input, output, and strongest non-goal in compact language.",
+          "Leverage: Install output self-repair checks — Add only the checks that prevent recurring output mistakes."
         ]
       }
     },
@@ -232,22 +251,22 @@
         {
           "name": "输出漂移风险",
           "impact": 2,
-          "probability": 2,
-          "signal": "已生成 6 / 8 类报告证据。",
+          "probability": 1,
+          "signal": "已生成 20 / 20 类报告证据。",
           "response": "先补证据和边界，再增加包体复杂度。"
         },
         {
           "name": "证据不足风险",
           "impact": 3,
-          "probability": 2,
-          "signal": "已生成 6 / 8 类报告证据。",
+          "probability": 1,
+          "signal": "已生成 20 / 20 类报告证据。",
           "response": "先补证据和边界，再增加包体复杂度。"
         },
         {
           "name": "包体膨胀风险",
           "impact": 2,
           "probability": 1,
-          "signal": "SKILL.md 约 362 个词/字。",
+          "signal": "SKILL.md 约 350 个词/字。",
           "response": "先补证据和边界，再增加包体复杂度。"
         },
         {
@@ -258,7 +277,121 @@
           "response": "先补证据和边界，再增加包体复杂度。"
         }
       ],
-      "risk_families": [],
+      "risk_families": [
+        {
+          "key": "markdown_readability",
+          "label": "Markdown readability",
+          "matched_keywords": [
+            "md",
+            "report",
+            "doc"
+          ],
+          "score": 3,
+          "risks": [
+            "Tables can render as dense grids with weak hierarchy or poor mobile readability.",
+            "Long bullets can make the output look complete while hiding the actual decision logic.",
+            "Mixed heading levels can reduce scanability."
+          ],
+          "constraints": [
+            "Use tables only when comparison is the main job; otherwise prefer compact cards or grouped bullets.",
+            "Keep table cells short and move explanations below the table.",
+            "Use heading levels consistently and keep each section anchored to a user-facing outcome."
+          ],
+          "self_repair": [
+            "Preview whether each table still reads well when columns are narrow.",
+            "Convert any table with paragraph-length cells into bullets or cards."
+          ]
+        },
+        {
+          "key": "citation_clutter",
+          "label": "Citation and footnote clutter",
+          "matched_keywords": [
+            "source",
+            "reference"
+          ],
+          "score": 2,
+          "risks": [
+            "Footnote markers or dense citation notes can interrupt the reading flow.",
+            "Evidence can be over-attached to obvious statements and under-attached to risky claims.",
+            "Source notes may become more prominent than the tutorial itself."
+          ],
+          "constraints": [
+            "Attach citations only to claims that need evidence, not to every sentence.",
+            "Group source notes at the end of a section when inline markers would hurt readability.",
+            "Keep the main sentence readable without requiring the reader to chase a footnote."
+          ],
+          "self_repair": [
+            "Remove decorative citations that do not support a material claim.",
+            "Move repeated source explanations into one compact source note."
+          ]
+        },
+        {
+          "key": "visual_capture",
+          "label": "Screenshot and visual capture",
+          "matched_keywords": [
+            "capture"
+          ],
+          "score": 1,
+          "risks": [
+            "Screenshots can be captured from the wrong state, wrong viewport, or wrong crop.",
+            "Missing screenshots can cause the skill to invent visual references instead of declaring the gap.",
+            "Image descriptions can omit the action-relevant region."
+          ],
+          "constraints": [
+            "Never invent a screenshot; state when visual evidence is missing.",
+            "Record the source, viewport, and crop intent for any screenshot-dependent output.",
+            "Describe what the reader should inspect in the image, not just that an image exists."
+          ],
+          "self_repair": [
+            "Check that every screenshot reference points to a real provided or generated asset.",
+            "Reword any visual instruction that depends on an unseen screen state."
+          ]
+        },
+        {
+          "key": "code_or_command_safety",
+          "label": "Code and command safety",
+          "matched_keywords": [
+            "script"
+          ],
+          "score": 1,
+          "risks": [
+            "Commands can omit environment assumptions, working directory, or rollback notes.",
+            "Code snippets can look runnable while missing required inputs.",
+            "Error handling can be either absent or over-engineered."
+          ],
+          "constraints": [
+            "Name the working directory, required inputs, and expected output for each command.",
+            "Mark destructive or external side-effect operations explicitly.",
+            "Prefer the smallest runnable snippet over broad framework code."
+          ],
+          "self_repair": [
+            "Scan each command for cwd, input, output, and side-effect assumptions.",
+            "Remove speculative error handling that is not tied to a real failure mode."
+          ]
+        },
+        {
+          "key": "tone_and_specificity",
+          "label": "Tone and specificity",
+          "matched_keywords": [
+            "summary"
+          ],
+          "score": 1,
+          "risks": [
+            "Headings and summaries can drift into generic, interchangeable language.",
+            "The output can sound polished but lose the user's actual taste, audience, or scenario.",
+            "Strong claims can appear without examples or constraints."
+          ],
+          "constraints": [
+            "Anchor titles and summaries in the user's audience, object, and concrete outcome.",
+            "Avoid placeholder phrases such as comprehensive guide, ultimate solution, or key insights unless the source demands them.",
+            "Preserve one distinctive phrase, constraint, or standard from the user's input."
+          ],
+          "self_repair": [
+            "Replace generic title candidates with scenario-specific alternatives.",
+            "Delete any polished sentence that could fit almost any project unchanged."
+          ]
+        }
+      ],
       "human_judgment_boundary": [
         "Ask one focused clarification when the real job, output, or exclusion boundary is unclear.",
         "Escalate visible tradeoffs when benchmark patterns conflict with local privacy, naming, or governance constraints.",
@@ -295,28 +428,28 @@
           "path": "references",
           "label": "Extended guidance and reusable notes",
           "kind": "folder",
-          "file_count": 23
+          "file_count": 32
         },
         {
           "path": "scripts",
           "label": "Deterministic helpers or local tooling",
           "kind": "folder",
-          "file_count": 65
+          "file_count": 74
         },
         {
           "path": "evals",
           "label": "Trigger and quality checks",
           "kind": "folder",
-          "file_count": 25
+          "file_count": 28
         },
         {
           "path": "reports",
           "label": "Generated evidence and overview artifacts",
           "kind": "folder",
-          "file_count": 118
+          "file_count": 173
         }
       ],
-      "file_count": 235,
+      "file_count": 311,
       "folder_count": 4,
       "distribution": [
         {
@@ -337,24 +470,34 @@
         },
         {
           "label": "references",
-          "value": 23
+          "value": 32
         },
         {
           "label": "scripts",
-          "value": 65
+          "value": 74
         },
         {
           "label": "evals",
-          "value": 25
+          "value": 28
         },
         {
           "label": "reports",
-          "value": 118
+          "value": 173
         }
       ]
     },
     "iteration_roadmap": {
       "items": [
+        {
+          "title": "Borrow one proven pattern on purpose",
+          "why": "You already have public benchmark objects. The next gain is to choose one pattern intentionally instead of absorbing everything loosely.",
+          "actions": [
+            "Read the strongest pattern from obra/superpowers.",
+            "Decide whether to borrow method, structure, execution, or portability, but only one of them first.",
+            "Record what you will not borrow so the package stays light."
+          ],
+          "unlocks": "A cleaner package shape with less accidental over-design."
+        },
         {
           "title": "Harden portability semantics",
           "why": "The skill already signals reuse across environments, so contract clarity matters early.",
@@ -454,33 +597,34 @@
         "path": "references",
         "label": "Extended guidance and reusable notes",
         "kind": "folder",
-        "file_count": 23
+        "file_count": 32
       },
       {
         "path": "scripts",
         "label": "Deterministic helpers or local tooling",
         "kind": "folder",
-        "file_count": 65
+        "file_count": 74
       },
       {
         "path": "evals",
         "label": "Trigger and quality checks",
         "kind": "folder",
-        "file_count": 25
+        "file_count": 28
       },
       {
         "path": "reports",
         "label": "Generated evidence and overview artifacts",
         "kind": "folder",
-        "file_count": 118
+        "file_count": 173
       }
     ],
     "strengths": [
       "触发面保持精简，并锚定在 frontmatter description。",
-      "已打包 agents/interface.yaml，便于后续做跨平台适配。",
-      "长指导被拆到 references 中，入口文件可以保持轻量。",
-      "确定性辅助逻辑放在 scripts 中，而不是藏在提示词里。",
-      "包内包含可随 Skill 迁移的质量门禁或触发检查。"
+      "已生成 Skill IR，核心语义可先于平台打包被审查和迁移。",
+      "已生成目标编译报告，可审查 IR 到 OpenAI、Claude、generic 等目标契约的映射。",
+      "已生成 Output Eval Lab scorecard，可比较 with-skill 与 baseline 输出质量。",
+      "已生成 Output Execution Runs，可区分记录样本、命令执行和模型执行证据。",
+      "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
     ],
     "scenarios": [
       "把重复流程沉淀为可复用的 agent skill。",
@@ -496,20 +640,20 @@
     },
     "io_contract": {
       "inputs": [
-        "用户提供的工作流、提示词、文档、记录或散乱笔记",
-        "期望沉淀的复用场景、排除项、约束和质量标准"
+        "rough workflow notes, SOPs, runbooks, prompts, transcripts, documents, or repeated task descriptions",
+        "an existing skill directory that needs refactor, evaluation, packaging, or governance hardening",
+        "target platform requirements such as OpenAI, Claude, generic Agent Skills, or team distribution",
+        "benchmark references, local constraints, desired maturity tier, and review standards"
       ],
       "outputs": [
-        "可路由的 SKILL.md",
-        "agents/interface.yaml 元数据",
-        "必要的 references、scripts、evals、reports 证据",
+        "A working skill package with lean SKILL.md, aligned agents/interface.yaml, justified references, scripts only when useful, eval evidence, reports, packaging metadata, and clear next iteration recommendations.",
         "结构化 Skill 目录，共 8 类关键资产。"
       ]
     },
     "principles": [
       {
         "title": "意图澄清",
-        "body": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse."
+        "body": "Turn repeated workflows, prompts, transcripts, runbooks, documents, or existing skill packages into routeable, evaluable, packageable, and governable agent skills for personal, team, library, or governed reuse."
       },
       {
         "title": "边界路由",
@@ -529,10 +673,20 @@
       },
       {
         "title": "杠杆升级",
-        "body": "Ask one focused question and update intent context before adding assets."
+        "body": "Name the recurring job, expected input, output, and strongest non-goal in compact language."
       }
     ],
     "roadmap": [
+      {
+        "title": "Borrow one proven pattern on purpose",
+        "why": "You already have public benchmark objects. The next gain is to choose one pattern intentionally instead of absorbing everything loosely.",
+        "actions": [
+          "Read the strongest pattern from obra/superpowers.",
+          "Decide whether to borrow method, structure, execution, or portability, but only one of them first.",
+          "Record what you will not borrow so the package stays light."
+        ],
+        "unlocks": "A cleaner package shape with less accidental over-design."
+      },
       {
         "title": "Harden portability semantics",
         "why": "The skill already signals reuse across environments, so contract clarity matters early.",
@@ -561,39 +715,576 @@
       "如果需求仍然模糊，优先回到 intent dialogue 收紧边界，再扩展包体结构。"
     ],
     "benchmark_highlights": [],
+    "skill_ir": {
+      "schema_version": "2.0.0",
+      "target_count": 5,
+      "trigger_samples": 8,
+      "output_eval_cases": 3
+    },
+    "compiled_targets": {
+      "ok": true,
+      "schema_version": "1.0",
+      "summary": {
+        "target_count": 5,
+        "pass_count": 5,
+        "warn_count": 0,
+        "block_count": 0,
+        "failure_count": 0,
+        "warning_count": 0
+      },
+      "targets": [
+        {
+          "target": "openai",
+          "status": "pass",
+          "adapter_mode": "metadata-adapter",
+          "degradation_strategy": "metadata-adapter",
+          "native_surface": "OpenAI-style interface metadata plus neutral Agent Skills source",
+          "permission_enforcement": "metadata-only",
+          "generated_files": [
+            "targets/openai/adapter.json",
+            "targets/openai/agents/openai.yaml"
+          ],
+          "unsupported_features": [
+            "client-native script permission prompts are represented as permission contract metadata"
+          ],
+          "warnings": []
+        },
+        {
+          "target": "claude",
+          "status": "pass",
+          "adapter_mode": "neutral-source-plus-adapter",
+          "degradation_strategy": "neutral-source-plus-adapter",
+          "native_surface": "Claude-compatible neutral source folder with adapter notes",
+          "permission_enforcement": "metadata-fallback",
+          "generated_files": [
+            "targets/claude/adapter.json",
+            "targets/claude/README.md"
+          ],
+          "unsupported_features": [
+            "vendor-native metadata fields are carried as adapter JSON and README notes"
+          ],
+          "warnings": []
+        },
+        {
+          "target": "generic",
+          "status": "pass",
+          "adapter_mode": "agent-skills-compatible",
+          "degradation_strategy": "neutral-source",
+          "native_surface": "Agent Skills compatible neutral package",
+          "permission_enforcement": "consumer-enforced-or-metadata-only",
+          "generated_files": [
+            "targets/generic/adapter.json"
+          ],
+          "unsupported_features": [],
+          "warnings": []
+        },
+        {
+          "target": "agent-skills-compatible",
+          "status": "pass",
+          "adapter_mode": "neutral-agent-skills-source",
+          "degradation_strategy": "neutral-source",
+          "native_surface": "Agent Skills standard source tree",
+          "permission_enforcement": "consumer-enforced-or-metadata-only",
+          "generated_files": [
+            "SKILL.md",
+            "agents/interface.yaml"
+          ],
+          "unsupported_features": [],
+          "warnings": []
+        },
+        {
+          "target": "vscode",
+          "status": "pass",
+          "adapter_mode": "vscode-agent-skills-adapter",
+          "degradation_strategy": "agent-skills-source-with-vscode-notes",
+          "native_surface": "VS Code/Copilot Agent Skills project or user scope",
+          "permission_enforcement": "client-or-workspace-trust",
+          "generated_files": [
+            "targets/vscode/adapter.json",
+            "targets/vscode/README.md"
+          ],
+          "unsupported_features": [
+            "VS Code installation scope is documented but not installed by this compiler"
+          ],
+          "warnings": []
+        }
+      ],
+      "failures": [],
+      "warnings": []
+    },
+    "output_quality": {
+      "case_count": 5,
+      "file_backed_case_count": 1,
+      "near_neighbor_case_count": 1,
+      "boundary_case_count": 1,
+      "baseline_pass_rate": 0.0,
+      "with_skill_pass_rate": 100.0,
+      "delta": 100.0,
+      "regression_count": 0,
+      "gate_pass": true,
+      "failure_taxonomy": [],
+      "blind_pair_count": 5
+    },
+    "output_execution": {
+      "ok": true,
+      "summary": {
+        "case_count": 5,
+        "variant_run_count": 10,
+        "command_executed_count": 10,
+        "model_executed_count": 0,
+        "recorded_fixture_count": 0,
+        "timing_observed_count": 10,
+        "token_observed_count": 0,
+        "token_estimated_count": 10,
+        "baseline_pass_rate": 0.0,
+        "with_skill_pass_rate": 100.0,
+        "delta": 100.0,
+        "regression_count": 0,
+        "failure_count": 0,
+        "gate_pass": true
+      },
+      "runner": {
+        "mode": "command",
+        "command": [
+          "python3",
+          "scripts/local_output_eval_runner.py"
+        ],
+        "timeout_seconds": 30.0
+      },
+      "failures": []
+    },
+    "output_blind_review": {
+      "summary": {
+        "pair_count": 5,
+        "answer_key_separate": true,
+        "with_skill_hidden_count": 5
+      },
+      "seed": "yao-output-eval-blind-v1",
+      "pair_count": 5,
+      "answer_key_separate": true
+    },
+    "output_review_adjudication": {
+      "ok": true,
+      "summary": {
+        "pair_count": 5,
+        "judgment_count": 0,
+        "pending_count": 5,
+        "agreement_count": 0,
+        "disagreement_count": 0,
+        "invalid_decision_count": 0,
+        "answer_revealed_count": 0,
+        "pending_answer_hidden_count": 5,
+        "agreement_rate": null,
+        "needs_review": true,
+        "failure_count": 0
+      },
+      "reviewer": "",
+      "reviewed_at": "",
+      "failures": []
+    },
+    "runtime_conformance": {
+      "target_count": 5,
+      "pass_count": 5,
+      "fail_count": 0
+    },
+    "runtime_permissions": {
+      "ok": true,
+      "summary": {
+        "target_count": 4,
+        "pass_count": 4,
+        "fail_count": 0,
+        "native_enforcement_count": 0,
+        "metadata_fallback_count": 4,
+        "residual_risk_count": 4,
+        "required_capability_count": 3,
+        "failure_count": 0
+      },
+      "expected_capabilities": [
+        "file_write",
+        "network",
+        "subprocess"
+      ],
+      "targets": [
+        {
+          "target": "openai",
+          "status": "pass",
+          "assurance": "metadata-fallback-explicit",
+          "native_enforcement": false,
+          "metadata_fallback_explicit": true,
+          "residual_risks": [
+            "Client-native permission enforcement is not provided by this target; installer or operator must honor metadata."
+          ]
+        },
+        {
+          "target": "claude",
+          "status": "pass",
+          "assurance": "metadata-fallback-explicit",
+          "native_enforcement": false,
+          "metadata_fallback_explicit": true,
+          "residual_risks": [
+            "Client-native permission enforcement is not provided by this target; installer or operator must honor metadata."
+          ]
+        },
+        {
+          "target": "generic",
+          "status": "pass",
+          "assurance": "metadata-fallback-explicit",
+          "native_enforcement": false,
+          "metadata_fallback_explicit": true,
+          "residual_risks": [
+            "Client-native permission enforcement is not provided by this target; installer or operator must honor metadata."
+          ]
+        },
+        {
+          "target": "vscode",
+          "status": "pass",
+          "assurance": "metadata-fallback-explicit",
+          "native_enforcement": false,
+          "metadata_fallback_explicit": true,
+          "residual_risks": [
+            "Client-native permission enforcement is not provided by this target; installer or operator must honor metadata."
+          ]
+        }
+      ],
+      "failures": []
+    },
+    "trust_security": {
+      "scanned_files": 158,
+      "script_count": 74,
+      "internal_module_count": 10,
+      "secret_findings": 0,
+      "dependency_files": [
+        "requirements-ci.txt"
+      ],
+      "network_script_count": 3,
+      "network_policy_covered_count": 3,
+      "network_policy_missing_count": 0,
+      "file_write_script_count": 51,
+      "permission_required_count": 3,
+      "permission_approved_count": 3,
+      "permission_missing_count": 0,
+      "permission_invalid_count": 0,
+      "permission_expired_count": 0,
+      "help_smoke_checked_count": 64,
+      "help_smoke_failed_count": 0,
+      "interactive_script_count": 0,
+      "package_hash_scope": "source-contract-without-generated-reports",
+      "package_hash_file_count": 158,
+      "package_sha256": "e42a9c4cf0f22cd6fc047dff3da1a380f5cc9e17157a48d8a1ac2071f7c84fbc"
+    },
+    "skill_atlas": {
+      "skill_count": 12,
+      "actionable_skill_count": 1,
+      "route_collision_count": 5,
+      "actionable_route_collision_count": 0,
+      "owner_gap_count": 9,
+      "actionable_owner_gap_count": 0,
+      "stale_count": 10,
+      "actionable_stale_count": 0,
+      "shared_resource_count": 0,
+      "no_route_opportunity_count": 0,
+      "telemetry_report_count": 1,
+      "drift_signal_count": 0,
+      "actionable_drift_signal_count": 0,
+      "non_actionable_issue_count": 24
+    },
+    "registry_distribution": {
+      "ok": true,
+      "package": {
+        "schema_version": "2.0",
+        "name": "yao-meta-skill",
+        "version": "1.1.0",
+        "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
+        "targets": [
+          "openai",
+          "claude",
+          "generic",
+          "agent-skills-compatible",
+          "vscode"
+        ],
+        "maturity": "governed",
+        "owner": "Yao Team",
+        "review_cadence": "quarterly",
+        "trust_level": "local",
+        "license": "MIT",
+        "checksums": {
+          "package_sha256": "e42a9c4cf0f22cd6fc047dff3da1a380f5cc9e17157a48d8a1ac2071f7c84fbc",
+          "archive_sha256": "7494bf9b978d58b663cc0e8b6ffe2531a84602385f6f517774320197d30170d3"
+        },
+        "compatibility": {
+          "openai": "pass",
+          "claude": "pass",
+          "agent-skills": "pass",
+          "vscode": "pass",
+          "generic": "pass",
+          "agent-skills-compatible": "pass"
+        },
+        "source": {
+          "skill_dir": ".",
+          "skill_ir": "skill-ir/examples/yao-meta-skill.json",
+          "ir_schema_version": "2.0.0",
+          "canonical_metadata": "agents/interface.yaml"
+        },
+        "artifacts": {
+          "overview_html": "reports/skill-overview.html",
+          "review_studio_html": "reports/review-studio.html",
+          "trust_report": "reports/security_trust_report.md",
+          "conformance_matrix": "reports/conformance_matrix.md",
+          "compiled_targets": "reports/compiled_targets.md",
+          "package_verification": "reports/package_verification.md",
+          "install_simulation": "reports/install_simulation.md",
+          "adoption_drift": "reports/adoption_drift_report.md",
+          "review_waivers": "reports/review_waivers.md",
+          "review_annotations": "reports/review_annotations.md",
+          "package_metadata": "registry/packages/yao-meta-skill.json"
+        },
+        "distribution": {
+          "archive_verified": true,
+          "archive_sha256": "7494bf9b978d58b663cc0e8b6ffe2531a84602385f6f517774320197d30170d3",
+          "package_verification": "reports/package_verification.json",
+          "install_simulated": true,
+          "install_simulation": "reports/install_simulation.json"
+        },
+        "generated_at": "2026-06-13"
+      },
+      "failures": [],
+      "warnings": []
+    },
+    "package_verification": {
+      "ok": true,
+      "summary": {
+        "target_count": 4,
+        "adapter_count": 4,
+        "archive_present": true,
+        "archive_sha256": "7494bf9b978d58b663cc0e8b6ffe2531a84602385f6f517774320197d30170d3",
+        "archive_entry_count": 505,
+        "failure_count": 0,
+        "warning_count": 0
+      },
+      "failures": [],
+      "warnings": []
+    },
+    "install_simulation": {
+      "ok": true,
+      "summary": {
+        "archive_present": true,
+        "archive_entry_count": 505,
+        "archive_extracted": true,
+        "entrypoint_loaded": true,
+        "manifest_loaded": true,
+        "interface_loaded": true,
+        "adapter_count": 4,
+        "installer_permission_enforced_count": 12,
+        "installer_permission_failure_count": 0,
+        "permission_target_count": 4,
+        "permission_capability_count": 3,
+        "install_root_is_temp": false,
+        "failure_count": 0,
+        "warning_count": 0
+      },
+      "failures": [],
+      "warnings": []
+    },
+    "upgrade_check": {
+      "ok": true,
+      "summary": {
+        "declared_bump": "minor",
+        "recommended_bump": "minor",
+        "breaking_change_count": 0,
+        "added_target_count": 2,
+        "metadata_change_count": 1,
+        "checksum_change_count": 2,
+        "failure_count": 0,
+        "warning_count": 0
+      },
+      "upgrade_diff": {
+        "name_changed": false,
+        "added_targets": [
+          "agent-skills-compatible",
+          "vscode"
+        ],
+        "removed_targets": [],
+        "compatibility_changes": [
+          {
+            "target": "agent-skills",
+            "from": "missing",
+            "to": "pass",
+            "direction": "improved"
+          },
+          {
+            "target": "agent-skills-compatible",
+            "from": "missing",
+            "to": "pass",
+            "direction": "improved"
+          },
+          {
+            "target": "vscode",
+            "from": "missing",
+            "to": "pass",
+            "direction": "improved"
+          }
+        ],
+        "metadata_changes": [
+          {
+            "field": "description",
+            "from": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes.",
+            "to": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse."
+          }
+        ],
+        "checksum_changes": [
+          {
+            "field": "archive_sha256",
+            "from": "",
+            "to": "7494bf9b978d58b663cc0e8b6ffe2531a84602385f6f517774320197d30170d3"
+          },
+          {
+            "field": "package_sha256",
+            "from": "0000000000000000000000000000000000000000000000000000000000000000",
+            "to": "e42a9c4cf0f22cd6fc047dff3da1a380f5cc9e17157a48d8a1ac2071f7c84fbc"
+          }
+        ]
+      },
+      "release_notes": [
+        "Recommended version bump: minor.",
+        "Added targets: agent-skills-compatible, vscode.",
+        "Package or archive checksum changed; reviewers should verify package artifacts before release.",
+        "Package verification evidence: reports/package_verification.md."
+      ],
+      "failures": [],
+      "warnings": []
+    },
+    "adoption_drift": {
+      "ok": true,
+      "summary": {
+        "event_count": 1,
+        "adoption_sample_count": 0,
+        "activation_count": 0,
+        "accepted_count": 0,
+        "edited_count": 0,
+        "rejected_count": 0,
+        "missed_count": 0,
+        "failed_count": 0,
+        "adoption_rate": 0,
+        "missed_trigger_count": 0,
+        "wrong_trigger_count": 0,
+        "bad_output_count": 0,
+        "script_error_count": 0,
+        "missing_resource_count": 0,
+        "review_overdue_count": 0,
+        "risk_band": "low",
+        "event_types": {
+          "review_event": 1
+        },
+        "failure_types": {},
+        "source_types": {
+          "manual": 1
+        },
+        "command_counts": {}
+      },
+      "next_iteration_candidates": [],
+      "privacy_contract": {
+        "storage": "local-first",
+        "event_scope": "metadata-only",
+        "raw_content_allowed": false,
+        "raw_event_log_packaged": false,
+        "blocked_fields": [
+          "content",
+          "input",
+          "inputs",
+          "message",
+          "messages",
+          "note",
+          "output",
+          "outputs",
+          "prompt",
+          "raw",
+          "text",
+          "transcript"
+        ]
+      },
+      "failures": []
+    },
+    "review_waivers": {
+      "ok": true,
+      "summary": {
+        "waiver_count": 0,
+        "active_count": 0,
+        "expired_count": 0,
+        "invalid_count": 0,
+        "covered_gate_count": 0,
+        "covered_gate_keys": []
+      },
+      "policy": {
+        "blocker_waivers_allowed": false,
+        "minimum_reason_chars": 20,
+        "expires_required": true,
+        "known_gate_keys": [
+          "context-budget",
+          "intent-canvas",
+          "operations-loop",
+          "output-lab",
+          "permission-gates",
+          "permission-runtime",
+          "registry-audit",
+          "release-notes",
+          "runtime-matrix",
+          "skill-atlas",
+          "trigger-lab",
+          "trust-report"
+        ]
+      },
+      "failures": [],
+      "warnings": []
+    },
+    "review_annotations": {
+      "ok": true,
+      "summary": {
+        "annotation_count": 0,
+        "open_count": 0,
+        "resolved_count": 0,
+        "deferred_count": 0,
+        "open_blocker_count": 0,
+        "open_warning_count": 0,
+        "linked_gate_count": 0,
+        "target_missing_count": 0,
+        "failure_count": 0
+      },
+      "annotations": [],
+      "failures": []
+    },
     "synthesis_highlights": [
-      "Borrow a first-time operator flow that explains itself before it asks for more structure.",
-      "Borrow a small hypothesis-test-learn loop so the first revision is evidence-backed.",
+      "Borrow progressive disclosure: keep the entrypoint lean and move depth into references or scripts.",
+      "Borrow a review checkpoint wherever trust matters more than raw speed.",
       "Borrow the discipline of defining what the skill should not own before growing the package."
     ],
     "artifact_design": {
-      "design_system": "content-led editorial",
+      "design_system": "metric editorial",
       "highlights": [
-        "High-trust editorial report with a clear first-screen thesis, compact evidence blocks, and decisions separated from supporting detail.",
-        "Keep the first screen useful without requiring the reader to parse every detail.",
-        "Use tables only for comparisons; move explanations below the table.",
-        "Keep source notes readable without flooding the body with markers."
+        "Execution-focused technical artifact with environment assumptions, copyable commands, expected outputs, and side effects made explicit.",
+        "Name the working directory and required inputs for commands.",
+        "Mark destructive, networked, or external side-effect operations.",
+        "Prefer the smallest runnable snippet over broad framework scaffolding."
       ]
     },
     "prompt_quality": {
-      "overall_quality_score": 82.0,
+      "overall_quality_score": 89.0,
       "highlights": [
-        "Primary prompt task family: Dialogue interaction.",
-        "Complexity: complex — multiple inputs, constraints, or task families require tradeoff handling",
-        "Completeness: 80/100.",
-        "Clarity: 80/100."
+        "Primary prompt task family: Execution operation.",
+        "Complexity: expert — multiple task families plus governance, evaluation, or expert-level constraints",
+        "Completeness: 100/100.",
+        "Clarity: 85/100."
       ]
     },
     "system_model": {
       "stability": {
-        "score": 78,
-        "band": "stable-first-pass"
+        "score": 100,
+        "band": "system-ready"
       },
       "highlights": [
-        "Stability: stable-first-pass (78/100).",
-        "Owned job: Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
-        "Leverage: Clarify the real job boundary — Ask one focused question and update intent context before adding assets.",
-        "Leverage: Tune the frontmatter description — Name the recurring job, expected input, output, and strongest non-goal in compact language."
+        "Stability: system-ready (100/100).",
+        "Owned job: Turn repeated workflows, prompts, transcripts, runbooks, documents, or existing skill packages into routeable, evaluable, packageable, and governable agent skills for personal, team, library, or governed reuse.",
+        "Leverage: Tune the frontmatter description — Name the recurring job, expected input, output, and strongest non-goal in compact language.",
+        "Leverage: Install output self-repair checks — Add only the checks that prevent recurring output mistakes."
       ]
     },
     "metadata": {
@@ -601,7 +1292,8 @@
       "targets": [
         "openai",
         "claude",
-        "generic"
+        "generic",
+        "vscode"
       ],
       "maturity_tier": "governed",
       "skill_archetype": "governed",
@@ -609,82 +1301,56 @@
     }
   },
   "intent_confidence": {
-    "score": 30,
-    "band": "low",
-    "gate_passed": false,
+    "score": 100,
+    "band": "high",
+    "gate_passed": true,
     "strengths": [
-      "The recurring job is concrete enough to anchor the package."
+      "The recurring job is concrete enough to anchor the package.",
+      "Real input shape is explicit.",
+      "The hand-back output is concrete.",
+      "Boundary exclusions are already explicit.",
+      "Operational constraints are visible."
     ],
-    "gaps": [
-      {
-        "key": "real_inputs",
-        "label": "Real inputs are missing",
-        "reason": "Without real inputs, it is hard to choose assets, scripts, or examples.",
-        "severity": "high"
-      },
-      {
-        "key": "primary_output",
-        "label": "Primary output is missing",
-        "reason": "The package does not yet know what it must hand back.",
-        "severity": "high"
-      },
-      {
-        "key": "exclusions",
-        "label": "Near-neighbor exclusions are missing",
-        "reason": "The route may blur into nearby requests without an exclusion list.",
-        "severity": "high"
-      },
-      {
-        "key": "constraints",
-        "label": "Constraints are missing",
-        "reason": "The package does not yet know which tradeoffs matter most.",
-        "severity": "high"
-      },
-      {
-        "key": "standards",
-        "label": "Quality bar is implied, not explicit",
-        "reason": "The first evaluation target is still underspecified.",
-        "severity": "medium"
-      }
-    ],
-    "follow_up_questions": [
-      {
-        "slot": "real_inputs",
-        "question": "What material will people actually hand to this skill in practice?",
-        "why": "Real input shape decides whether references, scripts, or examples are needed.",
-        "list": true,
-        "label": "Real inputs are missing",
-        "severity": "high"
-      },
-      {
-        "slot": "primary_output",
-        "question": "What finished hand-back should this skill return so the next person can keep moving?",
-        "why": "The output is the anchor for package design and review.",
-        "list": false,
-        "label": "Primary output is missing",
-        "severity": "high"
-      },
-      {
-        "slot": "exclusions",
-        "question": "What nearby requests should this skill clearly leave out so the boundary stays clean?",
-        "why": "Exclusions are the fastest route to better trigger quality.",
-        "list": true,
-        "label": "Near-neighbor exclusions are missing",
-        "severity": "high"
-      }
-    ],
-    "anchor_sentence": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
-    "recommended_action": "Pause before deep authoring and close the highest-leverage gaps first.",
+    "gaps": [],
+    "follow_up_questions": [],
+    "anchor_sentence": "Turn repeated workflows, prompts, transcripts, runbooks, documents, or existing skill packages into routeable, evaluable, packageable, and governable agent skills for personal, team, library, or governed reuse. Primary output: A working skill package with lean SKILL.md, aligned agents/interface.yaml, justified references, scripts only when useful, eval evidence, reports, packaging metadata, and clear next iteration recommendations.. Exclusions: one-off writing, translation, explanation, or brainstorming requests that do not need a reusable skill, general code review or debugging unless the user is packaging that workflow as a skill, raw private material that was not intentionally supplied as skill evidence, platform-specific plugin creation when the request is not about an agent skill package.",
+    "recommended_action": "Intent is clear enough to package the first routeable version.",
     "context": {
-      "job": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
-      "real_inputs": [],
-      "primary_output": "",
+      "job": "Turn repeated workflows, prompts, transcripts, runbooks, documents, or existing skill packages into routeable, evaluable, packageable, and governable agent skills for personal, team, library, or governed reuse.",
+      "real_inputs": [
+        "rough workflow notes, SOPs, runbooks, prompts, transcripts, documents, or repeated task descriptions",
+        "an existing skill directory that needs refactor, evaluation, packaging, or governance hardening",
+        "target platform requirements such as OpenAI, Claude, generic Agent Skills, or team distribution",
+        "benchmark references, local constraints, desired maturity tier, and review standards"
+      ],
+      "primary_output": "A working skill package with lean SKILL.md, aligned agents/interface.yaml, justified references, scripts only when useful, eval evidence, reports, packaging metadata, and clear next iteration recommendations.",
       "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
-      "exclusions": [],
-      "constraints": [],
-      "standards": [],
-      "correction": "",
-      "user_references": []
+      "exclusions": [
+        "one-off writing, translation, explanation, or brainstorming requests that do not need a reusable skill",
+        "general code review or debugging unless the user is packaging that workflow as a skill",
+        "raw private material that was not intentionally supplied as skill evidence",
+        "platform-specific plugin creation when the request is not about an agent skill package"
+      ],
+      "constraints": [
+        "keep SKILL.md lean and route primarily through frontmatter description",
+        "put durable guidance in references, executable logic in scripts, and evidence in reports",
+        "default to the lightest reliable mode before adding governance weight",
+        "preserve portability across OpenAI, Claude, generic, and Agent Skills compatible targets",
+        "avoid raw prompt, output, transcript, or private content in telemetry"
+      ],
+      "standards": [
+        "trigger boundaries must be tested with should-trigger and should-not-trigger cases",
+        "production and higher maturity work needs output eval, trust, runtime conformance, and Review Studio evidence",
+        "governed work needs owner, review cadence, permission approvals, registry metadata, package verification, and install simulation",
+        "generated reports should be bilingual or reviewer-friendly when they are user-facing",
+        "each new asset must earn its place by reducing ambiguity, risk, or repeated work"
+      ],
+      "correction": "The 2.0 direction reframes this package from a Meta Skill factory into a Skill OS with Skill IR, compiler contracts, output eval, runtime conformance, trust, registry, Review Studio, Skill Atlas, and telemetry loops.",
+      "user_references": [
+        "Yao Meta Skill 2.0 upgrade plan",
+        "Kami-style white report layout requirements for generated skill reports",
+        "local Waza engineering habits for review, design, diagnosis, and implementation discipline"
+      ]
     }
   },
   "intent": {
@@ -12410,9 +13076,9 @@
     "skill_name": "yao-meta-skill",
     "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
     "intent_confidence": {
-      "score": 30,
-      "band": "low",
-      "gate_passed": false
+      "score": 100,
+      "band": "high",
+      "gate_passed": true
     },
     "github_benchmarks": [
       {
@@ -12446,49 +13112,51 @@
     "source_tracks": [
       {
         "source_type": "official",
-        "name": "Official workflow product ergonomics",
+        "name": "Official skill anatomy and context discipline",
         "evidence_mode": "curated-pattern-track",
         "matched_keywords": [
-          "workflow"
+          "metadata",
+          "references"
         ],
-        "borrow": "Borrow a first-time operator flow that explains itself before it asks for more structure.",
-        "avoid": "Do not mimic product polish that adds UI bulk without improving clarity.",
-        "why_relevant": "This track matches: workflow."
+        "borrow": "Borrow progressive disclosure: keep the entrypoint lean and move depth into references or scripts.",
+        "avoid": "Do not let packaging or platform concerns swallow the core job boundary.",
+        "why_relevant": "This track matches: metadata, references."
       },
       {
         "source_type": "research",
-        "name": "Hypothesis-test-learn loop",
+        "name": "Human-in-the-loop verification",
         "evidence_mode": "curated-pattern-track",
         "matched_keywords": [
-          "general fit"
+          "review",
+          "govern"
         ],
-        "borrow": "Borrow a small hypothesis-test-learn loop so the first revision is evidence-backed.",
-        "avoid": "Do not create experimental overhead that exceeds the skill's real risk tier.",
-        "why_relevant": "This track matches: general fit."
+        "borrow": "Borrow a review checkpoint wherever trust matters more than raw speed.",
+        "avoid": "Do not force every skill through heavyweight review when the risk is low.",
+        "why_relevant": "This track matches: review, govern."
       },
       {
         "source_type": "principles",
         "name": "Boundary-first design",
         "evidence_mode": "curated-pattern-track",
         "matched_keywords": [
-          "general fit"
+          "route"
         ],
         "borrow": "Borrow the discipline of defining what the skill should not own before growing the package.",
         "avoid": "Do not expand execution assets until route boundaries stay clean.",
-        "why_relevant": "This track matches: general fit."
+        "why_relevant": "This track matches: route."
       }
     ],
     "synthesis": {
       "borrow_now": [
-        "Borrow a first-time operator flow that explains itself before it asks for more structure.",
-        "Borrow a small hypothesis-test-learn loop so the first revision is evidence-backed.",
+        "Borrow progressive disclosure: keep the entrypoint lean and move depth into references or scripts.",
+        "Borrow a review checkpoint wherever trust matters more than raw speed.",
         "Borrow the discipline of defining what the skill should not own before growing the package.",
         "Borrow the way it turns a messy workflow into a repeatable operating path.",
         "Borrow the clear execution entrypoints and command structure."
       ],
       "avoid_now": [
-        "Do not mimic product polish that adds UI bulk without improving clarity.",
-        "Do not create experimental overhead that exceeds the skill's real risk tier.",
+        "Do not let packaging or platform concerns swallow the core job boundary.",
+        "Do not force every skill through heavyweight review when the risk is low.",
         "Do not expand execution assets until route boundaries stay clean.",
         "Do not import process overhead that only exists for that project's scale.",
         "Do not copy repo-specific commands or environment assumptions verbatim."
@@ -12504,10 +13172,50 @@
         "source_count": 6,
         "accepted": [
           {
-            "name": "Official workflow product ergonomics",
+            "name": "Official skill anatomy and context discipline",
             "source_type": "official",
-            "borrow": "Borrow a first-time operator flow that explains itself before it asks for more structure.",
-            "avoid": "Do not mimic product polish that adds UI bulk without improving clarity.",
+            "borrow": "Borrow progressive disclosure: keep the entrypoint lean and move depth into references or scripts.",
+            "avoid": "Do not let packaging or platform concerns swallow the core job boundary.",
+            "gates": {
+              "recurrence": true,
+              "generativity": true,
+              "distinctiveness": true,
+              "boundary": true
+            },
+            "passed": [
+              "recurrence",
+              "generativity",
+              "distinctiveness",
+              "boundary"
+            ],
+            "missing": [],
+            "score": 4
+          },
+          {
+            "name": "Human-in-the-loop verification",
+            "source_type": "research",
+            "borrow": "Borrow a review checkpoint wherever trust matters more than raw speed.",
+            "avoid": "Do not force every skill through heavyweight review when the risk is low.",
+            "gates": {
+              "recurrence": true,
+              "generativity": true,
+              "distinctiveness": true,
+              "boundary": true
+            },
+            "passed": [
+              "recurrence",
+              "generativity",
+              "distinctiveness",
+              "boundary"
+            ],
+            "missing": [],
+            "score": 4
+          },
+          {
+            "name": "Boundary-first design",
+            "source_type": "principles",
+            "borrow": "Borrow the discipline of defining what the skill should not own before growing the package.",
+            "avoid": "Do not expand execution assets until route boundaries stay clean.",
             "gates": {
               "recurrence": true,
               "generativity": true,
@@ -12566,48 +13274,6 @@
         ],
         "deferred": [
           {
-            "name": "Hypothesis-test-learn loop",
-            "source_type": "research",
-            "borrow": "Borrow a small hypothesis-test-learn loop so the first revision is evidence-backed.",
-            "avoid": "Do not create experimental overhead that exceeds the skill's real risk tier.",
-            "gates": {
-              "recurrence": true,
-              "generativity": true,
-              "distinctiveness": false,
-              "boundary": true
-            },
-            "passed": [
-              "recurrence",
-              "generativity",
-              "boundary"
-            ],
-            "missing": [
-              "distinctiveness"
-            ],
-            "score": 3
-          },
-          {
-            "name": "Boundary-first design",
-            "source_type": "principles",
-            "borrow": "Borrow the discipline of defining what the skill should not own before growing the package.",
-            "avoid": "Do not expand execution assets until route boundaries stay clean.",
-            "gates": {
-              "recurrence": true,
-              "generativity": true,
-              "distinctiveness": false,
-              "boundary": true
-            },
-            "passed": [
-              "recurrence",
-              "generativity",
-              "boundary"
-            ],
-            "missing": [
-              "distinctiveness"
-            ],
-            "score": 3
-          },
-          {
             "name": "multica-ai/andrej-karpathy-skills",
             "source_type": "github",
             "borrow": "Borrow explicit validation and quality gates that make iteration safer.; Borrow the way it separates explanation, examples, and reusable structure.",
@@ -12629,27 +13295,34 @@
             "score": 3
           }
         ],
-        "summary": "3 accepted, 3 deferred using threshold 4/4."
+        "summary": "5 accepted, 1 deferred using threshold 4/4."
       },
-      "conflicts": [],
+      "conflicts": [
+        {
+          "key": "lightweight_vs_governance",
+          "summary": "The stated preference leans lightweight or speed-first, while the benchmark mix leans toward governance, review, or heavier evaluation structure.",
+          "user_preference": "lightweight or speed-first",
+          "benchmark_pressure": "governance or evaluation-heavy patterns"
+        }
+      ],
       "recommendation": {
-        "summary": "Start by borrowing this pattern: Borrow a first-time operator flow that explains itself before it asks for more structure. Avoid this for the first pass: Do not mimic product polish that adds UI bulk without improving clarity.",
+        "summary": "Start by borrowing this pattern: Borrow progressive disclosure: keep the entrypoint lean and move depth into references or scripts. Avoid this for the first pass: Do not let packaging or platform concerns swallow the core job boundary.",
         "borrow_now": [
-          "Borrow a first-time operator flow that explains itself before it asks for more structure.",
-          "Borrow a small hypothesis-test-learn loop so the first revision is evidence-backed."
+          "Borrow progressive disclosure: keep the entrypoint lean and move depth into references or scripts.",
+          "Borrow a review checkpoint wherever trust matters more than raw speed."
         ],
         "avoid_for_now": [
-          "Do not mimic product polish that adds UI bulk without improving clarity.",
-          "Do not create experimental overhead that exceeds the skill's real risk tier."
+          "Do not let packaging or platform concerns swallow the core job boundary.",
+          "Do not force every skill through heavyweight review when the risk is low."
         ],
-        "why": "Intent still has gaps, so the system should surface the recommendation and ask for correction before deepening the package.",
+        "why": "There is a real design conflict to resolve: The stated preference leans lightweight or speed-first, while the benchmark mix leans toward governance, review, or heavier evaluation structure.",
         "user_decision_required": true
       },
       "visibility": {
         "mode": "explicit",
         "user_decision_required": true,
         "reasons": [
-          "intent_uncertain"
+          "design_conflict"
         ],
         "user_note": "Surface the recommendation because intent is still settling or there is a real design conflict that needs a user call.",
         "reviewer_note": "Keep the full benchmark and synthesis evidence visible for authors and reviewers."
@@ -12807,17 +13480,29 @@
   },
   "artifact_design": {
     "skill_name": "yao-meta-skill",
-    "design_system": "content-led editorial",
+    "design_system": "metric editorial",
     "primary_artifact": {
-      "key": "report",
-      "label": "Report or brief",
-      "direction": "High-trust editorial report with a clear first-screen thesis, compact evidence blocks, and decisions separated from supporting detail.",
+      "key": "code_or_cli",
+      "label": "Code, CLI, or implementation guide",
+      "direction": "Execution-focused technical artifact with environment assumptions, copyable commands, expected outputs, and side effects made explicit.",
       "matched_keywords": [
-        "report",
-        "summary"
+        "code",
+        "script",
+        "command"
       ]
     },
     "artifact_families": [
+      {
+        "key": "code_or_cli",
+        "label": "Code, CLI, or implementation guide",
+        "score": 3,
+        "matched_keywords": [
+          "code",
+          "script",
+          "command"
+        ],
+        "direction": "Execution-focused technical artifact with environment assumptions, copyable commands, expected outputs, and side effects made explicit."
+      },
       {
         "key": "report",
         "label": "Report or brief",
@@ -12829,24 +13514,43 @@
         "direction": "High-trust editorial report with a clear first-screen thesis, compact evidence blocks, and decisions separated from supporting detail."
       },
       {
-        "key": "code_or_cli",
-        "label": "Code, CLI, or implementation guide",
+        "key": "review_viewer",
+        "label": "Review viewer",
+        "score": 2,
+        "matched_keywords": [
+          "review",
+          "viewer"
+        ],
+        "direction": "Side-by-side reviewer studio with explicit tradeoffs, evidence readiness, and fast paths for approving, blocking, or requesting one focused fix."
+      },
+      {
+        "key": "dashboard",
+        "label": "Dashboard or metrics page",
         "score": 1,
         "matched_keywords": [
-          "script"
+          "table"
         ],
-        "direction": "Execution-focused technical artifact with environment assumptions, copyable commands, expected outputs, and side effects made explicit."
+        "direction": "Metric-first dashboard with stable dimensions, short labels, visible deltas, and narrative callouts only where they change interpretation."
+      },
+      {
+        "key": "visual_capture",
+        "label": "Screenshot or visual evidence",
+        "score": 1,
+        "matched_keywords": [
+          "screenshot"
+        ],
+        "direction": "Evidence-led visual artifact that records source, viewport, crop intent, and the exact region the reader should inspect."
       }
     ],
     "layout_patterns": [
-      "thesis",
-      "evidence blocks",
-      "decision table",
-      "risks",
-      "next actions",
       "prerequisites",
       "commands",
-      "expected output"
+      "expected output",
+      "failure handling",
+      "rollback or cleanup",
+      "thesis",
+      "evidence blocks",
+      "decision table"
     ],
     "design_tokens": {
       "type": [
@@ -12871,12 +13575,14 @@
       ]
     },
     "quality_gates": [
+      "Name the working directory and required inputs for commands.",
+      "Mark destructive, networked, or external side-effect operations.",
+      "Prefer the smallest runnable snippet over broad framework scaffolding.",
       "Keep the first screen useful without requiring the reader to parse every detail.",
       "Use tables only for comparisons; move explanations below the table.",
       "Keep source notes readable without flooding the body with markers.",
-      "Name the working directory and required inputs for commands.",
-      "Mark destructive, networked, or external side-effect operations.",
-      "Prefer the smallest runnable snippet over broad framework scaffolding."
+      "Make differences visible instead of hiding them in prose.",
+      "Separate author-facing recommendations from reviewer-only evidence."
     ],
     "anti_patterns": [
       "Do not copy Kami's fixed parchment background as a default.",
@@ -12891,14 +13597,26 @@
     "skill_name": "yao-meta-skill",
     "relevance": "prompt-heavy",
     "primary_task_family": {
-      "key": "dialogue_interaction",
-      "label": "Dialogue interaction",
+      "key": "execution_operation",
+      "label": "Execution operation",
       "matched_keywords": [
-        "dialogue",
-        "conversation"
+        "workflow",
+        "runbook"
       ]
     },
     "task_families": [
+      {
+        "key": "execution_operation",
+        "label": "Execution operation",
+        "score": 2,
+        "matched_keywords": [
+          "workflow",
+          "runbook"
+        ],
+        "role_guidance": "Use an operator role with explicit boundaries, inputs, outputs, and failure handling.",
+        "task_guidance": "Convert the job into ordered steps with validation checks and stop conditions.",
+        "format_guidance": "Return a runbook-like handoff with commands, checks, owners, and next actions when relevant."
+      },
       {
         "key": "dialogue_interaction",
         "label": "Dialogue interaction",
@@ -12912,26 +13630,15 @@
         "format_guidance": "Return concise prompts, decision points, and reviewer-visible assumptions."
       },
       {
-        "key": "execution_operation",
-        "label": "Execution operation",
+        "key": "creative_generation",
+        "label": "Creative generation",
         "score": 1,
         "matched_keywords": [
-          "workflow"
+          "content"
         ],
-        "role_guidance": "Use an operator role with explicit boundaries, inputs, outputs, and failure handling.",
-        "task_guidance": "Convert the job into ordered steps with validation checks and stop conditions.",
-        "format_guidance": "Return a runbook-like handoff with commands, checks, owners, and next actions when relevant."
-      },
-      {
-        "key": "teaching_guidance",
-        "label": "Teaching guidance",
-        "score": 1,
-        "matched_keywords": [
-          "teach"
-        ],
-        "role_guidance": "Use a teacher role that adapts to learner level and avoids overloading the first pass.",
-        "task_guidance": "Explain through progressive steps, examples, and visible success checks.",
-        "format_guidance": "Return learner-facing sections, worked examples, checkpoints, and common mistakes."
+        "role_guidance": "Use a taste-aware creator role with clear audience, tone, and originality boundaries.",
+        "task_guidance": "Generate variants, explain selection logic, and preserve the user's distinctive constraints.",
+        "format_guidance": "Return options with rationale, selection criteria, and refinement paths."
       },
       {
         "key": "prompt_engineering",
@@ -12946,27 +13653,27 @@
       }
     ],
     "complexity": {
-      "band": "complex",
-      "score": 6,
-      "reason": "multiple inputs, constraints, or task families require tradeoff handling"
+      "band": "expert",
+      "score": 27,
+      "reason": "multiple task families plus governance, evaluation, or expert-level constraints"
     },
     "need_model": {
-      "explicit_need": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
+      "explicit_need": "Turn repeated workflows, prompts, transcripts, runbooks, documents, or existing skill packages into routeable, evaluable, packageable, and governable agent skills for personal, team, library, or governed reuse.",
       "implicit_need": "The reusable skill needs a stable role, task, and output contract rather than a one-off prompt.",
-      "scenario": "not yet explicit",
+      "scenario": "rough workflow notes, SOPs, runbooks, prompts, transcripts, documents, or repeated task descriptions, an existing skill directory that needs refactor, evaluation, packaging, or governance hardening, target platform requirements such as OpenAI, Claude, generic Agent Skills, or team distribution, benchmark references, local constraints, desired maturity tier, and review standards",
       "user_level": "infer from examples and standards; ask only if it changes output depth",
-      "success_standard": "usable output with clear validation cues"
+      "success_standard": "trigger boundaries must be tested with should-trigger and should-not-trigger cases, production and higher maturity work needs output eval, trust, runtime conformance, and Review Studio evidence, governed work needs owner, review cadence, permission approvals, registry metadata, package verification, and install simulation, generated reports should be bilingual or reviewer-friendly when they are user-facing, each new asset must earn its place by reducing ambiguity, risk, or repeated work"
     },
     "rtf_to_skill": {
-      "role": "Use a conversational role that asks only high-leverage questions and remembers the user's goal.",
-      "task": "Clarify intent, resolve uncertainty, and converge toward a recommendation instead of a long option list.",
-      "format": "Return concise prompts, decision points, and reviewer-visible assumptions."
+      "role": "Use an operator role with explicit boundaries, inputs, outputs, and failure handling.",
+      "task": "Convert the job into ordered steps with validation checks and stop conditions.",
+      "format": "Return a runbook-like handoff with commands, checks, owners, and next actions when relevant."
     },
     "quality_matrix": [
       {
         "key": "completeness",
         "label": "Completeness",
-        "score": 80,
+        "score": 100,
         "matched_signals": [
           "output",
           "constraint",
@@ -12977,8 +13684,10 @@
       {
         "key": "clarity",
         "label": "Clarity",
-        "score": 80,
-        "matched_signals": [],
+        "score": 85,
+        "matched_signals": [
+          "clear"
+        ],
         "repair": "Replace broad verbs with observable actions and define what done means."
       },
       {
@@ -13004,12 +13713,12 @@
       {
         "key": "specificity",
         "label": "Specificity",
-        "score": 70,
+        "score": 80,
         "matched_signals": [],
         "repair": "Anchor wording in the user's audience, domain nouns, and target outcome."
       }
     ],
-    "overall_quality_score": 82.0,
+    "overall_quality_score": 89.0,
     "self_repair_checks": [
       "Check explicit need, implicit need, scenario, user level, and success standard before deepening.",
       "Map Role, Task, and Format into skill behavior, not decorative prompt labels.",
@@ -13024,8 +13733,8 @@
     "checks": [
       {
         "label": "Intent clarity",
-        "status": "needs review",
-        "detail": "30/100 intent confidence."
+        "status": "ready",
+        "detail": "100/100 intent confidence."
       },
       {
         "label": "Benchmark coverage",
@@ -13035,12 +13744,12 @@
       {
         "label": "Pattern gate",
         "status": "ready",
-        "detail": "3 accepted, 3 deferred using threshold 4/4."
+        "detail": "5 accepted, 1 deferred using threshold 4/4."
       },
       {
         "label": "Conflict handling",
-        "status": "ready",
-        "detail": "No material conflicts detected."
+        "status": "decision needed",
+        "detail": "The stated preference leans lightweight or speed-first, while the benchmark mix leans toward governance, review, or heavier evaluation structure."
       },
       {
         "label": "Output risk profile",
@@ -13050,12 +13759,12 @@
       {
         "label": "Artifact design profile",
         "status": "ready",
-        "detail": "High-trust editorial report with a clear first-screen thesis, compact evidence blocks, and decisions separated from supporting detail."
+        "detail": "Execution-focused technical artifact with environment assumptions, copyable commands, expected outputs, and side effects made explicit."
       },
       {
         "label": "Prompt quality profile",
         "status": "ready",
-        "detail": "82.0/100 prompt-facing quality score."
+        "detail": "89.0/100 prompt-facing quality score."
       }
     ],
     "reviewer_note": "Use this section to decide whether the package is ready to deepen or should stay in discovery."
