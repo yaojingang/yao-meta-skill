@@ -275,7 +275,11 @@ def insight_cards(data: dict[str, dict[str, Any]]) -> list[dict[str, str]]:
         {
             "label": "Install",
             "value": "pass" if data["install_simulation"].get("ok") else "n/a",
-            "detail": f"{install_simulation.get('adapter_count', 0)} adapters readable; local install simulation",
+            "detail": (
+                f"{install_simulation.get('adapter_count', 0)} adapters; "
+                f"{install_simulation.get('installer_permission_enforced_count', 0)} permissions enforced; "
+                f"{install_simulation.get('installer_permission_failure_count', 0)} permission failures"
+            ),
         },
         {
             "label": "Upgrade",
@@ -626,6 +630,7 @@ def render_html(report: dict[str, Any]) -> str:
     )
     registry_package = report["data"]["registry"].get("package", {})
     package_summary = report["data"]["package_verification"].get("summary", {})
+    install_summary = report["data"]["install_simulation"].get("summary", {})
     atlas_panel = render_kv_grid(
         atlas_summary,
         [
@@ -726,6 +731,23 @@ def render_html(report: dict[str, Any]) -> str:
         package_summary,
         ["target_count", "adapter_count", "archive_present", "archive_entry_count", "failure_count", "warning_count", "archive_sha256"],
         "package verification missing",
+    )
+    install_panel = render_kv_grid(
+        install_summary,
+        [
+            "archive_extracted",
+            "entrypoint_loaded",
+            "manifest_loaded",
+            "interface_loaded",
+            "adapter_count",
+            "installer_permission_enforced_count",
+            "installer_permission_failure_count",
+            "permission_target_count",
+            "permission_capability_count",
+            "failure_count",
+            "warning_count",
+        ],
+        "install simulation missing",
     )
     evidence_html = "".join(
         f"<li><strong>{html.escape(key)}</strong><span>{html.escape(value)}</span></li>"
@@ -865,6 +887,11 @@ def render_html(report: dict[str, Any]) -> str:
     <section id="release" class="twocol">
       <div class="panel"><h2>发布路线</h2><p>{html.escape(gate_details.get('release-notes', 'release notes missing'))}</p></div>
       <div class="panel"><h2>包体验证</h2>{package_panel}</div>
+    </section>
+
+    <section class="twocol">
+      <div class="panel"><h2>安装模拟</h2>{install_panel}</div>
+      <div class="panel"><h2>权限覆盖</h2><p>安装模拟会读取解压后的 target adapter，并按 declared_capabilities 核对 security/permission_policy.json 中的有效批准、证据、过期时间和目标端 enforcement 说明。</p></div>
     </section>
   </main>
 </body>

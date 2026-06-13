@@ -22,9 +22,11 @@ Each high-permission approval must include:
 - `reason`
 - `expires_at`
 - `evidence`
-- `target_enforcement` for OpenAI, Claude, and generic packages
+- `target_enforcement` for OpenAI, Claude, generic, and VS Code / Copilot packages
 
 Review Studio exposes this as the `permission-gates` gate. Missing, invalid, or expired approvals block governed mode and stay reviewer-visible in lighter modes.
+
+Install simulation also enforces this policy after archive extraction. `python3 scripts/simulate_install.py . --package-dir dist` reads the installed `security/permission_policy.json`, reads each installed target adapter's `target_permission_contract.declared_capabilities`, and fails when any target/capability pair lacks an active reviewer approval or target-specific enforcement note. This keeps package distribution from relying only on metadata presence in the source tree.
 
 After packaging, run `python3 scripts/probe_runtime_permissions.py . --package-dir dist` to generate `reports/runtime_permission_probes.md` and `reports/runtime_permission_probes.json`. Review Studio exposes that evidence as the `permission-runtime` gate, separate from approval governance. A passing probe means target adapters make permission handling explicit and auditable; it does not claim client-native enforcement when the target only supports metadata fallback.
 

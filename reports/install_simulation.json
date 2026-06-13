@@ -14,6 +14,10 @@
     "manifest_loaded": true,
     "interface_loaded": true,
     "adapter_count": 4,
+    "installer_permission_enforced_count": 12,
+    "installer_permission_failure_count": 0,
+    "permission_target_count": 4,
+    "permission_capability_count": 3,
     "install_root_is_temp": false,
     "failure_count": 0,
     "warning_count": 0
@@ -118,6 +122,151 @@
       "id": "adapter-vscode-name",
       "status": "pass",
       "detail": "vscode adapter name matches package manifest"
+    },
+    {
+      "id": "permission-policy-load",
+      "status": "pass",
+      "detail": "Installed permission policy is readable"
+    },
+    {
+      "id": "permission-claude-contract",
+      "status": "pass",
+      "detail": "claude adapter exposes target permission contract for installer enforcement"
+    },
+    {
+      "id": "permission-claude-file_write-approved",
+      "status": "pass",
+      "detail": "claude capability file_write has active reviewer approval"
+    },
+    {
+      "id": "permission-claude-file_write-target-enforcement",
+      "status": "pass",
+      "detail": "claude capability file_write has target enforcement note"
+    },
+    {
+      "id": "permission-claude-network-approved",
+      "status": "pass",
+      "detail": "claude capability network has active reviewer approval"
+    },
+    {
+      "id": "permission-claude-network-target-enforcement",
+      "status": "pass",
+      "detail": "claude capability network has target enforcement note"
+    },
+    {
+      "id": "permission-claude-subprocess-approved",
+      "status": "pass",
+      "detail": "claude capability subprocess has active reviewer approval"
+    },
+    {
+      "id": "permission-claude-subprocess-target-enforcement",
+      "status": "pass",
+      "detail": "claude capability subprocess has target enforcement note"
+    },
+    {
+      "id": "permission-generic-contract",
+      "status": "pass",
+      "detail": "generic adapter exposes target permission contract for installer enforcement"
+    },
+    {
+      "id": "permission-generic-file_write-approved",
+      "status": "pass",
+      "detail": "generic capability file_write has active reviewer approval"
+    },
+    {
+      "id": "permission-generic-file_write-target-enforcement",
+      "status": "pass",
+      "detail": "generic capability file_write has target enforcement note"
+    },
+    {
+      "id": "permission-generic-network-approved",
+      "status": "pass",
+      "detail": "generic capability network has active reviewer approval"
+    },
+    {
+      "id": "permission-generic-network-target-enforcement",
+      "status": "pass",
+      "detail": "generic capability network has target enforcement note"
+    },
+    {
+      "id": "permission-generic-subprocess-approved",
+      "status": "pass",
+      "detail": "generic capability subprocess has active reviewer approval"
+    },
+    {
+      "id": "permission-generic-subprocess-target-enforcement",
+      "status": "pass",
+      "detail": "generic capability subprocess has target enforcement note"
+    },
+    {
+      "id": "permission-openai-contract",
+      "status": "pass",
+      "detail": "openai adapter exposes target permission contract for installer enforcement"
+    },
+    {
+      "id": "permission-openai-file_write-approved",
+      "status": "pass",
+      "detail": "openai capability file_write has active reviewer approval"
+    },
+    {
+      "id": "permission-openai-file_write-target-enforcement",
+      "status": "pass",
+      "detail": "openai capability file_write has target enforcement note"
+    },
+    {
+      "id": "permission-openai-network-approved",
+      "status": "pass",
+      "detail": "openai capability network has active reviewer approval"
+    },
+    {
+      "id": "permission-openai-network-target-enforcement",
+      "status": "pass",
+      "detail": "openai capability network has target enforcement note"
+    },
+    {
+      "id": "permission-openai-subprocess-approved",
+      "status": "pass",
+      "detail": "openai capability subprocess has active reviewer approval"
+    },
+    {
+      "id": "permission-openai-subprocess-target-enforcement",
+      "status": "pass",
+      "detail": "openai capability subprocess has target enforcement note"
+    },
+    {
+      "id": "permission-vscode-contract",
+      "status": "pass",
+      "detail": "vscode adapter exposes target permission contract for installer enforcement"
+    },
+    {
+      "id": "permission-vscode-file_write-approved",
+      "status": "pass",
+      "detail": "vscode capability file_write has active reviewer approval"
+    },
+    {
+      "id": "permission-vscode-file_write-target-enforcement",
+      "status": "pass",
+      "detail": "vscode capability file_write has target enforcement note"
+    },
+    {
+      "id": "permission-vscode-network-approved",
+      "status": "pass",
+      "detail": "vscode capability network has active reviewer approval"
+    },
+    {
+      "id": "permission-vscode-network-target-enforcement",
+      "status": "pass",
+      "detail": "vscode capability network has target enforcement note"
+    },
+    {
+      "id": "permission-vscode-subprocess-approved",
+      "status": "pass",
+      "detail": "vscode capability subprocess has active reviewer approval"
+    },
+    {
+      "id": "permission-vscode-subprocess-target-enforcement",
+      "status": "pass",
+      "detail": "vscode capability subprocess has target enforcement note"
     }
   ],
   "failures": [],

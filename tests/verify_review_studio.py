@@ -93,6 +93,14 @@ def main() -> None:
         capture_output=True,
         text=True,
     )
+    (ROOT / "reports" / "install_simulation.json").write_text(
+        (tmp_root / "install_simulation.json").read_text(encoding="utf-8"),
+        encoding="utf-8",
+    )
+    (ROOT / "reports" / "install_simulation.md").write_text(
+        (tmp_root / "install_simulation.md").read_text(encoding="utf-8"),
+        encoding="utf-8",
+    )
     subprocess.run(
         [sys.executable, str(ROOT / "scripts" / "registry_audit.py"), str(ROOT), "--generated-at", "2026-06-13"],
         cwd=ROOT,
@@ -257,6 +265,7 @@ def main() -> None:
     assert "reports/upgrade_check.json" in release_gate["evidence"], release_gate
     registry_gate = next(item for item in payload["gates"] if item["key"] == "registry-audit")
     assert "install pass" in registry_gate["detail"], registry_gate
+    assert "installer permissions 12 enforced / 0 failures" in registry_gate["detail"], registry_gate
     assert "reports/install_simulation.json" in registry_gate["evidence"], registry_gate
     trust_gate = next(item for item in payload["gates"] if item["key"] == "trust-report")
     assert trust_gate["status"] == "pass", trust_gate

@@ -107,7 +107,7 @@
       "key": "registry-audit",
       "label": "注册审计",
       "status": "pass",
-      "detail": "yao-meta-skill 1.1.0; 6/6 compatibility entries pass; install pass with 4 adapters",
+      "detail": "yao-meta-skill 1.1.0; 6/6 compatibility entries pass; install pass with 4 adapters; installer permissions 12 enforced / 0 failures",
       "evidence": "reports/registry_audit.json + reports/install_simulation.json",
       "link": "registry_audit.md"
     },
@@ -1228,7 +1228,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 153,
-        "package_sha256": "3eb57d2a31275058fdc10e5e26fb1c871dab2a2c72b532ddf4a990a530fdb131"
+        "package_sha256": "69dd8811ae7fef4aa0dcb296cd7c0587751eb2d7c68091953de620dcbf9aa682"
       },
       "skill_atlas": {
         "skill_count": 12,
@@ -1266,8 +1266,8 @@
           "trust_level": "local",
           "license": "MIT",
           "checksums": {
-            "package_sha256": "3eb57d2a31275058fdc10e5e26fb1c871dab2a2c72b532ddf4a990a530fdb131",
-            "archive_sha256": "a94b342c99204ed28626183e614c40bcdf7a1b8154fbb20256560258cd7910e6"
+            "package_sha256": "69dd8811ae7fef4aa0dcb296cd7c0587751eb2d7c68091953de620dcbf9aa682",
+            "archive_sha256": "2abac4fcfb65ae9a27fee5acad50c70dc63bc889adec293407fd84b9f07d5706"
           },
           "compatibility": {
             "openai": "pass",
@@ -1298,7 +1298,7 @@
           },
           "distribution": {
             "archive_verified": true,
-            "archive_sha256": "a94b342c99204ed28626183e614c40bcdf7a1b8154fbb20256560258cd7910e6",
+            "archive_sha256": "2abac4fcfb65ae9a27fee5acad50c70dc63bc889adec293407fd84b9f07d5706",
             "package_verification": "reports/package_verification.json",
             "install_simulated": true,
             "install_simulation": "reports/install_simulation.json"
@@ -1314,7 +1314,7 @@
           "target_count": 4,
           "adapter_count": 4,
           "archive_present": true,
-          "archive_sha256": "a94b342c99204ed28626183e614c40bcdf7a1b8154fbb20256560258cd7910e6",
+          "archive_sha256": "2abac4fcfb65ae9a27fee5acad50c70dc63bc889adec293407fd84b9f07d5706",
           "archive_entry_count": 494,
           "failure_count": 0,
           "warning_count": 0
@@ -1332,6 +1332,10 @@
           "manifest_loaded": true,
           "interface_loaded": true,
           "adapter_count": 4,
+          "installer_permission_enforced_count": 12,
+          "installer_permission_failure_count": 0,
+          "permission_target_count": 4,
+          "permission_capability_count": 3,
           "install_root_is_temp": false,
           "failure_count": 0,
           "warning_count": 0
@@ -1389,12 +1393,12 @@
             {
               "field": "archive_sha256",
               "from": "",
-              "to": "a94b342c99204ed28626183e614c40bcdf7a1b8154fbb20256560258cd7910e6"
+              "to": "2abac4fcfb65ae9a27fee5acad50c70dc63bc889adec293407fd84b9f07d5706"
             },
             {
               "field": "package_sha256",
               "from": "0000000000000000000000000000000000000000000000000000000000000000",
-              "to": "3eb57d2a31275058fdc10e5e26fb1c871dab2a2c72b532ddf4a990a530fdb131"
+              "to": "69dd8811ae7fef4aa0dcb296cd7c0587751eb2d7c68091953de620dcbf9aa682"
             }
           ]
         },
@@ -3124,7 +3128,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 31.8,
+          "duration_ms": 32.77,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3152,7 +3156,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 31.63,
+          "duration_ms": 33.31,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3175,7 +3179,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.68,
+          "duration_ms": 32.68,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3203,7 +3207,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 32.69,
+          "duration_ms": 32.86,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3226,7 +3230,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 32.73,
+          "duration_ms": 33.15,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3254,7 +3258,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 34.03,
+          "duration_ms": 32.95,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3277,7 +3281,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 34.95,
+          "duration_ms": 33.5,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3304,7 +3308,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 34.6,
+          "duration_ms": 33.13,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3327,7 +3331,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 33.14,
+          "duration_ms": 33.0,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3356,7 +3360,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 36.79,
+          "duration_ms": 31.88,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -8224,7 +8228,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 153,
-        "package_sha256": "3eb57d2a31275058fdc10e5e26fb1c871dab2a2c72b532ddf4a990a530fdb131"
+        "package_sha256": "69dd8811ae7fef4aa0dcb296cd7c0587751eb2d7c68091953de620dcbf9aa682"
       },
       "failures": [],
       "warnings": [],
@@ -9934,7 +9938,8 @@
             "target_enforcement": {
               "openai": "metadata-only permission_contract in openai.yaml plus adapter.json",
               "claude": "adapter.json target_permission_contract and README note",
-              "generic": "adapter.json target_permission_contract"
+              "generic": "adapter.json target_permission_contract",
+              "vscode": "adapter.json target_permission_contract plus VS Code workspace-trust note"
             },
             "validation": []
           },
@@ -10002,7 +10007,8 @@
             "target_enforcement": {
               "openai": "metadata-only permission_contract in openai.yaml plus adapter.json",
               "claude": "adapter.json target_permission_contract and README note",
-              "generic": "adapter.json target_permission_contract"
+              "generic": "adapter.json target_permission_contract",
+              "vscode": "adapter.json target_permission_contract plus VS Code workspace-trust note"
             },
             "validation": []
           },
@@ -10029,7 +10035,8 @@
             "target_enforcement": {
               "openai": "metadata-only permission_contract in openai.yaml plus adapter.json",
               "claude": "adapter.json target_permission_contract and README note",
-              "generic": "adapter.json target_permission_contract"
+              "generic": "adapter.json target_permission_contract",
+              "vscode": "adapter.json target_permission_contract plus VS Code workspace-trust note"
             },
             "validation": []
           }
@@ -11884,7 +11891,7 @@
     "adoption_drift": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-13T12:26:25Z",
+      "generated_at": "2026-06-13T12:56:47Z",
       "skill_dir": ".",
       "privacy_contract": {
         "storage": "local-first",
@@ -12046,8 +12053,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "3eb57d2a31275058fdc10e5e26fb1c871dab2a2c72b532ddf4a990a530fdb131",
-          "archive_sha256": "a94b342c99204ed28626183e614c40bcdf7a1b8154fbb20256560258cd7910e6"
+          "package_sha256": "69dd8811ae7fef4aa0dcb296cd7c0587751eb2d7c68091953de620dcbf9aa682",
+          "archive_sha256": "2abac4fcfb65ae9a27fee5acad50c70dc63bc889adec293407fd84b9f07d5706"
         },
         "compatibility": {
           "openai": "pass",
@@ -12078,7 +12085,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "a94b342c99204ed28626183e614c40bcdf7a1b8154fbb20256560258cd7910e6",
+          "archive_sha256": "2abac4fcfb65ae9a27fee5acad50c70dc63bc889adec293407fd84b9f07d5706",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -12103,7 +12110,7 @@
               "vscode"
             ],
             "package_metadata": "registry/packages/yao-meta-skill.json",
-            "package_sha256": "3eb57d2a31275058fdc10e5e26fb1c871dab2a2c72b532ddf4a990a530fdb131"
+            "package_sha256": "69dd8811ae7fef4aa0dcb296cd7c0587751eb2d7c68091953de620dcbf9aa682"
           }
         ]
       },
@@ -12126,7 +12133,7 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "a94b342c99204ed28626183e614c40bcdf7a1b8154fbb20256560258cd7910e6",
+        "archive_sha256": "2abac4fcfb65ae9a27fee5acad50c70dc63bc889adec293407fd84b9f07d5706",
         "archive_entry_count": 494,
         "failure_count": 0,
         "warning_count": 0
@@ -12798,6 +12805,10 @@
         "manifest_loaded": true,
         "interface_loaded": true,
         "adapter_count": 4,
+        "installer_permission_enforced_count": 12,
+        "installer_permission_failure_count": 0,
+        "permission_target_count": 4,
+        "permission_capability_count": 3,
         "install_root_is_temp": false,
         "failure_count": 0,
         "warning_count": 0
@@ -12902,6 +12913,151 @@
           "id": "adapter-vscode-name",
           "status": "pass",
           "detail": "vscode adapter name matches package manifest"
+        },
+        {
+          "id": "permission-policy-load",
+          "status": "pass",
+          "detail": "Installed permission policy is readable"
+        },
+        {
+          "id": "permission-claude-contract",
+          "status": "pass",
+          "detail": "claude adapter exposes target permission contract for installer enforcement"
+        },
+        {
+          "id": "permission-claude-file_write-approved",
+          "status": "pass",
+          "detail": "claude capability file_write has active reviewer approval"
+        },
+        {
+          "id": "permission-claude-file_write-target-enforcement",
+          "status": "pass",
+          "detail": "claude capability file_write has target enforcement note"
+        },
+        {
+          "id": "permission-claude-network-approved",
+          "status": "pass",
+          "detail": "claude capability network has active reviewer approval"
+        },
+        {
+          "id": "permission-claude-network-target-enforcement",
+          "status": "pass",
+          "detail": "claude capability network has target enforcement note"
+        },
+        {
+          "id": "permission-claude-subprocess-approved",
+          "status": "pass",
+          "detail": "claude capability subprocess has active reviewer approval"
+        },
+        {
+          "id": "permission-claude-subprocess-target-enforcement",
+          "status": "pass",
+          "detail": "claude capability subprocess has target enforcement note"
+        },
+        {
+          "id": "permission-generic-contract",
+          "status": "pass",
+          "detail": "generic adapter exposes target permission contract for installer enforcement"
+        },
+        {
+          "id": "permission-generic-file_write-approved",
+          "status": "pass",
+          "detail": "generic capability file_write has active reviewer approval"
+        },
+        {
+          "id": "permission-generic-file_write-target-enforcement",
+          "status": "pass",
+          "detail": "generic capability file_write has target enforcement note"
+        },
+        {
+          "id": "permission-generic-network-approved",
+          "status": "pass",
+          "detail": "generic capability network has active reviewer approval"
+        },
+        {
+          "id": "permission-generic-network-target-enforcement",
+          "status": "pass",
+          "detail": "generic capability network has target enforcement note"
+        },
+        {
+          "id": "permission-generic-subprocess-approved",
+          "status": "pass",
+          "detail": "generic capability subprocess has active reviewer approval"
+        },
+        {
+          "id": "permission-generic-subprocess-target-enforcement",
+          "status": "pass",
+          "detail": "generic capability subprocess has target enforcement note"
+        },
+        {
+          "id": "permission-openai-contract",
+          "status": "pass",
+          "detail": "openai adapter exposes target permission contract for installer enforcement"
+        },
+        {
+          "id": "permission-openai-file_write-approved",
+          "status": "pass",
+          "detail": "openai capability file_write has active reviewer approval"
+        },
+        {
+          "id": "permission-openai-file_write-target-enforcement",
+          "status": "pass",
+          "detail": "openai capability file_write has target enforcement note"
+        },
+        {
+          "id": "permission-openai-network-approved",
+          "status": "pass",
+          "detail": "openai capability network has active reviewer approval"
+        },
+        {
+          "id": "permission-openai-network-target-enforcement",
+          "status": "pass",
+          "detail": "openai capability network has target enforcement note"
+        },
+        {
+          "id": "permission-openai-subprocess-approved",
+          "status": "pass",
+          "detail": "openai capability subprocess has active reviewer approval"
+        },
+        {
+          "id": "permission-openai-subprocess-target-enforcement",
+          "status": "pass",
+          "detail": "openai capability subprocess has target enforcement note"
+        },
+        {
+          "id": "permission-vscode-contract",
+          "status": "pass",
+          "detail": "vscode adapter exposes target permission contract for installer enforcement"
+        },
+        {
+          "id": "permission-vscode-file_write-approved",
+          "status": "pass",
+          "detail": "vscode capability file_write has active reviewer approval"
+        },
+        {
+          "id": "permission-vscode-file_write-target-enforcement",
+          "status": "pass",
+          "detail": "vscode capability file_write has target enforcement note"
+        },
+        {
+          "id": "permission-vscode-network-approved",
+          "status": "pass",
+          "detail": "vscode capability network has active reviewer approval"
+        },
+        {
+          "id": "permission-vscode-network-target-enforcement",
+          "status": "pass",
+          "detail": "vscode capability network has target enforcement note"
+        },
+        {
+          "id": "permission-vscode-subprocess-approved",
+          "status": "pass",
+          "detail": "vscode capability subprocess has active reviewer approval"
+        },
+        {
+          "id": "permission-vscode-subprocess-target-enforcement",
+          "status": "pass",
+          "detail": "vscode capability subprocess has target enforcement note"
         }
       ],
       "failures": [],
@@ -12985,12 +13141,12 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "a94b342c99204ed28626183e614c40bcdf7a1b8154fbb20256560258cd7910e6"
+            "to": "2abac4fcfb65ae9a27fee5acad50c70dc63bc889adec293407fd84b9f07d5706"
           },
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "3eb57d2a31275058fdc10e5e26fb1c871dab2a2c72b532ddf4a990a530fdb131"
+            "to": "69dd8811ae7fef4aa0dcb296cd7c0587751eb2d7c68091953de620dcbf9aa682"
           }
         ]
       },

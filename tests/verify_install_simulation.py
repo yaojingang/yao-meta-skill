@@ -71,6 +71,23 @@ def simulate(package_dir: Path, output_json: Path, output_md: Path) -> dict:
     )
 
 
+def rewrite_archive_json(package_dir: Path, relative_path: str, transform) -> None:
+    archive_path = package_dir / "yao-meta-skill.zip"
+    rewritten_path = package_dir / "yao-meta-skill.rewritten.zip"
+    archive_member = f"yao-meta-skill/{relative_path}"
+    replaced = False
+    with zipfile.ZipFile(archive_path) as archive_in, zipfile.ZipFile(rewritten_path, "w", compression=zipfile.ZIP_DEFLATED) as archive_out:
+        for info in archive_in.infolist():
+            data = archive_in.read(info.filename)
+            if info.filename == archive_member:
+                payload = json.loads(data.decode("utf-8"))
+                data = (json.dumps(transform(payload), ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+                replaced = True
+            archive_out.writestr(info, data)
+    assert replaced, archive_member
+    rewritten_path.replace(archive_path)
+
+
 def main() -> None:
     if TMP.exists():
         shutil.rmtree(TMP)
@@ -88,8 +105,30 @@ def main() -> None:
     assert payload["summary"]["manifest_loaded"], payload
     assert payload["summary"]["interface_loaded"], payload
     assert payload["summary"]["adapter_count"] == 4, payload
+    assert payload["summary"]["installer_permission_enforced_count"] == 12, payload
+    assert payload["summary"]["installer_permission_failure_count"] == 0, payload
+    assert payload["summary"]["permission_target_count"] == 4, payload
+    assert payload["summary"]["permission_capability_count"] == 3, payload
     assert not payload["failures"], payload
-    assert "Install Simulation" in (TMP / "install_simulation.md").read_text(encoding="utf-8")
+    valid_markdown = (TMP / "install_simulation.md").read_text(encoding="utf-8")
+    assert "Install Simulation" in valid_markdown
+    assert "Installer permissions enforced" in valid_markdown
+
+    policy_gap_dir = TMP / "policy-gap-dist"
+    shutil.copytree(valid_dir, policy_gap_dir)
+
+    def remove_vscode_network_enforcement(payload: dict) -> dict:
+        payload["capabilities"]["network"]["target_enforcement"].pop("vscode", None)
+        return payload
+
+    rewrite_archive_json(policy_gap_dir, "security/permission_policy.json", remove_vscode_network_enforcement)
+    policy_gap = simulate(policy_gap_dir, TMP / "policy_gap.json", TMP / "policy_gap.md")
+    policy_gap_payload = policy_gap["payload"]
+    assert policy_gap["returncode"] == 2, policy_gap
+    assert not policy_gap_payload["ok"], policy_gap_payload
+    assert policy_gap_payload["summary"]["installer_permission_enforced_count"] == 11, policy_gap_payload
+    assert policy_gap_payload["summary"]["installer_permission_failure_count"] >= 1, policy_gap_payload
+    assert any("vscode capability network has target enforcement note" in item for item in policy_gap_payload["failures"]), policy_gap_payload
 
     unsafe_dir = TMP / "unsafe-dist"
     shutil.copytree(valid_dir, unsafe_dir)

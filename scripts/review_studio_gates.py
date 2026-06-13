@@ -437,12 +437,15 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
             f"{pass_count}/{len(compatibility)} compatibility entries pass"
         )
     if install:
-        if install.get("failures"):
-            registry_status = "block"
         install_summary = install.get("summary", {})
+        permission_failures = int(install_summary.get("installer_permission_failure_count", 0) or 0)
+        if install.get("failures") or permission_failures:
+            registry_status = "block"
         registry_detail += (
             f"; install {'pass' if install.get('ok') else 'fail'}"
             f" with {install_summary.get('adapter_count', 0)} adapters"
+            f"; installer permissions {install_summary.get('installer_permission_enforced_count', 0)} enforced"
+            f" / {permission_failures} failures"
         )
     gates.append(
         gate(

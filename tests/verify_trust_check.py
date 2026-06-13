@@ -219,6 +219,7 @@ def main() -> None:
                             "openai": "metadata-only",
                             "claude": "adapter metadata",
                             "generic": "adapter metadata",
+                            "vscode": "workspace trust note",
                         },
                     }
                 },

@@ -27,7 +27,7 @@ NETWORK_POLICY_REL_PATH = "security/network_policy.json"
 PERMISSION_POLICY_REL_PATH = "security/permission_policy.json"
 HELP_SMOKE_TIMEOUT_SECONDS = 5.0
 PERMISSION_CAPABILITIES = ("network", "file_write", "subprocess", "interactive")
-PERMISSION_TARGETS = ("openai", "claude", "generic")
+PERMISSION_TARGETS = ("openai", "claude", "generic", "vscode")
 SECRET_PATTERNS = [
     ("private_key", re.compile(r"-----BEGIN (?:RSA |DSA |EC |OPENSSH |PGP )?PRIVATE KEY-----")),
     ("github_token", re.compile(r"\bgh[pousr]_[A-Za-z0-9_]{20,}\b")),
