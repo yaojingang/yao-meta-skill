@@ -313,6 +313,7 @@ def build_audit(skill_dir: Path, generated_at: str) -> dict[str, Any]:
         "artifacts": {
             "json": "reports/skill_os2_audit.json",
             "markdown": "reports/skill_os2_audit.md",
+            "world_class_evidence_plan": "reports/world_class_evidence_plan.md",
         },
     }
 
@@ -332,6 +333,7 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- external required: `{summary['external_required_count']}`",
         f"- missing: `{summary['missing_count']}`",
         f"- world-class ready: `{str(summary['world_class_ready']).lower()}`",
+        "- evidence plan: `reports/world_class_evidence_plan.md`",
         "",
         "## Audit Items",
         "",

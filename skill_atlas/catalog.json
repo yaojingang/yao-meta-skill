@@ -70,6 +70,7 @@
         "scripts/render_social_preview.py",
         "scripts/render_system_model.py",
         "scripts/render_telemetry_hook_recipes.py",
+        "scripts/render_world_class_evidence_plan.py",
         "scripts/resource_boundary_check.py",
         "scripts/review_studio_formatting.py",
         "scripts/review_studio_gates.py",

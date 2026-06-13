@@ -142,6 +142,16 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     skill_os2_audit_cmd.add_argument("--generated-at")
     skill_os2_audit_cmd.set_defaults(func=_handler(command_handlers, "command_skill_os2_audit"))
 
+    world_class_evidence_cmd = subparsers.add_parser(
+        "world-class-evidence",
+        help="Render the evidence collection plan for remaining world-class readiness gaps.",
+    )
+    world_class_evidence_cmd.add_argument("skill_dir", nargs="?", default=".")
+    world_class_evidence_cmd.add_argument("--output-json")
+    world_class_evidence_cmd.add_argument("--output-md")
+    world_class_evidence_cmd.add_argument("--generated-at")
+    world_class_evidence_cmd.set_defaults(func=_handler(command_handlers, "command_world_class_evidence"))
+
     reference_scan_cmd = subparsers.add_parser(
         "reference-scan",
         help="Render a controlled benchmark scan report for a skill package.",

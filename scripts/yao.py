@@ -547,6 +547,20 @@ def command_skill_os2_audit(args: argparse.Namespace) -> int:
     return 0 if result["ok"] else 2
 
 
+def command_world_class_evidence(args: argparse.Namespace) -> int:
+    skill_dir = str(Path(args.skill_dir).resolve())
+    cmd = [skill_dir]
+    if args.output_json:
+        cmd.extend(["--output-json", args.output_json])
+    if args.output_md:
+        cmd.extend(["--output-md", args.output_md])
+    if args.generated_at:
+        cmd.extend(["--generated-at", args.generated_at])
+    result = run_script("render_world_class_evidence_plan.py", cmd)
+    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
+    return 0 if result["ok"] else 2
+
+
 def command_reference_scan(args: argparse.Namespace) -> int:
     skill_dir = str(Path(args.skill_dir).resolve())
     cmd = [skill_dir]

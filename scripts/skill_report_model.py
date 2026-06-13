@@ -487,6 +487,7 @@ def build_report_model(skill_dir: Path) -> dict:
     adoption_drift = load_json(skill_dir / "reports" / "adoption_drift_report.json")
     review_waivers = load_json(skill_dir / "reports" / "review_waivers.json")
     review_annotations = load_json(skill_dir / "reports" / "review_annotations.json")
+    world_class_evidence = load_json(skill_dir / "reports" / "world_class_evidence_plan.json")
     compiled_targets = load_json(skill_dir / "reports" / "compiled_targets.json")
     skill_ir = load_json(skill_dir / "reports" / "skill-ir.json")
     if not skill_ir:
@@ -550,6 +551,9 @@ def build_report_model(skill_dir: Path) -> dict:
     if (skill_dir / "reports" / "output_review_adjudication.md").exists():
         insert_after = deliverables.index("reports/output_blind_answer_key.json") + 1 if "reports/output_blind_answer_key.json" in deliverables else deliverables.index("reports/output_quality_scorecard.md") + 1
         deliverables.insert(insert_after, "reports/output_review_adjudication.md")
+    if (skill_dir / "reports" / "world_class_evidence_plan.md").exists():
+        insert_after = deliverables.index("reports/review_waivers.md") + 1
+        deliverables.insert(insert_after, "reports/world_class_evidence_plan.md")
 
     skill_summary = {
         "name": name,
@@ -737,6 +741,12 @@ def build_report_model(skill_dir: Path) -> dict:
             "summary": review_annotations.get("summary", {}),
             "annotations": review_annotations.get("annotations", [])[:8],
             "failures": review_annotations.get("failures", []),
+        },
+        "world_class_evidence_plan": {
+            "ok": world_class_evidence.get("ok", False),
+            "summary": world_class_evidence.get("summary", {}),
+            "tasks": world_class_evidence.get("tasks", [])[:8],
+            "source_audit": world_class_evidence.get("source_audit", {}),
         },
         "synthesis_highlights": synthesis,
         "artifact_design": q_review["artifact_design"],

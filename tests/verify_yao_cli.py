@@ -74,6 +74,7 @@ def main() -> None:
     assert "quickstart" in parser_help, parser_help
     assert "review-studio" in parser_help, parser_help
     assert "skill-os2-audit" in parser_help, parser_help
+    assert "world-class-evidence" in parser_help, parser_help
     assert "telemetry-import" in parser_help, parser_help
     assert "telemetry-emit" in parser_help, parser_help
     assert "telemetry-hooks" in parser_help, parser_help
@@ -163,6 +164,20 @@ def main() -> None:
     assert skill_os2_audit_result["ok"], skill_os2_audit_result
     assert skill_os2_audit_result["payload"]["summary"]["decision"] == "continue-iteration", skill_os2_audit_result
     assert skill_os2_audit_result["payload"]["summary"]["world_class_ready"] is False, skill_os2_audit_result
+
+    world_class_evidence_result = run(
+        "world-class-evidence",
+        str(ROOT),
+        "--output-json",
+        str(tmp_root / "world_class_evidence_plan.json"),
+        "--output-md",
+        str(tmp_root / "world_class_evidence_plan.md"),
+        "--generated-at",
+        "2026-06-13",
+    )
+    assert world_class_evidence_result["ok"], world_class_evidence_result
+    assert world_class_evidence_result["payload"]["summary"]["decision"] == "collect-external-evidence", world_class_evidence_result
+    assert world_class_evidence_result["payload"]["summary"]["ready_to_claim_world_class"] is False, world_class_evidence_result
 
     quickstart_result = run(
         "quickstart",

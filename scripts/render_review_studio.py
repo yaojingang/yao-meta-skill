@@ -133,6 +133,7 @@ def evidence_paths(skill_dir: Path) -> dict[str, str]:
         "adoption_drift": "reports/adoption_drift_report.md",
         "review_waivers": "reports/review_waivers.md",
         "review_annotations": "reports/review_annotations.md",
+        "world_class_evidence_plan": "reports/world_class_evidence_plan.md",
         "registry_audit": "reports/registry_audit.md",
         "package_verification": "reports/package_verification.md",
         "install_simulation": "reports/install_simulation.md",

@@ -1,0 +1,145 @@
+# World-Class Evidence Plan
+
+Generated at: `2026-06-13`
+
+## Summary
+
+- decision: `collect-external-evidence`
+- audit decision: `continue-iteration`
+- ready to claim world-class: `false`
+- tasks: `4`
+- human tasks: `1`
+- external tasks: `3`
+
+This report is an execution plan for the remaining world-class evidence gaps. It does not count a plan as completion.
+
+## Task Table
+
+| Task | Status | Category | Owner | Current |
+| --- | --- | --- | --- | --- |
+| `provider-holdout` | `external_required` | `external` | operator with provider credentials | model-executed 0; token-observed 0 |
+| `human-adjudication` | `human_required` | `human` | human reviewer | 0/5 decisions; pending 5 |
+| `native-permission-enforcement` | `external_required` | `external` | target client or installer integrator | native-enforced targets 0 |
+| `native-client-telemetry` | `external_required` | `external` | Browser/Chrome/IDE/provider client integrator | external source events 0; adoption samples 0 |
+
+## Provider Holdout
+
+- objective: Collect at least one provider-backed output-eval holdout run with model, timing, and token metadata.
+- audit next action: Run provider-backed holdout cases with real credentials and commit only aggregate evidence.
+
+### Runbook
+
+- `YAO_OUTPUT_EVAL_MODEL=gpt-4.1-mini OPENAI_API_KEY=<redacted> python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60`
+- `python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>`
+
+### Success Checks
+
+- reports/output_execution_runs.json summary.model_executed_count > 0
+- reports/output_execution_runs.json summary.timing_observed_count > 0
+- reports/output_execution_runs.json summary.token_observed_count > 0
+- reports/skill_os2_audit.json item provider-holdout status becomes pass
+
+### Evidence Artifacts
+
+- `reports/output_execution_runs.json`
+- `reports/output_execution_runs.md`
+- `reports/skill_os2_audit.json`
+
+### Privacy Contract
+
+- Do not commit provider credentials or environment dumps.
+- The output execution report records output hashes and aggregate run metadata, not raw provider prompts.
+
+## Human Adjudication
+
+- objective: Record real blind A/B reviewer decisions before claiming human output review completion.
+- audit next action: Record real A/B choices in the decision template, then regenerate adjudication.
+
+### Runbook
+
+- `python3 scripts/adjudicate_output_review.py --write-template`
+- Open reports/output_blind_review_pack.md and choose A or B for each pair without opening the answer key.
+- Edit reports/output_review_decisions.json with winner_variant values and reviewer metadata.
+- `python3 scripts/yao.py output-review`
+- `python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>`
+
+### Success Checks
+
+- reports/output_review_adjudication.json summary.pending_count == 0
+- reports/output_review_adjudication.json summary.judgment_count == summary.pair_count
+- reports/output_review_adjudication.json summary.invalid_decision_count == 0
+- reports/skill_os2_audit.json item human-adjudication status becomes pass
+
+### Evidence Artifacts
+
+- `reports/output_blind_review_pack.md`
+- `reports/output_review_decisions.json`
+- `reports/output_review_adjudication.json`
+- `reports/output_review_adjudication.md`
+
+### Privacy Contract
+
+- Reviewer decisions should not include raw user data or private customer detail.
+- Keep the answer key separate until after decisions are recorded.
+
+## Native Permission Enforcement
+
+- objective: Prove at least one target or installer enforces approved high-permission capabilities at runtime.
+- audit next action: Integrate a real client or installer runtime guard before claiming native permission enforcement.
+
+### Runbook
+
+- Implement or connect a real target client/installer guard that blocks undeclared network, file_write, or subprocess capabilities.
+- Update the generated target adapter only when the guard is actually enforced by that target.
+- `python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip`
+- `python3 scripts/yao.py runtime-permissions . --package-dir dist`
+- `python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>`
+
+### Success Checks
+
+- reports/runtime_permission_probes.json summary.native_enforcement_count > 0
+- reports/runtime_permission_probes.json summary.fail_count == 0
+- reports/skill_os2_audit.json item native-permission-enforcement status becomes pass
+
+### Evidence Artifacts
+
+- `dist/targets/*/adapter.json`
+- `reports/runtime_permission_probes.json`
+- `reports/runtime_permission_probes.md`
+- `security/permission_policy.json`
+
+### Privacy Contract
+
+- Do not mark native_enforcement true for metadata-only fallbacks.
+- Keep residual risks visible for targets that still rely on operator enforcement.
+
+## Native Client Telemetry
+
+- objective: Import production metadata-only events from a real external client into the local drift loop.
+- audit next action: Install a real client against the native host and import production metadata-only events.
+
+### Runbook
+
+- `python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/`
+- Install the generated native messaging manifest for the real client and send at least one accepted skill_activation or skill_output event.
+- `python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl`
+- `python3 scripts/yao.py skill-atlas --workspace-root .`
+- `python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>`
+
+### Success Checks
+
+- reports/adoption_drift_report.json summary.source_types.external > 0
+- reports/adoption_drift_report.json summary.adoption_sample_count > 0
+- reports/skill_os2_audit.json item native-client-telemetry status becomes pass
+
+### Evidence Artifacts
+
+- `reports/adoption_drift_report.json`
+- `reports/adoption_drift_report.md`
+- `reports/telemetry_hook_recipes.json`
+- `scripts/telemetry_native_host.py`
+
+### Privacy Contract
+
+- Telemetry must remain metadata-only and local-first.
+- Do not package reports/telemetry_events.jsonl or any raw prompt, output, transcript, note, or message field.

@@ -2,8 +2,8 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 159,
-    "script_count": 75,
+    "scanned_files": 160,
+    "script_count": 76,
     "internal_module_count": 10,
     "secret_findings": 0,
     "dependency_files": [
@@ -12,18 +12,18 @@
     "network_script_count": 3,
     "network_policy_covered_count": 3,
     "network_policy_missing_count": 0,
-    "file_write_script_count": 52,
+    "file_write_script_count": 53,
     "permission_required_count": 3,
     "permission_approved_count": 3,
     "permission_missing_count": 0,
     "permission_invalid_count": 0,
     "permission_expired_count": 0,
-    "help_smoke_checked_count": 65,
+    "help_smoke_checked_count": 66,
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 159,
-    "package_sha256": "224450e2cc3e2689a08ac5b53228b5fb6608faedeb3abf004156acac5674bd8e"
+    "package_hash_file_count": 160,
+    "package_sha256": "14948119733df8546f5c30e0131428ea95c4866a3bdc8151a3e1ab9c7a4f1726"
   },
   "failures": [],
   "warnings": [],
@@ -747,6 +747,20 @@
       "network_hosts": []
     },
     {
+      "path": "scripts/render_world_class_evidence_plan.py",
+      "interface": "cli",
+      "interface_declared": false,
+      "interface_reason": "Default CLI classification; add SCRIPT_INTERFACE for internal modules.",
+      "has_argparse": true,
+      "has_main_guard": true,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": true,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
       "path": "scripts/resource_boundary_check.py",
       "interface": "cli",
       "interface_declared": false,
@@ -1127,9 +1141,9 @@
   "help_smoke": {
     "enabled": true,
     "timeout_seconds": 5.0,
-    "candidate_count": 65,
-    "checked_count": 65,
-    "passed_count": 65,
+    "candidate_count": 66,
+    "checked_count": 66,
+    "passed_count": 66,
     "failed_count": 0,
     "skipped_count": 10,
     "failed_scripts": [],
@@ -1635,6 +1649,16 @@
         "stderr_excerpt": ""
       },
       {
+        "path": "scripts/render_world_class_evidence_plan.py",
+        "command": "python3 scripts/render_world_class_evidence_plan.py --help",
+        "returncode": 0,
+        "timed_out": false,
+        "passed": true,
+        "has_help_text": true,
+        "stdout_excerpt": "usage: render_world_class_evidence_plan.py [-h] [--output-json OUTPUT_JSON]\n                                           [--output-md OUTPUT_MD]\n                                           [--generated-at GENERATED_AT]\n                        ",
+        "stderr_excerpt": ""
+      },
+      {
         "path": "scripts/resource_boundary_check.py",
         "command": "python3 scripts/resource_boundary_check.py --help",
         "returncode": 0,
@@ -1922,6 +1946,7 @@
           "scripts/render_social_preview.py",
           "scripts/render_system_model.py",
           "scripts/render_telemetry_hook_recipes.py",
+          "scripts/render_world_class_evidence_plan.py",
           "scripts/run_conformance_suite.py",
           "scripts/run_description_optimization_suite.py",
           "scripts/run_output_eval.py",

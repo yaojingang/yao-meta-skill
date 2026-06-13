@@ -195,6 +195,7 @@
             "scripts/render_social_preview.py",
             "scripts/render_system_model.py",
             "scripts/render_telemetry_hook_recipes.py",
+            "scripts/render_world_class_evidence_plan.py",
             "scripts/resource_boundary_check.py",
             "scripts/review_studio_formatting.py",
             "scripts/review_studio_gates.py",
@@ -272,7 +273,7 @@
           ],
           "counts": {
             "references": 32,
-            "scripts": 75,
+            "scripts": 76,
             "assets": 2,
             "reports": 43
           }
@@ -378,7 +379,7 @@
             },
             "file_write": {
               "required": true,
-              "script_count": 52,
+              "script_count": 53,
               "scripts": [
                 "scripts/adjudicate_output_review.py",
                 "scripts/build_confusion_matrix.py",
@@ -422,6 +423,7 @@
                 "scripts/render_social_preview.py",
                 "scripts/render_system_model.py",
                 "scripts/render_telemetry_hook_recipes.py",
+                "scripts/render_world_class_evidence_plan.py",
                 "scripts/run_conformance_suite.py",
                 "scripts/run_description_optimization_suite.py",
                 "scripts/run_output_eval.py",
@@ -468,14 +470,14 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 65,
+            "checked_count": 66,
             "failed_count": 0,
             "failed_scripts": []
           },
           "trust_summary": {
             "secret_findings": 0,
             "network_script_count": 3,
-            "file_write_script_count": 52,
+            "file_write_script_count": 53,
             "subprocess_script_count": 7,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
@@ -497,7 +499,7 @@
           ],
           "capability_counts": {
             "network": 3,
-            "file_write": 52,
+            "file_write": 53,
             "subprocess": 7,
             "interactive": 0
           },
@@ -518,7 +520,7 @@
             "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
             "counts": {
               "references": 32,
-              "scripts": 75,
+              "scripts": 76,
               "assets": 2,
               "reports": 43
             },
@@ -529,7 +531,7 @@
           },
           "scripts": {
             "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-            "script_count": 75,
+            "script_count": 76,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -610,7 +612,7 @@
           },
           "file_write": {
             "required": true,
-            "script_count": 52,
+            "script_count": 53,
             "scripts": [
               "scripts/adjudicate_output_review.py",
               "scripts/build_confusion_matrix.py",
@@ -654,6 +656,7 @@
               "scripts/render_social_preview.py",
               "scripts/render_system_model.py",
               "scripts/render_telemetry_hook_recipes.py",
+              "scripts/render_world_class_evidence_plan.py",
               "scripts/run_conformance_suite.py",
               "scripts/run_description_optimization_suite.py",
               "scripts/run_output_eval.py",
@@ -700,14 +703,14 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 65,
+          "checked_count": 66,
           "failed_count": 0,
           "failed_scripts": []
         },
         "trust_summary": {
           "secret_findings": 0,
           "network_script_count": 3,
-          "file_write_script_count": 52,
+          "file_write_script_count": 53,
           "subprocess_script_count": 7,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
@@ -727,7 +730,7 @@
         ],
         "capability_counts": {
           "network": 3,
-          "file_write": 52,
+          "file_write": 53,
           "subprocess": 7,
           "interactive": 0
         },
@@ -748,7 +751,7 @@
           "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
           "counts": {
             "references": 32,
-            "scripts": 75,
+            "scripts": 76,
             "assets": 2,
             "reports": 43
           },
@@ -759,7 +762,7 @@
         },
         "scripts": {
           "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-          "script_count": 75,
+          "script_count": 76,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -1011,6 +1014,7 @@
             "scripts/render_social_preview.py",
             "scripts/render_system_model.py",
             "scripts/render_telemetry_hook_recipes.py",
+            "scripts/render_world_class_evidence_plan.py",
             "scripts/resource_boundary_check.py",
             "scripts/review_studio_formatting.py",
             "scripts/review_studio_gates.py",
@@ -1088,7 +1092,7 @@
           ],
           "counts": {
             "references": 32,
-            "scripts": 75,
+            "scripts": 76,
             "assets": 2,
             "reports": 43
           }
@@ -1194,7 +1198,7 @@
             },
             "file_write": {
               "required": true,
-              "script_count": 52,
+              "script_count": 53,
               "scripts": [
                 "scripts/adjudicate_output_review.py",
                 "scripts/build_confusion_matrix.py",
@@ -1238,6 +1242,7 @@
                 "scripts/render_social_preview.py",
                 "scripts/render_system_model.py",
                 "scripts/render_telemetry_hook_recipes.py",
+                "scripts/render_world_class_evidence_plan.py",
                 "scripts/run_conformance_suite.py",
                 "scripts/run_description_optimization_suite.py",
                 "scripts/run_output_eval.py",
@@ -1284,14 +1289,14 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 65,
+            "checked_count": 66,
             "failed_count": 0,
             "failed_scripts": []
           },
           "trust_summary": {
             "secret_findings": 0,
             "network_script_count": 3,
-            "file_write_script_count": 52,
+            "file_write_script_count": 53,
             "subprocess_script_count": 7,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
@@ -1313,7 +1318,7 @@
           ],
           "capability_counts": {
             "network": 3,
-            "file_write": 52,
+            "file_write": 53,
             "subprocess": 7,
             "interactive": 0
           },
@@ -1334,7 +1339,7 @@
             "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
             "counts": {
               "references": 32,
-              "scripts": 75,
+              "scripts": 76,
               "assets": 2,
               "reports": 43
             },
@@ -1345,7 +1350,7 @@
           },
           "scripts": {
             "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-            "script_count": 75,
+            "script_count": 76,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -1426,7 +1431,7 @@
           },
           "file_write": {
             "required": true,
-            "script_count": 52,
+            "script_count": 53,
             "scripts": [
               "scripts/adjudicate_output_review.py",
               "scripts/build_confusion_matrix.py",
@@ -1470,6 +1475,7 @@
               "scripts/render_social_preview.py",
               "scripts/render_system_model.py",
               "scripts/render_telemetry_hook_recipes.py",
+              "scripts/render_world_class_evidence_plan.py",
               "scripts/run_conformance_suite.py",
               "scripts/run_description_optimization_suite.py",
               "scripts/run_output_eval.py",
@@ -1516,14 +1522,14 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 65,
+          "checked_count": 66,
           "failed_count": 0,
           "failed_scripts": []
         },
         "trust_summary": {
           "secret_findings": 0,
           "network_script_count": 3,
-          "file_write_script_count": 52,
+          "file_write_script_count": 53,
           "subprocess_script_count": 7,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
@@ -1543,7 +1549,7 @@
         ],
         "capability_counts": {
           "network": 3,
-          "file_write": 52,
+          "file_write": 53,
           "subprocess": 7,
           "interactive": 0
         },
@@ -1564,7 +1570,7 @@
           "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
           "counts": {
             "references": 32,
-            "scripts": 75,
+            "scripts": 76,
             "assets": 2,
             "reports": 43
           },
@@ -1575,7 +1581,7 @@
         },
         "scripts": {
           "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-          "script_count": 75,
+          "script_count": 76,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -1827,6 +1833,7 @@
             "scripts/render_social_preview.py",
             "scripts/render_system_model.py",
             "scripts/render_telemetry_hook_recipes.py",
+            "scripts/render_world_class_evidence_plan.py",
             "scripts/resource_boundary_check.py",
             "scripts/review_studio_formatting.py",
             "scripts/review_studio_gates.py",
@@ -1904,7 +1911,7 @@
           ],
           "counts": {
             "references": 32,
-            "scripts": 75,
+            "scripts": 76,
             "assets": 2,
             "reports": 43
           }
@@ -2010,7 +2017,7 @@
             },
             "file_write": {
               "required": true,
-              "script_count": 52,
+              "script_count": 53,
               "scripts": [
                 "scripts/adjudicate_output_review.py",
                 "scripts/build_confusion_matrix.py",
@@ -2054,6 +2061,7 @@
                 "scripts/render_social_preview.py",
                 "scripts/render_system_model.py",
                 "scripts/render_telemetry_hook_recipes.py",
+                "scripts/render_world_class_evidence_plan.py",
                 "scripts/run_conformance_suite.py",
                 "scripts/run_description_optimization_suite.py",
                 "scripts/run_output_eval.py",
@@ -2100,14 +2108,14 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 65,
+            "checked_count": 66,
             "failed_count": 0,
             "failed_scripts": []
           },
           "trust_summary": {
             "secret_findings": 0,
             "network_script_count": 3,
-            "file_write_script_count": 52,
+            "file_write_script_count": 53,
             "subprocess_script_count": 7,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
@@ -2129,7 +2137,7 @@
           ],
           "capability_counts": {
             "network": 3,
-            "file_write": 52,
+            "file_write": 53,
             "subprocess": 7,
             "interactive": 0
           },
@@ -2150,7 +2158,7 @@
             "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
             "counts": {
               "references": 32,
-              "scripts": 75,
+              "scripts": 76,
               "assets": 2,
               "reports": 43
             },
@@ -2160,7 +2168,7 @@
           },
           "scripts": {
             "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-            "script_count": 75,
+            "script_count": 76,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -2235,7 +2243,7 @@
           },
           "file_write": {
             "required": true,
-            "script_count": 52,
+            "script_count": 53,
             "scripts": [
               "scripts/adjudicate_output_review.py",
               "scripts/build_confusion_matrix.py",
@@ -2279,6 +2287,7 @@
               "scripts/render_social_preview.py",
               "scripts/render_system_model.py",
               "scripts/render_telemetry_hook_recipes.py",
+              "scripts/render_world_class_evidence_plan.py",
               "scripts/run_conformance_suite.py",
               "scripts/run_description_optimization_suite.py",
               "scripts/run_output_eval.py",
@@ -2325,14 +2334,14 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 65,
+          "checked_count": 66,
           "failed_count": 0,
           "failed_scripts": []
         },
         "trust_summary": {
           "secret_findings": 0,
           "network_script_count": 3,
-          "file_write_script_count": 52,
+          "file_write_script_count": 53,
           "subprocess_script_count": 7,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
@@ -2352,7 +2361,7 @@
         ],
         "capability_counts": {
           "network": 3,
-          "file_write": 52,
+          "file_write": 53,
           "subprocess": 7,
           "interactive": 0
         },
@@ -2373,7 +2382,7 @@
           "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
           "counts": {
             "references": 32,
-            "scripts": 75,
+            "scripts": 76,
             "assets": 2,
             "reports": 43
           },
@@ -2383,7 +2392,7 @@
         },
         "scripts": {
           "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-          "script_count": 75,
+          "script_count": 76,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -2627,6 +2636,7 @@
             "scripts/render_social_preview.py",
             "scripts/render_system_model.py",
             "scripts/render_telemetry_hook_recipes.py",
+            "scripts/render_world_class_evidence_plan.py",
             "scripts/resource_boundary_check.py",
             "scripts/review_studio_formatting.py",
             "scripts/review_studio_gates.py",
@@ -2704,7 +2714,7 @@
           ],
           "counts": {
             "references": 32,
-            "scripts": 75,
+            "scripts": 76,
             "assets": 2,
             "reports": 43
           }
@@ -2810,7 +2820,7 @@
             },
             "file_write": {
               "required": true,
-              "script_count": 52,
+              "script_count": 53,
               "scripts": [
                 "scripts/adjudicate_output_review.py",
                 "scripts/build_confusion_matrix.py",
@@ -2854,6 +2864,7 @@
                 "scripts/render_social_preview.py",
                 "scripts/render_system_model.py",
                 "scripts/render_telemetry_hook_recipes.py",
+                "scripts/render_world_class_evidence_plan.py",
                 "scripts/run_conformance_suite.py",
                 "scripts/run_description_optimization_suite.py",
                 "scripts/run_output_eval.py",
@@ -2900,14 +2911,14 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 65,
+            "checked_count": 66,
             "failed_count": 0,
             "failed_scripts": []
           },
           "trust_summary": {
             "secret_findings": 0,
             "network_script_count": 3,
-            "file_write_script_count": 52,
+            "file_write_script_count": 53,
             "subprocess_script_count": 7,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
@@ -2929,7 +2940,7 @@
           ],
           "capability_counts": {
             "network": 3,
-            "file_write": 52,
+            "file_write": 53,
             "subprocess": 7,
             "interactive": 0
           },
@@ -2950,7 +2961,7 @@
             "strategy": "Keep optional directories as relative resources next to SKILL.md.",
             "counts": {
               "references": 32,
-              "scripts": 75,
+              "scripts": 76,
               "assets": 2,
               "reports": 43
             },
@@ -2961,7 +2972,7 @@
           },
           "scripts": {
             "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-            "script_count": 75,
+            "script_count": 76,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -3035,7 +3046,7 @@
           },
           "file_write": {
             "required": true,
-            "script_count": 52,
+            "script_count": 53,
             "scripts": [
               "scripts/adjudicate_output_review.py",
               "scripts/build_confusion_matrix.py",
@@ -3079,6 +3090,7 @@
               "scripts/render_social_preview.py",
               "scripts/render_system_model.py",
               "scripts/render_telemetry_hook_recipes.py",
+              "scripts/render_world_class_evidence_plan.py",
               "scripts/run_conformance_suite.py",
               "scripts/run_description_optimization_suite.py",
               "scripts/run_output_eval.py",
@@ -3125,14 +3137,14 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 65,
+          "checked_count": 66,
           "failed_count": 0,
           "failed_scripts": []
         },
         "trust_summary": {
           "secret_findings": 0,
           "network_script_count": 3,
-          "file_write_script_count": 52,
+          "file_write_script_count": 53,
           "subprocess_script_count": 7,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
@@ -3152,7 +3164,7 @@
         ],
         "capability_counts": {
           "network": 3,
-          "file_write": 52,
+          "file_write": 53,
           "subprocess": 7,
           "interactive": 0
         },
@@ -3173,7 +3185,7 @@
           "strategy": "Keep optional directories as relative resources next to SKILL.md.",
           "counts": {
             "references": 32,
-            "scripts": 75,
+            "scripts": 76,
             "assets": 2,
             "reports": 43
           },
@@ -3184,7 +3196,7 @@
         },
         "scripts": {
           "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-          "script_count": 75,
+          "script_count": 76,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -3427,6 +3439,7 @@
             "scripts/render_social_preview.py",
             "scripts/render_system_model.py",
             "scripts/render_telemetry_hook_recipes.py",
+            "scripts/render_world_class_evidence_plan.py",
             "scripts/resource_boundary_check.py",
             "scripts/review_studio_formatting.py",
             "scripts/review_studio_gates.py",
@@ -3504,7 +3517,7 @@
           ],
           "counts": {
             "references": 32,
-            "scripts": 75,
+            "scripts": 76,
             "assets": 2,
             "reports": 43
           }
@@ -3610,7 +3623,7 @@
             },
             "file_write": {
               "required": true,
-              "script_count": 52,
+              "script_count": 53,
               "scripts": [
                 "scripts/adjudicate_output_review.py",
                 "scripts/build_confusion_matrix.py",
@@ -3654,6 +3667,7 @@
                 "scripts/render_social_preview.py",
                 "scripts/render_system_model.py",
                 "scripts/render_telemetry_hook_recipes.py",
+                "scripts/render_world_class_evidence_plan.py",
                 "scripts/run_conformance_suite.py",
                 "scripts/run_description_optimization_suite.py",
                 "scripts/run_output_eval.py",
@@ -3700,14 +3714,14 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 65,
+            "checked_count": 66,
             "failed_count": 0,
             "failed_scripts": []
           },
           "trust_summary": {
             "secret_findings": 0,
             "network_script_count": 3,
-            "file_write_script_count": 52,
+            "file_write_script_count": 53,
             "subprocess_script_count": 7,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
@@ -3729,7 +3743,7 @@
           ],
           "capability_counts": {
             "network": 3,
-            "file_write": 52,
+            "file_write": 53,
             "subprocess": 7,
             "interactive": 0
           },
@@ -3750,7 +3764,7 @@
             "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
             "counts": {
               "references": 32,
-              "scripts": 75,
+              "scripts": 76,
               "assets": 2,
               "reports": 43
             },
@@ -3761,7 +3775,7 @@
           },
           "scripts": {
             "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
-            "script_count": 75,
+            "script_count": 76,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -3839,7 +3853,7 @@
           },
           "file_write": {
             "required": true,
-            "script_count": 52,
+            "script_count": 53,
             "scripts": [
               "scripts/adjudicate_output_review.py",
               "scripts/build_confusion_matrix.py",
@@ -3883,6 +3897,7 @@
               "scripts/render_social_preview.py",
               "scripts/render_system_model.py",
               "scripts/render_telemetry_hook_recipes.py",
+              "scripts/render_world_class_evidence_plan.py",
               "scripts/run_conformance_suite.py",
               "scripts/run_description_optimization_suite.py",
               "scripts/run_output_eval.py",
@@ -3929,14 +3944,14 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 65,
+          "checked_count": 66,
           "failed_count": 0,
           "failed_scripts": []
         },
         "trust_summary": {
           "secret_findings": 0,
           "network_script_count": 3,
-          "file_write_script_count": 52,
+          "file_write_script_count": 53,
           "subprocess_script_count": 7,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
@@ -3956,7 +3971,7 @@
         ],
         "capability_counts": {
           "network": 3,
-          "file_write": 52,
+          "file_write": 53,
           "subprocess": 7,
           "interactive": 0
         },
@@ -3977,7 +3992,7 @@
           "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
           "counts": {
             "references": 32,
-            "scripts": 75,
+            "scripts": 76,
             "assets": 2,
             "reports": 43
           },
@@ -3988,7 +4003,7 @@
         },
         "scripts": {
           "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
-          "script_count": 75,
+          "script_count": 76,
           "help_smoke_failed_count": 0
         },
         "permissions": {
