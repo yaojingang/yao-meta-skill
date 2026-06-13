@@ -119,6 +119,7 @@
       "scripts/create_iteration_snapshot.py",
       "scripts/cross_packager.py",
       "scripts/diff_eval.py",
+      "scripts/emit_telemetry_event.py",
       "scripts/export_skill_ir.py",
       "scripts/github_benchmark_scan.py",
       "scripts/governance_check.py",

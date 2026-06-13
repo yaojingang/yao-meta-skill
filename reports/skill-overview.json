@@ -96,7 +96,7 @@
       "label": "上下文成本",
       "score": 42,
       "reasons": [
-        "入口约 350 个词/字，references 约 14978 个词/字。",
+        "入口约 350 个词/字，references 约 15124 个词/字。",
         "分数越高代表上下文成本越低。",
         "上下文成本偏高，建议压缩入口或拆分 references。"
       ]
@@ -200,7 +200,7 @@
       "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
     ],
     "gaps": [
-      "上下文成本需要补强：入口约 350 个词/字，references 约 14978 个词/字。"
+      "上下文成本需要补强：入口约 350 个词/字，references 约 15124 个词/字。"
     ],
     "recommendations": [
       "先改触发边界，再扩展工作流。",
@@ -433,7 +433,7 @@
         "path": "scripts",
         "label": "Deterministic helpers or local tooling",
         "kind": "folder",
-        "file_count": 71
+        "file_count": 72
       },
       {
         "path": "evals",
@@ -448,7 +448,7 @@
         "file_count": 171
       }
     ],
-    "file_count": 306,
+    "file_count": 307,
     "folder_count": 4,
     "distribution": [
       {
@@ -473,7 +473,7 @@
       },
       {
         "label": "scripts",
-        "value": 71
+        "value": 72
       },
       {
         "label": "evals",
@@ -602,7 +602,7 @@
       "path": "scripts",
       "label": "Deterministic helpers or local tooling",
       "kind": "folder",
-      "file_count": 71
+      "file_count": 72
     },
     {
       "path": "evals",
@@ -948,8 +948,8 @@
     "failures": []
   },
   "trust_security": {
-    "scanned_files": 155,
-    "script_count": 71,
+    "scanned_files": 156,
+    "script_count": 72,
     "internal_module_count": 10,
     "secret_findings": 0,
     "dependency_files": [
@@ -958,18 +958,18 @@
     "network_script_count": 3,
     "network_policy_covered_count": 3,
     "network_policy_missing_count": 0,
-    "file_write_script_count": 48,
+    "file_write_script_count": 49,
     "permission_required_count": 3,
     "permission_approved_count": 3,
     "permission_missing_count": 0,
     "permission_invalid_count": 0,
     "permission_expired_count": 0,
-    "help_smoke_checked_count": 61,
+    "help_smoke_checked_count": 62,
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 155,
-    "package_sha256": "57991433fa63fd3a5b34cf9bad76ab118895476dbe12810929c8a396b73796c9"
+    "package_hash_file_count": 156,
+    "package_sha256": "195c77ccf18eb0dd72c429b4cbe6137de531a34c00a4ce4a97f9385b3a3b26f4"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -1007,8 +1007,8 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "57991433fa63fd3a5b34cf9bad76ab118895476dbe12810929c8a396b73796c9",
-        "archive_sha256": "7ae19fa1196580440ddebf5ad124810f724f945cb76ac3a4a519da9edde2f14c"
+        "package_sha256": "195c77ccf18eb0dd72c429b4cbe6137de531a34c00a4ce4a97f9385b3a3b26f4",
+        "archive_sha256": "3c6223c609ef538fc3ff9a100c3896894cd8d443a304dcd77524d88a22e02599"
       },
       "compatibility": {
         "openai": "pass",
@@ -1039,7 +1039,7 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "7ae19fa1196580440ddebf5ad124810f724f945cb76ac3a4a519da9edde2f14c",
+        "archive_sha256": "3c6223c609ef538fc3ff9a100c3896894cd8d443a304dcd77524d88a22e02599",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
@@ -1055,8 +1055,8 @@
       "target_count": 4,
       "adapter_count": 4,
       "archive_present": true,
-      "archive_sha256": "7ae19fa1196580440ddebf5ad124810f724f945cb76ac3a4a519da9edde2f14c",
-      "archive_entry_count": 497,
+      "archive_sha256": "3c6223c609ef538fc3ff9a100c3896894cd8d443a304dcd77524d88a22e02599",
+      "archive_entry_count": 499,
       "failure_count": 0,
       "warning_count": 0
     },
@@ -1067,7 +1067,7 @@
     "ok": true,
     "summary": {
       "archive_present": true,
-      "archive_entry_count": 497,
+      "archive_entry_count": 499,
       "archive_extracted": true,
       "entrypoint_loaded": true,
       "manifest_loaded": true,
@@ -1134,12 +1134,12 @@
         {
           "field": "archive_sha256",
           "from": "",
-          "to": "7ae19fa1196580440ddebf5ad124810f724f945cb76ac3a4a519da9edde2f14c"
+          "to": "3c6223c609ef538fc3ff9a100c3896894cd8d443a304dcd77524d88a22e02599"
         },
         {
           "field": "package_sha256",
           "from": "0000000000000000000000000000000000000000000000000000000000000000",
-          "to": "57991433fa63fd3a5b34cf9bad76ab118895476dbe12810929c8a396b73796c9"
+          "to": "195c77ccf18eb0dd72c429b4cbe6137de531a34c00a4ce4a97f9385b3a3b26f4"
         }
       ]
     },

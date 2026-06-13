@@ -74,6 +74,7 @@ def main() -> None:
     assert "quickstart" in parser_help, parser_help
     assert "review-studio" in parser_help, parser_help
     assert "telemetry-import" in parser_help, parser_help
+    assert "telemetry-emit" in parser_help, parser_help
     assert "--record-cli-telemetry" in parser_help, parser_help
 
     init_result = run("init", "cli-demo-skill", "--description", "CLI demo skill.", "--output-dir", str(tmp_root))

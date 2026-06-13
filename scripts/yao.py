@@ -727,6 +727,38 @@ def command_telemetry_import(args: argparse.Namespace) -> int:
     return 0 if result["ok"] else 2
 
 
+def command_telemetry_emit(args: argparse.Namespace) -> int:
+    skill_dir = str(Path(args.skill_dir).resolve())
+    cmd = [
+        skill_dir,
+        "--event",
+        args.event,
+        "--activation-type",
+        args.activation_type,
+        "--outcome",
+        args.outcome,
+        "--failure-type",
+        args.failure_type,
+        "--source",
+        args.source,
+        "--command",
+        args.telemetry_command,
+    ]
+    if args.output_jsonl:
+        cmd.extend(["--output-jsonl", args.output_jsonl])
+    if args.timestamp:
+        cmd.extend(["--timestamp", args.timestamp])
+    if args.skill_name:
+        cmd.extend(["--skill-name", args.skill_name])
+    if args.version:
+        cmd.extend(["--version", args.version])
+    if args.dry_run:
+        cmd.append("--dry-run")
+    result = run_script("emit_telemetry_event.py", cmd)
+    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
+    return 0 if result["ok"] else 2
+
+
 def command_review_waivers(args: argparse.Namespace) -> int:
     skill_dir = str(Path(args.skill_dir).resolve())
     cmd = [skill_dir]

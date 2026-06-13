@@ -61,6 +61,37 @@ python3 scripts/yao.py --no-cli-telemetry validate .
 
 Successful CLI runs record `event=script_run`, `source=yao_cli`, `outcome=accepted`, and `failure_type=none`. Failed CLI runs record `outcome=failed` and `failure_type=script_error`. The command name is normalized to the subcommand only; command arguments are never recorded.
 
+## External Client Emit
+
+External clients, browser extensions, editor adapters, or wrapper scripts can emit one sanitized event at a time into a local spool before importing it into the aggregate drift report:
+
+```bash
+python3 scripts/yao.py telemetry-emit . \
+  --event skill_activation \
+  --activation-type explicit \
+  --outcome accepted \
+  --command browser-extension
+```
+
+By default this writes to `.yao/telemetry_spool/external_events.jsonl`. Use `--output-jsonl` when a client needs a different local handoff path:
+
+```bash
+python3 scripts/yao.py telemetry-emit . \
+  --output-jsonl /tmp/external-client-events.jsonl \
+  --event skill_output \
+  --activation-type manual \
+  --outcome edited \
+  --command browser-plugin
+```
+
+Use `--dry-run` to validate a proposed event without writing to the spool. The emitter uses the same metadata-only contract as import: no prompt, input, output, transcript, message, note, raw text, arguments, or unknown fields are accepted.
+
+After a client finishes a batch, import the spool:
+
+```bash
+python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl
+```
+
 ## External Client Import
 
 External clients, browser extensions, editor adapters, or wrapper scripts may hand off already-sanitized JSONL through `telemetry-import`:
@@ -97,7 +128,7 @@ Package builders should exclude `reports/telemetry_events.jsonl`. The root repos
 
 ## Iteration Loop
 
-1. Capture metadata-only events locally, either manually with `adoption-drift --record-event`, automatically with opt-in `yao.py` CLI capture, or through validated external JSONL import.
+1. Capture metadata-only events locally, either manually with `adoption-drift --record-event`, automatically with opt-in `yao.py` CLI capture, through `telemetry-emit` client hooks, or through validated external JSONL import.
 2. Render `reports/adoption_drift_report.md`.
 3. Convert missed triggers into trigger eval cases.
 4. Convert bad outputs into Output Eval assertions and failure taxonomy entries.

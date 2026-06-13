@@ -51,6 +51,7 @@ DEFAULT_TARGETS = [
     "feedback-check",
     "adoption-drift-check",
     "telemetry-import-check",
+    "telemetry-emit-check",
     "review-waivers-check",
     "review-annotations-check",
     "baseline-compare-check",

@@ -299,6 +299,48 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     telemetry_import_cmd.add_argument("--dry-run", action="store_true")
     telemetry_import_cmd.set_defaults(func=_handler(command_handlers, "command_telemetry_import"))
 
+    telemetry_emit_cmd = subparsers.add_parser(
+        "telemetry-emit",
+        help="Emit one metadata-only telemetry event for later import.",
+    )
+    telemetry_emit_cmd.add_argument("skill_dir", nargs="?", default=".")
+    telemetry_emit_cmd.add_argument("--output-jsonl")
+    telemetry_emit_cmd.add_argument(
+        "--event",
+        choices=["review_event", "script_run", "skill_activation", "skill_output"],
+        default="script_run",
+    )
+    telemetry_emit_cmd.add_argument(
+        "--activation-type",
+        choices=["explicit", "implicit", "manual", "unknown"],
+        default="manual",
+    )
+    telemetry_emit_cmd.add_argument(
+        "--outcome",
+        choices=["accepted", "edited", "failed", "missed", "rejected", "reviewed", "unknown"],
+        default="unknown",
+    )
+    telemetry_emit_cmd.add_argument(
+        "--failure-type",
+        choices=[
+            "bad_output",
+            "missing_resource",
+            "none",
+            "review_overdue",
+            "script_error",
+            "under_trigger",
+            "wrong_trigger",
+        ],
+        default="none",
+    )
+    telemetry_emit_cmd.add_argument("--source", choices=["external", "manual", "unknown", "yao_cli"], default="external")
+    telemetry_emit_cmd.add_argument("--command", dest="telemetry_command", default="external-client")
+    telemetry_emit_cmd.add_argument("--timestamp")
+    telemetry_emit_cmd.add_argument("--skill-name")
+    telemetry_emit_cmd.add_argument("--version")
+    telemetry_emit_cmd.add_argument("--dry-run", action="store_true")
+    telemetry_emit_cmd.set_defaults(func=_handler(command_handlers, "command_telemetry_emit"))
+
     review_waivers_cmd = subparsers.add_parser(
         "review-waivers",
         help="Render or update human reviewer waiver evidence for Review Studio.",
