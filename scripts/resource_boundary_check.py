@@ -14,6 +14,10 @@ IGNORED_RELATIVE_DIRS = {
     Path("tests") / "tmp_snapshot",
     Path("tests") / "tmp_cli",
 }
+IGNORED_FILE_PATTERNS = {
+    "reports/*pattern-analysis*.md",
+    "reports/*research-plan*.md",
+}
 CANONICAL_PATHS = (
     "SKILL.md",
     "manifest.json",
@@ -46,6 +50,8 @@ def has_files(path: Path) -> bool:
 def should_ignore(path: Path, root: Path) -> bool:
     rel = path.relative_to(root)
     if any(rel == ignored or ignored in rel.parents for ignored in IGNORED_RELATIVE_DIRS):
+        return True
+    if any(rel.match(pattern) for pattern in IGNORED_FILE_PATTERNS):
         return True
     return len(rel.parts) >= 2 and rel.parts[0] == "tests" and rel.parts[1].startswith("tmp_")
 

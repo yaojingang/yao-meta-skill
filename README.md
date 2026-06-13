@@ -141,7 +141,7 @@ Sync the current source into the disabled mirror:
 make sync-local-install
 ```
 
-The sync command copies Git-tracked files plus new source files in code and guidance directories such as `scripts/`, `tests/`, `references/`, and `docs/`. It skips untracked business-skill folders and untracked private reports by default, so local experiments do not leak into the mirror.
+The sync command first rebuilds the package and runs install preflight against `dist/yao-meta-skill.zip`. It refuses to sync when package extraction, adapter readability, or installer permission enforcement fails. After the preflight passes, it copies Git-tracked files plus new source files in code and guidance directories such as `scripts/`, `tests/`, `references/`, and `docs/`. It skips untracked business-skill folders and untracked private reports by default, so local experiments do not leak into the mirror.
 
 Restore an active global Codex install only when you intentionally want this skill discoverable outside the development workspace:
 

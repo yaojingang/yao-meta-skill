@@ -3,6 +3,7 @@ dist/
 *.zip
 __pycache__/
 tests/tmp/
+tests/tmp_*/
 tests/tmp_snapshot/
 tests/tmp_cli/
 tests/tmp_skill_overview/
@@ -29,3 +30,4 @@ geo-ranking-article-generator/
 
 # Private or one-off pattern analysis reports should not be committed as factory evidence.
 reports/*pattern-analysis*.md
+reports/*research-plan*.md

@@ -355,7 +355,7 @@
           "label": "上下文成本",
           "score": 42,
           "reasons": [
-            "入口约 350 个词/字，references 约 14640 个词/字。",
+            "入口约 350 个词/字，references 约 14711 个词/字。",
             "分数越高代表上下文成本越低。",
             "上下文成本偏高，建议压缩入口或拆分 references。"
           ]
@@ -459,7 +459,7 @@
           "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
         ],
         "gaps": [
-          "上下文成本需要补强：入口约 350 个词/字，references 约 14640 个词/字。"
+          "上下文成本需要补强：入口约 350 个词/字，references 约 14711 个词/字。"
         ],
         "recommendations": [
           "先改触发边界，再扩展工作流。",
@@ -1228,7 +1228,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 153,
-        "package_sha256": "69dd8811ae7fef4aa0dcb296cd7c0587751eb2d7c68091953de620dcbf9aa682"
+        "package_sha256": "44d9cb1aa096fff1b2c8844a609574c05c8ed9ae12005dc74a5662d3d94013fd"
       },
       "skill_atlas": {
         "skill_count": 12,
@@ -1266,8 +1266,8 @@
           "trust_level": "local",
           "license": "MIT",
           "checksums": {
-            "package_sha256": "69dd8811ae7fef4aa0dcb296cd7c0587751eb2d7c68091953de620dcbf9aa682",
-            "archive_sha256": "2abac4fcfb65ae9a27fee5acad50c70dc63bc889adec293407fd84b9f07d5706"
+            "package_sha256": "44d9cb1aa096fff1b2c8844a609574c05c8ed9ae12005dc74a5662d3d94013fd",
+            "archive_sha256": "cdadcbc9a0c92eba0c80a9f4fbd840530d32d19bf3cbb508a24bebb8e8551933"
           },
           "compatibility": {
             "openai": "pass",
@@ -1298,7 +1298,7 @@
           },
           "distribution": {
             "archive_verified": true,
-            "archive_sha256": "2abac4fcfb65ae9a27fee5acad50c70dc63bc889adec293407fd84b9f07d5706",
+            "archive_sha256": "cdadcbc9a0c92eba0c80a9f4fbd840530d32d19bf3cbb508a24bebb8e8551933",
             "package_verification": "reports/package_verification.json",
             "install_simulated": true,
             "install_simulation": "reports/install_simulation.json"
@@ -1314,7 +1314,7 @@
           "target_count": 4,
           "adapter_count": 4,
           "archive_present": true,
-          "archive_sha256": "2abac4fcfb65ae9a27fee5acad50c70dc63bc889adec293407fd84b9f07d5706",
+          "archive_sha256": "cdadcbc9a0c92eba0c80a9f4fbd840530d32d19bf3cbb508a24bebb8e8551933",
           "archive_entry_count": 494,
           "failure_count": 0,
           "warning_count": 0
@@ -1393,12 +1393,12 @@
             {
               "field": "archive_sha256",
               "from": "",
-              "to": "2abac4fcfb65ae9a27fee5acad50c70dc63bc889adec293407fd84b9f07d5706"
+              "to": "cdadcbc9a0c92eba0c80a9f4fbd840530d32d19bf3cbb508a24bebb8e8551933"
             },
             {
               "field": "package_sha256",
               "from": "0000000000000000000000000000000000000000000000000000000000000000",
-              "to": "69dd8811ae7fef4aa0dcb296cd7c0587751eb2d7c68091953de620dcbf9aa682"
+              "to": "44d9cb1aa096fff1b2c8844a609574c05c8ed9ae12005dc74a5662d3d94013fd"
             }
           ]
         },
@@ -3128,7 +3128,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 32.77,
+          "duration_ms": 33.6,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3156,7 +3156,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 33.31,
+          "duration_ms": 33.9,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3179,7 +3179,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 32.68,
+          "duration_ms": 37.17,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3207,7 +3207,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 32.86,
+          "duration_ms": 49.26,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3230,7 +3230,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 33.15,
+          "duration_ms": 32.41,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3258,7 +3258,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 32.95,
+          "duration_ms": 33.26,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3281,7 +3281,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 33.5,
+          "duration_ms": 33.85,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3308,7 +3308,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 33.13,
+          "duration_ms": 34.38,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3331,7 +3331,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 33.0,
+          "duration_ms": 34.12,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3360,7 +3360,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 31.88,
+          "duration_ms": 34.95,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -8228,7 +8228,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 153,
-        "package_sha256": "69dd8811ae7fef4aa0dcb296cd7c0587751eb2d7c68091953de620dcbf9aa682"
+        "package_sha256": "44d9cb1aa096fff1b2c8844a609574c05c8ed9ae12005dc74a5662d3d94013fd"
       },
       "failures": [],
       "warnings": [],
@@ -9792,7 +9792,7 @@
             "timed_out": false,
             "passed": true,
             "has_help_text": true,
-            "stdout_excerpt": "usage: sync_local_install.py [-h] [--root ROOT] [--install-dir INSTALL_DIR]\n                             [--dry-run]\n\nSync the current yao-meta-skill source into a managed local skill mirror.\n\noptions:\n  -h, --help            show this help",
+            "stdout_excerpt": "usage: sync_local_install.py [-h] [--root ROOT] [--install-dir INSTALL_DIR]\n                             [--package-dir PACKAGE_DIR]\n                             [--generated-at GENERATED_AT]\n                             [--skip-install-pre",
             "stderr_excerpt": ""
           },
           {
@@ -10060,10 +10060,10 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 751,
-        "other_text_tokens": 911753,
+        "other_text_tokens": 915033,
         "estimated_initial_load_tokens": 944,
-        "estimated_total_text_tokens": 912504,
-        "relevant_file_count": 390,
+        "estimated_total_text_tokens": 915784,
+        "relevant_file_count": 392,
         "unused_resource_dirs": [],
         "quality_signal_points": 130,
         "quality_density": 137.7
@@ -11891,7 +11891,7 @@
     "adoption_drift": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-13T12:56:47Z",
+      "generated_at": "2026-06-13T13:13:24Z",
       "skill_dir": ".",
       "privacy_contract": {
         "storage": "local-first",
@@ -12053,8 +12053,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "69dd8811ae7fef4aa0dcb296cd7c0587751eb2d7c68091953de620dcbf9aa682",
-          "archive_sha256": "2abac4fcfb65ae9a27fee5acad50c70dc63bc889adec293407fd84b9f07d5706"
+          "package_sha256": "44d9cb1aa096fff1b2c8844a609574c05c8ed9ae12005dc74a5662d3d94013fd",
+          "archive_sha256": "cdadcbc9a0c92eba0c80a9f4fbd840530d32d19bf3cbb508a24bebb8e8551933"
         },
         "compatibility": {
           "openai": "pass",
@@ -12085,7 +12085,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "2abac4fcfb65ae9a27fee5acad50c70dc63bc889adec293407fd84b9f07d5706",
+          "archive_sha256": "cdadcbc9a0c92eba0c80a9f4fbd840530d32d19bf3cbb508a24bebb8e8551933",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -12110,7 +12110,7 @@
               "vscode"
             ],
             "package_metadata": "registry/packages/yao-meta-skill.json",
-            "package_sha256": "69dd8811ae7fef4aa0dcb296cd7c0587751eb2d7c68091953de620dcbf9aa682"
+            "package_sha256": "44d9cb1aa096fff1b2c8844a609574c05c8ed9ae12005dc74a5662d3d94013fd"
           }
         ]
       },
@@ -12133,7 +12133,7 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "2abac4fcfb65ae9a27fee5acad50c70dc63bc889adec293407fd84b9f07d5706",
+        "archive_sha256": "cdadcbc9a0c92eba0c80a9f4fbd840530d32d19bf3cbb508a24bebb8e8551933",
         "archive_entry_count": 494,
         "failure_count": 0,
         "warning_count": 0
@@ -13141,12 +13141,12 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "2abac4fcfb65ae9a27fee5acad50c70dc63bc889adec293407fd84b9f07d5706"
+            "to": "cdadcbc9a0c92eba0c80a9f4fbd840530d32d19bf3cbb508a24bebb8e8551933"
           },
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "69dd8811ae7fef4aa0dcb296cd7c0587751eb2d7c68091953de620dcbf9aa682"
+            "to": "44d9cb1aa096fff1b2c8844a609574c05c8ed9ae12005dc74a5662d3d94013fd"
           }
         ]
       },

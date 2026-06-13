@@ -181,10 +181,10 @@ resource-boundary-check:
 quality-check:
 	$(PYTHON) tests/verify_quality_checks.py
 
-sync-local-install:
+sync-local-install: package-check
 	$(PYTHON) scripts/sync_local_install.py --install-dir "$(LOCAL_SKILL_INSTALL_DIR)"
 
-sync-active-install:
+sync-active-install: package-check
 	$(PYTHON) scripts/sync_local_install.py --install-dir "$(ACTIVE_SKILL_INSTALL_DIR)"
 
 test: eval eval-suite route-scorecard route-confusion-check description-optimization description-optimization-check promotion-check yao-cli-check skill-overview-check skill-report-metrics-check skill-report-charts-check skill-ir-check compiler-check output-eval-check output-execution-check output-review-adjudication-check runtime-conformance-check runtime-permission-check trust-check skill-atlas-check registry-audit-check package-verify-check install-simulation-check upgrade-check review-viewer-check review-studio-check feedback-check adoption-drift-check review-waivers-check review-annotations-check baseline-compare-check reference-scan-check github-benchmark-scan-check intent-confidence-check reference-synthesis-check output-risk-profile-check artifact-design-profile-check prompt-quality-profile-check system-model-check iteration-directions-check description-drift-history iteration-ledger regression-history context-reports portability-report portability-check failure-regression-check package-check package-failure-check security-boundary-check local-install-sync-check snapshot-check validate lint governance-check resource-boundary-check quality-check

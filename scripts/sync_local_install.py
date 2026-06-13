@@ -3,7 +3,11 @@ import argparse
 import json
 import shutil
 import subprocess
+import tempfile
+from datetime import date
 from pathlib import Path
+
+from simulate_install import simulate_install
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -11,6 +15,7 @@ SKILL_NAME = "yao-meta-skill"
 SENTINEL_NAME = ".yao-local-install.json"
 DEFAULT_INSTALL_DIR = Path.home() / ".agents" / "skills.disabled" / SKILL_NAME
 ACTIVE_INSTALL_DIR = Path.home() / ".agents" / "skills" / SKILL_NAME
+DEFAULT_PACKAGE_DIR = ROOT / "dist"
 ALLOW_UNTRACKED_PREFIXES = {
     ".github",
     "agents",
@@ -133,6 +138,31 @@ def write_sentinel(root: Path, install_dir: Path, dry_run: bool) -> None:
     (install_dir / SENTINEL_NAME).write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def install_preflight(root: Path, package_dir: Path, generated_at: str) -> dict:
+    package_dir = package_dir.resolve()
+    with tempfile.TemporaryDirectory(prefix="yao-local-install-preflight-") as temp_dir:
+        report = simulate_install(root, package_dir, Path(temp_dir), generated_at)
+    summary = report.get("summary", {}) if isinstance(report.get("summary"), dict) else {}
+    permission_failures = int(summary.get("installer_permission_failure_count", 0) or 0)
+    if not report.get("ok") or permission_failures:
+        failure_preview = "; ".join(str(item) for item in report.get("failures", [])[:3])
+        if permission_failures and not failure_preview:
+            failure_preview = f"{permission_failures} installer permission failures"
+        raise ValueError(f"Install preflight failed for {package_dir}: {failure_preview or 'unknown failure'}")
+    return {
+        "ok": True,
+        "package_dir": str(package_dir),
+        "archive_extracted": bool(summary.get("archive_extracted")),
+        "adapter_count": int(summary.get("adapter_count", 0) or 0),
+        "installer_permission_enforced_count": int(summary.get("installer_permission_enforced_count", 0) or 0),
+        "installer_permission_failure_count": permission_failures,
+        "permission_target_count": int(summary.get("permission_target_count", 0) or 0),
+        "permission_capability_count": int(summary.get("permission_capability_count", 0) or 0),
+        "failure_count": int(summary.get("failure_count", 0) or 0),
+        "warning_count": int(summary.get("warning_count", 0) or 0),
+    }
+
+
 def remove_stale_files(install_dir: Path, desired_files: set[Path], dry_run: bool) -> list[str]:
     removed = []
     if not install_dir.exists():
@@ -176,10 +206,21 @@ def copy_files(root: Path, install_dir: Path, files: list[Path], dry_run: bool) 
     return copied, skipped
 
 
-def sync_local_install(root: Path, install_dir: Path, dry_run: bool = False) -> dict:
+def sync_local_install(
+    root: Path,
+    install_dir: Path,
+    dry_run: bool = False,
+    package_dir: Path | None = None,
+    generated_at: str | None = None,
+    skip_install_preflight: bool = False,
+) -> dict:
     root = root.resolve()
     install_dir = install_dir.resolve()
     validate_install_dir(root, install_dir)
+    preflight = {"ok": True, "skipped": True}
+    if not skip_install_preflight:
+        resolved_package_dir = (package_dir or DEFAULT_PACKAGE_DIR).resolve()
+        preflight = install_preflight(root, resolved_package_dir, generated_at or str(date.today()))
     files, skipped_untracked = candidate_files(root)
     desired_files = set(files)
     desired_files.add(Path(SENTINEL_NAME))
@@ -197,6 +238,7 @@ def sync_local_install(root: Path, install_dir: Path, dry_run: bool = False) -> 
         "removed_count": len(removed),
         "skipped_source_count": len(skipped_sources),
         "skipped_untracked_count": len(skipped_untracked),
+        "install_preflight": preflight,
         "copied_samples": copied[:10],
         "removed_samples": removed[:10],
         "skipped_source_samples": skipped_sources[:10],
@@ -208,13 +250,23 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Sync the current yao-meta-skill source into a managed local skill mirror.")
     parser.add_argument("--root", default=str(ROOT))
     parser.add_argument("--install-dir", default=str(DEFAULT_INSTALL_DIR))
+    parser.add_argument("--package-dir", default=str(DEFAULT_PACKAGE_DIR))
+    parser.add_argument("--generated-at", default=str(date.today()))
+    parser.add_argument("--skip-install-preflight", action="store_true")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
+    root = Path(args.root).resolve()
+    package_dir = Path(args.package_dir)
+    if not package_dir.is_absolute():
+        package_dir = root / package_dir
     try:
         result = sync_local_install(
-            Path(args.root),
+            root,
             resolve_install_dir(args.install_dir),
             dry_run=args.dry_run,
+            package_dir=package_dir,
+            generated_at=args.generated_at,
+            skip_install_preflight=args.skip_install_preflight,
         )
     except (OSError, subprocess.CalledProcessError, ValueError) as exc:
         result = {"ok": False, "failures": [str(exc)]}

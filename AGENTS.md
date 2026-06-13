@@ -34,7 +34,7 @@ After source changes that affect scripts, package contents, trust evidence, Revi
 GENERATED_AT="${GENERATED_AT:-$(date +%F)}"
 python3 scripts/run_output_execution.py --runner-command '["python3","scripts/local_output_eval_runner.py"]'
 python3 scripts/compile_skill.py . --generated-at "$GENERATED_AT"
-python3 scripts/cross_packager.py . --platform openai --platform claude --platform generic --expectations evals/packaging_expectations.json --output-dir dist --zip
+python3 scripts/cross_packager.py . --platform openai --platform claude --platform generic --platform vscode --expectations evals/packaging_expectations.json --output-dir dist --zip
 python3 scripts/simulate_install.py . --package-dir dist --install-root dist/install-simulation --output-json reports/install_simulation.json --output-md reports/install_simulation.md --generated-at "$GENERATED_AT"
 python3 scripts/trust_check.py . --output-json reports/security_trust_report.json --output-md reports/security_trust_report.md
 python3 scripts/registry_audit.py . --generated-at "$GENERATED_AT"
@@ -45,7 +45,9 @@ python3 scripts/render_skill_overview.py .
 python3 scripts/render_review_studio.py . --output-html reports/review-studio.html --output-json reports/review-studio.json
 ```
 
-Clean test-only scratch directories after verification with `rm -rf tests/tmp_*`. Do not clean unrelated untracked files.
+Local sync into `~/.agents/skills.disabled/yao-meta-skill` or `~/.agents/skills/yao-meta-skill` must keep the install preflight enabled unless the user explicitly requests a diagnostic bypass. `make sync-local-install` and `make sync-active-install` rebuild the package first, then `scripts/sync_local_install.py` refuses to copy files when install simulation or installer permission enforcement fails.
+
+Clean test-only scratch directories after verification with `find tests -maxdepth 1 \( -name 'tmp' -o -name 'tmp_*' \) -type d -exec rm -rf {} +`. Do not clean unrelated untracked files.
 
 ## Boundaries
 

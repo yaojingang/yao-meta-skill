@@ -36,6 +36,8 @@ Do not claim archive readiness when package verification reports unsafe zip path
 
 Do not claim install readiness when install simulation cannot extract the archive into a temporary skill root, load `SKILL.md` frontmatter, read `manifest.json`, read `agents/interface.yaml`, find the overview and Review Studio reports, or load each generated adapter.
 
+Do not sync a local or active install from source until the same package has passed install preflight. `scripts/sync_local_install.py` must run install simulation against the configured package directory and fail before copying files when any target/capability pair lacks active permission approval or target-specific enforcement evidence. Use `--skip-install-preflight` only for isolated diagnostics, not for release or active install.
+
 Do not include raw `reports/telemetry_events.jsonl` in a distributed package. Include only aggregate adoption drift reports, and block release review when telemetry contains raw prompts, outputs, transcripts, notes, or messages.
 
 Review waiver evidence may be distributed as `reports/review_waivers.md/json` because it is metadata-only reviewer accountability. Do not store raw prompts, outputs, transcripts, credentials, or private customer detail in waiver reasons.
@@ -53,5 +55,6 @@ A reviewer should be able to answer:
 5. Which reports prove trust and runtime readiness?
 6. Was the installable archive verified, and which checksum identifies it?
 7. Was the archive install-simulated in a temporary local skill root?
-8. What changed since the previous package, and does the declared version bump match the recommended bump?
-9. Are adoption and drift signals summarized without packaging raw local telemetry?
+8. Did local or active install sync preserve that preflight and installer permission gate?
+9. What changed since the previous package, and does the declared version bump match the recommended bump?
+10. Are adoption and drift signals summarized without packaging raw local telemetry?

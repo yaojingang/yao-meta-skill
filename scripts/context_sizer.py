@@ -26,6 +26,10 @@ PACKAGE_PATHS = (
     "input",
     "outputs",
 )
+IGNORED_FILE_PATTERNS = {
+    "reports/*pattern-analysis*.md",
+    "reports/*research-plan*.md",
+}
 
 
 def estimate_tokens(text: str) -> int:
@@ -60,6 +64,8 @@ def classify(path: Path) -> str:
 def should_ignore(path: Path, skill_dir: Path) -> bool:
     rel = path.relative_to(skill_dir)
     if any(rel == ignored or ignored in rel.parents for ignored in IGNORED_RELATIVE_DIRS):
+        return True
+    if any(rel.match(pattern) for pattern in IGNORED_FILE_PATTERNS):
         return True
     return len(rel.parts) >= 2 and rel.parts[0] == "tests" and rel.parts[1].startswith("tmp_")
 
