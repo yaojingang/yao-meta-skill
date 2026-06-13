@@ -4,11 +4,11 @@
   "skill_dir": ".",
   "summary": {
     "decision": "review",
-    "world_class_score": 92,
-    "gate_count": 13,
+    "world_class_score": 90,
+    "gate_count": 14,
     "blocker_count": 0,
-    "warning_count": 2,
-    "action_count": 2,
+    "warning_count": 3,
+    "action_count": 3,
     "annotation_count": 0,
     "open_annotation_count": 0,
     "open_annotation_blocker_count": 0,
@@ -104,6 +104,14 @@
       "link": "review_waivers.md"
     },
     {
+      "key": "world-class-evidence",
+      "label": "世界证据",
+      "status": "warn",
+      "detail": "4 pending world-class evidence entries; 1 human pending; 3 external pending; overclaim guard true",
+      "evidence": "reports/world_class_evidence_ledger.json",
+      "link": "world_class_evidence_ledger.md"
+    },
+    {
       "key": "registry-audit",
       "label": "注册审计",
       "status": "pass",
@@ -137,6 +145,14 @@
       "detail": "0 active waivers; 1 warning gates still need reviewer decision",
       "evidence": "reports/review_waivers.json",
       "link": "review_waivers.md"
+    },
+    {
+      "key": "world-class-evidence",
+      "label": "世界证据",
+      "status": "warn",
+      "detail": "4 pending world-class evidence entries; 1 human pending; 3 external pending; overclaim guard true",
+      "evidence": "reports/world_class_evidence_ledger.json",
+      "link": "world_class_evidence_ledger.md"
     }
   ],
   "review_actions": [
@@ -231,6 +247,68 @@
       "evidence": "reports/review_waivers.json",
       "evidence_link": "review_waivers.md",
       "verification_command": "python3 scripts/render_review_waivers.py ."
+    },
+    {
+      "gate_key": "world-class-evidence",
+      "label": "世界证据",
+      "status": "warn",
+      "priority": "warning",
+      "summary": "补齐 provider、真人盲评、原生权限执行和真实客户端遥测证据，或明确本次发布不声明 world-class 完成。",
+      "why": "世界级结论必须来自已接受的外部/人工证据；计划、metadata fallback、待评审和本地命令都不能替代完成证据。",
+      "source_fix": "reports/world_class_evidence_ledger.md + reports/world_class_evidence_plan.md",
+      "source_refs": [
+        {
+          "path": "reports/world_class_evidence_ledger.md",
+          "label": "world-class evidence ledger",
+          "kind": "report",
+          "line": 1,
+          "exists": true,
+          "link": "world_class_evidence_ledger.md"
+        },
+        {
+          "path": "reports/world_class_evidence_plan.md",
+          "label": "world-class evidence plan",
+          "kind": "report",
+          "line": 1,
+          "exists": true,
+          "link": "world_class_evidence_plan.md"
+        },
+        {
+          "path": "reports/skill_os2_audit.md",
+          "label": "Skill OS 2.0 audit",
+          "kind": "report",
+          "line": 1,
+          "exists": true,
+          "link": "skill_os2_audit.md"
+        },
+        {
+          "path": "reports/output_review_decisions.json",
+          "label": "human review decisions",
+          "kind": "report",
+          "line": 6,
+          "exists": true,
+          "link": "output_review_decisions.json"
+        },
+        {
+          "path": "reports/runtime_permission_probes.md",
+          "label": "runtime permission probes",
+          "kind": "report",
+          "line": 1,
+          "exists": true,
+          "link": "runtime_permission_probes.md"
+        },
+        {
+          "path": "reports/adoption_drift_report.md",
+          "label": "adoption drift",
+          "kind": "report",
+          "line": 1,
+          "exists": true,
+          "link": "adoption_drift_report.md"
+        }
+      ],
+      "evidence": "reports/world_class_evidence_ledger.json",
+      "evidence_link": "world_class_evidence_ledger.md",
+      "verification_command": "python3 scripts/yao.py world-class-ledger . && python3 scripts/yao.py review-studio ."
     }
   ],
   "evidence_paths": {
@@ -1167,9 +1245,9 @@
           "world_class_task_count": 4,
           "world_class_ledger_pending_count": 4,
           "working_tree_dirty": true,
-          "changed_file_count": 47
+          "changed_file_count": 25
         },
-        "commit": "be3fe0016116ab337a972a0bfee1b05cace7ac36",
+        "commit": "f3b23ea9b90e85dbcfdf85c75b40c29e9cad2ab3",
         "missing_artifacts": [],
         "limitations": [
           "Local command-runner evidence is reproducible but does not replace provider-backed model holdout evidence.",
@@ -1265,7 +1343,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 162,
-        "package_sha256": "22d5e9247b42c8c237c0524da9cae227ba0056807815e4174b810b178568546f"
+        "package_sha256": "22b432b88be7f5aef7f4935fc6fc904211e4eb30b47bf1dd687b905d3e62b481"
       },
       "skill_atlas": {
         "skill_count": 12,
@@ -1303,8 +1381,8 @@
           "trust_level": "local",
           "license": "MIT",
           "checksums": {
-            "package_sha256": "22d5e9247b42c8c237c0524da9cae227ba0056807815e4174b810b178568546f",
-            "archive_sha256": "23c245a236f450db2373b8ba7b95290df1a05b454d96890e89e25db7efaf4328"
+            "package_sha256": "22b432b88be7f5aef7f4935fc6fc904211e4eb30b47bf1dd687b905d3e62b481",
+            "archive_sha256": "c13191187953698cd40da82fd55e1c6116e516edd2c0045b4e20b41db6bf3b6a"
           },
           "compatibility": {
             "openai": "pass",
@@ -1335,7 +1413,7 @@
           },
           "distribution": {
             "archive_verified": true,
-            "archive_sha256": "23c245a236f450db2373b8ba7b95290df1a05b454d96890e89e25db7efaf4328",
+            "archive_sha256": "c13191187953698cd40da82fd55e1c6116e516edd2c0045b4e20b41db6bf3b6a",
             "package_verification": "reports/package_verification.json",
             "install_simulated": true,
             "install_simulation": "reports/install_simulation.json"
@@ -1351,7 +1429,7 @@
           "target_count": 4,
           "adapter_count": 4,
           "archive_present": true,
-          "archive_sha256": "23c245a236f450db2373b8ba7b95290df1a05b454d96890e89e25db7efaf4328",
+          "archive_sha256": "c13191187953698cd40da82fd55e1c6116e516edd2c0045b4e20b41db6bf3b6a",
           "archive_entry_count": 521,
           "failure_count": 0,
           "warning_count": 0
@@ -1430,12 +1508,12 @@
             {
               "field": "archive_sha256",
               "from": "",
-              "to": "23c245a236f450db2373b8ba7b95290df1a05b454d96890e89e25db7efaf4328"
+              "to": "c13191187953698cd40da82fd55e1c6116e516edd2c0045b4e20b41db6bf3b6a"
             },
             {
               "field": "package_sha256",
               "from": "0000000000000000000000000000000000000000000000000000000000000000",
-              "to": "22d5e9247b42c8c237c0524da9cae227ba0056807815e4174b810b178568546f"
+              "to": "22b432b88be7f5aef7f4935fc6fc904211e4eb30b47bf1dd687b905d3e62b481"
             }
           ]
         },
@@ -3512,7 +3590,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.6,
+          "duration_ms": 25.58,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3540,7 +3618,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.28,
+          "duration_ms": 25.78,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3563,7 +3641,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.23,
+          "duration_ms": 25.83,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3591,7 +3669,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.19,
+          "duration_ms": 25.84,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3614,7 +3692,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.68,
+          "duration_ms": 25.91,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3642,7 +3720,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.96,
+          "duration_ms": 25.98,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3665,7 +3743,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.39,
+          "duration_ms": 25.77,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3692,7 +3770,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.41,
+          "duration_ms": 25.69,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3715,7 +3793,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.45,
+          "duration_ms": 25.64,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3744,7 +3822,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.25,
+          "duration_ms": 25.66,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -8757,7 +8835,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 162,
-        "package_sha256": "22d5e9247b42c8c237c0524da9cae227ba0056807815e4174b810b178568546f"
+        "package_sha256": "22b432b88be7f5aef7f4935fc6fc904211e4eb30b47bf1dd687b905d3e62b481"
       },
       "failures": [],
       "warnings": [],
@@ -10808,9 +10886,9 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 751,
-        "other_text_tokens": 1002467,
+        "other_text_tokens": 1004699,
         "estimated_initial_load_tokens": 944,
-        "estimated_total_text_tokens": 1003218,
+        "estimated_total_text_tokens": 1005450,
         "relevant_file_count": 436,
         "unused_resource_dirs": [],
         "quality_signal_points": 130,
@@ -13020,8 +13098,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "22d5e9247b42c8c237c0524da9cae227ba0056807815e4174b810b178568546f",
-          "archive_sha256": "23c245a236f450db2373b8ba7b95290df1a05b454d96890e89e25db7efaf4328"
+          "package_sha256": "22b432b88be7f5aef7f4935fc6fc904211e4eb30b47bf1dd687b905d3e62b481",
+          "archive_sha256": "c13191187953698cd40da82fd55e1c6116e516edd2c0045b4e20b41db6bf3b6a"
         },
         "compatibility": {
           "openai": "pass",
@@ -13052,7 +13130,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "23c245a236f450db2373b8ba7b95290df1a05b454d96890e89e25db7efaf4328",
+          "archive_sha256": "c13191187953698cd40da82fd55e1c6116e516edd2c0045b4e20b41db6bf3b6a",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -13077,7 +13155,7 @@
               "vscode"
             ],
             "package_metadata": "registry/packages/yao-meta-skill.json",
-            "package_sha256": "22d5e9247b42c8c237c0524da9cae227ba0056807815e4174b810b178568546f"
+            "package_sha256": "22b432b88be7f5aef7f4935fc6fc904211e4eb30b47bf1dd687b905d3e62b481"
           }
         ]
       },
@@ -13100,7 +13178,7 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "23c245a236f450db2373b8ba7b95290df1a05b454d96890e89e25db7efaf4328",
+        "archive_sha256": "c13191187953698cd40da82fd55e1c6116e516edd2c0045b4e20b41db6bf3b6a",
         "archive_entry_count": 521,
         "failure_count": 0,
         "warning_count": 0
@@ -14108,12 +14186,12 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "23c245a236f450db2373b8ba7b95290df1a05b454d96890e89e25db7efaf4328"
+            "to": "c13191187953698cd40da82fd55e1c6116e516edd2c0045b4e20b41db6bf3b6a"
           },
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "22d5e9247b42c8c237c0524da9cae227ba0056807815e4174b810b178568546f"
+            "to": "22b432b88be7f5aef7f4935fc6fc904211e4eb30b47bf1dd687b905d3e62b481"
           }
         ]
       },

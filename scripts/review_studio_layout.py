@@ -22,6 +22,7 @@ REVIEW_STUDIO_NAV = [
     ("#atlas", "组合治理"),
     ("#telemetry", "运营回路"),
     ("#waivers", "人工批准"),
+    ("#world-class", "世界证据"),
     ("#registry", "注册审计"),
     ("#release", "发布路线"),
 ]

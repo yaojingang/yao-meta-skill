@@ -240,17 +240,17 @@ def main() -> None:
     assert payload["ok"], payload
     assert payload["schema_version"] == "2.0", payload
     assert payload["summary"]["decision"] == "review", payload
-    assert payload["summary"]["gate_count"] == 13, payload
-    assert payload["summary"]["world_class_score"] == 92, payload
-    assert payload["summary"]["warning_count"] == 2, payload
+    assert payload["summary"]["gate_count"] == 14, payload
+    assert payload["summary"]["world_class_score"] == 90, payload
+    assert payload["summary"]["warning_count"] == 3, payload
     assert payload["summary"]["blocker_count"] == 0, payload
-    assert payload["summary"]["action_count"] == 2, payload
+    assert payload["summary"]["action_count"] == 3, payload
     assert payload["summary"]["annotation_count"] == 0, payload
     assert payload["summary"]["open_annotation_blocker_count"] == 0, payload
     assert payload["summary"]["action_count"] == payload["summary"]["warning_count"] + payload["summary"]["blocker_count"], payload
-    assert {item["gate_key"] for item in payload["review_actions"]} == {"output-lab", "review-waivers"}, payload
+    assert {item["gate_key"] for item in payload["review_actions"]} == {"output-lab", "review-waivers", "world-class-evidence"}, payload
     gate_keys = {item["key"] for item in payload["gates"]}
-    assert {"intent-canvas", "trigger-lab", "output-lab", "runtime-matrix", "trust-report", "permission-gates", "permission-runtime", "skill-atlas", "operations-loop", "review-waivers", "registry-audit", "release-notes"} <= gate_keys, payload
+    assert {"intent-canvas", "trigger-lab", "output-lab", "runtime-matrix", "trust-report", "permission-gates", "permission-runtime", "skill-atlas", "operations-loop", "review-waivers", "world-class-evidence", "registry-audit", "release-notes"} <= gate_keys, payload
     output_gate = next(item for item in payload["gates"] if item["key"] == "output-lab")
     assert output_gate["status"] == "warn", output_gate
     assert "5/5 cases" in output_gate["detail"], output_gate
@@ -295,6 +295,13 @@ def main() -> None:
     assert waivers_gate["status"] == "warn", waivers_gate
     assert "warning gates still need reviewer decision" in waivers_gate["detail"], waivers_gate
     assert "reports/review_waivers.json" in waivers_gate["evidence"], waivers_gate
+    world_class_gate = next(item for item in payload["gates"] if item["key"] == "world-class-evidence")
+    assert world_class_gate["status"] == "warn", world_class_gate
+    assert "4 pending world-class evidence entries" in world_class_gate["detail"], world_class_gate
+    assert "1 human pending" in world_class_gate["detail"], world_class_gate
+    assert "3 external pending" in world_class_gate["detail"], world_class_gate
+    assert "overclaim guard true" in world_class_gate["detail"], world_class_gate
+    assert world_class_gate["evidence"] == "reports/world_class_evidence_ledger.json", world_class_gate
     assert output_html.exists(), output_html
     assert output_json.exists(), output_json
     full_payload = json.loads(output_json.read_text(encoding="utf-8"))
@@ -324,7 +331,15 @@ def main() -> None:
     assert full_payload["data"]["runtime_permissions"]["summary"]["metadata_fallback_count"] == 4, full_payload["data"]["runtime_permissions"]
     assert full_payload["evidence_paths"]["runtime_permissions"] == "reports/runtime_permission_probes.md", full_payload["evidence_paths"]
     action_keys = {item["gate_key"] for item in full_payload["review_actions"]}
-    assert action_keys == {"output-lab", "review-waivers"}, full_payload["review_actions"]
+    assert action_keys == {"output-lab", "review-waivers", "world-class-evidence"}, full_payload["review_actions"]
+    world_class_action = next(item for item in full_payload["review_actions"] if item["gate_key"] == "world-class-evidence")
+    assert {item["path"] for item in world_class_action["source_refs"]} >= {
+        "reports/world_class_evidence_ledger.md",
+        "reports/world_class_evidence_plan.md",
+        "reports/skill_os2_audit.md",
+    }, world_class_action
+    assert all(item["exists"] for item in world_class_action["source_refs"]), world_class_action
+    assert full_payload["data"]["world_class_evidence_ledger"]["summary"]["pending_count"] == 4, full_payload["data"]["world_class_evidence_ledger"]
     assert full_payload["data"]["atlas"]["summary"]["actionable_route_collision_count"] == 0, full_payload["data"]["atlas"]
     assert full_payload["data"]["atlas"]["summary"]["actionable_drift_signal_count"] == 0, full_payload["data"]["atlas"]
     assert full_payload["data"]["atlas"]["summary"]["non_actionable_issue_count"] >= 1, full_payload["data"]["atlas"]
@@ -367,6 +382,9 @@ def main() -> None:
     assert "reports/output_review_decisions.json" in html, html[:9000]
     assert "python3 scripts/adjudicate_output_review.py --write-template" in html, html[:9000]
     assert "对保留的 warning 写入 reviewer、理由、范围和到期时间，或修掉 warning。" in html, html[:9000]
+    assert "补齐 provider、真人盲评、原生权限执行和真实客户端遥测证据" in html, html
+    assert "世界证据" in html, html
+    assert "证据台账" in html, html
     assert "审查批注" in html, html[:9000]
     assert "当前没有 reviewer 批注" in html, html[:9000]
     assert "输出实验" in html, html[:2000]
@@ -411,7 +429,8 @@ def main() -> None:
     assert review_gates.status_label("warn") == "关注"
     assert review_gates.weighted_score([{"key": "output-lab", "status": "pass"}]) == 100
     assert review_gates.weighted_score([{"key": "output-lab", "status": "warn"}]) == 60
-    assert len(review_layout.REVIEW_STUDIO_NAV) == 15, review_layout.REVIEW_STUDIO_NAV
+    assert len(review_layout.REVIEW_STUDIO_NAV) == 16, review_layout.REVIEW_STUDIO_NAV
+    assert ("#world-class", "世界证据") in review_layout.REVIEW_STUDIO_NAV, review_layout.REVIEW_STUDIO_NAV
     assert "position: sticky" in review_layout.review_studio_css(), review_layout.review_studio_css()[:400]
     assert "#overview" in review_layout.render_review_nav(), review_layout.render_review_nav()
     assert "审查总览" in review_layout.render_review_nav(), review_layout.render_review_nav()

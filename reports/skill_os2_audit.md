@@ -28,7 +28,7 @@ Generated at: `2026-06-13`
 | Native Permission Enforcement | external-required | native-enforced targets 0 | At least one target/client enforces approved permissions at runtime | Integrate a real client or installer runtime guard before claiming native permission enforcement. |
 | Skill Atlas | pass | 12 skills; actionable collisions 0 | Workspace catalog, route overlap, stale/owner gaps, drift, and no-route opportunities | Feed real drift data into Atlas once client telemetry is installed. |
 | Registry Distribution | pass | zip entries 521; install failures 0; permission failures 0 | Package metadata, archive checksum, package verification, and install simulation pass | Regenerate registry after package verification so checksums stay aligned. |
-| Review Studio | pass | decision review; warnings 2; score 92 | One page shows gates, evidence paths, blockers, warnings, actions, waivers, and annotations | Resolve human/external warning gates before claiming full release readiness. |
+| Review Studio | pass | decision review; warnings 3; score 90 | One page shows gates, evidence paths, blockers, warnings, actions, waivers, and annotations | Resolve human/external warning gates before claiming full release readiness. |
 | Telemetry Drift | pass | events 1; risk low; recipes 5 | Local-first metadata-only event contract, aggregate drift report, hook recipes, and import path | Keep raw JSONL out of distributed packages and use aggregate reports for Atlas. |
 | Native Client Telemetry | external-required | external source events 0; adoption samples 0 | A real Browser/Chrome/provider client sends production metadata events | Install a real client against the native host and import production metadata-only events. |
 

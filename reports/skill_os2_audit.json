@@ -303,7 +303,7 @@
       "key": "review-studio",
       "label": "Review Studio",
       "status": "pass",
-      "current": "decision review; warnings 2; score 92",
+      "current": "decision review; warnings 3; score 90",
       "target": "One page shows gates, evidence paths, blockers, warnings, actions, waivers, and annotations",
       "evidence": [
         {

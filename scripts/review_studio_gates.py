@@ -418,6 +418,39 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
         )
     )
 
+    world_class_ledger = data.get("world_class_evidence_ledger", {})
+    world_class_summary = world_class_ledger.get("summary", {}) if isinstance(world_class_ledger, dict) else {}
+    if not world_class_ledger and maturity == "governed":
+        world_class_status = "warn"
+        world_class_detail = "world-class evidence ledger is missing; public world-class readiness cannot be claimed"
+    elif not world_class_ledger:
+        world_class_status = "pass"
+        world_class_detail = "world-class evidence ledger is optional until governed or public world-class readiness is claimed"
+    elif world_class_summary.get("ready_to_claim_world_class") is True:
+        world_class_status = "pass"
+        world_class_detail = (
+            f"{world_class_summary.get('accepted_count', 0)} accepted evidence entries; "
+            f"{world_class_summary.get('pending_count', 0)} pending"
+        )
+    else:
+        world_class_status = "warn"
+        world_class_detail = (
+            f"{world_class_summary.get('pending_count', 0)} pending world-class evidence entries; "
+            f"{world_class_summary.get('human_pending_count', 0)} human pending; "
+            f"{world_class_summary.get('external_pending_count', 0)} external pending; "
+            f"overclaim guard {str(world_class_summary.get('overclaim_guard_active', False)).lower()}"
+        )
+    gates.append(
+        gate(
+            "world-class-evidence",
+            "世界证据",
+            world_class_status,
+            world_class_detail,
+            "reports/world_class_evidence_ledger.json",
+            _report_link(output_html, skill_dir, "reports/world_class_evidence_ledger.md"),
+        )
+    )
+
     registry = data["registry"]
     install = data["install_simulation"]
     if not registry:
@@ -505,6 +538,7 @@ def weighted_score(gates: list[dict[str, str]]) -> int:
         "skill-atlas": 10,
         "operations-loop": 10,
         "review-waivers": 10,
+        "world-class-evidence": 10,
         "registry-audit": 10,
         "release-notes": 10,
         "intent-canvas": 10,

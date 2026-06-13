@@ -458,6 +458,20 @@ ACTION_GUIDANCE: dict[str, dict[str, str]] = {
         ],
         "verification": "python3 scripts/render_review_waivers.py .",
     },
+    "world-class-evidence": {
+        "summary": "补齐 provider、真人盲评、原生权限执行和真实客户端遥测证据，或明确本次发布不声明 world-class 完成。",
+        "why": "世界级结论必须来自已接受的外部/人工证据；计划、metadata fallback、待评审和本地命令都不能替代完成证据。",
+        "source_fix": "reports/world_class_evidence_ledger.md + reports/world_class_evidence_plan.md",
+        "source_paths": [
+            {"path": "reports/world_class_evidence_ledger.md", "label": "world-class evidence ledger", "kind": "report", "patterns": ["# World-Class Evidence Ledger"]},
+            {"path": "reports/world_class_evidence_plan.md", "label": "world-class evidence plan", "kind": "report", "patterns": ["# World-Class Evidence Plan"]},
+            {"path": "reports/skill_os2_audit.md", "label": "Skill OS 2.0 audit", "kind": "report", "patterns": ["# Skill OS"]},
+            {"path": "reports/output_review_decisions.json", "label": "human review decisions", "kind": "report", "patterns": ["winner_variant"]},
+            {"path": "reports/runtime_permission_probes.md", "label": "runtime permission probes", "kind": "report", "patterns": ["# Runtime"]},
+            {"path": "reports/adoption_drift_report.md", "label": "adoption drift", "kind": "report", "patterns": ["# Adoption"]},
+        ],
+        "verification": "python3 scripts/yao.py world-class-ledger . && python3 scripts/yao.py review-studio .",
+    },
     "registry-audit": {
         "summary": "补齐 registry package metadata、checksum、license、owner、review cadence 和 install evidence。",
         "why": "分发元数据不完整时，团队无法安全安装、升级或追溯包体来源。",
@@ -626,6 +640,7 @@ def render_html(report: dict[str, Any]) -> str:
     atlas_summary = report["data"]["atlas"].get("summary", {})
     adoption_summary = report["data"]["adoption_drift"].get("summary", {})
     waiver_summary = report["data"]["review_waivers"].get("summary", {})
+    world_class_summary = report["data"].get("world_class_evidence_ledger", {}).get("summary", {})
     annotation_summary = report["data"]["review_annotations"].get("summary", {})
     annotation_caption = (
         f"{annotation_summary.get('annotation_count', 0)} 条批注；"
@@ -715,6 +730,19 @@ def render_html(report: dict[str, Any]) -> str:
         waiver_summary,
         ["waiver_count", "active_count", "expired_count", "invalid_count", "covered_gate_count"],
         "no review waiver summary",
+    )
+    world_class_panel = render_kv_grid(
+        world_class_summary,
+        [
+            "ledger_entry_count",
+            "accepted_count",
+            "pending_count",
+            "human_pending_count",
+            "external_pending_count",
+            "overclaim_guard_active",
+            "ready_to_claim_world_class",
+        ],
+        "world-class evidence ledger missing",
     )
     registry_panel = render_kv_grid(
         registry_package_summary(registry_package),
@@ -881,6 +909,11 @@ def render_html(report: dict[str, Any]) -> str:
     <section id="waivers" class="twocol">
       <div class="panel"><h2>人工批准</h2><p>{html.escape(gate_details.get('review-waivers', 'review waiver ledger missing'))}</p></div>
       <div class="panel"><h2>批准台账</h2>{waiver_panel}</div>
+    </section>
+
+    <section id="world-class" class="twocol">
+      <div class="panel"><h2>世界证据</h2><p>{html.escape(gate_details.get('world-class-evidence', 'world-class evidence ledger missing'))}</p></div>
+      <div class="panel"><h2>证据台账</h2>{world_class_panel}</div>
     </section>
 
     <section id="registry" class="twocol">

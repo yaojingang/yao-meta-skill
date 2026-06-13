@@ -319,7 +319,10 @@ def main() -> None:
     review_studio_result = run("review-studio", str(created))
     assert review_studio_result["ok"], review_studio_result
     assert review_studio_result["payload"]["artifacts"]["html"].endswith("reports/review-studio.html"), review_studio_result
-    assert review_studio_result["payload"]["summary"]["gate_count"] == 13, review_studio_result
+    assert review_studio_result["payload"]["summary"]["gate_count"] == 14, review_studio_result
+    created_world_class_gate = next(item for item in review_studio_result["payload"]["gates"] if item["key"] == "world-class-evidence")
+    assert created_world_class_gate["status"] == "pass", created_world_class_gate
+    assert "optional" in created_world_class_gate["detail"], created_world_class_gate
 
     review_waivers_result = run(
         "review-waivers",
