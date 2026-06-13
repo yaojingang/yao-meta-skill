@@ -23,6 +23,7 @@ from yao_cli_config import (
     resolve_target,
 )
 from yao_cli_parser import build_parser as build_cli_parser
+from yao_cli_telemetry import add_telemetry_args, maybe_record_cli_event
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -691,6 +692,8 @@ def command_adoption_drift(args: argparse.Namespace) -> int:
         cmd.extend(["--activation-type", args.activation_type])
         cmd.extend(["--outcome", args.outcome])
         cmd.extend(["--failure-type", args.failure_type])
+        cmd.extend(["--source", args.source])
+        cmd.extend(["--command", args.telemetry_command])
         if args.timestamp:
             cmd.extend(["--timestamp", args.timestamp])
         if args.skill_name:
@@ -1182,13 +1185,20 @@ def command_check_update(args: argparse.Namespace) -> int:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    return build_cli_parser({name: value for name, value in globals().items() if name.startswith("command_")})
+    parser = build_cli_parser({name: value for name, value in globals().items() if name.startswith("command_")})
+    add_telemetry_args(parser)
+    return parser
 
 
 def main() -> None:
     parser = build_parser()
     args = parser.parse_args()
-    raise SystemExit(args.func(args))
+    returncode = 2
+    try:
+        returncode = args.func(args)
+    finally:
+        maybe_record_cli_event(ROOT, args, returncode)
+    raise SystemExit(returncode)
 
 
 if __name__ == "__main__":

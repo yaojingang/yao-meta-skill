@@ -22,6 +22,7 @@ Yao Meta Skill is no longer only a Meta Skill factory. The current working tree 
 - Install Simulation v0 for local extraction, entrypoint loading, interface loading, report presence, adapter readability, and installer-level permission approval/enforcement checks.
 - Upgrade Check v0 for registry package diffs, semver bump recommendations, breaking-change notes, and release evidence.
 - Adoption Drift v0 for local-first metadata-only telemetry, privacy-field blocking, usage-signal aggregation, iteration candidate generation, and Skill Atlas drift-signal input.
+- CLI Telemetry Capture v0 for opt-in `yao.py` command-run metadata that records command name, source, outcome, failure class, and timestamp without command arguments or raw user/model content.
 - Review Waivers v0 for human warning acceptance with reviewer, reason, scope, expiry, and blocker-safe policy.
 - Governed Permission Gates v0 for reviewer-approved network, file-write, and subprocess capabilities with scope, reason, expiry, evidence, and target-enforcement mapping.
 - Runtime Permission Probes v0 for packaged target adapter checks, explicit native-enforcement flags, metadata fallback evidence, and residual permission risks.
@@ -33,7 +34,7 @@ Yao Meta Skill is no longer only a Meta Skill factory. The current working tree 
 - Output Review Adjudication now preserves blind-review integrity by hiding expected winners for pending or invalid reviewer decisions; answer keys are revealed only after a valid A/B decision exists for that case.
 - Provider Output Eval Runner v0 so `python3 scripts/yao.py output-exec --provider-runner openai` can collect real provider-backed model evidence through a reviewed OpenAI Responses API compatible runner instead of ad hoc shell glue.
 
-This is still not the final world-class state. Target-native behavior contracts are now explicit, VS Code / Copilot package metadata is auditable, local output-eval command execution is wired, blind-review answers remain hidden until valid decisions exist, a provider-backed output runner exists, installer-level permission coverage is now locally enforced during install simulation and local install sync, and Skill Atlas now consumes aggregate drift reports. Review Studio keeps pending human adjudication visible as a warning instead of treating it as a clean pass. Deeper provider-native execution transforms, real client telemetry capture, provider-native installer integration, real provider holdout runs, real human adjudication decisions, and native runtime permission enforcement remain open.
+This is still not the final world-class state. Target-native behavior contracts are now explicit, VS Code / Copilot package metadata is auditable, local output-eval command execution is wired, blind-review answers remain hidden until valid decisions exist, a provider-backed output runner exists, installer-level permission coverage is now locally enforced during install simulation and local install sync, opt-in `yao.py` CLI telemetry can capture metadata-only real run signals, and Skill Atlas now consumes aggregate drift reports. Review Studio keeps pending human adjudication visible as a warning instead of treating it as a clean pass. Deeper provider-native execution transforms, external client telemetry capture, provider-native installer integration, real provider holdout runs, real human adjudication decisions, and native runtime permission enforcement remain open.
 
 ## Coverage Matrix
 
@@ -54,7 +55,7 @@ This is still not the final world-class state. Target-native behavior contracts 
 | Install Simulation | `scripts/simulate_install.py`, `reports/install_simulation.md`, `tests/verify_install_simulation.py` with installer permission coverage checks | v0 landed |
 | Local Install Sync Preflight | `scripts/sync_local_install.py`, `tests/verify_local_install_sync.py`, `Makefile` package-check prerequisites | v0 landed |
 | Upgrade Check | `scripts/upgrade_check.py`, `reports/upgrade_check.md`, `tests/verify_upgrade_check.py` | v0 landed |
-| Telemetry & Drift | `scripts/render_adoption_drift_report.py`, `reports/adoption_drift_report.md`, `tests/verify_adoption_drift.py`, `references/telemetry-drift-method.md` | v0 landed |
+| Telemetry & Drift | `scripts/render_adoption_drift_report.py`, `scripts/yao_cli_telemetry.py`, `reports/adoption_drift_report.md`, `tests/verify_adoption_drift.py`, `tests/verify_yao_cli.py`, `references/telemetry-drift-method.md` | v0 landed |
 | Review Waivers | `scripts/render_review_waivers.py`, `reports/review_waivers.md`, `tests/verify_review_waivers.py`, `references/review-waiver-method.md` | v0 landed |
 | Governed Permission Gates | `security/permission_policy.json`, `scripts/trust_check.py`, `scripts/render_review_studio.py`, `tests/verify_trust_check.py`, `tests/verify_review_studio.py` | v0 landed |
 | Runtime Permission Probes | `scripts/probe_runtime_permissions.py`, `reports/runtime_permission_probes.md`, `tests/verify_runtime_permission_probes.py`, `tests/verify_review_studio.py` | v0 landed |
@@ -84,9 +85,9 @@ Next move: add richer source-line anchors inside generated reports and record re
 
 ### 4. Multi-skill operation now links Atlas with drift, but needs real client capture
 
-The new Skill Atlas can scan a workspace and report catalog, route overlap, dependency graph, stale skill, missing owner/review metadata, aggregate drift signals, and no-route opportunities. It now also supports `skill_atlas/policy.json` so release gates distinguish actionable library skills from examples and fixtures while keeping full visibility. Adoption Drift v0 can record metadata-only local events, block raw prompt/output fields, summarize missed-trigger, bad-output, script-error, and review-overdue signals, feed next iteration candidates into Review Studio, and publish aggregate drift input for Atlas. It still needs real client-side capture instead of manual CLI event recording.
+The new Skill Atlas can scan a workspace and report catalog, route overlap, dependency graph, stale skill, missing owner/review metadata, aggregate drift signals, and no-route opportunities. It now also supports `skill_atlas/policy.json` so release gates distinguish actionable library skills from examples and fixtures while keeping full visibility. Adoption Drift v0 can record metadata-only local events, block raw prompt/output fields, summarize missed-trigger, bad-output, script-error, and review-overdue signals, feed next iteration candidates into Review Studio, and publish aggregate drift input for Atlas. `yao.py` now adds opt-in automatic CLI run capture through `YAO_CLI_TELEMETRY=1` or `--record-cli-telemetry`, recording only `source=yao_cli`, normalized subcommand name, outcome, failure class, and timestamp. It still needs external client-side capture beyond the local CLI.
 
-Next move: connect client activations and failure history so Atlas can rank stale, drifting, or conflicting skills by real usage impact.
+Next move: connect non-CLI client activations and failure history so Atlas can rank stale, drifting, or conflicting skills by real usage impact.
 
 ### 5. Trust report is structural, not full security review
 
@@ -106,11 +107,11 @@ Next move: add real client or installer permission enforcement integration.
 | Runtime Permission Probes | `4 / 4` target adapters probed, `0` native-enforcement adapters, `4` explicit metadata fallbacks, `4` residual risks retained for reviewer visibility |
 | Skill Atlas | `12` scanned skills, `1` actionable root skill, `1` telemetry report, `0` actionable route collisions, `0` actionable owner gaps, `0` actionable stale skills, `0` actionable drift signals, `24` scoped non-actionable issue signals retained for visibility |
 | Registry Audit | package metadata generated with version, owner, license, source checksum, archive checksum, Skill IR provenance, and compatibility matrix |
-| Package Verification | `4 / 4` target adapters present, archive verified, `494` zip entries, `0` failures, `0` warnings |
-| Install Simulation | archive with `494` entries extracted into a local verification root, entrypoint/manifest/interface loaded, reports present, `4` adapters readable, `12` installer permission checks enforced, `0` permission failures, `0` failures, `0` warnings |
+| Package Verification | `4 / 4` target adapters present, archive verified, `495` zip entries, `0` failures, `0` warnings |
+| Install Simulation | archive with `495` entries extracted into a local verification root, entrypoint/manifest/interface loaded, reports present, `4` adapters readable, `12` installer permission checks enforced, `0` permission failures, `0` failures, `0` warnings |
 | Local Install Sync Preflight | `make sync-local-install` and `make sync-active-install` rebuild the package first, then sync only after install simulation passes with `12` enforced installer permission checks and `0` permission failures |
 | Upgrade Check | current package declares `minor` over the 1.0.0 baseline, recommended bump is `minor`, and release notes include added targets plus checksum changes |
-| Adoption Drift | `1` metadata-only review event, `0` adoption samples, adoption `0`, risk band `low`; raw `reports/telemetry_events.jsonl` is gitignored and blocked from zip packages |
+| Adoption Drift | `1` metadata-only review event, `0` adoption samples, adoption `0`, risk band `low`; optional `yao.py` CLI capture is available but off by default for reproducible release evidence; raw `reports/telemetry_events.jsonl` is gitignored and blocked from zip packages |
 | Review Waivers | ledger generated; current release has `1` warning gate that still needs reviewer decision or a time-bounded waiver; blockers remain non-waivable in v0 |
 | Review Annotations | ledger generated; current release has `0` reviewer annotations and `0` open annotation blockers |
 | Review Studio | decision `review`, world-class score `92`, `13` gates, `0` blockers, `2` warnings, `2` review actions, `0` open annotation blockers |
@@ -124,4 +125,4 @@ Next move: add real client or installer permission enforcement integration.
 2. Add native client or installer runtime enforcement for approved high-permission capabilities.
 3. Run the new provider-backed output runner against holdout cases with real credentials, then record the current blind A/B decisions before claiming fully ready status.
 4. Add real reviewer annotation records during the next human review pass.
-5. Connect real client telemetry capture and failure history so Atlas drift signals are based on live usage, not manual samples.
+5. Connect external client telemetry capture and failure history so Atlas drift signals include non-CLI live usage, not only manual samples or opt-in CLI runs.

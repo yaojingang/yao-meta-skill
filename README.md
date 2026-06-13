@@ -31,7 +31,7 @@ It turns rough workflows, transcripts, prompts, notes, and runbooks into reusabl
 - a systems-thinking model that maps boundaries, feedback loops, drift risks, recurring failure patterns, and highest-leverage quality moves
 - three high-value next iteration directions after the first package is created
 - a lightweight feedback log that does not require a full promotion cycle
-- a local-first metadata-only adoption and drift report that turns real usage signals into next iteration candidates
+- a local-first metadata-only adoption and drift report that turns real usage signals into next iteration candidates, with optional `yao.py` CLI run capture that records command names and outcomes without arguments or raw content
 - a Skill Atlas drift layer that reads aggregate adoption reports and surfaces portfolio-level drift signals without packaging raw telemetry logs
 - a baseline compare report for with-skill vs baseline review
 - a conversation-style, archetype-aware quickstart that steers new packages toward scaffold, production, library, or governed fits
@@ -108,6 +108,7 @@ python3 scripts/yao.py prompt-quality-profile my-skill
 python3 scripts/yao.py system-model my-skill
 python3 scripts/yao.py feedback my-skill --note "Tighten exclusions before adding scripts." --rating 4 --category boundary
 python3 scripts/yao.py adoption-drift my-skill --record-event skill_activation --activation-type explicit --outcome accepted
+YAO_CLI_TELEMETRY=1 python3 scripts/yao.py validate my-skill
 python3 scripts/yao.py review-waivers my-skill --add-waiver --gate-key trust-report --reviewer "Yao Team" --reason "Known warning accepted for this release with bounded follow-up." --expires-at 2026-09-30
 python3 scripts/yao.py review-waivers my-skill --add-waiver --gate-key permission-gates --reviewer "Yao Team" --reason "Permission warning accepted only for this non-governed release window." --expires-at 2026-09-30
 python3 scripts/yao.py review-annotations my-skill --add-annotation --gate-key output-lab --target-path reports/output_quality_scorecard.md --line 1 --body "Clarify recorded fixture vs model-executed evidence before release."
@@ -413,6 +414,7 @@ Utility scripts that make the meta-skill operational:
 - `simulate_install.py`: extracts a generated zip into a temporary skill root and verifies entrypoint, manifest, interface, reports, and adapters can be loaded
 - `upgrade_check.py`: compares current and previous registry package metadata, recommends a version bump, and blocks incompatible upgrade claims
 - `render_adoption_drift_report.py`: records metadata-only local telemetry and renders adoption, missed-trigger, bad-output, script-error, and review-drift signals without packaging raw event logs
+- `yao_cli_telemetry.py`: opt-in metadata-only `yao.py` run capture for command name, source, outcome, and failure class without command arguments or raw content
 - `render_review_waivers.py`: validates human reviewer risk approvals with gate keys, reasons, expiry dates, and blocker-safe waiver policy
 - `init_skill.py`, `lint_skill.py`, `validate_skill.py`, `diff_eval.py`: minimal authoring toolchain
 - `check_update.py`: checks GitHub for a newer `VERSION` or remote manifest version and reports a reinstall hint without modifying local files

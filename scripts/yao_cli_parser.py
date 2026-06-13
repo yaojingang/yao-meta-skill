@@ -277,6 +277,8 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
         ],
         default="none",
     )
+    adoption_drift_cmd.add_argument("--source", choices=["external", "manual", "unknown", "yao_cli"], default="manual")
+    adoption_drift_cmd.add_argument("--command", dest="telemetry_command", default="unknown")
     adoption_drift_cmd.add_argument("--timestamp")
     adoption_drift_cmd.add_argument("--skill-name")
     adoption_drift_cmd.add_argument("--version")

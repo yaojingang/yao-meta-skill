@@ -89,6 +89,7 @@
         "scripts/yao.py",
         "scripts/yao_cli_config.py",
         "scripts/yao_cli_parser.py",
+        "scripts/yao_cli_telemetry.py",
         "references/artifact-design-doctrine.md",
         "references/authoring-discipline.md",
         "references/distribution-registry-method.md",

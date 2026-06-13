@@ -69,6 +69,7 @@ Clean test-only scratch directories after verification with `find tests -maxdept
 - `scripts/skill_report_model.py`, `scripts/skill_report_metrics.py`, `scripts/skill_report_charts.py`: skill overview data model, scoring, and inline SVG chart generation.
 - `scripts/yao_cli_config.py`: CLI target maps, archetype heuristics, diagnosis copy, and side-effect-free shaping helpers.
 - `scripts/yao_cli_parser.py`: CLI argparse command surface, flags, choices, and command handler binding.
+- `scripts/yao_cli_telemetry.py`: opt-in metadata-only CLI run telemetry. Keep it free of prompt, argument, output, transcript, note, or message capture.
 
 New helper modules that are imported by CLI/report scripts but are not standalone commands must declare:
 

@@ -2,9 +2,9 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 153,
-    "script_count": 69,
-    "internal_module_count": 9,
+    "scanned_files": 154,
+    "script_count": 70,
+    "internal_module_count": 10,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 153,
-    "package_sha256": "44d9cb1aa096fff1b2c8844a609574c05c8ed9ae12005dc74a5662d3d94013fd"
+    "package_hash_file_count": 154,
+    "package_sha256": "495c5824cf84b56ef77bebc75e415191425e2f1131f0a4027d17037631b52fa2"
   },
   "failures": [],
   "warnings": [],
@@ -1011,6 +1011,20 @@
       "uses_subprocess": false,
       "network_urls": [],
       "network_hosts": []
+    },
+    {
+      "path": "scripts/yao_cli_telemetry.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Imported by yao.py to record opt-in metadata-only CLI run telemetry.",
+      "has_argparse": true,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
     }
   ],
   "dependencies": {
@@ -1047,7 +1061,7 @@
     "checked_count": 60,
     "passed_count": 60,
     "failed_count": 0,
-    "skipped_count": 9,
+    "skipped_count": 10,
     "failed_scripts": [],
     "results": [
       {
@@ -1647,7 +1661,7 @@
         "timed_out": false,
         "passed": true,
         "has_help_text": true,
-        "stdout_excerpt": "usage: yao.py [-h]\n              {init,quickstart,validate,optimize-description,promote-check,review,release-snapshot,workspace-flow,report,skill-report,review-viewer,review-studio,reference-scan,github-benchmark-scan,intent-confidence,inte",
+        "stdout_excerpt": "usage: yao.py [-h] [--record-cli-telemetry] [--no-cli-telemetry]\n              [--telemetry-events-jsonl TELEMETRY_EVENTS_JSONL]\n              {init,quickstart,validate,optimize-description,promote-check,review,release-snapshot,workspace-fl",
         "stderr_excerpt": ""
       }
     ],
@@ -1686,6 +1700,10 @@
       },
       {
         "path": "scripts/yao_cli_parser.py",
+        "reason": "internal module"
+      },
+      {
+        "path": "scripts/yao_cli_telemetry.py",
         "reason": "internal module"
       }
     ]

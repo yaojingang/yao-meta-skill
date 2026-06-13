@@ -213,7 +213,8 @@
             "scripts/verify_package.py",
             "scripts/yao.py",
             "scripts/yao_cli_config.py",
-            "scripts/yao_cli_parser.py"
+            "scripts/yao_cli_parser.py",
+            "scripts/yao_cli_telemetry.py"
           ],
           "assets": [
             "templates/basic_skill.md.j2",
@@ -264,7 +265,7 @@
           ],
           "counts": {
             "references": 32,
-            "scripts": 69,
+            "scripts": 70,
             "assets": 2,
             "reports": 41
           }
@@ -505,7 +506,7 @@
             "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
             "counts": {
               "references": 32,
-              "scripts": 69,
+              "scripts": 70,
               "assets": 2,
               "reports": 41
             },
@@ -516,7 +517,7 @@
           },
           "scripts": {
             "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-            "script_count": 69,
+            "script_count": 70,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -730,7 +731,7 @@
           "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
           "counts": {
             "references": 32,
-            "scripts": 69,
+            "scripts": 70,
             "assets": 2,
             "reports": 41
           },
@@ -741,7 +742,7 @@
         },
         "scripts": {
           "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-          "script_count": 69,
+          "script_count": 70,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -1011,7 +1012,8 @@
             "scripts/verify_package.py",
             "scripts/yao.py",
             "scripts/yao_cli_config.py",
-            "scripts/yao_cli_parser.py"
+            "scripts/yao_cli_parser.py",
+            "scripts/yao_cli_telemetry.py"
           ],
           "assets": [
             "templates/basic_skill.md.j2",
@@ -1062,7 +1064,7 @@
           ],
           "counts": {
             "references": 32,
-            "scripts": 69,
+            "scripts": 70,
             "assets": 2,
             "reports": 41
           }
@@ -1303,7 +1305,7 @@
             "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
             "counts": {
               "references": 32,
-              "scripts": 69,
+              "scripts": 70,
               "assets": 2,
               "reports": 41
             },
@@ -1314,7 +1316,7 @@
           },
           "scripts": {
             "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-            "script_count": 69,
+            "script_count": 70,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -1528,7 +1530,7 @@
           "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
           "counts": {
             "references": 32,
-            "scripts": 69,
+            "scripts": 70,
             "assets": 2,
             "reports": 41
           },
@@ -1539,7 +1541,7 @@
         },
         "scripts": {
           "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-          "script_count": 69,
+          "script_count": 70,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -1809,7 +1811,8 @@
             "scripts/verify_package.py",
             "scripts/yao.py",
             "scripts/yao_cli_config.py",
-            "scripts/yao_cli_parser.py"
+            "scripts/yao_cli_parser.py",
+            "scripts/yao_cli_telemetry.py"
           ],
           "assets": [
             "templates/basic_skill.md.j2",
@@ -1860,7 +1863,7 @@
           ],
           "counts": {
             "references": 32,
-            "scripts": 69,
+            "scripts": 70,
             "assets": 2,
             "reports": 41
           }
@@ -2101,7 +2104,7 @@
             "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
             "counts": {
               "references": 32,
-              "scripts": 69,
+              "scripts": 70,
               "assets": 2,
               "reports": 41
             },
@@ -2111,7 +2114,7 @@
           },
           "scripts": {
             "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-            "script_count": 69,
+            "script_count": 70,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -2319,7 +2322,7 @@
           "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
           "counts": {
             "references": 32,
-            "scripts": 69,
+            "scripts": 70,
             "assets": 2,
             "reports": 41
           },
@@ -2329,7 +2332,7 @@
         },
         "scripts": {
           "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-          "script_count": 69,
+          "script_count": 70,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -2591,7 +2594,8 @@
             "scripts/verify_package.py",
             "scripts/yao.py",
             "scripts/yao_cli_config.py",
-            "scripts/yao_cli_parser.py"
+            "scripts/yao_cli_parser.py",
+            "scripts/yao_cli_telemetry.py"
           ],
           "assets": [
             "templates/basic_skill.md.j2",
@@ -2642,7 +2646,7 @@
           ],
           "counts": {
             "references": 32,
-            "scripts": 69,
+            "scripts": 70,
             "assets": 2,
             "reports": 41
           }
@@ -2883,7 +2887,7 @@
             "strategy": "Keep optional directories as relative resources next to SKILL.md.",
             "counts": {
               "references": 32,
-              "scripts": 69,
+              "scripts": 70,
               "assets": 2,
               "reports": 41
             },
@@ -2894,7 +2898,7 @@
           },
           "scripts": {
             "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-            "script_count": 69,
+            "script_count": 70,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -3101,7 +3105,7 @@
           "strategy": "Keep optional directories as relative resources next to SKILL.md.",
           "counts": {
             "references": 32,
-            "scripts": 69,
+            "scripts": 70,
             "assets": 2,
             "reports": 41
           },
@@ -3112,7 +3116,7 @@
         },
         "scripts": {
           "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-          "script_count": 69,
+          "script_count": 70,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -3373,7 +3377,8 @@
             "scripts/verify_package.py",
             "scripts/yao.py",
             "scripts/yao_cli_config.py",
-            "scripts/yao_cli_parser.py"
+            "scripts/yao_cli_parser.py",
+            "scripts/yao_cli_telemetry.py"
           ],
           "assets": [
             "templates/basic_skill.md.j2",
@@ -3424,7 +3429,7 @@
           ],
           "counts": {
             "references": 32,
-            "scripts": 69,
+            "scripts": 70,
             "assets": 2,
             "reports": 41
           }
@@ -3665,7 +3670,7 @@
             "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
             "counts": {
               "references": 32,
-              "scripts": 69,
+              "scripts": 70,
               "assets": 2,
               "reports": 41
             },
@@ -3676,7 +3681,7 @@
           },
           "scripts": {
             "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
-            "script_count": 69,
+            "script_count": 70,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -3887,7 +3892,7 @@
           "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
           "counts": {
             "references": 32,
-            "scripts": 69,
+            "scripts": 70,
             "assets": 2,
             "reports": 41
           },
@@ -3898,7 +3903,7 @@
         },
         "scripts": {
           "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
-          "script_count": 69,
+          "script_count": 70,
           "help_smoke_failed_count": 0
         },
         "permissions": {

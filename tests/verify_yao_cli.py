@@ -16,13 +16,35 @@ import yao_cli_parser  # noqa: E402
 
 
 def run(*args: str, input_text: str | None = None) -> dict:
+    env = dict(os.environ)
+    env["YAO_CLI_TELEMETRY"] = "0"
+    env.pop("YAO_CLI_TELEMETRY_EVENTS", None)
     proc = subprocess.run(
         [sys.executable, str(CLI), *args],
         cwd=ROOT,
         capture_output=True,
         text=True,
         input=input_text,
-        env=os.environ,
+        env=env,
+    )
+    payload = json.loads(proc.stdout)
+    return {
+        "ok": proc.returncode == 0,
+        "returncode": proc.returncode,
+        "payload": payload,
+        "stderr": proc.stderr,
+    }
+
+
+def run_with_env(extra_env: dict[str, str], *args: str) -> dict:
+    env = dict(os.environ)
+    env.update(extra_env)
+    proc = subprocess.run(
+        [sys.executable, str(CLI), *args],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        env=env,
     )
     payload = json.loads(proc.stdout)
     return {
@@ -51,6 +73,7 @@ def main() -> None:
     parser_help = yao_cli_module.build_parser().format_help()
     assert "quickstart" in parser_help, parser_help
     assert "review-studio" in parser_help, parser_help
+    assert "--record-cli-telemetry" in parser_help, parser_help
 
     init_result = run("init", "cli-demo-skill", "--description", "CLI demo skill.", "--output-dir", str(tmp_root))
     assert init_result["ok"], init_result
@@ -95,6 +118,33 @@ def main() -> None:
     init_skill_ir = init_result["payload"]["skill_ir"]
     assert init_skill_ir["name"] == "cli-demo-skill", init_skill_ir
     assert init_skill_ir["trigger_samples"] >= 1, init_skill_ir
+
+    telemetry_log = tmp_root / "cli-telemetry-events.jsonl"
+    telemetry_env = {
+        "YAO_CLI_TELEMETRY": "1",
+        "YAO_CLI_TELEMETRY_EVENTS": str(telemetry_log),
+    }
+    telemetry_ok = run_with_env(telemetry_env, "validate", str(created))
+    assert telemetry_ok["ok"], telemetry_ok
+    telemetry_fail = run_with_env(
+        telemetry_env,
+        "output-exec",
+        "--runner-command",
+        json.dumps([sys.executable, str(ROOT / "scripts" / "local_output_eval_runner.py")]),
+        "--provider-runner",
+        "openai",
+    )
+    assert not telemetry_fail["ok"], telemetry_fail
+    telemetry_events = [json.loads(line) for line in telemetry_log.read_text(encoding="utf-8").splitlines()]
+    assert len(telemetry_events) == 2, telemetry_events
+    assert telemetry_events[0]["event"] == "script_run", telemetry_events
+    assert telemetry_events[0]["source"] == "yao_cli", telemetry_events
+    assert telemetry_events[0]["command"] == "validate", telemetry_events
+    assert telemetry_events[0]["outcome"] == "accepted", telemetry_events
+    assert telemetry_events[0]["failure_type"] == "none", telemetry_events
+    assert telemetry_events[1]["command"] == "output-exec", telemetry_events
+    assert telemetry_events[1]["outcome"] == "failed", telemetry_events
+    assert telemetry_events[1]["failure_type"] == "script_error", telemetry_events
 
     quickstart_result = run(
         "quickstart",

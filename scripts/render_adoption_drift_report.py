@@ -23,14 +23,17 @@ ALLOWED_FAILURE_TYPES = {
     "review_overdue",
 }
 ALLOWED_FIELDS = {
+    "command",
     "event",
     "skill",
+    "source",
     "version",
     "activation_type",
     "outcome",
     "failure_type",
     "timestamp",
 }
+ALLOWED_SOURCES = {"manual", "yao_cli", "external", "unknown"}
 SENSITIVE_FIELDS = {
     "prompt",
     "content",
@@ -112,6 +115,8 @@ def normalize_event(raw: dict[str, Any], defaults: dict[str, str], line_label: s
     timestamp = str(raw.get("timestamp") or utc_now())
     skill = str(raw.get("skill") or defaults["skill"])
     version = str(raw.get("version") or defaults["version"])
+    source = str(raw.get("source") or "manual")
+    command = str(raw.get("command") or "unknown")
 
     if event not in ALLOWED_EVENTS:
         failures.append(f"{line_label}: unsupported event `{event}`")
@@ -121,12 +126,18 @@ def normalize_event(raw: dict[str, Any], defaults: dict[str, str], line_label: s
         failures.append(f"{line_label}: unsupported outcome `{outcome}`")
     if failure_type not in ALLOWED_FAILURE_TYPES:
         failures.append(f"{line_label}: unsupported failure_type `{failure_type}`")
+    if source not in ALLOWED_SOURCES:
+        failures.append(f"{line_label}: unsupported source `{source}`")
+    if not command.replace("-", "").replace("_", "").isalnum() or len(command) > 64:
+        failures.append(f"{line_label}: command must use only letters, numbers, hyphens, or underscores and stay under 64 chars")
 
     if failures:
         return None, failures
     return {
+        "command": command,
         "event": event,
         "skill": skill,
+        "source": source,
         "version": version,
         "activation_type": activation_type,
         "outcome": outcome,
@@ -254,6 +265,8 @@ def summarize(events: list[dict[str, str]], review_overdue_count: int) -> dict[s
     outcomes = Counter(event["outcome"] for event in adoption_events)
     failures = Counter(event["failure_type"] for event in events if event["failure_type"] != "none")
     event_types = Counter(event["event"] for event in events)
+    source_types = Counter(event.get("source", "manual") for event in events)
+    command_counts = Counter(event.get("command", "unknown") for event in events if event.get("command", "unknown") != "unknown")
     adopted = outcomes["accepted"] + outcomes["edited"]
     event_count = len(events)
     adoption_sample_count = len(adoption_events)
@@ -289,6 +302,8 @@ def summarize(events: list[dict[str, str]], review_overdue_count: int) -> dict[s
         "risk_band": risk_band,
         "event_types": dict(sorted(event_types.items())),
         "failure_types": dict(sorted(failures.items())),
+        "source_types": dict(sorted(source_types.items())),
+        "command_counts": dict(sorted(command_counts.items())),
     }
 
 
@@ -339,6 +354,7 @@ def render_markdown(report: dict[str, Any]) -> str:
     for event in report["recent_events"]:
         lines.append(
             f"- `{event['timestamp']}` `{event['skill']}` event=`{event['event']}` "
+            f"source=`{event.get('source', 'manual')}` command=`{event.get('command', 'unknown')}` "
             f"activation=`{event['activation_type']}` outcome=`{event['outcome']}` failure=`{event['failure_type']}`"
         )
     if not report["recent_events"]:
@@ -415,6 +431,8 @@ def main() -> None:
     parser.add_argument("--activation-type", choices=sorted(ALLOWED_ACTIVATION_TYPES), default="unknown")
     parser.add_argument("--outcome", choices=sorted(ALLOWED_OUTCOMES), default="unknown")
     parser.add_argument("--failure-type", choices=sorted(ALLOWED_FAILURE_TYPES), default="none")
+    parser.add_argument("--source", choices=sorted(ALLOWED_SOURCES), default="manual")
+    parser.add_argument("--command", default="unknown")
     parser.add_argument("--timestamp")
     parser.add_argument("--skill-name")
     parser.add_argument("--version")
@@ -427,6 +445,8 @@ def main() -> None:
             "activation_type": args.activation_type,
             "outcome": args.outcome,
             "failure_type": args.failure_type,
+            "source": args.source,
+            "command": args.command,
         }
         if args.timestamp:
             record_event["timestamp"] = args.timestamp

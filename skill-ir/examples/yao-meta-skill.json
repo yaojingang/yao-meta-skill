@@ -176,7 +176,8 @@
       "scripts/verify_package.py",
       "scripts/yao.py",
       "scripts/yao_cli_config.py",
-      "scripts/yao_cli_parser.py"
+      "scripts/yao_cli_parser.py",
+      "scripts/yao_cli_telemetry.py"
     ],
     "assets": [
       "templates/basic_skill.md.j2",

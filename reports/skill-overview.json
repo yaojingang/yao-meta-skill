@@ -96,7 +96,7 @@
       "label": "上下文成本",
       "score": 42,
       "reasons": [
-        "入口约 350 个词/字，references 约 14711 个词/字。",
+        "入口约 350 个词/字，references 约 14859 个词/字。",
         "分数越高代表上下文成本越低。",
         "上下文成本偏高，建议压缩入口或拆分 references。"
       ]
@@ -200,7 +200,7 @@
       "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
     ],
     "gaps": [
-      "上下文成本需要补强：入口约 350 个词/字，references 约 14711 个词/字。"
+      "上下文成本需要补强：入口约 350 个词/字，references 约 14859 个词/字。"
     ],
     "recommendations": [
       "先改触发边界，再扩展工作流。",
@@ -433,7 +433,7 @@
         "path": "scripts",
         "label": "Deterministic helpers or local tooling",
         "kind": "folder",
-        "file_count": 69
+        "file_count": 70
       },
       {
         "path": "evals",
@@ -448,7 +448,7 @@
         "file_count": 171
       }
     ],
-    "file_count": 304,
+    "file_count": 305,
     "folder_count": 4,
     "distribution": [
       {
@@ -473,7 +473,7 @@
       },
       {
         "label": "scripts",
-        "value": 69
+        "value": 70
       },
       {
         "label": "evals",
@@ -602,7 +602,7 @@
       "path": "scripts",
       "label": "Deterministic helpers or local tooling",
       "kind": "folder",
-      "file_count": 69
+      "file_count": 70
     },
     {
       "path": "evals",
@@ -948,9 +948,9 @@
     "failures": []
   },
   "trust_security": {
-    "scanned_files": 153,
-    "script_count": 69,
-    "internal_module_count": 9,
+    "scanned_files": 154,
+    "script_count": 70,
+    "internal_module_count": 10,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -968,8 +968,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 153,
-    "package_sha256": "44d9cb1aa096fff1b2c8844a609574c05c8ed9ae12005dc74a5662d3d94013fd"
+    "package_hash_file_count": 154,
+    "package_sha256": "495c5824cf84b56ef77bebc75e415191425e2f1131f0a4027d17037631b52fa2"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -1007,8 +1007,8 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "44d9cb1aa096fff1b2c8844a609574c05c8ed9ae12005dc74a5662d3d94013fd",
-        "archive_sha256": "cdadcbc9a0c92eba0c80a9f4fbd840530d32d19bf3cbb508a24bebb8e8551933"
+        "package_sha256": "495c5824cf84b56ef77bebc75e415191425e2f1131f0a4027d17037631b52fa2",
+        "archive_sha256": "0f80e2e194d003a99da34f73923b9459f260b2d177c5f1f6ec7104fdd5713474"
       },
       "compatibility": {
         "openai": "pass",
@@ -1039,7 +1039,7 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "cdadcbc9a0c92eba0c80a9f4fbd840530d32d19bf3cbb508a24bebb8e8551933",
+        "archive_sha256": "0f80e2e194d003a99da34f73923b9459f260b2d177c5f1f6ec7104fdd5713474",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
@@ -1055,8 +1055,8 @@
       "target_count": 4,
       "adapter_count": 4,
       "archive_present": true,
-      "archive_sha256": "cdadcbc9a0c92eba0c80a9f4fbd840530d32d19bf3cbb508a24bebb8e8551933",
-      "archive_entry_count": 494,
+      "archive_sha256": "0f80e2e194d003a99da34f73923b9459f260b2d177c5f1f6ec7104fdd5713474",
+      "archive_entry_count": 495,
       "failure_count": 0,
       "warning_count": 0
     },
@@ -1067,7 +1067,7 @@
     "ok": true,
     "summary": {
       "archive_present": true,
-      "archive_entry_count": 494,
+      "archive_entry_count": 495,
       "archive_extracted": true,
       "entrypoint_loaded": true,
       "manifest_loaded": true,
@@ -1134,12 +1134,12 @@
         {
           "field": "archive_sha256",
           "from": "",
-          "to": "cdadcbc9a0c92eba0c80a9f4fbd840530d32d19bf3cbb508a24bebb8e8551933"
+          "to": "0f80e2e194d003a99da34f73923b9459f260b2d177c5f1f6ec7104fdd5713474"
         },
         {
           "field": "package_sha256",
           "from": "0000000000000000000000000000000000000000000000000000000000000000",
-          "to": "44d9cb1aa096fff1b2c8844a609574c05c8ed9ae12005dc74a5662d3d94013fd"
+          "to": "495c5824cf84b56ef77bebc75e415191425e2f1131f0a4027d17037631b52fa2"
         }
       ]
     },
@@ -1156,14 +1156,14 @@
     "ok": true,
     "summary": {
       "event_count": 1,
-      "adoption_sample_count": 1,
-      "activation_count": 1,
-      "accepted_count": 1,
+      "adoption_sample_count": 0,
+      "activation_count": 0,
+      "accepted_count": 0,
       "edited_count": 0,
       "rejected_count": 0,
       "missed_count": 0,
       "failed_count": 0,
-      "adoption_rate": 100.0,
+      "adoption_rate": 0,
       "missed_trigger_count": 0,
       "wrong_trigger_count": 0,
       "bad_output_count": 0,
@@ -1172,9 +1172,13 @@
       "review_overdue_count": 0,
       "risk_band": "low",
       "event_types": {
-        "skill_activation": 1
+        "review_event": 1
       },
-      "failure_types": {}
+      "failure_types": {},
+      "source_types": {
+        "manual": 1
+      },
+      "command_counts": {}
     },
     "next_iteration_candidates": [],
     "privacy_contract": {

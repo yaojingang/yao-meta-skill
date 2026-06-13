@@ -17,6 +17,8 @@ The local event stream is `reports/telemetry_events.jsonl`. It is intentionally 
   "event": "skill_activation",
   "skill": "example-skill",
   "version": "2.0.0",
+  "source": "yao_cli",
+  "command": "quickstart",
   "activation_type": "implicit",
   "outcome": "accepted",
   "failure_type": "none",
@@ -26,9 +28,38 @@ The local event stream is `reports/telemetry_events.jsonl`. It is intentionally 
 
 Allowed events: `skill_activation`, `skill_output`, `script_run`, `review_event`.
 
+Allowed sources: `manual`, `yao_cli`, `external`, `unknown`.
+
 Allowed outcomes: `accepted`, `edited`, `rejected`, `missed`, `failed`, `reviewed`, `unknown`.
 
 Allowed failure types: `wrong_trigger`, `under_trigger`, `bad_output`, `missing_resource`, `script_error`, `review_overdue`, `none`.
+
+`source` and `command` are metadata fields. They may identify that `yao.py` ran `quickstart`, `validate`, `output-exec`, or another subcommand, but they must not include arguments, prompt text, file content, model output, transcripts, or reviewer notes.
+
+## CLI Capture
+
+`scripts/yao.py` can record metadata-only `script_run` events automatically. It is opt-in to keep release evidence reproducible and avoid surprising local writes:
+
+```bash
+YAO_CLI_TELEMETRY=1 python3 scripts/yao.py validate .
+```
+
+Optional destination override:
+
+```bash
+YAO_CLI_TELEMETRY=1 \
+YAO_CLI_TELEMETRY_EVENTS=/tmp/yao-telemetry.jsonl \
+python3 scripts/yao.py output-exec
+```
+
+Equivalent global flags are available before the subcommand:
+
+```bash
+python3 scripts/yao.py --record-cli-telemetry validate .
+python3 scripts/yao.py --no-cli-telemetry validate .
+```
+
+Successful CLI runs record `event=script_run`, `source=yao_cli`, `outcome=accepted`, and `failure_type=none`. Failed CLI runs record `outcome=failed` and `failure_type=script_error`. The command name is normalized to the subcommand only; command arguments are never recorded.
 
 ## Privacy Rule
 
@@ -48,7 +79,7 @@ Package builders should exclude `reports/telemetry_events.jsonl`. The root repos
 
 ## Iteration Loop
 
-1. Capture metadata-only events locally.
+1. Capture metadata-only events locally, either manually with `adoption-drift --record-event` or automatically with opt-in `yao.py` CLI capture.
 2. Render `reports/adoption_drift_report.md`.
 3. Convert missed triggers into trigger eval cases.
 4. Convert bad outputs into Output Eval assertions and failure taxonomy entries.

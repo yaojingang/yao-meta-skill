@@ -103,6 +103,10 @@ def main() -> None:
         "failed",
         "--failure-type",
         "script_error",
+        "--source",
+        "yao_cli",
+        "--command",
+        "validate",
         "--timestamp",
         "2026-06-13T10:04:00Z",
     )
@@ -115,11 +119,14 @@ def main() -> None:
     assert summary["bad_output_count"] == 1, summary
     assert summary["script_error_count"] == 1, summary
     assert summary["risk_band"] == "high", summary
+    assert summary["source_types"]["yao_cli"] == 1, summary
+    assert summary["command_counts"]["validate"] == 1, summary
     assert final["payload"]["privacy_contract"]["raw_content_allowed"] is False, final
     assert final["payload"]["next_iteration_candidates"], final
     markdown = (skill_dir / "reports" / "adoption_drift_report.md").read_text(encoding="utf-8")
     assert "metadata-only telemetry" in markdown, markdown
     assert "Raw user prompts" in markdown, markdown
+    assert "source=`yao_cli` command=`validate`" in markdown, markdown
 
     unsafe_events = TMP / "unsafe_events.jsonl"
     unsafe_events.write_text(
