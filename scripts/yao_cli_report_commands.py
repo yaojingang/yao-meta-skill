@@ -77,6 +77,19 @@ def command_world_class_intake(args: argparse.Namespace) -> int:
     return emit_result(run_script("render_world_class_evidence_intake.py", cmd))
 
 
+def command_world_class_submission_kit(args: argparse.Namespace) -> int:
+    cmd = [resolved_skill_dir(args)]
+    if args.output_dir:
+        cmd.extend(["--output-dir", args.output_dir])
+    for key in args.evidence_key:
+        cmd.extend(["--evidence-key", key])
+    if args.overwrite:
+        cmd.append("--overwrite")
+    if args.generated_at:
+        cmd.extend(["--generated-at", args.generated_at])
+    return emit_result(run_script("prepare_world_class_submission_kit.py", cmd))
+
+
 def command_world_class_claim_guard(args: argparse.Namespace) -> int:
     cmd = [resolved_skill_dir(args)]
     for surface in args.claim_surface:

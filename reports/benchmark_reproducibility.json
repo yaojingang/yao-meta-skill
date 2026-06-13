@@ -3,12 +3,15 @@
   "ok": true,
   "generated_at": "2026-06-14",
   "skill_dir": ".",
-  "commit": "c5e7b05faae8536b420c5120c1d3a59456c96e51",
+  "commit": "b540f580b373cb9c0f575b687fb82c5a16748a5d",
   "git_status": {
     "available": true,
     "dirty": true,
-    "changed_file_count": 30,
+    "changed_file_count": 48,
     "sample": [
+      " M .gitignore",
+      " M README.md",
+      " M evidence/world_class/README.md",
       " M registry/index.json",
       " M registry/packages/yao-meta-skill.json",
       " M reports/adoption_drift_report.json",
@@ -16,11 +19,8 @@
       " M reports/architecture_maintainability.md",
       " M reports/benchmark_reproducibility.json",
       " M reports/benchmark_reproducibility.md",
-      " M reports/context_budget.json",
-      " M reports/output_execution_runs.json",
-      " M reports/output_execution_runs.md",
-      " M reports/package_verification.json",
-      " M reports/package_verification.md"
+      " M reports/compiled_targets.json",
+      " M reports/context_budget.json"
     ]
   },
   "summary": {
@@ -42,7 +42,7 @@
     "world_class_task_count": 4,
     "world_class_ledger_pending_count": 4,
     "working_tree_dirty": true,
-    "changed_file_count": 30
+    "changed_file_count": 48
   },
   "methodology": {
     "path": "reports/benchmark_methodology.md",
@@ -115,8 +115,8 @@
       "label": "output_execution",
       "path": "reports/output_execution_runs.json",
       "exists": true,
-      "bytes": 7965,
-      "sha256": "917751088ebd5af0581461f73cf28c4b192a91bb1352d7c981b2e3bdb12ce48f"
+      "bytes": 7966,
+      "sha256": "9456b0729b322d3f9fdf6f0929c0010d649df94eccc9597f4e0f67115dc8ea1b"
     },
     {
       "label": "blind_review",
@@ -150,43 +150,43 @@
       "label": "trust_report",
       "path": "reports/security_trust_report.json",
       "exists": true,
-      "bytes": 92549,
-      "sha256": "5680f911b5b589d63c8e83ef2c2edabdff004d6634bc6d475f2efd76256071ab"
+      "bytes": 93677,
+      "sha256": "2aa9f4b0a7e2ca36d7f8e87e76bbc224bb23f9962f86d2c0f2b3cefd7deca221"
     },
     {
       "label": "python_compatibility",
       "path": "reports/python_compatibility.json",
       "exists": true,
-      "bytes": 19427,
-      "sha256": "809d07d66de33719b160b1a20d3bc86c546b3a69051cc662c840e5d16e10f5b8"
+      "bytes": 19564,
+      "sha256": "bbab01ebaa5b6986b0a3bfcf9825b15efdea5b98377a126fb0708e9fa67d2acb"
     },
     {
       "label": "registry_audit",
       "path": "reports/registry_audit.json",
       "exists": true,
       "bytes": 3183,
-      "sha256": "9934a175c3db29c7e2d182cdd68aa3b04da28d0dff7606c98dc8bc5cb209425b"
+      "sha256": "69f9f9f4663e291275c0c50caa86aac68d2579f9e02abf3f6dc9e03b64a77557"
     },
     {
       "label": "package_verification",
       "path": "reports/package_verification.json",
       "exists": true,
       "bytes": 19325,
-      "sha256": "51a8e785a233726c2988004db5437c5678e58ed36f4b5ab312942245e385cf11"
+      "sha256": "c8ab851a6f715e866a7b5fca04de075692027d77bc81d4d68e425c5d2dd2a7de"
     },
     {
       "label": "install_simulation",
       "path": "reports/install_simulation.json",
       "exists": true,
-      "bytes": 8557,
-      "sha256": "5e6e501706588c0eb431d71af38c4789c40991acca4531f667acb6a0610a70c3"
+      "bytes": 8758,
+      "sha256": "a88a496f58a591e3f81f552347de64e56dd9269bb775121e6bf0fafab795707f"
     },
     {
       "label": "skill_os2_audit",
       "path": "reports/skill_os2_audit.json",
       "exists": true,
       "bytes": 13946,
-      "sha256": "ed1be043898a5550be37c93b3d8723dbaf2d537af3005a8a6476ec6d0d266318"
+      "sha256": "91945bad2dcd8f6a165b1c896932a61ee64f43bfc9cca2091f3a921ef7817c0c"
     },
     {
       "label": "world_class_evidence_plan",
@@ -206,8 +206,8 @@
       "label": "world_class_evidence_intake",
       "path": "reports/world_class_evidence_intake.json",
       "exists": true,
-      "bytes": 12523,
-      "sha256": "6eae947a6e2f3721a8c616b58795554fe6cd778be62c6e6c34833563582a505d"
+      "bytes": 12369,
+      "sha256": "465f8d915a869ad536c2d71ba26dc536b82ba64e6e98013e8dbd0efd1bb92883"
     },
     {
       "label": "world_class_claim_guard",

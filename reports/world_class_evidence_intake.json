@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-14",
+  "generated_at": "2026-06-13",
   "skill_dir": ".",
   "summary": {
     "schema_present": true,
@@ -64,7 +64,7 @@
       "template_path": "evidence/world_class/templates/provider-holdout.intake.json",
       "submission_path": "evidence/world_class/submissions/provider-holdout.json",
       "commands": {
-        "prepare_submission": "mkdir -p evidence/world_class/submissions && cp evidence/world_class/templates/provider-holdout.intake.json evidence/world_class/submissions/provider-holdout.json",
+        "prepare_submission": "python3 scripts/yao.py world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions",
         "validate_intake": "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions",
         "refresh_ledger": "python3 scripts/yao.py world-class-ledger .",
         "guard_claim": "python3 scripts/yao.py world-class-claim-guard ."
@@ -115,7 +115,7 @@
       "template_path": "evidence/world_class/templates/human-adjudication.intake.json",
       "submission_path": "evidence/world_class/submissions/human-adjudication.json",
       "commands": {
-        "prepare_submission": "mkdir -p evidence/world_class/submissions && cp evidence/world_class/templates/human-adjudication.intake.json evidence/world_class/submissions/human-adjudication.json",
+        "prepare_submission": "python3 scripts/yao.py world-class-submission-kit . --evidence-key human-adjudication --output-dir evidence/world_class/submissions",
         "validate_intake": "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions",
         "refresh_ledger": "python3 scripts/yao.py world-class-ledger .",
         "guard_claim": "python3 scripts/yao.py world-class-claim-guard ."
@@ -167,7 +167,7 @@
       "template_path": "evidence/world_class/templates/native-permission-enforcement.intake.json",
       "submission_path": "evidence/world_class/submissions/native-permission-enforcement.json",
       "commands": {
-        "prepare_submission": "mkdir -p evidence/world_class/submissions && cp evidence/world_class/templates/native-permission-enforcement.intake.json evidence/world_class/submissions/native-permission-enforcement.json",
+        "prepare_submission": "python3 scripts/yao.py world-class-submission-kit . --evidence-key native-permission-enforcement --output-dir evidence/world_class/submissions",
         "validate_intake": "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions",
         "refresh_ledger": "python3 scripts/yao.py world-class-ledger .",
         "guard_claim": "python3 scripts/yao.py world-class-claim-guard ."
@@ -218,7 +218,7 @@
       "template_path": "evidence/world_class/templates/native-client-telemetry.intake.json",
       "submission_path": "evidence/world_class/submissions/native-client-telemetry.json",
       "commands": {
-        "prepare_submission": "mkdir -p evidence/world_class/submissions && cp evidence/world_class/templates/native-client-telemetry.intake.json evidence/world_class/submissions/native-client-telemetry.json",
+        "prepare_submission": "python3 scripts/yao.py world-class-submission-kit . --evidence-key native-client-telemetry --output-dir evidence/world_class/submissions",
         "validate_intake": "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions",
         "refresh_ledger": "python3 scripts/yao.py world-class-ledger .",
         "guard_claim": "python3 scripts/yao.py world-class-claim-guard ."

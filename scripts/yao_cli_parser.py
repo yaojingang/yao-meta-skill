@@ -208,6 +208,17 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     world_class_intake_cmd.add_argument("--generated-at")
     world_class_intake_cmd.set_defaults(func=_handler(command_handlers, "command_world_class_intake"))
 
+    world_class_submission_kit_cmd = subparsers.add_parser(
+        "world-class-submission-kit",
+        help="Prepare editable world-class evidence submission drafts.",
+    )
+    world_class_submission_kit_cmd.add_argument("skill_dir", nargs="?", default=".")
+    world_class_submission_kit_cmd.add_argument("--output-dir")
+    world_class_submission_kit_cmd.add_argument("--evidence-key", action="append", default=[])
+    world_class_submission_kit_cmd.add_argument("--overwrite", action="store_true")
+    world_class_submission_kit_cmd.add_argument("--generated-at")
+    world_class_submission_kit_cmd.set_defaults(func=_handler(command_handlers, "command_world_class_submission_kit"))
+
     world_class_claim_guard_cmd = subparsers.add_parser(
         "world-class-claim-guard",
         help="Scan public claim surfaces for premature world-class completion claims.",

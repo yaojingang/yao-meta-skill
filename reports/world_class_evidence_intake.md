@@ -1,6 +1,6 @@
 # World-Class Evidence Intake
 
-Generated at: `2026-06-14`
+Generated at: `2026-06-13`
 
 ## Summary
 
@@ -51,7 +51,7 @@ This report validates the intake contract for human and external evidence. A val
 
 #### Commands
 
-- prepare_submission: `mkdir -p evidence/world_class/submissions && cp evidence/world_class/templates/provider-holdout.intake.json evidence/world_class/submissions/provider-holdout.json`
+- prepare_submission: `python3 scripts/yao.py world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions`
 - validate_intake: `python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions`
 - refresh_ledger: `python3 scripts/yao.py world-class-ledger .`
 - guard_claim: `python3 scripts/yao.py world-class-claim-guard .`
@@ -89,7 +89,7 @@ This report validates the intake contract for human and external evidence. A val
 
 #### Commands
 
-- prepare_submission: `mkdir -p evidence/world_class/submissions && cp evidence/world_class/templates/human-adjudication.intake.json evidence/world_class/submissions/human-adjudication.json`
+- prepare_submission: `python3 scripts/yao.py world-class-submission-kit . --evidence-key human-adjudication --output-dir evidence/world_class/submissions`
 - validate_intake: `python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions`
 - refresh_ledger: `python3 scripts/yao.py world-class-ledger .`
 - guard_claim: `python3 scripts/yao.py world-class-claim-guard .`
@@ -128,7 +128,7 @@ This report validates the intake contract for human and external evidence. A val
 
 #### Commands
 
-- prepare_submission: `mkdir -p evidence/world_class/submissions && cp evidence/world_class/templates/native-permission-enforcement.intake.json evidence/world_class/submissions/native-permission-enforcement.json`
+- prepare_submission: `python3 scripts/yao.py world-class-submission-kit . --evidence-key native-permission-enforcement --output-dir evidence/world_class/submissions`
 - validate_intake: `python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions`
 - refresh_ledger: `python3 scripts/yao.py world-class-ledger .`
 - guard_claim: `python3 scripts/yao.py world-class-claim-guard .`
@@ -166,7 +166,7 @@ This report validates the intake contract for human and external evidence. A val
 
 #### Commands
 
-- prepare_submission: `mkdir -p evidence/world_class/submissions && cp evidence/world_class/templates/native-client-telemetry.intake.json evidence/world_class/submissions/native-client-telemetry.json`
+- prepare_submission: `python3 scripts/yao.py world-class-submission-kit . --evidence-key native-client-telemetry --output-dir evidence/world_class/submissions`
 - validate_intake: `python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions`
 - refresh_ledger: `python3 scripts/yao.py world-class-ledger .`
 - guard_claim: `python3 scripts/yao.py world-class-claim-guard .`

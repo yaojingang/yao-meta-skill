@@ -143,6 +143,7 @@ python3 scripts/yao.py package-verify . --package-dir dist --require-zip
 python3 scripts/yao.py install-simulate . --package-dir dist
 python3 scripts/yao.py upgrade-check . --previous-package-json registry/examples/yao-meta-skill-1.0.0.json
 python3 scripts/yao.py world-class-evidence .
+python3 scripts/yao.py world-class-submission-kit . --output-dir /tmp/yao-world-class-submission-kit
 python3 scripts/yao.py world-class-ledger .
 python3 scripts/yao.py world-class-intake .
 python3 scripts/yao.py world-class-claim-guard .

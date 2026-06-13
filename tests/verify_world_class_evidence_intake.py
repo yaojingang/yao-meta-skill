@@ -8,6 +8,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPT = ROOT / "scripts" / "render_world_class_evidence_intake.py"
+KIT_SCRIPT = ROOT / "scripts" / "prepare_world_class_submission_kit.py"
 TMP = ROOT / "tests" / "tmp_world_class_evidence_intake"
 
 
@@ -27,6 +28,23 @@ def run_intake(*extra: str) -> dict:
         check=True,
     )
     return json.loads(proc.stdout)
+
+
+def run_kit(*extra: str) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(
+        [
+            sys.executable,
+            str(KIT_SCRIPT),
+            str(ROOT),
+            "--generated-at",
+            "2026-06-14",
+            *extra,
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
 
 
 def provider_submission(*, valid: bool) -> dict:
@@ -113,7 +131,10 @@ def main() -> None:
     assert checklist["provider-holdout"]["readiness"] == "awaiting-submission", checklist["provider-holdout"]
     assert checklist["provider-holdout"]["template_path"] == "evidence/world_class/templates/provider-holdout.intake.json", checklist["provider-holdout"]
     assert checklist["provider-holdout"]["submission_path"] == "evidence/world_class/submissions/provider-holdout.json", checklist["provider-holdout"]
-    assert "cp evidence/world_class/templates/provider-holdout.intake.json" in checklist["provider-holdout"]["commands"]["prepare_submission"], checklist["provider-holdout"]
+    assert checklist["provider-holdout"]["commands"]["prepare_submission"] == (
+        "python3 scripts/yao.py world-class-submission-kit . "
+        "--evidence-key provider-holdout --output-dir evidence/world_class/submissions"
+    ), checklist["provider-holdout"]
     assert checklist["provider-holdout"]["commands"]["validate_intake"] == "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions", checklist["provider-holdout"]
     assert "provider-backed model run" in checklist["provider-holdout"]["must_collect"]["provenance_requirements"], checklist["provider-holdout"]
     assert "reports/output_execution_runs.json summary.model_executed_count > 0" in checklist["provider-holdout"]["must_collect"]["success_checks"], checklist["provider-holdout"]
@@ -124,8 +145,40 @@ def main() -> None:
     assert "Operator Checklist" in markdown, markdown
     assert "operator checklist: `0` ready / `4` total" in markdown, markdown
     assert "`evidence/world_class/submissions/provider-holdout.json`" in markdown, markdown
+    assert "`python3 scripts/yao.py world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions`" in markdown, markdown
     assert "`python3 scripts/yao.py world-class-ledger .`" in markdown, markdown
     assert "Templates and planned work do not count as accepted evidence." in markdown, markdown
+
+    kit_dir = TMP / "submission_kit"
+    kit_proc = run_kit("--output-dir", str(kit_dir), "--evidence-key", "provider-holdout")
+    kit_payload = json.loads(kit_proc.stdout)
+    assert kit_payload["ok"] is True, kit_payload
+    assert kit_payload["summary"]["decision"] == "submission-kit-ready", kit_payload["summary"]
+    assert kit_payload["summary"]["requested_count"] == 1, kit_payload["summary"]
+    assert kit_payload["summary"]["written_count"] == 1, kit_payload["summary"]
+    assert kit_payload["summary"]["drafts_count_as_evidence"] is False, kit_payload["summary"]
+    assert kit_payload["safety"]["template_only_drafts"] is True, kit_payload["safety"]
+    assert kit_payload["safety"]["raw_content_allowed"] is False, kit_payload["safety"]
+    assert kit_payload["files"][0]["output_path"].endswith("tests/tmp_world_class_evidence_intake/submission_kit/provider-holdout.json"), kit_payload["files"]
+    kit_draft = json.loads((kit_dir / "provider-holdout.json").read_text(encoding="utf-8"))
+    assert kit_draft["template_only"] is True, kit_draft
+    assert kit_draft["attestation"]["real_external_or_human_evidence"] is False, kit_draft
+    kit_manifest = json.loads((kit_dir / "submission_manifest.json").read_text(encoding="utf-8"))
+    assert kit_manifest["summary"]["ledger_counts_submission_as_completion"] is False, kit_manifest["summary"]
+    kit_readme = (kit_dir / "README.md").read_text(encoding="utf-8")
+    assert "Drafts are not accepted evidence." in kit_readme, kit_readme
+    assert "validate intake" in kit_readme, kit_readme
+    draft_intake = run_intake("--submissions-dir", str(kit_dir))
+    assert draft_intake["ok"] is False, draft_intake
+    assert draft_intake["summary"]["submission_count"] == 1, draft_intake["summary"]
+    assert draft_intake["summary"]["invalid_submission_count"] == 1, draft_intake["summary"]
+    assert draft_intake["submissions"][0]["evidence_key"] == "provider-holdout", draft_intake["submissions"]
+    assert all(item["evidence_key"] != "unknown" for item in draft_intake["submissions"]), draft_intake["submissions"]
+
+    existing_proc = run_kit("--output-dir", str(kit_dir), "--evidence-key", "provider-holdout")
+    existing_payload = json.loads(existing_proc.stdout)
+    assert existing_payload["summary"]["existing_count"] == 1, existing_payload["summary"]
+    assert existing_payload["files"][0]["status"] == "exists", existing_payload["files"]
 
     valid_dir = TMP / "valid_submissions"
     valid_dir.mkdir()

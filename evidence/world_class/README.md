@@ -7,6 +7,7 @@ The templates in `templates/` are review aids only. They do not count as accepte
 Run:
 
 ```bash
+python3 scripts/yao.py world-class-submission-kit . --output-dir /tmp/yao-world-class-submission-kit
 python3 scripts/yao.py world-class-intake .
 ```
 
@@ -19,5 +20,7 @@ The intake validator checks:
 - planned work, local command-only output, and metadata fallback are not claimed as completion evidence
 
 The generated intake report also includes an `operator_checklist` for each pending evidence item. Use it to find the template path, target submission path, preparation command, validation command, required provenance, success checks, and privacy boundary before asking a reviewer or external operator to submit evidence.
+
+The submission kit command creates editable JSON drafts plus a local README for an external operator or human reviewer. Those drafts keep `template_only: true` and do not count as evidence until the real run or review exists, the packet is edited truthfully, and `world-class-intake` validates it.
 
 Accepted intake means "ready for ledger review", not "world-class complete". The ledger remains the source of truth for `ready_to_claim_world_class`.

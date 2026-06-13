@@ -179,7 +179,8 @@ def template_paths(skill_dir: Path, keys: list[str]) -> dict[str, Path]:
 def submission_paths(submissions_dir: Path) -> list[Path]:
     if not submissions_dir.exists():
         return []
-    return sorted(path for path in submissions_dir.glob("*.json") if path.is_file())
+    ignored_names = {"submission_manifest.json"}
+    return sorted(path for path in submissions_dir.glob("*.json") if path.is_file() and path.name not in ignored_names)
 
 
 def find_entry(entries: list[dict[str, Any]], key: str) -> dict[str, Any] | None:
@@ -250,8 +251,8 @@ def build_operator_checklist(
                 "submission_path": rel_path(submission_path, skill_dir),
                 "commands": {
                     "prepare_submission": (
-                        f"mkdir -p {shell_path(submission_path.parent, skill_dir)} && "
-                        f"cp {shell_path(template_path, skill_dir)} {shell_path(submission_path, skill_dir)}"
+                        "python3 scripts/yao.py world-class-submission-kit . "
+                        f"--evidence-key {shlex.quote(key)} --output-dir {shell_path(submission_path.parent, skill_dir)}"
                     ),
                     "validate_intake": f"python3 scripts/yao.py world-class-intake . --submissions-dir {submissions_dir_arg}",
                     "refresh_ledger": "python3 scripts/yao.py world-class-ledger .",

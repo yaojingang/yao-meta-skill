@@ -1,7 +1,7 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-14`
-Commit: `c5e7b05faae8536b420c5120c1d3a59456c96e51`
+Commit: `b540f580b373cb9c0f575b687fb82c5a16748a5d`
 Working tree dirty at generation: `true`
 
 ## Summary
@@ -16,7 +16,7 @@ Working tree dirty at generation: `true`
 - provider evidence complete: `false`
 - human review complete: `false`
 - world-class ready: `false`
-- changed files at generation: `30`
+- changed files at generation: `48`
 
 This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete.
 
@@ -40,20 +40,20 @@ This report proves local benchmark reproducibility only. It keeps external provi
 | output_cases | `evals/output/cases.jsonl` | present | `a6ae96857116` |
 | output_schema | `evals/output/schema.json` | present | `8ee340c95064` |
 | output_scorecard | `reports/output_quality_scorecard.json` | present | `0806258a8e08` |
-| output_execution | `reports/output_execution_runs.json` | present | `917751088ebd` |
+| output_execution | `reports/output_execution_runs.json` | present | `9456b0729b32` |
 | blind_review | `reports/output_blind_review_pack.json` | present | `bbe2db8ec277` |
 | review_adjudication | `reports/output_review_adjudication.json` | present | `5765254c4309` |
 | trigger_scorecard | `reports/route_scorecard.json` | present | `c164e83e36d0` |
 | runtime_conformance | `reports/conformance_matrix.json` | present | `8251329e663d` |
-| trust_report | `reports/security_trust_report.json` | present | `5680f911b5b5` |
-| python_compatibility | `reports/python_compatibility.json` | present | `809d07d66de3` |
-| registry_audit | `reports/registry_audit.json` | present | `9934a175c3db` |
-| package_verification | `reports/package_verification.json` | present | `51a8e785a233` |
-| install_simulation | `reports/install_simulation.json` | present | `5e6e50170658` |
-| skill_os2_audit | `reports/skill_os2_audit.json` | present | `ed1be043898a` |
+| trust_report | `reports/security_trust_report.json` | present | `2aa9f4b0a7e2` |
+| python_compatibility | `reports/python_compatibility.json` | present | `bbab01ebaa5b` |
+| registry_audit | `reports/registry_audit.json` | present | `69f9f9f4663e` |
+| package_verification | `reports/package_verification.json` | present | `c8ab851a6f71` |
+| install_simulation | `reports/install_simulation.json` | present | `a88a496f58a5` |
+| skill_os2_audit | `reports/skill_os2_audit.json` | present | `91945bad2dcd` |
 | world_class_evidence_plan | `reports/world_class_evidence_plan.json` | present | `ed1274b7c18c` |
 | world_class_evidence_ledger | `reports/world_class_evidence_ledger.json` | present | `e6dfdb22dc9f` |
-| world_class_evidence_intake | `reports/world_class_evidence_intake.json` | present | `6eae947a6e2f` |
+| world_class_evidence_intake | `reports/world_class_evidence_intake.json` | present | `465f8d915a86` |
 | world_class_claim_guard | `reports/world_class_claim_guard.json` | present | `608c954d1af9` |
 
 ## Reproduction Commands

@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-14",
+  "generated_at": "2026-06-13",
   "skill_dir": ".",
   "summary": {
     "ledger_entry_count": 4,
@@ -194,7 +194,7 @@
       "owner": "Browser/Chrome/IDE/provider client integrator",
       "status": "pending",
       "source_status": "external_required",
-      "current": "external source events 0; adoption samples 0",
+      "current": "external source events 0; adoption samples 1",
       "objective": "Import production metadata-only events from a real external client into the local drift loop.",
       "provenance_requirements": [
         "real external client source",
@@ -222,7 +222,7 @@
       ],
       "observed_state": {
         "external_source_events": 0,
-        "adoption_sample_count": 0,
+        "adoption_sample_count": 1,
         "raw_content_allowed": false,
         "risk_band": "low",
         "accepted": false

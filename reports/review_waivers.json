@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "ok": true,
   "skill_dir": ".",
-  "generated_at": "2026-06-14",
+  "generated_at": "2026-06-13",
   "summary": {
     "waiver_count": 0,
     "active_count": 0,
@@ -52,7 +52,7 @@
         "Reviewer links output_review_adjudication or output_execution evidence."
       ],
       "suggested_evidence": "reports/output_review_adjudication.md",
-      "suggested_command": "python3 scripts/yao.py review-waivers . --add-waiver --gate-key output-lab --reviewer \"<reviewer>\" --reason \"Output Lab has pending human/provider evidence; accepted only for this bounded review scope.\" --expires-at 2027-06-14 --evidence reports/output_review_adjudication.md",
+      "suggested_command": "python3 scripts/yao.py review-waivers . --add-waiver --gate-key output-lab --reviewer \"<reviewer>\" --reason \"Output Lab has pending human/provider evidence; accepted only for this bounded review scope.\" --expires-at 2027-06-13 --evidence reports/output_review_adjudication.md",
       "world_class_boundary": "Does not count as provider, human, or public world-class completion evidence."
     },
     {

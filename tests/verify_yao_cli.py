@@ -85,6 +85,7 @@ def main() -> None:
     assert "world-class-evidence" in parser_help, parser_help
     assert "world-class-ledger" in parser_help, parser_help
     assert "world-class-intake" in parser_help, parser_help
+    assert "world-class-submission-kit" in parser_help, parser_help
     assert "world-class-claim-guard" in parser_help, parser_help
     assert "benchmark-reproducibility" in parser_help, parser_help
     assert "telemetry-import" in parser_help, parser_help
@@ -270,8 +271,28 @@ def main() -> None:
         item for item in world_class_intake_result["payload"]["operator_checklist"] if item["evidence_key"] == "provider-holdout"
     )
     assert provider_checklist["readiness"] == "awaiting-submission", provider_checklist
-    assert "cp evidence/world_class/templates/provider-holdout.intake.json" in provider_checklist["commands"]["prepare_submission"], provider_checklist
+    assert provider_checklist["commands"]["prepare_submission"] == (
+        "python3 scripts/yao.py world-class-submission-kit . "
+        "--evidence-key provider-holdout --output-dir evidence/world_class/submissions"
+    ), provider_checklist
     assert world_class_ledger_result["payload"]["summary"]["ready_to_claim_world_class"] is False, world_class_ledger_result
+
+    world_class_submission_kit_result = run(
+        "world-class-submission-kit",
+        str(ROOT),
+        "--output-dir",
+        str(tmp_root / "world_class_submission_kit"),
+        "--evidence-key",
+        "provider-holdout",
+        "--generated-at",
+        "2026-06-14",
+    )
+    assert world_class_submission_kit_result["ok"], world_class_submission_kit_result
+    assert world_class_submission_kit_result["payload"]["summary"]["decision"] == "submission-kit-ready", world_class_submission_kit_result
+    assert world_class_submission_kit_result["payload"]["summary"]["written_count"] == 1, world_class_submission_kit_result
+    assert world_class_submission_kit_result["payload"]["summary"]["drafts_count_as_evidence"] is False, world_class_submission_kit_result
+    assert (tmp_root / "world_class_submission_kit" / "provider-holdout.json").exists(), world_class_submission_kit_result
+    assert (tmp_root / "world_class_submission_kit" / "submission_manifest.json").exists(), world_class_submission_kit_result
 
     world_class_claim_guard_result = run(
         "world-class-claim-guard",

@@ -20,6 +20,7 @@ SAFE_ENV_KEYS = (
     "TERM",
     "TMP",
     "TMPDIR",
+    "TZ",
 )
 DEFAULT_TARGETS = [
     "eval",

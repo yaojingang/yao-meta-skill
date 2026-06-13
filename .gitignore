@@ -24,6 +24,7 @@ tests/tmp_baseline_compare.*
 reports/release_snapshots/
 reports/telemetry_events.jsonl
 .yao/
+evidence/world_class/submission-kit/
 evidence/world_class/submissions/
 
 # Local business-skill experiments belong outside this meta-skill repo unless promoted intentionally.

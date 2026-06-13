@@ -436,7 +436,7 @@
         "path": "scripts",
         "label": "Deterministic helpers or local tooling",
         "kind": "folder",
-        "file_count": 90
+        "file_count": 91
       },
       {
         "path": "evals",
@@ -451,7 +451,7 @@
         "file_count": 195
       }
     ],
-    "file_count": 349,
+    "file_count": 350,
     "folder_count": 4,
     "distribution": [
       {
@@ -476,7 +476,7 @@
       },
       {
         "label": "scripts",
-        "value": 90
+        "value": 91
       },
       {
         "label": "evals",
@@ -605,7 +605,7 @@
       "path": "scripts",
       "label": "Deterministic helpers or local tooling",
       "kind": "folder",
-      "file_count": 90
+      "file_count": 91
     },
     {
       "path": "evals",
@@ -909,9 +909,9 @@
       "world_class_task_count": 4,
       "world_class_ledger_pending_count": 4,
       "working_tree_dirty": true,
-      "changed_file_count": 30
+      "changed_file_count": 54
     },
-    "commit": "c5e7b05faae8536b420c5120c1d3a59456c96e51",
+    "commit": "b540f580b373cb9c0f575b687fb82c5a16748a5d",
     "missing_artifacts": [],
     "limitations": [
       "Local command-runner evidence is reproducible but does not replace provider-backed model holdout evidence.",
@@ -986,8 +986,8 @@
     "failures": []
   },
   "trust_security": {
-    "scanned_files": 174,
-    "script_count": 90,
+    "scanned_files": 175,
+    "script_count": 91,
     "internal_module_count": 17,
     "secret_findings": 0,
     "dependency_files": [
@@ -996,18 +996,18 @@
     "network_script_count": 3,
     "network_policy_covered_count": 3,
     "network_policy_missing_count": 0,
-    "file_write_script_count": 60,
+    "file_write_script_count": 61,
     "permission_required_count": 3,
     "permission_approved_count": 3,
     "permission_missing_count": 0,
     "permission_invalid_count": 0,
     "permission_expired_count": 0,
-    "help_smoke_checked_count": 73,
+    "help_smoke_checked_count": 74,
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 174,
-    "package_sha256": "0b47fb8b2db508e32d5aafd5c46bd008dc23493c1ff909427686609e9f99d5a9"
+    "package_hash_file_count": 175,
+    "package_sha256": "d799ec85c035b6335ea1e262b980d630ec05cd07448239cf97a34540eb4c2bac"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -1045,8 +1045,8 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "0b47fb8b2db508e32d5aafd5c46bd008dc23493c1ff909427686609e9f99d5a9",
-        "archive_sha256": "934b2967ff56afa5d725b9c129d4fc1e280854d85aa09783ffdb1b6b3108346d"
+        "package_sha256": "d799ec85c035b6335ea1e262b980d630ec05cd07448239cf97a34540eb4c2bac",
+        "archive_sha256": "fe47e53a7a89918ef2d7ae53c1e62a6b73da0bd80904d5a157c71a2758c8004e"
       },
       "compatibility": {
         "openai": "pass",
@@ -1077,7 +1077,7 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "934b2967ff56afa5d725b9c129d4fc1e280854d85aa09783ffdb1b6b3108346d",
+        "archive_sha256": "fe47e53a7a89918ef2d7ae53c1e62a6b73da0bd80904d5a157c71a2758c8004e",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
@@ -1093,8 +1093,8 @@
       "target_count": 4,
       "adapter_count": 4,
       "archive_present": true,
-      "archive_sha256": "934b2967ff56afa5d725b9c129d4fc1e280854d85aa09783ffdb1b6b3108346d",
-      "archive_entry_count": 558,
+      "archive_sha256": "fe47e53a7a89918ef2d7ae53c1e62a6b73da0bd80904d5a157c71a2758c8004e",
+      "archive_entry_count": 559,
       "failure_count": 0,
       "warning_count": 0
     },
@@ -1105,7 +1105,7 @@
     "ok": true,
     "summary": {
       "archive_present": true,
-      "archive_entry_count": 558,
+      "archive_entry_count": 559,
       "archive_extracted": true,
       "entrypoint_loaded": true,
       "manifest_loaded": true,
@@ -1115,7 +1115,7 @@
       "installer_permission_failure_count": 0,
       "permission_target_count": 4,
       "permission_capability_count": 3,
-      "install_root_is_temp": true,
+      "install_root_is_temp": false,
       "failure_count": 0,
       "warning_count": 0
     },
@@ -1172,12 +1172,12 @@
         {
           "field": "archive_sha256",
           "from": "",
-          "to": "934b2967ff56afa5d725b9c129d4fc1e280854d85aa09783ffdb1b6b3108346d"
+          "to": "fe47e53a7a89918ef2d7ae53c1e62a6b73da0bd80904d5a157c71a2758c8004e"
         },
         {
           "field": "package_sha256",
           "from": "0000000000000000000000000000000000000000000000000000000000000000",
-          "to": "0b47fb8b2db508e32d5aafd5c46bd008dc23493c1ff909427686609e9f99d5a9"
+          "to": "d799ec85c035b6335ea1e262b980d630ec05cd07448239cf97a34540eb4c2bac"
         }
       ]
     },
@@ -1194,14 +1194,14 @@
     "ok": true,
     "summary": {
       "event_count": 1,
-      "adoption_sample_count": 0,
-      "activation_count": 0,
-      "accepted_count": 0,
+      "adoption_sample_count": 1,
+      "activation_count": 1,
+      "accepted_count": 1,
       "edited_count": 0,
       "rejected_count": 0,
       "missed_count": 0,
       "failed_count": 0,
-      "adoption_rate": 0,
+      "adoption_rate": 100.0,
       "missed_trigger_count": 0,
       "wrong_trigger_count": 0,
       "bad_output_count": 0,
@@ -1210,7 +1210,7 @@
       "review_overdue_count": 0,
       "risk_band": "low",
       "event_types": {
-        "review_event": 1
+        "skill_activation": 1
       },
       "failure_types": {},
       "source_types": {
@@ -1423,7 +1423,7 @@
         "status": "external_required",
         "category": "external",
         "owner": "Browser/Chrome/IDE/provider client integrator",
-        "current": "external source events 0; adoption samples 0",
+        "current": "external source events 0; adoption samples 1",
         "objective": "Import production metadata-only events from a real external client into the local drift loop.",
         "runbook": [
           "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
@@ -1655,7 +1655,7 @@
         "owner": "Browser/Chrome/IDE/provider client integrator",
         "status": "pending",
         "source_status": "external_required",
-        "current": "external source events 0; adoption samples 0",
+        "current": "external source events 0; adoption samples 1",
         "objective": "Import production metadata-only events from a real external client into the local drift loop.",
         "provenance_requirements": [
           "real external client source",
@@ -1683,7 +1683,7 @@
         ],
         "observed_state": {
           "external_source_events": 0,
-          "adoption_sample_count": 0,
+          "adoption_sample_count": 1,
           "raw_content_allowed": false,
           "risk_band": "low",
           "accepted": false
