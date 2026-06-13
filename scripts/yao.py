@@ -437,6 +437,24 @@ def command_promote_check(args: argparse.Namespace) -> int:
     return 0 if result["ok"] else 2
 
 
+def command_python_compat(args: argparse.Namespace) -> int:
+    skill_dir = str(Path(args.skill_dir).resolve())
+    cmd = [skill_dir]
+    for path in args.path:
+        cmd.extend(["--path", path])
+    if args.target_python:
+        cmd.extend(["--target-python", args.target_python])
+    if args.output_json:
+        cmd.extend(["--output-json", args.output_json])
+    if args.output_md:
+        cmd.extend(["--output-md", args.output_md])
+    if args.generated_at:
+        cmd.extend(["--generated-at", args.generated_at])
+    result = run_script("python_compat_check.py", cmd)
+    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
+    return 0 if result["ok"] else 2
+
+
 def command_report(args: argparse.Namespace) -> int:
     steps = []
     if args.refresh_optimization:
@@ -453,6 +471,7 @@ def command_report(args: argparse.Namespace) -> int:
             run_script("render_regression_history.py", []),
             run_script("render_context_reports.py", []),
             run_script("render_portability_report.py", []),
+            run_script("python_compat_check.py", [str(ROOT)]),
             run_script("render_reference_synthesis.py", [str(ROOT)]),
             run_script("render_artifact_design_profile.py", [str(ROOT)]),
             run_script("render_prompt_quality_profile.py", [str(ROOT)]),
@@ -486,6 +505,7 @@ def command_report(args: argparse.Namespace) -> int:
             "regression_history": "reports/regression_history.md",
             "context_budget": "reports/context_budget.json",
             "portability_score": "reports/portability_score.json",
+            "python_compatibility": "reports/python_compatibility.json",
             "reference_synthesis": "reports/reference-synthesis.json",
             "artifact_design_profile": "reports/artifact-design-profile.json",
             "prompt_quality_profile": "reports/prompt-quality-profile.json",
@@ -1262,6 +1282,7 @@ def command_workspace_flow(args: argparse.Namespace) -> int:
             {"phase": "report-refresh", "result": run_script("render_regression_history.py", [])},
             {"phase": "report-refresh", "result": run_script("render_context_reports.py", [])},
             {"phase": "report-refresh", "result": run_script("render_portability_report.py", [])},
+            {"phase": "report-refresh", "result": run_script("python_compat_check.py", [str(ROOT)])},
             {"phase": "report-refresh", "result": run_script("compile_skill.py", [str(ROOT)])},
             {"phase": "report-refresh", "result": run_script("render_adoption_drift_report.py", [str(ROOT)])},
             {"phase": "report-refresh", "result": run_script("render_telemetry_hook_recipes.py", [str(ROOT)])},

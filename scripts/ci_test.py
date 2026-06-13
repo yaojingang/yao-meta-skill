@@ -29,6 +29,7 @@ DEFAULT_TARGETS = [
     "description-optimization",
     "description-optimization-check",
     "promotion-check",
+    "python-compat-check",
     "yao-cli-check",
     "skill-overview-check",
     "skill-report-metrics-check",

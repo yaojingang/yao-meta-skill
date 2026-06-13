@@ -33,6 +33,7 @@ REQUIRED_ARTIFACTS = [
     ("trigger_scorecard", "reports/route_scorecard.json"),
     ("runtime_conformance", "reports/conformance_matrix.json"),
     ("trust_report", "reports/security_trust_report.json"),
+    ("python_compatibility", "reports/python_compatibility.json"),
     ("registry_audit", "reports/registry_audit.json"),
     ("package_verification", "reports/package_verification.json"),
     ("install_simulation", "reports/install_simulation.json"),
@@ -83,6 +84,11 @@ REPRODUCTION_COMMANDS = [
         "label": "trust report",
         "command": "python3 scripts/yao.py trust .",
         "evidence": "reports/security_trust_report.json",
+    },
+    {
+        "label": "python compatibility",
+        "command": "python3 scripts/yao.py python-compat .",
+        "evidence": "reports/python_compatibility.json",
     },
     {
         "label": "package",

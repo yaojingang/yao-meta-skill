@@ -81,6 +81,18 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     promote_cmd = subparsers.add_parser("promote-check", help="Apply promotion policy and build iteration bundles.")
     promote_cmd.set_defaults(func=_handler(command_handlers, "command_promote_check"))
 
+    python_compat_cmd = subparsers.add_parser(
+        "python-compat",
+        help="Check Python source compatibility for the supported CI/runtime interpreter.",
+    )
+    python_compat_cmd.add_argument("skill_dir", nargs="?", default=".")
+    python_compat_cmd.add_argument("--path", action="append", default=[])
+    python_compat_cmd.add_argument("--target-python", default="3.11")
+    python_compat_cmd.add_argument("--output-json")
+    python_compat_cmd.add_argument("--output-md")
+    python_compat_cmd.add_argument("--generated-at")
+    python_compat_cmd.set_defaults(func=_handler(command_handlers, "command_python_compat"))
+
     review_cmd = subparsers.add_parser("review", help="Locate the current bundle and human review stub for a target.")
     review_cmd.add_argument(
         "--target",

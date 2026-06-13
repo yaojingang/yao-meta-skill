@@ -145,7 +145,7 @@
       "key": "benchmark-reproducibility",
       "label": "Benchmark Reproducibility",
       "status": "pass",
-      "current": "artifacts 19; missing 0; failures 3",
+      "current": "artifacts 20; missing 0; failures 3",
       "target": "Public methodology, reproducible commands, required artifacts, and failure disclosure are machine-checkable",
       "evidence": [
         {
@@ -197,7 +197,7 @@
       "key": "trust-security",
       "label": "Trust Security",
       "status": "pass",
-      "current": "secrets 0; scripts 81; help failures 0",
+      "current": "secrets 0; scripts 82; help failures 0",
       "target": "Secrets, scripts, dependencies, permissions, and package hash are reviewable",
       "evidence": [
         {
@@ -281,7 +281,7 @@
       "key": "registry-distribution",
       "label": "Registry Distribution",
       "status": "pass",
-      "current": "zip entries 543; install failures 0; permission failures 0",
+      "current": "zip entries 547; install failures 0; permission failures 0",
       "target": "Package metadata, archive checksum, package verification, and install simulation pass",
       "evidence": [
         {

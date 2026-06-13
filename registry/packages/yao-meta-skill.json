@@ -16,8 +16,8 @@
   "trust_level": "local",
   "license": "MIT",
   "checksums": {
-    "package_sha256": "25367c1534cac1e3bae0a1b03a9741eeede85e8cc7b7ad6adf0a3ad6597c9a6d",
-    "archive_sha256": "737f7608b2bf43c91cbbaf3adf55e2f8daecf246906de1dbc3b0a8b94c8490d8"
+    "package_sha256": "5466073395d5a54812f5b45061e745bc4e1ad67c446eeb5a41f6e206b916405d",
+    "archive_sha256": "13b8b221acd80b5267c0ba63341560fa24ab99c0ee51cd55b2c763ffa458bc05"
   },
   "compatibility": {
     "openai": "pass",
@@ -48,7 +48,7 @@
   },
   "distribution": {
     "archive_verified": true,
-    "archive_sha256": "737f7608b2bf43c91cbbaf3adf55e2f8daecf246906de1dbc3b0a8b94c8490d8",
+    "archive_sha256": "13b8b221acd80b5267c0ba63341560fa24ab99c0ee51cd55b2c763ffa458bc05",
     "package_verification": "reports/package_verification.json",
     "install_simulated": true,
     "install_simulation": "reports/install_simulation.json"

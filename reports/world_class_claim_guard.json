@@ -6,7 +6,7 @@
   "summary": {
     "ledger_ready_to_claim_world_class": false,
     "ledger_pending_count": 4,
-    "claim_surface_count": 66,
+    "claim_surface_count": 67,
     "violation_count": 0,
     "overclaim_guard_active": true,
     "decision": "claim-guard-pass-evidence-pending"
@@ -205,6 +205,10 @@
     },
     {
       "path": "reports/prompt-quality-profile.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/python_compatibility.md",
       "violation_count": 0
     },
     {

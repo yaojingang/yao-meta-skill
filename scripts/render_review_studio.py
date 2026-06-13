@@ -128,6 +128,7 @@ def evidence_paths(skill_dir: Path) -> dict[str, str]:
         "skill_os2_coverage": "reports/skill_os2_coverage.md",
         "runtime_conformance": "reports/conformance_matrix.md",
         "trust_report": "reports/security_trust_report.md",
+        "python_compatibility": "reports/python_compatibility.md",
         "permission_policy": "security/permission_policy.md",
         "runtime_permissions": "reports/runtime_permission_probes.md",
         "skill_atlas": "reports/skill_atlas.html",
@@ -165,6 +166,7 @@ def load_review_data(skill_dir: Path) -> dict[str, dict[str, Any]]:
         "conformance": load_json(reports / "conformance_matrix.json"),
         "runtime_permissions": load_json(reports / "runtime_permission_probes.json"),
         "trust": load_json(reports / "security_trust_report.json"),
+        "python_compatibility": load_json(reports / "python_compatibility.json"),
         "context_budget": load_json(reports / "context_budget.json"),
         "promotion": load_json(reports / "promotion_decisions.json"),
         "atlas": load_json(reports / "skill_atlas.json"),
@@ -195,6 +197,7 @@ def insight_cards(data: dict[str, dict[str, Any]]) -> list[dict[str, str]]:
     conformance = data["conformance"].get("summary", {})
     runtime_permissions = data["runtime_permissions"].get("summary", {})
     trust = data["trust"].get("summary", {})
+    python_compat = data["python_compatibility"].get("summary", {})
     atlas = data["atlas"].get("summary", {})
     adoption = data["adoption_drift"].get("summary", {})
     waivers = data["review_waivers"].get("summary", {})
@@ -259,6 +262,11 @@ def insight_cards(data: dict[str, dict[str, Any]]) -> list[dict[str, str]]:
             "label": "Trust",
             "value": str(trust.get("secret_findings", 0)),
             "detail": f"{trust.get('script_count', 0)} scripts scanned; secrets found",
+        },
+        {
+            "label": "Py Compat",
+            "value": str(python_compat.get("issue_count", 0)),
+            "detail": f"{python_compat.get('file_count', 0)} files scanned for Python {python_compat.get('target_python', '3.11')}",
         },
         {
             "label": "Atlas",
@@ -712,6 +720,7 @@ def render_html(report: dict[str, Any]) -> str:
     conformance_summary = report["data"]["conformance"].get("summary", {})
     compiled_summary = report["data"]["compiled_targets"].get("summary", {})
     trust_summary = report["data"]["trust"].get("summary", {})
+    python_compat_summary = report["data"]["python_compatibility"].get("summary", {})
     runtime_permissions_summary = report["data"]["runtime_permissions"].get("summary", {})
     atlas_summary = report["data"]["atlas"].get("summary", {})
     adoption_summary = report["data"]["adoption_drift"].get("summary", {})
@@ -810,6 +819,11 @@ def render_html(report: dict[str, Any]) -> str:
         trust_summary,
         ["secret_findings", "script_count", "network_script_count", "help_smoke_failed_count", "package_sha256"],
         "security trust report missing",
+    )
+    python_compat_panel = render_kv_grid(
+        python_compat_summary,
+        ["target_python", "file_count", "issue_count", "syntax_error_count", "fstring_311_violation_count"],
+        "python compatibility report missing",
     )
     runtime_boundary_panel = render_kv_grid(
         runtime_permissions_summary,
@@ -1005,6 +1019,11 @@ def render_html(report: dict[str, Any]) -> str:
     <section id="trust" class="twocol">
       <div class="panel"><h2>信任报告</h2>{trust_panel}</div>
       <div class="panel"><h2>安全边界</h2><p>高风险 secret、远程 inline execution、缺失依赖策略或无法解释的脚本接口应阻断 governed release。</p></div>
+    </section>
+
+    <section class="twocol">
+      <div class="panel"><h2>Python 兼容</h2>{python_compat_panel}</div>
+      <div class="panel"><h2>解释器边界</h2><p>CI 和发布审查以 Python 3.11 兼容为底线；本地更高版本允许的新语法不能绕过兼容门禁。</p></div>
     </section>
 
     <section id="permissions" class="twocol">

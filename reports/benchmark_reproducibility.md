@@ -1,22 +1,22 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-14`
-Commit: `2afb802a87468a8cf1bbd11769774ad373425a33`
+Commit: `ee4879f296d6e6b5dde76afc37b81504806afc82`
 Working tree dirty at generation: `true`
 
 ## Summary
 
 - reproducibility ready: `true`
 - methodology complete: `true`
-- required artifacts: `19`
+- required artifacts: `20`
 - missing artifacts: `0`
 - output cases: `5`
 - disclosed failure cases: `3`
-- reproduction commands: `18`
+- reproduction commands: `19`
 - provider evidence complete: `false`
 - human review complete: `false`
 - world-class ready: `false`
-- changed files at generation: `18`
+- changed files at generation: `44`
 
 This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete.
 
@@ -40,20 +40,21 @@ This report proves local benchmark reproducibility only. It keeps external provi
 | output_cases | `evals/output/cases.jsonl` | present | `a6ae96857116` |
 | output_schema | `evals/output/schema.json` | present | `8ee340c95064` |
 | output_scorecard | `reports/output_quality_scorecard.json` | present | `0806258a8e08` |
-| output_execution | `reports/output_execution_runs.json` | present | `e2cc7e4454a4` |
+| output_execution | `reports/output_execution_runs.json` | present | `0340b973c3e9` |
 | blind_review | `reports/output_blind_review_pack.json` | present | `bbe2db8ec277` |
 | review_adjudication | `reports/output_review_adjudication.json` | present | `ddd9af90d42e` |
 | trigger_scorecard | `reports/route_scorecard.json` | present | `c164e83e36d0` |
 | runtime_conformance | `reports/conformance_matrix.json` | present | `8251329e663d` |
-| trust_report | `reports/security_trust_report.json` | present | `ce04044319c8` |
-| registry_audit | `reports/registry_audit.json` | present | `e75cba25d519` |
-| package_verification | `reports/package_verification.json` | present | `87f88af64e46` |
-| install_simulation | `reports/install_simulation.json` | present | `ae7cccad4792` |
-| skill_os2_audit | `reports/skill_os2_audit.json` | present | `3f1c6fdf7b52` |
+| trust_report | `reports/security_trust_report.json` | present | `0eed3f527cd2` |
+| python_compatibility | `reports/python_compatibility.json` | present | `435dabcd3ce0` |
+| registry_audit | `reports/registry_audit.json` | present | `dee17f5e1f35` |
+| package_verification | `reports/package_verification.json` | present | `b247e849e011` |
+| install_simulation | `reports/install_simulation.json` | present | `2bb990fc2198` |
+| skill_os2_audit | `reports/skill_os2_audit.json` | present | `ef085ddc8a1e` |
 | world_class_evidence_plan | `reports/world_class_evidence_plan.json` | present | `ed1274b7c18c` |
 | world_class_evidence_ledger | `reports/world_class_evidence_ledger.json` | present | `5ed043491c3d` |
 | world_class_evidence_intake | `reports/world_class_evidence_intake.json` | present | `124b9239d7f3` |
-| world_class_claim_guard | `reports/world_class_claim_guard.json` | present | `7365f6cd85b8` |
+| world_class_claim_guard | `reports/world_class_claim_guard.json` | present | `63628e78d1d2` |
 
 ## Reproduction Commands
 
@@ -73,6 +74,8 @@ This report proves local benchmark reproducibility only. It keeps external provi
   - evidence: `reports/conformance_matrix.json`
 - `python3 scripts/yao.py trust .`
   - evidence: `reports/security_trust_report.json`
+- `python3 scripts/yao.py python-compat .`
+  - evidence: `reports/python_compatibility.json`
 - `python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --expectations evals/packaging_expectations.json --output-dir dist --zip`
   - evidence: `dist/yao-meta-skill.zip`
 - `python3 scripts/yao.py package-verify . --package-dir dist --require-zip`

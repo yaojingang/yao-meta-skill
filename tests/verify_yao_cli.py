@@ -73,6 +73,7 @@ def main() -> None:
     parser_help = yao_cli_module.build_parser().format_help()
     assert "quickstart" in parser_help, parser_help
     assert "review-studio" in parser_help, parser_help
+    assert "python-compat" in parser_help, parser_help
     assert "skill-os2-audit" in parser_help, parser_help
     assert "skill-os2-coverage" in parser_help, parser_help
     assert "world-class-evidence" in parser_help, parser_help
@@ -183,6 +184,21 @@ def main() -> None:
     assert skill_os2_coverage_result["ok"], skill_os2_coverage_result
     assert skill_os2_coverage_result["payload"]["summary"]["local_blueprint_ready"] is True, skill_os2_coverage_result
     assert skill_os2_coverage_result["payload"]["summary"]["public_world_class_ready"] is False, skill_os2_coverage_result
+
+    python_compat_result = run(
+        "python-compat",
+        str(ROOT),
+        "--output-json",
+        str(tmp_root / "python_compatibility.json"),
+        "--output-md",
+        str(tmp_root / "python_compatibility.md"),
+        "--generated-at",
+        "2026-06-14",
+    )
+    assert python_compat_result["ok"], python_compat_result
+    assert python_compat_result["payload"]["summary"]["target_python"] == "3.11", python_compat_result
+    assert python_compat_result["payload"]["summary"]["issue_count"] == 0, python_compat_result
+    assert python_compat_result["payload"]["summary"]["file_count"] >= 50, python_compat_result
 
     world_class_evidence_result = run(
         "world-class-evidence",
@@ -656,6 +672,7 @@ def main() -> None:
     assert report_result["ok"], report_result
     assert "iteration_ledger" in report_result["payload"]["artifacts"], report_result
     assert "portability_score" in report_result["payload"]["artifacts"], report_result
+    assert "python_compatibility" in report_result["payload"]["artifacts"], report_result
     assert "artifact_design_profile" in report_result["payload"]["artifacts"], report_result
     assert "prompt_quality_profile" in report_result["payload"]["artifacts"], report_result
     assert "compiled_targets" in report_result["payload"]["artifacts"], report_result

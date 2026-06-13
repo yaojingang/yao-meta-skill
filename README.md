@@ -32,6 +32,7 @@ It turns rough workflows, transcripts, prompts, notes, and runbooks into reusabl
 - a benchmark reproducibility manifest that checks methodology sections, required artifacts, failure disclosure, and reproduction commands
 - Output Eval Lab evidence with assertion grading, execution/timing/token evidence, a blind A/B review pack, a separate answer key, and reviewer adjudication reports
 - a runtime permission probe report that checks packaged target adapters for explicit permission metadata, native-enforcement flags, metadata fallback notes, and residual risks
+- a Python compatibility gate that catches supported-runtime syntax hazards before they reach GitHub Actions or packaged distribution
 - a side-by-side HTML review studio for first-pass human review
 - an artifact design profile that defines visual direction, layout patterns, and quality gates for reports, tutorials, dashboards, screenshots, and review pages
 - a prompt quality profile that abstracts need modeling, RTF mapping, complexity, and quality checks into reviewer-visible evidence instead of bloating `SKILL.md`
@@ -134,6 +135,7 @@ python3 scripts/yao.py output-exec
 python3 scripts/yao.py output-review
 python3 scripts/yao.py conformance .
 python3 scripts/yao.py trust .
+python3 scripts/yao.py python-compat .
 python3 scripts/yao.py runtime-permissions . --package-dir dist
 python3 scripts/yao.py skill-atlas --workspace-root .
 python3 scripts/yao.py registry-audit .
@@ -296,6 +298,7 @@ Full reports: [reports/eval_suite.json](reports/eval_suite.json) and [reports/fa
 - world-class public claim guard status is published in [reports/world_class_claim_guard.md](reports/world_class_claim_guard.md)
 - benchmark reproducibility evidence is published in [reports/benchmark_reproducibility.md](reports/benchmark_reproducibility.md)
 - target compiler evidence is published in [reports/compiled_targets.md](reports/compiled_targets.md)
+- Python runtime compatibility evidence is published in [reports/python_compatibility.md](reports/python_compatibility.md)
 - registry package metadata and audit status are published in [reports/registry_audit.md](reports/registry_audit.md)
 - package archive verification is published in [reports/package_verification.md](reports/package_verification.md)
 - temporary local install simulation is published in [reports/install_simulation.md](reports/install_simulation.md)
@@ -410,7 +413,7 @@ Utility scripts that make the meta-skill operational:
 - `run_description_optimization_suite.py`: runs description optimization across the root skill and governed examples, then writes reusable reports and optional drift snapshots with calibration and family summaries
 - `promotion_checker.py`: applies promotion policy to current description candidates, writes promotion decisions, builds candidate registries, and emits iteration bundles with review stubs
 - `create_iteration_snapshot.py`: freezes the current promotion decision into a versioned release snapshot with review, route, and context evidence
-- `yao.py`: unified authoring CLI that exposes init, validate, optimize-description, promote-check, review, release-snapshot, workspace-flow, report, skill-ir, compile-skill, output-exec, output-review, skill-os2-audit, skill-os2-coverage, world-class-evidence, world-class-ledger, world-class-intake, world-class-claim-guard, benchmark-reproducibility, telemetry-emit, telemetry-hooks, telemetry-import, package, registry-audit, package-verify, install-simulate, upgrade-check, review-waivers, and test as one entrypoint
+- `yao.py`: unified authoring CLI that exposes init, validate, optimize-description, promote-check, python-compat, review, release-snapshot, workspace-flow, report, skill-ir, compile-skill, output-exec, output-review, skill-os2-audit, skill-os2-coverage, world-class-evidence, world-class-ledger, world-class-intake, world-class-claim-guard, benchmark-reproducibility, telemetry-emit, telemetry-hooks, telemetry-import, package, registry-audit, package-verify, install-simulate, upgrade-check, review-waivers, and test as one entrypoint
 - `render_description_drift_history.py`: turns description-optimization snapshots into a readable drift-history report
 - `build_confusion_matrix.py`: scores route confusion across tracked sibling skills and `no_route` cases, then writes a route scorecard and optional milestone snapshot
 - `render_iteration_ledger.py`: compresses regression milestones, description optimization drift, and route scorecards into one iteration-facing ledger
@@ -426,6 +429,7 @@ Utility scripts that make the meta-skill operational:
 - `render_world_class_evidence_intake.py`: validates world-class external and human evidence packets against provenance, privacy, artifact, and anti-overclaim requirements before ledger review
 - `render_world_class_claim_guard.py`: scans README, docs, and reports for premature world-class completion claims while accepted evidence is still pending
 - `render_benchmark_reproducibility.py`: renders methodology, artifact, failure-disclosure, and reproduction-command evidence for public benchmark claims
+- `python_compat_check.py`: checks Python source for supported-runtime compatibility hazards such as Python 3.11 f-string expression backslashes
 - `cross_packager.py`: builds client-specific export artifacts from Skill IR plus neutral metadata, with explicit platform contracts and validation
 - `render_portability_report.py`: scores cross-environment portability from neutral metadata, degradation rules, and consumer validation coverage
 - `render_skill_overview.py`: generates the white-background bilingual HTML skill audit report with sticky four-character Chinese navigation, top-right language switch, v2 scorecard, inline SVG charts, contract boundary, quality review, risk governance, assets, and iteration roadmap

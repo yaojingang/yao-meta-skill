@@ -21,9 +21,9 @@ This report maps the Skill OS 2.0 upgrade blueprint to concrete local artifacts,
 | Skill IR | `pass` | schema 2.0.0; targets 5 | `python3 scripts/yao.py skill-ir .` | `python3 tests/verify_skill_ir.py` |
 | Output Eval Lab | `pass` | 5 cases; delta 100.0; execution 10 | `python3 scripts/yao.py output-exec . && python3 scripts/yao.py output-review .` | `python3 tests/verify_output_eval_lab.py` |
 | Runtime Conformance | `pass` | 5/5 targets pass | `python3 scripts/yao.py conformance .` | `python3 tests/verify_conformance_suite.py` |
-| Trust Security | `pass` | 81 scripts; secrets 0; help failures 0 | `python3 scripts/yao.py trust .` | `python3 tests/verify_trust_check.py` |
+| Trust Security | `pass` | 82 scripts; secrets 0; help failures 0 | `python3 scripts/yao.py trust .` | `python3 tests/verify_trust_check.py` |
 | Skill Atlas | `pass` | 12 scanned skills; actionable collisions 0 | `python3 scripts/yao.py skill-atlas --workspace-root .` | `python3 tests/verify_skill_atlas.py` |
-| Registry Distribution | `pass` | archive entries 543; install failures 0 | `python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip && python3 scripts/yao.py registry-audit .` | `python3 tests/verify_registry_audit.py` |
+| Registry Distribution | `pass` | archive entries 547; install failures 0 | `python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip && python3 scripts/yao.py registry-audit .` | `python3 tests/verify_registry_audit.py` |
 | Review Studio | `pass` | 14 gates; decision review; warnings 3 | `python3 scripts/yao.py review-studio .` | `python3 tests/verify_review_studio.py` |
 | Telemetry Drift | `pass` | events 1; recipes 5; risk low | `python3 scripts/yao.py telemetry-hooks . && python3 scripts/yao.py adoption-drift .` | `python3 tests/verify_telemetry_hooks.py` |
 
@@ -31,7 +31,7 @@ This report maps the Skill OS 2.0 upgrade blueprint to concrete local artifacts,
 
 | Item | Status | Current | Command | Test |
 | --- | --- | --- | --- | --- |
-| Benchmark Methodology | `pass` | 19 required artifacts checked | `make ci-test` | `tests/verify_benchmark_reproducibility.py` |
+| Benchmark Methodology | `pass` | 20 required artifacts checked | `make ci-test` | `tests/verify_benchmark_reproducibility.py` |
 | Output Eval Schema | `pass` | 5 output cases | `make ci-test` | `tests/verify_output_eval_lab.py` |
 | Output Eval Runner | `pass` | delta 100.0 | `make ci-test` | `tests/verify_output_eval_lab.py` |
 | Output Quality Scorecard | `pass` | gate pass True | `make ci-test` | `tests/verify_output_eval_lab.py` |

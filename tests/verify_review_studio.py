@@ -218,6 +218,13 @@ def main() -> None:
         capture_output=True,
         text=True,
     )
+    subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "python_compat_check.py"), str(ROOT), "--generated-at", "2026-06-13"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
     for script_name in [
         "render_skill_os2_audit.py",
         "render_world_class_evidence_plan.py",
@@ -325,6 +332,7 @@ def main() -> None:
     assert full_payload["evidence_paths"]["output_blind_review"] == "reports/output_blind_review_pack.md", full_payload["evidence_paths"]
     assert full_payload["evidence_paths"]["output_review_decisions"] == "reports/output_review_decisions.json", full_payload["evidence_paths"]
     assert full_payload["evidence_paths"]["output_review_adjudication"] == "reports/output_review_adjudication.md", full_payload["evidence_paths"]
+    assert full_payload["evidence_paths"]["python_compatibility"] == "reports/python_compatibility.md", full_payload["evidence_paths"]
     if (ROOT / "reports" / "benchmark_reproducibility.md").exists():
         assert full_payload["evidence_paths"]["benchmark_reproducibility"] == "reports/benchmark_reproducibility.md", full_payload["evidence_paths"]
     if (ROOT / "reports" / "skill_os2_coverage.md").exists():
@@ -351,6 +359,8 @@ def main() -> None:
     assert full_payload["data"]["compiled_targets"]["summary"]["block_count"] == 0, full_payload["data"]["compiled_targets"]
     assert full_payload["data"]["runtime_permissions"]["summary"]["metadata_fallback_count"] == 4, full_payload["data"]["runtime_permissions"]
     assert full_payload["evidence_paths"]["runtime_permissions"] == "reports/runtime_permission_probes.md", full_payload["evidence_paths"]
+    assert full_payload["data"]["python_compatibility"]["summary"]["target_python"] == "3.11", full_payload["data"]["python_compatibility"]
+    assert full_payload["data"]["python_compatibility"]["summary"]["issue_count"] == 0, full_payload["data"]["python_compatibility"]
     action_keys = {item["gate_key"] for item in full_payload["review_actions"]}
     assert action_keys == {"output-lab", "review-waivers", "world-class-evidence"}, full_payload["review_actions"]
     world_class_action = next(item for item in full_payload["review_actions"] if item["gate_key"] == "world-class-evidence")
@@ -470,6 +480,9 @@ def main() -> None:
     assert "人工批准" in html, html[:8200]
     assert "权限批准" in html, html[:9000]
     assert "权限探针" in html, html[:9500]
+    assert "Python 兼容" in html, html[:10000]
+    assert "解释器边界" in html, html[:10000]
+    assert "reports/python_compatibility.md" in html, html
     assert "kv-grid" in html, html
     assert "案例数" in html, html
     assert "命令执行" in html, html

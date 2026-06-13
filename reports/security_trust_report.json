@@ -2,8 +2,8 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 165,
-    "script_count": 81,
+    "scanned_files": 166,
+    "script_count": 82,
     "internal_module_count": 10,
     "secret_findings": 0,
     "dependency_files": [
@@ -12,18 +12,18 @@
     "network_script_count": 3,
     "network_policy_covered_count": 3,
     "network_policy_missing_count": 0,
-    "file_write_script_count": 58,
+    "file_write_script_count": 59,
     "permission_required_count": 3,
     "permission_approved_count": 3,
     "permission_missing_count": 0,
     "permission_invalid_count": 0,
     "permission_expired_count": 0,
-    "help_smoke_checked_count": 71,
+    "help_smoke_checked_count": 72,
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 165,
-    "package_sha256": "25367c1534cac1e3bae0a1b03a9741eeede85e8cc7b7ad6adf0a3ad6597c9a6d"
+    "package_hash_file_count": 166,
+    "package_sha256": "5466073395d5a54812f5b45061e745bc4e1ad67c446eeb5a41f6e206b916405d"
   },
   "failures": [],
   "warnings": [],
@@ -377,6 +377,20 @@
       "network_hosts": [
         "api.openai.com"
       ]
+    },
+    {
+      "path": "scripts/python_compat_check.py",
+      "interface": "cli",
+      "interface_declared": true,
+      "interface_reason": "Checks repository Python source for syntax that can pass locally but fail on the supported CI interpreter.",
+      "has_argparse": true,
+      "has_main_guard": true,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": true,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
     },
     {
       "path": "scripts/registry_audit.py",
@@ -1211,9 +1225,9 @@
   "help_smoke": {
     "enabled": true,
     "timeout_seconds": 5.0,
-    "candidate_count": 71,
-    "checked_count": 71,
-    "passed_count": 71,
+    "candidate_count": 72,
+    "checked_count": 72,
+    "passed_count": 72,
     "failed_count": 0,
     "skipped_count": 10,
     "failed_scripts": [],
@@ -1456,6 +1470,16 @@
         "passed": true,
         "has_help_text": true,
         "stdout_excerpt": "usage: provider_output_eval_runner.py [-h] [--provider PROVIDER]\n                                      [--base-url BASE_URL] [--model MODEL]\n                                      [--api-key-env API_KEY_ENV]\n                                 ",
+        "stderr_excerpt": ""
+      },
+      {
+        "path": "scripts/python_compat_check.py",
+        "command": "python3 scripts/python_compat_check.py --help",
+        "returncode": 0,
+        "timed_out": false,
+        "passed": true,
+        "has_help_text": true,
+        "stdout_excerpt": "usage: python_compat_check.py [-h] [--path PATH]\n                              [--target-python TARGET_PYTHON]\n                              [--output-json OUTPUT_JSON]\n                              [--output-md OUTPUT_MD]\n                 ",
         "stderr_excerpt": ""
       },
       {
@@ -1925,7 +1949,7 @@
         "timed_out": false,
         "passed": true,
         "has_help_text": true,
-        "stdout_excerpt": "usage: yao.py [-h] [--record-cli-telemetry] [--no-cli-telemetry]\n              [--telemetry-events-jsonl TELEMETRY_EVENTS_JSONL]\n              {init,quickstart,validate,optimize-description,promote-check,review,release-snapshot,workspace-fl",
+        "stdout_excerpt": "usage: yao.py [-h] [--record-cli-telemetry] [--no-cli-telemetry]\n              [--telemetry-events-jsonl TELEMETRY_EVENTS_JSONL]\n              {init,quickstart,validate,optimize-description,promote-check,python-compat,review,release-snapsho",
         "stderr_excerpt": ""
       }
     ],
@@ -2040,6 +2064,7 @@
           "scripts/init_skill.py",
           "scripts/probe_runtime_permissions.py",
           "scripts/promotion_checker.py",
+          "scripts/python_compat_check.py",
           "scripts/registry_audit.py",
           "scripts/render_adoption_drift_report.py",
           "scripts/render_artifact_design_profile.py",
