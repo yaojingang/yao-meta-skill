@@ -204,9 +204,11 @@
             "scripts/render_world_class_evidence_ledger.py",
             "scripts/render_world_class_evidence_plan.py",
             "scripts/resource_boundary_check.py",
+            "scripts/review_studio_data.py",
             "scripts/review_studio_formatting.py",
             "scripts/review_studio_gates.py",
             "scripts/review_studio_layout.py",
+            "scripts/review_studio_world_class.py",
             "scripts/run_conformance_suite.py",
             "scripts/run_description_optimization_suite.py",
             "scripts/run_eval_suite.py",
@@ -222,9 +224,7 @@
             "scripts/trigger_eval.py",
             "scripts/trust_check.py",
             "scripts/upgrade_check.py",
-            "scripts/validate_skill.py",
-            "scripts/verify_package.py",
-            "scripts/yao.py"
+            "scripts/validate_skill.py"
           ],
           "assets": [
             "templates/basic_skill.md.j2",
@@ -1045,9 +1045,11 @@
             "scripts/render_world_class_evidence_ledger.py",
             "scripts/render_world_class_evidence_plan.py",
             "scripts/resource_boundary_check.py",
+            "scripts/review_studio_data.py",
             "scripts/review_studio_formatting.py",
             "scripts/review_studio_gates.py",
             "scripts/review_studio_layout.py",
+            "scripts/review_studio_world_class.py",
             "scripts/run_conformance_suite.py",
             "scripts/run_description_optimization_suite.py",
             "scripts/run_eval_suite.py",
@@ -1063,9 +1065,7 @@
             "scripts/trigger_eval.py",
             "scripts/trust_check.py",
             "scripts/upgrade_check.py",
-            "scripts/validate_skill.py",
-            "scripts/verify_package.py",
-            "scripts/yao.py"
+            "scripts/validate_skill.py"
           ],
           "assets": [
             "templates/basic_skill.md.j2",
@@ -1886,9 +1886,11 @@
             "scripts/render_world_class_evidence_ledger.py",
             "scripts/render_world_class_evidence_plan.py",
             "scripts/resource_boundary_check.py",
+            "scripts/review_studio_data.py",
             "scripts/review_studio_formatting.py",
             "scripts/review_studio_gates.py",
             "scripts/review_studio_layout.py",
+            "scripts/review_studio_world_class.py",
             "scripts/run_conformance_suite.py",
             "scripts/run_description_optimization_suite.py",
             "scripts/run_eval_suite.py",
@@ -1904,9 +1906,7 @@
             "scripts/trigger_eval.py",
             "scripts/trust_check.py",
             "scripts/upgrade_check.py",
-            "scripts/validate_skill.py",
-            "scripts/verify_package.py",
-            "scripts/yao.py"
+            "scripts/validate_skill.py"
           ],
           "assets": [
             "templates/basic_skill.md.j2",
@@ -2711,9 +2711,11 @@
             "scripts/render_world_class_evidence_ledger.py",
             "scripts/render_world_class_evidence_plan.py",
             "scripts/resource_boundary_check.py",
+            "scripts/review_studio_data.py",
             "scripts/review_studio_formatting.py",
             "scripts/review_studio_gates.py",
             "scripts/review_studio_layout.py",
+            "scripts/review_studio_world_class.py",
             "scripts/run_conformance_suite.py",
             "scripts/run_description_optimization_suite.py",
             "scripts/run_eval_suite.py",
@@ -2729,9 +2731,7 @@
             "scripts/trigger_eval.py",
             "scripts/trust_check.py",
             "scripts/upgrade_check.py",
-            "scripts/validate_skill.py",
-            "scripts/verify_package.py",
-            "scripts/yao.py"
+            "scripts/validate_skill.py"
           ],
           "assets": [
             "templates/basic_skill.md.j2",
@@ -3536,9 +3536,11 @@
             "scripts/render_world_class_evidence_ledger.py",
             "scripts/render_world_class_evidence_plan.py",
             "scripts/resource_boundary_check.py",
+            "scripts/review_studio_data.py",
             "scripts/review_studio_formatting.py",
             "scripts/review_studio_gates.py",
             "scripts/review_studio_layout.py",
+            "scripts/review_studio_world_class.py",
             "scripts/run_conformance_suite.py",
             "scripts/run_description_optimization_suite.py",
             "scripts/run_eval_suite.py",
@@ -3554,9 +3556,7 @@
             "scripts/trigger_eval.py",
             "scripts/trust_check.py",
             "scripts/upgrade_check.py",
-            "scripts/validate_skill.py",
-            "scripts/verify_package.py",
-            "scripts/yao.py"
+            "scripts/validate_skill.py"
           ],
           "assets": [
             "templates/basic_skill.md.j2",

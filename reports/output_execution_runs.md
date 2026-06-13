@@ -23,15 +23,15 @@ Command runner evidence is present. This proves the eval harness executed an ext
 
 | Case | Variant | Mode | Model | Duration ms | Tokens | Score | Status |
 | --- | --- | --- | --- | ---: | ---: | ---: | --- |
-| skill-package-contract | baseline | command | local-output-eval-runner | 25.82 | 33 | 0.0 | pass |
-| skill-package-contract | with_skill | command | local-output-eval-runner | 25.73 | 73 | 100.0 | pass |
-| output-eval-expectation | baseline | command | local-output-eval-runner | 25.52 | 36 | 0.0 | pass |
+| skill-package-contract | baseline | command | local-output-eval-runner | 27.82 | 33 | 0.0 | pass |
+| skill-package-contract | with_skill | command | local-output-eval-runner | 26.16 | 73 | 100.0 | pass |
+| output-eval-expectation | baseline | command | local-output-eval-runner | 27.01 | 36 | 0.0 | pass |
 | output-eval-expectation | with_skill | command | local-output-eval-runner | 25.68 | 80 | 100.0 | pass |
-| ir-before-packaging | baseline | command | local-output-eval-runner | 25.92 | 33 | 0.0 | pass |
-| ir-before-packaging | with_skill | command | local-output-eval-runner | 25.58 | 80 | 100.0 | pass |
-| near-neighbor-boundary | baseline | command | local-output-eval-runner | 25.69 | 36 | 0.0 | pass |
-| near-neighbor-boundary | with_skill | command | local-output-eval-runner | 25.4 | 65 | 100.0 | pass |
-| file-backed-governed-package | baseline | command | local-output-eval-runner | 25.48 | 37 | 0.0 | pass |
+| ir-before-packaging | baseline | command | local-output-eval-runner | 25.7 | 33 | 0.0 | pass |
+| ir-before-packaging | with_skill | command | local-output-eval-runner | 25.64 | 80 | 100.0 | pass |
+| near-neighbor-boundary | baseline | command | local-output-eval-runner | 25.83 | 36 | 0.0 | pass |
+| near-neighbor-boundary | with_skill | command | local-output-eval-runner | 26.02 | 65 | 100.0 | pass |
+| file-backed-governed-package | baseline | command | local-output-eval-runner | 25.66 | 37 | 0.0 | pass |
 | file-backed-governed-package | with_skill | command | local-output-eval-runner | 25.68 | 98 | 100.0 | pass |
 
 ## Next Fixes

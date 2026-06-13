@@ -38,14 +38,15 @@ def main() -> None:
     payload = json.loads(proc.stdout)
     assert payload["ok"], payload
     assert payload["summary"]["decision"] == "watch-maintainability-hotspots", payload["summary"]
-    assert payload["summary"]["hotspot_count"] >= 3, payload["summary"]
+    assert payload["summary"]["hotspot_count"] == 2, payload["summary"]
     assert payload["summary"]["blocker_count"] == 0, payload["summary"]
     assert 30 <= payload["summary"]["command_handler_count"] < 50, payload["summary"]
     assert payload["summary"]["largest_file_lines"] >= 900, payload["summary"]
-    assert payload["largest_files"][0]["path"] == "scripts/render_review_studio.py", payload["largest_files"][0]
+    assert payload["largest_files"][0]["path"] == "scripts/yao.py", payload["largest_files"][0]
     assert payload["largest_files"][0]["severity"] == "warn", payload["largest_files"][0]
     hotspot_paths = {item["path"] for item in payload["hotspots"]}
-    assert {"scripts/yao.py", "scripts/render_review_studio.py", "scripts/render_review_viewer.py"} <= hotspot_paths, hotspot_paths
+    assert {"scripts/yao.py", "scripts/render_review_viewer.py"} <= hotspot_paths, hotspot_paths
+    assert "scripts/render_review_studio.py" not in hotspot_paths, hotspot_paths
     assert output_json.exists(), output_json
     markdown = output_md.read_text(encoding="utf-8")
     assert "# Architecture Maintainability" in markdown, markdown

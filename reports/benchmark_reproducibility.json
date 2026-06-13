@@ -3,24 +3,24 @@
   "ok": true,
   "generated_at": "2026-06-14",
   "skill_dir": ".",
-  "commit": "7afde5ebafd5b8cb0b00aaaac4943c037fc9dce4",
+  "commit": "d7018dac5583d8973d8544d5f02906e94e8b1f9b",
   "git_status": {
     "available": true,
     "dirty": true,
-    "changed_file_count": 36,
+    "changed_file_count": 39,
     "sample": [
-      " M registry/index.json",
-      " M registry/packages/yao-meta-skill.json",
-      " M reports/adoption_drift_report.json",
-      " M reports/architecture_maintainability.json",
-      " M reports/architecture_maintainability.md",
-      " M reports/benchmark_reproducibility.json",
-      " M reports/benchmark_reproducibility.md",
-      " M reports/compiled_targets.json",
-      " M reports/context_budget.json",
-      " M reports/install_simulation.json",
-      " M reports/output_execution_runs.json",
-      " M reports/output_execution_runs.md"
+      "MM registry/index.json",
+      "MM registry/packages/yao-meta-skill.json",
+      "MM reports/adoption_drift_report.json",
+      "M  reports/architecture_maintainability.json",
+      "M  reports/architecture_maintainability.md",
+      "MM reports/benchmark_reproducibility.json",
+      "MM reports/benchmark_reproducibility.md",
+      "M  reports/compiled_targets.json",
+      "MM reports/context_budget.json",
+      "M  reports/install_simulation.json",
+      "MM reports/output_execution_runs.json",
+      "MM reports/output_execution_runs.md"
     ]
   },
   "summary": {
@@ -42,7 +42,7 @@
     "world_class_task_count": 4,
     "world_class_ledger_pending_count": 4,
     "working_tree_dirty": true,
-    "changed_file_count": 36
+    "changed_file_count": 39
   },
   "methodology": {
     "path": "reports/benchmark_methodology.md",
@@ -116,7 +116,7 @@
       "path": "reports/output_execution_runs.json",
       "exists": true,
       "bytes": 7966,
-      "sha256": "ef773cdb0b4b3e6263b58aa52c8473ee5b5613297bae721ea34da2418f4f6c9b"
+      "sha256": "e1497671aeac5efe481d21880306d1cd156520f3c6981335a23bea04c4d11e5e"
     },
     {
       "label": "blind_review",
@@ -150,43 +150,43 @@
       "label": "trust_report",
       "path": "reports/security_trust_report.json",
       "exists": true,
-      "bytes": 89598,
-      "sha256": "043f8314a8c2c8ef992d486384cd22dba5a0284af491fd830ddc91fec54f666a"
+      "bytes": 90767,
+      "sha256": "6a3b7738607ffef7d039e1ff913593ec9d5cd0242fc74d430c53bb62dc33df8a"
     },
     {
       "label": "python_compatibility",
       "path": "reports/python_compatibility.json",
       "exists": true,
-      "bytes": 18801,
-      "sha256": "3f071172d13c70acd0b16fe84ae011fee39030da61dd5801009fadead64f2a60"
+      "bytes": 19050,
+      "sha256": "648f17271e22805669eebc88486f47e891faa9b1fa9f2bf8cf21b14d00f9e1aa"
     },
     {
       "label": "registry_audit",
       "path": "reports/registry_audit.json",
       "exists": true,
       "bytes": 3183,
-      "sha256": "a55d0fb1c7d6730d1b8009904b59a18eb61a776368a211385b4a5d21b915edf1"
+      "sha256": "e350e7b2d3d6a971b506c9d2d159059b19e692e0957498a502fe797057ebdb85"
     },
     {
       "label": "package_verification",
       "path": "reports/package_verification.json",
       "exists": true,
       "bytes": 19325,
-      "sha256": "ff899ad76a6ad8e39a5f15e483135b4a93602ff59984a61f0c807ad627749dad"
+      "sha256": "144cd592106a66b50e8464b96494f6ed0ad41dba11941a3d7de11765b818a800"
     },
     {
       "label": "install_simulation",
       "path": "reports/install_simulation.json",
       "exists": true,
       "bytes": 8557,
-      "sha256": "20d6fa71cc492c837a98d383686677c7c2e9cc5885514ab56d5b23819060b746"
+      "sha256": "097060e129d0d699a2e19c5802b03b14b28134983a87f7d78cc1d525e7e5c683"
     },
     {
       "label": "skill_os2_audit",
       "path": "reports/skill_os2_audit.json",
       "exists": true,
       "bytes": 13946,
-      "sha256": "48f2206d4eb7598009740e9d4ab9e1f08b9d039cf661bb39ffbc24b2beb2c099"
+      "sha256": "52aff10d9877c50343b2caca9f2e3f6a721045662b6862551e22f5fe0555d878"
     },
     {
       "label": "world_class_evidence_plan",

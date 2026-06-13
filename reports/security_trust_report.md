@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `169`
-- Scripts: `85`
-- Internal script modules: `12`
+- Scanned files: `171`
+- Scripts: `87`
+- Internal script modules: `14`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `169`
-- Package SHA256: `18e4ec6cd34d80c2fff0ce51a7a107f15c9dbaa5c6d4e54065aee15dbd0fb00e`
+- Package hash files: `171`
+- Package SHA256: `1636101ae369f5659d9a64e95bb19144e1271912f1ac5ce846fd7b569cb1ff49`
 
 ## Failures
 
@@ -121,9 +121,11 @@
 | scripts/render_world_class_evidence_ledger.py | cli | True | True | True | False | False | True | False | Renders a machine-checkable ledger for world-class external and human evidence gaps. |
 | scripts/render_world_class_evidence_plan.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/resource_boundary_check.py | cli | False | True | True | False | False | False | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
+| scripts/review_studio_data.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to load Review Studio source reports and metric cards. |
 | scripts/review_studio_formatting.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to format report dictionaries as audit UI panels. |
 | scripts/review_studio_gates.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to keep Review Studio gate evaluation separate from HTML rendering. |
 | scripts/review_studio_layout.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to keep Review Studio layout and CSS out of gate logic. |
+| scripts/review_studio_world_class.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to render world-class evidence cards. |
 | scripts/run_conformance_suite.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/run_description_optimization_suite.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/run_eval_suite.py | cli | False | True | True | False | False | False | True | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
