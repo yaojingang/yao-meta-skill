@@ -25,6 +25,7 @@ It turns rough workflows, transcripts, prompts, notes, and runbooks into reusabl
 - a Review Studio 2.0 HTML gate page that combines intent, trigger, output eval, context, runtime, trust, atlas, adoption drift, reviewer waivers, reviewer annotations, release evidence, and per-warning fix actions
 - a Skill OS 2.0 audit that maps each world-class requirement to current evidence, human-required gaps, and external-required gaps
 - a world-class evidence plan that turns remaining provider, human, native-permission, and real-client telemetry gaps into executable evidence tasks
+- a world-class evidence ledger that records which external and human evidence is accepted or still pending without treating planned work as proof
 - a benchmark reproducibility manifest that checks methodology sections, required artifacts, failure disclosure, and reproduction commands
 - Output Eval Lab evidence with assertion grading, execution/timing/token evidence, a blind A/B review pack, a separate answer key, and reviewer adjudication reports
 - a runtime permission probe report that checks packaged target adapters for explicit permission metadata, native-enforcement flags, metadata fallback notes, and residual risks
@@ -269,7 +270,7 @@ Full reports: [reports/eval_suite.json](reports/eval_suite.json) and [reports/fa
 - root governance maturity score: `90/100`; governed benchmark example: `95/100`
 - CJK-aware trigger matching is now covered by explicit Chinese build, packaging, eval, and near-neighbor cases
 - context budgets: root `944/1000`, complex benchmark `790/1000`, governed benchmark `760/1000`
-- quality density: root `131.7`, complex benchmark `164.6`, governed benchmark `171.1`
+- quality density: root `137.7`, complex benchmark `164.6`, governed benchmark `171.1`
 - regression milestones are tracked in [reports/regression_history.md](reports/regression_history.md)
 - description drift history is tracked in [reports/description_drift_history.md](reports/description_drift_history.md)
 - route confusion is tracked in [reports/route_scorecard.md](reports/route_scorecard.md)
@@ -281,6 +282,7 @@ Full reports: [reports/eval_suite.json](reports/eval_suite.json) and [reports/fa
 - Review Studio fix actions are embedded in [reports/review-studio.json](reports/review-studio.json)
 - reviewer waiver evidence is published in [reports/review_waivers.md](reports/review_waivers.md)
 - remaining world-class evidence tasks are published in [reports/world_class_evidence_plan.md](reports/world_class_evidence_plan.md)
+- current world-class evidence acceptance state is published in [reports/world_class_evidence_ledger.md](reports/world_class_evidence_ledger.md)
 - benchmark reproducibility evidence is published in [reports/benchmark_reproducibility.md](reports/benchmark_reproducibility.md)
 - target compiler evidence is published in [reports/compiled_targets.md](reports/compiled_targets.md)
 - registry package metadata and audit status are published in [reports/registry_audit.md](reports/registry_audit.md)
@@ -397,7 +399,7 @@ Utility scripts that make the meta-skill operational:
 - `run_description_optimization_suite.py`: runs description optimization across the root skill and governed examples, then writes reusable reports and optional drift snapshots with calibration and family summaries
 - `promotion_checker.py`: applies promotion policy to current description candidates, writes promotion decisions, builds candidate registries, and emits iteration bundles with review stubs
 - `create_iteration_snapshot.py`: freezes the current promotion decision into a versioned release snapshot with review, route, and context evidence
-- `yao.py`: unified authoring CLI that exposes init, validate, optimize-description, promote-check, review, release-snapshot, workspace-flow, report, skill-ir, compile-skill, output-exec, output-review, skill-os2-audit, world-class-evidence, benchmark-reproducibility, telemetry-emit, telemetry-hooks, telemetry-import, package, registry-audit, package-verify, install-simulate, upgrade-check, review-waivers, and test as one entrypoint
+- `yao.py`: unified authoring CLI that exposes init, validate, optimize-description, promote-check, review, release-snapshot, workspace-flow, report, skill-ir, compile-skill, output-exec, output-review, skill-os2-audit, world-class-evidence, world-class-ledger, benchmark-reproducibility, telemetry-emit, telemetry-hooks, telemetry-import, package, registry-audit, package-verify, install-simulate, upgrade-check, review-waivers, and test as one entrypoint
 - `render_description_drift_history.py`: turns description-optimization snapshots into a readable drift-history report
 - `build_confusion_matrix.py`: scores route confusion across tracked sibling skills and `no_route` cases, then writes a route scorecard and optional milestone snapshot
 - `render_iteration_ledger.py`: compresses regression milestones, description optimization drift, and route scorecards into one iteration-facing ledger
@@ -408,6 +410,7 @@ Utility scripts that make the meta-skill operational:
 - `render_regression_history.py`: turns milestone snapshots into a readable regression history report
 - `render_skill_os2_audit.py`: renders a requirement-by-requirement Skill OS 2.0 audit that separates landed local evidence from human-required and external-required gaps
 - `render_world_class_evidence_plan.py`: renders executable evidence tasks for remaining world-class gaps without treating planned external work as completed evidence
+- `render_world_class_evidence_ledger.py`: renders a machine-checkable ledger for current world-class evidence acceptance, anti-overclaim guards, provenance requirements, and privacy contracts
 - `render_benchmark_reproducibility.py`: renders methodology, artifact, failure-disclosure, and reproduction-command evidence for public benchmark claims
 - `cross_packager.py`: builds client-specific export artifacts from Skill IR plus neutral metadata, with explicit platform contracts and validation
 - `render_portability_report.py`: scores cross-environment portability from neutral metadata, degradation rules, and consumer validation coverage

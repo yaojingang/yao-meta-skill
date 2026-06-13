@@ -41,6 +41,7 @@ def main() -> None:
     assert payload["summary"]["task_count"] == 4, payload
     assert payload["summary"]["human_task_count"] == 1, payload
     assert payload["summary"]["external_task_count"] == 3, payload
+    assert payload["artifacts"]["ledger"] == "reports/world_class_evidence_ledger.md", payload
     tasks = {item["key"]: item for item in payload["tasks"]}
     assert set(tasks) == {
         "provider-holdout",
@@ -51,6 +52,7 @@ def main() -> None:
     assert any("--provider-runner openai" in command for command in tasks["provider-holdout"]["runbook"]), tasks["provider-holdout"]
     assert any("output_review_decisions.json" in command for command in tasks["human-adjudication"]["runbook"]), tasks["human-adjudication"]
     assert any("runtime-permissions" in command for command in tasks["native-permission-enforcement"]["runbook"]), tasks["native-permission-enforcement"]
+    assert any("summary.failure_count == 0" in check for check in tasks["native-permission-enforcement"]["success_checks"]), tasks["native-permission-enforcement"]
     assert any("telemetry_native_host.py" in command for command in tasks["native-client-telemetry"]["runbook"]), tasks["native-client-telemetry"]
     for task in tasks.values():
         assert task["success_checks"], task

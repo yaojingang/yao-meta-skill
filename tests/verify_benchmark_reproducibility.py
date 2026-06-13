@@ -14,6 +14,19 @@ TMP = ROOT / "tests" / "tmp_benchmark_reproducibility"
 def main() -> None:
     shutil.rmtree(TMP, ignore_errors=True)
     TMP.mkdir(parents=True, exist_ok=True)
+    subprocess.run(
+        [
+            sys.executable,
+            str(ROOT / "scripts" / "render_world_class_evidence_ledger.py"),
+            str(ROOT),
+            "--generated-at",
+            "2026-06-13",
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
     output_json = TMP / "benchmark_reproducibility.json"
     output_md = TMP / "benchmark_reproducibility.md"
     proc = subprocess.run(
@@ -54,7 +67,9 @@ def main() -> None:
     assert artifacts["reports/benchmark_methodology.md"]["exists"], artifacts
     assert artifacts["evals/failure-cases.md"]["exists"], artifacts
     assert artifacts["reports/world_class_evidence_plan.json"]["exists"], artifacts
+    assert artifacts["reports/world_class_evidence_ledger.json"]["exists"], artifacts
     assert any(command["command"] == "make ci-test" for command in payload["reproduction_commands"]), payload
+    assert any(command["command"] == "python3 scripts/yao.py world-class-ledger ." for command in payload["reproduction_commands"]), payload
     assert any("provider-backed" in item for item in payload["limitations"]), payload["limitations"]
     markdown = output_md.read_text(encoding="utf-8")
     assert "Benchmark Reproducibility" in markdown, markdown

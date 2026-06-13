@@ -77,7 +77,7 @@ TASK_TEMPLATES: dict[str, dict[str, Any]] = {
         ],
         "success_checks": [
             "reports/runtime_permission_probes.json summary.native_enforcement_count > 0",
-            "reports/runtime_permission_probes.json summary.fail_count == 0",
+            "reports/runtime_permission_probes.json summary.failure_count == 0",
             "reports/skill_os2_audit.json item native-permission-enforcement status becomes pass",
         ],
         "evidence_artifacts": [
@@ -188,6 +188,7 @@ def build_plan(skill_dir: Path, generated_at: str) -> dict[str, Any]:
         "artifacts": {
             "json": "reports/world_class_evidence_plan.json",
             "markdown": "reports/world_class_evidence_plan.md",
+            "ledger": "reports/world_class_evidence_ledger.md",
         },
     }
 

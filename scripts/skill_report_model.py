@@ -489,6 +489,7 @@ def build_report_model(skill_dir: Path) -> dict:
     review_waivers = load_json(skill_dir / "reports" / "review_waivers.json")
     review_annotations = load_json(skill_dir / "reports" / "review_annotations.json")
     world_class_evidence = load_json(skill_dir / "reports" / "world_class_evidence_plan.json")
+    world_class_evidence_ledger = load_json(skill_dir / "reports" / "world_class_evidence_ledger.json")
     compiled_targets = load_json(skill_dir / "reports" / "compiled_targets.json")
     skill_ir = load_json(skill_dir / "reports" / "skill-ir.json")
     if not skill_ir:
@@ -558,6 +559,13 @@ def build_report_model(skill_dir: Path) -> dict:
     if (skill_dir / "reports" / "world_class_evidence_plan.md").exists():
         insert_after = deliverables.index("reports/review_waivers.md") + 1
         deliverables.insert(insert_after, "reports/world_class_evidence_plan.md")
+    if (skill_dir / "reports" / "world_class_evidence_ledger.md").exists():
+        insert_after = (
+            deliverables.index("reports/world_class_evidence_plan.md") + 1
+            if "reports/world_class_evidence_plan.md" in deliverables
+            else deliverables.index("reports/review_waivers.md") + 1
+        )
+        deliverables.insert(insert_after, "reports/world_class_evidence_ledger.md")
 
     skill_summary = {
         "name": name,
@@ -758,6 +766,12 @@ def build_report_model(skill_dir: Path) -> dict:
             "summary": world_class_evidence.get("summary", {}),
             "tasks": world_class_evidence.get("tasks", [])[:8],
             "source_audit": world_class_evidence.get("source_audit", {}),
+        },
+        "world_class_evidence_ledger": {
+            "ok": world_class_evidence_ledger.get("ok", False),
+            "summary": world_class_evidence_ledger.get("summary", {}),
+            "entries": world_class_evidence_ledger.get("entries", [])[:8],
+            "source_plan": world_class_evidence_ledger.get("source_plan", {}),
         },
         "synthesis_highlights": synthesis,
         "artifact_design": q_review["artifact_design"],

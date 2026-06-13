@@ -117,6 +117,7 @@ def main() -> None:
     assert "reports/output_quality_scorecard.md" in overview_json["skill_summary"]["deliverables"], overview_json["skill_summary"]
     assert "reports/output_blind_review_pack.md" not in overview_json["skill_summary"]["deliverables"], overview_json["skill_summary"]
     assert "reports/benchmark_reproducibility.md" not in overview_json["skill_summary"]["deliverables"], overview_json["skill_summary"]
+    assert "reports/world_class_evidence_ledger.md" not in overview_json["skill_summary"]["deliverables"], overview_json["skill_summary"]
     assert "reports/conformance_matrix.md" in overview_json["skill_summary"]["deliverables"], overview_json["skill_summary"]
     assert "reports/security_trust_report.md" in overview_json["skill_summary"]["deliverables"], overview_json["skill_summary"]
     assert "reports/runtime_permission_probes.md" not in overview_json["skill_summary"]["deliverables"], overview_json["skill_summary"]
@@ -140,6 +141,8 @@ def main() -> None:
     assert overview_json["output_review_adjudication"]["summary"] == {}, overview_json["output_review_adjudication"]
     assert "benchmark_reproducibility" in overview_json, overview_json.keys()
     assert overview_json["benchmark_reproducibility"]["summary"] == {}, overview_json["benchmark_reproducibility"]
+    assert "world_class_evidence_ledger" in overview_json, overview_json.keys()
+    assert overview_json["world_class_evidence_ledger"]["summary"] == {}, overview_json["world_class_evidence_ledger"]
     assert "runtime_conformance" in overview_json, overview_json.keys()
     assert "runtime_permissions" in overview_json, overview_json.keys()
     assert overview_json["runtime_permissions"]["summary"] == {}, overview_json["runtime_permissions"]

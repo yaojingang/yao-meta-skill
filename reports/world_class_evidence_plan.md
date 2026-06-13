@@ -98,7 +98,7 @@ This report is an execution plan for the remaining world-class evidence gaps. It
 ### Success Checks
 
 - reports/runtime_permission_probes.json summary.native_enforcement_count > 0
-- reports/runtime_permission_probes.json summary.fail_count == 0
+- reports/runtime_permission_probes.json summary.failure_count == 0
 - reports/skill_os2_audit.json item native-permission-enforcement status becomes pass
 
 ### Evidence Artifacts

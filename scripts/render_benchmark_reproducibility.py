@@ -38,6 +38,7 @@ REQUIRED_ARTIFACTS = [
     ("install_simulation", "reports/install_simulation.json"),
     ("skill_os2_audit", "reports/skill_os2_audit.json"),
     ("world_class_evidence_plan", "reports/world_class_evidence_plan.json"),
+    ("world_class_evidence_ledger", "reports/world_class_evidence_ledger.json"),
 ]
 
 REPRODUCTION_COMMANDS = [
@@ -110,6 +111,11 @@ REPRODUCTION_COMMANDS = [
         "label": "world-class evidence plan",
         "command": "python3 scripts/yao.py world-class-evidence .",
         "evidence": "reports/world_class_evidence_plan.json",
+    },
+    {
+        "label": "world-class evidence ledger",
+        "command": "python3 scripts/yao.py world-class-ledger .",
+        "evidence": "reports/world_class_evidence_ledger.json",
     },
     {
         "label": "full ci",
@@ -221,6 +227,7 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
     output_review = load_json(reports / "output_review_adjudication.json")
     skill_os2 = load_json(reports / "skill_os2_audit.json")
     world_class_plan = load_json(reports / "world_class_evidence_plan.json")
+    world_class_ledger = load_json(reports / "world_class_evidence_ledger.json")
     methodology = methodology_check(reports / "benchmark_methodology.md")
     artifacts = [artifact_record(skill_dir, label, rel) for label, rel in REQUIRED_ARTIFACTS]
     missing_artifacts = [item["path"] for item in artifacts if not item["exists"]]
@@ -265,6 +272,7 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             "world_class_ready": bool(skill_os2.get("summary", {}).get("world_class_ready", False)),
             "world_class_open_gap_count": skill_os2.get("summary", {}).get("open_gap_count", 0),
             "world_class_task_count": world_class_plan.get("summary", {}).get("task_count", 0),
+            "world_class_ledger_pending_count": world_class_ledger.get("summary", {}).get("pending_count", 0),
             "working_tree_dirty": status.get("dirty"),
             "changed_file_count": status.get("changed_file_count"),
         },

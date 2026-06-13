@@ -50,6 +50,7 @@ DEFAULT_TARGETS = [
     "review-studio-check",
     "skill-os2-audit-check",
     "world-class-evidence-check",
+    "world-class-ledger-check",
     "benchmark-reproducibility-check",
     "feedback-check",
     "adoption-drift-check",

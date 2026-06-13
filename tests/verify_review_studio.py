@@ -308,6 +308,8 @@ def main() -> None:
     assert full_payload["evidence_paths"]["review_annotations"] == "reports/review_annotations.md", full_payload["evidence_paths"]
     if (ROOT / "reports" / "world_class_evidence_plan.md").exists():
         assert full_payload["evidence_paths"]["world_class_evidence_plan"] == "reports/world_class_evidence_plan.md", full_payload["evidence_paths"]
+    if (ROOT / "reports" / "world_class_evidence_ledger.md").exists():
+        assert full_payload["evidence_paths"]["world_class_evidence_ledger"] == "reports/world_class_evidence_ledger.md", full_payload["evidence_paths"]
     assert full_payload["data"]["output_blind_review"]["summary"]["pair_count"] == 5, full_payload["data"]["output_blind_review"]
     assert full_payload["data"]["output_execution"]["summary"]["command_executed_count"] == 10, full_payload["data"]["output_execution"]
     assert full_payload["data"]["output_execution"]["summary"]["recorded_fixture_count"] == 0, full_payload["data"]["output_execution"]

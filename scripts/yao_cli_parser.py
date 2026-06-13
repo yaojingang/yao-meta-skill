@@ -152,6 +152,16 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     world_class_evidence_cmd.add_argument("--generated-at")
     world_class_evidence_cmd.set_defaults(func=_handler(command_handlers, "command_world_class_evidence"))
 
+    world_class_ledger_cmd = subparsers.add_parser(
+        "world-class-ledger",
+        help="Render the machine-checkable ledger for world-class evidence gaps.",
+    )
+    world_class_ledger_cmd.add_argument("skill_dir", nargs="?", default=".")
+    world_class_ledger_cmd.add_argument("--output-json")
+    world_class_ledger_cmd.add_argument("--output-md")
+    world_class_ledger_cmd.add_argument("--generated-at")
+    world_class_ledger_cmd.set_defaults(func=_handler(command_handlers, "command_world_class_ledger"))
+
     benchmark_reproducibility_cmd = subparsers.add_parser(
         "benchmark-reproducibility",
         help="Render benchmark methodology, artifact, failure-disclosure, and reproduction-command evidence.",

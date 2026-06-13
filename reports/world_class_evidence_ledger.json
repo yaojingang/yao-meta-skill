@@ -4,27 +4,29 @@
   "generated_at": "2026-06-13",
   "skill_dir": ".",
   "summary": {
-    "audit_decision": "continue-iteration",
-    "world_class_ready": false,
+    "ledger_entry_count": 4,
+    "accepted_count": 0,
+    "pending_count": 4,
+    "human_pending_count": 1,
+    "external_pending_count": 3,
+    "overclaim_guard_active": true,
     "ready_to_claim_world_class": false,
-    "task_count": 4,
-    "human_task_count": 1,
-    "external_task_count": 3,
-    "review_task_count": 0,
-    "decision": "collect-external-evidence"
+    "decision": "evidence-pending"
   },
-  "tasks": [
+  "entries": [
     {
       "key": "provider-holdout",
       "label": "Provider Holdout",
-      "status": "external_required",
       "category": "external",
       "owner": "operator with provider credentials",
+      "status": "pending",
+      "source_status": "external_required",
       "current": "model-executed 0; token-observed 0",
       "objective": "Collect at least one provider-backed output-eval holdout run with model, timing, and token metadata.",
-      "runbook": [
-        "YAO_OUTPUT_EVAL_MODEL=gpt-4.1-mini OPENAI_API_KEY=<redacted> python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60",
-        "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>"
+      "provenance_requirements": [
+        "provider-backed model run",
+        "observed timing",
+        "observed token metadata"
       ],
       "success_checks": [
         "reports/output_execution_runs.json summary.model_executed_count > 0",
@@ -41,22 +43,33 @@
         "Do not commit provider credentials or environment dumps.",
         "The output execution report records output hashes and aggregate run metadata, not raw provider prompts."
       ],
-      "audit_next_action": "Run provider-backed holdout cases with real credentials and commit only aggregate evidence."
+      "observed_state": {
+        "model_executed_count": 0,
+        "timing_observed_count": 10,
+        "token_observed_count": 0,
+        "accepted": false
+      },
+      "anti_overclaim": {
+        "planned_work_counts_as_evidence": false,
+        "metadata_fallback_counts_as_native_enforcement": false,
+        "pending_review_counts_as_human_decision": false,
+        "local_command_runner_counts_as_provider_model": false
+      },
+      "next_action": "Run provider-backed holdout cases with real credentials and commit only aggregate evidence."
     },
     {
       "key": "human-adjudication",
       "label": "Human Adjudication",
-      "status": "human_required",
       "category": "human",
       "owner": "human reviewer",
+      "status": "pending",
+      "source_status": "human_required",
       "current": "0/5 decisions; pending 5",
       "objective": "Record real blind A/B reviewer decisions before claiming human output review completion.",
-      "runbook": [
-        "python3 scripts/adjudicate_output_review.py --write-template",
-        "Open reports/output_blind_review_pack.md and choose A or B for each pair without opening the answer key.",
-        "Edit reports/output_review_decisions.json with winner_variant values and reviewer metadata.",
-        "python3 scripts/yao.py output-review",
-        "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>"
+      "provenance_requirements": [
+        "real reviewer identity",
+        "blind A/B decisions",
+        "answer key unopened until decisions exist"
       ],
       "success_checks": [
         "reports/output_review_adjudication.json summary.pending_count == 0",
@@ -74,22 +87,35 @@
         "Reviewer decisions should not include raw user data or private customer detail.",
         "Keep the answer key separate until after decisions are recorded."
       ],
-      "audit_next_action": "Record real A/B choices in the decision template, then regenerate adjudication."
+      "observed_state": {
+        "pair_count": 5,
+        "judgment_count": 0,
+        "pending_count": 5,
+        "invalid_decision_count": 0,
+        "answer_revealed_count": 0,
+        "accepted": false
+      },
+      "anti_overclaim": {
+        "planned_work_counts_as_evidence": false,
+        "metadata_fallback_counts_as_native_enforcement": false,
+        "pending_review_counts_as_human_decision": false,
+        "local_command_runner_counts_as_provider_model": false
+      },
+      "next_action": "Record real A/B choices in the decision template, then regenerate adjudication."
     },
     {
       "key": "native-permission-enforcement",
       "label": "Native Permission Enforcement",
-      "status": "external_required",
       "category": "external",
       "owner": "target client or installer integrator",
+      "status": "pending",
+      "source_status": "external_required",
       "current": "native-enforced targets 0",
       "objective": "Prove at least one target or installer enforces approved high-permission capabilities at runtime.",
-      "runbook": [
-        "Implement or connect a real target client/installer guard that blocks undeclared network, file_write, or subprocess capabilities.",
-        "Update the generated target adapter only when the guard is actually enforced by that target.",
-        "python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip",
-        "python3 scripts/yao.py runtime-permissions . --package-dir dist",
-        "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>"
+      "provenance_requirements": [
+        "real target or installer guard",
+        "native enforcement flag",
+        "residual risk retained for fallback targets"
       ],
       "success_checks": [
         "reports/runtime_permission_probes.json summary.native_enforcement_count > 0",
@@ -106,22 +132,34 @@
         "Do not mark native_enforcement true for metadata-only fallbacks.",
         "Keep residual risks visible for targets that still rely on operator enforcement."
       ],
-      "audit_next_action": "Integrate a real client or installer runtime guard before claiming native permission enforcement."
+      "observed_state": {
+        "native_enforcement_count": 0,
+        "metadata_fallback_count": 4,
+        "residual_risk_count": 4,
+        "failure_count": 0,
+        "accepted": false
+      },
+      "anti_overclaim": {
+        "planned_work_counts_as_evidence": false,
+        "metadata_fallback_counts_as_native_enforcement": false,
+        "pending_review_counts_as_human_decision": false,
+        "local_command_runner_counts_as_provider_model": false
+      },
+      "next_action": "Integrate a real client or installer runtime guard before claiming native permission enforcement."
     },
     {
       "key": "native-client-telemetry",
       "label": "Native Client Telemetry",
-      "status": "external_required",
       "category": "external",
       "owner": "Browser/Chrome/IDE/provider client integrator",
+      "status": "pending",
+      "source_status": "external_required",
       "current": "external source events 0; adoption samples 0",
       "objective": "Import production metadata-only events from a real external client into the local drift loop.",
-      "runbook": [
-        "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
-        "Install the generated native messaging manifest for the real client and send at least one accepted skill_activation or skill_output event.",
-        "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl",
-        "python3 scripts/yao.py skill-atlas --workspace-root .",
-        "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>"
+      "provenance_requirements": [
+        "real external client source",
+        "metadata-only event",
+        "local-first import path"
       ],
       "success_checks": [
         "reports/adoption_drift_report.json summary.source_types.external > 0",
@@ -138,17 +176,29 @@
         "Telemetry must remain metadata-only and local-first.",
         "Do not package reports/telemetry_events.jsonl or any raw prompt, output, transcript, note, or message field."
       ],
-      "audit_next_action": "Install a real client against the native host and import production metadata-only events."
+      "observed_state": {
+        "external_source_events": 0,
+        "adoption_sample_count": 0,
+        "raw_content_allowed": false,
+        "risk_band": "low",
+        "accepted": false
+      },
+      "anti_overclaim": {
+        "planned_work_counts_as_evidence": false,
+        "metadata_fallback_counts_as_native_enforcement": false,
+        "pending_review_counts_as_human_decision": false,
+        "local_command_runner_counts_as_provider_model": false
+      },
+      "next_action": "Install a real client against the native host and import production metadata-only events."
     }
   ],
-  "source_audit": {
-    "json": "reports/skill_os2_audit.json",
-    "markdown": "reports/skill_os2_audit.md",
-    "open_gap_count": 4
-  },
-  "artifacts": {
+  "source_plan": {
     "json": "reports/world_class_evidence_plan.json",
     "markdown": "reports/world_class_evidence_plan.md",
-    "ledger": "reports/world_class_evidence_ledger.md"
+    "task_count": 4
+  },
+  "artifacts": {
+    "json": "reports/world_class_evidence_ledger.json",
+    "markdown": "reports/world_class_evidence_ledger.md"
   }
 }

@@ -75,6 +75,7 @@ def main() -> None:
     assert "review-studio" in parser_help, parser_help
     assert "skill-os2-audit" in parser_help, parser_help
     assert "world-class-evidence" in parser_help, parser_help
+    assert "world-class-ledger" in parser_help, parser_help
     assert "benchmark-reproducibility" in parser_help, parser_help
     assert "telemetry-import" in parser_help, parser_help
     assert "telemetry-emit" in parser_help, parser_help
@@ -179,6 +180,20 @@ def main() -> None:
     assert world_class_evidence_result["ok"], world_class_evidence_result
     assert world_class_evidence_result["payload"]["summary"]["decision"] == "collect-external-evidence", world_class_evidence_result
     assert world_class_evidence_result["payload"]["summary"]["ready_to_claim_world_class"] is False, world_class_evidence_result
+
+    world_class_ledger_result = run(
+        "world-class-ledger",
+        str(ROOT),
+        "--output-json",
+        str(tmp_root / "world_class_evidence_ledger.json"),
+        "--output-md",
+        str(tmp_root / "world_class_evidence_ledger.md"),
+        "--generated-at",
+        "2026-06-13",
+    )
+    assert world_class_ledger_result["ok"], world_class_ledger_result
+    assert world_class_ledger_result["payload"]["summary"]["pending_count"] == 4, world_class_ledger_result
+    assert world_class_ledger_result["payload"]["summary"]["ready_to_claim_world_class"] is False, world_class_ledger_result
 
     benchmark_reproducibility_result = run(
         "benchmark-reproducibility",
@@ -598,6 +613,9 @@ def main() -> None:
     assert "output_review_adjudication" in report_result["payload"]["artifacts"], report_result
     assert "adoption_drift" in report_result["payload"]["artifacts"], report_result
     assert "review_annotations" in report_result["payload"]["artifacts"], report_result
+    assert "world_class_evidence_plan" in report_result["payload"]["artifacts"], report_result
+    assert "world_class_evidence_ledger" in report_result["payload"]["artifacts"], report_result
+    assert "benchmark_reproducibility" in report_result["payload"]["artifacts"], report_result
     report_output_execution = json.loads((ROOT / "reports" / "output_execution_runs.json").read_text(encoding="utf-8"))
     assert report_output_execution["summary"]["command_executed_count"] == 10, report_output_execution
     assert report_output_execution["summary"]["recorded_fixture_count"] == 0, report_output_execution

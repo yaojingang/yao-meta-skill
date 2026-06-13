@@ -2,8 +2,8 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 161,
-    "script_count": 77,
+    "scanned_files": 162,
+    "script_count": 78,
     "internal_module_count": 10,
     "secret_findings": 0,
     "dependency_files": [
@@ -12,18 +12,18 @@
     "network_script_count": 3,
     "network_policy_covered_count": 3,
     "network_policy_missing_count": 0,
-    "file_write_script_count": 54,
+    "file_write_script_count": 55,
     "permission_required_count": 3,
     "permission_approved_count": 3,
     "permission_missing_count": 0,
     "permission_invalid_count": 0,
     "permission_expired_count": 0,
-    "help_smoke_checked_count": 67,
+    "help_smoke_checked_count": 68,
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 161,
-    "package_sha256": "fcc89390653cca0e31cb56be360951474028409c160fb0d975b361aad557e96c"
+    "package_hash_file_count": 162,
+    "package_sha256": "22d5e9247b42c8c237c0524da9cae227ba0056807815e4174b810b178568546f"
   },
   "failures": [],
   "warnings": [],
@@ -761,6 +761,20 @@
       "network_hosts": []
     },
     {
+      "path": "scripts/render_world_class_evidence_ledger.py",
+      "interface": "cli",
+      "interface_declared": true,
+      "interface_reason": "Renders a machine-checkable ledger for world-class external and human evidence gaps.",
+      "has_argparse": true,
+      "has_main_guard": true,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": true,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
       "path": "scripts/render_world_class_evidence_plan.py",
       "interface": "cli",
       "interface_declared": false,
@@ -1155,9 +1169,9 @@
   "help_smoke": {
     "enabled": true,
     "timeout_seconds": 5.0,
-    "candidate_count": 67,
-    "checked_count": 67,
-    "passed_count": 67,
+    "candidate_count": 68,
+    "checked_count": 68,
+    "passed_count": 68,
     "failed_count": 0,
     "skipped_count": 10,
     "failed_scripts": [],
@@ -1673,6 +1687,16 @@
         "stderr_excerpt": ""
       },
       {
+        "path": "scripts/render_world_class_evidence_ledger.py",
+        "command": "python3 scripts/render_world_class_evidence_ledger.py --help",
+        "returncode": 0,
+        "timed_out": false,
+        "passed": true,
+        "has_help_text": true,
+        "stdout_excerpt": "usage: render_world_class_evidence_ledger.py [-h] [--output-json OUTPUT_JSON]\n                                             [--output-md OUTPUT_MD]\n                                             [--generated-at GENERATED_AT]\n                  ",
+        "stderr_excerpt": ""
+      },
+      {
         "path": "scripts/render_world_class_evidence_plan.py",
         "command": "python3 scripts/render_world_class_evidence_plan.py --help",
         "returncode": 0,
@@ -1971,6 +1995,7 @@
           "scripts/render_social_preview.py",
           "scripts/render_system_model.py",
           "scripts/render_telemetry_hook_recipes.py",
+          "scripts/render_world_class_evidence_ledger.py",
           "scripts/render_world_class_evidence_plan.py",
           "scripts/run_conformance_suite.py",
           "scripts/run_description_optimization_suite.py",

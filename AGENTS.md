@@ -68,6 +68,7 @@ Clean test-only scratch directories after verification with `find tests -maxdept
 - `scripts/review_studio_gates.py`: Review Studio gate evaluation, release decision scoring, and gate status labels.
 - `scripts/render_skill_os2_audit.py`: requirement-by-requirement Skill OS 2.0 completion audit. Keep local evidence, human-required gaps, and external-required gaps separate so reports do not overclaim world-class readiness.
 - `scripts/render_world_class_evidence_plan.py`: executable evidence task plan for the remaining world-class readiness gaps. Keep provider, human, native-permission, and real-client telemetry evidence requirements concrete without marking planned work as complete.
+- `scripts/render_world_class_evidence_ledger.py`: machine-checkable acceptance ledger for the remaining world-class evidence gaps. Keep anti-overclaim guards explicit so planned work, metadata fallbacks, pending review, and local command runners never count as final evidence.
 - `scripts/render_benchmark_reproducibility.py`: release-facing benchmark reproducibility manifest. Keep methodology sections, required artifacts, failure disclosure, reproduction commands, and world-class limitations machine-checkable.
 - `scripts/skill_report_model.py`, `scripts/skill_report_metrics.py`, `scripts/skill_report_charts.py`: skill overview data model, scoring, and inline SVG chart generation.
 - `scripts/yao_cli_config.py`: CLI target maps, archetype heuristics, diagnosis copy, and side-effect-free shaping helpers.
