@@ -32,6 +32,7 @@ It turns rough workflows, transcripts, prompts, notes, and runbooks into reusabl
 - three high-value next iteration directions after the first package is created
 - a lightweight feedback log that does not require a full promotion cycle
 - a local-first metadata-only adoption and drift report that turns real usage signals into next iteration candidates, with optional `yao.py` CLI run capture, external client event emit hooks, hook recipes, and JSONL import that record command names and outcomes without arguments or raw content
+- a Browser/Chrome Native Messaging telemetry host that can receive length-prefixed metadata-only client events and generate a local launcher plus manifest without storing raw content
 - a Skill Atlas drift layer that reads aggregate adoption reports and surfaces portfolio-level drift signals without packaging raw telemetry logs
 - a baseline compare report for with-skill vs baseline review
 - a conversation-style, archetype-aware quickstart that steers new packages toward scaffold, production, library, or governed fits
@@ -111,6 +112,7 @@ python3 scripts/yao.py adoption-drift my-skill --record-event skill_activation -
 YAO_CLI_TELEMETRY=1 python3 scripts/yao.py validate my-skill
 python3 scripts/yao.py telemetry-emit my-skill --event skill_activation --activation-type explicit --outcome accepted --command browser-extension
 python3 scripts/yao.py telemetry-hooks my-skill
+python3 scripts/telemetry_native_host.py my-skill --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/
 python3 scripts/yao.py telemetry-import my-skill --input-jsonl /tmp/external-client-events.jsonl --command browser-extension
 python3 scripts/yao.py review-waivers my-skill --add-waiver --gate-key trust-report --reviewer "Yao Team" --reason "Known warning accepted for this release with bounded follow-up." --expires-at 2026-09-30
 python3 scripts/yao.py review-waivers my-skill --add-waiver --gate-key permission-gates --reviewer "Yao Team" --reason "Permission warning accepted only for this non-governed release window." --expires-at 2026-09-30
@@ -420,6 +422,7 @@ Utility scripts that make the meta-skill operational:
 - `import_telemetry_events.py`: imports external metadata-only telemetry JSONL after whole-file privacy validation, then refreshes the aggregate adoption drift report
 - `emit_telemetry_event.py`: emits one metadata-only external client event into a local spool for later `telemetry-import`, with dry-run validation and raw-content field blocking
 - `render_telemetry_hook_recipes.py`: renders Browser, Chrome, VS Code, CLI wrapper, and provider-adapter telemetry hook recipes with dry-run commands and explicit native-integration caveats
+- `telemetry_native_host.py`: receives Browser/Chrome Native Messaging length-prefixed JSON events, rejects raw-content fields, appends metadata-only events, and writes local launcher/manifest files for operator installation
 - `yao_cli_telemetry.py`: opt-in metadata-only `yao.py` run capture for command name, source, outcome, and failure class without command arguments or raw content
 - `render_review_waivers.py`: validates human reviewer risk approvals with gate keys, reasons, expiry dates, and blocker-safe waiver policy
 - `init_skill.py`, `lint_skill.py`, `validate_skill.py`, `diff_eval.py`: minimal authoring toolchain

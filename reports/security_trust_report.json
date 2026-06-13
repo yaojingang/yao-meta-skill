@@ -2,8 +2,8 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 157,
-    "script_count": 73,
+    "scanned_files": 158,
+    "script_count": 74,
     "internal_module_count": 10,
     "secret_findings": 0,
     "dependency_files": [
@@ -12,18 +12,18 @@
     "network_script_count": 3,
     "network_policy_covered_count": 3,
     "network_policy_missing_count": 0,
-    "file_write_script_count": 50,
+    "file_write_script_count": 51,
     "permission_required_count": 3,
     "permission_approved_count": 3,
     "permission_missing_count": 0,
     "permission_invalid_count": 0,
     "permission_expired_count": 0,
-    "help_smoke_checked_count": 63,
+    "help_smoke_checked_count": 64,
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 157,
-    "package_sha256": "25df24e0cb24e09a1a11819ca6c185b60c279a4f12851ef1ce9275e67a58d339"
+    "package_hash_file_count": 158,
+    "package_sha256": "e42a9c4cf0f22cd6fc047dff3da1a380f5cc9e17157a48d8a1ac2071f7c84fbc"
   },
   "failures": [],
   "warnings": [],
@@ -943,6 +943,20 @@
       "network_hosts": []
     },
     {
+      "path": "scripts/telemetry_native_host.py",
+      "interface": "cli",
+      "interface_declared": false,
+      "interface_reason": "Default CLI classification; add SCRIPT_INTERFACE for internal modules.",
+      "has_argparse": true,
+      "has_main_guard": true,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": true,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
       "path": "scripts/trigger_eval.py",
       "interface": "cli",
       "interface_declared": false,
@@ -1099,9 +1113,9 @@
   "help_smoke": {
     "enabled": true,
     "timeout_seconds": 5.0,
-    "candidate_count": 63,
-    "checked_count": 63,
-    "passed_count": 63,
+    "candidate_count": 64,
+    "checked_count": 64,
+    "passed_count": 64,
     "failed_count": 0,
     "skipped_count": 10,
     "failed_scripts": [],
@@ -1677,6 +1691,16 @@
         "stderr_excerpt": ""
       },
       {
+        "path": "scripts/telemetry_native_host.py",
+        "command": "python3 scripts/telemetry_native_host.py --help",
+        "returncode": 0,
+        "timed_out": false,
+        "passed": true,
+        "has_help_text": true,
+        "stdout_excerpt": "usage: telemetry_native_host.py [-h] [--output-jsonl OUTPUT_JSONL]\n                                [--message-json MESSAGE_JSON] [--stdio]\n                                [--dry-run] [--write-manifest WRITE_MANIFEST]\n                       ",
+        "stderr_excerpt": ""
+      },
+      {
         "path": "scripts/trigger_eval.py",
         "command": "python3 scripts/trigger_eval.py --help",
         "returncode": 0,
@@ -1879,6 +1903,7 @@
           "scripts/run_output_execution.py",
           "scripts/simulate_install.py",
           "scripts/sync_local_install.py",
+          "scripts/telemetry_native_host.py",
           "scripts/trust_check.py",
           "scripts/upgrade_check.py",
           "scripts/verify_package.py"

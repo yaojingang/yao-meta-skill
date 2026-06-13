@@ -73,6 +73,7 @@ Clean test-only scratch directories after verification with `find tests -maxdept
 - `scripts/import_telemetry_events.py`: external telemetry importer. Validate the whole input before appending events, and keep raw prompt/output/transcript/message/note fields blocked.
 - `scripts/emit_telemetry_event.py`: external client telemetry emitter. It may append one normalized metadata event to a local spool, but must never accept or write raw prompt, output, transcript, message, note, argument, or private content.
 - `scripts/render_telemetry_hook_recipes.py`: client hook recipe report. Keep recipes metadata-only, mark native auto-capture as unclaimed unless a real client integration exists, and preserve dry-run commands for Browser/Chrome/IDE/wrapper adapters.
+- `scripts/telemetry_native_host.py`: Browser/Chrome Native Messaging telemetry bridge. Preserve length-prefixed stdio behavior, raw-content blocking, and launcher/manifest generation tests.
 
 New helper modules that are imported by CLI/report scripts but are not standalone commands must declare:
 

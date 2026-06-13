@@ -128,6 +128,7 @@
           "scripts/skill_report_metrics.py",
           "scripts/skill_report_model.py",
           "scripts/sync_local_install.py",
+          "scripts/telemetry_native_host.py",
           "scripts/trigger_eval.py",
           "scripts/trust_check.py",
           "scripts/upgrade_check.py",

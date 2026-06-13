@@ -107,6 +107,28 @@ The report is written to:
 
 Each recipe includes a dry-run command, an emit command, the target local spool, trigger points, and the privacy contract. The report intentionally sets `native_auto_capture=false`; it proves the local hook contract and metadata-only command shape, not that a host client is already natively integrated.
 
+## Browser Native Host
+
+`scripts/telemetry_native_host.py` implements the local side of Browser/Chrome Native Messaging. It accepts length-prefixed JSON messages on stdio, validates them with the same metadata-only telemetry contract, appends accepted events to the local spool, and rejects raw prompt/output/transcript/message/note fields.
+
+Smoke-test one message without Browser installation:
+
+```bash
+python3 scripts/telemetry_native_host.py . \
+  --message-json '{"event":"skill_activation","activation_type":"explicit","outcome":"accepted","failure_type":"none","command":"chrome-native-host"}'
+```
+
+Generate a local launcher and Chrome native messaging manifest for an operator-installed extension:
+
+```bash
+python3 scripts/telemetry_native_host.py . \
+  --write-launcher /tmp/yao-telemetry-host.sh \
+  --write-manifest /tmp/yao-telemetry-host.json \
+  --allowed-origin chrome-extension://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/
+```
+
+This is an executable native host bridge and manifest generator. It still does not prove that a specific Browser/Chrome extension is installed or sending events in the user's environment.
+
 ## External Client Import
 
 External clients, browser extensions, editor adapters, or wrapper scripts may hand off already-sanitized JSONL through `telemetry-import`:

@@ -53,6 +53,7 @@ DEFAULT_TARGETS = [
     "telemetry-import-check",
     "telemetry-emit-check",
     "telemetry-hooks-check",
+    "telemetry-native-host-check",
     "review-waivers-check",
     "review-annotations-check",
     "baseline-compare-check",

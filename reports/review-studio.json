@@ -59,7 +59,7 @@
       "key": "trust-report",
       "label": "信任报告",
       "status": "pass",
-      "detail": "0 secrets; 73 scripts; 3 network-capable scripts; 0 help smoke failures",
+      "detail": "0 secrets; 74 scripts; 3 network-capable scripts; 0 help smoke failures",
       "evidence": "reports/security_trust_report.json",
       "link": "security_trust_report.md"
     },
@@ -355,7 +355,7 @@
           "label": "上下文成本",
           "score": 42,
           "reasons": [
-            "入口约 350 个词/字，references 约 15206 个词/字。",
+            "入口约 350 个词/字，references 约 15316 个词/字。",
             "分数越高代表上下文成本越低。",
             "上下文成本偏高，建议压缩入口或拆分 references。"
           ]
@@ -459,7 +459,7 @@
           "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
         ],
         "gaps": [
-          "上下文成本需要补强：入口约 350 个词/字，references 约 15206 个词/字。"
+          "上下文成本需要补强：入口约 350 个词/字，references 约 15316 个词/字。"
         ],
         "recommendations": [
           "先改触发边界，再扩展工作流。",
@@ -692,7 +692,7 @@
             "path": "scripts",
             "label": "Deterministic helpers or local tooling",
             "kind": "folder",
-            "file_count": 73
+            "file_count": 74
           },
           {
             "path": "evals",
@@ -707,7 +707,7 @@
             "file_count": 173
           }
         ],
-        "file_count": 310,
+        "file_count": 311,
         "folder_count": 4,
         "distribution": [
           {
@@ -732,7 +732,7 @@
           },
           {
             "label": "scripts",
-            "value": 73
+            "value": 74
           },
           {
             "label": "evals",
@@ -861,7 +861,7 @@
           "path": "scripts",
           "label": "Deterministic helpers or local tooling",
           "kind": "folder",
-          "file_count": 73
+          "file_count": 74
         },
         {
           "path": "evals",
@@ -1207,8 +1207,8 @@
         "failures": []
       },
       "trust_security": {
-        "scanned_files": 157,
-        "script_count": 73,
+        "scanned_files": 158,
+        "script_count": 74,
         "internal_module_count": 10,
         "secret_findings": 0,
         "dependency_files": [
@@ -1217,18 +1217,18 @@
         "network_script_count": 3,
         "network_policy_covered_count": 3,
         "network_policy_missing_count": 0,
-        "file_write_script_count": 50,
+        "file_write_script_count": 51,
         "permission_required_count": 3,
         "permission_approved_count": 3,
         "permission_missing_count": 0,
         "permission_invalid_count": 0,
         "permission_expired_count": 0,
-        "help_smoke_checked_count": 63,
+        "help_smoke_checked_count": 64,
         "help_smoke_failed_count": 0,
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
-        "package_hash_file_count": 157,
-        "package_sha256": "25df24e0cb24e09a1a11819ca6c185b60c279a4f12851ef1ce9275e67a58d339"
+        "package_hash_file_count": 158,
+        "package_sha256": "e42a9c4cf0f22cd6fc047dff3da1a380f5cc9e17157a48d8a1ac2071f7c84fbc"
       },
       "skill_atlas": {
         "skill_count": 12,
@@ -1266,8 +1266,8 @@
           "trust_level": "local",
           "license": "MIT",
           "checksums": {
-            "package_sha256": "25df24e0cb24e09a1a11819ca6c185b60c279a4f12851ef1ce9275e67a58d339",
-            "archive_sha256": "15aac04026bdedbd4c4e4a8eb9ac2cd95b2cda1ffe9735cdb706b0f4393aceaf"
+            "package_sha256": "e42a9c4cf0f22cd6fc047dff3da1a380f5cc9e17157a48d8a1ac2071f7c84fbc",
+            "archive_sha256": "7494bf9b978d58b663cc0e8b6ffe2531a84602385f6f517774320197d30170d3"
           },
           "compatibility": {
             "openai": "pass",
@@ -1298,7 +1298,7 @@
           },
           "distribution": {
             "archive_verified": true,
-            "archive_sha256": "15aac04026bdedbd4c4e4a8eb9ac2cd95b2cda1ffe9735cdb706b0f4393aceaf",
+            "archive_sha256": "7494bf9b978d58b663cc0e8b6ffe2531a84602385f6f517774320197d30170d3",
             "package_verification": "reports/package_verification.json",
             "install_simulated": true,
             "install_simulation": "reports/install_simulation.json"
@@ -1314,8 +1314,8 @@
           "target_count": 4,
           "adapter_count": 4,
           "archive_present": true,
-          "archive_sha256": "15aac04026bdedbd4c4e4a8eb9ac2cd95b2cda1ffe9735cdb706b0f4393aceaf",
-          "archive_entry_count": 503,
+          "archive_sha256": "7494bf9b978d58b663cc0e8b6ffe2531a84602385f6f517774320197d30170d3",
+          "archive_entry_count": 505,
           "failure_count": 0,
           "warning_count": 0
         },
@@ -1326,7 +1326,7 @@
         "ok": true,
         "summary": {
           "archive_present": true,
-          "archive_entry_count": 503,
+          "archive_entry_count": 505,
           "archive_extracted": true,
           "entrypoint_loaded": true,
           "manifest_loaded": true,
@@ -1393,12 +1393,12 @@
             {
               "field": "archive_sha256",
               "from": "",
-              "to": "15aac04026bdedbd4c4e4a8eb9ac2cd95b2cda1ffe9735cdb706b0f4393aceaf"
+              "to": "7494bf9b978d58b663cc0e8b6ffe2531a84602385f6f517774320197d30170d3"
             },
             {
               "field": "package_sha256",
               "from": "0000000000000000000000000000000000000000000000000000000000000000",
-              "to": "25df24e0cb24e09a1a11819ca6c185b60c279a4f12851ef1ce9275e67a58d339"
+              "to": "e42a9c4cf0f22cd6fc047dff3da1a380f5cc9e17157a48d8a1ac2071f7c84fbc"
             }
           ]
         },
@@ -3132,7 +3132,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 34.49,
+          "duration_ms": 31.95,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3160,7 +3160,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 33.15,
+          "duration_ms": 34.87,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3183,7 +3183,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 34.31,
+          "duration_ms": 33.23,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3211,7 +3211,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.67,
+          "duration_ms": 48.91,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3234,7 +3234,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 29.54,
+          "duration_ms": 34.71,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3262,7 +3262,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.43,
+          "duration_ms": 33.42,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3285,7 +3285,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 27.8,
+          "duration_ms": 34.16,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3312,7 +3312,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 27.96,
+          "duration_ms": 32.68,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3335,7 +3335,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.79,
+          "duration_ms": 29.95,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3364,7 +3364,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.95,
+          "duration_ms": 28.78,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3882,6 +3882,7 @@
                 "scripts/skill_report_metrics.py",
                 "scripts/skill_report_model.py",
                 "scripts/sync_local_install.py",
+                "scripts/telemetry_native_host.py",
                 "scripts/trigger_eval.py",
                 "scripts/trust_check.py",
                 "scripts/upgrade_check.py",
@@ -3943,7 +3944,7 @@
               ],
               "counts": {
                 "references": 32,
-                "scripts": 73,
+                "scripts": 74,
                 "assets": 2,
                 "reports": 43
               }
@@ -4049,7 +4050,7 @@
                 },
                 "file_write": {
                   "required": true,
-                  "script_count": 50,
+                  "script_count": 51,
                   "scripts": [
                     "scripts/adjudicate_output_review.py",
                     "scripts/build_confusion_matrix.py",
@@ -4098,6 +4099,7 @@
                     "scripts/run_output_execution.py",
                     "scripts/simulate_install.py",
                     "scripts/sync_local_install.py",
+                    "scripts/telemetry_native_host.py",
                     "scripts/trust_check.py",
                     "scripts/upgrade_check.py",
                     "scripts/verify_package.py"
@@ -4137,14 +4139,14 @@
               },
               "help_smoke": {
                 "enabled": true,
-                "checked_count": 63,
+                "checked_count": 64,
                 "failed_count": 0,
                 "failed_scripts": []
               },
               "trust_summary": {
                 "secret_findings": 0,
                 "network_script_count": 3,
-                "file_write_script_count": 50,
+                "file_write_script_count": 51,
                 "subprocess_script_count": 7,
                 "interactive_script_count": 0,
                 "help_smoke_failed_count": 0
@@ -4166,7 +4168,7 @@
               ],
               "capability_counts": {
                 "network": 3,
-                "file_write": 50,
+                "file_write": 51,
                 "subprocess": 7,
                 "interactive": 0
               },
@@ -4187,7 +4189,7 @@
                 "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
                 "counts": {
                   "references": 32,
-                  "scripts": 73,
+                  "scripts": 74,
                   "assets": 2,
                   "reports": 43
                 },
@@ -4198,7 +4200,7 @@
               },
               "scripts": {
                 "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-                "script_count": 73,
+                "script_count": 74,
                 "help_smoke_failed_count": 0
               },
               "permissions": {
@@ -4279,7 +4281,7 @@
               },
               "file_write": {
                 "required": true,
-                "script_count": 50,
+                "script_count": 51,
                 "scripts": [
                   "scripts/adjudicate_output_review.py",
                   "scripts/build_confusion_matrix.py",
@@ -4328,6 +4330,7 @@
                   "scripts/run_output_execution.py",
                   "scripts/simulate_install.py",
                   "scripts/sync_local_install.py",
+                  "scripts/telemetry_native_host.py",
                   "scripts/trust_check.py",
                   "scripts/upgrade_check.py",
                   "scripts/verify_package.py"
@@ -4367,14 +4370,14 @@
             },
             "help_smoke": {
               "enabled": true,
-              "checked_count": 63,
+              "checked_count": 64,
               "failed_count": 0,
               "failed_scripts": []
             },
             "trust_summary": {
               "secret_findings": 0,
               "network_script_count": 3,
-              "file_write_script_count": 50,
+              "file_write_script_count": 51,
               "subprocess_script_count": 7,
               "interactive_script_count": 0,
               "help_smoke_failed_count": 0
@@ -4394,7 +4397,7 @@
             ],
             "capability_counts": {
               "network": 3,
-              "file_write": 50,
+              "file_write": 51,
               "subprocess": 7,
               "interactive": 0
             },
@@ -4415,7 +4418,7 @@
               "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
               "counts": {
                 "references": 32,
-                "scripts": 73,
+                "scripts": 74,
                 "assets": 2,
                 "reports": 43
               },
@@ -4426,7 +4429,7 @@
             },
             "scripts": {
               "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-              "script_count": 73,
+              "script_count": 74,
               "help_smoke_failed_count": 0
             },
             "permissions": {
@@ -4692,6 +4695,7 @@
                 "scripts/skill_report_metrics.py",
                 "scripts/skill_report_model.py",
                 "scripts/sync_local_install.py",
+                "scripts/telemetry_native_host.py",
                 "scripts/trigger_eval.py",
                 "scripts/trust_check.py",
                 "scripts/upgrade_check.py",
@@ -4753,7 +4757,7 @@
               ],
               "counts": {
                 "references": 32,
-                "scripts": 73,
+                "scripts": 74,
                 "assets": 2,
                 "reports": 43
               }
@@ -4859,7 +4863,7 @@
                 },
                 "file_write": {
                   "required": true,
-                  "script_count": 50,
+                  "script_count": 51,
                   "scripts": [
                     "scripts/adjudicate_output_review.py",
                     "scripts/build_confusion_matrix.py",
@@ -4908,6 +4912,7 @@
                     "scripts/run_output_execution.py",
                     "scripts/simulate_install.py",
                     "scripts/sync_local_install.py",
+                    "scripts/telemetry_native_host.py",
                     "scripts/trust_check.py",
                     "scripts/upgrade_check.py",
                     "scripts/verify_package.py"
@@ -4947,14 +4952,14 @@
               },
               "help_smoke": {
                 "enabled": true,
-                "checked_count": 63,
+                "checked_count": 64,
                 "failed_count": 0,
                 "failed_scripts": []
               },
               "trust_summary": {
                 "secret_findings": 0,
                 "network_script_count": 3,
-                "file_write_script_count": 50,
+                "file_write_script_count": 51,
                 "subprocess_script_count": 7,
                 "interactive_script_count": 0,
                 "help_smoke_failed_count": 0
@@ -4976,7 +4981,7 @@
               ],
               "capability_counts": {
                 "network": 3,
-                "file_write": 50,
+                "file_write": 51,
                 "subprocess": 7,
                 "interactive": 0
               },
@@ -4997,7 +5002,7 @@
                 "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
                 "counts": {
                   "references": 32,
-                  "scripts": 73,
+                  "scripts": 74,
                   "assets": 2,
                   "reports": 43
                 },
@@ -5008,7 +5013,7 @@
               },
               "scripts": {
                 "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-                "script_count": 73,
+                "script_count": 74,
                 "help_smoke_failed_count": 0
               },
               "permissions": {
@@ -5089,7 +5094,7 @@
               },
               "file_write": {
                 "required": true,
-                "script_count": 50,
+                "script_count": 51,
                 "scripts": [
                   "scripts/adjudicate_output_review.py",
                   "scripts/build_confusion_matrix.py",
@@ -5138,6 +5143,7 @@
                   "scripts/run_output_execution.py",
                   "scripts/simulate_install.py",
                   "scripts/sync_local_install.py",
+                  "scripts/telemetry_native_host.py",
                   "scripts/trust_check.py",
                   "scripts/upgrade_check.py",
                   "scripts/verify_package.py"
@@ -5177,14 +5183,14 @@
             },
             "help_smoke": {
               "enabled": true,
-              "checked_count": 63,
+              "checked_count": 64,
               "failed_count": 0,
               "failed_scripts": []
             },
             "trust_summary": {
               "secret_findings": 0,
               "network_script_count": 3,
-              "file_write_script_count": 50,
+              "file_write_script_count": 51,
               "subprocess_script_count": 7,
               "interactive_script_count": 0,
               "help_smoke_failed_count": 0
@@ -5204,7 +5210,7 @@
             ],
             "capability_counts": {
               "network": 3,
-              "file_write": 50,
+              "file_write": 51,
               "subprocess": 7,
               "interactive": 0
             },
@@ -5225,7 +5231,7 @@
               "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
               "counts": {
                 "references": 32,
-                "scripts": 73,
+                "scripts": 74,
                 "assets": 2,
                 "reports": 43
               },
@@ -5236,7 +5242,7 @@
             },
             "scripts": {
               "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-              "script_count": 73,
+              "script_count": 74,
               "help_smoke_failed_count": 0
             },
             "permissions": {
@@ -5502,6 +5508,7 @@
                 "scripts/skill_report_metrics.py",
                 "scripts/skill_report_model.py",
                 "scripts/sync_local_install.py",
+                "scripts/telemetry_native_host.py",
                 "scripts/trigger_eval.py",
                 "scripts/trust_check.py",
                 "scripts/upgrade_check.py",
@@ -5563,7 +5570,7 @@
               ],
               "counts": {
                 "references": 32,
-                "scripts": 73,
+                "scripts": 74,
                 "assets": 2,
                 "reports": 43
               }
@@ -5669,7 +5676,7 @@
                 },
                 "file_write": {
                   "required": true,
-                  "script_count": 50,
+                  "script_count": 51,
                   "scripts": [
                     "scripts/adjudicate_output_review.py",
                     "scripts/build_confusion_matrix.py",
@@ -5718,6 +5725,7 @@
                     "scripts/run_output_execution.py",
                     "scripts/simulate_install.py",
                     "scripts/sync_local_install.py",
+                    "scripts/telemetry_native_host.py",
                     "scripts/trust_check.py",
                     "scripts/upgrade_check.py",
                     "scripts/verify_package.py"
@@ -5757,14 +5765,14 @@
               },
               "help_smoke": {
                 "enabled": true,
-                "checked_count": 63,
+                "checked_count": 64,
                 "failed_count": 0,
                 "failed_scripts": []
               },
               "trust_summary": {
                 "secret_findings": 0,
                 "network_script_count": 3,
-                "file_write_script_count": 50,
+                "file_write_script_count": 51,
                 "subprocess_script_count": 7,
                 "interactive_script_count": 0,
                 "help_smoke_failed_count": 0
@@ -5786,7 +5794,7 @@
               ],
               "capability_counts": {
                 "network": 3,
-                "file_write": 50,
+                "file_write": 51,
                 "subprocess": 7,
                 "interactive": 0
               },
@@ -5807,7 +5815,7 @@
                 "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
                 "counts": {
                   "references": 32,
-                  "scripts": 73,
+                  "scripts": 74,
                   "assets": 2,
                   "reports": 43
                 },
@@ -5817,7 +5825,7 @@
               },
               "scripts": {
                 "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-                "script_count": 73,
+                "script_count": 74,
                 "help_smoke_failed_count": 0
               },
               "permissions": {
@@ -5892,7 +5900,7 @@
               },
               "file_write": {
                 "required": true,
-                "script_count": 50,
+                "script_count": 51,
                 "scripts": [
                   "scripts/adjudicate_output_review.py",
                   "scripts/build_confusion_matrix.py",
@@ -5941,6 +5949,7 @@
                   "scripts/run_output_execution.py",
                   "scripts/simulate_install.py",
                   "scripts/sync_local_install.py",
+                  "scripts/telemetry_native_host.py",
                   "scripts/trust_check.py",
                   "scripts/upgrade_check.py",
                   "scripts/verify_package.py"
@@ -5980,14 +5989,14 @@
             },
             "help_smoke": {
               "enabled": true,
-              "checked_count": 63,
+              "checked_count": 64,
               "failed_count": 0,
               "failed_scripts": []
             },
             "trust_summary": {
               "secret_findings": 0,
               "network_script_count": 3,
-              "file_write_script_count": 50,
+              "file_write_script_count": 51,
               "subprocess_script_count": 7,
               "interactive_script_count": 0,
               "help_smoke_failed_count": 0
@@ -6007,7 +6016,7 @@
             ],
             "capability_counts": {
               "network": 3,
-              "file_write": 50,
+              "file_write": 51,
               "subprocess": 7,
               "interactive": 0
             },
@@ -6028,7 +6037,7 @@
               "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
               "counts": {
                 "references": 32,
-                "scripts": 73,
+                "scripts": 74,
                 "assets": 2,
                 "reports": 43
               },
@@ -6038,7 +6047,7 @@
             },
             "scripts": {
               "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-              "script_count": 73,
+              "script_count": 74,
               "help_smoke_failed_count": 0
             },
             "permissions": {
@@ -6296,6 +6305,7 @@
                 "scripts/skill_report_metrics.py",
                 "scripts/skill_report_model.py",
                 "scripts/sync_local_install.py",
+                "scripts/telemetry_native_host.py",
                 "scripts/trigger_eval.py",
                 "scripts/trust_check.py",
                 "scripts/upgrade_check.py",
@@ -6357,7 +6367,7 @@
               ],
               "counts": {
                 "references": 32,
-                "scripts": 73,
+                "scripts": 74,
                 "assets": 2,
                 "reports": 43
               }
@@ -6463,7 +6473,7 @@
                 },
                 "file_write": {
                   "required": true,
-                  "script_count": 50,
+                  "script_count": 51,
                   "scripts": [
                     "scripts/adjudicate_output_review.py",
                     "scripts/build_confusion_matrix.py",
@@ -6512,6 +6522,7 @@
                     "scripts/run_output_execution.py",
                     "scripts/simulate_install.py",
                     "scripts/sync_local_install.py",
+                    "scripts/telemetry_native_host.py",
                     "scripts/trust_check.py",
                     "scripts/upgrade_check.py",
                     "scripts/verify_package.py"
@@ -6551,14 +6562,14 @@
               },
               "help_smoke": {
                 "enabled": true,
-                "checked_count": 63,
+                "checked_count": 64,
                 "failed_count": 0,
                 "failed_scripts": []
               },
               "trust_summary": {
                 "secret_findings": 0,
                 "network_script_count": 3,
-                "file_write_script_count": 50,
+                "file_write_script_count": 51,
                 "subprocess_script_count": 7,
                 "interactive_script_count": 0,
                 "help_smoke_failed_count": 0
@@ -6580,7 +6591,7 @@
               ],
               "capability_counts": {
                 "network": 3,
-                "file_write": 50,
+                "file_write": 51,
                 "subprocess": 7,
                 "interactive": 0
               },
@@ -6601,7 +6612,7 @@
                 "strategy": "Keep optional directories as relative resources next to SKILL.md.",
                 "counts": {
                   "references": 32,
-                  "scripts": 73,
+                  "scripts": 74,
                   "assets": 2,
                   "reports": 43
                 },
@@ -6612,7 +6623,7 @@
               },
               "scripts": {
                 "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-                "script_count": 73,
+                "script_count": 74,
                 "help_smoke_failed_count": 0
               },
               "permissions": {
@@ -6686,7 +6697,7 @@
               },
               "file_write": {
                 "required": true,
-                "script_count": 50,
+                "script_count": 51,
                 "scripts": [
                   "scripts/adjudicate_output_review.py",
                   "scripts/build_confusion_matrix.py",
@@ -6735,6 +6746,7 @@
                   "scripts/run_output_execution.py",
                   "scripts/simulate_install.py",
                   "scripts/sync_local_install.py",
+                  "scripts/telemetry_native_host.py",
                   "scripts/trust_check.py",
                   "scripts/upgrade_check.py",
                   "scripts/verify_package.py"
@@ -6774,14 +6786,14 @@
             },
             "help_smoke": {
               "enabled": true,
-              "checked_count": 63,
+              "checked_count": 64,
               "failed_count": 0,
               "failed_scripts": []
             },
             "trust_summary": {
               "secret_findings": 0,
               "network_script_count": 3,
-              "file_write_script_count": 50,
+              "file_write_script_count": 51,
               "subprocess_script_count": 7,
               "interactive_script_count": 0,
               "help_smoke_failed_count": 0
@@ -6801,7 +6813,7 @@
             ],
             "capability_counts": {
               "network": 3,
-              "file_write": 50,
+              "file_write": 51,
               "subprocess": 7,
               "interactive": 0
             },
@@ -6822,7 +6834,7 @@
               "strategy": "Keep optional directories as relative resources next to SKILL.md.",
               "counts": {
                 "references": 32,
-                "scripts": 73,
+                "scripts": 74,
                 "assets": 2,
                 "reports": 43
               },
@@ -6833,7 +6845,7 @@
             },
             "scripts": {
               "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-              "script_count": 73,
+              "script_count": 74,
               "help_smoke_failed_count": 0
             },
             "permissions": {
@@ -7090,6 +7102,7 @@
                 "scripts/skill_report_metrics.py",
                 "scripts/skill_report_model.py",
                 "scripts/sync_local_install.py",
+                "scripts/telemetry_native_host.py",
                 "scripts/trigger_eval.py",
                 "scripts/trust_check.py",
                 "scripts/upgrade_check.py",
@@ -7151,7 +7164,7 @@
               ],
               "counts": {
                 "references": 32,
-                "scripts": 73,
+                "scripts": 74,
                 "assets": 2,
                 "reports": 43
               }
@@ -7257,7 +7270,7 @@
                 },
                 "file_write": {
                   "required": true,
-                  "script_count": 50,
+                  "script_count": 51,
                   "scripts": [
                     "scripts/adjudicate_output_review.py",
                     "scripts/build_confusion_matrix.py",
@@ -7306,6 +7319,7 @@
                     "scripts/run_output_execution.py",
                     "scripts/simulate_install.py",
                     "scripts/sync_local_install.py",
+                    "scripts/telemetry_native_host.py",
                     "scripts/trust_check.py",
                     "scripts/upgrade_check.py",
                     "scripts/verify_package.py"
@@ -7345,14 +7359,14 @@
               },
               "help_smoke": {
                 "enabled": true,
-                "checked_count": 63,
+                "checked_count": 64,
                 "failed_count": 0,
                 "failed_scripts": []
               },
               "trust_summary": {
                 "secret_findings": 0,
                 "network_script_count": 3,
-                "file_write_script_count": 50,
+                "file_write_script_count": 51,
                 "subprocess_script_count": 7,
                 "interactive_script_count": 0,
                 "help_smoke_failed_count": 0
@@ -7374,7 +7388,7 @@
               ],
               "capability_counts": {
                 "network": 3,
-                "file_write": 50,
+                "file_write": 51,
                 "subprocess": 7,
                 "interactive": 0
               },
@@ -7395,7 +7409,7 @@
                 "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
                 "counts": {
                   "references": 32,
-                  "scripts": 73,
+                  "scripts": 74,
                   "assets": 2,
                   "reports": 43
                 },
@@ -7406,7 +7420,7 @@
               },
               "scripts": {
                 "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
-                "script_count": 73,
+                "script_count": 74,
                 "help_smoke_failed_count": 0
               },
               "permissions": {
@@ -7484,7 +7498,7 @@
               },
               "file_write": {
                 "required": true,
-                "script_count": 50,
+                "script_count": 51,
                 "scripts": [
                   "scripts/adjudicate_output_review.py",
                   "scripts/build_confusion_matrix.py",
@@ -7533,6 +7547,7 @@
                   "scripts/run_output_execution.py",
                   "scripts/simulate_install.py",
                   "scripts/sync_local_install.py",
+                  "scripts/telemetry_native_host.py",
                   "scripts/trust_check.py",
                   "scripts/upgrade_check.py",
                   "scripts/verify_package.py"
@@ -7572,14 +7587,14 @@
             },
             "help_smoke": {
               "enabled": true,
-              "checked_count": 63,
+              "checked_count": 64,
               "failed_count": 0,
               "failed_scripts": []
             },
             "trust_summary": {
               "secret_findings": 0,
               "network_script_count": 3,
-              "file_write_script_count": 50,
+              "file_write_script_count": 51,
               "subprocess_script_count": 7,
               "interactive_script_count": 0,
               "help_smoke_failed_count": 0
@@ -7599,7 +7614,7 @@
             ],
             "capability_counts": {
               "network": 3,
-              "file_write": 50,
+              "file_write": 51,
               "subprocess": 7,
               "interactive": 0
             },
@@ -7620,7 +7635,7 @@
               "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
               "counts": {
                 "references": 32,
-                "scripts": 73,
+                "scripts": 74,
                 "assets": 2,
                 "reports": 43
               },
@@ -7631,7 +7646,7 @@
             },
             "scripts": {
               "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
-              "script_count": 73,
+              "script_count": 74,
               "help_smoke_failed_count": 0
             },
             "permissions": {
@@ -8271,8 +8286,8 @@
       "ok": true,
       "skill_dir": ".",
       "summary": {
-        "scanned_files": 157,
-        "script_count": 73,
+        "scanned_files": 158,
+        "script_count": 74,
         "internal_module_count": 10,
         "secret_findings": 0,
         "dependency_files": [
@@ -8281,18 +8296,18 @@
         "network_script_count": 3,
         "network_policy_covered_count": 3,
         "network_policy_missing_count": 0,
-        "file_write_script_count": 50,
+        "file_write_script_count": 51,
         "permission_required_count": 3,
         "permission_approved_count": 3,
         "permission_missing_count": 0,
         "permission_invalid_count": 0,
         "permission_expired_count": 0,
-        "help_smoke_checked_count": 63,
+        "help_smoke_checked_count": 64,
         "help_smoke_failed_count": 0,
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
-        "package_hash_file_count": 157,
-        "package_sha256": "25df24e0cb24e09a1a11819ca6c185b60c279a4f12851ef1ce9275e67a58d339"
+        "package_hash_file_count": 158,
+        "package_sha256": "e42a9c4cf0f22cd6fc047dff3da1a380f5cc9e17157a48d8a1ac2071f7c84fbc"
       },
       "failures": [],
       "warnings": [],
@@ -9212,6 +9227,20 @@
           "network_hosts": []
         },
         {
+          "path": "scripts/telemetry_native_host.py",
+          "interface": "cli",
+          "interface_declared": false,
+          "interface_reason": "Default CLI classification; add SCRIPT_INTERFACE for internal modules.",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_file_write": true,
+          "uses_subprocess": false,
+          "network_urls": [],
+          "network_hosts": []
+        },
+        {
           "path": "scripts/trigger_eval.py",
           "interface": "cli",
           "interface_declared": false,
@@ -9368,9 +9397,9 @@
       "help_smoke": {
         "enabled": true,
         "timeout_seconds": 5.0,
-        "candidate_count": 63,
-        "checked_count": 63,
-        "passed_count": 63,
+        "candidate_count": 64,
+        "checked_count": 64,
+        "passed_count": 64,
         "failed_count": 0,
         "skipped_count": 10,
         "failed_scripts": [],
@@ -9946,6 +9975,16 @@
             "stderr_excerpt": ""
           },
           {
+            "path": "scripts/telemetry_native_host.py",
+            "command": "python3 scripts/telemetry_native_host.py --help",
+            "returncode": 0,
+            "timed_out": false,
+            "passed": true,
+            "has_help_text": true,
+            "stdout_excerpt": "usage: telemetry_native_host.py [-h] [--output-jsonl OUTPUT_JSONL]\n                                [--message-json MESSAGE_JSON] [--stdio]\n                                [--dry-run] [--write-manifest WRITE_MANIFEST]\n                       ",
+            "stderr_excerpt": ""
+          },
+          {
             "path": "scripts/trigger_eval.py",
             "command": "python3 scripts/trigger_eval.py --help",
             "returncode": 0,
@@ -10148,6 +10187,7 @@
               "scripts/run_output_execution.py",
               "scripts/simulate_install.py",
               "scripts/sync_local_install.py",
+              "scripts/telemetry_native_host.py",
               "scripts/trust_check.py",
               "scripts/upgrade_check.py",
               "scripts/verify_package.py"
@@ -10217,10 +10257,10 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 751,
-        "other_text_tokens": 936263,
+        "other_text_tokens": 941577,
         "estimated_initial_load_tokens": 944,
-        "estimated_total_text_tokens": 937014,
-        "relevant_file_count": 409,
+        "estimated_total_text_tokens": 942328,
+        "relevant_file_count": 413,
         "unused_resource_dirs": [],
         "quality_signal_points": 130,
         "quality_density": 137.7
@@ -11148,6 +11188,7 @@
               "scripts/skill_report_metrics.py",
               "scripts/skill_report_model.py",
               "scripts/sync_local_install.py",
+              "scripts/telemetry_native_host.py",
               "scripts/trigger_eval.py",
               "scripts/trust_check.py",
               "scripts/upgrade_check.py",
@@ -12220,8 +12261,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "25df24e0cb24e09a1a11819ca6c185b60c279a4f12851ef1ce9275e67a58d339",
-          "archive_sha256": "15aac04026bdedbd4c4e4a8eb9ac2cd95b2cda1ffe9735cdb706b0f4393aceaf"
+          "package_sha256": "e42a9c4cf0f22cd6fc047dff3da1a380f5cc9e17157a48d8a1ac2071f7c84fbc",
+          "archive_sha256": "7494bf9b978d58b663cc0e8b6ffe2531a84602385f6f517774320197d30170d3"
         },
         "compatibility": {
           "openai": "pass",
@@ -12252,7 +12293,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "15aac04026bdedbd4c4e4a8eb9ac2cd95b2cda1ffe9735cdb706b0f4393aceaf",
+          "archive_sha256": "7494bf9b978d58b663cc0e8b6ffe2531a84602385f6f517774320197d30170d3",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -12277,7 +12318,7 @@
               "vscode"
             ],
             "package_metadata": "registry/packages/yao-meta-skill.json",
-            "package_sha256": "25df24e0cb24e09a1a11819ca6c185b60c279a4f12851ef1ce9275e67a58d339"
+            "package_sha256": "e42a9c4cf0f22cd6fc047dff3da1a380f5cc9e17157a48d8a1ac2071f7c84fbc"
           }
         ]
       },
@@ -12300,8 +12341,8 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "15aac04026bdedbd4c4e4a8eb9ac2cd95b2cda1ffe9735cdb706b0f4393aceaf",
-        "archive_entry_count": 503,
+        "archive_sha256": "7494bf9b978d58b663cc0e8b6ffe2531a84602385f6f517774320197d30170d3",
+        "archive_entry_count": 505,
         "failure_count": 0,
         "warning_count": 0
       },
@@ -12966,7 +13007,7 @@
       "installed_skill_dir": "dist/install-simulation/simulate-yao-meta-skill/yao-meta-skill",
       "summary": {
         "archive_present": true,
-        "archive_entry_count": 503,
+        "archive_entry_count": 505,
         "archive_extracted": true,
         "entrypoint_loaded": true,
         "manifest_loaded": true,
@@ -13308,12 +13349,12 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "15aac04026bdedbd4c4e4a8eb9ac2cd95b2cda1ffe9735cdb706b0f4393aceaf"
+            "to": "7494bf9b978d58b663cc0e8b6ffe2531a84602385f6f517774320197d30170d3"
           },
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "25df24e0cb24e09a1a11819ca6c185b60c279a4f12851ef1ce9275e67a58d339"
+            "to": "e42a9c4cf0f22cd6fc047dff3da1a380f5cc9e17157a48d8a1ac2071f7c84fbc"
           }
         ]
       },
