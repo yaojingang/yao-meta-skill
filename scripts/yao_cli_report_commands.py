@@ -62,7 +62,11 @@ def command_world_class_evidence(args: argparse.Namespace) -> int:
 
 
 def command_world_class_ledger(args: argparse.Namespace) -> int:
-    return render_skill_report_command(args, "render_world_class_evidence_ledger.py", generated_at=True)
+    cmd = [resolved_skill_dir(args)]
+    if getattr(args, "submissions_dir", None):
+        cmd.extend(["--submissions-dir", args.submissions_dir])
+    append_outputs(cmd, args, generated_at=True)
+    return emit_result(run_script("render_world_class_evidence_ledger.py", cmd))
 
 
 def command_world_class_intake(args: argparse.Namespace) -> int:

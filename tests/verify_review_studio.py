@@ -445,6 +445,8 @@ def main() -> None:
     assert provider_entry["status"] == "pending", provider_entry
     assert "reports/output_execution_runs.json summary.model_executed_count > 0" in provider_entry["success_checks"], provider_entry
     assert provider_entry["observed_state"]["model_executed_count"] == 0, provider_entry
+    assert provider_entry["submission_state"]["status"] == "missing", provider_entry
+    assert provider_entry["submission_state"]["ledger_counts_as_completion"] is False, provider_entry
     assert full_payload["data"]["atlas"]["summary"]["actionable_route_collision_count"] == 0, full_payload["data"]["atlas"]
     assert full_payload["data"]["atlas"]["summary"]["actionable_drift_signal_count"] == 0, full_payload["data"]["atlas"]
     assert full_payload["data"]["atlas"]["summary"]["non_actionable_issue_count"] >= 1, full_payload["data"]["atlas"]
@@ -508,6 +510,8 @@ def main() -> None:
     assert "world-evidence-grid" in html, html
     assert "Provider Holdout" in html, html
     assert "Native Permission Enforcement" in html, html
+    assert "提交态" in html, html
+    assert "status: missing" in html, html
     assert "完成定义" in html, html
     assert "证据来源" in html, html
     assert "隐私约束" in html, html

@@ -909,9 +909,9 @@
       "world_class_task_count": 4,
       "world_class_ledger_pending_count": 4,
       "working_tree_dirty": true,
-      "changed_file_count": 25
+      "changed_file_count": 30
     },
-    "commit": "8af7d75347cdb883e4f3f73288977afe985cfbfc",
+    "commit": "c5e7b05faae8536b420c5120c1d3a59456c96e51",
     "missing_artifacts": [],
     "limitations": [
       "Local command-runner evidence is reproducible but does not replace provider-backed model holdout evidence.",
@@ -1007,7 +1007,7 @@
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
     "package_hash_file_count": 174,
-    "package_sha256": "31dd41a9235d164be6b56101148f6ecdac045e50b927596974b2157ceeea4cd5"
+    "package_sha256": "0b47fb8b2db508e32d5aafd5c46bd008dc23493c1ff909427686609e9f99d5a9"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -1045,8 +1045,8 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "31dd41a9235d164be6b56101148f6ecdac045e50b927596974b2157ceeea4cd5",
-        "archive_sha256": "ff791438eede847edcb5506573eb12868307c16a39d06f1c3e11133fd56ff59e"
+        "package_sha256": "0b47fb8b2db508e32d5aafd5c46bd008dc23493c1ff909427686609e9f99d5a9",
+        "archive_sha256": "934b2967ff56afa5d725b9c129d4fc1e280854d85aa09783ffdb1b6b3108346d"
       },
       "compatibility": {
         "openai": "pass",
@@ -1077,7 +1077,7 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "ff791438eede847edcb5506573eb12868307c16a39d06f1c3e11133fd56ff59e",
+        "archive_sha256": "934b2967ff56afa5d725b9c129d4fc1e280854d85aa09783ffdb1b6b3108346d",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
@@ -1093,7 +1093,7 @@
       "target_count": 4,
       "adapter_count": 4,
       "archive_present": true,
-      "archive_sha256": "ff791438eede847edcb5506573eb12868307c16a39d06f1c3e11133fd56ff59e",
+      "archive_sha256": "934b2967ff56afa5d725b9c129d4fc1e280854d85aa09783ffdb1b6b3108346d",
       "archive_entry_count": 558,
       "failure_count": 0,
       "warning_count": 0
@@ -1172,12 +1172,12 @@
         {
           "field": "archive_sha256",
           "from": "",
-          "to": "ff791438eede847edcb5506573eb12868307c16a39d06f1c3e11133fd56ff59e"
+          "to": "934b2967ff56afa5d725b9c129d4fc1e280854d85aa09783ffdb1b6b3108346d"
         },
         {
           "field": "package_sha256",
           "from": "0000000000000000000000000000000000000000000000000000000000000000",
-          "to": "31dd41a9235d164be6b56101148f6ecdac045e50b927596974b2157ceeea4cd5"
+          "to": "0b47fb8b2db508e32d5aafd5c46bd008dc23493c1ff909427686609e9f99d5a9"
         }
       ]
     },
@@ -1470,6 +1470,10 @@
       "pending_count": 4,
       "human_pending_count": 1,
       "external_pending_count": 3,
+      "submitted_entry_count": 0,
+      "missing_submission_count": 4,
+      "invalid_submission_count": 0,
+      "submitted_but_pending_count": 0,
       "overclaim_guard_active": true,
       "ready_to_claim_world_class": false,
       "decision": "evidence-pending"
@@ -1513,6 +1517,14 @@
           "timing_observed_count": 10,
           "token_observed_count": 0,
           "accepted": false
+        },
+        "submission_state": {
+          "status": "missing",
+          "path": "evidence/world_class/submissions/provider-holdout.json",
+          "artifact_ref_count": 0,
+          "attested_real_evidence": false,
+          "privacy_contract_satisfied": false,
+          "ledger_counts_as_completion": false
         },
         "anti_overclaim": {
           "planned_work_counts_as_evidence": false,
@@ -1564,6 +1576,14 @@
           "answer_revealed_count": 0,
           "accepted": false
         },
+        "submission_state": {
+          "status": "missing",
+          "path": "evidence/world_class/submissions/human-adjudication.json",
+          "artifact_ref_count": 0,
+          "attested_real_evidence": false,
+          "privacy_contract_satisfied": false,
+          "ledger_counts_as_completion": false
+        },
         "anti_overclaim": {
           "planned_work_counts_as_evidence": false,
           "metadata_fallback_counts_as_native_enforcement": false,
@@ -1612,6 +1632,14 @@
           "failure_count": 0,
           "accepted": false
         },
+        "submission_state": {
+          "status": "missing",
+          "path": "evidence/world_class/submissions/native-permission-enforcement.json",
+          "artifact_ref_count": 0,
+          "attested_real_evidence": false,
+          "privacy_contract_satisfied": false,
+          "ledger_counts_as_completion": false
+        },
         "anti_overclaim": {
           "planned_work_counts_as_evidence": false,
           "metadata_fallback_counts_as_native_enforcement": false,
@@ -1659,6 +1687,14 @@
           "raw_content_allowed": false,
           "risk_band": "low",
           "accepted": false
+        },
+        "submission_state": {
+          "status": "missing",
+          "path": "evidence/world_class/submissions/native-client-telemetry.json",
+          "artifact_ref_count": 0,
+          "attested_real_evidence": false,
+          "privacy_contract_satisfied": false,
+          "ledger_counts_as_completion": false
         },
         "anti_overclaim": {
           "planned_work_counts_as_evidence": false,

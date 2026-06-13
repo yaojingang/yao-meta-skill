@@ -27,7 +27,7 @@
     },
     {
       "path": "tests/verify_yao_cli.py",
-      "lines": 848,
+      "lines": 850,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
@@ -69,7 +69,7 @@
     },
     {
       "path": "scripts/yao_cli_parser.py",
-      "lines": 691,
+      "lines": 692,
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."

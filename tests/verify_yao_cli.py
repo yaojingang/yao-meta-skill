@@ -247,6 +247,8 @@ def main() -> None:
     )
     assert world_class_ledger_result["ok"], world_class_ledger_result
     assert world_class_ledger_result["payload"]["summary"]["pending_count"] == 4, world_class_ledger_result
+    assert world_class_ledger_result["payload"]["summary"]["missing_submission_count"] == 4, world_class_ledger_result
+    assert world_class_ledger_result["payload"]["summary"]["submitted_entry_count"] == 0, world_class_ledger_result
 
     world_class_intake_result = run(
         "world-class-intake",

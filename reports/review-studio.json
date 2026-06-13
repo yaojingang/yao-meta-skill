@@ -1310,9 +1310,9 @@
           "world_class_task_count": 4,
           "world_class_ledger_pending_count": 4,
           "working_tree_dirty": true,
-          "changed_file_count": 25
+          "changed_file_count": 30
         },
-        "commit": "8af7d75347cdb883e4f3f73288977afe985cfbfc",
+        "commit": "c5e7b05faae8536b420c5120c1d3a59456c96e51",
         "missing_artifacts": [],
         "limitations": [
           "Local command-runner evidence is reproducible but does not replace provider-backed model holdout evidence.",
@@ -1408,7 +1408,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 174,
-        "package_sha256": "31dd41a9235d164be6b56101148f6ecdac045e50b927596974b2157ceeea4cd5"
+        "package_sha256": "0b47fb8b2db508e32d5aafd5c46bd008dc23493c1ff909427686609e9f99d5a9"
       },
       "skill_atlas": {
         "skill_count": 12,
@@ -1446,8 +1446,8 @@
           "trust_level": "local",
           "license": "MIT",
           "checksums": {
-            "package_sha256": "31dd41a9235d164be6b56101148f6ecdac045e50b927596974b2157ceeea4cd5",
-            "archive_sha256": "ff791438eede847edcb5506573eb12868307c16a39d06f1c3e11133fd56ff59e"
+            "package_sha256": "0b47fb8b2db508e32d5aafd5c46bd008dc23493c1ff909427686609e9f99d5a9",
+            "archive_sha256": "934b2967ff56afa5d725b9c129d4fc1e280854d85aa09783ffdb1b6b3108346d"
           },
           "compatibility": {
             "openai": "pass",
@@ -1478,7 +1478,7 @@
           },
           "distribution": {
             "archive_verified": true,
-            "archive_sha256": "ff791438eede847edcb5506573eb12868307c16a39d06f1c3e11133fd56ff59e",
+            "archive_sha256": "934b2967ff56afa5d725b9c129d4fc1e280854d85aa09783ffdb1b6b3108346d",
             "package_verification": "reports/package_verification.json",
             "install_simulated": true,
             "install_simulation": "reports/install_simulation.json"
@@ -1494,7 +1494,7 @@
           "target_count": 4,
           "adapter_count": 4,
           "archive_present": true,
-          "archive_sha256": "ff791438eede847edcb5506573eb12868307c16a39d06f1c3e11133fd56ff59e",
+          "archive_sha256": "934b2967ff56afa5d725b9c129d4fc1e280854d85aa09783ffdb1b6b3108346d",
           "archive_entry_count": 558,
           "failure_count": 0,
           "warning_count": 0
@@ -1573,12 +1573,12 @@
             {
               "field": "archive_sha256",
               "from": "",
-              "to": "ff791438eede847edcb5506573eb12868307c16a39d06f1c3e11133fd56ff59e"
+              "to": "934b2967ff56afa5d725b9c129d4fc1e280854d85aa09783ffdb1b6b3108346d"
             },
             {
               "field": "package_sha256",
               "from": "0000000000000000000000000000000000000000000000000000000000000000",
-              "to": "31dd41a9235d164be6b56101148f6ecdac045e50b927596974b2157ceeea4cd5"
+              "to": "0b47fb8b2db508e32d5aafd5c46bd008dc23493c1ff909427686609e9f99d5a9"
             }
           ]
         },
@@ -1871,6 +1871,10 @@
           "pending_count": 4,
           "human_pending_count": 1,
           "external_pending_count": 3,
+          "submitted_entry_count": 0,
+          "missing_submission_count": 4,
+          "invalid_submission_count": 0,
+          "submitted_but_pending_count": 0,
           "overclaim_guard_active": true,
           "ready_to_claim_world_class": false,
           "decision": "evidence-pending"
@@ -1914,6 +1918,14 @@
               "timing_observed_count": 10,
               "token_observed_count": 0,
               "accepted": false
+            },
+            "submission_state": {
+              "status": "missing",
+              "path": "evidence/world_class/submissions/provider-holdout.json",
+              "artifact_ref_count": 0,
+              "attested_real_evidence": false,
+              "privacy_contract_satisfied": false,
+              "ledger_counts_as_completion": false
             },
             "anti_overclaim": {
               "planned_work_counts_as_evidence": false,
@@ -1965,6 +1977,14 @@
               "answer_revealed_count": 0,
               "accepted": false
             },
+            "submission_state": {
+              "status": "missing",
+              "path": "evidence/world_class/submissions/human-adjudication.json",
+              "artifact_ref_count": 0,
+              "attested_real_evidence": false,
+              "privacy_contract_satisfied": false,
+              "ledger_counts_as_completion": false
+            },
             "anti_overclaim": {
               "planned_work_counts_as_evidence": false,
               "metadata_fallback_counts_as_native_enforcement": false,
@@ -2013,6 +2033,14 @@
               "failure_count": 0,
               "accepted": false
             },
+            "submission_state": {
+              "status": "missing",
+              "path": "evidence/world_class/submissions/native-permission-enforcement.json",
+              "artifact_ref_count": 0,
+              "attested_real_evidence": false,
+              "privacy_contract_satisfied": false,
+              "ledger_counts_as_completion": false
+            },
             "anti_overclaim": {
               "planned_work_counts_as_evidence": false,
               "metadata_fallback_counts_as_native_enforcement": false,
@@ -2060,6 +2088,14 @@
               "raw_content_allowed": false,
               "risk_band": "low",
               "accepted": false
+            },
+            "submission_state": {
+              "status": "missing",
+              "path": "evidence/world_class/submissions/native-client-telemetry.json",
+              "artifact_ref_count": 0,
+              "attested_real_evidence": false,
+              "privacy_contract_satisfied": false,
+              "ledger_counts_as_completion": false
             },
             "anti_overclaim": {
               "planned_work_counts_as_evidence": false,
@@ -3698,7 +3734,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 31.1,
+          "duration_ms": 29.8,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3726,7 +3762,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 31.02,
+          "duration_ms": 28.94,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3749,7 +3785,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.31,
+          "duration_ms": 29.0,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3777,7 +3813,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 31.07,
+          "duration_ms": 39.86,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3800,7 +3836,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.27,
+          "duration_ms": 32.86,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3828,7 +3864,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.59,
+          "duration_ms": 30.43,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3851,7 +3887,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.5,
+          "duration_ms": 30.14,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3878,7 +3914,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 31.61,
+          "duration_ms": 29.46,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3901,7 +3937,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 32.07,
+          "duration_ms": 31.25,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3930,7 +3966,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 32.93,
+          "duration_ms": 29.63,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -9765,7 +9801,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 174,
-        "package_sha256": "31dd41a9235d164be6b56101148f6ecdac045e50b927596974b2157ceeea4cd5"
+        "package_sha256": "0b47fb8b2db508e32d5aafd5c46bd008dc23493c1ff909427686609e9f99d5a9"
       },
       "failures": [],
       "warnings": [],
@@ -11653,7 +11689,7 @@
             "timed_out": false,
             "passed": true,
             "has_help_text": true,
-            "stdout_excerpt": "usage: render_world_class_evidence_ledger.py [-h] [--output-json OUTPUT_JSON]\n                                             [--output-md OUTPUT_MD]\n                                             [--generated-at GENERATED_AT]\n                  ",
+            "stdout_excerpt": "usage: render_world_class_evidence_ledger.py [-h] [--output-json OUTPUT_JSON]\n                                             [--output-md OUTPUT_MD]\n                                             [--submissions-dir SUBMISSIONS_DIR]\n            ",
             "stderr_excerpt": ""
           },
           {
@@ -13014,7 +13050,7 @@
         },
         {
           "path": "tests/verify_yao_cli.py",
-          "lines": 848,
+          "lines": 850,
           "kind": "test",
           "severity": "pass",
           "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
@@ -13056,7 +13092,7 @@
         },
         {
           "path": "scripts/yao_cli_parser.py",
-          "lines": 691,
+          "lines": 692,
           "kind": "internal-module",
           "severity": "pass",
           "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
@@ -13105,9 +13141,9 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 751,
-        "other_text_tokens": 1109081,
+        "other_text_tokens": 1113302,
         "estimated_initial_load_tokens": 944,
-        "estimated_total_text_tokens": 1109832,
+        "estimated_total_text_tokens": 1114053,
         "relevant_file_count": 479,
         "unused_resource_dirs": [],
         "quality_signal_points": 130,
@@ -14957,7 +14993,7 @@
     "adoption_drift": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-13T21:50:33Z",
+      "generated_at": "2026-06-13T22:00:20Z",
       "skill_dir": ".",
       "privacy_contract": {
         "storage": "local-first",
@@ -15153,6 +15189,10 @@
         "pending_count": 4,
         "human_pending_count": 1,
         "external_pending_count": 3,
+        "submitted_entry_count": 0,
+        "missing_submission_count": 4,
+        "invalid_submission_count": 0,
+        "submitted_but_pending_count": 0,
         "overclaim_guard_active": true,
         "ready_to_claim_world_class": false,
         "decision": "evidence-pending"
@@ -15196,6 +15236,14 @@
             "timing_observed_count": 10,
             "token_observed_count": 0,
             "accepted": false
+          },
+          "submission_state": {
+            "status": "missing",
+            "path": "evidence/world_class/submissions/provider-holdout.json",
+            "artifact_ref_count": 0,
+            "attested_real_evidence": false,
+            "privacy_contract_satisfied": false,
+            "ledger_counts_as_completion": false
           },
           "anti_overclaim": {
             "planned_work_counts_as_evidence": false,
@@ -15247,6 +15295,14 @@
             "answer_revealed_count": 0,
             "accepted": false
           },
+          "submission_state": {
+            "status": "missing",
+            "path": "evidence/world_class/submissions/human-adjudication.json",
+            "artifact_ref_count": 0,
+            "attested_real_evidence": false,
+            "privacy_contract_satisfied": false,
+            "ledger_counts_as_completion": false
+          },
           "anti_overclaim": {
             "planned_work_counts_as_evidence": false,
             "metadata_fallback_counts_as_native_enforcement": false,
@@ -15294,6 +15350,14 @@
             "residual_risk_count": 4,
             "failure_count": 0,
             "accepted": false
+          },
+          "submission_state": {
+            "status": "missing",
+            "path": "evidence/world_class/submissions/native-permission-enforcement.json",
+            "artifact_ref_count": 0,
+            "attested_real_evidence": false,
+            "privacy_contract_satisfied": false,
+            "ledger_counts_as_completion": false
           },
           "anti_overclaim": {
             "planned_work_counts_as_evidence": false,
@@ -15343,6 +15407,14 @@
             "risk_band": "low",
             "accepted": false
           },
+          "submission_state": {
+            "status": "missing",
+            "path": "evidence/world_class/submissions/native-client-telemetry.json",
+            "artifact_ref_count": 0,
+            "attested_real_evidence": false,
+            "privacy_contract_satisfied": false,
+            "ledger_counts_as_completion": false
+          },
           "anti_overclaim": {
             "planned_work_counts_as_evidence": false,
             "metadata_fallback_counts_as_native_enforcement": false,
@@ -15356,6 +15428,10 @@
         "json": "reports/world_class_evidence_plan.json",
         "markdown": "reports/world_class_evidence_plan.md",
         "task_count": 4
+      },
+      "submissions": {
+        "directory": "evidence/world_class/submissions",
+        "ledger_counts_submission_as_completion": false
       },
       "artifacts": {
         "json": "reports/world_class_evidence_ledger.json",
@@ -15980,8 +16056,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "31dd41a9235d164be6b56101148f6ecdac045e50b927596974b2157ceeea4cd5",
-          "archive_sha256": "ff791438eede847edcb5506573eb12868307c16a39d06f1c3e11133fd56ff59e"
+          "package_sha256": "0b47fb8b2db508e32d5aafd5c46bd008dc23493c1ff909427686609e9f99d5a9",
+          "archive_sha256": "934b2967ff56afa5d725b9c129d4fc1e280854d85aa09783ffdb1b6b3108346d"
         },
         "compatibility": {
           "openai": "pass",
@@ -16012,7 +16088,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "ff791438eede847edcb5506573eb12868307c16a39d06f1c3e11133fd56ff59e",
+          "archive_sha256": "934b2967ff56afa5d725b9c129d4fc1e280854d85aa09783ffdb1b6b3108346d",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -16037,7 +16113,7 @@
               "vscode"
             ],
             "package_metadata": "registry/packages/yao-meta-skill.json",
-            "package_sha256": "31dd41a9235d164be6b56101148f6ecdac045e50b927596974b2157ceeea4cd5"
+            "package_sha256": "0b47fb8b2db508e32d5aafd5c46bd008dc23493c1ff909427686609e9f99d5a9"
           }
         ]
       },
@@ -16060,7 +16136,7 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "ff791438eede847edcb5506573eb12868307c16a39d06f1c3e11133fd56ff59e",
+        "archive_sha256": "934b2967ff56afa5d725b9c129d4fc1e280854d85aa09783ffdb1b6b3108346d",
         "archive_entry_count": 558,
         "failure_count": 0,
         "warning_count": 0
@@ -17068,12 +17144,12 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "ff791438eede847edcb5506573eb12868307c16a39d06f1c3e11133fd56ff59e"
+            "to": "934b2967ff56afa5d725b9c129d4fc1e280854d85aa09783ffdb1b6b3108346d"
           },
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "31dd41a9235d164be6b56101148f6ecdac045e50b927596974b2157ceeea4cd5"
+            "to": "0b47fb8b2db508e32d5aafd5c46bd008dc23493c1ff909427686609e9f99d5a9"
           }
         ]
       },

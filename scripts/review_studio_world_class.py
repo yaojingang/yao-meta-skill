@@ -23,6 +23,10 @@ def render_world_class_evidence_entries(ledger: dict[str, Any]) -> str:
     for entry in entries:
         observed = entry.get("observed_state", {}) if isinstance(entry.get("observed_state", {}), dict) else {}
         observed_summary = "; ".join(f"{key}: {value}" for key, value in observed.items())
+        submission = entry.get("submission_state", {}) if isinstance(entry.get("submission_state", {}), dict) else {}
+        submission_summary = "; ".join(
+            f"{key}: {value}" for key, value in submission.items() if key in {"status", "path", "attested_real_evidence", "privacy_contract_satisfied"}
+        )
         status = str(entry.get("status", "pending"))
         status_label_text = "已接受" if status == "accepted" else "待补证"
         cards.append(
@@ -35,7 +39,8 @@ def render_world_class_evidence_entries(ledger: dict[str, Any]) -> str:
             f"<dl><dt>负责人</dt><dd>{html.escape(str(entry.get('owner', '')))}</dd>"
             f"<dt>当前状态</dt><dd>{html.escape(str(entry.get('current', '')))}</dd>"
             f"<dt>下一步</dt><dd>{html.escape(str(entry.get('next_action', '')))}</dd>"
-            f"<dt>观测值</dt><dd>{html.escape(observed_summary or '无')}</dd></dl>"
+            f"<dt>观测值</dt><dd>{html.escape(observed_summary or '无')}</dd>"
+            f"<dt>提交态</dt><dd>{html.escape(submission_summary or 'missing')}</dd></dl>"
             "<div class='world-evidence-columns'>"
             "<div><h4>完成定义</h4>"
             + render_inline_list(entry.get("success_checks", []), "暂无完成定义。")

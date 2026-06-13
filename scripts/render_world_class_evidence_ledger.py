@@ -23,6 +23,18 @@ def load_json(path: Path) -> dict[str, Any]:
     return payload if isinstance(payload, dict) else {}
 
 
+def load_json_with_status(path: Path) -> tuple[dict[str, Any], str]:
+    if not path.exists():
+        return {}, "missing"
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return {}, "invalid-json"
+    if not isinstance(payload, dict):
+        return {}, "invalid-json"
+    return payload, "present"
+
+
 def rel_path(path: Path, root: Path) -> str:
     try:
         return str(path.resolve().relative_to(root.resolve()))
@@ -105,9 +117,44 @@ PROVENANCE_REQUIREMENTS = {
 }
 
 
-def build_entry(skill_dir: Path, task: dict[str, Any]) -> dict[str, Any]:
+def submission_state(skill_dir: Path, key: str, submissions_dir: Path) -> dict[str, Any]:
+    path = submissions_dir / f"{key}.json"
+    payload, load_status = load_json_with_status(path)
+    if load_status != "present":
+        return {
+            "status": load_status,
+            "path": rel_path(path, skill_dir),
+            "artifact_ref_count": 0,
+            "attested_real_evidence": False,
+            "privacy_contract_satisfied": False,
+            "ledger_counts_as_completion": False,
+        }
+    errors = []
+    if payload.get("evidence_key") != key:
+        errors.append("evidence_key mismatch")
+    if payload.get("template_only") is not False:
+        errors.append("template_only must be false")
+    refs = payload.get("artifact_refs", [])
+    attestation = payload.get("attestation", {}) if isinstance(payload.get("attestation", {}), dict) else {}
+    status = "submitted" if not errors else "invalid-contract"
+    return {
+        "status": status,
+        "path": rel_path(path, skill_dir),
+        "submitted_by": payload.get("submitted_by", ""),
+        "submitted_at": payload.get("submitted_at", ""),
+        "artifact_ref_count": len(refs) if isinstance(refs, list) else 0,
+        "attested_real_evidence": attestation.get("real_external_or_human_evidence") is True,
+        "reviewer_or_operator_identity_present": attestation.get("reviewer_or_operator_identity_present") is True,
+        "privacy_contract_satisfied": attestation.get("privacy_contract_satisfied") is True,
+        "errors": errors,
+        "ledger_counts_as_completion": False,
+    }
+
+
+def build_entry(skill_dir: Path, task: dict[str, Any], submissions_dir: Path) -> dict[str, Any]:
     state = STATE_LOADERS.get(task["key"], lambda _: {"accepted": task["status"] == "pass"})(skill_dir)
     accepted = bool(state.get("accepted"))
+    submission = submission_state(skill_dir, task["key"], submissions_dir)
     return {
         "key": task["key"],
         "label": task["label"],
@@ -122,6 +169,7 @@ def build_entry(skill_dir: Path, task: dict[str, Any]) -> dict[str, Any]:
         "evidence_artifacts": task["evidence_artifacts"],
         "privacy_contract": task["privacy_contract"],
         "observed_state": state,
+        "submission_state": submission,
         "anti_overclaim": {
             "planned_work_counts_as_evidence": False,
             "metadata_fallback_counts_as_native_enforcement": False,
@@ -132,13 +180,20 @@ def build_entry(skill_dir: Path, task: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def build_ledger(skill_dir: Path, generated_at: str) -> dict[str, Any]:
+def build_ledger(skill_dir: Path, generated_at: str, submissions_dir: Path | None = None) -> dict[str, Any]:
     plan = build_plan(skill_dir, generated_at)
-    entries = [build_entry(skill_dir, task) for task in plan["tasks"]]
+    submissions_dir = submissions_dir or (skill_dir / "evidence" / "world_class" / "submissions")
+    entries = [build_entry(skill_dir, task, submissions_dir) for task in plan["tasks"]]
     accepted_count = sum(1 for entry in entries if entry["status"] == "accepted")
     pending_count = len(entries) - accepted_count
     human_pending_count = sum(1 for entry in entries if entry["category"] == "human" and entry["status"] == "pending")
     external_pending_count = sum(1 for entry in entries if entry["category"] == "external" and entry["status"] == "pending")
+    submitted_entry_count = sum(1 for entry in entries if entry["submission_state"]["status"] == "submitted")
+    missing_submission_count = sum(1 for entry in entries if entry["submission_state"]["status"] == "missing")
+    invalid_submission_count = sum(1 for entry in entries if entry["submission_state"]["status"] in {"invalid-json", "invalid-contract"})
+    submitted_but_pending_count = sum(
+        1 for entry in entries if entry["submission_state"]["status"] == "submitted" and entry["status"] == "pending"
+    )
     ready = pending_count == 0 and plan["summary"].get("world_class_ready") is True
     return {
         "schema_version": "1.0",
@@ -151,6 +206,10 @@ def build_ledger(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             "pending_count": pending_count,
             "human_pending_count": human_pending_count,
             "external_pending_count": external_pending_count,
+            "submitted_entry_count": submitted_entry_count,
+            "missing_submission_count": missing_submission_count,
+            "invalid_submission_count": invalid_submission_count,
+            "submitted_but_pending_count": submitted_but_pending_count,
             "overclaim_guard_active": True,
             "ready_to_claim_world_class": ready,
             "decision": "ready-for-completion-audit" if ready else "evidence-pending",
@@ -160,6 +219,10 @@ def build_ledger(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             "json": "reports/world_class_evidence_plan.json",
             "markdown": "reports/world_class_evidence_plan.md",
             "task_count": plan["summary"].get("task_count", 0),
+        },
+        "submissions": {
+            "directory": rel_path(submissions_dir, skill_dir),
+            "ledger_counts_submission_as_completion": False,
         },
         "artifacts": {
             "json": "reports/world_class_evidence_ledger.json",
@@ -185,19 +248,23 @@ def render_markdown(ledger: dict[str, Any]) -> str:
         f"- pending: `{summary['pending_count']}`",
         f"- human pending: `{summary['human_pending_count']}`",
         f"- external pending: `{summary['external_pending_count']}`",
+        f"- submitted entries: `{summary['submitted_entry_count']}`",
+        f"- submitted but pending: `{summary['submitted_but_pending_count']}`",
+        f"- invalid submissions: `{summary['invalid_submission_count']}`",
         f"- overclaim guard active: `{str(summary['overclaim_guard_active']).lower()}`",
         "",
         "This ledger records the current evidence state. It does not treat planned work, metadata fallback, pending review, or local command-runner output as world-class completion evidence.",
         "",
         "## Ledger",
         "",
-        "| Evidence | Status | Category | Current | Next action |",
-        "| --- | --- | --- | --- | --- |",
+        "| Evidence | Status | Submission | Category | Current | Next action |",
+        "| --- | --- | --- | --- | --- | --- |",
     ]
     for entry in ledger["entries"]:
         current = str(entry["current"]).replace("|", "\\|")
         action = str(entry["next_action"]).replace("|", "\\|")
-        lines.append(f"| `{entry['key']}` | `{entry['status']}` | `{entry['category']}` | {current} | {action} |")
+        submission = entry.get("submission_state", {}).get("status", "missing")
+        lines.append(f"| `{entry['key']}` | `{entry['status']}` | `{submission}` | `{entry['category']}` | {current} | {action} |")
     if not ledger["entries"]:
         lines.append("| `none` | `accepted` | `none` | all evidence collected | none |")
     for entry in ledger["entries"]:
@@ -205,6 +272,7 @@ def render_markdown(ledger: dict[str, Any]) -> str:
         lines.append(f"- objective: {entry['objective']}")
         lines.append(f"- source status: `{entry['source_status']}`")
         lines.append(f"- observed state: `{json.dumps(entry['observed_state'], ensure_ascii=False)}`")
+        lines.append(f"- submission state: `{json.dumps(entry.get('submission_state', {}), ensure_ascii=False)}`")
         lines.extend(["", "### Provenance Requirements", ""])
         lines.extend(f"- {item}" for item in entry["provenance_requirements"])
         lines.extend(["", "### Success Checks", ""])
@@ -219,11 +287,13 @@ def main() -> None:
     parser.add_argument("skill_dir", nargs="?", default=".")
     parser.add_argument("--output-json", default="reports/world_class_evidence_ledger.json")
     parser.add_argument("--output-md", default="reports/world_class_evidence_ledger.md")
+    parser.add_argument("--submissions-dir")
     parser.add_argument("--generated-at", default=date.today().isoformat())
     args = parser.parse_args()
 
     skill_dir = Path(args.skill_dir).resolve()
-    ledger = build_ledger(skill_dir, args.generated_at)
+    submissions_dir = Path(args.submissions_dir).resolve() if args.submissions_dir else None
+    ledger = build_ledger(skill_dir, args.generated_at, submissions_dir=submissions_dir)
     output_json = Path(args.output_json)
     output_md = Path(args.output_md)
     if not output_json.is_absolute():

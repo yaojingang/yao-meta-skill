@@ -11,24 +11,28 @@ Generated at: `2026-06-14`
 - pending: `4`
 - human pending: `1`
 - external pending: `3`
+- submitted entries: `0`
+- submitted but pending: `0`
+- invalid submissions: `0`
 - overclaim guard active: `true`
 
 This ledger records the current evidence state. It does not treat planned work, metadata fallback, pending review, or local command-runner output as world-class completion evidence.
 
 ## Ledger
 
-| Evidence | Status | Category | Current | Next action |
-| --- | --- | --- | --- | --- |
-| `provider-holdout` | `pending` | `external` | model-executed 0; token-observed 0 | Run provider-backed holdout cases with real credentials and commit only aggregate evidence. |
-| `human-adjudication` | `pending` | `human` | 0/5 decisions; pending 5 | Record real A/B choices in the decision template, then regenerate adjudication. |
-| `native-permission-enforcement` | `pending` | `external` | native-enforced targets 0 | Integrate a real client or installer runtime guard before claiming native permission enforcement. |
-| `native-client-telemetry` | `pending` | `external` | external source events 0; adoption samples 0 | Install a real client against the native host and import production metadata-only events. |
+| Evidence | Status | Submission | Category | Current | Next action |
+| --- | --- | --- | --- | --- | --- |
+| `provider-holdout` | `pending` | `missing` | `external` | model-executed 0; token-observed 0 | Run provider-backed holdout cases with real credentials and commit only aggregate evidence. |
+| `human-adjudication` | `pending` | `missing` | `human` | 0/5 decisions; pending 5 | Record real A/B choices in the decision template, then regenerate adjudication. |
+| `native-permission-enforcement` | `pending` | `missing` | `external` | native-enforced targets 0 | Integrate a real client or installer runtime guard before claiming native permission enforcement. |
+| `native-client-telemetry` | `pending` | `missing` | `external` | external source events 0; adoption samples 0 | Install a real client against the native host and import production metadata-only events. |
 
 ## Provider Holdout
 
 - objective: Collect at least one provider-backed output-eval holdout run with model, timing, and token metadata.
 - source status: `external_required`
 - observed state: `{"model_executed_count": 0, "timing_observed_count": 10, "token_observed_count": 0, "accepted": false}`
+- submission state: `{"status": "missing", "path": "evidence/world_class/submissions/provider-holdout.json", "artifact_ref_count": 0, "attested_real_evidence": false, "privacy_contract_satisfied": false, "ledger_counts_as_completion": false}`
 
 ### Provenance Requirements
 
@@ -53,6 +57,7 @@ This ledger records the current evidence state. It does not treat planned work, 
 - objective: Record real blind A/B reviewer decisions before claiming human output review completion.
 - source status: `human_required`
 - observed state: `{"pair_count": 5, "judgment_count": 0, "pending_count": 5, "invalid_decision_count": 0, "answer_revealed_count": 0, "accepted": false}`
+- submission state: `{"status": "missing", "path": "evidence/world_class/submissions/human-adjudication.json", "artifact_ref_count": 0, "attested_real_evidence": false, "privacy_contract_satisfied": false, "ledger_counts_as_completion": false}`
 
 ### Provenance Requirements
 
@@ -77,6 +82,7 @@ This ledger records the current evidence state. It does not treat planned work, 
 - objective: Prove at least one target or installer enforces approved high-permission capabilities at runtime.
 - source status: `external_required`
 - observed state: `{"native_enforcement_count": 0, "metadata_fallback_count": 4, "residual_risk_count": 4, "failure_count": 0, "accepted": false}`
+- submission state: `{"status": "missing", "path": "evidence/world_class/submissions/native-permission-enforcement.json", "artifact_ref_count": 0, "attested_real_evidence": false, "privacy_contract_satisfied": false, "ledger_counts_as_completion": false}`
 
 ### Provenance Requirements
 
@@ -100,6 +106,7 @@ This ledger records the current evidence state. It does not treat planned work, 
 - objective: Import production metadata-only events from a real external client into the local drift loop.
 - source status: `external_required`
 - observed state: `{"external_source_events": 0, "adoption_sample_count": 0, "raw_content_allowed": false, "risk_band": "low", "accepted": false}`
+- submission state: `{"status": "missing", "path": "evidence/world_class/submissions/native-client-telemetry.json", "artifact_ref_count": 0, "attested_real_evidence": false, "privacy_contract_satisfied": false, "ledger_counts_as_completion": false}`
 
 ### Provenance Requirements
 

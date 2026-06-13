@@ -9,6 +9,10 @@
     "pending_count": 4,
     "human_pending_count": 1,
     "external_pending_count": 3,
+    "submitted_entry_count": 0,
+    "missing_submission_count": 4,
+    "invalid_submission_count": 0,
+    "submitted_but_pending_count": 0,
     "overclaim_guard_active": true,
     "ready_to_claim_world_class": false,
     "decision": "evidence-pending"
@@ -52,6 +56,14 @@
         "timing_observed_count": 10,
         "token_observed_count": 0,
         "accepted": false
+      },
+      "submission_state": {
+        "status": "missing",
+        "path": "evidence/world_class/submissions/provider-holdout.json",
+        "artifact_ref_count": 0,
+        "attested_real_evidence": false,
+        "privacy_contract_satisfied": false,
+        "ledger_counts_as_completion": false
       },
       "anti_overclaim": {
         "planned_work_counts_as_evidence": false,
@@ -103,6 +115,14 @@
         "answer_revealed_count": 0,
         "accepted": false
       },
+      "submission_state": {
+        "status": "missing",
+        "path": "evidence/world_class/submissions/human-adjudication.json",
+        "artifact_ref_count": 0,
+        "attested_real_evidence": false,
+        "privacy_contract_satisfied": false,
+        "ledger_counts_as_completion": false
+      },
       "anti_overclaim": {
         "planned_work_counts_as_evidence": false,
         "metadata_fallback_counts_as_native_enforcement": false,
@@ -150,6 +170,14 @@
         "residual_risk_count": 4,
         "failure_count": 0,
         "accepted": false
+      },
+      "submission_state": {
+        "status": "missing",
+        "path": "evidence/world_class/submissions/native-permission-enforcement.json",
+        "artifact_ref_count": 0,
+        "attested_real_evidence": false,
+        "privacy_contract_satisfied": false,
+        "ledger_counts_as_completion": false
       },
       "anti_overclaim": {
         "planned_work_counts_as_evidence": false,
@@ -199,6 +227,14 @@
         "risk_band": "low",
         "accepted": false
       },
+      "submission_state": {
+        "status": "missing",
+        "path": "evidence/world_class/submissions/native-client-telemetry.json",
+        "artifact_ref_count": 0,
+        "attested_real_evidence": false,
+        "privacy_contract_satisfied": false,
+        "ledger_counts_as_completion": false
+      },
       "anti_overclaim": {
         "planned_work_counts_as_evidence": false,
         "metadata_fallback_counts_as_native_enforcement": false,
@@ -212,6 +248,10 @@
     "json": "reports/world_class_evidence_plan.json",
     "markdown": "reports/world_class_evidence_plan.md",
     "task_count": 4
+  },
+  "submissions": {
+    "directory": "evidence/world_class/submissions",
+    "ledger_counts_submission_as_completion": false
   },
   "artifacts": {
     "json": "reports/world_class_evidence_ledger.json",

@@ -11,6 +11,32 @@ SCRIPT = ROOT / "scripts" / "render_world_class_evidence_ledger.py"
 TMP = ROOT / "tests" / "tmp_world_class_evidence_ledger"
 
 
+def provider_submission() -> dict:
+    return {
+        "schema_version": "1.0",
+        "evidence_key": "provider-holdout",
+        "template_only": False,
+        "category": "external",
+        "source_type": "provider-output-eval",
+        "submitted_by": "Yao provider operator",
+        "submitted_at": "2026-06-13",
+        "summary": "Aggregate provider-backed holdout evidence for ledger review.",
+        "artifact_refs": [
+            {
+                "path": "reports/output_execution_runs.json",
+                "kind": "aggregate-report",
+                "contains_raw_content": False,
+            }
+        ],
+        "attestation": {
+            "real_external_or_human_evidence": True,
+            "reviewer_or_operator_identity_present": True,
+            "artifact_refs_reviewed": True,
+            "privacy_contract_satisfied": True,
+        },
+    }
+
+
 def main() -> None:
     shutil.rmtree(TMP, ignore_errors=True)
     TMP.mkdir(parents=True, exist_ok=True)
@@ -42,6 +68,10 @@ def main() -> None:
     assert summary["pending_count"] == 4, summary
     assert summary["human_pending_count"] == 1, summary
     assert summary["external_pending_count"] == 3, summary
+    assert summary["submitted_entry_count"] == 0, summary
+    assert summary["missing_submission_count"] == 4, summary
+    assert summary["invalid_submission_count"] == 0, summary
+    assert summary["submitted_but_pending_count"] == 0, summary
     assert summary["overclaim_guard_active"] is True, summary
     assert summary["ready_to_claim_world_class"] is False, summary
     assert payload["artifacts"]["intake"] == "reports/world_class_evidence_intake.md", payload
@@ -53,6 +83,8 @@ def main() -> None:
         "native-client-telemetry",
     }, entries
     assert entries["provider-holdout"]["observed_state"]["model_executed_count"] == 0, entries["provider-holdout"]
+    assert entries["provider-holdout"]["submission_state"]["status"] == "missing", entries["provider-holdout"]
+    assert entries["provider-holdout"]["submission_state"]["ledger_counts_as_completion"] is False, entries["provider-holdout"]
     assert entries["human-adjudication"]["observed_state"]["pending_count"] == 5, entries["human-adjudication"]
     assert entries["native-permission-enforcement"]["observed_state"]["native_enforcement_count"] == 0, entries["native-permission-enforcement"]
     assert any("summary.failure_count == 0" in check for check in entries["native-permission-enforcement"]["success_checks"]), entries["native-permission-enforcement"]
@@ -63,10 +95,48 @@ def main() -> None:
         assert entry["privacy_contract"], entry
         assert entry["anti_overclaim"]["planned_work_counts_as_evidence"] is False, entry
         assert entry["anti_overclaim"]["pending_review_counts_as_human_decision"] is False, entry
+        assert "submission_state" in entry, entry
     markdown = output_md.read_text(encoding="utf-8")
     assert "World-Class Evidence Ledger" in markdown, markdown
     assert "overclaim guard active: `true`" in markdown, markdown
+    assert "submitted entries: `0`" in markdown, markdown
     assert "`provider-holdout`" in markdown, markdown
+
+    submissions = TMP / "submissions"
+    submissions.mkdir()
+    (submissions / "provider-holdout.json").write_text(
+        json.dumps(provider_submission(), ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    submitted_proc = subprocess.run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            str(ROOT),
+            "--output-json",
+            str(TMP / "submitted_ledger.json"),
+            "--output-md",
+            str(TMP / "submitted_ledger.md"),
+            "--submissions-dir",
+            str(submissions),
+            "--generated-at",
+            "2026-06-13",
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    submitted_payload = json.loads(submitted_proc.stdout)
+    submitted_summary = submitted_payload["summary"]
+    assert submitted_summary["submitted_entry_count"] == 1, submitted_summary
+    assert submitted_summary["submitted_but_pending_count"] == 1, submitted_summary
+    assert submitted_summary["accepted_count"] == 0, submitted_summary
+    submitted_provider = {entry["key"]: entry for entry in submitted_payload["entries"]}["provider-holdout"]
+    assert submitted_provider["status"] == "pending", submitted_provider
+    assert submitted_provider["submission_state"]["status"] == "submitted", submitted_provider
+    assert submitted_provider["submission_state"]["attested_real_evidence"] is True, submitted_provider
+    assert submitted_provider["submission_state"]["ledger_counts_as_completion"] is False, submitted_provider
     print(json.dumps({"ok": True}, ensure_ascii=False, indent=2))
 
 

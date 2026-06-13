@@ -23,7 +23,7 @@
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
     "package_hash_file_count": 174,
-    "package_sha256": "31dd41a9235d164be6b56101148f6ecdac045e50b927596974b2157ceeea4cd5"
+    "package_sha256": "0b47fb8b2db508e32d5aafd5c46bd008dc23493c1ff909427686609e9f99d5a9"
   },
   "failures": [],
   "warnings": [],
@@ -1911,7 +1911,7 @@
         "timed_out": false,
         "passed": true,
         "has_help_text": true,
-        "stdout_excerpt": "usage: render_world_class_evidence_ledger.py [-h] [--output-json OUTPUT_JSON]\n                                             [--output-md OUTPUT_MD]\n                                             [--generated-at GENERATED_AT]\n                  ",
+        "stdout_excerpt": "usage: render_world_class_evidence_ledger.py [-h] [--output-json OUTPUT_JSON]\n                                             [--output-md OUTPUT_MD]\n                                             [--submissions-dir SUBMISSIONS_DIR]\n            ",
         "stderr_excerpt": ""
       },
       {
