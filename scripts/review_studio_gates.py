@@ -304,10 +304,12 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
         hotspot_count = int(architecture_summary.get("hotspot_count", 0) or 0)
         blocker_count = int(architecture_summary.get("blocker_count", 0) or 0)
         architecture_status = "block" if not architecture.get("ok", True) or blocker_count else ("warn" if hotspot_count else "pass")
+        hotspot_label = "hotspot" if hotspot_count == 1 else "hotspots"
+        blocker_label = "blocker" if blocker_count == 1 else "blockers"
         architecture_detail = (
             f"{architecture_summary.get('python_file_count', 0)} Python files; "
-            f"{hotspot_count} hotspots; "
-            f"{blocker_count} blockers; "
+            f"{hotspot_count} {hotspot_label}; "
+            f"{blocker_count} {blocker_label}; "
             f"largest {architecture_summary.get('largest_file_lines', 0)} lines; "
             f"{architecture_summary.get('command_handler_count', 0)} CLI handlers"
         )

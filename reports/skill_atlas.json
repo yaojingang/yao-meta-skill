@@ -128,6 +128,7 @@
           "scripts/review_studio_gates.py",
           "scripts/review_studio_layout.py",
           "scripts/review_studio_world_class.py",
+          "scripts/review_viewer_data.py",
           "scripts/run_conformance_suite.py",
           "scripts/run_description_optimization_suite.py",
           "scripts/run_eval_suite.py",

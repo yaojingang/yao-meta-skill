@@ -199,7 +199,7 @@ ACTION_GUIDANCE: dict[str, dict[str, str]] = {
     "architecture-maintainability": {
         "summary": "处理大文件和 CLI command surface 的维护性热点，优先拆分稳定职责边界。",
         "why": "Meta Skill 的门禁、报告和 CLI 会持续增长；如果不把架构债纳入审查，后续能力会越来越难验证和迁移。",
-        "source_fix": "reports/architecture_maintainability.md + scripts/yao.py + scripts/render_review_studio.py",
+        "source_fix": "reports/architecture_maintainability.md + scripts/yao.py + scripts/render_review_viewer.py",
         "source_paths": [
             {"path": "reports/architecture_maintainability.md", "label": "architecture maintainability", "kind": "report", "patterns": ["# Architecture"]},
             {"path": "scripts/yao.py", "label": "Yao CLI orchestrator", "kind": "source", "patterns": ["def command_"]},

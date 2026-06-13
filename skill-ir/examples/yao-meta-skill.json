@@ -172,6 +172,7 @@
       "scripts/review_studio_gates.py",
       "scripts/review_studio_layout.py",
       "scripts/review_studio_world_class.py",
+      "scripts/review_viewer_data.py",
       "scripts/run_conformance_suite.py",
       "scripts/run_description_optimization_suite.py",
       "scripts/run_eval_suite.py",
@@ -186,8 +187,7 @@
       "scripts/telemetry_native_host.py",
       "scripts/trigger_eval.py",
       "scripts/trust_check.py",
-      "scripts/upgrade_check.py",
-      "scripts/validate_skill.py"
+      "scripts/upgrade_check.py"
     ],
     "assets": [
       "templates/basic_skill.md.j2",

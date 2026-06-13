@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `171`
-- Scripts: `87`
-- Internal script modules: `14`
+- Scanned files: `172`
+- Scripts: `88`
+- Internal script modules: `15`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `171`
-- Package SHA256: `1636101ae369f5659d9a64e95bb19144e1271912f1ac5ce846fd7b569cb1ff49`
+- Package hash files: `172`
+- Package SHA256: `38e25604b3d11793a45c37b0680dc50e8233c5d0aecf982879109022fbed0cfc`
 
 ## Failures
 
@@ -126,6 +126,7 @@
 | scripts/review_studio_gates.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to keep Review Studio gate evaluation separate from HTML rendering. |
 | scripts/review_studio_layout.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to keep Review Studio layout and CSS out of gate logic. |
 | scripts/review_studio_world_class.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to render world-class evidence cards. |
+| scripts/review_viewer_data.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_viewer.py to assemble Review Viewer data before HTML rendering. |
 | scripts/run_conformance_suite.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/run_description_optimization_suite.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/run_eval_suite.py | cli | False | True | True | False | False | False | True | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |

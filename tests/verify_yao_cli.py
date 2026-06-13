@@ -217,7 +217,7 @@ def main() -> None:
         "2026-06-14",
     )
     assert architecture_result["ok"], architecture_result
-    assert architecture_result["payload"]["summary"]["hotspot_count"] == 2, architecture_result
+    assert architecture_result["payload"]["summary"]["hotspot_count"] == 1, architecture_result
     assert architecture_result["payload"]["summary"]["blocker_count"] == 0, architecture_result
     assert 30 <= architecture_result["payload"]["summary"]["command_handler_count"] < 50, architecture_result
 

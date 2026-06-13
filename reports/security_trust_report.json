@@ -2,9 +2,9 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 171,
-    "script_count": 87,
-    "internal_module_count": 14,
+    "scanned_files": 172,
+    "script_count": 88,
+    "internal_module_count": 15,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 171,
-    "package_sha256": "1636101ae369f5659d9a64e95bb19144e1271912f1ac5ce846fd7b569cb1ff49"
+    "package_hash_file_count": 172,
+    "package_sha256": "38e25604b3d11793a45c37b0680dc50e8233c5d0aecf982879109022fbed0cfc"
   },
   "failures": [],
   "warnings": [],
@@ -943,6 +943,20 @@
       "network_hosts": []
     },
     {
+      "path": "scripts/review_viewer_data.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Imported by render_review_viewer.py to assemble Review Viewer data before HTML rendering.",
+      "has_argparse": false,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
       "path": "scripts/run_conformance_suite.py",
       "interface": "cli",
       "interface_declared": false,
@@ -1299,7 +1313,7 @@
     "checked_count": 73,
     "passed_count": 73,
     "failed_count": 0,
-    "skipped_count": 14,
+    "skipped_count": 15,
     "failed_scripts": [],
     "results": [
       {
@@ -2052,6 +2066,10 @@
       },
       {
         "path": "scripts/review_studio_world_class.py",
+        "reason": "internal module"
+      },
+      {
+        "path": "scripts/review_viewer_data.py",
         "reason": "internal module"
       },
       {

@@ -4,16 +4,16 @@
   "generated_at": "2026-06-14",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 143,
-    "script_file_count": 87,
+    "python_file_count": 144,
+    "script_file_count": 88,
     "test_file_count": 56,
-    "internal_module_count": 16,
+    "internal_module_count": 17,
     "cli_script_count": 72,
     "command_handler_count": 35,
     "warn_line_threshold": 900,
     "block_line_threshold": 1500,
     "largest_file_lines": 1159,
-    "hotspot_count": 2,
+    "hotspot_count": 1,
     "blocker_count": 0,
     "decision": "watch-maintainability-hotspots"
   },
@@ -24,13 +24,6 @@
       "kind": "cli-script",
       "severity": "warn",
       "recommendation": "Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator."
-    },
-    {
-      "path": "scripts/render_review_viewer.py",
-      "lines": 983,
-      "kind": "cli-script",
-      "severity": "warn",
-      "recommendation": "Split viewer data assembly from HTML section rendering."
     },
     {
       "path": "scripts/render_review_studio.py",
@@ -82,6 +75,13 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
+      "path": "scripts/render_review_viewer.py",
+      "lines": 685,
+      "kind": "cli-script",
+      "severity": "pass",
+      "recommendation": "Split viewer data assembly from HTML section rendering."
+    },
+    {
       "path": "scripts/build_skill_atlas.py",
       "lines": 674,
       "kind": "cli-script",
@@ -110,13 +110,6 @@
       "kind": "cli-script",
       "severity": "warn",
       "recommendation": "Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator."
-    },
-    {
-      "path": "scripts/render_review_viewer.py",
-      "lines": 983,
-      "kind": "cli-script",
-      "severity": "warn",
-      "recommendation": "Split viewer data assembly from HTML section rendering."
     }
   ],
   "actions": [
@@ -124,11 +117,6 @@
       "path": "scripts/yao.py",
       "severity": "warn",
       "action": "Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator."
-    },
-    {
-      "path": "scripts/render_review_viewer.py",
-      "severity": "warn",
-      "action": "Split viewer data assembly from HTML section rendering."
     }
   ],
   "artifacts": {

@@ -319,7 +319,7 @@ def main() -> None:
     assert python_compat_gate["evidence"] == "reports/python_compatibility.json", python_compat_gate
     architecture_gate = next(item for item in payload["gates"] if item["key"] == "architecture-maintainability")
     assert architecture_gate["status"] == "warn", architecture_gate
-    assert "2 hotspots" in architecture_gate["detail"], architecture_gate
+    assert "1 hotspot" in architecture_gate["detail"], architecture_gate
     assert "0 blockers" in architecture_gate["detail"], architecture_gate
     assert "CLI handlers" in architecture_gate["detail"], architecture_gate
     assert architecture_gate["evidence"] == "reports/architecture_maintainability.json", architecture_gate
@@ -392,7 +392,7 @@ def main() -> None:
     assert full_payload["evidence_paths"]["runtime_permissions"] == "reports/runtime_permission_probes.md", full_payload["evidence_paths"]
     assert full_payload["data"]["python_compatibility"]["summary"]["target_python"] == "3.11", full_payload["data"]["python_compatibility"]
     assert full_payload["data"]["python_compatibility"]["summary"]["issue_count"] == 0, full_payload["data"]["python_compatibility"]
-    assert full_payload["data"]["architecture_maintainability"]["summary"]["hotspot_count"] == 2, full_payload["data"]["architecture_maintainability"]
+    assert full_payload["data"]["architecture_maintainability"]["summary"]["hotspot_count"] == 1, full_payload["data"]["architecture_maintainability"]
     assert full_payload["data"]["architecture_maintainability"]["summary"]["blocker_count"] == 0, full_payload["data"]["architecture_maintainability"]
     action_keys = {item["gate_key"] for item in full_payload["review_actions"]}
     assert action_keys == {"output-lab", "architecture-maintainability", "review-waivers", "world-class-evidence"}, full_payload["review_actions"]

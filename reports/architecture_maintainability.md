@@ -5,14 +5,14 @@ Generated at: `2026-06-14`
 ## Summary
 
 - decision: `watch-maintainability-hotspots`
-- python files: `143`
-- scripts: `87`
+- python files: `144`
+- scripts: `88`
 - tests: `56`
-- internal modules: `16`
+- internal modules: `17`
 - CLI scripts: `72`
 - Yao CLI command handlers: `35`
 - largest file lines: `1159`
-- hotspots: `2`
+- hotspots: `1`
 - blockers: `0`
 
 This report keeps maintainability risk visible before the Meta Skill grows more gates, renderers, and CLI commands.
@@ -22,14 +22,12 @@ This report keeps maintainability risk visible before the Meta Skill grows more 
 | File | Lines | Kind | Severity | Recommended action |
 | --- | ---: | --- | --- | --- |
 | `scripts/yao.py` | `1159` | `cli-script` | `warn` | Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator. |
-| `scripts/render_review_viewer.py` | `983` | `cli-script` | `warn` | Split viewer data assembly from HTML section rendering. |
 
 ## Largest Files
 
 | File | Lines | Kind | Severity |
 | --- | ---: | --- | --- |
 | `scripts/yao.py` | `1159` | `cli-script` | `warn` |
-| `scripts/render_review_viewer.py` | `983` | `cli-script` | `warn` |
 | `scripts/render_review_studio.py` | `887` | `cli-script` | `pass` |
 | `tests/verify_yao_cli.py` | `838` | `test` | `pass` |
 | `scripts/skill_report_model.py` | `782` | `internal-module` | `pass` |
@@ -37,6 +35,7 @@ This report keeps maintainability risk visible before the Meta Skill grows more 
 | `scripts/optimize_description.py` | `723` | `cli-script` | `pass` |
 | `scripts/trust_check.py` | `714` | `internal-module` | `pass` |
 | `scripts/yao_cli_parser.py` | `691` | `internal-module` | `pass` |
+| `scripts/render_review_viewer.py` | `685` | `cli-script` | `pass` |
 | `scripts/build_skill_atlas.py` | `674` | `cli-script` | `pass` |
 | `scripts/skill_report_layout.py` | `653` | `internal-module` | `pass` |
 | `scripts/render_reference_synthesis.py` | `644` | `cli-script` | `pass` |
