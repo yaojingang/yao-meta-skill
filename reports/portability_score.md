@@ -2,7 +2,7 @@
 
 - score: `100/100`
 - band: `world-class`
-- adapter targets: `3`
+- adapter targets: `4`
 - activation mode: `manual`
 - execution context: `inline`
 - shell: `bash`

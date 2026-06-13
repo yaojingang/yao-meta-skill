@@ -10,7 +10,7 @@ except ImportError:  # pragma: no cover
     yaml = None
 
 
-DEFAULT_TARGETS = ["openai", "claude", "generic"]
+DEFAULT_TARGETS = ["openai", "claude", "generic", "vscode"]
 
 
 def display_path(path: Path, root: Path) -> str:

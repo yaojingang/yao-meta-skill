@@ -9,7 +9,7 @@
 
 ## Upgrade Diff
 
-- Added targets: `agent-skills-compatible`
+- Added targets: `agent-skills-compatible, vscode`
 - Removed targets: `none`
 - Compatibility changes: `3`
 - Metadata changes: `1`
@@ -18,7 +18,7 @@
 ## Release Notes
 
 - Recommended version bump: minor.
-- Added targets: agent-skills-compatible.
+- Added targets: agent-skills-compatible, vscode.
 - Package or archive checksum changed; reviewers should verify package artifacts before release.
 - Package verification evidence: reports/package_verification.md.
 

@@ -25,7 +25,7 @@ Do not publish a team package when registry audit reports missing version, hash,
 For an installable archive, first build the distribution and run package verification:
 
 ```bash
-python3 scripts/yao.py package . --platform openai --platform claude --platform generic --output-dir dist --zip
+python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip
 python3 scripts/yao.py package-verify . --package-dir dist --require-zip
 python3 scripts/yao.py install-simulate . --package-dir dist
 python3 scripts/yao.py registry-audit .

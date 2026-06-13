@@ -1,8 +1,8 @@
 # Compiled Targets
 
 - OK: `True`
-- Targets: `4`
-- Pass: `4`
+- Targets: `5`
+- Pass: `5`
 - Warn: `0`
 - Block: `0`
 
@@ -14,6 +14,7 @@
 | `claude` | `pass` | Claude-compatible neutral source folder with adapter notes | `neutral-source-plus-adapter` | `network, file_write, subprocess` | `neutral-source-plus-adapter` | targets/claude/adapter.json, targets/claude/README.md |
 | `generic` | `pass` | Agent Skills compatible neutral package | `agent-skills-compatible` | `network, file_write, subprocess` | `neutral-source` | targets/generic/adapter.json |
 | `agent-skills-compatible` | `pass` | Agent Skills standard source tree | `neutral-agent-skills-source` | `network, file_write, subprocess` | `neutral-source` | SKILL.md, agents/interface.yaml |
+| `vscode` | `pass` | VS Code/Copilot Agent Skills project or user scope | `vscode-agent-skills-adapter` | `network, file_write, subprocess` | `agent-skills-source-with-vscode-notes` | targets/vscode/adapter.json, targets/vscode/README.md |
 
 ## Native Behavior Contracts
 
@@ -51,6 +52,15 @@
 - Resources: Keep optional directories as relative resources next to SKILL.md.
 - Scripts: Scripts remain local optional resources and should advertise --help when executable.
 - Permission enforcement: `consumer-enforced-or-metadata-only`; native enforcement `False`
+- Review artifacts: SKILL.md, agents/interface.yaml, reports/review-studio.html
+
+### vscode
+
+- Native surface: VS Code/Copilot Agent Skills project or user scope
+- Activation: Use folder name plus SKILL.md name/description; keep description under platform limits.
+- Resources: Install as project or user scoped skill source, preserving relative references and scripts.
+- Scripts: Scripts require workspace trust and operator/client approval outside this compiler.
+- Permission enforcement: `client-or-workspace-trust`; native enforcement `False`
 - Review artifacts: SKILL.md, agents/interface.yaml, reports/review-studio.html
 
 

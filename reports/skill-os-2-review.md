@@ -15,8 +15,8 @@ Yao Meta Skill is no longer only a Meta Skill factory. The current working tree 
 - Bilingual Skill Overview v2 that includes these evidence surfaces.
 - Review Studio 2.0 v0 for one-page blocker, warning, evidence-path, review-action, and release-gate review.
 - Review Studio Source Refs v0 so every non-pass review action can expose structured relative source/report links with best-effort line numbers.
-- Target Compiler v0 so Skill IR compiles into OpenAI, Claude, generic, and Agent Skills compatible target contracts before packaging, including target-specific permission contracts and native behavior contracts.
-- IR-first packaging v0 so adapters carry the platform-neutral semantic contract, compiler contract, parity checks, and IR provenance.
+- Target Compiler v0 so Skill IR compiles into OpenAI, Claude, generic, Agent Skills compatible, and VS Code / Copilot target contracts before packaging, including target-specific permission contracts and native behavior contracts.
+- IR-first packaging v0 so adapters carry the platform-neutral semantic contract, compiler contract, parity checks, IR provenance, and VS Code / Copilot install-scope notes where applicable.
 - Registry & Distribution v0 for package metadata, checksum, owner, license, compatibility matrix, and audit reporting.
 - Package Verification v0 for generated manifest, target adapters, zip archive safety, archive checksum, and registry parity.
 - Install Simulation v0 for local extraction, entrypoint loading, interface loading, report presence, and adapter readability.
@@ -31,7 +31,7 @@ Yao Meta Skill is no longer only a Meta Skill factory. The current working tree 
 - Review Studio Output Lab actions now link directly to `reports/output_review_decisions.json`, so pending blind A/B reviewer decisions have a concrete template instead of only a general adjudication warning.
 - Provider Output Eval Runner v0 so `python3 scripts/yao.py output-exec --provider-runner openai` can collect real provider-backed model evidence through a reviewed OpenAI Responses API compatible runner instead of ad hoc shell glue.
 
-This is still not the final world-class state. Target-native behavior contracts are now explicit, local output-eval command execution is wired, and a provider-backed output runner exists. Review Studio now keeps pending human adjudication visible as a warning instead of treating it as a clean pass. Deeper provider-native execution transforms, real client telemetry capture, installer integration, real provider holdout runs, real human adjudication decisions, and native runtime permission enforcement remain open.
+This is still not the final world-class state. Target-native behavior contracts are now explicit, VS Code / Copilot package metadata is auditable, local output-eval command execution is wired, and a provider-backed output runner exists. Review Studio keeps pending human adjudication visible as a warning instead of treating it as a clean pass. Deeper provider-native execution transforms, real client telemetry capture, installer integration, real provider holdout runs, real human adjudication decisions, and native runtime permission enforcement remain open.
 
 ## Coverage Matrix
 
@@ -63,7 +63,7 @@ This is still not the final world-class state. Target-native behavior contracts 
 
 ### 1. Target-native behavior contracts are landed, but provider execution is still shallow
 
-`scripts/compile_skill.py` now reads Skill IR and emits target-specific contracts for OpenAI, Claude, generic, and Agent Skills compatible outputs. The packager embeds `compiler`, `compiled_contract`, `permission_contract`, `target_permission_contract`, `target_native_contract`, `target_transform`, warnings, and unsupported-feature notes in each adapter. The native contract makes the target surface, activation policy, resource strategy, script strategy, permission enforcement mode, install scope, review artifacts, fallback behavior, and unsupported native features reviewable instead of implicit.
+`scripts/compile_skill.py` now reads Skill IR and emits target-specific contracts for OpenAI, Claude, generic, Agent Skills compatible, and VS Code / Copilot outputs. The packager embeds `compiler`, `compiled_contract`, `permission_contract`, `target_permission_contract`, `target_native_contract`, `target_transform`, warnings, and unsupported-feature notes in each adapter. The native contract makes the target surface, activation policy, resource strategy, script strategy, permission enforcement mode, install scope, review artifacts, fallback behavior, and unsupported native features reviewable instead of implicit.
 
 Next move: deepen provider-native execution transforms so OpenAI, Claude, VS Code/Copilot, and generic packages can express and verify behavior through real client or installer capabilities, not only auditable contracts and fallback notes.
 
@@ -97,22 +97,22 @@ Next move: add real client or installer permission enforcement integration.
 | --- | --- |
 | Output Eval | `5` cases, with-skill pass rate `100`, baseline pass rate `0`, with file-backed, near-neighbor, boundary coverage, `10` local command-runner execution runs, `0` recorded fixture runs, `0` provider model-executed runs in root release evidence, `10` estimated token counts, provider runner v0 available, `5` blind A/B review pairs, a generated `reports/output_review_decisions.json` template, and `0 / 5` reviewer decisions pending |
 | Runtime Conformance | `5 / 5` targets passing |
-| Target Compiler | compiled target contracts generated for OpenAI, Claude, generic, and Agent Skills compatible outputs, including target permission contracts and target-native behavior contracts |
+| Target Compiler | `5 / 5` compiled target contracts generated for OpenAI, Claude, generic, Agent Skills compatible, and VS Code / Copilot outputs, including target permission contracts and target-native behavior contracts |
 | Trust | `0` secret findings, `1` pinned dependency file, `9` declared internal modules, `3 / 3` network-capable scripts covered by bounded host policy, `60 / 60` CLI help smoke checks passing across `69` scripts, source-contract hash scope explicit |
 | Permission Governance | `3 / 3` required high-permission capabilities approved, `0` missing, `0` invalid, `0` expired |
-| Runtime Permission Probes | `3 / 3` target adapters probed, `0` native-enforcement adapters, `3` explicit metadata fallbacks, `3` residual risks retained for reviewer visibility |
+| Runtime Permission Probes | `4 / 4` target adapters probed, `0` native-enforcement adapters, `4` explicit metadata fallbacks, `4` residual risks retained for reviewer visibility |
 | Skill Atlas | `12` scanned skills, `1` actionable root skill, `0` actionable route collisions, `0` actionable owner gaps, `0` actionable stale skills, `24` scoped non-actionable issue signals retained for visibility |
 | Registry Audit | package metadata generated with version, owner, license, source checksum, archive checksum, Skill IR provenance, and compatibility matrix |
-| Package Verification | `3 / 3` target adapters present, archive verified, `492` zip entries, `0` failures, `0` warnings |
-| Install Simulation | archive with `492` entries extracted into a local verification root, entrypoint/manifest/interface loaded, reports present, `3` adapters readable, `0` failures, `0` warnings |
+| Package Verification | `4 / 4` target adapters present, archive verified, `493` zip entries, `0` failures, `0` warnings |
+| Install Simulation | archive with `493` entries extracted into a local verification root, entrypoint/manifest/interface loaded, reports present, `4` adapters readable, `0` failures, `0` warnings |
 | Upgrade Check | current package declares `minor` over the 1.0.0 baseline, recommended bump is `minor`, and release notes include added targets plus checksum changes |
-| Adoption Drift | `1` metadata-only review event, `0` adoption samples, adoption `0`, risk band `low`; raw `reports/telemetry_events.jsonl` is gitignored and blocked from zip packages |
+| Adoption Drift | `1` metadata-only activation event, `1` adoption sample, adoption `100.0`, risk band `low`; raw `reports/telemetry_events.jsonl` is gitignored and blocked from zip packages |
 | Review Waivers | ledger generated; current release has `1` warning gate that still needs reviewer decision or a time-bounded waiver; blockers remain non-waivable in v0 |
 | Review Annotations | ledger generated; current release has `0` reviewer annotations and `0` open annotation blockers |
 | Review Studio | decision `review`, world-class score `92`, `13` gates, `0` blockers, `2` warnings, `2` review actions, `0` open annotation blockers |
-| IR-first Packaging | `openai`, `claude`, and `generic` adapters include compiler contracts, permission contracts, target-native behavior contracts, IR provenance, and semantic parity checks |
-| Context Budget | initial load `987/1000`, under the production budget |
-| CI | `make ci-test` target count is now `56` after adding Review Annotations |
+| IR-first Packaging | `openai`, `claude`, `generic`, and `vscode` adapters include compiler contracts, permission contracts, target-native behavior contracts, IR provenance, semantic parity checks, and install-scope notes where applicable |
+| Context Budget | initial load `944/1000`, under the production budget |
+| CI | `make ci-test` target count is `56` after the VS Code package target update |
 
 ## Next Highest-Leverage Moves
 

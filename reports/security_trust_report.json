@@ -23,7 +23,7 @@
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
     "package_hash_file_count": 153,
-    "package_sha256": "2984db5f8d02b147c86bf259679e247a10a6fa495d123032be46c2e7fdaf8368"
+    "package_sha256": "7a8dab0d542d2994adec2045b54559612db36f14db8b7b66e4138fb0435ae3d3"
   },
   "failures": [],
   "warnings": [],
@@ -1247,7 +1247,7 @@
         "timed_out": false,
         "passed": true,
         "has_help_text": true,
-        "stdout_excerpt": "usage: probe_runtime_permissions.py [-h] [--package-dir PACKAGE_DIR]\n                                    [--target {openai,claude,generic}]\n                                    [--output-json OUTPUT_JSON]\n                                    ",
+        "stdout_excerpt": "usage: probe_runtime_permissions.py [-h] [--package-dir PACKAGE_DIR]\n                                    [--target {openai,claude,generic,vscode}]\n                                    [--output-json OUTPUT_JSON]\n                             ",
         "stderr_excerpt": ""
       },
       {

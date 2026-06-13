@@ -129,6 +129,7 @@ compatibility:
     - "openai"
     - "claude"
     - "generic"
+    - "vscode"
   activation:
     mode: "manual"
     paths: []
@@ -143,6 +144,7 @@ compatibility:
     openai: "metadata-adapter"
     claude: "neutral-source-plus-adapter"
     generic: "neutral-source"
+    vscode: "agent-skills-source-with-vscode-notes"
 """
 
 
@@ -213,6 +215,7 @@ def build_manifest(name: str, mode: str, archetype: str) -> dict:
             "claude",
             "generic",
             "agent-skills-compatible",
+            "vscode",
         ],
         "factory_components": [
             "references",

@@ -9,12 +9,12 @@
     "subprocess"
   ],
   "summary": {
-    "target_count": 3,
-    "pass_count": 3,
+    "target_count": 4,
+    "pass_count": 4,
     "fail_count": 0,
     "native_enforcement_count": 0,
-    "metadata_fallback_count": 3,
-    "residual_risk_count": 3,
+    "metadata_fallback_count": 4,
+    "residual_risk_count": 4,
     "required_capability_count": 3,
     "failure_count": 0
   },
@@ -237,6 +237,76 @@
           "key": "review-required-matches",
           "passed": true,
           "detail": "generic review_required matches whether capabilities are required"
+        }
+      ],
+      "failures": [],
+      "residual_risks": [
+        "Client-native permission enforcement is not provided by this target; installer or operator must honor metadata."
+      ]
+    },
+    {
+      "target": "vscode",
+      "status": "pass",
+      "adapter": "tests/tmp_review_studio/dist/targets/vscode/adapter.json",
+      "permission_model": "vscode-workspace-trust-plus-metadata",
+      "native_enforcement": false,
+      "metadata_fallback_explicit": true,
+      "assurance": "metadata-fallback-explicit",
+      "declared_capabilities": [
+        "file_write",
+        "network",
+        "subprocess"
+      ],
+      "checks": [
+        {
+          "key": "adapter-present",
+          "passed": true,
+          "detail": "vscode adapter.json is readable"
+        },
+        {
+          "key": "permission-contract-present",
+          "passed": true,
+          "detail": "vscode adapter includes permission_contract"
+        },
+        {
+          "key": "target-contract-present",
+          "passed": true,
+          "detail": "vscode adapter includes target_permission_contract"
+        },
+        {
+          "key": "source-available",
+          "passed": true,
+          "detail": "vscode permission_contract links to an available trust report"
+        },
+        {
+          "key": "declared-capabilities-match",
+          "passed": true,
+          "detail": "vscode target_permission_contract mirrors expected capabilities"
+        },
+        {
+          "key": "capability-counts-present",
+          "passed": true,
+          "detail": "vscode target_permission_contract includes capability_counts"
+        },
+        {
+          "key": "native-enforcement-boolean",
+          "passed": true,
+          "detail": "vscode target_permission_contract declares native_enforcement as a boolean"
+        },
+        {
+          "key": "representation-present",
+          "passed": true,
+          "detail": "vscode target_permission_contract declares where permission metadata is represented"
+        },
+        {
+          "key": "operator-note-present",
+          "passed": true,
+          "detail": "vscode target_permission_contract includes an operator_note"
+        },
+        {
+          "key": "review-required-matches",
+          "passed": true,
+          "detail": "vscode review_required matches whether capabilities are required"
         }
       ],
       "failures": [],

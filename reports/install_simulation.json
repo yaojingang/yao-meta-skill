@@ -8,12 +8,12 @@
   "installed_skill_dir": "dist/install-simulation/simulate-yao-meta-skill/yao-meta-skill",
   "summary": {
     "archive_present": true,
-    "archive_entry_count": 492,
+    "archive_entry_count": 493,
     "archive_extracted": true,
     "entrypoint_loaded": true,
     "manifest_loaded": true,
     "interface_loaded": true,
-    "adapter_count": 3,
+    "adapter_count": 4,
     "install_root_is_temp": false,
     "failure_count": 0,
     "warning_count": 0
@@ -108,6 +108,16 @@
       "id": "adapter-openai-name",
       "status": "pass",
       "detail": "openai adapter name matches package manifest"
+    },
+    {
+      "id": "adapter-vscode",
+      "status": "pass",
+      "detail": "vscode adapter is readable after package install simulation"
+    },
+    {
+      "id": "adapter-vscode-name",
+      "status": "pass",
+      "detail": "vscode adapter name matches package manifest"
     }
   ],
   "failures": [],

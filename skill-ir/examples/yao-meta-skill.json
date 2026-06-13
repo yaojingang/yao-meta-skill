@@ -280,7 +280,8 @@
     "openai",
     "claude",
     "generic",
-    "agent-skills-compatible"
+    "agent-skills-compatible",
+    "vscode"
   ],
   "source_files": [
     "SKILL.md",

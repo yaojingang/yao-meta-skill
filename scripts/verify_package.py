@@ -108,12 +108,13 @@ def verify_package(
                 field in adapter,
                 f"{target} adapter includes field: {field}",
             )
-    for target, key in (
-        ("openai", "openai_required_files"),
-        ("claude", "claude_required_files"),
-        ("generic", "generic_required_files"),
-    ):
-        for rel in expectations.get(key, []):
+    required_files_by_target = {
+        key[: -len("_required_files")]: value
+        for key, value in expectations.items()
+        if key.endswith("_required_files")
+    }
+    for target, required_files in required_files_by_target.items():
+        for rel in required_files:
             add_check(checks, failures, f"{target}-file-{rel}", (package_dir / rel).exists(), f"Package contains {rel}")
 
     archive_path = package_dir / f"{skill_dir.name}.zip"

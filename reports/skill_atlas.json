@@ -57,7 +57,8 @@
           "openai",
           "claude",
           "generic",
-          "agent-skills-compatible"
+          "agent-skills-compatible",
+          "vscode"
         ],
         "resources": [
           "scripts/adjudicate_output_review.py",

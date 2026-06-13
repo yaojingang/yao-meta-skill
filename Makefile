@@ -152,7 +152,7 @@ failure-regression-check:
 	$(PYTHON) tests/verify_failure_regressions.py
 
 package-check:
-	$(PYTHON) scripts/cross_packager.py . --platform openai --platform claude --platform generic --expectations evals/packaging_expectations.json --output-dir dist --zip
+	$(PYTHON) scripts/cross_packager.py . --platform openai --platform claude --platform generic --platform vscode --expectations evals/packaging_expectations.json --output-dir dist --zip
 
 package-failure-check:
 	$(PYTHON) tests/verify_packager_failures.py

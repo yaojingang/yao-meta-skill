@@ -336,9 +336,9 @@ def main() -> None:
     assert created_skill_ir["schema_version"] == "2.0.0", created_skill_ir
     assert created_skill_ir["trigger_surface"]["description"], created_skill_ir
 
-    compile_result = run("compile-skill", str(created), "--target", "openai", "--target", "claude", "--target", "generic")
+    compile_result = run("compile-skill", str(created), "--target", "openai", "--target", "claude", "--target", "generic", "--target", "vscode")
     assert compile_result["ok"], compile_result
-    assert compile_result["payload"]["summary"]["target_count"] == 3, compile_result
+    assert compile_result["payload"]["summary"]["target_count"] == 4, compile_result
     assert compile_result["payload"]["summary"]["block_count"] == 0, compile_result
     assert compile_result["payload"]["artifacts"]["markdown"].endswith("reports/compiled_targets.md"), compile_result
 
@@ -523,6 +523,8 @@ def main() -> None:
         "claude",
         "--platform",
         "generic",
+        "--platform",
+        "vscode",
         "--expectations",
         str(ROOT / "evals" / "packaging_expectations.json"),
         "--output-dir",
@@ -548,7 +550,7 @@ def main() -> None:
         "2026-06-13",
     )
     assert package_verify_result["ok"], package_verify_result
-    assert package_verify_result["payload"]["summary"]["adapter_count"] == 3, package_verify_result
+    assert package_verify_result["payload"]["summary"]["adapter_count"] == 4, package_verify_result
     assert package_verify_result["payload"]["summary"]["archive_sha256"], package_verify_result
 
     runtime_permissions_result = run(
@@ -562,7 +564,7 @@ def main() -> None:
         str(tmp_root / "runtime_permission_probes.md"),
     )
     assert runtime_permissions_result["ok"], runtime_permissions_result
-    assert runtime_permissions_result["payload"]["summary"]["metadata_fallback_count"] == 3, runtime_permissions_result
+    assert runtime_permissions_result["payload"]["summary"]["metadata_fallback_count"] == 4, runtime_permissions_result
     assert runtime_permissions_result["payload"]["summary"]["native_enforcement_count"] == 0, runtime_permissions_result
 
     install_simulate_result = run(
@@ -581,7 +583,7 @@ def main() -> None:
     )
     assert install_simulate_result["ok"], install_simulate_result
     assert install_simulate_result["payload"]["summary"]["archive_extracted"], install_simulate_result
-    assert install_simulate_result["payload"]["summary"]["adapter_count"] == 3, install_simulate_result
+    assert install_simulate_result["payload"]["summary"]["adapter_count"] == 4, install_simulate_result
 
     upgrade_result = run(
         "upgrade-check",

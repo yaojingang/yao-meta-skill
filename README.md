@@ -113,7 +113,7 @@ python3 scripts/yao.py review-annotations my-skill --add-annotation --gate-key o
 python3 scripts/yao.py baseline-compare
 python3 scripts/yao.py check-update
 python3 scripts/yao.py skill-ir . --output-json skill-ir/examples/yao-meta-skill.json
-python3 scripts/yao.py compile-skill . --target openai --target claude --target generic
+python3 scripts/yao.py compile-skill . --target openai --target claude --target generic --target vscode
 python3 scripts/yao.py package . --platform generic --output-dir dist
 python3 scripts/yao.py output-eval
 python3 scripts/yao.py output-exec
@@ -177,7 +177,7 @@ python3 scripts/context_sizer.py .
 python3 scripts/resource_boundary_check.py .
 python3 scripts/governance_check.py . --require-manifest
 python3 scripts/compile_skill.py .
-python3 scripts/cross_packager.py . --platform openai --platform claude --platform generic --expectations evals/packaging_expectations.json --zip
+python3 scripts/cross_packager.py . --platform openai --platform claude --platform generic --platform vscode --expectations evals/packaging_expectations.json --zip
 python3 scripts/probe_runtime_permissions.py . --package-dir dist
 python3 tests/verify_packager_failures.py
 ```
@@ -199,7 +199,7 @@ python3 scripts/yao.py review --target root
 python3 scripts/yao.py release-snapshot --target root --label release-candidate
 python3 scripts/yao.py skill-ir . --output-json skill-ir/examples/yao-meta-skill.json
 python3 scripts/yao.py compile-skill .
-python3 scripts/yao.py package . --platform openai --platform claude --platform generic --output-dir dist --zip
+python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip
 python3 scripts/yao.py runtime-permissions . --package-dir dist
 python3 scripts/yao.py package-verify . --package-dir dist --require-zip
 python3 scripts/yao.py test
@@ -247,9 +247,9 @@ The homepage panel below is generated from the current eval suite so the family-
 Full reports: [reports/eval_suite.json](reports/eval_suite.json) and [reports/family_summary.md](reports/family_summary.md)
 <!-- END:EVAL_RESULTS -->
 
-- packaging validation: `openai`, `claude`, and `generic` targets pass contract checks and carry IR provenance, semantic parity metadata, and target-native behavior contracts
-- target compiler validation: `openai`, `claude`, `generic`, and Agent Skills compatible contracts are compiled from Skill IR with generated-file mappings, adapter modes, native surfaces, permission enforcement notes, and unsupported-feature notes
-- runtime permission probes: `openai`, `claude`, and `generic` adapters expose explicit permission contracts; current targets report `0` native-enforcement adapters and `3` metadata fallbacks with residual risks visible to reviewers
+- packaging validation: `openai`, `claude`, `generic`, and `vscode` targets pass contract checks and carry IR provenance, semantic parity metadata, and target-native behavior contracts
+- target compiler validation: `openai`, `claude`, `generic`, Agent Skills compatible, and VS Code / Copilot contracts are compiled from Skill IR with generated-file mappings, adapter modes, native surfaces, permission enforcement notes, and unsupported-feature notes
+- runtime permission probes: `openai`, `claude`, `generic`, and `vscode` adapters expose explicit permission contracts; current targets report `0` native-enforcement adapters and `4` metadata fallbacks with residual risks visible to reviewers
 - portability score: `100/100` with neutral activation, execution, trust, and degradation metadata preserved across all exported targets
 - description optimization suite: root, team frontend review, and governed incident command pass blind and adversarial holdout gates; governed incident command still carries one visible holdout miss, and adversarial calibration plus family drift are now tracked separately
 - judge-backed blind eval: root, team frontend review, and governed incident command now pass an independent rubric judge on blind holdout prompts
@@ -258,7 +258,7 @@ Full reports: [reports/eval_suite.json](reports/eval_suite.json) and [reports/fa
 - governance and resource-boundary checks are part of the default test path
 - root governance maturity score: `90/100`; governed benchmark example: `95/100`
 - CJK-aware trigger matching is now covered by explicit Chinese build, packaging, eval, and near-neighbor cases
-- context budgets: root `987/1000`, complex benchmark `790/1000`, governed benchmark `760/1000`
+- context budgets: root `944/1000`, complex benchmark `790/1000`, governed benchmark `760/1000`
 - quality density: root `131.7`, complex benchmark `164.6`, governed benchmark `171.1`
 - regression milestones are tracked in [reports/regression_history.md](reports/regression_history.md)
 - description drift history is tracked in [reports/description_drift_history.md](reports/description_drift_history.md)

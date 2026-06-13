@@ -59,6 +59,7 @@ def main() -> None:
     assert package["compatibility"]["openai"] == "pass", package
     assert package["compatibility"]["claude"] == "pass", package
     assert package["compatibility"]["generic"] == "pass", package
+    assert package["compatibility"]["vscode"] == "pass", package
     assert (registry_dir / "index.json").exists(), registry_dir
     assert (registry_dir / "packages" / "yao-meta-skill.json").exists(), registry_dir
     assert output_json.exists(), output_json

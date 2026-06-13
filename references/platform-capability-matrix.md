@@ -8,6 +8,7 @@ This matrix describes the current packaging targets and their support level.
 | `claude` | Yes | Yes | Yes | Yes | Yes | activation, execution, trust, permissions, degradation, native behavior | Generates `targets/claude/README.md` plus adapter metadata |
 | `generic` | Yes | Yes | Yes | Yes | Yes | activation, execution, trust, permissions, degradation, native behavior | Uses neutral adapter metadata only |
 | `agent-skills-compatible` | Neutral source | Yes | Yes | Source-compatible | Yes | activation, execution, trust, permissions, degradation, native behavior | Keeps canonical `SKILL.md` plus `agents/interface.yaml` source shape |
+| `vscode` | Yes | Yes | Yes | Yes | Yes | activation, execution, trust, permissions, degradation, native behavior, install scope | Generates `targets/vscode/README.md` plus adapter metadata for VS Code / Copilot Agent Skills review |
 
 ## Current Support Model
 
@@ -15,6 +16,7 @@ This matrix describes the current packaging targets and their support level.
 - `claude`: lightweight compatibility adapter with an explicit compiler contract and fallback notes.
 - `generic`: lowest-friction export for neutral Agent Skills consumers.
 - `agent-skills-compatible`: canonical source shape with compiler evidence for review and distribution.
+- `vscode`: VS Code / Copilot Agent Skills adapter that preserves the neutral source package and documents user/project scope plus workspace-trust review notes.
 - runtime permission probes currently report metadata fallback for generated targets; no target is claimed as native-enforced until a client or installer integration can actually enforce the permission model.
 
 ## Portable Semantics

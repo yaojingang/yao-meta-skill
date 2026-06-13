@@ -3,14 +3,14 @@
   "score": 100,
   "band": "world-class",
   "summary": {
-    "adapter_target_count": 3,
+    "adapter_target_count": 4,
     "activation_mode": "manual",
     "execution_context": "inline",
     "shell": "bash",
     "trust_level": "local",
     "remote_inline_execution": "forbid",
-    "degradation_coverage": 3,
-    "snapshot_count": 3,
+    "degradation_coverage": 4,
+    "snapshot_count": 4,
     "ir_source": "skill-ir/examples/yao-meta-skill.json",
     "ir_schema_version": "2.0.0"
   },

@@ -52,6 +52,7 @@ def main() -> None:
     assert payload["summary"]["declared_bump"] == "minor", payload
     assert payload["summary"]["recommended_bump"] == "minor", payload
     assert "agent-skills-compatible" in payload["upgrade_diff"]["added_targets"], payload
+    assert "vscode" in payload["upgrade_diff"]["added_targets"], payload
     assert output_json.exists(), output_json
     assert "Upgrade Check" in output_md.read_text(encoding="utf-8"), output_md
 

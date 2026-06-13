@@ -75,7 +75,7 @@
       "label": "可维护性",
       "score": 100,
       "reasons": [
-        "SKILL.md 约 365 个词/字。",
+        "SKILL.md 约 350 个词/字。",
         "入口文件保持克制，可维护性较好。",
         "references/ 已承载扩展指导。",
         "scripts/ 已承载确定性逻辑。",
@@ -96,7 +96,7 @@
       "label": "上下文成本",
       "score": 42,
       "reasons": [
-        "入口约 365 个词/字，references 约 14388 个词/字。",
+        "入口约 350 个词/字，references 约 14450 个词/字。",
         "分数越高代表上下文成本越低。",
         "上下文成本偏高，建议压缩入口或拆分 references。"
       ]
@@ -200,7 +200,7 @@
       "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
     ],
     "gaps": [
-      "上下文成本需要补强：入口约 365 个词/字，references 约 14388 个词/字。"
+      "上下文成本需要补强：入口约 350 个词/字，references 约 14450 个词/字。"
     ],
     "recommendations": [
       "先改触发边界，再扩展工作流。",
@@ -265,7 +265,7 @@
         "name": "包体膨胀风险",
         "impact": 2,
         "probability": 1,
-        "signal": "SKILL.md 约 365 个词/字。",
+        "signal": "SKILL.md 约 350 个词/字。",
         "response": "先补证据和边界，再增加包体复杂度。"
       },
       {
@@ -716,7 +716,7 @@
   "benchmark_highlights": [],
   "skill_ir": {
     "schema_version": "2.0.0",
-    "target_count": 4,
+    "target_count": 5,
     "trigger_samples": 8,
     "output_eval_cases": 3
   },
@@ -724,8 +724,8 @@
     "ok": true,
     "schema_version": "1.0",
     "summary": {
-      "target_count": 4,
-      "pass_count": 4,
+      "target_count": 5,
+      "pass_count": 5,
       "warn_count": 0,
       "block_count": 0,
       "failure_count": 0,
@@ -789,6 +789,22 @@
           "agents/interface.yaml"
         ],
         "unsupported_features": [],
+        "warnings": []
+      },
+      {
+        "target": "vscode",
+        "status": "pass",
+        "adapter_mode": "vscode-agent-skills-adapter",
+        "degradation_strategy": "agent-skills-source-with-vscode-notes",
+        "native_surface": "VS Code/Copilot Agent Skills project or user scope",
+        "permission_enforcement": "client-or-workspace-trust",
+        "generated_files": [
+          "targets/vscode/adapter.json",
+          "targets/vscode/README.md"
+        ],
+        "unsupported_features": [
+          "VS Code installation scope is documented but not installed by this compiler"
+        ],
         "warnings": []
       }
     ],
@@ -871,12 +887,12 @@
   "runtime_permissions": {
     "ok": true,
     "summary": {
-      "target_count": 3,
-      "pass_count": 3,
+      "target_count": 4,
+      "pass_count": 4,
       "fail_count": 0,
       "native_enforcement_count": 0,
-      "metadata_fallback_count": 3,
-      "residual_risk_count": 3,
+      "metadata_fallback_count": 4,
+      "residual_risk_count": 4,
       "required_capability_count": 3,
       "failure_count": 0
     },
@@ -915,6 +931,16 @@
         "residual_risks": [
           "Client-native permission enforcement is not provided by this target; installer or operator must honor metadata."
         ]
+      },
+      {
+        "target": "vscode",
+        "status": "pass",
+        "assurance": "metadata-fallback-explicit",
+        "native_enforcement": false,
+        "metadata_fallback_explicit": true,
+        "residual_risks": [
+          "Client-native permission enforcement is not provided by this target; installer or operator must honor metadata."
+        ]
       }
     ],
     "failures": []
@@ -941,7 +967,7 @@
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
     "package_hash_file_count": 153,
-    "package_sha256": "2984db5f8d02b147c86bf259679e247a10a6fa495d123032be46c2e7fdaf8368"
+    "package_sha256": "2109ae8e212111b1619d8d728e54c73425fecc174113b45629c656ecceb3fadd"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -967,7 +993,8 @@
         "openai",
         "claude",
         "generic",
-        "agent-skills-compatible"
+        "agent-skills-compatible",
+        "vscode"
       ],
       "maturity": "governed",
       "owner": "Yao Team",
@@ -975,8 +1002,8 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "2984db5f8d02b147c86bf259679e247a10a6fa495d123032be46c2e7fdaf8368",
-        "archive_sha256": "27fb62524da6ed2ccda448b7725e0154ee0fd3eccd4fe69a88494e67f4050353"
+        "package_sha256": "2109ae8e212111b1619d8d728e54c73425fecc174113b45629c656ecceb3fadd",
+        "archive_sha256": "176d93befb446985aaff7cd8325b05c4858da13177cb13db82d210aa2d264060"
       },
       "compatibility": {
         "openai": "pass",
@@ -1007,7 +1034,7 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "27fb62524da6ed2ccda448b7725e0154ee0fd3eccd4fe69a88494e67f4050353",
+        "archive_sha256": "176d93befb446985aaff7cd8325b05c4858da13177cb13db82d210aa2d264060",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
@@ -1020,11 +1047,11 @@
   "package_verification": {
     "ok": true,
     "summary": {
-      "target_count": 3,
-      "adapter_count": 3,
+      "target_count": 4,
+      "adapter_count": 4,
       "archive_present": true,
-      "archive_sha256": "27fb62524da6ed2ccda448b7725e0154ee0fd3eccd4fe69a88494e67f4050353",
-      "archive_entry_count": 492,
+      "archive_sha256": "176d93befb446985aaff7cd8325b05c4858da13177cb13db82d210aa2d264060",
+      "archive_entry_count": 493,
       "failure_count": 0,
       "warning_count": 0
     },
@@ -1035,12 +1062,12 @@
     "ok": true,
     "summary": {
       "archive_present": true,
-      "archive_entry_count": 492,
+      "archive_entry_count": 493,
       "archive_extracted": true,
       "entrypoint_loaded": true,
       "manifest_loaded": true,
       "interface_loaded": true,
-      "adapter_count": 3,
+      "adapter_count": 4,
       "install_root_is_temp": false,
       "failure_count": 0,
       "warning_count": 0
@@ -1054,7 +1081,7 @@
       "declared_bump": "minor",
       "recommended_bump": "minor",
       "breaking_change_count": 0,
-      "added_target_count": 1,
+      "added_target_count": 2,
       "metadata_change_count": 1,
       "checksum_change_count": 2,
       "failure_count": 0,
@@ -1063,7 +1090,8 @@
     "upgrade_diff": {
       "name_changed": false,
       "added_targets": [
-        "agent-skills-compatible"
+        "agent-skills-compatible",
+        "vscode"
       ],
       "removed_targets": [],
       "compatibility_changes": [
@@ -1097,18 +1125,18 @@
         {
           "field": "archive_sha256",
           "from": "",
-          "to": "27fb62524da6ed2ccda448b7725e0154ee0fd3eccd4fe69a88494e67f4050353"
+          "to": "176d93befb446985aaff7cd8325b05c4858da13177cb13db82d210aa2d264060"
         },
         {
           "field": "package_sha256",
           "from": "0000000000000000000000000000000000000000000000000000000000000000",
-          "to": "2984db5f8d02b147c86bf259679e247a10a6fa495d123032be46c2e7fdaf8368"
+          "to": "2109ae8e212111b1619d8d728e54c73425fecc174113b45629c656ecceb3fadd"
         }
       ]
     },
     "release_notes": [
       "Recommended version bump: minor.",
-      "Added targets: agent-skills-compatible.",
+      "Added targets: agent-skills-compatible, vscode.",
       "Package or archive checksum changed; reviewers should verify package artifacts before release.",
       "Package verification evidence: reports/package_verification.md."
     ],
@@ -1250,7 +1278,8 @@
     "targets": [
       "openai",
       "claude",
-      "generic"
+      "generic",
+      "vscode"
     ],
     "maturity_tier": "governed",
     "skill_archetype": "governed",

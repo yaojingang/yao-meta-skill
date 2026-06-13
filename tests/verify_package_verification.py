@@ -40,6 +40,8 @@ def build_package(out_dir: Path) -> dict:
             "claude",
             "--platform",
             "generic",
+            "--platform",
+            "vscode",
             "--expectations",
             str(EXPECTATIONS),
             "--output-dir",
@@ -84,8 +86,8 @@ def main() -> None:
     payload = valid["payload"]
     assert valid["ok"], valid
     assert payload["ok"], payload
-    assert payload["summary"]["target_count"] == 3, payload
-    assert payload["summary"]["adapter_count"] == 3, payload
+    assert payload["summary"]["target_count"] == 4, payload
+    assert payload["summary"]["adapter_count"] == 4, payload
     assert payload["summary"]["archive_present"], payload
     assert payload["summary"]["archive_sha256"], payload
     assert not payload["failures"], payload

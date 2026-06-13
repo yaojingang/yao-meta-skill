@@ -12,7 +12,8 @@
     "openai",
     "claude",
     "generic",
-    "agent-skills-compatible"
+    "agent-skills-compatible",
+    "vscode"
   ],
   "factory_components": [
     "templates",

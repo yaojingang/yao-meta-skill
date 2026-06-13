@@ -6,7 +6,7 @@
 - Entrypoint loaded: `True`
 - Manifest loaded: `True`
 - Interface loaded: `True`
-- Adapters readable: `3`
+- Adapters readable: `4`
 - Failures: `0`
 - Warnings: `0`
 
@@ -32,6 +32,8 @@
 | `adapter-generic-name` | `pass` | generic adapter name matches package manifest |
 | `adapter-openai` | `pass` | openai adapter is readable after package install simulation |
 | `adapter-openai-name` | `pass` | openai adapter name matches package manifest |
+| `adapter-vscode` | `pass` | vscode adapter is readable after package install simulation |
+| `adapter-vscode-name` | `pass` | vscode adapter name matches package manifest |
 
 ## Failures
 

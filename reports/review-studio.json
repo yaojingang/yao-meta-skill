@@ -43,7 +43,7 @@
       "key": "context-budget",
       "label": "上下文",
       "status": "pass",
-      "detail": "initial load 987/1000; quality density 131.7",
+      "detail": "initial load 944/1000; quality density 137.7",
       "evidence": "reports/context_budget.json",
       "link": "context_budget.md"
     },
@@ -75,7 +75,7 @@
       "key": "permission-runtime",
       "label": "权限探针",
       "status": "pass",
-      "detail": "3/3 targets probed; native 0; metadata fallback 3; residual risks 3",
+      "detail": "4/4 targets probed; native 0; metadata fallback 4; residual risks 4",
       "evidence": "reports/runtime_permission_probes.json",
       "link": "runtime_permission_probes.md"
     },
@@ -107,7 +107,7 @@
       "key": "registry-audit",
       "label": "注册审计",
       "status": "pass",
-      "detail": "yao-meta-skill 1.1.0; 6/6 compatibility entries pass; install pass with 3 adapters",
+      "detail": "yao-meta-skill 1.1.0; 6/6 compatibility entries pass; install pass with 4 adapters",
       "evidence": "reports/registry_audit.json + reports/install_simulation.json",
       "link": "registry_audit.md"
     },
@@ -334,7 +334,7 @@
           "label": "可维护性",
           "score": 100,
           "reasons": [
-            "SKILL.md 约 365 个词/字。",
+            "SKILL.md 约 350 个词/字。",
             "入口文件保持克制，可维护性较好。",
             "references/ 已承载扩展指导。",
             "scripts/ 已承载确定性逻辑。",
@@ -355,7 +355,7 @@
           "label": "上下文成本",
           "score": 42,
           "reasons": [
-            "入口约 365 个词/字，references 约 14388 个词/字。",
+            "入口约 350 个词/字，references 约 14450 个词/字。",
             "分数越高代表上下文成本越低。",
             "上下文成本偏高，建议压缩入口或拆分 references。"
           ]
@@ -459,7 +459,7 @@
           "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
         ],
         "gaps": [
-          "上下文成本需要补强：入口约 365 个词/字，references 约 14388 个词/字。"
+          "上下文成本需要补强：入口约 350 个词/字，references 约 14450 个词/字。"
         ],
         "recommendations": [
           "先改触发边界，再扩展工作流。",
@@ -524,7 +524,7 @@
             "name": "包体膨胀风险",
             "impact": 2,
             "probability": 1,
-            "signal": "SKILL.md 约 365 个词/字。",
+            "signal": "SKILL.md 约 350 个词/字。",
             "response": "先补证据和边界，再增加包体复杂度。"
           },
           {
@@ -975,7 +975,7 @@
       "benchmark_highlights": [],
       "skill_ir": {
         "schema_version": "2.0.0",
-        "target_count": 4,
+        "target_count": 5,
         "trigger_samples": 8,
         "output_eval_cases": 3
       },
@@ -983,8 +983,8 @@
         "ok": true,
         "schema_version": "1.0",
         "summary": {
-          "target_count": 4,
-          "pass_count": 4,
+          "target_count": 5,
+          "pass_count": 5,
           "warn_count": 0,
           "block_count": 0,
           "failure_count": 0,
@@ -1048,6 +1048,22 @@
               "agents/interface.yaml"
             ],
             "unsupported_features": [],
+            "warnings": []
+          },
+          {
+            "target": "vscode",
+            "status": "pass",
+            "adapter_mode": "vscode-agent-skills-adapter",
+            "degradation_strategy": "agent-skills-source-with-vscode-notes",
+            "native_surface": "VS Code/Copilot Agent Skills project or user scope",
+            "permission_enforcement": "client-or-workspace-trust",
+            "generated_files": [
+              "targets/vscode/adapter.json",
+              "targets/vscode/README.md"
+            ],
+            "unsupported_features": [
+              "VS Code installation scope is documented but not installed by this compiler"
+            ],
             "warnings": []
           }
         ],
@@ -1130,12 +1146,12 @@
       "runtime_permissions": {
         "ok": true,
         "summary": {
-          "target_count": 3,
-          "pass_count": 3,
+          "target_count": 4,
+          "pass_count": 4,
           "fail_count": 0,
           "native_enforcement_count": 0,
-          "metadata_fallback_count": 3,
-          "residual_risk_count": 3,
+          "metadata_fallback_count": 4,
+          "residual_risk_count": 4,
           "required_capability_count": 3,
           "failure_count": 0
         },
@@ -1174,6 +1190,16 @@
             "residual_risks": [
               "Client-native permission enforcement is not provided by this target; installer or operator must honor metadata."
             ]
+          },
+          {
+            "target": "vscode",
+            "status": "pass",
+            "assurance": "metadata-fallback-explicit",
+            "native_enforcement": false,
+            "metadata_fallback_explicit": true,
+            "residual_risks": [
+              "Client-native permission enforcement is not provided by this target; installer or operator must honor metadata."
+            ]
           }
         ],
         "failures": []
@@ -1200,7 +1226,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 153,
-        "package_sha256": "2984db5f8d02b147c86bf259679e247a10a6fa495d123032be46c2e7fdaf8368"
+        "package_sha256": "2109ae8e212111b1619d8d728e54c73425fecc174113b45629c656ecceb3fadd"
       },
       "skill_atlas": {
         "skill_count": 12,
@@ -1226,7 +1252,8 @@
             "openai",
             "claude",
             "generic",
-            "agent-skills-compatible"
+            "agent-skills-compatible",
+            "vscode"
           ],
           "maturity": "governed",
           "owner": "Yao Team",
@@ -1234,8 +1261,8 @@
           "trust_level": "local",
           "license": "MIT",
           "checksums": {
-            "package_sha256": "2984db5f8d02b147c86bf259679e247a10a6fa495d123032be46c2e7fdaf8368",
-            "archive_sha256": "27fb62524da6ed2ccda448b7725e0154ee0fd3eccd4fe69a88494e67f4050353"
+            "package_sha256": "2109ae8e212111b1619d8d728e54c73425fecc174113b45629c656ecceb3fadd",
+            "archive_sha256": "176d93befb446985aaff7cd8325b05c4858da13177cb13db82d210aa2d264060"
           },
           "compatibility": {
             "openai": "pass",
@@ -1266,7 +1293,7 @@
           },
           "distribution": {
             "archive_verified": true,
-            "archive_sha256": "27fb62524da6ed2ccda448b7725e0154ee0fd3eccd4fe69a88494e67f4050353",
+            "archive_sha256": "176d93befb446985aaff7cd8325b05c4858da13177cb13db82d210aa2d264060",
             "package_verification": "reports/package_verification.json",
             "install_simulated": true,
             "install_simulation": "reports/install_simulation.json"
@@ -1279,11 +1306,11 @@
       "package_verification": {
         "ok": true,
         "summary": {
-          "target_count": 3,
-          "adapter_count": 3,
+          "target_count": 4,
+          "adapter_count": 4,
           "archive_present": true,
-          "archive_sha256": "27fb62524da6ed2ccda448b7725e0154ee0fd3eccd4fe69a88494e67f4050353",
-          "archive_entry_count": 492,
+          "archive_sha256": "176d93befb446985aaff7cd8325b05c4858da13177cb13db82d210aa2d264060",
+          "archive_entry_count": 493,
           "failure_count": 0,
           "warning_count": 0
         },
@@ -1294,12 +1321,12 @@
         "ok": true,
         "summary": {
           "archive_present": true,
-          "archive_entry_count": 492,
+          "archive_entry_count": 493,
           "archive_extracted": true,
           "entrypoint_loaded": true,
           "manifest_loaded": true,
           "interface_loaded": true,
-          "adapter_count": 3,
+          "adapter_count": 4,
           "install_root_is_temp": false,
           "failure_count": 0,
           "warning_count": 0
@@ -1313,7 +1340,7 @@
           "declared_bump": "minor",
           "recommended_bump": "minor",
           "breaking_change_count": 0,
-          "added_target_count": 1,
+          "added_target_count": 2,
           "metadata_change_count": 1,
           "checksum_change_count": 2,
           "failure_count": 0,
@@ -1322,7 +1349,8 @@
         "upgrade_diff": {
           "name_changed": false,
           "added_targets": [
-            "agent-skills-compatible"
+            "agent-skills-compatible",
+            "vscode"
           ],
           "removed_targets": [],
           "compatibility_changes": [
@@ -1356,18 +1384,18 @@
             {
               "field": "archive_sha256",
               "from": "",
-              "to": "27fb62524da6ed2ccda448b7725e0154ee0fd3eccd4fe69a88494e67f4050353"
+              "to": "176d93befb446985aaff7cd8325b05c4858da13177cb13db82d210aa2d264060"
             },
             {
               "field": "package_sha256",
               "from": "0000000000000000000000000000000000000000000000000000000000000000",
-              "to": "2984db5f8d02b147c86bf259679e247a10a6fa495d123032be46c2e7fdaf8368"
+              "to": "2109ae8e212111b1619d8d728e54c73425fecc174113b45629c656ecceb3fadd"
             }
           ]
         },
         "release_notes": [
           "Recommended version bump: minor.",
-          "Added targets: agent-skills-compatible.",
+          "Added targets: agent-skills-compatible, vscode.",
           "Package or archive checksum changed; reviewers should verify package artifacts before release.",
           "Package verification evidence: reports/package_verification.md."
         ],
@@ -1509,7 +1537,8 @@
         "targets": [
           "openai",
           "claude",
-          "generic"
+          "generic",
+          "vscode"
         ],
         "maturity_tier": "governed",
         "skill_archetype": "governed",
@@ -3090,7 +3119,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 31.56,
+          "duration_ms": 29.87,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3118,7 +3147,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 32.02,
+          "duration_ms": 30.27,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3141,7 +3170,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.58,
+          "duration_ms": 40.04,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3169,7 +3198,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 29.13,
+          "duration_ms": 41.0,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3192,7 +3221,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 29.88,
+          "duration_ms": 37.68,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3220,7 +3249,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.36,
+          "duration_ms": 37.33,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3243,7 +3272,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 29.45,
+          "duration_ms": 30.73,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3270,7 +3299,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 29.33,
+          "duration_ms": 30.69,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3293,7 +3322,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 29.06,
+          "duration_ms": 30.1,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3322,7 +3351,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 29.61,
+          "duration_ms": 30.27,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3628,8 +3657,8 @@
       "generated_at": "2026-06-13",
       "skill_dir": ".",
       "summary": {
-        "target_count": 4,
-        "pass_count": 4,
+        "target_count": 5,
+        "pass_count": 5,
         "warn_count": 0,
         "block_count": 0,
         "failure_count": 0,
@@ -3654,7 +3683,8 @@
               "openai",
               "claude",
               "generic",
-              "agent-skills-compatible"
+              "agent-skills-compatible",
+              "vscode"
             ]
           },
           "compiled_contract": {
@@ -3965,7 +3995,8 @@
               "adapter_targets": [
                 "openai",
                 "claude",
-                "generic"
+                "generic",
+                "vscode"
               ],
               "canonical_format": "agent-skills"
             },
@@ -4450,7 +4481,8 @@
               "openai",
               "claude",
               "generic",
-              "agent-skills-compatible"
+              "agent-skills-compatible",
+              "vscode"
             ]
           },
           "compiled_contract": {
@@ -4761,7 +4793,8 @@
               "adapter_targets": [
                 "openai",
                 "claude",
-                "generic"
+                "generic",
+                "vscode"
               ],
               "canonical_format": "agent-skills"
             },
@@ -5246,7 +5279,8 @@
               "openai",
               "claude",
               "generic",
-              "agent-skills-compatible"
+              "agent-skills-compatible",
+              "vscode"
             ]
           },
           "compiled_contract": {
@@ -5557,7 +5591,8 @@
               "adapter_targets": [
                 "openai",
                 "claude",
-                "generic"
+                "generic",
+                "vscode"
               ],
               "canonical_format": "agent-skills"
             },
@@ -6026,7 +6061,8 @@
               "openai",
               "claude",
               "generic",
-              "agent-skills-compatible"
+              "agent-skills-compatible",
+              "vscode"
             ]
           },
           "compiled_contract": {
@@ -6337,7 +6373,8 @@
               "adapter_targets": [
                 "openai",
                 "claude",
-                "generic"
+                "generic",
+                "vscode"
               ],
               "canonical_format": "agent-skills"
             },
@@ -6787,6 +6824,798 @@
           "unsupported_features": [],
           "warnings": [],
           "failures": []
+        },
+        {
+          "schema_version": "1.0",
+          "target": "vscode",
+          "status": "pass",
+          "compiler": {
+            "name": "yao-skill-ir-compiler",
+            "schema_version": "1.0",
+            "source": "skill-ir",
+            "ir_source": "skill-ir/examples/yao-meta-skill.json",
+            "ir_schema_version": "2.0.0"
+          },
+          "source": {
+            "skill_dir": ".",
+            "canonical_metadata": "agents/interface.yaml",
+            "declared_targets": [
+              "openai",
+              "claude",
+              "generic",
+              "agent-skills-compatible",
+              "vscode"
+            ]
+          },
+          "compiled_contract": {
+            "name": "yao-meta-skill",
+            "title": "Yao Meta Skill",
+            "version": "1.1.0",
+            "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
+            "job_to_be_done": "Turn repeated workflows, prompts, transcripts, runbooks, documents, or existing skill packages into routeable, evaluable, packageable, and governable agent skills for personal, team, library, or governed reuse.",
+            "trigger": {
+              "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
+              "should_trigger": [
+                "Create a skill from this repeated workflow.",
+                "Turn this runbook into a reusable agent skill.",
+                "Convert this process note into a reusable skill package for the team.",
+                "Improve this skill description and add evals.",
+                "Refactor this prompt into a proper skill package.",
+                "Package this skill for team reuse.",
+                "Create a meta-skill for packaging internal workflows.",
+                "Standardize this recurring workflow as a shareable skill package with references."
+              ],
+              "should_not_trigger": [
+                "Explain what a workflow is.",
+                "Just explain what a skill is.",
+                "Summarize this random note.",
+                "Translate this README into Japanese.",
+                "Write a product headline for this landing page.",
+                "Draft a blog title for this article.",
+                "Rewrite this paragraph more clearly, but do not package anything.",
+                "Explain the difference between a runbook and a workflow.",
+                "one-off writing, translation, explanation, or brainstorming requests that do not need a reusable skill",
+                "general code review or debugging unless the user is packaging that workflow as a skill"
+              ],
+              "edge_cases": [
+                "Create a one-off prompt for this task.",
+                "Write a custom answer for this request without creating a skill package.",
+                "Help me brainstorm process ideas without building a skill.",
+                "Improve this README but do not turn it into a skill.",
+                "Make a checklist for this task, but not a reusable skill.",
+                "Create a reusable-looking checklist, but keep it as a plain note instead of a skill.",
+                "Review this process note and explain it, no packaging needed.",
+                "Turn this into a checklist and template, but stop short of making a full skill."
+              ]
+            },
+            "workflow": {
+              "steps": [
+                "Decide whether the request should become a skill and choose the lightest fit.",
+                "Capture job, output, exclusions, constraints, and standards.",
+                "Run reference scan: external benchmarks first, user references second, local fit third; surface only uncertainty or conflict.",
+                "Write the `description` early and test route quality before expanding the package.",
+                "Add output-risk, artifact-design, prompt-quality, and system-model reports only when they matter.",
+                "Add only folders and gates that earn their keep.",
+                "Surface the top three next iteration directions."
+              ],
+              "decision_points": [
+                "Route by frontmatter `description`.",
+                "Keep `SKILL.md` lean; put guidance in `references/`, logic in `scripts/`, and evidence in `reports/`.",
+                "Use the lightest reliable process.",
+                "`Scaffold`: exploratory or personal.",
+                "`Production`: team reuse.",
+                "`Library`: shared infrastructure.",
+                "Ask one focused clarification when the real job, output, or exclusion boundary is unclear.",
+                "Escalate visible tradeoffs when benchmark patterns conflict with local privacy, naming, or governance constraints.",
+                "Do not silently broaden the skill into adjacent jobs just because the examples are nearby."
+              ],
+              "failure_modes": [
+                "Tables can render as dense grids with weak hierarchy or poor mobile readability.",
+                "Long bullets can make the output look complete while hiding the actual decision logic.",
+                "Footnote markers or dense citation notes can interrupt the reading flow.",
+                "Evidence can be over-attached to obvious statements and under-attached to risky claims.",
+                "Screenshots can be captured from the wrong state, wrong viewport, or wrong crop.",
+                "Missing screenshots can cause the skill to invent visual references instead of declaring the gap.",
+                "Users start invoking the skill for adjacent one-off or explanation-only requests.",
+                "Outputs remain valid but become generic, cluttered, or weakly aligned with the user's domain.",
+                "Borrowed benchmark patterns no longer fit the local job or add ceremony without payoff.",
+                "Skill usage becomes team-critical while ownership, review cadence, or rollback evidence stays informal."
+              ]
+            },
+            "resources": {
+              "references": [
+                "references/artifact-design-doctrine.md",
+                "references/authoring-discipline.md",
+                "references/distribution-registry-method.md",
+                "references/eval-playbook.md",
+                "references/gate-selection.md",
+                "references/governance.md",
+                "references/human-review-template.md",
+                "references/intent-dialogue.md",
+                "references/iteration-philosophy.md",
+                "references/non-skill-decision-tree.md",
+                "references/operating-modes.md",
+                "references/output-eval-method.md",
+                "references/output-quality-risk.md",
+                "references/output-visual-quality.md",
+                "references/packaging-contracts.md",
+                "references/pattern-extraction-doctrine.md",
+                "references/platform-capability-matrix.md",
+                "references/prompt-engineering-doctrine.md",
+                "references/qa-ladder.md",
+                "references/reference-scan.md",
+                "references/regression-cause-taxonomy.md",
+                "references/resource-boundaries.md",
+                "references/review-studio-method.md",
+                "references/review-waiver-method.md",
+                "references/runtime-conformance-method.md",
+                "references/skill-archetypes.md",
+                "references/skill-atlas-method.md",
+                "references/skill-engineering-method.md",
+                "references/skill-ir-method.md",
+                "references/systems-thinking-doctrine.md",
+                "references/telemetry-drift-method.md",
+                "references/trust-security-method.md"
+              ],
+              "scripts": [
+                "scripts/adjudicate_output_review.py",
+                "scripts/build_confusion_matrix.py",
+                "scripts/build_skill_atlas.py",
+                "scripts/check_update.py",
+                "scripts/ci_test.py",
+                "scripts/collect_feedback.py",
+                "scripts/compile_skill.py",
+                "scripts/context_sizer.py",
+                "scripts/create_iteration_snapshot.py",
+                "scripts/cross_packager.py",
+                "scripts/diff_eval.py",
+                "scripts/export_skill_ir.py",
+                "scripts/github_benchmark_scan.py",
+                "scripts/governance_check.py",
+                "scripts/init_skill.py",
+                "scripts/judge_blind_eval.py",
+                "scripts/lint_skill.py",
+                "scripts/local_output_eval_runner.py",
+                "scripts/optimize_description.py",
+                "scripts/probe_runtime_permissions.py",
+                "scripts/promotion_checker.py",
+                "scripts/provider_output_eval_runner.py",
+                "scripts/registry_audit.py",
+                "scripts/render_adoption_drift_report.py",
+                "scripts/render_artifact_design_profile.py",
+                "scripts/render_baseline_compare.py",
+                "scripts/render_context_reports.py",
+                "scripts/render_description_drift_history.py",
+                "scripts/render_eval_dashboard.py",
+                "scripts/render_intent_confidence.py",
+                "scripts/render_intent_dialogue.py",
+                "scripts/render_iteration_directions.py",
+                "scripts/render_iteration_ledger.py",
+                "scripts/render_output_risk_profile.py",
+                "scripts/render_portability_report.py",
+                "scripts/render_prompt_quality_profile.py",
+                "scripts/render_reference_scan.py",
+                "scripts/render_reference_synthesis.py",
+                "scripts/render_regression_history.py",
+                "scripts/render_review_annotations.py",
+                "scripts/render_review_studio.py",
+                "scripts/render_review_viewer.py",
+                "scripts/render_review_waivers.py",
+                "scripts/render_skill_overview.py",
+                "scripts/render_social_preview.py",
+                "scripts/render_system_model.py",
+                "scripts/resource_boundary_check.py",
+                "scripts/review_studio_formatting.py",
+                "scripts/review_studio_gates.py",
+                "scripts/review_studio_layout.py",
+                "scripts/run_conformance_suite.py",
+                "scripts/run_description_optimization_suite.py",
+                "scripts/run_eval_suite.py",
+                "scripts/run_output_eval.py",
+                "scripts/run_output_execution.py",
+                "scripts/simulate_install.py",
+                "scripts/skill_report_charts.py",
+                "scripts/skill_report_layout.py",
+                "scripts/skill_report_metrics.py",
+                "scripts/skill_report_model.py",
+                "scripts/sync_local_install.py",
+                "scripts/trigger_eval.py",
+                "scripts/trust_check.py",
+                "scripts/upgrade_check.py",
+                "scripts/validate_skill.py",
+                "scripts/verify_package.py",
+                "scripts/yao.py",
+                "scripts/yao_cli_config.py",
+                "scripts/yao_cli_parser.py"
+              ],
+              "assets": [
+                "templates/basic_skill.md.j2",
+                "templates/complex_skill.md.j2"
+              ],
+              "reports": [
+                "reports/benchmark_methodology.md",
+                "reports/intent-context.json",
+                "reports/intent-confidence.json",
+                "reports/intent-confidence.md",
+                "reports/reference-synthesis.json",
+                "reports/reference-synthesis.md",
+                "reports/output-risk-profile.json",
+                "reports/output-risk-profile.md",
+                "reports/artifact-design-profile.json",
+                "reports/artifact-design-profile.md",
+                "reports/prompt-quality-profile.json",
+                "reports/prompt-quality-profile.md",
+                "reports/system-model.json",
+                "reports/system-model.md",
+                "reports/iteration-directions.json",
+                "reports/iteration-directions.md",
+                "reports/skill-overview.json",
+                "reports/skill-overview.html",
+                "reports/output_quality_scorecard.json",
+                "reports/output_quality_scorecard.md",
+                "reports/output_execution_runs.json",
+                "reports/output_execution_runs.md",
+                "reports/output_blind_review_pack.json",
+                "reports/output_blind_review_pack.md",
+                "reports/output_blind_answer_key.json",
+                "reports/output_review_adjudication.json",
+                "reports/output_review_adjudication.md",
+                "reports/review_annotations.json",
+                "reports/review_annotations.md",
+                "reports/conformance_matrix.json",
+                "reports/conformance_matrix.md",
+                "reports/security_trust_report.json",
+                "reports/security_trust_report.md",
+                "reports/runtime_permission_probes.json",
+                "reports/runtime_permission_probes.md",
+                "reports/skill_atlas.json",
+                "reports/skill_atlas.html",
+                "reports/skill-os-2-review.md",
+                "reports/portability_score.json",
+                "reports/portability_score.md",
+                "reports/governance_score.json"
+              ],
+              "counts": {
+                "references": 32,
+                "scripts": 69,
+                "assets": 2,
+                "reports": 41
+              }
+            },
+            "eval_plan": {
+              "trigger": [
+                "evals/README.md",
+                "evals/adversarial/trigger_cases.json",
+                "evals/blind_holdout/trigger_cases.json",
+                "evals/confusion/route_cases.json",
+                "evals/dev/trigger_cases.json",
+                "evals/failure-cases.md",
+                "evals/history/2026-03-31-context-first-pack.json",
+                "evals/history/2026-03-31-family-suite-expansion.json",
+                "evals/history/2026-03-31-governance-quality-gates.json",
+                "evals/history/2026-03-31-governed-assets-and-history.json",
+                "evals/history/2026-04-01-route-scorecard-foundation.json",
+                "evals/history/README.md",
+                "evals/history/description_optimization/2026-03-31-description-optimization-suite.json",
+                "evals/history/description_optimization/2026-04-01-adversarial-calibration-and-family-drift.json",
+                "evals/history/description_optimization/2026-04-01-blind-holdout-and-drift-history.json",
+                "evals/history/description_optimization/2026-04-01-judge-backed-blind-eval.json",
+                "evals/history/description_optimization/README.md",
+                "evals/holdout/trigger_cases.json",
+                "evals/output/cases.jsonl",
+                "evals/output/fixtures/release-brief-source.md",
+                "evals/output/schema.json",
+                "evals/packaging_expectations.json",
+                "evals/promotion_policy.md",
+                "evals/semantic_config.json",
+                "evals/train/trigger_cases.json",
+                "evals/trigger_cases.json"
+              ],
+              "output": [
+                "evals/output/cases.jsonl",
+                "evals/output/fixtures/release-brief-source.md",
+                "evals/output/schema.json"
+              ],
+              "adversarial": [
+                "evals/adversarial/trigger_cases.json"
+              ],
+              "baseline": "without_skill",
+              "counts": {
+                "trigger": 26,
+                "output": 3,
+                "adversarial": 1,
+                "baseline": 1
+              }
+            },
+            "risk": {
+              "output_risk": "high",
+              "execution_risk": "medium",
+              "trust_boundary": "external"
+            },
+            "governance": {
+              "owner": "Yao Team",
+              "maturity": "governed",
+              "review_cadence": "quarterly",
+              "review_due": ""
+            },
+            "runtime": {
+              "activation": {
+                "mode": "manual",
+                "paths": []
+              },
+              "execution": {
+                "context": "inline",
+                "shell": "bash"
+              },
+              "trust": {
+                "source_tier": "local",
+                "remote_inline_execution": "forbid",
+                "remote_metadata_policy": "allow-metadata-only"
+              },
+              "adapter_targets": [
+                "openai",
+                "claude",
+                "generic",
+                "vscode"
+              ],
+              "canonical_format": "agent-skills"
+            },
+            "permissions": {
+              "schema_version": "1.0",
+              "source": "reports/security_trust_report.json",
+              "source_available": true,
+              "declared_capabilities": [
+                "network",
+                "file_write",
+                "subprocess"
+              ],
+              "review_required": true,
+              "capabilities": {
+                "network": {
+                  "required": true,
+                  "script_count": 3,
+                  "scripts": [
+                    "scripts/check_update.py",
+                    "scripts/github_benchmark_scan.py",
+                    "scripts/provider_output_eval_runner.py"
+                  ],
+                  "review_reason": "Outbound hosts must match security/network_policy.json."
+                },
+                "file_write": {
+                  "required": true,
+                  "script_count": 47,
+                  "scripts": [
+                    "scripts/adjudicate_output_review.py",
+                    "scripts/build_confusion_matrix.py",
+                    "scripts/build_skill_atlas.py",
+                    "scripts/check_update.py",
+                    "scripts/ci_test.py",
+                    "scripts/collect_feedback.py",
+                    "scripts/compile_skill.py",
+                    "scripts/create_iteration_snapshot.py",
+                    "scripts/cross_packager.py",
+                    "scripts/export_skill_ir.py",
+                    "scripts/github_benchmark_scan.py",
+                    "scripts/init_skill.py",
+                    "scripts/probe_runtime_permissions.py",
+                    "scripts/promotion_checker.py",
+                    "scripts/registry_audit.py",
+                    "scripts/render_adoption_drift_report.py",
+                    "scripts/render_artifact_design_profile.py",
+                    "scripts/render_baseline_compare.py",
+                    "scripts/render_context_reports.py",
+                    "scripts/render_description_drift_history.py",
+                    "scripts/render_eval_dashboard.py",
+                    "scripts/render_intent_confidence.py",
+                    "scripts/render_intent_dialogue.py",
+                    "scripts/render_iteration_directions.py",
+                    "scripts/render_iteration_ledger.py",
+                    "scripts/render_output_risk_profile.py",
+                    "scripts/render_portability_report.py",
+                    "scripts/render_prompt_quality_profile.py",
+                    "scripts/render_reference_scan.py",
+                    "scripts/render_reference_synthesis.py",
+                    "scripts/render_regression_history.py",
+                    "scripts/render_review_annotations.py",
+                    "scripts/render_review_studio.py",
+                    "scripts/render_review_viewer.py",
+                    "scripts/render_review_waivers.py",
+                    "scripts/render_skill_overview.py",
+                    "scripts/render_social_preview.py",
+                    "scripts/render_system_model.py",
+                    "scripts/run_conformance_suite.py",
+                    "scripts/run_description_optimization_suite.py",
+                    "scripts/run_output_eval.py",
+                    "scripts/run_output_execution.py",
+                    "scripts/simulate_install.py",
+                    "scripts/sync_local_install.py",
+                    "scripts/trust_check.py",
+                    "scripts/upgrade_check.py",
+                    "scripts/verify_package.py"
+                  ],
+                  "review_reason": "Scripts write local files or generated artifacts."
+                },
+                "subprocess": {
+                  "required": true,
+                  "script_count": 7,
+                  "scripts": [
+                    "scripts/ci_test.py",
+                    "scripts/render_eval_dashboard.py",
+                    "scripts/run_eval_suite.py",
+                    "scripts/run_output_execution.py",
+                    "scripts/sync_local_install.py",
+                    "scripts/trust_check.py",
+                    "scripts/yao.py"
+                  ],
+                  "review_reason": "Scripts spawn local commands and need operator review."
+                },
+                "interactive": {
+                  "required": false,
+                  "script_count": 0,
+                  "scripts": [],
+                  "review_reason": ""
+                }
+              },
+              "network_policy": {
+                "source": "security/network_policy.json",
+                "covered_scripts": [
+                  "scripts/check_update.py",
+                  "scripts/github_benchmark_scan.py",
+                  "scripts/provider_output_eval_runner.py"
+                ],
+                "missing_scripts": [],
+                "mismatches": []
+              },
+              "help_smoke": {
+                "enabled": true,
+                "checked_count": 60,
+                "failed_count": 0,
+                "failed_scripts": []
+              },
+              "trust_summary": {
+                "secret_findings": 0,
+                "network_script_count": 3,
+                "file_write_script_count": 47,
+                "subprocess_script_count": 7,
+                "interactive_script_count": 0,
+                "help_smoke_failed_count": 0
+              }
+            },
+            "source_files_count": 6,
+            "target": "vscode",
+            "target_permission_contract": {
+              "schema_version": "1.0",
+              "target": "vscode",
+              "permission_model": "vscode-workspace-trust-plus-metadata",
+              "native_enforcement": false,
+              "representation": "targets/vscode/adapter.json::target_permission_contract and targets/vscode/README.md install notes",
+              "review_required": true,
+              "declared_capabilities": [
+                "network",
+                "file_write",
+                "subprocess"
+              ],
+              "capability_counts": {
+                "network": 3,
+                "file_write": 47,
+                "subprocess": 7,
+                "interactive": 0
+              },
+              "evidence": "reports/security_trust_report.json",
+              "operator_note": "VS Code target relies on project or user skill installation plus VS Code workspace trust; Yao preserves permission metadata for reviewer and installer checks."
+            },
+            "target_native_contract": {
+              "schema_version": "1.0",
+              "target": "vscode",
+              "native_surface": "VS Code/Copilot Agent Skills project or user scope",
+              "activation": {
+                "policy": "Use folder name plus SKILL.md name/description; keep description under platform limits.",
+                "trigger_description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
+                "manual_activation_supported": true,
+                "automatic_activation_note": "Depends on the target client route/catalog implementation."
+              },
+              "resources": {
+                "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
+                "counts": {
+                  "references": 32,
+                  "scripts": 69,
+                  "assets": 2,
+                  "reports": 41
+                },
+                "generated_files": [
+                  "targets/vscode/adapter.json",
+                  "targets/vscode/README.md"
+                ]
+              },
+              "scripts": {
+                "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
+                "script_count": 69,
+                "help_smoke_failed_count": 0
+              },
+              "permissions": {
+                "enforcement": "client-or-workspace-trust",
+                "native_enforcement": false,
+                "declared_capabilities": [
+                  "network",
+                  "file_write",
+                  "subprocess"
+                ],
+                "review_required": true
+              },
+              "review": {
+                "artifacts": [
+                  "SKILL.md",
+                  "agents/interface.yaml",
+                  "reports/review-studio.html"
+                ],
+                "fallback_behavior": "If VS Code scope is not installed, use the neutral Agent Skills source.",
+                "unsupported_native_features": [
+                  "automatic VS Code installation",
+                  "VS Code installation scope is documented but not installed by this compiler"
+                ]
+              },
+              "install_scope": "VS Code user or project skills directory"
+            },
+            "degradation_strategy": "agent-skills-source-with-vscode-notes",
+            "target_runtime": {
+              "adapter_mode": "vscode-agent-skills-adapter",
+              "generated_files": [
+                "targets/vscode/adapter.json",
+                "targets/vscode/README.md"
+              ],
+              "metadata_mapping": {
+                "name": "folder-name-and-SKILL.md::frontmatter.name",
+                "description": "SKILL.md::frontmatter.description",
+                "interface": "agents/interface.yaml",
+                "permissions": "targets/vscode/adapter.json::target_permission_contract",
+                "install_scope": "targets/vscode/README.md"
+              },
+              "preserved_semantics": [
+                "trigger",
+                "workflow",
+                "resources",
+                "eval-plan",
+                "risk",
+                "governance",
+                "runtime",
+                "trust",
+                "permissions"
+              ],
+              "native_surface": "VS Code/Copilot Agent Skills project or user scope"
+            }
+          },
+          "permission_contract": {
+            "schema_version": "1.0",
+            "source": "reports/security_trust_report.json",
+            "source_available": true,
+            "declared_capabilities": [
+              "network",
+              "file_write",
+              "subprocess"
+            ],
+            "review_required": true,
+            "capabilities": {
+              "network": {
+                "required": true,
+                "script_count": 3,
+                "scripts": [
+                  "scripts/check_update.py",
+                  "scripts/github_benchmark_scan.py",
+                  "scripts/provider_output_eval_runner.py"
+                ],
+                "review_reason": "Outbound hosts must match security/network_policy.json."
+              },
+              "file_write": {
+                "required": true,
+                "script_count": 47,
+                "scripts": [
+                  "scripts/adjudicate_output_review.py",
+                  "scripts/build_confusion_matrix.py",
+                  "scripts/build_skill_atlas.py",
+                  "scripts/check_update.py",
+                  "scripts/ci_test.py",
+                  "scripts/collect_feedback.py",
+                  "scripts/compile_skill.py",
+                  "scripts/create_iteration_snapshot.py",
+                  "scripts/cross_packager.py",
+                  "scripts/export_skill_ir.py",
+                  "scripts/github_benchmark_scan.py",
+                  "scripts/init_skill.py",
+                  "scripts/probe_runtime_permissions.py",
+                  "scripts/promotion_checker.py",
+                  "scripts/registry_audit.py",
+                  "scripts/render_adoption_drift_report.py",
+                  "scripts/render_artifact_design_profile.py",
+                  "scripts/render_baseline_compare.py",
+                  "scripts/render_context_reports.py",
+                  "scripts/render_description_drift_history.py",
+                  "scripts/render_eval_dashboard.py",
+                  "scripts/render_intent_confidence.py",
+                  "scripts/render_intent_dialogue.py",
+                  "scripts/render_iteration_directions.py",
+                  "scripts/render_iteration_ledger.py",
+                  "scripts/render_output_risk_profile.py",
+                  "scripts/render_portability_report.py",
+                  "scripts/render_prompt_quality_profile.py",
+                  "scripts/render_reference_scan.py",
+                  "scripts/render_reference_synthesis.py",
+                  "scripts/render_regression_history.py",
+                  "scripts/render_review_annotations.py",
+                  "scripts/render_review_studio.py",
+                  "scripts/render_review_viewer.py",
+                  "scripts/render_review_waivers.py",
+                  "scripts/render_skill_overview.py",
+                  "scripts/render_social_preview.py",
+                  "scripts/render_system_model.py",
+                  "scripts/run_conformance_suite.py",
+                  "scripts/run_description_optimization_suite.py",
+                  "scripts/run_output_eval.py",
+                  "scripts/run_output_execution.py",
+                  "scripts/simulate_install.py",
+                  "scripts/sync_local_install.py",
+                  "scripts/trust_check.py",
+                  "scripts/upgrade_check.py",
+                  "scripts/verify_package.py"
+                ],
+                "review_reason": "Scripts write local files or generated artifacts."
+              },
+              "subprocess": {
+                "required": true,
+                "script_count": 7,
+                "scripts": [
+                  "scripts/ci_test.py",
+                  "scripts/render_eval_dashboard.py",
+                  "scripts/run_eval_suite.py",
+                  "scripts/run_output_execution.py",
+                  "scripts/sync_local_install.py",
+                  "scripts/trust_check.py",
+                  "scripts/yao.py"
+                ],
+                "review_reason": "Scripts spawn local commands and need operator review."
+              },
+              "interactive": {
+                "required": false,
+                "script_count": 0,
+                "scripts": [],
+                "review_reason": ""
+              }
+            },
+            "network_policy": {
+              "source": "security/network_policy.json",
+              "covered_scripts": [
+                "scripts/check_update.py",
+                "scripts/github_benchmark_scan.py",
+                "scripts/provider_output_eval_runner.py"
+              ],
+              "missing_scripts": [],
+              "mismatches": []
+            },
+            "help_smoke": {
+              "enabled": true,
+              "checked_count": 60,
+              "failed_count": 0,
+              "failed_scripts": []
+            },
+            "trust_summary": {
+              "secret_findings": 0,
+              "network_script_count": 3,
+              "file_write_script_count": 47,
+              "subprocess_script_count": 7,
+              "interactive_script_count": 0,
+              "help_smoke_failed_count": 0
+            }
+          },
+          "target_permission_contract": {
+            "schema_version": "1.0",
+            "target": "vscode",
+            "permission_model": "vscode-workspace-trust-plus-metadata",
+            "native_enforcement": false,
+            "representation": "targets/vscode/adapter.json::target_permission_contract and targets/vscode/README.md install notes",
+            "review_required": true,
+            "declared_capabilities": [
+              "network",
+              "file_write",
+              "subprocess"
+            ],
+            "capability_counts": {
+              "network": 3,
+              "file_write": 47,
+              "subprocess": 7,
+              "interactive": 0
+            },
+            "evidence": "reports/security_trust_report.json",
+            "operator_note": "VS Code target relies on project or user skill installation plus VS Code workspace trust; Yao preserves permission metadata for reviewer and installer checks."
+          },
+          "target_native_contract": {
+            "schema_version": "1.0",
+            "target": "vscode",
+            "native_surface": "VS Code/Copilot Agent Skills project or user scope",
+            "activation": {
+              "policy": "Use folder name plus SKILL.md name/description; keep description under platform limits.",
+              "trigger_description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
+              "manual_activation_supported": true,
+              "automatic_activation_note": "Depends on the target client route/catalog implementation."
+            },
+            "resources": {
+              "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
+              "counts": {
+                "references": 32,
+                "scripts": 69,
+                "assets": 2,
+                "reports": 41
+              },
+              "generated_files": [
+                "targets/vscode/adapter.json",
+                "targets/vscode/README.md"
+              ]
+            },
+            "scripts": {
+              "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
+              "script_count": 69,
+              "help_smoke_failed_count": 0
+            },
+            "permissions": {
+              "enforcement": "client-or-workspace-trust",
+              "native_enforcement": false,
+              "declared_capabilities": [
+                "network",
+                "file_write",
+                "subprocess"
+              ],
+              "review_required": true
+            },
+            "review": {
+              "artifacts": [
+                "SKILL.md",
+                "agents/interface.yaml",
+                "reports/review-studio.html"
+              ],
+              "fallback_behavior": "If VS Code scope is not installed, use the neutral Agent Skills source.",
+              "unsupported_native_features": [
+                "automatic VS Code installation",
+                "VS Code installation scope is documented but not installed by this compiler"
+              ]
+            },
+            "install_scope": "VS Code user or project skills directory"
+          },
+          "target_transform": {
+            "target": "vscode",
+            "adapter_mode": "vscode-agent-skills-adapter",
+            "generated_files": [
+              "targets/vscode/adapter.json",
+              "targets/vscode/README.md"
+            ],
+            "metadata_mapping": {
+              "name": "folder-name-and-SKILL.md::frontmatter.name",
+              "description": "SKILL.md::frontmatter.description",
+              "interface": "agents/interface.yaml",
+              "permissions": "targets/vscode/adapter.json::target_permission_contract",
+              "install_scope": "targets/vscode/README.md"
+            },
+            "preserved_semantics": [
+              "trigger",
+              "workflow",
+              "resources",
+              "eval-plan",
+              "risk",
+              "governance",
+              "runtime",
+              "trust",
+              "permissions"
+            ],
+            "degradation_strategy": "agent-skills-source-with-vscode-notes",
+            "permission_representation": "targets/vscode/adapter.json::target_permission_contract and targets/vscode/README.md install notes",
+            "native_surface": "VS Code/Copilot Agent Skills project or user scope",
+            "activation_policy": "Use folder name plus SKILL.md name/description; keep description under platform limits.",
+            "resource_strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
+            "script_strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
+            "permission_enforcement": "client-or-workspace-trust"
+          },
+          "unsupported_features": [
+            "VS Code installation scope is documented but not installed by this compiler"
+          ],
+          "warnings": [],
+          "failures": []
         }
       ],
       "failures": [],
@@ -7039,19 +7868,19 @@
       "schema_version": "1.0",
       "ok": true,
       "skill_dir": ".",
-      "package_dir": "tests/tmp_review_studio/dist",
+      "package_dir": "dist",
       "expected_capabilities": [
         "file_write",
         "network",
         "subprocess"
       ],
       "summary": {
-        "target_count": 3,
-        "pass_count": 3,
+        "target_count": 4,
+        "pass_count": 4,
         "fail_count": 0,
         "native_enforcement_count": 0,
-        "metadata_fallback_count": 3,
-        "residual_risk_count": 3,
+        "metadata_fallback_count": 4,
+        "residual_risk_count": 4,
         "required_capability_count": 3,
         "failure_count": 0
       },
@@ -7059,7 +7888,7 @@
         {
           "target": "openai",
           "status": "pass",
-          "adapter": "tests/tmp_review_studio/dist/targets/openai/adapter.json",
+          "adapter": "dist/targets/openai/adapter.json",
           "permission_model": "metadata-only",
           "native_enforcement": false,
           "metadata_fallback_explicit": true,
@@ -7144,7 +7973,7 @@
         {
           "target": "claude",
           "status": "pass",
-          "adapter": "tests/tmp_review_studio/dist/targets/claude/adapter.json",
+          "adapter": "dist/targets/claude/adapter.json",
           "permission_model": "neutral-source-plus-adapter",
           "native_enforcement": false,
           "metadata_fallback_explicit": true,
@@ -7214,7 +8043,7 @@
         {
           "target": "generic",
           "status": "pass",
-          "adapter": "tests/tmp_review_studio/dist/targets/generic/adapter.json",
+          "adapter": "dist/targets/generic/adapter.json",
           "permission_model": "agent-skills-compatible-metadata",
           "native_enforcement": false,
           "metadata_fallback_explicit": true,
@@ -7280,6 +8109,76 @@
           "residual_risks": [
             "Client-native permission enforcement is not provided by this target; installer or operator must honor metadata."
           ]
+        },
+        {
+          "target": "vscode",
+          "status": "pass",
+          "adapter": "dist/targets/vscode/adapter.json",
+          "permission_model": "vscode-workspace-trust-plus-metadata",
+          "native_enforcement": false,
+          "metadata_fallback_explicit": true,
+          "assurance": "metadata-fallback-explicit",
+          "declared_capabilities": [
+            "file_write",
+            "network",
+            "subprocess"
+          ],
+          "checks": [
+            {
+              "key": "adapter-present",
+              "passed": true,
+              "detail": "vscode adapter.json is readable"
+            },
+            {
+              "key": "permission-contract-present",
+              "passed": true,
+              "detail": "vscode adapter includes permission_contract"
+            },
+            {
+              "key": "target-contract-present",
+              "passed": true,
+              "detail": "vscode adapter includes target_permission_contract"
+            },
+            {
+              "key": "source-available",
+              "passed": true,
+              "detail": "vscode permission_contract links to an available trust report"
+            },
+            {
+              "key": "declared-capabilities-match",
+              "passed": true,
+              "detail": "vscode target_permission_contract mirrors expected capabilities"
+            },
+            {
+              "key": "capability-counts-present",
+              "passed": true,
+              "detail": "vscode target_permission_contract includes capability_counts"
+            },
+            {
+              "key": "native-enforcement-boolean",
+              "passed": true,
+              "detail": "vscode target_permission_contract declares native_enforcement as a boolean"
+            },
+            {
+              "key": "representation-present",
+              "passed": true,
+              "detail": "vscode target_permission_contract declares where permission metadata is represented"
+            },
+            {
+              "key": "operator-note-present",
+              "passed": true,
+              "detail": "vscode target_permission_contract includes an operator_note"
+            },
+            {
+              "key": "review-required-matches",
+              "passed": true,
+              "detail": "vscode review_required matches whether capabilities are required"
+            }
+          ],
+          "failures": [],
+          "residual_risks": [
+            "Client-native permission enforcement is not provided by this target; installer or operator must honor metadata."
+          ]
         }
       ],
       "failures": [],
@@ -7313,7 +8212,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 153,
-        "package_sha256": "2984db5f8d02b147c86bf259679e247a10a6fa495d123032be46c2e7fdaf8368"
+        "package_sha256": "2109ae8e212111b1619d8d728e54c73425fecc174113b45629c656ecceb3fadd"
       },
       "failures": [],
       "warnings": [],
@@ -8537,7 +9436,7 @@
             "timed_out": false,
             "passed": true,
             "has_help_text": true,
-            "stdout_excerpt": "usage: probe_runtime_permissions.py [-h] [--package-dir PACKAGE_DIR]\n                                    [--target {openai,claude,generic}]\n                                    [--output-json OUTPUT_JSON]\n                                    ",
+            "stdout_excerpt": "usage: probe_runtime_permissions.py [-h] [--package-dir PACKAGE_DIR]\n                                    [--target {openai,claude,generic,vscode}]\n                                    [--output-json OUTPUT_JSON]\n                             ",
             "stderr_excerpt": ""
           },
           {
@@ -9141,14 +10040,14 @@
       "stats": {
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
-        "skill_body_tokens": 811,
-        "other_text_tokens": 880673,
-        "estimated_initial_load_tokens": 987,
-        "estimated_total_text_tokens": 881484,
-        "relevant_file_count": 374,
+        "skill_body_tokens": 751,
+        "other_text_tokens": 893597,
+        "estimated_initial_load_tokens": 944,
+        "estimated_total_text_tokens": 894348,
+        "relevant_file_count": 386,
         "unused_resource_dirs": [],
         "quality_signal_points": 130,
-        "quality_density": 131.7
+        "quality_density": 137.7
       }
     },
     "promotion": {
@@ -10002,7 +10901,8 @@
               "openai",
               "claude",
               "generic",
-              "agent-skills-compatible"
+              "agent-skills-compatible",
+              "vscode"
             ],
             "resources": [
               "scripts/adjudicate_output_review.py",
@@ -10855,7 +11755,7 @@
     "adoption_drift": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-13T11:56:59Z",
+      "generated_at": "2026-06-13T12:10:53Z",
       "skill_dir": ".",
       "privacy_contract": {
         "storage": "local-first",
@@ -11008,7 +11908,8 @@
           "openai",
           "claude",
           "generic",
-          "agent-skills-compatible"
+          "agent-skills-compatible",
+          "vscode"
         ],
         "maturity": "governed",
         "owner": "Yao Team",
@@ -11016,8 +11917,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "2984db5f8d02b147c86bf259679e247a10a6fa495d123032be46c2e7fdaf8368",
-          "archive_sha256": "27fb62524da6ed2ccda448b7725e0154ee0fd3eccd4fe69a88494e67f4050353"
+          "package_sha256": "2109ae8e212111b1619d8d728e54c73425fecc174113b45629c656ecceb3fadd",
+          "archive_sha256": "176d93befb446985aaff7cd8325b05c4858da13177cb13db82d210aa2d264060"
         },
         "compatibility": {
           "openai": "pass",
@@ -11048,7 +11949,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "27fb62524da6ed2ccda448b7725e0154ee0fd3eccd4fe69a88494e67f4050353",
+          "archive_sha256": "176d93befb446985aaff7cd8325b05c4858da13177cb13db82d210aa2d264060",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -11069,10 +11970,11 @@
               "openai",
               "claude",
               "generic",
-              "agent-skills-compatible"
+              "agent-skills-compatible",
+              "vscode"
             ],
             "package_metadata": "registry/packages/yao-meta-skill.json",
-            "package_sha256": "2984db5f8d02b147c86bf259679e247a10a6fa495d123032be46c2e7fdaf8368"
+            "package_sha256": "2109ae8e212111b1619d8d728e54c73425fecc174113b45629c656ecceb3fadd"
           }
         ]
       },
@@ -11092,11 +11994,11 @@
       "skill_dir": ".",
       "package_dir": "dist",
       "summary": {
-        "target_count": 3,
-        "adapter_count": 3,
+        "target_count": 4,
+        "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "27fb62524da6ed2ccda448b7725e0154ee0fd3eccd4fe69a88494e67f4050353",
-        "archive_entry_count": 492,
+        "archive_sha256": "176d93befb446985aaff7cd8325b05c4858da13177cb13db82d210aa2d264060",
+        "archive_entry_count": 493,
         "failure_count": 0,
         "warning_count": 0
       },
@@ -11512,6 +12414,141 @@
           "detail": "generic adapter includes field: portability_profile"
         },
         {
+          "id": "vscode-adapter",
+          "status": "pass",
+          "detail": "Adapter exists for target: vscode"
+        },
+        {
+          "id": "vscode-field-name",
+          "status": "pass",
+          "detail": "vscode adapter includes field: name"
+        },
+        {
+          "id": "vscode-field-description",
+          "status": "pass",
+          "detail": "vscode adapter includes field: description"
+        },
+        {
+          "id": "vscode-field-version",
+          "status": "pass",
+          "detail": "vscode adapter includes field: version"
+        },
+        {
+          "id": "vscode-field-display_name",
+          "status": "pass",
+          "detail": "vscode adapter includes field: display_name"
+        },
+        {
+          "id": "vscode-field-short_description",
+          "status": "pass",
+          "detail": "vscode adapter includes field: short_description"
+        },
+        {
+          "id": "vscode-field-default_prompt",
+          "status": "pass",
+          "detail": "vscode adapter includes field: default_prompt"
+        },
+        {
+          "id": "vscode-field-job_to_be_done",
+          "status": "pass",
+          "detail": "vscode adapter includes field: job_to_be_done"
+        },
+        {
+          "id": "vscode-field-ir_source",
+          "status": "pass",
+          "detail": "vscode adapter includes field: ir_source"
+        },
+        {
+          "id": "vscode-field-ir_schema_version",
+          "status": "pass",
+          "detail": "vscode adapter includes field: ir_schema_version"
+        },
+        {
+          "id": "vscode-field-semantic_contract",
+          "status": "pass",
+          "detail": "vscode adapter includes field: semantic_contract"
+        },
+        {
+          "id": "vscode-field-semantic_parity",
+          "status": "pass",
+          "detail": "vscode adapter includes field: semantic_parity"
+        },
+        {
+          "id": "vscode-field-compiler",
+          "status": "pass",
+          "detail": "vscode adapter includes field: compiler"
+        },
+        {
+          "id": "vscode-field-compiled_contract",
+          "status": "pass",
+          "detail": "vscode adapter includes field: compiled_contract"
+        },
+        {
+          "id": "vscode-field-permission_contract",
+          "status": "pass",
+          "detail": "vscode adapter includes field: permission_contract"
+        },
+        {
+          "id": "vscode-field-target_permission_contract",
+          "status": "pass",
+          "detail": "vscode adapter includes field: target_permission_contract"
+        },
+        {
+          "id": "vscode-field-target_native_contract",
+          "status": "pass",
+          "detail": "vscode adapter includes field: target_native_contract"
+        },
+        {
+          "id": "vscode-field-target_transform",
+          "status": "pass",
+          "detail": "vscode adapter includes field: target_transform"
+        },
+        {
+          "id": "vscode-field-canonical_metadata",
+          "status": "pass",
+          "detail": "vscode adapter includes field: canonical_metadata"
+        },
+        {
+          "id": "vscode-field-canonical_format",
+          "status": "pass",
+          "detail": "vscode adapter includes field: canonical_format"
+        },
+        {
+          "id": "vscode-field-activation_mode",
+          "status": "pass",
+          "detail": "vscode adapter includes field: activation_mode"
+        },
+        {
+          "id": "vscode-field-execution_context",
+          "status": "pass",
+          "detail": "vscode adapter includes field: execution_context"
+        },
+        {
+          "id": "vscode-field-shell",
+          "status": "pass",
+          "detail": "vscode adapter includes field: shell"
+        },
+        {
+          "id": "vscode-field-trust_level",
+          "status": "pass",
+          "detail": "vscode adapter includes field: trust_level"
+        },
+        {
+          "id": "vscode-field-remote_inline_execution",
+          "status": "pass",
+          "detail": "vscode adapter includes field: remote_inline_execution"
+        },
+        {
+          "id": "vscode-field-degradation_strategy",
+          "status": "pass",
+          "detail": "vscode adapter includes field: degradation_strategy"
+        },
+        {
+          "id": "vscode-field-portability_profile",
+          "status": "pass",
+          "detail": "vscode adapter includes field: portability_profile"
+        },
+        {
           "id": "openai-file-targets/openai/adapter.json",
           "status": "pass",
           "detail": "Package contains targets/openai/adapter.json"
@@ -11535,6 +12572,16 @@
           "id": "generic-file-targets/generic/adapter.json",
           "status": "pass",
           "detail": "Package contains targets/generic/adapter.json"
+        },
+        {
+          "id": "vscode-file-targets/vscode/adapter.json",
+          "status": "pass",
+          "detail": "Package contains targets/vscode/adapter.json"
+        },
+        {
+          "id": "vscode-file-targets/vscode/README.md",
+          "status": "pass",
+          "detail": "Package contains targets/vscode/README.md"
         },
         {
           "id": "archive-safe-paths",
@@ -11590,6 +12637,11 @@
           "id": "registry-compat-generic",
           "status": "pass",
           "detail": "Registry compatibility is reviewable for target: generic"
+        },
+        {
+          "id": "registry-compat-vscode",
+          "status": "pass",
+          "detail": "Registry compatibility is reviewable for target: vscode"
         }
       ],
       "failures": [],
@@ -11611,12 +12663,12 @@
       "installed_skill_dir": "dist/install-simulation/simulate-yao-meta-skill/yao-meta-skill",
       "summary": {
         "archive_present": true,
-        "archive_entry_count": 492,
+        "archive_entry_count": 493,
         "archive_extracted": true,
         "entrypoint_loaded": true,
         "manifest_loaded": true,
         "interface_loaded": true,
-        "adapter_count": 3,
+        "adapter_count": 4,
         "install_root_is_temp": false,
         "failure_count": 0,
         "warning_count": 0
@@ -11711,6 +12763,16 @@
           "id": "adapter-openai-name",
           "status": "pass",
           "detail": "openai adapter name matches package manifest"
+        },
+        {
+          "id": "adapter-vscode",
+          "status": "pass",
+          "detail": "vscode adapter is readable after package install simulation"
+        },
+        {
+          "id": "adapter-vscode-name",
+          "status": "pass",
+          "detail": "vscode adapter name matches package manifest"
         }
       ],
       "failures": [],
@@ -11742,14 +12804,15 @@
           "openai",
           "claude",
           "generic",
-          "agent-skills-compatible"
+          "agent-skills-compatible",
+          "vscode"
         ]
       },
       "summary": {
         "declared_bump": "minor",
         "recommended_bump": "minor",
         "breaking_change_count": 0,
-        "added_target_count": 1,
+        "added_target_count": 2,
         "metadata_change_count": 1,
         "checksum_change_count": 2,
         "failure_count": 0,
@@ -11758,7 +12821,8 @@
       "upgrade_diff": {
         "name_changed": false,
         "added_targets": [
-          "agent-skills-compatible"
+          "agent-skills-compatible",
+          "vscode"
         ],
         "removed_targets": [],
         "compatibility_changes": [
@@ -11792,18 +12856,18 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "27fb62524da6ed2ccda448b7725e0154ee0fd3eccd4fe69a88494e67f4050353"
+            "to": "176d93befb446985aaff7cd8325b05c4858da13177cb13db82d210aa2d264060"
           },
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "2984db5f8d02b147c86bf259679e247a10a6fa495d123032be46c2e7fdaf8368"
+            "to": "2109ae8e212111b1619d8d728e54c73425fecc174113b45629c656ecceb3fadd"
           }
         ]
       },
       "release_notes": [
         "Recommended version bump: minor.",
-        "Added targets: agent-skills-compatible.",
+        "Added targets: agent-skills-compatible, vscode.",
         "Package or archive checksum changed; reviewers should verify package artifacts before release.",
         "Package verification evidence: reports/package_verification.md."
       ],
@@ -11830,7 +12894,8 @@
         "openai",
         "claude",
         "generic",
-        "agent-skills-compatible"
+        "agent-skills-compatible",
+        "vscode"
       ],
       "factory_components": [
         "templates",
@@ -11858,7 +12923,8 @@
         "adapter_targets": [
           "openai",
           "claude",
-          "generic"
+          "generic",
+          "vscode"
         ],
         "activation": {
           "mode": "manual",
@@ -11876,7 +12942,8 @@
         "degradation": {
           "openai": "metadata-adapter",
           "claude": "neutral-source-plus-adapter",
-          "generic": "neutral-source"
+          "generic": "neutral-source",
+          "vscode": "agent-skills-source-with-vscode-notes"
         }
       }
     }

@@ -147,13 +147,17 @@ def build_semantic_contract(
         "targets": target_values,
         "source_files_count": count_list(ir, "source_files") if ir else 0,
     }
+    alias_declared = (
+        platform in {"agent-skills", "vscode"} and "agent-skills-compatible" in target_values
+    )
     semantic_parity = {
         "source": "skill-ir" if ir else "frontmatter-fallback",
         "ir_source": ir_source,
         "name_matches_ir": bool(ir) and frontmatter_name == name,
         "description_matches_ir": bool(ir) and frontmatter_description == description,
         "platform_declared_in_ir": platform in target_values
-        or (platform == "generic" and "agent-skills-compatible" in target_values),
+        or (platform == "generic" and "agent-skills-compatible" in target_values)
+        or alias_declared,
         "platform_declared_in_interface": platform in adapter_targets,
         "display_name_present": bool(interface.get("display_name")),
         "default_prompt_present": bool(interface.get("default_prompt")),
@@ -356,6 +360,44 @@ PLATFORM_CONTRACTS = {
             "shell": "compatibility.execution.shell",
         },
     },
+    "vscode": {
+        "required_fields": [
+            "name",
+            "description",
+            "version",
+            "display_name",
+            "short_description",
+            "default_prompt",
+            "job_to_be_done",
+            "ir_source",
+            "ir_schema_version",
+            "semantic_contract",
+            "semantic_parity",
+            "compiler",
+            "compiled_contract",
+            "permission_contract",
+            "target_permission_contract",
+            "target_native_contract",
+            "target_transform",
+            "canonical_metadata",
+            "canonical_format",
+            "activation_mode",
+            "execution_context",
+            "shell",
+            "trust_level",
+            "remote_inline_execution",
+            "degradation_strategy",
+            "portability_profile",
+        ],
+        "required_files": ["targets/vscode/adapter.json", "targets/vscode/README.md"],
+        "field_mapping": {
+            "name": "SKILL.md::frontmatter.name and folder name",
+            "description": "SKILL.md::frontmatter.description",
+            "display_name": "agents/interface.yaml::interface.display_name",
+            "execution_context": "compatibility.execution.context",
+            "permissions": "adapter.target_permission_contract",
+        },
+    },
 }
 
 EXCLUDED_ARCHIVE_PARTS = {".git", "__pycache__", ".venv", "venv", "node_modules", "dist"}
@@ -463,6 +505,24 @@ def write_adapter(skill_dir: Path, out_dir: Path, platform: str) -> Path:
             encoding="utf-8",
         )
         payload["install_hint"] = f"Use the packaged skill directly; this target relies on SKILL.md and optional neutral metadata."
+    elif platform == "vscode":
+        notes = target_dir / "README.md"
+        native = payload["target_native_contract"]
+        notes.write_text(
+            f"# VS Code / Copilot Agent Skills Package\n\n"
+            f"Install `{skill_dir.name}` as a VS Code user or project scoped Agent Skill. Keep the folder name aligned with `SKILL.md` frontmatter name.\n\n"
+            f"Native surface: {native['native_surface']}.\n\n"
+            f"Activation: {native['activation']['policy']}\n\n"
+            f"Resources: {native['resources']['strategy']}\n\n"
+            f"Scripts: {native['scripts']['strategy']}\n\n"
+            f"Permission model: {payload['target_permission_contract']['permission_model']}. "
+            "Review `target_permission_contract`, workspace trust, and `reports/security_trust_report.md` before running scripts.\n\n"
+            "This adapter does not perform automatic VS Code installation; it preserves the reviewed source package plus install notes.\n",
+            encoding="utf-8",
+        )
+        payload["install_hint"] = (
+            "Install the package as a VS Code user or project scoped Agent Skill; use targets/vscode/README.md for scope and trust notes."
+        )
     else:
         payload["install_hint"] = f"Use {skill_dir.name} as an Agent Skills compatible package."
     path = target_dir / "adapter.json"
@@ -511,9 +571,9 @@ def validate_exports(out_dir: Path, expectations: dict) -> dict:
     required_targets = expectations.get("required_targets", [])
     required_fields = expectations.get("required_fields", [])
     required_by_target = {
-        "openai": expectations.get("openai_required_files", []),
-        "claude": expectations.get("claude_required_files", []),
-        "generic": expectations.get("generic_required_files", []),
+        key[: -len("_required_files")]: value
+        for key, value in expectations.items()
+        if key.endswith("_required_files")
     }
 
     for target in required_targets:
@@ -534,7 +594,7 @@ def validate_exports(out_dir: Path, expectations: dict) -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Generate lightweight cross-platform packaging artifacts.")
     parser.add_argument("skill_dir", help="Path to the skill directory")
-    parser.add_argument("--platform", action="append", default=[], help="Target platform: openai, claude, generic")
+    parser.add_argument("--platform", action="append", default=[], help="Target platform: openai, claude, generic, vscode")
     parser.add_argument("--output-dir", default="dist", help="Output directory")
     parser.add_argument("--expectations", help="JSON file describing packaging expectations")
     parser.add_argument("--zip", action="store_true", help="Create a zip package")

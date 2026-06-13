@@ -1,5 +1,5 @@
 {
-  "required_targets": ["openai", "claude", "generic"],
+  "required_targets": ["openai", "claude", "generic", "vscode"],
   "required_fields": [
     "name",
     "description",
@@ -30,5 +30,6 @@
   ],
   "openai_required_files": ["targets/openai/adapter.json", "targets/openai/agents/openai.yaml"],
   "claude_required_files": ["targets/claude/adapter.json", "targets/claude/README.md"],
-  "generic_required_files": ["targets/generic/adapter.json"]
+  "generic_required_files": ["targets/generic/adapter.json"],
+  "vscode_required_files": ["targets/vscode/adapter.json", "targets/vscode/README.md"]
 }

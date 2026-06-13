@@ -39,6 +39,8 @@ def main() -> None:
             "claude",
             "--platform",
             "generic",
+            "--platform",
+            "vscode",
             "--expectations",
             str(EXPECTATIONS),
             "--output-dir",
@@ -54,7 +56,7 @@ def main() -> None:
         raise SystemExit(proc.returncode)
 
     failures = []
-    for name in ("openai", "claude", "generic"):
+    for name in ("openai", "claude", "generic", "vscode"):
         snapshot = json.loads((SNAPSHOTS / f"{name}_adapter.json").read_text(encoding="utf-8"))
         adapter = json.loads((TMP / "targets" / name / "adapter.json").read_text(encoding="utf-8"))
         if adapter.get("platform") != snapshot["platform"]:
@@ -152,6 +154,10 @@ def main() -> None:
             readme = (TMP / "targets" / "claude" / "README.md").read_text(encoding="utf-8")
             if "Native surface:" not in readme or "Activation:" not in readme:
                 failures.append(f"{name}: generated README does not describe native behavior")
+        if name == "vscode":
+            readme = (TMP / "targets" / "vscode" / "README.md").read_text(encoding="utf-8")
+            if "VS Code / Copilot Agent Skills Package" not in readme or "workspace trust" not in readme:
+                failures.append(f"{name}: generated README does not describe VS Code install and trust behavior")
 
     report = {"ok": not failures, "failures": failures}
     print(json.dumps(report, ensure_ascii=False, indent=2))

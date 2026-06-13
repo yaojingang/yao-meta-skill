@@ -87,12 +87,14 @@ TARGET_TRANSFORMS: dict[str, dict[str, Any]] = {
         "unsupported_features": [],
     },
     "vscode": {
-        "adapter_mode": "agent-skills-compatible-project-or-user-scope",
-        "generated_files": ["SKILL.md", "agents/interface.yaml"],
+        "adapter_mode": "vscode-agent-skills-adapter",
+        "generated_files": ["targets/vscode/adapter.json", "targets/vscode/README.md"],
         "metadata_mapping": {
             "name": "folder-name-and-SKILL.md::frontmatter.name",
             "description": "SKILL.md::frontmatter.description",
             "interface": "agents/interface.yaml",
+            "permissions": "targets/vscode/adapter.json::target_permission_contract",
+            "install_scope": "targets/vscode/README.md",
         },
         "preserved_semantics": ["trigger", "workflow", "resources", "eval-plan", "risk", "governance", "runtime", "trust", "permissions"],
         "unsupported_features": ["VS Code installation scope is documented but not installed by this compiler"],
@@ -264,6 +266,12 @@ TARGET_PERMISSION_MODELS = {
         "native_enforcement": False,
         "representation": "targets/generic/adapter.json::target_permission_contract",
         "operator_note": "Generic target exposes permission metadata for downstream clients to enforce or review.",
+    },
+    "vscode": {
+        "model": "vscode-workspace-trust-plus-metadata",
+        "native_enforcement": False,
+        "representation": "targets/vscode/adapter.json::target_permission_contract and targets/vscode/README.md install notes",
+        "operator_note": "VS Code target relies on project or user skill installation plus VS Code workspace trust; Yao preserves permission metadata for reviewer and installer checks.",
     },
 }
 
@@ -545,7 +553,7 @@ def compile_target_contract(skill_dir: Path, target: str) -> dict[str, Any]:
             "preserved_semantics": [],
             "unsupported_features": [],
         }
-    if target not in declared and not (target == "agent-skills" and "agent-skills-compatible" in declared):
+    if target not in declared and not (target in {"agent-skills", "vscode"} and "agent-skills-compatible" in declared):
         warnings.append(f"Target is not declared in Skill IR or interface metadata: {target}")
     if not sources["ir"]:
         warnings.append("Skill IR is missing; compiler used frontmatter fallback")

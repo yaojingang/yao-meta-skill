@@ -59,6 +59,8 @@ def main() -> None:
             "claude",
             "--platform",
             "generic",
+            "--platform",
+            "vscode",
             "--expectations",
             str(ROOT / "evals" / "packaging_expectations.json"),
             "--output-dir",
@@ -266,7 +268,7 @@ def main() -> None:
     assert "gaps 0" in permission_gate["detail"], permission_gate
     permission_runtime_gate = next(item for item in payload["gates"] if item["key"] == "permission-runtime")
     assert permission_runtime_gate["status"] == "pass", permission_runtime_gate
-    assert "metadata fallback 3" in permission_runtime_gate["detail"], permission_runtime_gate
+    assert "metadata fallback 4" in permission_runtime_gate["detail"], permission_runtime_gate
     assert "native 0" in permission_runtime_gate["detail"], permission_runtime_gate
     intent_gate = next(item for item in payload["gates"] if item["key"] == "intent-canvas")
     assert intent_gate["status"] == "pass", intent_gate
@@ -300,7 +302,7 @@ def main() -> None:
     assert full_payload["data"]["review_annotations"]["summary"]["annotation_count"] == 0, full_payload["data"]["review_annotations"]
     assert full_payload["data"]["compiled_targets"]["summary"]["target_count"] >= 4, full_payload["data"]["compiled_targets"]
     assert full_payload["data"]["compiled_targets"]["summary"]["block_count"] == 0, full_payload["data"]["compiled_targets"]
-    assert full_payload["data"]["runtime_permissions"]["summary"]["metadata_fallback_count"] == 3, full_payload["data"]["runtime_permissions"]
+    assert full_payload["data"]["runtime_permissions"]["summary"]["metadata_fallback_count"] == 4, full_payload["data"]["runtime_permissions"]
     assert full_payload["evidence_paths"]["runtime_permissions"] == "reports/runtime_permission_probes.md", full_payload["evidence_paths"]
     action_keys = {item["gate_key"] for item in full_payload["review_actions"]}
     assert action_keys == {"output-lab", "review-waivers"}, full_payload["review_actions"]

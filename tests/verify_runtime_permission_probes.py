@@ -40,6 +40,8 @@ def main() -> None:
             "claude",
             "--platform",
             "generic",
+            "--platform",
+            "vscode",
             "--expectations",
             str(ROOT / "evals" / "packaging_expectations.json"),
             "--output-dir",
@@ -65,12 +67,12 @@ def main() -> None:
     assert probe["ok"], probe
     payload = probe["payload"]
     summary = payload["summary"]
-    assert summary["target_count"] == 3, summary
-    assert summary["pass_count"] == 3, summary
+    assert summary["target_count"] == 4, summary
+    assert summary["pass_count"] == 4, summary
     assert summary["fail_count"] == 0, summary
     assert summary["native_enforcement_count"] == 0, summary
-    assert summary["metadata_fallback_count"] == 3, summary
-    assert summary["residual_risk_count"] == 3, summary
+    assert summary["metadata_fallback_count"] == 4, summary
+    assert summary["residual_risk_count"] == 4, summary
     assert payload["expected_capabilities"] == ["file_write", "network", "subprocess"], payload
     assert {item["assurance"] for item in payload["targets"]} == {"metadata-fallback-explicit"}, payload["targets"]
     assert (TMP / "runtime_permission_probes.md").exists(), TMP

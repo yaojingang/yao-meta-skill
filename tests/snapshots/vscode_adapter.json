@@ -1,0 +1,26 @@
+{
+  "platform": "vscode",
+  "canonical_metadata": "agents/interface.yaml",
+  "required_generated_file": "targets/vscode/README.md",
+  "required_fields": [
+    "canonical_format",
+    "activation_mode",
+    "execution_context",
+    "shell",
+    "trust_level",
+    "remote_inline_execution",
+    "degradation_strategy",
+    "portability_profile",
+    "job_to_be_done",
+    "ir_source",
+    "ir_schema_version",
+    "semantic_contract",
+    "semantic_parity",
+    "compiler",
+    "compiled_contract",
+    "permission_contract",
+    "target_permission_contract",
+    "target_native_contract",
+    "target_transform"
+  ]
+}

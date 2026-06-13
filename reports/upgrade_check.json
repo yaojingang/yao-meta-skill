@@ -18,14 +18,15 @@
       "openai",
       "claude",
       "generic",
-      "agent-skills-compatible"
+      "agent-skills-compatible",
+      "vscode"
     ]
   },
   "summary": {
     "declared_bump": "minor",
     "recommended_bump": "minor",
     "breaking_change_count": 0,
-    "added_target_count": 1,
+    "added_target_count": 2,
     "metadata_change_count": 1,
     "checksum_change_count": 2,
     "failure_count": 0,
@@ -34,7 +35,8 @@
   "upgrade_diff": {
     "name_changed": false,
     "added_targets": [
-      "agent-skills-compatible"
+      "agent-skills-compatible",
+      "vscode"
     ],
     "removed_targets": [],
     "compatibility_changes": [
@@ -68,18 +70,18 @@
       {
         "field": "archive_sha256",
         "from": "",
-        "to": "27fb62524da6ed2ccda448b7725e0154ee0fd3eccd4fe69a88494e67f4050353"
+        "to": "176d93befb446985aaff7cd8325b05c4858da13177cb13db82d210aa2d264060"
       },
       {
         "field": "package_sha256",
         "from": "0000000000000000000000000000000000000000000000000000000000000000",
-        "to": "2984db5f8d02b147c86bf259679e247a10a6fa495d123032be46c2e7fdaf8368"
+        "to": "7a8dab0d542d2994adec2045b54559612db36f14db8b7b66e4138fb0435ae3d3"
       }
     ]
   },
   "release_notes": [
     "Recommended version bump: minor.",
-    "Added targets: agent-skills-compatible.",
+    "Added targets: agent-skills-compatible, vscode.",
     "Package or archive checksum changed; reviewers should verify package artifacts before release.",
     "Package verification evidence: reports/package_verification.md."
   ],

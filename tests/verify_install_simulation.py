@@ -40,6 +40,8 @@ def build_package(out_dir: Path) -> dict:
             "claude",
             "--platform",
             "generic",
+            "--platform",
+            "vscode",
             "--expectations",
             str(EXPECTATIONS),
             "--output-dir",
@@ -85,7 +87,7 @@ def main() -> None:
     assert payload["summary"]["entrypoint_loaded"], payload
     assert payload["summary"]["manifest_loaded"], payload
     assert payload["summary"]["interface_loaded"], payload
-    assert payload["summary"]["adapter_count"] == 3, payload
+    assert payload["summary"]["adapter_count"] == 4, payload
     assert not payload["failures"], payload
     assert "Install Simulation" in (TMP / "install_simulation.md").read_text(encoding="utf-8")
 

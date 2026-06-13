@@ -2,9 +2,9 @@
 
 - OK: `True`
 - Package directory: `dist`
-- Targets: `3 / 3` adapters present
+- Targets: `4 / 4` adapters present
 - Archive present: `True`
-- Archive SHA256: `27fb62524da6ed2ccda448b7725e0154ee0fd3eccd4fe69a88494e67f4050353`
+- Archive SHA256: `176d93befb446985aaff7cd8325b05c4858da13177cb13db82d210aa2d264060`
 - Failures: `0`
 - Warnings: `0`
 
@@ -94,11 +94,40 @@
 | `generic-field-remote_inline_execution` | `pass` | generic adapter includes field: remote_inline_execution |
 | `generic-field-degradation_strategy` | `pass` | generic adapter includes field: degradation_strategy |
 | `generic-field-portability_profile` | `pass` | generic adapter includes field: portability_profile |
+| `vscode-adapter` | `pass` | Adapter exists for target: vscode |
+| `vscode-field-name` | `pass` | vscode adapter includes field: name |
+| `vscode-field-description` | `pass` | vscode adapter includes field: description |
+| `vscode-field-version` | `pass` | vscode adapter includes field: version |
+| `vscode-field-display_name` | `pass` | vscode adapter includes field: display_name |
+| `vscode-field-short_description` | `pass` | vscode adapter includes field: short_description |
+| `vscode-field-default_prompt` | `pass` | vscode adapter includes field: default_prompt |
+| `vscode-field-job_to_be_done` | `pass` | vscode adapter includes field: job_to_be_done |
+| `vscode-field-ir_source` | `pass` | vscode adapter includes field: ir_source |
+| `vscode-field-ir_schema_version` | `pass` | vscode adapter includes field: ir_schema_version |
+| `vscode-field-semantic_contract` | `pass` | vscode adapter includes field: semantic_contract |
+| `vscode-field-semantic_parity` | `pass` | vscode adapter includes field: semantic_parity |
+| `vscode-field-compiler` | `pass` | vscode adapter includes field: compiler |
+| `vscode-field-compiled_contract` | `pass` | vscode adapter includes field: compiled_contract |
+| `vscode-field-permission_contract` | `pass` | vscode adapter includes field: permission_contract |
+| `vscode-field-target_permission_contract` | `pass` | vscode adapter includes field: target_permission_contract |
+| `vscode-field-target_native_contract` | `pass` | vscode adapter includes field: target_native_contract |
+| `vscode-field-target_transform` | `pass` | vscode adapter includes field: target_transform |
+| `vscode-field-canonical_metadata` | `pass` | vscode adapter includes field: canonical_metadata |
+| `vscode-field-canonical_format` | `pass` | vscode adapter includes field: canonical_format |
+| `vscode-field-activation_mode` | `pass` | vscode adapter includes field: activation_mode |
+| `vscode-field-execution_context` | `pass` | vscode adapter includes field: execution_context |
+| `vscode-field-shell` | `pass` | vscode adapter includes field: shell |
+| `vscode-field-trust_level` | `pass` | vscode adapter includes field: trust_level |
+| `vscode-field-remote_inline_execution` | `pass` | vscode adapter includes field: remote_inline_execution |
+| `vscode-field-degradation_strategy` | `pass` | vscode adapter includes field: degradation_strategy |
+| `vscode-field-portability_profile` | `pass` | vscode adapter includes field: portability_profile |
 | `openai-file-targets/openai/adapter.json` | `pass` | Package contains targets/openai/adapter.json |
 | `openai-file-targets/openai/agents/openai.yaml` | `pass` | Package contains targets/openai/agents/openai.yaml |
 | `claude-file-targets/claude/adapter.json` | `pass` | Package contains targets/claude/adapter.json |
 | `claude-file-targets/claude/README.md` | `pass` | Package contains targets/claude/README.md |
 | `generic-file-targets/generic/adapter.json` | `pass` | Package contains targets/generic/adapter.json |
+| `vscode-file-targets/vscode/adapter.json` | `pass` | Package contains targets/vscode/adapter.json |
+| `vscode-file-targets/vscode/README.md` | `pass` | Package contains targets/vscode/README.md |
 | `archive-safe-paths` | `pass` | Archive has no absolute or parent-traversal entries |
 | `archive-entry-yao-meta-skill/SKILL.md` | `pass` | Archive contains yao-meta-skill/SKILL.md |
 | `archive-entry-yao-meta-skill/manifest.json` | `pass` | Archive contains yao-meta-skill/manifest.json |
@@ -110,6 +139,7 @@
 | `registry-compat-openai` | `pass` | Registry compatibility is reviewable for target: openai |
 | `registry-compat-claude` | `pass` | Registry compatibility is reviewable for target: claude |
 | `registry-compat-generic` | `pass` | Registry compatibility is reviewable for target: generic |
+| `registry-compat-vscode` | `pass` | Registry compatibility is reviewable for target: vscode |
 
 ## Failures
 

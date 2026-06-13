@@ -44,6 +44,8 @@ def main() -> None:
         "claude",
         "--target",
         "generic",
+        "--target",
+        "vscode",
         "--output-json",
         str(output_json),
         "--output-md",
@@ -54,13 +56,13 @@ def main() -> None:
     payload = json.loads(proc.stdout)
     assert payload["ok"], payload
     assert payload["schema_version"] == "1.0", payload
-    assert payload["summary"]["target_count"] == 3, payload
-    assert payload["summary"]["pass_count"] == 3, payload
+    assert payload["summary"]["target_count"] == 4, payload
+    assert payload["summary"]["pass_count"] == 4, payload
     assert output_json.exists(), output_json
     assert output_md.exists(), output_md
     assert "Compiled Targets" in output_md.read_text(encoding="utf-8")
     by_target = {item["target"]: item for item in payload["targets"]}
-    for target in ("openai", "claude", "generic"):
+    for target in ("openai", "claude", "generic", "vscode"):
         item = by_target[target]
         assert item["compiler"]["name"] == "yao-skill-ir-compiler", item
         assert item["compiler"]["source"] == "skill-ir", item

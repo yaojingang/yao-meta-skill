@@ -32,11 +32,11 @@ Mode rules: [Method](references/skill-engineering-method.md), [Operating Modes](
 6. Add only folders and gates that earn their keep.
 7. Surface the top three next iteration directions.
 
-Core playbooks: [Method](references/skill-engineering-method.md), [Intent](references/intent-dialogue.md), [Reference Scan](references/reference-scan.md), [Skill IR](references/skill-ir-method.md), [Output Eval](references/output-eval-method.md), [Registry](references/distribution-registry-method.md), [Telemetry](references/telemetry-drift-method.md), [Waivers](references/review-waiver-method.md), [Review Studio](references/review-studio-method.md).
+Core playbooks: [Method](references/skill-engineering-method.md), [Intent](references/intent-dialogue.md), [Skill IR](references/skill-ir-method.md), [Output Eval](references/output-eval-method.md), [Registry](references/distribution-registry-method.md), [Review Studio](references/review-studio-method.md).
 
 ## Skill OS 2.0 Gates
 
-For production, library, governed, or team-distributed work, use Skill IR, target compiler contracts, trigger + output eval, Skill Atlas, runtime conformance, trust report, registry metadata, package verification, install simulation, upgrade check, adoption/drift telemetry, reviewer waiver evidence, and Review Studio before release.
+For production, library, governed, or team-distributed work, run Skill IR, target compiler, trigger + output eval, Skill Atlas, conformance, trust, registry/package/install, upgrade, drift, waiver, and Review Studio gates before release.
 
 ## First-Turn Style
 
