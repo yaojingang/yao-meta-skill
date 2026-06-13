@@ -340,6 +340,18 @@ def main() -> None:
     }, world_class_action
     assert all(item["exists"] for item in world_class_action["source_refs"]), world_class_action
     assert full_payload["data"]["world_class_evidence_ledger"]["summary"]["pending_count"] == 4, full_payload["data"]["world_class_evidence_ledger"]
+    world_class_entries = full_payload["data"]["world_class_evidence_ledger"]["entries"]
+    assert len(world_class_entries) == 4, world_class_entries
+    assert {item["key"] for item in world_class_entries} == {
+        "provider-holdout",
+        "human-adjudication",
+        "native-permission-enforcement",
+        "native-client-telemetry",
+    }, world_class_entries
+    provider_entry = next(item for item in world_class_entries if item["key"] == "provider-holdout")
+    assert provider_entry["status"] == "pending", provider_entry
+    assert "reports/output_execution_runs.json summary.model_executed_count > 0" in provider_entry["success_checks"], provider_entry
+    assert provider_entry["observed_state"]["model_executed_count"] == 0, provider_entry
     assert full_payload["data"]["atlas"]["summary"]["actionable_route_collision_count"] == 0, full_payload["data"]["atlas"]
     assert full_payload["data"]["atlas"]["summary"]["actionable_drift_signal_count"] == 0, full_payload["data"]["atlas"]
     assert full_payload["data"]["atlas"]["summary"]["non_actionable_issue_count"] >= 1, full_payload["data"]["atlas"]
@@ -385,6 +397,14 @@ def main() -> None:
     assert "补齐 provider、真人盲评、原生权限执行和真实客户端遥测证据" in html, html
     assert "世界证据" in html, html
     assert "证据台账" in html, html
+    assert "world-evidence-grid" in html, html
+    assert "Provider Holdout" in html, html
+    assert "Native Permission Enforcement" in html, html
+    assert "完成定义" in html, html
+    assert "证据来源" in html, html
+    assert "隐私约束" in html, html
+    assert "reports/output_execution_runs.json summary.model_executed_count &gt; 0" in html, html
+    assert "计划、metadata fallback、待评审和本地命令不会被当成完成证据" in html, html
     assert "审查批注" in html, html[:9000]
     assert "当前没有 reviewer 批注" in html, html[:9000]
     assert "输出实验" in html, html[:2000]

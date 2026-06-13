@@ -610,6 +610,49 @@ def render_review_annotations_panel(annotations_report: dict[str, Any]) -> str:
     return "".join(cards)
 
 
+def render_inline_list(items: list[Any], empty_label: str) -> str:
+    if not items:
+        return f"<p class='muted'>{html.escape(empty_label)}</p>"
+    return "<ul>" + "".join(f"<li>{html.escape(str(item))}</li>" for item in items) + "</ul>"
+
+
+def render_world_class_evidence_entries(ledger: dict[str, Any]) -> str:
+    entries = ledger.get("entries", []) if isinstance(ledger, dict) else []
+    if not entries:
+        return "<p class='muted'>当前没有 world-class 证据条目。</p>"
+    cards = []
+    for entry in entries:
+        observed = entry.get("observed_state", {}) if isinstance(entry.get("observed_state", {}), dict) else {}
+        observed_summary = "; ".join(f"{key}: {value}" for key, value in observed.items())
+        status = str(entry.get("status", "pending"))
+        status_label_text = "已接受" if status == "accepted" else "待补证"
+        cards.append(
+            "<article class='world-evidence-card "
+            + html.escape(status)
+            + "'>"
+            f"<div><span>{html.escape(status_label_text)} · {html.escape(str(entry.get('category', '')))}</span>"
+            f"<h3>{html.escape(str(entry.get('label', entry.get('key', 'evidence'))))}</h3></div>"
+            f"<p>{html.escape(str(entry.get('objective', '')))}</p>"
+            f"<dl><dt>负责人</dt><dd>{html.escape(str(entry.get('owner', '')))}</dd>"
+            f"<dt>当前状态</dt><dd>{html.escape(str(entry.get('current', '')))}</dd>"
+            f"<dt>下一步</dt><dd>{html.escape(str(entry.get('next_action', '')))}</dd>"
+            f"<dt>观测值</dt><dd>{html.escape(observed_summary or '无')}</dd></dl>"
+            "<div class='world-evidence-columns'>"
+            "<div><h4>完成定义</h4>"
+            + render_inline_list(entry.get("success_checks", []), "暂无完成定义。")
+            + "</div>"
+            "<div><h4>证据来源</h4>"
+            + render_inline_list(entry.get("evidence_artifacts", []), "暂无证据来源。")
+            + "</div>"
+            "<div><h4>隐私约束</h4>"
+            + render_inline_list(entry.get("privacy_contract", []), "暂无隐私约束。")
+            + "</div>"
+            "</div>"
+            "</article>"
+        )
+    return "<div class='world-evidence-grid'>" + "".join(cards) + "</div>"
+
+
 def render_html(report: dict[str, Any]) -> str:
     summary = report["summary"]
     gates = report["gates"]
@@ -640,7 +683,9 @@ def render_html(report: dict[str, Any]) -> str:
     atlas_summary = report["data"]["atlas"].get("summary", {})
     adoption_summary = report["data"]["adoption_drift"].get("summary", {})
     waiver_summary = report["data"]["review_waivers"].get("summary", {})
-    world_class_summary = report["data"].get("world_class_evidence_ledger", {}).get("summary", {})
+    world_class_ledger = report["data"].get("world_class_evidence_ledger", {})
+    world_class_summary = world_class_ledger.get("summary", {})
+    world_class_entries_html = render_world_class_evidence_entries(world_class_ledger)
     annotation_summary = report["data"]["review_annotations"].get("summary", {})
     annotation_caption = (
         f"{annotation_summary.get('annotation_count', 0)} 条批注；"
@@ -911,7 +956,13 @@ def render_html(report: dict[str, Any]) -> str:
       <div class="panel"><h2>批准台账</h2>{waiver_panel}</div>
     </section>
 
-    <section id="world-class" class="twocol">
+    <section id="world-class">
+      <h2>世界证据</h2>
+      <p class="muted">这里列出每个 world-class 证据项的当前状态、完成定义、证据来源、隐私约束和下一步；计划、metadata fallback、待评审和本地命令不会被当成完成证据。</p>
+      {world_class_entries_html}
+    </section>
+
+    <section class="twocol">
       <div class="panel"><h2>世界证据</h2><p>{html.escape(gate_details.get('world-class-evidence', 'world-class evidence ledger missing'))}</p></div>
       <div class="panel"><h2>证据台账</h2>{world_class_panel}</div>
     </section>

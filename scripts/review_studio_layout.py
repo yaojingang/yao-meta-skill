@@ -203,6 +203,56 @@ def review_studio_css() -> str:
     .annotation-card.warning { border-left: 4px solid var(--warn); }
     .annotation-card.blocker { border-left: 4px solid var(--block); }
     .annotation-card.resolved { opacity: .72; }
+    .world-evidence-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .world-evidence-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      background: #fff;
+      display: grid;
+      gap: 12px;
+      min-width: 0;
+    }
+    .world-evidence-card.pending { border-left: 4px solid var(--warn); }
+    .world-evidence-card.accepted { border-left: 4px solid var(--pass); }
+    .world-evidence-card span,
+    .world-evidence-card p,
+    .world-evidence-card dd,
+    .world-evidence-card li {
+      color: var(--muted);
+      font-size: 14px;
+      overflow-wrap: anywhere;
+    }
+    .world-evidence-card dl {
+      display: grid;
+      grid-template-columns: 86px minmax(0, 1fr);
+      gap: 6px 10px;
+      margin: 0;
+    }
+    .world-evidence-card dt { color: var(--ink); font-size: 14px; }
+    .world-evidence-card dd { margin: 0; }
+    .world-evidence-columns {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+    }
+    .world-evidence-columns h4 {
+      margin: 0 0 6px;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .world-evidence-columns ul {
+      margin: 0;
+      padding-left: 18px;
+    }
     .action-card span,
     .annotation-card span,
     .action-card small,
@@ -252,7 +302,7 @@ def review_studio_css() -> str:
       font-size: 13px;
     }
     @media (max-width: 980px) {
-      .metrics, .gates, .twocol, .actions-grid, .annotations-grid, .kv-grid { grid-template-columns: 1fr; }
+      .metrics, .gates, .twocol, .actions-grid, .annotations-grid, .world-evidence-grid, .world-evidence-columns, .kv-grid { grid-template-columns: 1fr; }
       main { padding: 32px 18px 60px; }
       nav { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; }
       nav a { flex: 0 0 auto; }

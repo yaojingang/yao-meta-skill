@@ -44,7 +44,7 @@
   },
   "catalog": {
     "workspace_root": ".",
-    "generated_at": "2026-06-13",
+    "generated_at": "2026-06-14",
     "skills": [
       {
         "name": "yao-meta-skill",
@@ -869,7 +869,7 @@
       "name": "incident-command-governor",
       "path": "examples/governed-incident-command/generated-skill",
       "reason": "review overdue by cadence monthly",
-      "age_days": 74,
+      "age_days": 75,
       "allowed_days": 31,
       "actionable": false,
       "scope": "example"

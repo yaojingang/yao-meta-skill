@@ -3,24 +3,24 @@
   "ok": true,
   "generated_at": "2026-06-13",
   "skill_dir": ".",
-  "commit": "f3b23ea9b90e85dbcfdf85c75b40c29e9cad2ab3",
+  "commit": "acc2cc25715da452d4db48ea6818498846c806ce",
   "git_status": {
     "available": true,
     "dirty": true,
-    "changed_file_count": 25,
+    "changed_file_count": 27,
     "sample": [
       " M registry/index.json",
       " M registry/packages/yao-meta-skill.json",
       " M reports/benchmark_reproducibility.json",
       " M reports/benchmark_reproducibility.md",
       " M reports/context_budget.json",
+      " M reports/install_simulation.json",
       " M reports/output_execution_runs.json",
       " M reports/output_execution_runs.md",
       " M reports/package_verification.json",
       " M reports/package_verification.md",
       " M reports/registry_audit.json",
-      " M reports/registry_audit.md",
-      " M reports/review-studio.html"
+      " M reports/registry_audit.md"
     ]
   },
   "summary": {
@@ -42,7 +42,7 @@
     "world_class_task_count": 4,
     "world_class_ledger_pending_count": 4,
     "working_tree_dirty": true,
-    "changed_file_count": 25
+    "changed_file_count": 27
   },
   "methodology": {
     "path": "reports/benchmark_methodology.md",
@@ -115,8 +115,8 @@
       "label": "output_execution",
       "path": "reports/output_execution_runs.json",
       "exists": true,
-      "bytes": 7967,
-      "sha256": "538ba36bb39fd9d7040f760b0a7c914f7c4f383e777721239369db73bc44c363"
+      "bytes": 7966,
+      "sha256": "c8608efe17151886b6833bb3439bbf6518e6b95035416e31cdeaf5e919b36b18"
     },
     {
       "label": "blind_review",
@@ -151,35 +151,35 @@
       "path": "reports/security_trust_report.json",
       "exists": true,
       "bytes": 82914,
-      "sha256": "efb55ff48628972938b3938217373fcce189e91e61b62917edf9266b3c8b3954"
+      "sha256": "b634bb958d049e16bbf8aea38a16337964cf1877707577189ed6ea11beb99321"
     },
     {
       "label": "registry_audit",
       "path": "reports/registry_audit.json",
       "exists": true,
       "bytes": 3183,
-      "sha256": "d39f6642c39b2e0f5f8f5f05ce1eaac3e765ba5e7b90148bddf3553f3cbcf44d"
+      "sha256": "d967568d9b058a65c936d3075a6c947a3651e912bfe03021806927fe6eaff929"
     },
     {
       "label": "package_verification",
       "path": "reports/package_verification.json",
       "exists": true,
       "bytes": 19325,
-      "sha256": "cea8e0f5627ea3c19817f02a0644a5169b447333227a762223f0d2571a449825"
+      "sha256": "ca9a087d0badeba81f8a9f8b8411e0a6ca1bd979d1011a03523e20d76f3cc7dc"
     },
     {
       "label": "install_simulation",
       "path": "reports/install_simulation.json",
       "exists": true,
       "bytes": 8557,
-      "sha256": "db509b728ad4d9844f146f2f7493b9180bf34ef2c75e7e2d7e57868f3b612026"
+      "sha256": "00a3b2f3b36d83aa700dfc2082704d18b6069c82d53abb1af9cbbfed755d4fd6"
     },
     {
       "label": "skill_os2_audit",
       "path": "reports/skill_os2_audit.json",
       "exists": true,
       "bytes": 13946,
-      "sha256": "f8e39236c93213cab3a5e61881accd7bb941e6f77209f15ffcce9fa86e83b6fe"
+      "sha256": "c0a047098dadd7821637b4b126f461e857730193c3f262f95fb4552474a54218"
     },
     {
       "label": "world_class_evidence_plan",
