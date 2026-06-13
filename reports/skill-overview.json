@@ -449,10 +449,10 @@
         "path": "reports",
         "label": "Generated evidence and overview artifacts",
         "kind": "folder",
-        "file_count": 199
+        "file_count": 200
       }
     ],
-    "file_count": 356,
+    "file_count": 357,
     "folder_count": 4,
     "distribution": [
       {
@@ -485,7 +485,7 @@
       },
       {
         "label": "reports",
-        "value": 199
+        "value": 200
       }
     ]
   },
@@ -618,7 +618,7 @@
       "path": "reports",
       "label": "Generated evidence and overview artifacts",
       "kind": "folder",
-      "file_count": 199
+      "file_count": 200
     }
   ],
   "strengths": [
@@ -882,6 +882,7 @@
     "artifacts": {
       "reviewer_kit_json": "reports/output_review_kit.json",
       "reviewer_kit_markdown": "reports/output_review_kit.md",
+      "reviewer_kit_html": "reports/output_review_kit.html",
       "blind_pack_json": "reports/output_blind_review_pack.json",
       "blind_pack_markdown": "reports/output_blind_review_pack.md",
       "decisions": "reports/output_review_decisions.json",
@@ -934,9 +935,9 @@
       "world_class_task_count": 4,
       "world_class_ledger_pending_count": 4,
       "working_tree_dirty": true,
-      "changed_file_count": 63
+      "changed_file_count": 33
     },
-    "commit": "0cf7f32e32e2b5654a4d03cf91f025446e6d5b7b",
+    "commit": "834665b73c1422486be8cb1b1dd826fa58e81be7",
     "missing_artifacts": [],
     "limitations": [
       "Local command-runner evidence is reproducible but does not replace provider-backed model holdout evidence.",
@@ -1040,7 +1041,7 @@
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
     "package_hash_file_count": 177,
-    "package_sha256": "09013a0df3555b5f1ef58254c1bc78ebd2383f8efbfe67a7a9c1010a172fb492"
+    "package_sha256": "5b6eb1631e77feb6fe3f4199e128607cdc719f8ec0675c92ae986aad2553a045"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -1078,8 +1079,8 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "09013a0df3555b5f1ef58254c1bc78ebd2383f8efbfe67a7a9c1010a172fb492",
-        "archive_sha256": "2fbe2e4a06aa71dacd59865cf34adb163940972d04316ebbeb479a83cb46bd34"
+        "package_sha256": "5b6eb1631e77feb6fe3f4199e128607cdc719f8ec0675c92ae986aad2553a045",
+        "archive_sha256": "fc334a4b4da4af6c463510a76551e018633deb5626dca38d9aaaa2c636591eb7"
       },
       "compatibility": {
         "openai": "pass",
@@ -1110,7 +1111,7 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "2fbe2e4a06aa71dacd59865cf34adb163940972d04316ebbeb479a83cb46bd34",
+        "archive_sha256": "fc334a4b4da4af6c463510a76551e018633deb5626dca38d9aaaa2c636591eb7",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
@@ -1126,8 +1127,8 @@
       "target_count": 4,
       "adapter_count": 4,
       "archive_present": true,
-      "archive_sha256": "2fbe2e4a06aa71dacd59865cf34adb163940972d04316ebbeb479a83cb46bd34",
-      "archive_entry_count": 567,
+      "archive_sha256": "fc334a4b4da4af6c463510a76551e018633deb5626dca38d9aaaa2c636591eb7",
+      "archive_entry_count": 568,
       "failure_count": 0,
       "warning_count": 0
     },
@@ -1138,7 +1139,7 @@
     "ok": true,
     "summary": {
       "archive_present": true,
-      "archive_entry_count": 567,
+      "archive_entry_count": 568,
       "archive_extracted": true,
       "entrypoint_loaded": true,
       "manifest_loaded": true,
@@ -1205,12 +1206,12 @@
         {
           "field": "archive_sha256",
           "from": "",
-          "to": "2fbe2e4a06aa71dacd59865cf34adb163940972d04316ebbeb479a83cb46bd34"
+          "to": "fc334a4b4da4af6c463510a76551e018633deb5626dca38d9aaaa2c636591eb7"
         },
         {
           "field": "package_sha256",
           "from": "0000000000000000000000000000000000000000000000000000000000000000",
-          "to": "09013a0df3555b5f1ef58254c1bc78ebd2383f8efbfe67a7a9c1010a172fb492"
+          "to": "5b6eb1631e77feb6fe3f4199e128607cdc719f8ec0675c92ae986aad2553a045"
         }
       ]
     },
@@ -1227,14 +1228,14 @@
     "ok": true,
     "summary": {
       "event_count": 1,
-      "adoption_sample_count": 0,
-      "activation_count": 0,
-      "accepted_count": 0,
+      "adoption_sample_count": 1,
+      "activation_count": 1,
+      "accepted_count": 1,
       "edited_count": 0,
       "rejected_count": 0,
       "missed_count": 0,
       "failed_count": 0,
-      "adoption_rate": 0,
+      "adoption_rate": 100.0,
       "missed_trigger_count": 0,
       "wrong_trigger_count": 0,
       "bad_output_count": 0,
@@ -1243,7 +1244,7 @@
       "review_overdue_count": 0,
       "risk_band": "low",
       "event_types": {
-        "review_event": 1
+        "skill_activation": 1
       },
       "failure_types": {},
       "source_types": {
@@ -1462,7 +1463,7 @@
         "status": "external_required",
         "category": "external",
         "owner": "Browser/Chrome/IDE/provider client integrator",
-        "current": "external source events 0; adoption samples 0",
+        "current": "external source events 0; adoption samples 1",
         "objective": "Import production metadata-only events from a real external client into the local drift loop.",
         "runbook": [
           "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
@@ -1701,7 +1702,7 @@
         "owner": "Browser/Chrome/IDE/provider client integrator",
         "status": "pending",
         "source_status": "external_required",
-        "current": "external source events 0; adoption samples 0",
+        "current": "external source events 0; adoption samples 1",
         "objective": "Import production metadata-only events from a real external client into the local drift loop.",
         "provenance_requirements": [
           "real external client source",
@@ -1729,7 +1730,7 @@
         ],
         "observed_state": {
           "external_source_events": 0,
-          "adoption_sample_count": 0,
+          "adoption_sample_count": 1,
           "raw_content_allowed": false,
           "risk_band": "low",
           "accepted": false

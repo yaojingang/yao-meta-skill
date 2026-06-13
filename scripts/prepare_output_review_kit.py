@@ -2,6 +2,7 @@
 """Prepare a reviewer-facing blind A/B output review kit."""
 
 import argparse
+import html
 import json
 from pathlib import Path
 from typing import Any
@@ -22,6 +23,7 @@ DEFAULT_BLIND_PACK_MD = ROOT / "reports" / "output_blind_review_pack.md"
 DEFAULT_DECISIONS = ROOT / "reports" / "output_review_decisions.json"
 DEFAULT_OUTPUT_JSON = ROOT / "reports" / "output_review_kit.json"
 DEFAULT_OUTPUT_MD = ROOT / "reports" / "output_review_kit.md"
+DEFAULT_OUTPUT_HTML = ROOT / "reports" / "output_review_kit.html"
 
 
 def load_optional_decisions(path: Path) -> tuple[dict[str, Any], list[str]]:
@@ -236,12 +238,174 @@ def render_markdown(payload: dict[str, Any]) -> str:
     return "\n".join(lines).strip() + "\n"
 
 
+def html_text(value: Any) -> str:
+    return html.escape(str(value or ""), quote=True)
+
+
+def status_label(status: str) -> str:
+    return {
+        "awaiting-decision": "Awaiting",
+        "needs-fix": "Needs fix",
+        "ready-for-adjudication": "Ready",
+    }.get(status, status)
+
+
+def render_html_rubric(rubric: list[dict[str, Any]]) -> str:
+    if not rubric:
+        return "<li>No rubric items found.</li>"
+    return "".join(
+        "<li><span>{id}</span><p>{description}</p><small>{weight}</small></li>".format(
+            id=html_text(item.get("id", "")),
+            description=html_text(item.get("description", "")),
+            weight=html_text(item.get("weight", "")),
+        )
+        for item in rubric
+    )
+
+
+def render_html_cases(cases: list[dict[str, Any]]) -> str:
+    cards = []
+    for index, case in enumerate(cases, start=1):
+        state = case.get("decision_state", {})
+        status = str(state.get("status", "awaiting-decision"))
+        cards.append(
+            f"""
+      <article class="case-card" id="case-{html_text(case.get('case_id', ''))}">
+        <header class="case-head">
+          <div>
+            <span class="case-index">Case {index:02d}</span>
+            <h3>{html_text(case.get('case_id', ''))}</h3>
+          </div>
+          <span class="status-pill {html_text(status)}">{html_text(status_label(status))}</span>
+        </header>
+        <p class="prompt">{html_text(case.get('prompt', ''))}</p>
+        <section class="rubric"><h4>Rubric</h4><ul>{render_html_rubric(case.get('rubric', []))}</ul></section>
+        <section class="variants" aria-label="Blind output variants">
+          <div class="variant"><h4>Variant A</h4><pre>{html_text(case.get('variant_a', {}).get('output', ''))}</pre></div>
+          <div class="variant"><h4>Variant B</h4><pre>{html_text(case.get('variant_b', {}).get('output', ''))}</pre></div>
+        </section>
+        <footer class="case-foot">
+          <span>Winner recorded: {html_text(str(state.get('winner_variant_recorded', False)).lower())}</span>
+          <span>Confidence: {html_text(str(state.get('confidence_recorded', False)).lower())}</span>
+          <span>Reason: {html_text(str(state.get('reason_recorded', False)).lower())}</span>
+          <strong>{html_text(state.get('blocking_reason', ''))}</strong>
+        </footer>
+      </article>"""
+        )
+    return "\n".join(cards)
+
+
+def decision_template_json(cases: list[dict[str, Any]]) -> str:
+    template = {
+        "schema_version": "1.0",
+        "reviewer": "",
+        "reviewed_at": "",
+        "decisions": [
+            {"case_id": case.get("case_id", ""), "winner_variant": "", "confidence": None, "reason": ""}
+            for case in cases
+        ],
+    }
+    return json.dumps(template, ensure_ascii=False, indent=2)
+
+
+def render_html(payload: dict[str, Any]) -> str:
+    summary = payload["summary"]
+    contract = payload["review_contract"]
+    stats = [
+        ("Cases", summary["case_count"]),
+        ("Ready", summary["ready_for_adjudication_count"]),
+        ("Pending", summary["pending_decision_count"]),
+        ("Invalid", summary["invalid_decision_count"]),
+    ]
+    stat_html = "".join(f"<div><span>{html_text(label)}</span><strong>{html_text(value)}</strong></div>" for label, value in stats)
+    flow_html = "".join(f"<li>{html_text(step)}</li>" for step in contract["reviewer_steps"])
+    privacy_html = "".join(f"<li>{html_text(item)}</li>" for item in contract["privacy_contract"])
+    decision_json = html_text(decision_template_json(payload["cases"]))
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Output Review Kit</title>
+  <style>
+    :root {{ --ink:#1B365D; --text:#202124; --muted:#6f6a63; --line:#e8e1d8; --soft:#f8f6f2; --warn:#9b4d0f; --ok:#1f6f43; }}
+    * {{ box-sizing:border-box; }}
+    body {{ margin:0; background:#fff; color:var(--text); font:16px/1.55 Georgia, "Times New Roman", serif; }}
+    .shell {{ max-width:1180px; margin:0 auto; padding:36px 24px 72px; }}
+    .topbar {{ position:sticky; top:0; z-index:10; background:rgba(255,255,255,.96); border-bottom:1px solid var(--line); backdrop-filter:blur(8px); }}
+    .topbar-inner {{ max-width:1180px; margin:0 auto; padding:12px 24px; display:flex; justify-content:space-between; gap:18px; align-items:center; }}
+    .brand {{ color:var(--ink); font-weight:700; letter-spacing:0; }}
+    .links {{ display:flex; gap:12px; flex-wrap:wrap; }}
+    .links a {{ color:var(--ink); text-decoration:none; border-bottom:1px solid transparent; }}
+    .links a:hover {{ border-color:var(--ink); }}
+    .hero {{ border-bottom:1px solid var(--line); padding:34px 0 28px; }}
+    .eyebrow {{ color:var(--ink); text-transform:uppercase; font-size:12px; letter-spacing:0; font-weight:700; }}
+    h1 {{ margin:8px 0 12px; color:var(--ink); font-size:58px; line-height:1.02; letter-spacing:0; }}
+    .lede {{ max-width:760px; color:var(--muted); font-size:20px; }}
+    .stats {{ display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:12px; margin:28px 0; }}
+    .stats div, .panel, .case-card {{ border:1px solid var(--line); border-radius:8px; background:#fff; }}
+    .stats div {{ padding:16px; }}
+    .stats span {{ display:block; color:var(--muted); font-size:13px; }}
+    .stats strong {{ color:var(--ink); font-size:34px; line-height:1; }}
+    .grid {{ display:grid; grid-template-columns:minmax(0,1fr) minmax(280px,.42fr); gap:18px; align-items:start; }}
+    .panel {{ padding:20px; }}
+    h2, h3, h4 {{ color:var(--ink); letter-spacing:0; }}
+    h2 {{ margin:0 0 14px; font-size:28px; }}
+    h3 {{ margin:0; font-size:24px; }}
+    h4 {{ margin:0 0 10px; font-size:16px; }}
+    ol, ul {{ padding-left:22px; }}
+    code, pre {{ font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }}
+    pre {{ white-space:pre-wrap; overflow-wrap:anywhere; margin:0; color:#2b2b2b; font-size:13px; line-height:1.5; }}
+    .case-card {{ margin:22px 0; padding:22px; scroll-margin-top:72px; }}
+    .case-head, .case-foot {{ display:flex; gap:14px; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; }}
+    .case-index {{ color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:0; }}
+    .status-pill {{ border:1px solid var(--line); border-radius:999px; padding:4px 10px; color:var(--ink); background:var(--soft); font-size:13px; }}
+    .status-pill.ready-for-adjudication {{ color:var(--ok); }}
+    .status-pill.needs-fix {{ color:var(--warn); }}
+    .prompt {{ color:var(--muted); font-size:18px; }}
+    .rubric {{ margin:18px 0; padding:16px; background:var(--soft); border-radius:8px; }}
+    .rubric ul {{ list-style:none; padding:0; margin:0; display:grid; gap:8px; }}
+    .rubric li {{ display:grid; grid-template-columns:160px 1fr 44px; gap:12px; align-items:start; border-top:1px solid var(--line); padding-top:8px; }}
+    .rubric li:first-child {{ border-top:0; padding-top:0; }}
+    .rubric span {{ color:var(--ink); font-weight:700; overflow-wrap:anywhere; }}
+    .rubric p {{ margin:0; }}
+    .rubric small {{ text-align:right; color:var(--muted); }}
+    .variants {{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }}
+    .variant {{ border:1px solid var(--line); border-radius:8px; padding:16px; min-width:0; }}
+    .case-foot {{ margin-top:16px; padding-top:14px; border-top:1px solid var(--line); color:var(--muted); font-size:13px; }}
+    .case-foot strong {{ flex-basis:100%; color:var(--text); font-weight:400; }}
+    .template {{ background:#101820; color:#f7f2e8; border-radius:8px; padding:16px; }}
+    @media (max-width:820px) {{ .stats, .grid, .variants {{ grid-template-columns:1fr; }} .rubric li {{ grid-template-columns:1fr; }} .rubric small {{ text-align:left; }} h1 {{ font-size:38px; }} }}
+  </style>
+</head>
+<body>
+  <nav class="topbar"><div class="topbar-inner"><span class="brand">Output Review Kit</span><div class="links"><a href="#flow">Flow</a><a href="#cases">Cases</a><a href="#template">Template</a></div></div></nav>
+  <main class="shell">
+    <section class="hero">
+      <span class="eyebrow">Blind A/B Human Review</span>
+      <h1>Reviewer cockpit for output quality decisions</h1>
+      <p class="lede">Compare visible Variant A and Variant B outputs, fill the decision file, then run adjudication. The answer key is intentionally hidden from this page.</p>
+      <div class="stats">{stat_html}</div>
+    </section>
+    <section class="grid" id="flow">
+      <article class="panel"><h2>Review Flow</h2><ol>{flow_html}</ol></article>
+      <aside class="panel"><h2>Privacy</h2><ul>{privacy_html}</ul></aside>
+    </section>
+    <section id="cases">{render_html_cases(payload["cases"])}</section>
+    <section class="panel" id="template"><h2>Decision Template</h2><p>Use this shape in {html_text(payload['artifacts']['decisions'])}; leave a case blank when the reviewer is not ready.</p><pre class="template">{decision_json}</pre></section>
+  </main>
+</body>
+</html>
+"""
+
+
 def prepare_output_review_kit(
     blind_pack_json: Path,
     blind_pack_md: Path,
     decisions_path: Path,
     output_json: Path,
     output_md: Path,
+    output_html: Path | None = None,
     write_template: bool = False,
 ) -> dict[str, Any]:
     blind_pack, failures = load_json(blind_pack_json)
@@ -272,6 +436,7 @@ def prepare_output_review_kit(
         "artifacts": {
             "reviewer_kit_json": display_path(output_json),
             "reviewer_kit_markdown": display_path(output_md),
+            "reviewer_kit_html": display_path(output_html) if output_html else "",
             "blind_pack_json": display_path(blind_pack_json),
             "blind_pack_markdown": display_path(blind_pack_md),
             "decisions": display_path(decisions_path),
@@ -287,6 +452,9 @@ def prepare_output_review_kit(
     output_md.parent.mkdir(parents=True, exist_ok=True)
     output_json.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     output_md.write_text(render_markdown(payload), encoding="utf-8")
+    if output_html:
+        output_html.parent.mkdir(parents=True, exist_ok=True)
+        output_html.write_text(render_html(payload), encoding="utf-8")
     return payload
 
 
@@ -297,6 +465,7 @@ def main() -> None:
     parser.add_argument("--decisions", default=str(DEFAULT_DECISIONS))
     parser.add_argument("--output-json", default=str(DEFAULT_OUTPUT_JSON))
     parser.add_argument("--output-md", default=str(DEFAULT_OUTPUT_MD))
+    parser.add_argument("--output-html", default=str(DEFAULT_OUTPUT_HTML))
     parser.add_argument("--write-template", action="store_true")
     args = parser.parse_args()
 
@@ -306,6 +475,7 @@ def main() -> None:
         Path(args.decisions).resolve(),
         Path(args.output_json).resolve(),
         Path(args.output_md).resolve(),
+        Path(args.output_html).resolve() if args.output_html else None,
         write_template=args.write_template,
     )
     print(json.dumps(payload, ensure_ascii=False, indent=2))

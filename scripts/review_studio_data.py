@@ -64,6 +64,7 @@ def evidence_paths(skill_dir: Path) -> dict[str, str]:
         "output_execution": "reports/output_execution_runs.md",
         "output_blind_review": "reports/output_blind_review_pack.md",
         "output_review_kit": "reports/output_review_kit.md",
+        "output_review_kit_html": "reports/output_review_kit.html",
         "output_review_decisions": "reports/output_review_decisions.json",
         "output_review_adjudication": "reports/output_review_adjudication.md",
         "benchmark_reproducibility": "reports/benchmark_reproducibility.md",

@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Output Review Kit</title>
+  <style>
+    :root { --ink:#1B365D; --text:#202124; --muted:#6f6a63; --line:#e8e1d8; --soft:#f8f6f2; --warn:#9b4d0f; --ok:#1f6f43; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:#fff; color:var(--text); font:16px/1.55 Georgia, "Times New Roman", serif; }
+    .shell { max-width:1180px; margin:0 auto; padding:36px 24px 72px; }
+    .topbar { position:sticky; top:0; z-index:10; background:rgba(255,255,255,.96); border-bottom:1px solid var(--line); backdrop-filter:blur(8px); }
+    .topbar-inner { max-width:1180px; margin:0 auto; padding:12px 24px; display:flex; justify-content:space-between; gap:18px; align-items:center; }
+    .brand { color:var(--ink); font-weight:700; letter-spacing:0; }
+    .links { display:flex; gap:12px; flex-wrap:wrap; }
+    .links a { color:var(--ink); text-decoration:none; border-bottom:1px solid transparent; }
+    .links a:hover { border-color:var(--ink); }
+    .hero { border-bottom:1px solid var(--line); padding:34px 0 28px; }
+    .eyebrow { color:var(--ink); text-transform:uppercase; font-size:12px; letter-spacing:0; font-weight:700; }
+    h1 { margin:8px 0 12px; color:var(--ink); font-size:58px; line-height:1.02; letter-spacing:0; }
+    .lede { max-width:760px; color:var(--muted); font-size:20px; }
+    .stats { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:12px; margin:28px 0; }
+    .stats div, .panel, .case-card { border:1px solid var(--line); border-radius:8px; background:#fff; }
+    .stats div { padding:16px; }
+    .stats span { display:block; color:var(--muted); font-size:13px; }
+    .stats strong { color:var(--ink); font-size:34px; line-height:1; }
+    .grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(280px,.42fr); gap:18px; align-items:start; }
+    .panel { padding:20px; }
+    h2, h3, h4 { color:var(--ink); letter-spacing:0; }
+    h2 { margin:0 0 14px; font-size:28px; }
+    h3 { margin:0; font-size:24px; }
+    h4 { margin:0 0 10px; font-size:16px; }
+    ol, ul { padding-left:22px; }
+    code, pre { font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    pre { white-space:pre-wrap; overflow-wrap:anywhere; margin:0; color:#2b2b2b; font-size:13px; line-height:1.5; }
+    .case-card { margin:22px 0; padding:22px; scroll-margin-top:72px; }
+    .case-head, .case-foot { display:flex; gap:14px; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; }
+    .case-index { color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:0; }
+    .status-pill { border:1px solid var(--line); border-radius:999px; padding:4px 10px; color:var(--ink); background:var(--soft); font-size:13px; }
+    .status-pill.ready-for-adjudication { color:var(--ok); }
+    .status-pill.needs-fix { color:var(--warn); }
+    .prompt { color:var(--muted); font-size:18px; }
+    .rubric { margin:18px 0; padding:16px; background:var(--soft); border-radius:8px; }
+    .rubric ul { list-style:none; padding:0; margin:0; display:grid; gap:8px; }
+    .rubric li { display:grid; grid-template-columns:160px 1fr 44px; gap:12px; align-items:start; border-top:1px solid var(--line); padding-top:8px; }
+    .rubric li:first-child { border-top:0; padding-top:0; }
+    .rubric span { color:var(--ink); font-weight:700; overflow-wrap:anywhere; }
+    .rubric p { margin:0; }
+    .rubric small { text-align:right; color:var(--muted); }
+    .variants { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .variant { border:1px solid var(--line); border-radius:8px; padding:16px; min-width:0; }
+    .case-foot { margin-top:16px; padding-top:14px; border-top:1px solid var(--line); color:var(--muted); font-size:13px; }
+    .case-foot strong { flex-basis:100%; color:var(--text); font-weight:400; }
+    .template { background:#101820; color:#f7f2e8; border-radius:8px; padding:16px; }
+    @media (max-width:820px) { .stats, .grid, .variants { grid-template-columns:1fr; } .rubric li { grid-template-columns:1fr; } .rubric small { text-align:left; } h1 { font-size:38px; } }
+  </style>
+</head>
+<body>
+  <nav class="topbar"><div class="topbar-inner"><span class="brand">Output Review Kit</span><div class="links"><a href="#flow">Flow</a><a href="#cases">Cases</a><a href="#template">Template</a></div></div></nav>
+  <main class="shell">
+    <section class="hero">
+      <span class="eyebrow">Blind A/B Human Review</span>
+      <h1>Reviewer cockpit for output quality decisions</h1>
+      <p class="lede">Compare visible Variant A and Variant B outputs, fill the decision file, then run adjudication. The answer key is intentionally hidden from this page.</p>
+      <div class="stats"><div><span>Cases</span><strong>5</strong></div><div><span>Ready</span><strong></strong></div><div><span>Pending</span><strong>5</strong></div><div><span>Invalid</span><strong></strong></div></div>
+    </section>
+    <section class="grid" id="flow">
+      <article class="panel"><h2>Review Flow</h2><ol><li>Open reports/output_blind_review_pack.md or this kit and compare Variant A vs Variant B for each case.</li><li>Record choices in reports/output_review_decisions.json without opening the answer key.</li><li>Use winner_variant A or B, confidence from 0 to 1, and a short reason for every case.</li><li>Run python3 scripts/yao.py output-review after choices are recorded.</li><li>Refresh python3 scripts/yao.py review-studio . before asking for release approval.</li></ol></article>
+      <aside class="panel"><h2>Privacy</h2><ul><li>The answer key is intentionally withheld from this kit.</li><li>Do not inspect hidden labels or expected winners before decisions are recorded.</li><li>Do not paste private user data into decision reasons.</li><li>Pending decisions must stay pending instead of being counted as human agreement.</li></ul></aside>
+    </section>
+    <section id="cases">
+      <article class="case-card" id="case-skill-package-contract">
+        <header class="case-head">
+          <div>
+            <span class="case-index">Case 01</span>
+            <h3>skill-package-contract</h3>
+          </div>
+          <span class="status-pill awaiting-decision">Awaiting</span>
+        </header>
+        <p class="prompt">Turn this repeated workflow into a reusable team skill package.</p>
+        <section class="rubric"><h4>Rubric</h4><ul><li><span>has-entrypoint</span><p>Output names the routeable Skill entrypoint.</p><small>1.0</small></li><li><span>has-interface</span><p>Output includes neutral interface metadata.</p><small>1.0</small></li><li><span>has-report</span><p>Output points reviewer to generated overview report.</p><small>1.0</small></li><li><span>has-resource-boundary</span><p>Output preserves entrypoint/resource separation.</p><small>1.0</small></li></ul></section>
+        <section class="variants" aria-label="Blind output variants">
+          <div class="variant"><h4>Variant A</h4><pre>Create a routeable SKILL.md, agents/interface.yaml, reports/skill-overview.html, and a focused eval plan. Keep the root entrypoint lean, move durable guidance into references/, scripts into scripts/, and evidence into reports/.</pre></div>
+          <div class="variant"><h4>Variant B</h4><pre>I can write a prompt for that workflow and include a short checklist.</pre></div>
+        </section>
+        <footer class="case-foot">
+          <span>Winner recorded: false</span>
+          <span>Confidence: false</span>
+          <span>Reason: false</span>
+          <strong>Decision template exists but this row is still blank.</strong>
+        </footer>
+      </article>
+
+      <article class="case-card" id="case-output-eval-expectation">
+        <header class="case-head">
+          <div>
+            <span class="case-index">Case 02</span>
+            <h3>output-eval-expectation</h3>
+          </div>
+          <span class="status-pill awaiting-decision">Awaiting</span>
+        </header>
+        <p class="prompt">Upgrade this production skill so we know whether the generated output is better than baseline.</p>
+        <section class="rubric"><h4>Rubric</h4><ul><li><span>has-baseline-comparison</span><p>Output explicitly compares with-skill and baseline outputs.</p><small>1.0</small></li><li><span>has-assertion-grading</span><p>Output includes objective assertion grading.</p><small>1.0</small></li><li><span>has-scorecard</span><p>Output produces a scorecard report path.</p><small>1.0</small></li><li><span>has-failure-taxonomy</span><p>Output records failure taxonomy.</p><small>1.0</small></li></ul></section>
+        <section class="variants" aria-label="Blind output variants">
+          <div class="variant"><h4>Variant A</h4><pre>Add Output Eval Lab cases with baseline_output and with_skill_output, run assertion grading, report with-skill vs baseline pass-rate delta, and record failure taxonomy plus next fixes in reports/output_quality_scorecard.md.</pre></div>
+          <div class="variant"><h4>Variant B</h4><pre>Add more examples and run the trigger eval again.</pre></div>
+        </section>
+        <footer class="case-foot">
+          <span>Winner recorded: false</span>
+          <span>Confidence: false</span>
+          <span>Reason: false</span>
+          <strong>Decision template exists but this row is still blank.</strong>
+        </footer>
+      </article>
+
+      <article class="case-card" id="case-ir-before-packaging">
+        <header class="case-head">
+          <div>
+            <span class="case-index">Case 03</span>
+            <h3>ir-before-packaging</h3>
+          </div>
+          <span class="status-pill awaiting-decision">Awaiting</span>
+        </header>
+        <p class="prompt">Package this skill for OpenAI, Claude, Agent Skills, and generic targets.</p>
+        <section class="rubric"><h4>Rubric</h4><ul><li><span>has-ir-first</span><p>Output requires Skill IR before packaging.</p><small>1.0</small></li><li><span>has-core-ir-fields</span><p>Output lists core IR contract fields.</p><small>1.0</small></li><li><span>has-targets</span><p>Output names requested runtime targets.</p><small>1.0</small></li><li><span>has-semantic-preservation</span><p>Output says targets must preserve the capability contract.</p><small>1.0</small></li></ul></section>
+        <section class="variants" aria-label="Blind output variants">
+          <div class="variant"><h4>Variant A</h4><pre>Export folders for each platform and adjust files as needed.</pre></div>
+          <div class="variant"><h4>Variant B</h4><pre>Export Skill IR first with job_to_be_done, trigger_surface, workflow, resources, eval_plan, risk, and governance. Then compile or package targets from the IR so OpenAI, Claude, Agent Skills, and generic packages preserve the same capability contract.</pre></div>
+        </section>
+        <footer class="case-foot">
+          <span>Winner recorded: false</span>
+          <span>Confidence: false</span>
+          <span>Reason: false</span>
+          <strong>Decision template exists but this row is still blank.</strong>
+        </footer>
+      </article>
+
+      <article class="case-card" id="case-near-neighbor-boundary">
+        <header class="case-head">
+          <div>
+            <span class="case-index">Case 04</span>
+            <h3>near-neighbor-boundary</h3>
+          </div>
+          <span class="status-pill awaiting-decision">Awaiting</span>
+        </header>
+        <p class="prompt">I only need a one-off summary of these notes, not a reusable process.</p>
+        <section class="rubric"><h4>Rubric</h4><ul><li><span>declines-skill</span><p>Output refuses unnecessary skill creation for one-off work.</p><small>1.0</small></li><li><span>names-near-neighbor</span><p>Output labels the request as near-neighbor instead of owned work.</p><small>1.0</small></li><li><span>requires-reuse-signal</span><p>Output asks for repeat-use evidence before packaging.</p><small>1.0</small></li></ul></section>
+        <section class="variants" aria-label="Blind output variants">
+          <div class="variant"><h4>Variant A</h4><pre>Create a SKILL.md and a reusable workflow anyway so future notes can use it.</pre></div>
+          <div class="variant"><h4>Variant B</h4><pre>Do not create a skill for this one-off request. Treat it as a near-neighbor: answer the summary directly unless the user confirms repeated use, shared ownership, or a reusable output contract.</pre></div>
+        </section>
+        <footer class="case-foot">
+          <span>Winner recorded: false</span>
+          <span>Confidence: false</span>
+          <span>Reason: false</span>
+          <strong>Decision template exists but this row is still blank.</strong>
+        </footer>
+      </article>
+
+      <article class="case-card" id="case-file-backed-governed-package">
+        <header class="case-head">
+          <div>
+            <span class="case-index">Case 05</span>
+            <h3>file-backed-governed-package</h3>
+          </div>
+          <span class="status-pill awaiting-decision">Awaiting</span>
+        </header>
+        <p class="prompt">Turn the attached release brief source into a governed skill package.</p>
+        <section class="rubric"><h4>Rubric</h4><ul><li><span>uses-file-backed-evidence</span><p>Output names file-backed source evidence.</p><small>1.0</small></li><li><span>has-governance</span><p>Output preserves governed ownership metadata.</p><small>1.0</small></li><li><span>has-output-contract</span><p>Output preserves output and rollback boundaries.</p><small>1.0</small></li><li><span>has-trust-and-scorecard</span><p>Output requires trust and output scorecard artifacts.</p><small>1.0</small></li><li><span>does-not-invent-evidence</span><p>Output forbids invented launch evidence.</p><small>1.0</small></li></ul></section>
+        <section class="variants" aria-label="Blind output variants">
+          <div class="variant"><h4>Variant A</h4><pre>Draft a release announcement with the changelog, support notes, and owner name.</pre></div>
+          <div class="variant"><h4>Variant B</h4><pre>Use the file-backed fixture as source evidence, then create a governed skill package with SKILL.md, agents/interface.yaml, owner, review cadence, input_files, output contract, rollback boundary, trust report, and reports/output_quality_scorecard.md. Mark missing launch metrics as missing evidence instead of inventing them.</pre></div>
+        </section>
+        <footer class="case-foot">
+          <span>Winner recorded: false</span>
+          <span>Confidence: false</span>
+          <span>Reason: false</span>
+          <strong>Decision template exists but this row is still blank.</strong>
+        </footer>
+      </article></section>
+    <section class="panel" id="template"><h2>Decision Template</h2><p>Use this shape in reports/output_review_decisions.json; leave a case blank when the reviewer is not ready.</p><pre class="template">{
+  &quot;schema_version&quot;: &quot;1.0&quot;,
+  &quot;reviewer&quot;: &quot;&quot;,
+  &quot;reviewed_at&quot;: &quot;&quot;,
+  &quot;decisions&quot;: [
+    {
+      &quot;case_id&quot;: &quot;skill-package-contract&quot;,
+      &quot;winner_variant&quot;: &quot;&quot;,
+      &quot;confidence&quot;: null,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    {
+      &quot;case_id&quot;: &quot;output-eval-expectation&quot;,
+      &quot;winner_variant&quot;: &quot;&quot;,
+      &quot;confidence&quot;: null,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    {
+      &quot;case_id&quot;: &quot;ir-before-packaging&quot;,
+      &quot;winner_variant&quot;: &quot;&quot;,
+      &quot;confidence&quot;: null,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    {
+      &quot;case_id&quot;: &quot;near-neighbor-boundary&quot;,
+      &quot;winner_variant&quot;: &quot;&quot;,
+      &quot;confidence&quot;: null,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    {
+      &quot;case_id&quot;: &quot;file-backed-governed-package&quot;,
+      &quot;winner_variant&quot;: &quot;&quot;,
+      &quot;confidence&quot;: null,
+      &quot;reason&quot;: &quot;&quot;
+    }
+  ]
+}</pre></section>
+  </main>
+</body>
+</html>

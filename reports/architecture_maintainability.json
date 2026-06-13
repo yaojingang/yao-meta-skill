@@ -34,7 +34,7 @@
     },
     {
       "path": "scripts/yao.py",
-      "lines": 864,
+      "lines": 867,
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator."
@@ -55,7 +55,7 @@
     },
     {
       "path": "scripts/yao_cli_parser.py",
-      "lines": 727,
+      "lines": 728,
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."

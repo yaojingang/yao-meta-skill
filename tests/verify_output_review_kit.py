@@ -67,6 +67,7 @@ def main() -> None:
     decisions_path = tmp_root / "output_review_decisions.json"
     kit_json = tmp_root / "output_review_kit.json"
     kit_md = tmp_root / "output_review_kit.md"
+    kit_html = tmp_root / "output_review_kit.html"
     pending_proc = run(
         [
             str(REVIEW_KIT),
@@ -80,6 +81,8 @@ def main() -> None:
             str(kit_json),
             "--output-md",
             str(kit_md),
+            "--output-html",
+            str(kit_html),
             "--write-template",
         ]
     )
@@ -93,6 +96,7 @@ def main() -> None:
     assert pending_payload["summary"]["answer_key_path_exposed"] is False, pending_payload
     assert pending_payload["summary"]["ready_to_run_adjudication"] is False, pending_payload
     assert "answer_key" not in pending_payload["artifacts"], pending_payload["artifacts"]
+    assert pending_payload["artifacts"]["reviewer_kit_html"].endswith("tests/tmp_output_review_kit/output_review_kit.html"), pending_payload["artifacts"]
     assert len(pending_payload["cases"]) == 5, pending_payload["cases"]
     first_case = pending_payload["cases"][0]
     assert first_case["variant_a"]["output"], first_case
@@ -102,12 +106,18 @@ def main() -> None:
 
     kit_json_text = kit_json.read_text(encoding="utf-8")
     kit_md_text = kit_md.read_text(encoding="utf-8")
+    kit_html_text = kit_html.read_text(encoding="utf-8")
     assert "# Output Review Kit" in kit_md_text, kit_md_text
     assert "answer key path exposed: `false`" in kit_md_text, kit_md_text
     assert "Variant A" in kit_md_text and "Variant B" in kit_md_text, kit_md_text
     assert "python3 scripts/yao.py output-review" in kit_md_text, kit_md_text
+    assert "<title>Output Review Kit</title>" in kit_html_text, kit_html_text
+    assert "Reviewer cockpit for output quality decisions" in kit_html_text, kit_html_text
+    assert "Variant A" in kit_html_text and "Variant B" in kit_html_text, kit_html_text
+    assert "Decision Template" in kit_html_text, kit_html_text
     assert_no_answer_key_leak(kit_json_text)
     assert_no_answer_key_leak(kit_md_text)
+    assert_no_answer_key_leak(kit_html_text)
 
     cli_proc = run(
         [
@@ -123,6 +133,8 @@ def main() -> None:
             str(tmp_root / "cli_output_review_kit.json"),
             "--output-md",
             str(tmp_root / "cli_output_review_kit.md"),
+            "--output-html",
+            str(tmp_root / "cli_output_review_kit.html"),
         ]
     )
     cli_payload = json.loads(cli_proc.stdout)
@@ -130,6 +142,7 @@ def main() -> None:
     assert cli_payload["summary"]["case_count"] == 5, cli_payload
     assert cli_payload["summary"]["answer_key_hidden"] is True, cli_payload
     assert "answer_key" not in cli_payload["artifacts"], cli_payload["artifacts"]
+    assert (tmp_root / "cli_output_review_kit.html").exists(), cli_payload
 
     template = json.loads(decisions_path.read_text(encoding="utf-8"))
     filled = {
@@ -160,6 +173,8 @@ def main() -> None:
             str(tmp_root / "ready_output_review_kit.json"),
             "--output-md",
             str(tmp_root / "ready_output_review_kit.md"),
+            "--output-html",
+            str(tmp_root / "ready_output_review_kit.html"),
         ]
     )
     ready_payload = json.loads(ready_proc.stdout)
@@ -188,6 +203,8 @@ def main() -> None:
             str(tmp_root / "invalid_output_review_kit.json"),
             "--output-md",
             str(tmp_root / "invalid_output_review_kit.md"),
+            "--output-html",
+            str(tmp_root / "invalid_output_review_kit.html"),
         ]
     )
     invalid_payload = json.loads(invalid_proc.stdout)

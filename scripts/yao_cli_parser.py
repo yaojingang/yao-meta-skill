@@ -596,6 +596,7 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     output_review_kit_cmd.add_argument("--decisions")
     output_review_kit_cmd.add_argument("--output-json")
     output_review_kit_cmd.add_argument("--output-md")
+    output_review_kit_cmd.add_argument("--output-html")
     output_review_kit_cmd.add_argument("--write-template", action="store_true")
     output_review_kit_cmd.set_defaults(func=_handler(command_handlers, "command_output_review_kit"))
 

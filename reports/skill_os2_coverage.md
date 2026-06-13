@@ -23,7 +23,7 @@ This report maps the Skill OS 2.0 upgrade blueprint to concrete local artifacts,
 | Runtime Conformance | `pass` | 5/5 targets pass | `python3 scripts/yao.py conformance .` | `python3 tests/verify_conformance_suite.py` |
 | Trust Security | `pass` | 93 scripts; secrets 0; help failures 0 | `python3 scripts/yao.py trust .` | `python3 tests/verify_trust_check.py` |
 | Skill Atlas | `pass` | 12 scanned skills; actionable collisions 0 | `python3 scripts/yao.py skill-atlas --workspace-root .` | `python3 tests/verify_skill_atlas.py` |
-| Registry Distribution | `pass` | archive entries 567; install failures 0 | `python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip && python3 scripts/yao.py registry-audit .` | `python3 tests/verify_registry_audit.py` |
+| Registry Distribution | `pass` | archive entries 568; install failures 0 | `python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip && python3 scripts/yao.py registry-audit .` | `python3 tests/verify_registry_audit.py` |
 | Review Studio | `pass` | 16 gates; decision review; warnings 3 | `python3 scripts/yao.py review-studio .` | `python3 tests/verify_review_studio.py` |
 | Telemetry Drift | `pass` | events 1; recipes 5; risk low | `python3 scripts/yao.py telemetry-hooks . && python3 scripts/yao.py adoption-drift .` | `python3 tests/verify_telemetry_hooks.py` |
 

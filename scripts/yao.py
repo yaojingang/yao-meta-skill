@@ -203,6 +203,7 @@ def command_report(args: argparse.Namespace) -> int:
             "compiled_targets": "reports/compiled_targets.json",
             "output_execution": "reports/output_execution_runs.json",
             "output_review_kit": "reports/output_review_kit.json",
+            "output_review_kit_html": "reports/output_review_kit.html",
             "output_review_adjudication": "reports/output_review_adjudication.json",
             "adoption_drift": "reports/adoption_drift_report.json",
             "telemetry_hooks": "reports/telemetry_hook_recipes.json",
@@ -515,6 +516,8 @@ def command_output_review_kit(args: argparse.Namespace) -> int:
         cmd.extend(["--output-json", args.output_json])
     if args.output_md:
         cmd.extend(["--output-md", args.output_md])
+    if args.output_html:
+        cmd.extend(["--output-html", args.output_html])
     if args.write_template:
         cmd.append("--write-template")
     result = run_script("prepare_output_review_kit.py", cmd)

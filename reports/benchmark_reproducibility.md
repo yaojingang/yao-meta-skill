@@ -1,7 +1,7 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-14`
-Commit: `0cf7f32e32e2b5654a4d03cf91f025446e6d5b7b`
+Commit: `834665b73c1422486be8cb1b1dd826fa58e81be7`
 Working tree dirty at generation: `true`
 
 ## Summary
@@ -16,7 +16,7 @@ Working tree dirty at generation: `true`
 - provider evidence complete: `false`
 - human review complete: `false`
 - world-class ready: `false`
-- changed files at generation: `65`
+- changed files at generation: `58`
 
 This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete.
 
@@ -40,21 +40,21 @@ This report proves local benchmark reproducibility only. It keeps external provi
 | output_cases | `evals/output/cases.jsonl` | present | `a6ae96857116` |
 | output_schema | `evals/output/schema.json` | present | `8ee340c95064` |
 | output_scorecard | `reports/output_quality_scorecard.json` | present | `0806258a8e08` |
-| output_execution | `reports/output_execution_runs.json` | present | `5c02c5db6c55` |
+| output_execution | `reports/output_execution_runs.json` | present | `94be89b0096b` |
 | blind_review | `reports/output_blind_review_pack.json` | present | `bbe2db8ec277` |
 | review_adjudication | `reports/output_review_adjudication.json` | present | `240485a721af` |
 | trigger_scorecard | `reports/route_scorecard.json` | present | `c164e83e36d0` |
 | runtime_conformance | `reports/conformance_matrix.json` | present | `8251329e663d` |
-| trust_report | `reports/security_trust_report.json` | present | `bce52b7b783c` |
+| trust_report | `reports/security_trust_report.json` | present | `e5bbb8250aee` |
 | python_compatibility | `reports/python_compatibility.json` | present | `e5dd973d0b5c` |
-| registry_audit | `reports/registry_audit.json` | present | `03edb72bdd40` |
-| package_verification | `reports/package_verification.json` | present | `212ddb0a9c5a` |
-| install_simulation | `reports/install_simulation.json` | present | `69d989432714` |
+| registry_audit | `reports/registry_audit.json` | present | `3ea8d598452c` |
+| package_verification | `reports/package_verification.json` | present | `aef6143865fb` |
+| install_simulation | `reports/install_simulation.json` | present | `eebfba42d71e` |
 | skill_os2_audit | `reports/skill_os2_audit.json` | present | `a1ab5e625fbc` |
 | world_class_evidence_plan | `reports/world_class_evidence_plan.json` | present | `02e49b66159d` |
 | world_class_evidence_ledger | `reports/world_class_evidence_ledger.json` | present | `0b52d0d1528b` |
 | world_class_evidence_intake | `reports/world_class_evidence_intake.json` | present | `5fbfcd35ac6a` |
-| world_class_claim_guard | `reports/world_class_claim_guard.json` | present | `299a88eb7b47` |
+| world_class_claim_guard | `reports/world_class_claim_guard.json` | present | `79c5b29f0ff6` |
 
 ## Reproduction Commands
 

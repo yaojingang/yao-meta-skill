@@ -107,7 +107,7 @@
       "key": "operations-loop",
       "label": "运营回路",
       "status": "pass",
-      "detail": "1 metadata events; adoption 0; missed 0; bad-output 0; risk low",
+      "detail": "1 metadata events; adoption 100.0; missed 0; bad-output 0; risk low",
       "evidence": "reports/adoption_drift_report.json",
       "link": "adoption_drift_report.md"
     },
@@ -179,7 +179,7 @@
       "priority": "warning",
       "summary": "补足 output eval 覆盖、execution evidence、blind A/B 和 reviewer adjudication。",
       "why": "没有输出质量和人工盲评证据时，Skill 只能证明会触发，不能证明输出真的更好且经得起审查。",
-      "source_fix": "evals/output/cases.jsonl + reports/output_quality_scorecard.md + reports/output_review_decisions.json + reports/output_review_adjudication.md",
+      "source_fix": "evals/output/cases.jsonl + reports/output_quality_scorecard.md + reports/output_review_kit.html + reports/output_review_adjudication.md",
       "source_refs": [
         {
           "path": "evals/output/cases.jsonl",
@@ -214,12 +214,12 @@
           "link": "output_blind_review_pack.md"
         },
         {
-          "path": "reports/output_review_decisions.json",
-          "label": "review decisions template",
+          "path": "reports/output_review_kit.html",
+          "label": "reviewer cockpit",
           "kind": "report",
-          "line": 5,
+          "line": 6,
           "exists": true,
-          "link": "output_review_decisions.json"
+          "link": "output_review_kit.html"
         },
         {
           "path": "reports/output_review_adjudication.md",
@@ -382,6 +382,7 @@
     "output_execution": "reports/output_execution_runs.md",
     "output_blind_review": "reports/output_blind_review_pack.md",
     "output_review_kit": "reports/output_review_kit.md",
+    "output_review_kit_html": "reports/output_review_kit.html",
     "output_review_decisions": "reports/output_review_decisions.json",
     "output_review_adjudication": "reports/output_review_adjudication.md",
     "benchmark_reproducibility": "reports/benchmark_reproducibility.md",
@@ -860,10 +861,10 @@
             "path": "reports",
             "label": "Generated evidence and overview artifacts",
             "kind": "folder",
-            "file_count": 199
+            "file_count": 200
           }
         ],
-        "file_count": 356,
+        "file_count": 357,
         "folder_count": 4,
         "distribution": [
           {
@@ -896,7 +897,7 @@
           },
           {
             "label": "reports",
-            "value": 199
+            "value": 200
           }
         ]
       },
@@ -1029,7 +1030,7 @@
           "path": "reports",
           "label": "Generated evidence and overview artifacts",
           "kind": "folder",
-          "file_count": 199
+          "file_count": 200
         }
       ],
       "strengths": [
@@ -1293,6 +1294,7 @@
         "artifacts": {
           "reviewer_kit_json": "reports/output_review_kit.json",
           "reviewer_kit_markdown": "reports/output_review_kit.md",
+          "reviewer_kit_html": "reports/output_review_kit.html",
           "blind_pack_json": "reports/output_blind_review_pack.json",
           "blind_pack_markdown": "reports/output_blind_review_pack.md",
           "decisions": "reports/output_review_decisions.json",
@@ -1345,9 +1347,9 @@
           "world_class_task_count": 4,
           "world_class_ledger_pending_count": 4,
           "working_tree_dirty": true,
-          "changed_file_count": 63
+          "changed_file_count": 33
         },
-        "commit": "0cf7f32e32e2b5654a4d03cf91f025446e6d5b7b",
+        "commit": "834665b73c1422486be8cb1b1dd826fa58e81be7",
         "missing_artifacts": [],
         "limitations": [
           "Local command-runner evidence is reproducible but does not replace provider-backed model holdout evidence.",
@@ -1451,7 +1453,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 177,
-        "package_sha256": "09013a0df3555b5f1ef58254c1bc78ebd2383f8efbfe67a7a9c1010a172fb492"
+        "package_sha256": "5b6eb1631e77feb6fe3f4199e128607cdc719f8ec0675c92ae986aad2553a045"
       },
       "skill_atlas": {
         "skill_count": 12,
@@ -1489,8 +1491,8 @@
           "trust_level": "local",
           "license": "MIT",
           "checksums": {
-            "package_sha256": "09013a0df3555b5f1ef58254c1bc78ebd2383f8efbfe67a7a9c1010a172fb492",
-            "archive_sha256": "2fbe2e4a06aa71dacd59865cf34adb163940972d04316ebbeb479a83cb46bd34"
+            "package_sha256": "5b6eb1631e77feb6fe3f4199e128607cdc719f8ec0675c92ae986aad2553a045",
+            "archive_sha256": "fc334a4b4da4af6c463510a76551e018633deb5626dca38d9aaaa2c636591eb7"
           },
           "compatibility": {
             "openai": "pass",
@@ -1521,7 +1523,7 @@
           },
           "distribution": {
             "archive_verified": true,
-            "archive_sha256": "2fbe2e4a06aa71dacd59865cf34adb163940972d04316ebbeb479a83cb46bd34",
+            "archive_sha256": "fc334a4b4da4af6c463510a76551e018633deb5626dca38d9aaaa2c636591eb7",
             "package_verification": "reports/package_verification.json",
             "install_simulated": true,
             "install_simulation": "reports/install_simulation.json"
@@ -1537,8 +1539,8 @@
           "target_count": 4,
           "adapter_count": 4,
           "archive_present": true,
-          "archive_sha256": "2fbe2e4a06aa71dacd59865cf34adb163940972d04316ebbeb479a83cb46bd34",
-          "archive_entry_count": 567,
+          "archive_sha256": "fc334a4b4da4af6c463510a76551e018633deb5626dca38d9aaaa2c636591eb7",
+          "archive_entry_count": 568,
           "failure_count": 0,
           "warning_count": 0
         },
@@ -1549,7 +1551,7 @@
         "ok": true,
         "summary": {
           "archive_present": true,
-          "archive_entry_count": 567,
+          "archive_entry_count": 568,
           "archive_extracted": true,
           "entrypoint_loaded": true,
           "manifest_loaded": true,
@@ -1616,12 +1618,12 @@
             {
               "field": "archive_sha256",
               "from": "",
-              "to": "2fbe2e4a06aa71dacd59865cf34adb163940972d04316ebbeb479a83cb46bd34"
+              "to": "fc334a4b4da4af6c463510a76551e018633deb5626dca38d9aaaa2c636591eb7"
             },
             {
               "field": "package_sha256",
               "from": "0000000000000000000000000000000000000000000000000000000000000000",
-              "to": "09013a0df3555b5f1ef58254c1bc78ebd2383f8efbfe67a7a9c1010a172fb492"
+              "to": "5b6eb1631e77feb6fe3f4199e128607cdc719f8ec0675c92ae986aad2553a045"
             }
           ]
         },
@@ -1638,14 +1640,14 @@
         "ok": true,
         "summary": {
           "event_count": 1,
-          "adoption_sample_count": 0,
-          "activation_count": 0,
-          "accepted_count": 0,
+          "adoption_sample_count": 1,
+          "activation_count": 1,
+          "accepted_count": 1,
           "edited_count": 0,
           "rejected_count": 0,
           "missed_count": 0,
           "failed_count": 0,
-          "adoption_rate": 0,
+          "adoption_rate": 100.0,
           "missed_trigger_count": 0,
           "wrong_trigger_count": 0,
           "bad_output_count": 0,
@@ -1654,7 +1656,7 @@
           "review_overdue_count": 0,
           "risk_band": "low",
           "event_types": {
-            "review_event": 1
+            "skill_activation": 1
           },
           "failure_types": {},
           "source_types": {
@@ -1873,7 +1875,7 @@
             "status": "external_required",
             "category": "external",
             "owner": "Browser/Chrome/IDE/provider client integrator",
-            "current": "external source events 0; adoption samples 0",
+            "current": "external source events 0; adoption samples 1",
             "objective": "Import production metadata-only events from a real external client into the local drift loop.",
             "runbook": [
               "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
@@ -2112,7 +2114,7 @@
             "owner": "Browser/Chrome/IDE/provider client integrator",
             "status": "pending",
             "source_status": "external_required",
-            "current": "external source events 0; adoption samples 0",
+            "current": "external source events 0; adoption samples 1",
             "objective": "Import production metadata-only events from a real external client into the local drift loop.",
             "provenance_requirements": [
               "real external client source",
@@ -2140,7 +2142,7 @@
             ],
             "observed_state": {
               "external_source_events": 0,
-              "adoption_sample_count": 0,
+              "adoption_sample_count": 1,
               "raw_content_allowed": false,
               "risk_band": "low",
               "accepted": false
@@ -3790,7 +3792,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.46,
+          "duration_ms": 25.88,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3818,7 +3820,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.0,
+          "duration_ms": 25.25,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3841,7 +3843,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.44,
+          "duration_ms": 25.73,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3869,7 +3871,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 27.47,
+          "duration_ms": 26.83,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3892,7 +3894,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.76,
+          "duration_ms": 28.58,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3920,7 +3922,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.7,
+          "duration_ms": 27.09,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3943,7 +3945,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.55,
+          "duration_ms": 26.26,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3970,7 +3972,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.89,
+          "duration_ms": 25.6,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4022,7 +4024,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.67,
+          "duration_ms": 25.76,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4266,6 +4268,7 @@
       "artifacts": {
         "reviewer_kit_json": "reports/output_review_kit.json",
         "reviewer_kit_markdown": "reports/output_review_kit.md",
+        "reviewer_kit_html": "reports/output_review_kit.html",
         "blind_pack_json": "reports/output_blind_review_pack.json",
         "blind_pack_markdown": "reports/output_blind_review_pack.md",
         "decisions": "reports/output_review_decisions.json",
@@ -4740,7 +4743,7 @@
     "skill_os2_coverage": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-14",
+      "generated_at": "2026-06-13",
       "skill_dir": ".",
       "summary": {
         "item_count": 20,
@@ -10227,7 +10230,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 177,
-        "package_sha256": "09013a0df3555b5f1ef58254c1bc78ebd2383f8efbfe67a7a9c1010a172fb492"
+        "package_sha256": "5b6eb1631e77feb6fe3f4199e128607cdc719f8ec0675c92ae986aad2553a045"
       },
       "failures": [],
       "warnings": [],
@@ -12600,7 +12603,7 @@
     "python_compatibility": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-14",
+      "generated_at": "2026-06-13",
       "root": ".",
       "summary": {
         "target_python": "3.11",
@@ -13555,7 +13558,7 @@
     "architecture_maintainability": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-14",
+      "generated_at": "2026-06-13",
       "skill_dir": ".",
       "summary": {
         "python_file_count": 151,
@@ -13588,7 +13591,7 @@
         },
         {
           "path": "scripts/yao.py",
-          "lines": 864,
+          "lines": 867,
           "kind": "cli-script",
           "severity": "pass",
           "recommendation": "Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator."
@@ -13609,7 +13612,7 @@
         },
         {
           "path": "scripts/yao_cli_parser.py",
-          "lines": 727,
+          "lines": 728,
           "kind": "internal-module",
           "severity": "pass",
           "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
@@ -13672,9 +13675,9 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 751,
-        "other_text_tokens": 1151522,
+        "other_text_tokens": 1154215,
         "estimated_initial_load_tokens": 944,
-        "estimated_total_text_tokens": 1152273,
+        "estimated_total_text_tokens": 1154966,
         "relevant_file_count": 490,
         "unused_resource_dirs": [],
         "quality_signal_points": 130,
@@ -15527,7 +15530,7 @@
     "adoption_drift": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-13T23:14:39Z",
+      "generated_at": "2026-06-13T23:27:35Z",
       "skill_dir": ".",
       "privacy_contract": {
         "storage": "local-first",
@@ -15551,14 +15554,14 @@
       },
       "summary": {
         "event_count": 1,
-        "adoption_sample_count": 0,
-        "activation_count": 0,
-        "accepted_count": 0,
+        "adoption_sample_count": 1,
+        "activation_count": 1,
+        "accepted_count": 1,
         "edited_count": 0,
         "rejected_count": 0,
         "missed_count": 0,
         "failed_count": 0,
-        "adoption_rate": 0,
+        "adoption_rate": 100.0,
         "missed_trigger_count": 0,
         "wrong_trigger_count": 0,
         "bad_output_count": 0,
@@ -15567,7 +15570,7 @@
         "review_overdue_count": 0,
         "risk_band": "low",
         "event_types": {
-          "review_event": 1
+          "skill_activation": 1
         },
         "failure_types": {},
         "source_types": {
@@ -15579,31 +15582,31 @@
         {
           "skill": "yao-meta-skill",
           "events": 1,
-          "adoption_events": 0,
-          "accepted": 0,
+          "adoption_events": 1,
+          "accepted": 1,
           "edited": 0,
           "rejected": 0,
           "missed": 0,
-          "adoption_rate": 0
+          "adoption_rate": 100.0
         }
       ],
       "next_iteration_candidates": [],
       "recent_events": [
         {
           "command": "unknown",
-          "event": "review_event",
+          "event": "skill_activation",
           "skill": "yao-meta-skill",
           "source": "manual",
           "version": "1.1.0",
-          "activation_type": "manual",
-          "outcome": "reviewed",
+          "activation_type": "explicit",
+          "outcome": "accepted",
           "failure_type": "none",
-          "timestamp": "2026-06-13T12:00:00Z"
+          "timestamp": "2026-06-13T10:00:00Z"
         }
       ],
       "failures": [],
       "artifacts": {
-        "events_jsonl": "reports/telemetry_events.jsonl",
+        "events_jsonl": "tests/tmp_review_studio/telemetry_events.jsonl",
         "json": "reports/adoption_drift_report.json",
         "markdown": "reports/adoption_drift_report.md"
       }
@@ -15612,7 +15615,7 @@
       "schema_version": "1.0",
       "ok": true,
       "skill_dir": ".",
-      "generated_at": "2026-06-14",
+      "generated_at": "2026-06-13",
       "summary": {
         "waiver_count": 0,
         "active_count": 0,
@@ -15662,7 +15665,7 @@
             "Reviewer links output_review_adjudication or output_execution evidence."
           ],
           "suggested_evidence": "reports/output_review_adjudication.md",
-          "suggested_command": "python3 scripts/yao.py review-waivers . --add-waiver --gate-key output-lab --reviewer \"<reviewer>\" --reason \"Output Lab has pending human/provider evidence; accepted only for this bounded review scope.\" --expires-at 2027-06-14 --evidence reports/output_review_adjudication.md",
+          "suggested_command": "python3 scripts/yao.py review-waivers . --add-waiver --gate-key output-lab --reviewer \"<reviewer>\" --reason \"Output Lab has pending human/provider evidence; accepted only for this bounded review scope.\" --expires-at 2027-06-13 --evidence reports/output_review_adjudication.md",
           "world_class_boundary": "Does not count as provider, human, or public world-class completion evidence."
         },
         {
@@ -15692,7 +15695,7 @@
       "schema_version": "1.0",
       "ok": true,
       "skill_dir": ".",
-      "source": "reports/review_annotations_input.json",
+      "source": "tests/tmp_review_studio/empty_review_annotations_input.json",
       "summary": {
         "annotation_count": 0,
         "open_count": 0,
@@ -15915,7 +15918,7 @@
           "owner": "Browser/Chrome/IDE/provider client integrator",
           "status": "pending",
           "source_status": "external_required",
-          "current": "external source events 0; adoption samples 0",
+          "current": "external source events 0; adoption samples 1",
           "objective": "Import production metadata-only events from a real external client into the local drift loop.",
           "provenance_requirements": [
             "real external client source",
@@ -15943,7 +15946,7 @@
           ],
           "observed_state": {
             "external_source_events": 0,
-            "adoption_sample_count": 0,
+            "adoption_sample_count": 1,
             "raw_content_allowed": false,
             "risk_band": "low",
             "accepted": false
@@ -16403,7 +16406,7 @@
           "intake_errors": [],
           "observed_state": {
             "external_source_events": 0,
-            "adoption_sample_count": 0,
+            "adoption_sample_count": 1,
             "raw_content_allowed": false,
             "risk_band": "low",
             "accepted": false
@@ -16438,7 +16441,7 @@
       "summary": {
         "ledger_ready_to_claim_world_class": false,
         "ledger_pending_count": 4,
-        "claim_surface_count": 70,
+        "claim_surface_count": 71,
         "violation_count": 0,
         "overclaim_guard_active": true,
         "decision": "claim-guard-pass-evidence-pending"
@@ -16628,6 +16631,10 @@
           "violation_count": 0
         },
         {
+          "path": "reports/output_review_kit.html",
+          "violation_count": 0
+        },
+        {
           "path": "reports/output_review_kit.md",
           "violation_count": 0
         },
@@ -16785,8 +16792,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "09013a0df3555b5f1ef58254c1bc78ebd2383f8efbfe67a7a9c1010a172fb492",
-          "archive_sha256": "2fbe2e4a06aa71dacd59865cf34adb163940972d04316ebbeb479a83cb46bd34"
+          "package_sha256": "5b6eb1631e77feb6fe3f4199e128607cdc719f8ec0675c92ae986aad2553a045",
+          "archive_sha256": "fc334a4b4da4af6c463510a76551e018633deb5626dca38d9aaaa2c636591eb7"
         },
         "compatibility": {
           "openai": "pass",
@@ -16817,7 +16824,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "2fbe2e4a06aa71dacd59865cf34adb163940972d04316ebbeb479a83cb46bd34",
+          "archive_sha256": "fc334a4b4da4af6c463510a76551e018633deb5626dca38d9aaaa2c636591eb7",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -16842,7 +16849,7 @@
               "vscode"
             ],
             "package_metadata": "registry/packages/yao-meta-skill.json",
-            "package_sha256": "09013a0df3555b5f1ef58254c1bc78ebd2383f8efbfe67a7a9c1010a172fb492"
+            "package_sha256": "5b6eb1631e77feb6fe3f4199e128607cdc719f8ec0675c92ae986aad2553a045"
           }
         ]
       },
@@ -16865,8 +16872,8 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "2fbe2e4a06aa71dacd59865cf34adb163940972d04316ebbeb479a83cb46bd34",
-        "archive_entry_count": 567,
+        "archive_sha256": "fc334a4b4da4af6c463510a76551e018633deb5626dca38d9aaaa2c636591eb7",
+        "archive_entry_count": 568,
         "failure_count": 0,
         "warning_count": 0
       },
@@ -17531,7 +17538,7 @@
       "installed_skill_dir": "dist/install-simulation/simulate-yao-meta-skill/yao-meta-skill",
       "summary": {
         "archive_present": true,
-        "archive_entry_count": 567,
+        "archive_entry_count": 568,
         "archive_extracted": true,
         "entrypoint_loaded": true,
         "manifest_loaded": true,
@@ -17873,12 +17880,12 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "2fbe2e4a06aa71dacd59865cf34adb163940972d04316ebbeb479a83cb46bd34"
+            "to": "fc334a4b4da4af6c463510a76551e018633deb5626dca38d9aaaa2c636591eb7"
           },
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "09013a0df3555b5f1ef58254c1bc78ebd2383f8efbfe67a7a9c1010a172fb492"
+            "to": "5b6eb1631e77feb6fe3f4199e128607cdc719f8ec0675c92ae986aad2553a045"
           }
         ]
       },
