@@ -4,33 +4,33 @@
   "generated_at": "2026-06-14",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 144,
-    "script_file_count": 88,
+    "python_file_count": 145,
+    "script_file_count": 89,
     "test_file_count": 56,
-    "internal_module_count": 17,
+    "internal_module_count": 18,
     "cli_script_count": 72,
-    "command_handler_count": 35,
+    "command_handler_count": 33,
     "warn_line_threshold": 900,
     "block_line_threshold": 1500,
-    "largest_file_lines": 1159,
-    "hotspot_count": 1,
+    "largest_file_lines": 887,
+    "hotspot_count": 0,
     "blocker_count": 0,
-    "decision": "watch-maintainability-hotspots"
+    "decision": "pass"
   },
   "largest_files": [
-    {
-      "path": "scripts/yao.py",
-      "lines": 1159,
-      "kind": "cli-script",
-      "severity": "warn",
-      "recommendation": "Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator."
-    },
     {
       "path": "scripts/render_review_studio.py",
       "lines": 887,
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Move data loading and large section renderers into focused review_studio_* modules."
+    },
+    {
+      "path": "scripts/yao.py",
+      "lines": 839,
+      "kind": "cli-script",
+      "severity": "pass",
+      "recommendation": "Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator."
     },
     {
       "path": "tests/verify_yao_cli.py",
@@ -103,22 +103,8 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     }
   ],
-  "hotspots": [
-    {
-      "path": "scripts/yao.py",
-      "lines": 1159,
-      "kind": "cli-script",
-      "severity": "warn",
-      "recommendation": "Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator."
-    }
-  ],
-  "actions": [
-    {
-      "path": "scripts/yao.py",
-      "severity": "warn",
-      "action": "Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator."
-    }
-  ],
+  "hotspots": [],
+  "actions": [],
   "artifacts": {
     "json": "reports/architecture_maintainability.json",
     "markdown": "reports/architecture_maintainability.md"

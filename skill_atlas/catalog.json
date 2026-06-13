@@ -104,6 +104,7 @@
         "scripts/verify_package.py",
         "scripts/yao.py",
         "scripts/yao_cli_config.py",
+        "scripts/yao_cli_create_commands.py",
         "scripts/yao_cli_parser.py",
         "scripts/yao_cli_report_commands.py",
         "scripts/yao_cli_runtime.py",

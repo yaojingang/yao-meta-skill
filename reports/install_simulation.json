@@ -8,7 +8,7 @@
   "installed_skill_dir": "[temporary-install-root]/yao-meta-skill",
   "summary": {
     "archive_present": true,
-    "archive_entry_count": 556,
+    "archive_entry_count": 557,
     "archive_extracted": true,
     "entrypoint_loaded": true,
     "manifest_loaded": true,

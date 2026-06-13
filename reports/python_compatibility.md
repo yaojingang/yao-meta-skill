@@ -6,7 +6,7 @@ Generated at: `2026-06-14`
 
 - decision: `pass`
 - target python: `3.11`
-- files scanned: `147`
+- files scanned: `148`
 - issues: `0`
 - syntax errors: `0`
 - f-string 3.11 violations: `0`

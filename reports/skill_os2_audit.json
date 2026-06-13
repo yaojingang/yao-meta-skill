@@ -197,7 +197,7 @@
       "key": "trust-security",
       "label": "Trust Security",
       "status": "pass",
-      "current": "secrets 0; scripts 88; help failures 0",
+      "current": "secrets 0; scripts 89; help failures 0",
       "target": "Secrets, scripts, dependencies, permissions, and package hash are reviewable",
       "evidence": [
         {
@@ -281,7 +281,7 @@
       "key": "registry-distribution",
       "label": "Registry Distribution",
       "status": "pass",
-      "current": "zip entries 556; install failures 0; permission failures 0",
+      "current": "zip entries 557; install failures 0; permission failures 0",
       "target": "Package metadata, archive checksum, package verification, and install simulation pass",
       "evidence": [
         {
@@ -303,7 +303,7 @@
       "key": "review-studio",
       "label": "Review Studio",
       "status": "pass",
-      "current": "decision review; warnings 4; score 89",
+      "current": "decision review; warnings 3; score 91",
       "target": "One page shows gates, evidence paths, blockers, warnings, actions, waivers, and annotations",
       "evidence": [
         {

@@ -436,7 +436,7 @@
         "path": "scripts",
         "label": "Deterministic helpers or local tooling",
         "kind": "folder",
-        "file_count": 88
+        "file_count": 89
       },
       {
         "path": "evals",
@@ -451,7 +451,7 @@
         "file_count": 195
       }
     ],
-    "file_count": 347,
+    "file_count": 348,
     "folder_count": 4,
     "distribution": [
       {
@@ -476,7 +476,7 @@
       },
       {
         "label": "scripts",
-        "value": 88
+        "value": 89
       },
       {
         "label": "evals",
@@ -605,7 +605,7 @@
       "path": "scripts",
       "label": "Deterministic helpers or local tooling",
       "kind": "folder",
-      "file_count": 88
+      "file_count": 89
     },
     {
       "path": "evals",
@@ -905,9 +905,9 @@
       "world_class_task_count": 4,
       "world_class_ledger_pending_count": 4,
       "working_tree_dirty": true,
-      "changed_file_count": 40
+      "changed_file_count": 36
     },
-    "commit": "479b098ccfe8756b15cbde1c8b97048ed53e9807",
+    "commit": "628acc5c35a9cf4cd0d3d684be50ee27724150ba",
     "missing_artifacts": [],
     "limitations": [
       "Local command-runner evidence is reproducible but does not replace provider-backed model holdout evidence.",
@@ -982,9 +982,9 @@
     "failures": []
   },
   "trust_security": {
-    "scanned_files": 172,
-    "script_count": 88,
-    "internal_module_count": 15,
+    "scanned_files": 173,
+    "script_count": 89,
+    "internal_module_count": 16,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -1002,8 +1002,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 172,
-    "package_sha256": "38e25604b3d11793a45c37b0680dc50e8233c5d0aecf982879109022fbed0cfc"
+    "package_hash_file_count": 173,
+    "package_sha256": "ac773f9145981816dd82890dd769bb608245fb14a5f6605db7e606d377ffcd9c"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -1041,8 +1041,8 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "38e25604b3d11793a45c37b0680dc50e8233c5d0aecf982879109022fbed0cfc",
-        "archive_sha256": "43e1251fe70c406ed6d0e5ec135bc2294492add1b5176427894f7df4dae8e14f"
+        "package_sha256": "ac773f9145981816dd82890dd769bb608245fb14a5f6605db7e606d377ffcd9c",
+        "archive_sha256": "a35cc5a6ebbbb278f826506ff52274ec65c8c5ffbdaa9dee2ef477d9dc409653"
       },
       "compatibility": {
         "openai": "pass",
@@ -1073,7 +1073,7 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "43e1251fe70c406ed6d0e5ec135bc2294492add1b5176427894f7df4dae8e14f",
+        "archive_sha256": "a35cc5a6ebbbb278f826506ff52274ec65c8c5ffbdaa9dee2ef477d9dc409653",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
@@ -1089,8 +1089,8 @@
       "target_count": 4,
       "adapter_count": 4,
       "archive_present": true,
-      "archive_sha256": "43e1251fe70c406ed6d0e5ec135bc2294492add1b5176427894f7df4dae8e14f",
-      "archive_entry_count": 556,
+      "archive_sha256": "a35cc5a6ebbbb278f826506ff52274ec65c8c5ffbdaa9dee2ef477d9dc409653",
+      "archive_entry_count": 557,
       "failure_count": 0,
       "warning_count": 0
     },
@@ -1101,7 +1101,7 @@
     "ok": true,
     "summary": {
       "archive_present": true,
-      "archive_entry_count": 556,
+      "archive_entry_count": 557,
       "archive_extracted": true,
       "entrypoint_loaded": true,
       "manifest_loaded": true,
@@ -1168,12 +1168,12 @@
         {
           "field": "archive_sha256",
           "from": "",
-          "to": "43e1251fe70c406ed6d0e5ec135bc2294492add1b5176427894f7df4dae8e14f"
+          "to": "a35cc5a6ebbbb278f826506ff52274ec65c8c5ffbdaa9dee2ef477d9dc409653"
         },
         {
           "field": "package_sha256",
           "from": "0000000000000000000000000000000000000000000000000000000000000000",
-          "to": "38e25604b3d11793a45c37b0680dc50e8233c5d0aecf982879109022fbed0cfc"
+          "to": "ac773f9145981816dd82890dd769bb608245fb14a5f6605db7e606d377ffcd9c"
         }
       ]
     },

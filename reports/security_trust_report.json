@@ -2,9 +2,9 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 172,
-    "script_count": 88,
-    "internal_module_count": 15,
+    "scanned_files": 173,
+    "script_count": 89,
+    "internal_module_count": 16,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 172,
-    "package_sha256": "38e25604b3d11793a45c37b0680dc50e8233c5d0aecf982879109022fbed0cfc"
+    "package_hash_file_count": 173,
+    "package_sha256": "ac773f9145981816dd82890dd769bb608245fb14a5f6605db7e606d377ffcd9c"
   },
   "failures": [],
   "warnings": [],
@@ -1223,6 +1223,20 @@
       "network_hosts": []
     },
     {
+      "path": "scripts/yao_cli_create_commands.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Imported by yao.py to keep skill creation and quickstart command handlers out of the CLI orchestrator.",
+      "has_argparse": true,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
       "path": "scripts/yao_cli_parser.py",
       "interface": "internal-module",
       "interface_declared": true,
@@ -1313,7 +1327,7 @@
     "checked_count": 73,
     "passed_count": 73,
     "failed_count": 0,
-    "skipped_count": 15,
+    "skipped_count": 16,
     "failed_scripts": [],
     "results": [
       {
@@ -2090,6 +2104,10 @@
       },
       {
         "path": "scripts/yao_cli_config.py",
+        "reason": "internal module"
+      },
+      {
+        "path": "scripts/yao_cli_create_commands.py",
         "reason": "internal module"
       },
       {
