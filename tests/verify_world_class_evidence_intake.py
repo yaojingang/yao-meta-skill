@@ -165,9 +165,16 @@ def main() -> None:
     assert kit_draft["attestation"]["real_external_or_human_evidence"] is False, kit_draft
     kit_manifest = json.loads((kit_dir / "submission_manifest.json").read_text(encoding="utf-8"))
     assert kit_manifest["summary"]["ledger_counts_submission_as_completion"] is False, kit_manifest["summary"]
+    assert kit_manifest["artifacts"]["html"].endswith("tests/tmp_world_class_evidence_intake/submission_kit/index.html"), kit_manifest["artifacts"]
     kit_readme = (kit_dir / "README.md").read_text(encoding="utf-8")
     assert "Drafts are not accepted evidence." in kit_readme, kit_readme
     assert "validate intake" in kit_readme, kit_readme
+    kit_html = (kit_dir / "index.html").read_text(encoding="utf-8")
+    assert "<title>World-Class Evidence Submission Kit</title>" in kit_html, kit_html
+    assert "Drafts are not accepted evidence" in kit_html, kit_html
+    assert "provider-holdout" in kit_html, kit_html
+    assert "World-Class Evidence Submission Kit" in kit_html, kit_html
+    assert "Do not include credentials, raw prompts, raw outputs, transcripts, notes, or private user content." in kit_html, kit_html
     draft_intake = run_intake("--submissions-dir", str(kit_dir))
     assert draft_intake["ok"] is False, draft_intake
     assert draft_intake["summary"]["submission_count"] == 1, draft_intake["summary"]

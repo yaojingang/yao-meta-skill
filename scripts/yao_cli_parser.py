@@ -217,6 +217,7 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     world_class_submission_kit_cmd.add_argument("--evidence-key", action="append", default=[])
     world_class_submission_kit_cmd.add_argument("--overwrite", action="store_true")
     world_class_submission_kit_cmd.add_argument("--generated-at")
+    world_class_submission_kit_cmd.add_argument("--output-html")
     world_class_submission_kit_cmd.set_defaults(func=_handler(command_handlers, "command_world_class_submission_kit"))
 
     world_class_submission_review_cmd = subparsers.add_parser(

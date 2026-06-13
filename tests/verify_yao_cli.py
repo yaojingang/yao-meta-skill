@@ -282,19 +282,20 @@ def main() -> None:
     world_class_submission_kit_result = run(
         "world-class-submission-kit",
         str(ROOT),
-        "--output-dir",
-        str(tmp_root / "world_class_submission_kit"),
-        "--evidence-key",
-        "provider-holdout",
-        "--generated-at",
-        "2026-06-14",
+        "--output-dir", str(tmp_root / "world_class_submission_kit"),
+        "--evidence-key", "provider-holdout",
+        "--generated-at", "2026-06-14",
+        "--output-html", str(tmp_root / "world_class_submission_kit.html"),
     )
+    kit_payload = world_class_submission_kit_result["payload"]
     assert world_class_submission_kit_result["ok"], world_class_submission_kit_result
-    assert world_class_submission_kit_result["payload"]["summary"]["decision"] == "submission-kit-ready", world_class_submission_kit_result
-    assert world_class_submission_kit_result["payload"]["summary"]["written_count"] == 1, world_class_submission_kit_result
-    assert world_class_submission_kit_result["payload"]["summary"]["drafts_count_as_evidence"] is False, world_class_submission_kit_result
+    assert kit_payload["summary"]["decision"] == "submission-kit-ready", world_class_submission_kit_result
+    assert kit_payload["summary"]["written_count"] == 1, world_class_submission_kit_result
+    assert kit_payload["summary"]["drafts_count_as_evidence"] is False, world_class_submission_kit_result
+    assert kit_payload["artifacts"]["html"].endswith("tests/tmp_cli/world_class_submission_kit.html"), world_class_submission_kit_result
     assert (tmp_root / "world_class_submission_kit" / "provider-holdout.json").exists(), world_class_submission_kit_result
     assert (tmp_root / "world_class_submission_kit" / "submission_manifest.json").exists(), world_class_submission_kit_result
+    assert (tmp_root / "world_class_submission_kit.html").exists(), world_class_submission_kit_result
 
     world_class_submission_review_result = run(
         "world-class-submission-review",

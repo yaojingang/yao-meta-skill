@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import argparse
+import html
 import json
 import shutil
 from datetime import date
@@ -24,6 +25,10 @@ def rel_path(path: Path, root: Path) -> str:
 def write_json(path: Path, payload: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def html_text(value: Any) -> str:
+    return html.escape(str(value or ""), quote=True)
 
 
 def requested_checklist_items(intake: dict[str, Any], evidence_keys: list[str]) -> list[dict[str, Any]]:
@@ -128,12 +133,176 @@ def render_readme(report: dict[str, Any]) -> str:
     return "\n".join(lines).rstrip() + "\n"
 
 
+def render_html_list(values: list[Any], empty: str) -> str:
+    if not values:
+        return f"<li>{html_text(empty)}</li>"
+    return "".join(f"<li>{html_text(value)}</li>" for value in values)
+
+
+def render_html_commands(commands: dict[str, str]) -> str:
+    return "".join(
+        f"<li><span>{html_text(label.replace('_', ' '))}</span><code>{html_text(command)}</code></li>"
+        for label, command in commands.items()
+    )
+
+
+def render_html_files(files: list[dict[str, Any]]) -> str:
+    if not files:
+        return "<p class=\"muted\">No submission drafts were requested.</p>"
+    return "".join(
+        """
+        <article class="draft-card {status}">
+          <div>
+            <span>{status}</span>
+            <h3>{key}</h3>
+          </div>
+          <dl>
+            <dt>Template</dt><dd><code>{template}</code></dd>
+            <dt>Draft</dt><dd><code>{output}</code></dd>
+          </dl>
+          {errors}
+        </article>
+        """.format(
+            status=html_text(item.get("status", "")),
+            key=html_text(item.get("evidence_key", "")),
+            template=html_text(item.get("template_path", "")),
+            output=html_text(item.get("output_path", "")),
+            errors=(
+                "<ul class=\"errors\">"
+                + render_html_list(item.get("errors", []), "No errors.")
+                + "</ul>"
+                if item.get("errors")
+                else ""
+            ),
+        )
+        for item in files
+    )
+
+
+def render_html_item(item: dict[str, Any]) -> str:
+    must_collect = item.get("must_collect", {}) if isinstance(item.get("must_collect", {}), dict) else {}
+    return f"""
+      <article class="evidence-card {html_text(item.get('readiness', ''))}">
+        <header>
+          <span>{html_text(item.get('category', ''))} · {html_text(item.get('readiness', ''))}</span>
+          <h3>{html_text(item.get('label', item.get('evidence_key', '')))}</h3>
+        </header>
+        <p>{html_text(item.get('blocking_reason', ''))}</p>
+        <dl>
+          <dt>Owner</dt><dd>{html_text(item.get('owner', ''))}</dd>
+          <dt>Evidence</dt><dd><code>{html_text(item.get('evidence_key', ''))}</code></dd>
+          <dt>Submission</dt><dd><code>{html_text(item.get('submission_path', ''))}</code></dd>
+        </dl>
+        <div class="mini-grid">
+          <section>
+            <h4>Must Collect</h4>
+            <ul>{render_html_list(must_collect.get('provenance_requirements', []), 'No provenance requirements listed.')}</ul>
+          </section>
+          <section>
+            <h4>Pass Checks</h4>
+            <ul>{render_html_list(must_collect.get('success_checks', []), 'No success checks listed.')}</ul>
+          </section>
+          <section>
+            <h4>Privacy</h4>
+            <ul>{render_html_list(must_collect.get('privacy_contract', []), 'No privacy contract listed.')}</ul>
+          </section>
+        </div>
+      </article>
+    """
+
+
+def render_html(report: dict[str, Any]) -> str:
+    summary = report["summary"]
+    stats = [
+        ("Requested", summary["requested_count"]),
+        ("Written", summary["written_count"]),
+        ("Existing", summary["existing_count"]),
+        ("Skipped", summary["skipped_count"]),
+    ]
+    stat_html = "".join(f"<article><span>{html_text(label)}</span><strong>{html_text(value)}</strong></article>" for label, value in stats)
+    evidence_html = "".join(render_html_item(item) for item in report.get("evidence_items", []))
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>World-Class Evidence Submission Kit</title>
+  <style>
+    :root {{ --ink:#1B365D; --text:#202124; --muted:#6f6a63; --line:#e8e1d8; --soft:#f8f6f2; --warn:#9b4d0f; --pass:#1f6f43; }}
+    * {{ box-sizing:border-box; }}
+    body {{ margin:0; background:#fff; color:var(--text); font:16px/1.55 Georgia, "Times New Roman", serif; }}
+    .topbar {{ position:sticky; top:0; z-index:10; background:rgba(255,255,255,.96); border-bottom:1px solid var(--line); }}
+    .topbar-inner {{ max-width:1180px; margin:0 auto; padding:12px 24px; display:flex; justify-content:space-between; gap:16px; align-items:center; }}
+    .brand, a {{ color:var(--ink); }}
+    .links {{ display:flex; gap:14px; flex-wrap:wrap; }}
+    .links a {{ text-decoration:none; }}
+    .shell {{ max-width:1180px; margin:0 auto; padding:36px 24px 72px; }}
+    .hero {{ border-bottom:1px solid var(--line); padding:32px 0 28px; }}
+    .eyebrow {{ color:var(--ink); font-size:12px; text-transform:uppercase; font-weight:700; letter-spacing:0; }}
+    h1 {{ margin:8px 0 12px; color:var(--ink); font-size:56px; line-height:1.04; letter-spacing:0; }}
+    h2, h3, h4 {{ color:var(--ink); letter-spacing:0; }}
+    h2 {{ margin:0 0 14px; font-size:30px; }}
+    h3 {{ margin:4px 0 10px; font-size:22px; }}
+    h4 {{ margin:0 0 8px; font-size:16px; }}
+    .lede {{ max-width:800px; color:var(--muted); font-size:20px; }}
+    .stats {{ display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:12px; margin:26px 0 0; }}
+    .stats article, .panel, .draft-card, .evidence-card {{ border:1px solid var(--line); border-radius:8px; background:#fff; }}
+    .stats article {{ padding:16px; }}
+    .stats span, .draft-card span, .evidence-card span, .muted {{ color:var(--muted); }}
+    .stats strong {{ display:block; color:var(--ink); font-size:34px; line-height:1; }}
+    .section {{ padding:32px 0; border-bottom:1px solid var(--line); }}
+    .panel {{ padding:20px; }}
+    .two-col {{ display:grid; grid-template-columns:minmax(0, .45fr) minmax(0, 1fr); gap:18px; align-items:start; }}
+    .draft-grid, .evidence-grid {{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px; }}
+    .draft-card, .evidence-card {{ padding:18px; min-width:0; }}
+    .draft-card.written, .draft-card.exists {{ border-left:4px solid var(--pass); }}
+    .draft-card.skipped {{ border-left:4px solid var(--warn); }}
+    .evidence-card.awaiting-submission, .evidence-card.fix-submission, .evidence-card.fix-template {{ border-left:4px solid var(--warn); }}
+    dl {{ display:grid; grid-template-columns:96px minmax(0,1fr); gap:8px 12px; }}
+    dt {{ color:var(--ink); }}
+    dd {{ margin:0; min-width:0; overflow-wrap:anywhere; }}
+    code {{ font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:13px; overflow-wrap:anywhere; }}
+    ul, ol {{ padding-left:20px; }}
+    .commands {{ list-style:none; padding:0; margin:0; display:grid; gap:10px; }}
+    .commands li {{ padding:12px; background:var(--soft); border-radius:8px; }}
+    .commands span {{ display:block; color:var(--ink); font-weight:700; margin-bottom:4px; }}
+    .mini-grid {{ display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:12px; margin-top:14px; }}
+    .mini-grid section {{ background:var(--soft); border-radius:8px; padding:14px; min-width:0; }}
+    .mini-grid li, .notice li {{ overflow-wrap:anywhere; }}
+    .notice {{ background:var(--soft); border-left:4px solid var(--ink); padding:16px; border-radius:8px; }}
+    .errors {{ color:var(--warn); }}
+    @media (max-width:820px) {{ .stats, .two-col, .draft-grid, .evidence-grid, .mini-grid {{ grid-template-columns:1fr; }} h1 {{ font-size:38px; }} .topbar-inner {{ align-items:flex-start; flex-direction:column; }} }}
+  </style>
+</head>
+<body>
+  <nav class="topbar"><div class="topbar-inner"><span class="brand">World-Class Kit</span><div class="links"><a href="#workflow">Workflow</a><a href="#drafts">Drafts</a><a href="#evidence">Evidence</a><a href="#safety">Safety</a></div></div></nav>
+  <main class="shell">
+    <section class="hero">
+      <span class="eyebrow">Evidence Intake</span>
+      <h1>World-Class Evidence Submission Kit</h1>
+      <p class="lede">Use this cockpit to prepare human and external evidence packets. Drafts are not accepted evidence, and this page never changes the ledger result.</p>
+      <div class="stats">{stat_html}</div>
+    </section>
+    <section class="section two-col" id="workflow">
+      <article class="panel"><h2>Workflow</h2><ol><li>Run the real provider, human review, native permission, or native client telemetry work first.</li><li>Edit the matching JSON draft with aggregate artifact references and provenance metadata.</li><li>Set template_only to false only after real evidence exists.</li><li>Validate intake, refresh the ledger, then guard public claims.</li></ol></article>
+      <aside class="panel"><h2>Commands</h2><ul class="commands">{render_html_commands(report['commands'])}</ul></aside>
+    </section>
+    <section class="section" id="drafts"><h2>Drafts</h2><div class="draft-grid">{render_html_files(report['files'])}</div></section>
+    <section class="section" id="evidence"><h2>Evidence Requirements</h2><div class="evidence-grid">{evidence_html}</div></section>
+    <section class="section" id="safety"><h2>Safety Boundary</h2><div class="notice"><ul><li>Drafts never count as accepted ledger evidence.</li><li>Valid intake means ready for ledger review, not world-class completion.</li><li>Do not include credentials, raw prompts, raw outputs, transcripts, notes, or private user content.</li></ul></div></section>
+  </main>
+</body>
+</html>
+"""
+
+
 def build_submission_kit(
     skill_dir: Path,
     output_dir: Path,
     generated_at: str,
     evidence_keys: list[str] | None = None,
     overwrite: bool = False,
+    output_html: Path | None = None,
 ) -> dict[str, Any]:
     intake = build_intake(skill_dir, generated_at, submissions_dir=output_dir)
     items = requested_checklist_items(intake, evidence_keys or [])
@@ -143,6 +312,7 @@ def build_submission_kit(
     files = [copy_template(skill_dir, output_dir, item, template_results, overwrite) for item in items]
     manifest_path = output_dir / "submission_manifest.json"
     readme_path = output_dir / "README.md"
+    output_html = output_html or (output_dir / "index.html")
     written_count = sum(1 for item in files if item["status"] == "written")
     existing_count = sum(1 for item in files if item["status"] == "exists")
     skipped_count = sum(1 for item in files if item["status"] == "skipped")
@@ -166,6 +336,7 @@ def build_submission_kit(
         },
         "unknown_evidence_keys": unknown_keys,
         "files": files,
+        "evidence_items": items,
         "commands": {
             "validate_intake": f"python3 scripts/yao.py world-class-intake . --submissions-dir {rel_path(output_dir, skill_dir)}",
             "refresh_ledger": f"python3 scripts/yao.py world-class-ledger . --submissions-dir {rel_path(output_dir, skill_dir)}",
@@ -181,11 +352,14 @@ def build_submission_kit(
         "artifacts": {
             "manifest": rel_path(manifest_path, skill_dir),
             "readme": rel_path(readme_path, skill_dir),
+            "html": rel_path(output_html, skill_dir),
         },
     }
     output_dir.mkdir(parents=True, exist_ok=True)
     write_json(manifest_path, report)
     readme_path.write_text(render_readme(report), encoding="utf-8")
+    output_html.parent.mkdir(parents=True, exist_ok=True)
+    output_html.write_text(render_html(report), encoding="utf-8")
     return report
 
 
@@ -196,6 +370,7 @@ def main() -> None:
     parser.add_argument("--evidence-key", action="append", default=[])
     parser.add_argument("--overwrite", action="store_true")
     parser.add_argument("--generated-at", default=date.today().isoformat())
+    parser.add_argument("--output-html")
     args = parser.parse_args()
 
     skill_dir = Path(args.skill_dir).resolve()
@@ -208,6 +383,7 @@ def main() -> None:
         args.generated_at,
         evidence_keys=args.evidence_key,
         overwrite=args.overwrite,
+        output_html=Path(args.output_html).resolve() if args.output_html else None,
     )
     print(json.dumps(report, ensure_ascii=False, indent=2))
     if not report["ok"]:

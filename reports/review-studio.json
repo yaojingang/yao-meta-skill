@@ -1347,9 +1347,9 @@
           "world_class_task_count": 4,
           "world_class_ledger_pending_count": 4,
           "working_tree_dirty": true,
-          "changed_file_count": 33
+          "changed_file_count": 32
         },
-        "commit": "834665b73c1422486be8cb1b1dd826fa58e81be7",
+        "commit": "6b71aa2fb1feac8342dc72ceb2a5d9c5e7572130",
         "missing_artifacts": [],
         "limitations": [
           "Local command-runner evidence is reproducible but does not replace provider-backed model holdout evidence.",
@@ -1453,7 +1453,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 177,
-        "package_sha256": "5b6eb1631e77feb6fe3f4199e128607cdc719f8ec0675c92ae986aad2553a045"
+        "package_sha256": "7f70f5ec6944b938933be61ba59499f6f65493c99a72213c59609b0f0cbd4771"
       },
       "skill_atlas": {
         "skill_count": 12,
@@ -1491,8 +1491,8 @@
           "trust_level": "local",
           "license": "MIT",
           "checksums": {
-            "package_sha256": "5b6eb1631e77feb6fe3f4199e128607cdc719f8ec0675c92ae986aad2553a045",
-            "archive_sha256": "fc334a4b4da4af6c463510a76551e018633deb5626dca38d9aaaa2c636591eb7"
+            "package_sha256": "7f70f5ec6944b938933be61ba59499f6f65493c99a72213c59609b0f0cbd4771",
+            "archive_sha256": "cc5a43f9a1a3cf2a75cd3dc31d1317b90b2a911f32e3667b62936943dc5d808b"
           },
           "compatibility": {
             "openai": "pass",
@@ -1523,7 +1523,7 @@
           },
           "distribution": {
             "archive_verified": true,
-            "archive_sha256": "fc334a4b4da4af6c463510a76551e018633deb5626dca38d9aaaa2c636591eb7",
+            "archive_sha256": "cc5a43f9a1a3cf2a75cd3dc31d1317b90b2a911f32e3667b62936943dc5d808b",
             "package_verification": "reports/package_verification.json",
             "install_simulated": true,
             "install_simulation": "reports/install_simulation.json"
@@ -1539,7 +1539,7 @@
           "target_count": 4,
           "adapter_count": 4,
           "archive_present": true,
-          "archive_sha256": "fc334a4b4da4af6c463510a76551e018633deb5626dca38d9aaaa2c636591eb7",
+          "archive_sha256": "cc5a43f9a1a3cf2a75cd3dc31d1317b90b2a911f32e3667b62936943dc5d808b",
           "archive_entry_count": 568,
           "failure_count": 0,
           "warning_count": 0
@@ -1618,12 +1618,12 @@
             {
               "field": "archive_sha256",
               "from": "",
-              "to": "fc334a4b4da4af6c463510a76551e018633deb5626dca38d9aaaa2c636591eb7"
+              "to": "cc5a43f9a1a3cf2a75cd3dc31d1317b90b2a911f32e3667b62936943dc5d808b"
             },
             {
               "field": "package_sha256",
               "from": "0000000000000000000000000000000000000000000000000000000000000000",
-              "to": "5b6eb1631e77feb6fe3f4199e128607cdc719f8ec0675c92ae986aad2553a045"
+              "to": "7f70f5ec6944b938933be61ba59499f6f65493c99a72213c59609b0f0cbd4771"
             }
           ]
         },
@@ -3792,7 +3792,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.88,
+          "duration_ms": 26.32,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3820,7 +3820,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.25,
+          "duration_ms": 25.41,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3843,7 +3843,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.73,
+          "duration_ms": 26.48,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3871,7 +3871,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.83,
+          "duration_ms": 27.35,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3894,7 +3894,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.58,
+          "duration_ms": 28.32,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3922,7 +3922,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 27.09,
+          "duration_ms": 25.82,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3945,7 +3945,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.26,
+          "duration_ms": 25.54,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3972,7 +3972,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.6,
+          "duration_ms": 25.39,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3995,7 +3995,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.49,
+          "duration_ms": 25.46,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4024,7 +4024,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.76,
+          "duration_ms": 25.36,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4938,7 +4938,7 @@
           "label": "Registry Distribution",
           "status": "pass",
           "objective": "Skill packages are installable, versioned, checksumed, and upgrade-reviewable.",
-          "current": "archive entries 567; install failures 0",
+          "current": "archive entries 568; install failures 0",
           "command": "python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip && python3 scripts/yao.py registry-audit .",
           "test": "python3 tests/verify_registry_audit.py",
           "evidence": [
@@ -10230,7 +10230,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 177,
-        "package_sha256": "5b6eb1631e77feb6fe3f4199e128607cdc719f8ec0675c92ae986aad2553a045"
+        "package_sha256": "7f70f5ec6944b938933be61ba59499f6f65493c99a72213c59609b0f0cbd4771"
       },
       "failures": [],
       "warnings": [],
@@ -13584,7 +13584,7 @@
         },
         {
           "path": "tests/verify_yao_cli.py",
-          "lines": 898,
+          "lines": 899,
           "kind": "test",
           "severity": "pass",
           "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
@@ -13612,7 +13612,7 @@
         },
         {
           "path": "scripts/yao_cli_parser.py",
-          "lines": 728,
+          "lines": 729,
           "kind": "internal-module",
           "severity": "pass",
           "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
@@ -13675,10 +13675,10 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 751,
-        "other_text_tokens": 1154215,
+        "other_text_tokens": 1157129,
         "estimated_initial_load_tokens": 944,
-        "estimated_total_text_tokens": 1154966,
-        "relevant_file_count": 490,
+        "estimated_total_text_tokens": 1157880,
+        "relevant_file_count": 491,
         "unused_resource_dirs": [],
         "quality_signal_points": 130,
         "quality_density": 137.7
@@ -15530,7 +15530,7 @@
     "adoption_drift": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-13T23:27:35Z",
+      "generated_at": "2026-06-13T23:42:36Z",
       "skill_dir": ".",
       "privacy_contract": {
         "storage": "local-first",
@@ -16792,8 +16792,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "5b6eb1631e77feb6fe3f4199e128607cdc719f8ec0675c92ae986aad2553a045",
-          "archive_sha256": "fc334a4b4da4af6c463510a76551e018633deb5626dca38d9aaaa2c636591eb7"
+          "package_sha256": "7f70f5ec6944b938933be61ba59499f6f65493c99a72213c59609b0f0cbd4771",
+          "archive_sha256": "cc5a43f9a1a3cf2a75cd3dc31d1317b90b2a911f32e3667b62936943dc5d808b"
         },
         "compatibility": {
           "openai": "pass",
@@ -16824,7 +16824,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "fc334a4b4da4af6c463510a76551e018633deb5626dca38d9aaaa2c636591eb7",
+          "archive_sha256": "cc5a43f9a1a3cf2a75cd3dc31d1317b90b2a911f32e3667b62936943dc5d808b",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -16849,7 +16849,7 @@
               "vscode"
             ],
             "package_metadata": "registry/packages/yao-meta-skill.json",
-            "package_sha256": "5b6eb1631e77feb6fe3f4199e128607cdc719f8ec0675c92ae986aad2553a045"
+            "package_sha256": "7f70f5ec6944b938933be61ba59499f6f65493c99a72213c59609b0f0cbd4771"
           }
         ]
       },
@@ -16872,7 +16872,7 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "fc334a4b4da4af6c463510a76551e018633deb5626dca38d9aaaa2c636591eb7",
+        "archive_sha256": "cc5a43f9a1a3cf2a75cd3dc31d1317b90b2a911f32e3667b62936943dc5d808b",
         "archive_entry_count": 568,
         "failure_count": 0,
         "warning_count": 0
@@ -17880,12 +17880,12 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "fc334a4b4da4af6c463510a76551e018633deb5626dca38d9aaaa2c636591eb7"
+            "to": "cc5a43f9a1a3cf2a75cd3dc31d1317b90b2a911f32e3667b62936943dc5d808b"
           },
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "5b6eb1631e77feb6fe3f4199e128607cdc719f8ec0675c92ae986aad2553a045"
+            "to": "7f70f5ec6944b938933be61ba59499f6f65493c99a72213c59609b0f0cbd4771"
           }
         ]
       },

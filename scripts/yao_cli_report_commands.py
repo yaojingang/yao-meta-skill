@@ -87,6 +87,8 @@ def command_world_class_submission_kit(args: argparse.Namespace) -> int:
         cmd.append("--overwrite")
     if args.generated_at:
         cmd.extend(["--generated-at", args.generated_at])
+    if args.output_html:
+        cmd.extend(["--output-html", args.output_html])
     return emit_result(run_script("prepare_world_class_submission_kit.py", cmd))
 
 
