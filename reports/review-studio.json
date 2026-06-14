@@ -43,7 +43,7 @@
       "key": "context-budget",
       "label": "上下文",
       "status": "pass",
-      "detail": "initial load 960/1000; deferred 388115/120000; top deferred scripts 340379; resource governance governed; quality density 135.4",
+      "detail": "initial load 960/1000; deferred 388240/120000; top deferred scripts 340504; resource governance governed; quality density 135.4",
       "evidence": "reports/context_budget.json",
       "link": "context_budget.md"
     },
@@ -372,7 +372,7 @@
       ],
       "evidence": "reports/world_class_evidence_ledger.json",
       "evidence_link": "world_class_evidence_ledger.md",
-      "verification_command": "python3 scripts/yao.py world-class-runbook . && python3 scripts/yao.py world-class-ledger . && python3 scripts/yao.py review-studio ."
+      "verification_command": "python3 scripts/yao.py world-class-runbook . --submissions-dir evidence/world_class/submissions && python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions && python3 scripts/yao.py review-studio ."
     }
   ],
   "evidence_paths": {
@@ -1336,9 +1336,9 @@
           "methodology_complete": true,
           "required_artifact_count": 24,
           "missing_artifact_count": 0,
-          "evidence_bundle_sha256": "69dfb6c9b80bc88d8043270714359b8f8074bfc60f5fb811d8a917a0da087aef",
-          "source_contract_sha256": "f6672acad15cd131632032e808c09ee71ea1da1b4714cfedcf8dd35b0808fcf5",
-          "archive_sha256": "7b0683ec4b2e6cf991a023ca137f5734612c64410a8a0b5fc2adae97595b470f",
+          "evidence_bundle_sha256": "1e0bb8068a01ef836225760c31bdd6fa04dbf4014643f5b4532d5241357c4554",
+          "source_contract_sha256": "7bd945074bb9066661e3f4f1c2b45a6147d0bdd467cadc3e96af1ce129dc3397",
+          "archive_sha256": "0488c5b84d906354c41570de908244ed8af5d55b55f3f01f94bdfdff99851798",
           "output_case_count": 5,
           "failure_disclosure_count": 3,
           "command_count": 21,
@@ -1357,7 +1357,7 @@
           "working_tree_dirty": false,
           "changed_file_count": 0
         },
-        "commit": "07274b4c50068d4635583631c55e5a6e3fc00a7a",
+        "commit": "328be185f6199ff1d7041378c97657b42e7e3c42",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -1462,7 +1462,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 181,
-        "package_sha256": "f6672acad15cd131632032e808c09ee71ea1da1b4714cfedcf8dd35b0808fcf5"
+        "package_sha256": "7bd945074bb9066661e3f4f1c2b45a6147d0bdd467cadc3e96af1ce129dc3397"
       },
       "skill_atlas": {
         "skill_count": 12,
@@ -1500,8 +1500,8 @@
           "trust_level": "local",
           "license": "MIT",
           "checksums": {
-            "package_sha256": "f6672acad15cd131632032e808c09ee71ea1da1b4714cfedcf8dd35b0808fcf5",
-            "archive_sha256": "7b0683ec4b2e6cf991a023ca137f5734612c64410a8a0b5fc2adae97595b470f"
+            "package_sha256": "7bd945074bb9066661e3f4f1c2b45a6147d0bdd467cadc3e96af1ce129dc3397",
+            "archive_sha256": "0488c5b84d906354c41570de908244ed8af5d55b55f3f01f94bdfdff99851798"
           },
           "compatibility": {
             "openai": "pass",
@@ -1532,7 +1532,7 @@
           },
           "distribution": {
             "archive_verified": true,
-            "archive_sha256": "7b0683ec4b2e6cf991a023ca137f5734612c64410a8a0b5fc2adae97595b470f",
+            "archive_sha256": "0488c5b84d906354c41570de908244ed8af5d55b55f3f01f94bdfdff99851798",
             "package_verification": "reports/package_verification.json",
             "install_simulated": true,
             "install_simulation": "reports/install_simulation.json"
@@ -1548,7 +1548,7 @@
           "target_count": 4,
           "adapter_count": 4,
           "archive_present": true,
-          "archive_sha256": "7b0683ec4b2e6cf991a023ca137f5734612c64410a8a0b5fc2adae97595b470f",
+          "archive_sha256": "0488c5b84d906354c41570de908244ed8af5d55b55f3f01f94bdfdff99851798",
           "archive_entry_count": 576,
           "failure_count": 0,
           "warning_count": 0
@@ -1627,12 +1627,12 @@
             {
               "field": "archive_sha256",
               "from": "",
-              "to": "7b0683ec4b2e6cf991a023ca137f5734612c64410a8a0b5fc2adae97595b470f"
+              "to": "0488c5b84d906354c41570de908244ed8af5d55b55f3f01f94bdfdff99851798"
             },
             {
               "field": "package_sha256",
               "from": "0000000000000000000000000000000000000000000000000000000000000000",
-              "to": "f6672acad15cd131632032e808c09ee71ea1da1b4714cfedcf8dd35b0808fcf5"
+              "to": "7bd945074bb9066661e3f4f1c2b45a6147d0bdd467cadc3e96af1ce129dc3397"
             }
           ]
         },
@@ -1775,7 +1775,7 @@
               "YAO_OUTPUT_EVAL_MODEL=gpt-4.1-mini OPENAI_API_KEY=<redacted> python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60",
               "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
               "Copy evidence/world_class/templates/provider-holdout.intake.json to evidence/world_class/submissions/provider-holdout.json and fill only real evidence fields.",
-              "python3 scripts/yao.py world-class-intake ."
+              "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
             ],
             "success_checks": [
               "reports/output_execution_runs.json summary.model_executed_count > 0",
@@ -1814,7 +1814,7 @@
               "python3 scripts/yao.py output-review",
               "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
               "Copy evidence/world_class/templates/human-adjudication.intake.json to evidence/world_class/submissions/human-adjudication.json and fill only real evidence fields.",
-              "python3 scripts/yao.py world-class-intake ."
+              "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
             ],
             "success_checks": [
               "reports/output_review_adjudication.json summary.pending_count == 0",
@@ -1855,7 +1855,7 @@
               "python3 scripts/yao.py runtime-permissions . --package-dir dist",
               "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
               "Copy evidence/world_class/templates/native-permission-enforcement.intake.json to evidence/world_class/submissions/native-permission-enforcement.json and fill only real evidence fields.",
-              "python3 scripts/yao.py world-class-intake ."
+              "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
             ],
             "success_checks": [
               "reports/runtime_permission_probes.json summary.native_enforcement_count > 0",
@@ -1896,7 +1896,7 @@
               "python3 scripts/yao.py skill-atlas --workspace-root .",
               "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
               "Copy evidence/world_class/templates/native-client-telemetry.intake.json to evidence/world_class/submissions/native-client-telemetry.json and fill only real evidence fields.",
-              "python3 scripts/yao.py world-class-intake ."
+              "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
             ],
             "success_checks": [
               "reports/adoption_drift_report.json summary.source_types.external > 0",
@@ -4764,7 +4764,7 @@
       "ok": true,
       "generated_at": "2026-06-14",
       "skill_dir": ".",
-      "commit": "07274b4c50068d4635583631c55e5a6e3fc00a7a",
+      "commit": "328be185f6199ff1d7041378c97657b42e7e3c42",
       "git_status": {
         "available": true,
         "dirty": false,
@@ -4778,9 +4778,9 @@
         "methodology_complete": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "69dfb6c9b80bc88d8043270714359b8f8074bfc60f5fb811d8a917a0da087aef",
-        "source_contract_sha256": "f6672acad15cd131632032e808c09ee71ea1da1b4714cfedcf8dd35b0808fcf5",
-        "archive_sha256": "7b0683ec4b2e6cf991a023ca137f5734612c64410a8a0b5fc2adae97595b470f",
+        "evidence_bundle_sha256": "1e0bb8068a01ef836225760c31bdd6fa04dbf4014643f5b4532d5241357c4554",
+        "source_contract_sha256": "7bd945074bb9066661e3f4f1c2b45a6147d0bdd467cadc3e96af1ce129dc3397",
+        "archive_sha256": "0488c5b84d906354c41570de908244ed8af5d55b55f3f01f94bdfdff99851798",
         "output_case_count": 5,
         "failure_disclosure_count": 3,
         "command_count": 21,
@@ -4811,7 +4811,7 @@
       },
       "release_lock": {
         "ready": true,
-        "commit": "07274b4c50068d4635583631c55e5a6e3fc00a7a",
+        "commit": "328be185f6199ff1d7041378c97657b42e7e3c42",
         "status_scope": "generation-time status before this report is written",
         "reason": "clean generation-time HEAD"
       },
@@ -4821,7 +4821,7 @@
         "existing_count": 24,
         "missing_count": 0,
         "missing_paths": [],
-        "sha256": "69dfb6c9b80bc88d8043270714359b8f8074bfc60f5fb811d8a917a0da087aef"
+        "sha256": "1e0bb8068a01ef836225760c31bdd6fa04dbf4014643f5b4532d5241357c4554"
       },
       "methodology": {
         "path": "reports/benchmark_methodology.md",
@@ -4930,7 +4930,7 @@
           "path": "reports/security_trust_report.json",
           "exists": true,
           "bytes": 98830,
-          "sha256": "871eb9e4f88b0b91c211af94a66660f1c4e799907466362c15ebe63a9128bab1"
+          "sha256": "39ddc420a6f8d6e0b991b54311c61ce2f7be8de8e6c7241eda8d0ffe9434bb39"
         },
         {
           "label": "python_compatibility",
@@ -4944,14 +4944,14 @@
           "path": "reports/registry_audit.json",
           "exists": true,
           "bytes": 3183,
-          "sha256": "1b2feee7ce87257d042d6a2b9cb75bd2e495f4676ff20c21a7b3508c87aa6248"
+          "sha256": "d02dbd2d31655fd27613765d3395212d53ca07c8ef028deeff64732ca5059dbc"
         },
         {
           "label": "package_verification",
           "path": "reports/package_verification.json",
           "exists": true,
           "bytes": 19325,
-          "sha256": "6e885151878efa803cb5e85d0636b493015729cbf598e22cafffb30b8df2936a"
+          "sha256": "e101808a5f8f97126c02fedac757d545fef3e65a7f01d9d1da2774d314af0840"
         },
         {
           "label": "install_simulation",
@@ -4971,8 +4971,8 @@
           "label": "world_class_evidence_plan",
           "path": "reports/world_class_evidence_plan.json",
           "exists": true,
-          "bytes": 19532,
-          "sha256": "a9bd392cd45f3accabe9b5befb9090456f383b1edbc323cab7d20930179dc229"
+          "bytes": 19940,
+          "sha256": "164803bb1cea795c8b962ec82cb1b3a4a58bbc51e10a4edfce12de00d046905a"
         },
         {
           "label": "world_class_evidence_ledger",
@@ -5103,22 +5103,22 @@
         },
         {
           "label": "world-class evidence ledger",
-          "command": "python3 scripts/yao.py world-class-ledger .",
+          "command": "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions",
           "evidence": "reports/world_class_evidence_ledger.json"
         },
         {
           "label": "world-class evidence intake",
-          "command": "python3 scripts/yao.py world-class-intake .",
+          "command": "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions",
           "evidence": "reports/world_class_evidence_intake.json"
         },
         {
           "label": "world-class submission review",
-          "command": "python3 scripts/yao.py world-class-submission-review .",
+          "command": "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions",
           "evidence": "reports/world_class_submission_review.json"
         },
         {
           "label": "world-class operator runbook",
-          "command": "python3 scripts/yao.py world-class-runbook .",
+          "command": "python3 scripts/yao.py world-class-runbook . --submissions-dir evidence/world_class/submissions",
           "evidence": "reports/world_class_operator_runbook.json"
         },
         {
@@ -10653,7 +10653,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 181,
-        "package_sha256": "f6672acad15cd131632032e808c09ee71ea1da1b4714cfedcf8dd35b0808fcf5"
+        "package_sha256": "7bd945074bb9066661e3f4f1c2b45a6147d0bdd467cadc3e96af1ce129dc3397"
       },
       "failures": [],
       "warnings": [],
@@ -14172,7 +14172,7 @@
         },
         {
           "path": "tests/verify_review_studio.py",
-          "lines": 679,
+          "lines": 680,
           "kind": "test",
           "severity": "pass",
           "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
@@ -14207,15 +14207,15 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 767,
-        "other_text_tokens": 1203641,
+        "other_text_tokens": 1204831,
         "estimated_initial_load_tokens": 960,
-        "estimated_total_text_tokens": 1204408,
-        "deferred_resource_tokens": 388115,
+        "estimated_total_text_tokens": 1205598,
+        "deferred_resource_tokens": 388240,
         "deferred_resource_warn_threshold": 120000,
         "deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 340379,
+            "estimated_tokens": 340504,
             "file_count": 97
           },
           {
@@ -14232,7 +14232,7 @@
         "large_deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 340379,
+            "estimated_tokens": 340504,
             "file_count": 97
           }
         ],
@@ -14255,14 +14255,14 @@
               ],
               "missing": [],
               "path": "scripts",
-              "estimated_tokens": 340379,
+              "estimated_tokens": 340504,
               "file_count": 97,
               "rationale": "Script resources are deterministic deferred tools, not initial-load prompt context."
             }
           ],
           "summary": "Large deferred resources are indexed and backed by evidence."
         },
-        "relevant_file_count": 509,
+        "relevant_file_count": 510,
         "unused_resource_dirs": [],
         "quality_signal_points": 130,
         "quality_density": 135.4
@@ -16203,7 +16203,7 @@
       "schema_version": "1.0",
       "ok": true,
       "skill_dir": ".",
-      "generated_at": "2026-06-13",
+      "generated_at": "2026-06-14",
       "summary": {
         "waiver_count": 0,
         "active_count": 0,
@@ -16253,7 +16253,7 @@
             "Reviewer links output_review_adjudication or output_execution evidence."
           ],
           "suggested_evidence": "reports/output_review_adjudication.md",
-          "suggested_command": "python3 scripts/yao.py review-waivers . --add-waiver --gate-key output-lab --reviewer \"<reviewer>\" --reason \"Output Lab has pending human/provider evidence; accepted only for this bounded review scope.\" --expires-at 2027-06-13 --evidence reports/output_review_adjudication.md",
+          "suggested_command": "python3 scripts/yao.py review-waivers . --add-waiver --gate-key output-lab --reviewer \"<reviewer>\" --reason \"Output Lab has pending human/provider evidence; accepted only for this bounded review scope.\" --expires-at 2027-06-14 --evidence reports/output_review_adjudication.md",
           "world_class_boundary": "Does not count as provider, human, or public world-class completion evidence."
         },
         {
@@ -16268,7 +16268,7 @@
             "Keep claim guard active until ledger summary.ready_to_claim_world_class is true."
           ],
           "suggested_evidence": "reports/world_class_evidence_ledger.md",
-          "suggested_command": "python3 scripts/yao.py world-class-ledger . && python3 scripts/yao.py world-class-claim-guard .",
+          "suggested_command": "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions && python3 scripts/yao.py world-class-claim-guard .",
           "world_class_boundary": "Non-waivable completion boundary."
         }
       ],
@@ -17748,8 +17748,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "f6672acad15cd131632032e808c09ee71ea1da1b4714cfedcf8dd35b0808fcf5",
-          "archive_sha256": "7b0683ec4b2e6cf991a023ca137f5734612c64410a8a0b5fc2adae97595b470f"
+          "package_sha256": "7bd945074bb9066661e3f4f1c2b45a6147d0bdd467cadc3e96af1ce129dc3397",
+          "archive_sha256": "0488c5b84d906354c41570de908244ed8af5d55b55f3f01f94bdfdff99851798"
         },
         "compatibility": {
           "openai": "pass",
@@ -17780,7 +17780,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "7b0683ec4b2e6cf991a023ca137f5734612c64410a8a0b5fc2adae97595b470f",
+          "archive_sha256": "0488c5b84d906354c41570de908244ed8af5d55b55f3f01f94bdfdff99851798",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -17805,7 +17805,7 @@
               "vscode"
             ],
             "package_metadata": "registry/packages/yao-meta-skill.json",
-            "package_sha256": "f6672acad15cd131632032e808c09ee71ea1da1b4714cfedcf8dd35b0808fcf5"
+            "package_sha256": "7bd945074bb9066661e3f4f1c2b45a6147d0bdd467cadc3e96af1ce129dc3397"
           }
         ]
       },
@@ -17828,7 +17828,7 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "7b0683ec4b2e6cf991a023ca137f5734612c64410a8a0b5fc2adae97595b470f",
+        "archive_sha256": "0488c5b84d906354c41570de908244ed8af5d55b55f3f01f94bdfdff99851798",
         "archive_entry_count": 576,
         "failure_count": 0,
         "warning_count": 0
@@ -18836,12 +18836,12 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "7b0683ec4b2e6cf991a023ca137f5734612c64410a8a0b5fc2adae97595b470f"
+            "to": "0488c5b84d906354c41570de908244ed8af5d55b55f3f01f94bdfdff99851798"
           },
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "f6672acad15cd131632032e808c09ee71ea1da1b4714cfedcf8dd35b0808fcf5"
+            "to": "7bd945074bb9066661e3f4f1c2b45a6147d0bdd467cadc3e96af1ce129dc3397"
           }
         ]
       },

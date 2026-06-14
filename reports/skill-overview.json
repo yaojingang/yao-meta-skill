@@ -922,9 +922,9 @@
       "methodology_complete": true,
       "required_artifact_count": 24,
       "missing_artifact_count": 0,
-      "evidence_bundle_sha256": "69dfb6c9b80bc88d8043270714359b8f8074bfc60f5fb811d8a917a0da087aef",
-      "source_contract_sha256": "f6672acad15cd131632032e808c09ee71ea1da1b4714cfedcf8dd35b0808fcf5",
-      "archive_sha256": "7b0683ec4b2e6cf991a023ca137f5734612c64410a8a0b5fc2adae97595b470f",
+      "evidence_bundle_sha256": "1e0bb8068a01ef836225760c31bdd6fa04dbf4014643f5b4532d5241357c4554",
+      "source_contract_sha256": "7bd945074bb9066661e3f4f1c2b45a6147d0bdd467cadc3e96af1ce129dc3397",
+      "archive_sha256": "0488c5b84d906354c41570de908244ed8af5d55b55f3f01f94bdfdff99851798",
       "output_case_count": 5,
       "failure_disclosure_count": 3,
       "command_count": 21,
@@ -943,7 +943,7 @@
       "working_tree_dirty": false,
       "changed_file_count": 0
     },
-    "commit": "07274b4c50068d4635583631c55e5a6e3fc00a7a",
+    "commit": "328be185f6199ff1d7041378c97657b42e7e3c42",
     "missing_artifacts": [],
     "limitations": [
       "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -1048,7 +1048,7 @@
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
     "package_hash_file_count": 181,
-    "package_sha256": "f6672acad15cd131632032e808c09ee71ea1da1b4714cfedcf8dd35b0808fcf5"
+    "package_sha256": "7bd945074bb9066661e3f4f1c2b45a6147d0bdd467cadc3e96af1ce129dc3397"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -1086,8 +1086,8 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "f6672acad15cd131632032e808c09ee71ea1da1b4714cfedcf8dd35b0808fcf5",
-        "archive_sha256": "7b0683ec4b2e6cf991a023ca137f5734612c64410a8a0b5fc2adae97595b470f"
+        "package_sha256": "7bd945074bb9066661e3f4f1c2b45a6147d0bdd467cadc3e96af1ce129dc3397",
+        "archive_sha256": "0488c5b84d906354c41570de908244ed8af5d55b55f3f01f94bdfdff99851798"
       },
       "compatibility": {
         "openai": "pass",
@@ -1118,7 +1118,7 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "7b0683ec4b2e6cf991a023ca137f5734612c64410a8a0b5fc2adae97595b470f",
+        "archive_sha256": "0488c5b84d906354c41570de908244ed8af5d55b55f3f01f94bdfdff99851798",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
@@ -1134,7 +1134,7 @@
       "target_count": 4,
       "adapter_count": 4,
       "archive_present": true,
-      "archive_sha256": "7b0683ec4b2e6cf991a023ca137f5734612c64410a8a0b5fc2adae97595b470f",
+      "archive_sha256": "0488c5b84d906354c41570de908244ed8af5d55b55f3f01f94bdfdff99851798",
       "archive_entry_count": 576,
       "failure_count": 0,
       "warning_count": 0
@@ -1213,12 +1213,12 @@
         {
           "field": "archive_sha256",
           "from": "",
-          "to": "7b0683ec4b2e6cf991a023ca137f5734612c64410a8a0b5fc2adae97595b470f"
+          "to": "0488c5b84d906354c41570de908244ed8af5d55b55f3f01f94bdfdff99851798"
         },
         {
           "field": "package_sha256",
           "from": "0000000000000000000000000000000000000000000000000000000000000000",
-          "to": "f6672acad15cd131632032e808c09ee71ea1da1b4714cfedcf8dd35b0808fcf5"
+          "to": "7bd945074bb9066661e3f4f1c2b45a6147d0bdd467cadc3e96af1ce129dc3397"
         }
       ]
     },
@@ -1361,7 +1361,7 @@
           "YAO_OUTPUT_EVAL_MODEL=gpt-4.1-mini OPENAI_API_KEY=<redacted> python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60",
           "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
           "Copy evidence/world_class/templates/provider-holdout.intake.json to evidence/world_class/submissions/provider-holdout.json and fill only real evidence fields.",
-          "python3 scripts/yao.py world-class-intake ."
+          "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
         ],
         "success_checks": [
           "reports/output_execution_runs.json summary.model_executed_count > 0",
@@ -1400,7 +1400,7 @@
           "python3 scripts/yao.py output-review",
           "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
           "Copy evidence/world_class/templates/human-adjudication.intake.json to evidence/world_class/submissions/human-adjudication.json and fill only real evidence fields.",
-          "python3 scripts/yao.py world-class-intake ."
+          "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
         ],
         "success_checks": [
           "reports/output_review_adjudication.json summary.pending_count == 0",
@@ -1441,7 +1441,7 @@
           "python3 scripts/yao.py runtime-permissions . --package-dir dist",
           "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
           "Copy evidence/world_class/templates/native-permission-enforcement.intake.json to evidence/world_class/submissions/native-permission-enforcement.json and fill only real evidence fields.",
-          "python3 scripts/yao.py world-class-intake ."
+          "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
         ],
         "success_checks": [
           "reports/runtime_permission_probes.json summary.native_enforcement_count > 0",
@@ -1482,7 +1482,7 @@
           "python3 scripts/yao.py skill-atlas --workspace-root .",
           "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
           "Copy evidence/world_class/templates/native-client-telemetry.intake.json to evidence/world_class/submissions/native-client-telemetry.json and fill only real evidence fields.",
-          "python3 scripts/yao.py world-class-intake ."
+          "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
         ],
         "success_checks": [
           "reports/adoption_drift_report.json summary.source_types.external > 0",

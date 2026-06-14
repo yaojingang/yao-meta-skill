@@ -3,7 +3,7 @@
   "ok": true,
   "generated_at": "2026-06-14",
   "skill_dir": ".",
-  "commit": "07274b4c50068d4635583631c55e5a6e3fc00a7a",
+  "commit": "328be185f6199ff1d7041378c97657b42e7e3c42",
   "git_status": {
     "available": true,
     "dirty": false,
@@ -17,9 +17,9 @@
     "methodology_complete": true,
     "required_artifact_count": 24,
     "missing_artifact_count": 0,
-    "evidence_bundle_sha256": "69dfb6c9b80bc88d8043270714359b8f8074bfc60f5fb811d8a917a0da087aef",
-    "source_contract_sha256": "f6672acad15cd131632032e808c09ee71ea1da1b4714cfedcf8dd35b0808fcf5",
-    "archive_sha256": "7b0683ec4b2e6cf991a023ca137f5734612c64410a8a0b5fc2adae97595b470f",
+    "evidence_bundle_sha256": "1e0bb8068a01ef836225760c31bdd6fa04dbf4014643f5b4532d5241357c4554",
+    "source_contract_sha256": "7bd945074bb9066661e3f4f1c2b45a6147d0bdd467cadc3e96af1ce129dc3397",
+    "archive_sha256": "0488c5b84d906354c41570de908244ed8af5d55b55f3f01f94bdfdff99851798",
     "output_case_count": 5,
     "failure_disclosure_count": 3,
     "command_count": 21,
@@ -50,7 +50,7 @@
   },
   "release_lock": {
     "ready": true,
-    "commit": "07274b4c50068d4635583631c55e5a6e3fc00a7a",
+    "commit": "328be185f6199ff1d7041378c97657b42e7e3c42",
     "status_scope": "generation-time status before this report is written",
     "reason": "clean generation-time HEAD"
   },
@@ -60,7 +60,7 @@
     "existing_count": 24,
     "missing_count": 0,
     "missing_paths": [],
-    "sha256": "69dfb6c9b80bc88d8043270714359b8f8074bfc60f5fb811d8a917a0da087aef"
+    "sha256": "1e0bb8068a01ef836225760c31bdd6fa04dbf4014643f5b4532d5241357c4554"
   },
   "methodology": {
     "path": "reports/benchmark_methodology.md",
@@ -169,7 +169,7 @@
       "path": "reports/security_trust_report.json",
       "exists": true,
       "bytes": 98830,
-      "sha256": "871eb9e4f88b0b91c211af94a66660f1c4e799907466362c15ebe63a9128bab1"
+      "sha256": "39ddc420a6f8d6e0b991b54311c61ce2f7be8de8e6c7241eda8d0ffe9434bb39"
     },
     {
       "label": "python_compatibility",
@@ -183,14 +183,14 @@
       "path": "reports/registry_audit.json",
       "exists": true,
       "bytes": 3183,
-      "sha256": "1b2feee7ce87257d042d6a2b9cb75bd2e495f4676ff20c21a7b3508c87aa6248"
+      "sha256": "d02dbd2d31655fd27613765d3395212d53ca07c8ef028deeff64732ca5059dbc"
     },
     {
       "label": "package_verification",
       "path": "reports/package_verification.json",
       "exists": true,
       "bytes": 19325,
-      "sha256": "6e885151878efa803cb5e85d0636b493015729cbf598e22cafffb30b8df2936a"
+      "sha256": "e101808a5f8f97126c02fedac757d545fef3e65a7f01d9d1da2774d314af0840"
     },
     {
       "label": "install_simulation",
@@ -210,8 +210,8 @@
       "label": "world_class_evidence_plan",
       "path": "reports/world_class_evidence_plan.json",
       "exists": true,
-      "bytes": 19532,
-      "sha256": "a9bd392cd45f3accabe9b5befb9090456f383b1edbc323cab7d20930179dc229"
+      "bytes": 19940,
+      "sha256": "164803bb1cea795c8b962ec82cb1b3a4a58bbc51e10a4edfce12de00d046905a"
     },
     {
       "label": "world_class_evidence_ledger",
@@ -342,22 +342,22 @@
     },
     {
       "label": "world-class evidence ledger",
-      "command": "python3 scripts/yao.py world-class-ledger .",
+      "command": "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions",
       "evidence": "reports/world_class_evidence_ledger.json"
     },
     {
       "label": "world-class evidence intake",
-      "command": "python3 scripts/yao.py world-class-intake .",
+      "command": "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions",
       "evidence": "reports/world_class_evidence_intake.json"
     },
     {
       "label": "world-class submission review",
-      "command": "python3 scripts/yao.py world-class-submission-review .",
+      "command": "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions",
       "evidence": "reports/world_class_submission_review.json"
     },
     {
       "label": "world-class operator runbook",
-      "command": "python3 scripts/yao.py world-class-runbook .",
+      "command": "python3 scripts/yao.py world-class-runbook . --submissions-dir evidence/world_class/submissions",
       "evidence": "reports/world_class_operator_runbook.json"
     },
     {
