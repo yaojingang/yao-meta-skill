@@ -3,7 +3,7 @@
   "ok": true,
   "generated_at": "2026-06-14",
   "skill_dir": ".",
-  "commit": "17db8f04980942fa5e91899ffc93c1b796df5bb8",
+  "commit": "b9d502bc96a8c90de10041ca111be9094ff29a5b",
   "git_status": {
     "available": true,
     "dirty": false,
@@ -17,9 +17,9 @@
     "methodology_complete": true,
     "required_artifact_count": 24,
     "missing_artifact_count": 0,
-    "evidence_bundle_sha256": "ebcc03a915d4cd65f48e88dcf0a62b3f921b041dcc940421543f0d107c0c7870",
+    "evidence_bundle_sha256": "1198b50799447f2478da882a1dfc088a0043ac699a649142f7a983e33262cfff",
     "source_contract_sha256": "8a63d5ebc9ac16b7ace805fa6373f591d993a135e099eacdb209596db70f3bf2",
-    "archive_sha256": "73cbe952a5a437ab3568fab5ffad102273e4188a6a877c13be755fea1777d496",
+    "archive_sha256": "501f298a9944ed9a597be439916dea3bb5812214488a46c0812bca920971f2c2",
     "output_case_count": 5,
     "failure_disclosure_count": 3,
     "command_count": 21,
@@ -50,7 +50,7 @@
   },
   "release_lock": {
     "ready": true,
-    "commit": "17db8f04980942fa5e91899ffc93c1b796df5bb8",
+    "commit": "b9d502bc96a8c90de10041ca111be9094ff29a5b",
     "status_scope": "generation-time status before this report is written",
     "reason": "clean generation-time HEAD"
   },
@@ -60,7 +60,7 @@
     "existing_count": 24,
     "missing_count": 0,
     "missing_paths": [],
-    "sha256": "ebcc03a915d4cd65f48e88dcf0a62b3f921b041dcc940421543f0d107c0c7870"
+    "sha256": "1198b50799447f2478da882a1dfc088a0043ac699a649142f7a983e33262cfff"
   },
   "methodology": {
     "path": "reports/benchmark_methodology.md",
@@ -133,8 +133,8 @@
       "label": "output_execution",
       "path": "reports/output_execution_runs.json",
       "exists": true,
-      "bytes": 7966,
-      "sha256": "815dad0e8e7817fdb0092375f14b0e5f96a0645c52d762434e433e52123920b6"
+      "bytes": 7967,
+      "sha256": "3b833c010cc2ec6cacd2d6f59ed8d976165c6eb13124ee834e6d84793b94c87c"
     },
     {
       "label": "blind_review",
@@ -183,14 +183,14 @@
       "path": "reports/registry_audit.json",
       "exists": true,
       "bytes": 3183,
-      "sha256": "a9b53df3dd1baf4e4e6f5725020a6c54b9ff7834cfe5ac0d34134992186acc60"
+      "sha256": "61fd3915f8d782ec5bda34a66bf1a67a7ef40b9a4d49534244b35f5b532fa442"
     },
     {
       "label": "package_verification",
       "path": "reports/package_verification.json",
       "exists": true,
       "bytes": 19325,
-      "sha256": "332f666e2f20e686d42da4f268e8e65c704d386d48bc05c2715f16974c84a5a1"
+      "sha256": "9d7d30968cecf0add29f4b54e56fe642592b3fb05afe9923ccf593dde15768cb"
     },
     {
       "label": "install_simulation",
