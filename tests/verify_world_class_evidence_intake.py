@@ -159,6 +159,7 @@ def main() -> None:
     assert "`python3 scripts/yao.py world-class-ledger .`" in markdown, markdown
     assert "Templates and planned work do not count as accepted evidence." in markdown, markdown
     assert "Real submissions must include the evidence-key critical artifact paths with verified SHA-256 digests." in markdown, markdown
+    assert "Real submissions must replace template submitter, date, and provenance placeholders with concrete evidence metadata." in markdown, markdown
 
     kit_dir = TMP / "submission_kit"
     kit_proc = run_kit("--output-dir", str(kit_dir), "--evidence-key", "provider-holdout")
@@ -218,6 +219,23 @@ def main() -> None:
     assert valid_checklist["provider-holdout"]["readiness"] == "ready-for-ledger-review", valid_checklist["provider-holdout"]
     assert valid_checklist["provider-holdout"]["submission_path"].endswith("tests/tmp_world_class_evidence_intake/valid_submissions/provider-holdout.json"), valid_checklist["provider-holdout"]
     assert "tests/tmp_world_class_evidence_intake/valid_submissions" in valid_checklist["provider-holdout"]["commands"]["validate_intake"], valid_checklist["provider-holdout"]
+
+    placeholder_dir = TMP / "placeholder_submissions"
+    placeholder_dir.mkdir()
+    placeholder_submission = provider_submission(valid=True)
+    placeholder_submission["submitted_by"] = "operator with provider credentials"
+    placeholder_submission["submitted_at"] = "YYYY-MM-DD"
+    (placeholder_dir / "provider-holdout.json").write_text(
+        json.dumps(placeholder_submission, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    placeholder_payload = run_intake("--submissions-dir", str(placeholder_dir))
+    assert placeholder_payload["ok"] is False, placeholder_payload
+    assert placeholder_payload["summary"]["decision"] == "fix-intake", placeholder_payload["summary"]
+    assert placeholder_payload["summary"]["invalid_submission_count"] == 1, placeholder_payload["summary"]
+    placeholder_errors = placeholder_payload["submissions"][0]["errors"]
+    assert any("submitted_by must not use template placeholder text" in error for error in placeholder_errors), placeholder_errors
+    assert any("submitted_at must use YYYY-MM-DD" in error for error in placeholder_errors), placeholder_errors
 
     invalid_dir = TMP / "invalid_submissions"
     invalid_dir.mkdir()

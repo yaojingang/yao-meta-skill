@@ -49,6 +49,7 @@ EXPECTED_SOURCE_TYPES = {
     "native-client-telemetry": "native-client-telemetry",
 }
 SHA256_RE = re.compile(r"^[0-9a-fA-F]{64}$")
+SUBMITTED_AT_RE = re.compile(r"^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}:\d{2}Z)?$")
 DISALLOWED_REAL_ARTIFACTS = {"reports/telemetry_events.jsonl"}
 REQUIRED_REAL_ARTIFACT_PATHS = {
     "provider-holdout": {"reports/output_execution_runs.json"},
@@ -65,6 +66,18 @@ REQUIRED_REAL_ARTIFACT_PATHS = {
         "reports/telemetry_hook_recipes.json",
     },
 }
+PLACEHOLDER_FRAGMENTS = (
+    "YYYY-MM-DD",
+    "name or team handle",
+    "operator with provider credentials",
+    "human reviewer",
+    "target client or installer integrator",
+    "Browser/Chrome/IDE/provider client integrator",
+    "Browser/Chrome/IDE/provider client",
+    "openai|claude|generic|vscode|other",
+    "client or installer component",
+    "/local/path/not/committed",
+)
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -99,6 +112,20 @@ def rel_path(path: Path, root: Path) -> str:
 def add_error(errors: list[str], condition: bool, message: str) -> None:
     if not condition:
         errors.append(message)
+
+
+def has_placeholder_text(value: Any) -> bool:
+    text = str(value or "").strip()
+    if not text:
+        return False
+    lowered = text.lower()
+    return any(fragment.lower() in lowered for fragment in PLACEHOLDER_FRAGMENTS)
+
+
+def require_real_text(errors: list[str], value: Any, field: str) -> None:
+    text = str(value or "").strip()
+    add_error(errors, bool(text), f"{field} is required")
+    add_error(errors, not has_placeholder_text(text), f"{field} must not use template placeholder text")
 
 
 def sha256_file(path: Path) -> str:
@@ -197,6 +224,7 @@ def validate_artifact_refs(
 
 def validate_evidence_specific(payload: dict[str, Any], errors: list[str]) -> None:
     key = str(payload.get("evidence_key", ""))
+    template_expected = payload.get("template_only") is True
     provenance = payload.get("provenance", {}) if isinstance(payload.get("provenance", {}), dict) else {}
     if key == "provider-holdout":
         add_error(errors, bool(str(provenance.get("provider", "")).strip()), "provider-holdout provenance.provider is required")
@@ -208,6 +236,8 @@ def validate_evidence_specific(payload: dict[str, Any], errors: list[str]) -> No
         )
     elif key == "human-adjudication":
         add_error(errors, bool(str(provenance.get("reviewer", "")).strip()), "human-adjudication provenance.reviewer is required")
+        if not template_expected:
+            require_real_text(errors, provenance.get("reviewer", ""), "human-adjudication provenance.reviewer")
         add_error(
             errors,
             provenance.get("answer_key_opened_after_decisions") is True,
@@ -215,11 +245,19 @@ def validate_evidence_specific(payload: dict[str, Any], errors: list[str]) -> No
         )
     elif key == "native-permission-enforcement":
         add_error(errors, bool(str(provenance.get("target", "")).strip()), "native-permission-enforcement provenance.target is required")
+        if not template_expected:
+            require_real_text(errors, provenance.get("target", ""), "native-permission-enforcement provenance.target")
         add_error(
             errors,
             bool(str(provenance.get("guard_location", "")).strip()),
             "native-permission-enforcement provenance.guard_location is required",
         )
+        if not template_expected:
+            require_real_text(
+                errors,
+                provenance.get("guard_location", ""),
+                "native-permission-enforcement provenance.guard_location",
+            )
         add_error(
             errors,
             str(provenance.get("guard_scope", "")).strip()
@@ -238,6 +276,14 @@ def validate_evidence_specific(payload: dict[str, Any], errors: list[str]) -> No
         )
     elif key == "native-client-telemetry":
         add_error(errors, bool(str(provenance.get("client", "")).strip()), "native-client-telemetry provenance.client is required")
+        if not template_expected:
+            require_real_text(errors, provenance.get("client", ""), "native-client-telemetry provenance.client")
+            if str(provenance.get("native_host_manifest", "")).strip():
+                require_real_text(
+                    errors,
+                    provenance.get("native_host_manifest", ""),
+                    "native-client-telemetry provenance.native_host_manifest",
+                )
         add_error(errors, provenance.get("event_source") == "external", "native-client-telemetry event_source must be external")
         add_error(errors, provenance.get("metadata_only") is True, "native-client-telemetry must be metadata_only")
 
@@ -266,6 +312,13 @@ def validate_payload(
     add_error(errors, bool(str(payload.get("submitted_by", "")).strip()), "submitted_by is required")
     add_error(errors, bool(str(payload.get("submitted_at", "")).strip()), "submitted_at is required")
     add_error(errors, bool(str(payload.get("summary", "")).strip()), "summary is required")
+    if not template_expected:
+        require_real_text(errors, payload.get("submitted_by", ""), "submitted_by")
+        add_error(
+            errors,
+            bool(SUBMITTED_AT_RE.match(str(payload.get("submitted_at", "")).strip())),
+            "submitted_at must use YYYY-MM-DD or YYYY-MM-DDTHH:MM:SSZ",
+        )
     artifact_integrity = validate_artifact_refs(payload, errors, root=root, template_expected=template_expected)
     privacy = payload.get("privacy", {}) if isinstance(payload.get("privacy", {}), dict) else {}
     for key in REQUIRED_PRIVACY_FALSE:

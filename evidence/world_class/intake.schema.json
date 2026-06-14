@@ -185,6 +185,19 @@
       },
       "then": {
         "properties": {
+          "submitted_at": {
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}(?:T\\d{2}:\\d{2}:\\d{2}Z)?$"
+          },
+          "submitted_by": {
+            "not": {
+              "enum": [
+                "operator with provider credentials",
+                "human reviewer",
+                "target client or installer integrator",
+                "Browser/Chrome/IDE/provider client integrator"
+              ]
+            }
+          },
           "artifact_refs": {
             "items": {
               "required": [

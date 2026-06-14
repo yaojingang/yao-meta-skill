@@ -263,6 +263,50 @@ def main() -> None:
         for error in unrelated_accepted_provider["submission_state"]["errors"]
     ), unrelated_accepted_provider
 
+    placeholder_accepted_submissions = TMP / "placeholder_accepted_submissions"
+    placeholder_accepted_submissions.mkdir()
+    placeholder_submission = provider_submission(accepted_source_skill)
+    placeholder_submission["submitted_by"] = "operator with provider credentials"
+    placeholder_submission["submitted_at"] = "YYYY-MM-DD"
+    (placeholder_accepted_submissions / "provider-holdout.json").write_text(
+        json.dumps(placeholder_submission, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    placeholder_accepted_proc = subprocess.run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            str(accepted_source_skill),
+            "--output-json",
+            str(TMP / "placeholder_accepted_provider_ledger.json"),
+            "--output-md",
+            str(TMP / "placeholder_accepted_provider_ledger.md"),
+            "--submissions-dir",
+            str(placeholder_accepted_submissions),
+            "--generated-at",
+            "2026-06-13",
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    placeholder_accepted_payload = json.loads(placeholder_accepted_proc.stdout)
+    placeholder_accepted_summary = placeholder_accepted_payload["summary"]
+    assert placeholder_accepted_summary["source_accepted_count"] == 1, placeholder_accepted_summary
+    assert placeholder_accepted_summary["accepted_count"] == 0, placeholder_accepted_summary
+    assert placeholder_accepted_summary["invalid_submission_count"] == 1, placeholder_accepted_summary
+    placeholder_accepted_provider = {
+        entry["key"]: entry for entry in placeholder_accepted_payload["entries"]
+    }["provider-holdout"]
+    assert placeholder_accepted_provider["source_accepted"] is True, placeholder_accepted_provider
+    assert placeholder_accepted_provider["status"] == "pending", placeholder_accepted_provider
+    assert placeholder_accepted_provider["submission_state"]["status"] == "invalid-contract", placeholder_accepted_provider
+    assert any(
+        "submitted_by must not use template placeholder text" in error
+        for error in placeholder_accepted_provider["submission_state"]["errors"]
+    ), placeholder_accepted_provider
+
     accepted_submissions = TMP / "accepted_submissions"
     accepted_submissions.mkdir()
     (accepted_submissions / "provider-holdout.json").write_text(

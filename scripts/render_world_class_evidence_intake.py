@@ -297,6 +297,7 @@ def render_markdown(report: dict[str, Any]) -> str:
         "",
         "- Templates and planned work do not count as accepted evidence.",
         "- Real submissions must include the evidence-key critical artifact paths with verified SHA-256 digests.",
+        "- Real submissions must replace template submitter, date, and provenance placeholders with concrete evidence metadata.",
         "- Local command-runner output does not count as provider-backed model evidence.",
         "- Metadata fallback does not count as native permission enforcement.",
         "- Pending reviewer work does not count as human adjudication.",
