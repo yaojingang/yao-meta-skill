@@ -13,6 +13,7 @@
     "invalid_submission_count": 0,
     "operator_checklist_count": 4,
     "operator_checklist_ready_count": 0,
+    "valid_packet_source_incomplete_count": 0,
     "ready_for_external_collection": true,
     "ready_for_ledger_review": false,
     "ready_to_claim_world_class": false,

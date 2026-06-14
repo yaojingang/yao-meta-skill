@@ -9,6 +9,7 @@ Generated at: `2026-06-14`
 - templates: `4` / `4`
 - submissions: `0` valid / `0` total
 - invalid submissions: `0`
+- valid packet but source incomplete: `0`
 - operator checklist: `0` ready / `4` total
 - ready for external collection: `true`
 - ready for ledger review: `false`

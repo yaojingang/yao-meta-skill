@@ -200,7 +200,7 @@ def render_markdown(report: dict[str, Any]) -> str:
             "## Boundary",
             "",
             "- Planned work, draft packets, metadata fallback, pending human decisions, and local command runners do not count as completion.",
-            "- Valid intake means ready for ledger review, not accepted evidence.",
+            "- Valid intake means ready for submission review; ledger review still requires passing source evidence.",
             "- The world-class ledger and claim guard remain the source of truth.",
         ]
     )
@@ -306,7 +306,7 @@ def render_html(report: dict[str, Any]) -> str:
     </section>
     <section class="section panel" id="fast-path"><h2>Fast Path</h2><ol><li>Run the real external or human work for one evidence item.</li><li>Generate and fill the matching submission draft.</li><li>Validate intake and inspect the submission review queue.</li><li>Refresh the ledger and run the claim guard before making any completion claim.</li></ol></section>
     <section class="section" id="items"><h2>Evidence Items</h2><div class="item-grid">{item_html}</div></section>
-    <section class="section panel" id="boundary"><h2>Boundary</h2><ul><li>Planned work, draft packets, metadata fallback, pending human decisions, and local command runners do not count as completion.</li><li>Valid intake means ready for ledger review, not accepted evidence.</li><li>The world-class ledger and claim guard remain the source of truth.</li></ul></section>
+    <section class="section panel" id="boundary"><h2>Boundary</h2><ul><li>Planned work, draft packets, metadata fallback, pending human decisions, and local command runners do not count as completion.</li><li>Valid intake means ready for submission review; ledger review still requires passing source evidence.</li><li>The world-class ledger and claim guard remain the source of truth.</li></ul></section>
   </main>
 </body>
 </html>

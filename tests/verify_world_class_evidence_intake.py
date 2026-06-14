@@ -117,6 +117,7 @@ def main() -> None:
     assert summary["submission_count"] == 0, summary
     assert summary["valid_submission_count"] == 0, summary
     assert summary["invalid_submission_count"] == 0, summary
+    assert summary["valid_packet_source_incomplete_count"] == 0, summary
     assert summary["operator_checklist_count"] == 4, summary
     assert summary["operator_checklist_ready_count"] == 0, summary
     assert summary["ready_for_external_collection"] is True, summary
@@ -152,6 +153,7 @@ def main() -> None:
     assert "World-Class Evidence Intake" in markdown, markdown
     assert "ready to claim world-class: `false`" in markdown, markdown
     assert "Operator Checklist" in markdown, markdown
+    assert "valid packet but source incomplete: `0`" in markdown, markdown
     assert "operator checklist: `0` ready / `4` total" in markdown, markdown
     assert "0 existing / 0 sha256 verified / 0 required verified / 1 refs" in markdown, markdown
     assert "`evidence/world_class/submissions/provider-holdout.json`" in markdown, markdown
@@ -207,16 +209,18 @@ def main() -> None:
     )
     valid_payload = run_intake("--submissions-dir", str(valid_dir))
     assert valid_payload["ok"] is True, valid_payload
-    assert valid_payload["summary"]["decision"] == "intake-ready-for-ledger-review", valid_payload["summary"]
+    assert valid_payload["summary"]["decision"] == "source-evidence-incomplete", valid_payload["summary"]
     assert valid_payload["summary"]["valid_submission_count"] == 1, valid_payload["summary"]
-    assert valid_payload["summary"]["operator_checklist_ready_count"] == 1, valid_payload["summary"]
-    assert valid_payload["summary"]["ready_for_ledger_review"] is True, valid_payload["summary"]
+    assert valid_payload["summary"]["valid_packet_source_incomplete_count"] == 1, valid_payload["summary"]
+    assert valid_payload["summary"]["operator_checklist_ready_count"] == 0, valid_payload["summary"]
+    assert valid_payload["summary"]["ready_for_ledger_review"] is False, valid_payload["summary"]
     assert valid_payload["summary"]["ready_to_claim_world_class"] is False, valid_payload["summary"]
     assert valid_payload["submissions"][0]["status"] == "pass", valid_payload["submissions"]
     assert valid_payload["submissions"][0]["artifact_integrity"]["artifact_existing_count"] == 1, valid_payload["submissions"]
     assert valid_payload["submissions"][0]["artifact_integrity"]["artifact_sha256_verified_count"] == 1, valid_payload["submissions"]
     valid_checklist = {item["evidence_key"]: item for item in valid_payload["operator_checklist"]}
-    assert valid_checklist["provider-holdout"]["readiness"] == "ready-for-ledger-review", valid_checklist["provider-holdout"]
+    assert valid_checklist["provider-holdout"]["readiness"] == "source-evidence-incomplete", valid_checklist["provider-holdout"]
+    assert "source evidence checks still do not pass" in valid_checklist["provider-holdout"]["blocking_reason"], valid_checklist["provider-holdout"]
     assert valid_checklist["provider-holdout"]["submission_path"].endswith("tests/tmp_world_class_evidence_intake/valid_submissions/provider-holdout.json"), valid_checklist["provider-holdout"]
     assert "tests/tmp_world_class_evidence_intake/valid_submissions" in valid_checklist["provider-holdout"]["commands"]["validate_intake"], valid_checklist["provider-holdout"]
 

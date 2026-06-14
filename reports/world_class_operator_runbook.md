@@ -210,5 +210,5 @@ This runbook coordinates evidence collection only. It does not accept submission
 ## Boundary
 
 - Planned work, draft packets, metadata fallback, pending human decisions, and local command runners do not count as completion.
-- Valid intake means ready for ledger review, not accepted evidence.
+- Valid intake means ready for submission review; ledger review still requires passing source evidence.
 - The world-class ledger and claim guard remain the source of truth.

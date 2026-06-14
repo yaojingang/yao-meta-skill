@@ -58,7 +58,10 @@ def checklist_readiness(
     if submission_result is None:
         return "awaiting-submission", "No real evidence submission has been provided yet."
     if submission_result.get("status") == "pass":
-        return "ready-for-ledger-review", "Submission passes intake validation and is ready for ledger review."
+        observed = entry.get("observed_state", {}) if isinstance(entry.get("observed_state", {}), dict) else {}
+        if entry.get("source_accepted") is True or observed.get("accepted") is True:
+            return "ready-for-ledger-review", "Submission passes intake validation and is ready for ledger review."
+        return "source-evidence-incomplete", "Submission passes intake validation, but the source evidence checks still do not pass."
     return "fix-submission", "Submission exists but failed intake validation."
 
 
@@ -162,6 +165,7 @@ def build_intake(skill_dir: Path, generated_at: str, submissions_dir: Path | Non
     intake_ready = schema_exists and template_pass_count == len(keys) and invalid_submission_count == 0
     operator_checklist = build_operator_checklist(skill_dir, ledger, template_results, submission_results, submissions_dir)
     ready_checklist_count = sum(1 for item in operator_checklist if item["readiness"] in {"accepted", "ready-for-ledger-review"})
+    source_incomplete_count = sum(1 for item in operator_checklist if item["readiness"] == "source-evidence-incomplete")
     return {
         "schema_version": "1.0",
         "ok": intake_ready,
@@ -177,14 +181,19 @@ def build_intake(skill_dir: Path, generated_at: str, submissions_dir: Path | Non
             "invalid_submission_count": invalid_submission_count,
             "operator_checklist_count": len(operator_checklist),
             "operator_checklist_ready_count": ready_checklist_count,
+            "valid_packet_source_incomplete_count": source_incomplete_count,
             "ready_for_external_collection": intake_ready,
-            "ready_for_ledger_review": valid_submission_count > 0 and invalid_submission_count == 0,
+            "ready_for_ledger_review": ready_checklist_count > 0,
             "ready_to_claim_world_class": ledger.get("summary", {}).get("ready_to_claim_world_class") is True,
             "overclaim_guard_active": True,
             "decision": (
                 "fix-intake"
                 if not intake_ready
-                else ("intake-ready-for-ledger-review" if valid_submission_count else "awaiting-submissions")
+                else (
+                    "intake-ready-for-ledger-review"
+                    if ready_checklist_count
+                    else ("source-evidence-incomplete" if source_incomplete_count else "awaiting-submissions")
+                )
             ),
         },
         "schema": rel_path(schema_path, skill_dir),
@@ -273,6 +282,7 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- templates: `{summary['template_pass_count']}` / `{summary['template_count']}`",
         f"- submissions: `{summary['valid_submission_count']}` valid / `{summary['submission_count']}` total",
         f"- invalid submissions: `{summary['invalid_submission_count']}`",
+        f"- valid packet but source incomplete: `{summary['valid_packet_source_incomplete_count']}`",
         f"- operator checklist: `{summary['operator_checklist_ready_count']}` ready / `{summary['operator_checklist_count']}` total",
         f"- ready for external collection: `{str(summary['ready_for_external_collection']).lower()}`",
         f"- ready for ledger review: `{str(summary['ready_for_ledger_review']).lower()}`",

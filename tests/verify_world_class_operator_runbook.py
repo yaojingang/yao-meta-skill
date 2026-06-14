@@ -127,7 +127,7 @@ def main() -> None:
     markdown = output_md.read_text(encoding="utf-8")
     assert "World-Class Operator Runbook" in markdown, markdown
     assert "runbook counts as completion: `false`" in markdown, markdown
-    assert "Valid intake means ready for ledger review, not accepted evidence." in markdown, markdown
+    assert "Valid intake means ready for submission review; ledger review still requires passing source evidence." in markdown, markdown
     html = output_html.read_text(encoding="utf-8")
     assert "World-Class Operator Runbook" in html, html[:400]
     assert "ledger and claim guard" in html, html
@@ -164,7 +164,7 @@ def main() -> None:
     assert submitted_summary["ready_for_ledger_review_count"] == 0, submitted_summary
     assert submitted_summary["ready_to_claim_world_class"] is False, submitted_summary
     submitted_provider = {item["evidence_key"]: item for item in submitted["items"]}["provider-holdout"]
-    assert submitted_provider["intake_readiness"] == "ready-for-ledger-review", submitted_provider
+    assert submitted_provider["intake_readiness"] == "source-evidence-incomplete", submitted_provider
     assert submitted_provider["review_state"] == "source-evidence-incomplete", submitted_provider
     assert submitted_provider["source_accepted"] is False, submitted_provider
     print(json.dumps({"ok": True}, ensure_ascii=False, indent=2))
