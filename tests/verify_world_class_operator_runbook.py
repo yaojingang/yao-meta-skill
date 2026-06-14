@@ -120,6 +120,9 @@ def main() -> None:
     provider = items["provider-holdout"]
     assert provider["review_state"] == "awaiting-submission", provider
     assert provider["source_accepted"] is False, provider
+    assert provider["blocked_source_check_count"] == 2, provider
+    assert "Run provider-backed output-exec with real credentials." in provider["next_source_actions"], provider
+    assert "Provider execution should return non-estimated token usage." in provider["next_source_actions"], provider
     assert provider["commands"]["prepare_submission"].startswith("python3 scripts/yao.py world-class-submission-kit"), provider
     assert "world-class-intake" in provider["commands"]["validate_intake"], provider
     assert "world-class-submission-review" in provider["commands"]["review_queue"], provider
@@ -135,12 +138,20 @@ def main() -> None:
     assert "World-Class Operator Runbook" in markdown, markdown
     assert "runbook counts as completion: `false`" in markdown, markdown
     assert "Valid intake means ready for submission review; ledger review still requires passing source evidence." in markdown, markdown
+    assert "| Evidence | Ledger | Intake | Review | Blocked checks | Next source action | Owner |" in markdown, markdown
+    assert "| `provider-holdout` | `pending` | `awaiting-submission` | `awaiting-submission` | `2` | Run provider-backed output-exec with real credentials." in markdown, markdown
+    assert "### Next Source Actions" in markdown, markdown
+    assert "- Provider execution should return non-estimated token usage." in markdown, markdown
     assert "Source Evidence Snapshot" in markdown, markdown
-    assert "| Provider model run | `0` | `>0` | `blocked` |" in markdown, markdown
+    assert "| Check | Current | Expected | Status | Next action |" in markdown, markdown
+    assert "| Provider model run | `0` | `>0` | `blocked` | Run provider-backed output-exec with real credentials. |" in markdown, markdown
     html = output_html.read_text(encoding="utf-8")
     assert "World-Class Operator Runbook" in html, html[:400]
     assert "ledger and claim guard" in html, html
     assert "position:sticky" in html, html
+    assert "<span>Blocked</span><strong>7</strong>" in html, html
+    assert "<dt>Blocked</dt><dd><code>2</code></dd>" in html, html
+    assert "Next Source Actions" in html, html
     assert "Source Evidence Snapshot" in html, html
     assert "model_executed_count" in html, html
     assert "<script" not in html.lower(), html
@@ -180,6 +191,8 @@ def main() -> None:
     assert submitted_provider["intake_readiness"] == "source-evidence-incomplete", submitted_provider
     assert submitted_provider["review_state"] == "source-evidence-incomplete", submitted_provider
     assert submitted_provider["source_accepted"] is False, submitted_provider
+    assert submitted_provider["blocked_source_check_count"] == 2, submitted_provider
+    assert submitted_provider["next_source_actions"] == provider["next_source_actions"], submitted_provider
     assert "tests/tmp_world_class_operator_runbook/valid_submissions" in submitted_provider["commands"]["validate_intake"], submitted_provider
     assert "tests/tmp_world_class_operator_runbook/valid_submissions" in submitted_provider["commands"]["review_queue"], submitted_provider
     assert "tests/tmp_world_class_operator_runbook/valid_submissions" in submitted_provider["commands"]["refresh_ledger"], submitted_provider

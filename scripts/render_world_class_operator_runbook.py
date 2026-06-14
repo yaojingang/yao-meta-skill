@@ -45,6 +45,15 @@ def build_runbook_item(
 ) -> dict[str, Any]:
     commands = checklist.get("commands", {}) if isinstance(checklist.get("commands", {}), dict) else {}
     must_collect = checklist.get("must_collect", {}) if isinstance(checklist.get("must_collect", {}), dict) else {}
+    source_checklist = review_item.get("source_checklist", [])
+    blocked_source_checks = [
+        row for row in source_checklist if isinstance(row, dict) and row.get("status") != "pass"
+    ]
+    next_source_actions = []
+    for row in blocked_source_checks:
+        action = str(row.get("next_action", "")).strip()
+        if action and action not in next_source_actions:
+            next_source_actions.append(action)
     return {
         "evidence_key": entry.get("key", ""),
         "label": entry.get("label", entry.get("key", "")),
@@ -73,7 +82,9 @@ def build_runbook_item(
         },
         "evidence_artifacts": entry.get("evidence_artifacts", []),
         "observed_state": entry.get("observed_state", {}),
-        "source_checklist": review_item.get("source_checklist", []),
+        "source_checklist": source_checklist,
+        "blocked_source_check_count": len(blocked_source_checks),
+        "next_source_actions": next_source_actions,
         "submission_state": entry.get("submission_state", {}),
         "anti_overclaim": entry.get("anti_overclaim", {}),
     }
@@ -165,13 +176,14 @@ def render_markdown(report: dict[str, Any]) -> str:
         "",
         "## Evidence Items",
         "",
-        "| Evidence | Ledger | Intake | Review | Owner |",
-        "| --- | --- | --- | --- | --- |",
+        "| Evidence | Ledger | Intake | Review | Blocked checks | Next source action | Owner |",
+        "| --- | --- | --- | --- | ---: | --- | --- |",
     ]
     for item in report["items"]:
+        next_action = item.get("next_source_actions", ["none"])[0] if item.get("next_source_actions") else "none"
         lines.append(
             f"| `{item['evidence_key']}` | `{item['ledger_status']}` | `{item['intake_readiness']}` | "
-            f"`{item['review_state']}` | {item['owner']} |"
+            f"`{item['review_state']}` | `{item.get('blocked_source_check_count', 0)}` | {next_action} | {item['owner']} |"
         )
     for item in report["items"]:
         lines.extend(
@@ -181,6 +193,7 @@ def render_markdown(report: dict[str, Any]) -> str:
                 "",
                 f"- objective: {item['objective']}",
                 f"- blocking reason: {item['blocking_reason']}",
+                f"- blocked source checks: `{item.get('blocked_source_check_count', 0)}`",
                 f"- submission: `{item['submission_path'] or 'missing'}`",
                 f"- template: `{item['template_path'] or 'missing'}`",
                 "",
@@ -198,23 +211,25 @@ def render_markdown(report: dict[str, Any]) -> str:
         lines.extend(list_lines(item["must_collect"].get("privacy_contract", []), "No privacy contract listed."))
         lines.extend(["", "### Evidence Artifacts", ""])
         lines.extend(list_lines(item.get("evidence_artifacts", []), "No evidence artifacts listed."))
+        lines.extend(["", "### Next Source Actions", ""])
+        lines.extend(list_lines(item.get("next_source_actions", []), "No blocked source checks."))
         lines.extend(
             [
                 "",
                 "### Source Evidence Snapshot",
                 "",
-                "| Check | Current | Expected | Status |",
-                "| --- | --- | --- | --- |",
+                "| Check | Current | Expected | Status | Next action |",
+                "| --- | --- | --- | --- | --- |",
             ]
         )
         source_rows = item.get("source_checklist", [])
         if source_rows:
             for row in source_rows:
                 lines.append(
-                    f"| {row['label']} | `{row['actual']}` | `{row['expected']}` | `{row['status']}` |"
+                    f"| {row['label']} | `{row['actual']}` | `{row['expected']}` | `{row['status']}` | {row.get('next_action', '')} |"
                 )
         else:
-            lines.append("| No source checks listed. | `n/a` | `n/a` | `n/a` |")
+            lines.append("| No source checks listed. | `n/a` | `n/a` | `n/a` | n/a |")
     lines.extend(
         [
             "",
@@ -264,6 +279,7 @@ def render_html_item(item: dict[str, Any]) -> str:
         <dl>
           <dt>Owner</dt><dd>{html_text(item['owner'])}</dd>
           <dt>Ledger</dt><dd><code>{html_text(item['ledger_status'])}</code></dd>
+          <dt>Blocked</dt><dd><code>{html_text(item.get('blocked_source_check_count', 0))}</code></dd>
           <dt>Submission</dt><dd><code>{html_text(item['submission_path'])}</code></dd>
         </dl>
         <section><h4>Commands</h4><ul class="commands">{commands}</ul></section>
@@ -272,6 +288,7 @@ def render_html_item(item: dict[str, Any]) -> str:
           <section><h4>Success Checks</h4><ul>{html_list(must_collect.get('success_checks', []), 'No success checks listed.')}</ul></section>
           <section><h4>Privacy</h4><ul>{html_list(must_collect.get('privacy_contract', []), 'No privacy contract listed.')}</ul></section>
         </div>
+        <section class="source-panel"><h4>Next Source Actions</h4><ul>{html_list(item.get('next_source_actions', []), 'No blocked source checks.')}</ul></section>
         <section class="source-panel"><h4>Source Evidence Snapshot</h4>{html_source_checks(item.get('source_checklist', []))}</section>
       </article>
     """.strip()
@@ -284,6 +301,7 @@ def render_html(report: dict[str, Any]) -> str:
         ("Awaiting", summary["awaiting_submission_count"]),
         ("Ready", summary["ready_for_ledger_review_count"]),
         ("Source", f"{summary.get('source_pass_count', 0)}/{summary.get('source_check_count', 0)}"),
+        ("Blocked", summary.get("source_blocked_count", 0)),
         ("Invalid", summary["invalid_submission_count"]),
     ]
     stat_html = "".join(f"<article><span>{html_text(label)}</span><strong>{html_text(value)}</strong></article>" for label, value in stats)
@@ -312,7 +330,7 @@ def render_html(report: dict[str, Any]) -> str:
     h3 {{ margin:4px 0 10px; font-size:22px; }}
     h4 {{ margin:0 0 8px; font-size:16px; }}
     .lede {{ max-width:800px; color:var(--muted); font-size:20px; }}
-    .stats {{ display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); gap:12px; margin-top:26px; }}
+    .stats {{ display:grid; grid-template-columns:repeat(6, minmax(0,1fr)); gap:12px; margin-top:26px; }}
     .stats article, .panel, .item-card {{ border:1px solid var(--line); border-radius:8px; background:#fff; }}
     .stats article {{ padding:16px; }}
     .stats span, .item-card span, .muted {{ color:var(--muted); }}
