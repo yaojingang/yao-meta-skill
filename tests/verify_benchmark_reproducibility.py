@@ -147,11 +147,13 @@ def main() -> None:
         == payload["summary"]["world_class_source_check_count"]
     ), payload
     assert payload["summary"]["public_claim_ready"] is False, payload
-    assert payload["summary"]["public_claim_blocker_count"] >= 3, payload
+    assert payload["summary"]["public_claim_blocker_count"] >= 4, payload
     assert payload["public_claim"]["ready"] is False, payload["public_claim"]
     assert any("provider-backed" in item for item in payload["public_claim"]["blockers"]), payload["public_claim"]
     assert any("human blind-review" in item for item in payload["public_claim"]["blockers"]), payload["public_claim"]
     assert any("world-class evidence" in item for item in payload["public_claim"]["blockers"]), payload["public_claim"]
+    assert any("world-class source checks" in item for item in payload["public_claim"]["blockers"]), payload["public_claim"]
+    assert "complete source checks" in payload["public_claim"]["policy"], payload["public_claim"]
     headings = {item["heading"]: item["exists"] for item in payload["methodology"]["sections"]}
     assert headings["## Benchmark Types"], headings
     assert headings["## Failure Disclosure"], headings
@@ -183,6 +185,7 @@ def main() -> None:
     assert "public claim ready: `false`" in markdown, markdown
     assert "## Public Claim Boundary" in markdown, markdown
     assert "provider-backed model holdout evidence is incomplete" in markdown, markdown
+    assert "world-class source checks are not all accepted" in markdown, markdown
     assert "## Release Lock" in markdown, markdown
     assert "## Evidence Bundle" in markdown, markdown
     assert "reports/benchmark_methodology.md" in markdown, markdown

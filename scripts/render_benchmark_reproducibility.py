@@ -313,6 +313,9 @@ def public_claim_blockers(
     world_class_ready: bool,
     world_class_open_gap_count: int,
     world_class_ledger_pending_count: int,
+    world_class_source_check_count: int,
+    world_class_source_pass_count: int,
+    world_class_source_blocked_count: int,
 ) -> list[str]:
     blockers = []
     if not local_reproducibility_ready:
@@ -327,6 +330,16 @@ def public_claim_blockers(
         blockers.append(
             f"world-class evidence is not accepted yet ({world_class_open_gap_count} open gaps, "
             f"{world_class_ledger_pending_count} ledger pending)"
+        )
+    if (
+        world_class_source_check_count == 0
+        or world_class_source_pass_count != world_class_source_check_count
+        or world_class_source_blocked_count > 0
+    ):
+        blockers.append(
+            "world-class source checks are not all accepted "
+            f"({world_class_source_pass_count}/{world_class_source_check_count} pass, "
+            f"{world_class_source_blocked_count} blocked)"
         )
     return blockers
 
@@ -379,6 +392,9 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
         world_class_ready,
         world_class_open_gap_count,
         world_class_ledger_pending_count,
+        world_class_source_check_count,
+        world_class_source_pass_count,
+        world_class_source_blocked_count,
     )
     public_claim_ready = not claim_blockers
     return {
@@ -422,7 +438,7 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             "ready": public_claim_ready,
             "scope": "public benchmark or world-class readiness claim",
             "blockers": claim_blockers,
-            "policy": "Local reproducibility can pass before public claims; public claims require provider evidence, human adjudication, clean release lock, and accepted world-class evidence.",
+            "policy": "Local reproducibility can pass before public claims; public claims require provider evidence, human adjudication, clean release lock, accepted world-class evidence, and complete source checks.",
         },
         "release_lock": release_lock,
         "evidence_bundle": evidence_bundle,
