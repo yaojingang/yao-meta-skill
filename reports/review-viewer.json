@@ -1049,7 +1049,7 @@
       "interactive_script_count": 0,
       "package_hash_scope": "source-contract-without-generated-reports",
       "package_hash_file_count": 181,
-      "package_sha256": "8a63d5ebc9ac16b7ace805fa6373f591d993a135e099eacdb209596db70f3bf2"
+      "package_sha256": "d3341950a7fb52a18a3a2a7453f7c697cc92e443c6604facdeeb83848d4f867c"
     },
     "skill_atlas": {
       "skill_count": 12,
@@ -1087,8 +1087,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "8a63d5ebc9ac16b7ace805fa6373f591d993a135e099eacdb209596db70f3bf2",
-          "archive_sha256": "501f298a9944ed9a597be439916dea3bb5812214488a46c0812bca920971f2c2"
+          "package_sha256": "d3341950a7fb52a18a3a2a7453f7c697cc92e443c6604facdeeb83848d4f867c",
+          "archive_sha256": "c2028f0a12c88f2cae3462c80af972be934333829252faf7c92816bcc54dc541"
         },
         "compatibility": {
           "openai": "pass",
@@ -1119,7 +1119,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "501f298a9944ed9a597be439916dea3bb5812214488a46c0812bca920971f2c2",
+          "archive_sha256": "c2028f0a12c88f2cae3462c80af972be934333829252faf7c92816bcc54dc541",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -1135,7 +1135,7 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "501f298a9944ed9a597be439916dea3bb5812214488a46c0812bca920971f2c2",
+        "archive_sha256": "c2028f0a12c88f2cae3462c80af972be934333829252faf7c92816bcc54dc541",
         "archive_entry_count": 576,
         "failure_count": 0,
         "warning_count": 0
@@ -1214,12 +1214,12 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "501f298a9944ed9a597be439916dea3bb5812214488a46c0812bca920971f2c2"
+            "to": "c2028f0a12c88f2cae3462c80af972be934333829252faf7c92816bcc54dc541"
           },
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "8a63d5ebc9ac16b7ace805fa6373f591d993a135e099eacdb209596db70f3bf2"
+            "to": "d3341950a7fb52a18a3a2a7453f7c697cc92e443c6604facdeeb83848d4f867c"
           }
         ]
       },

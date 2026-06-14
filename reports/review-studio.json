@@ -1462,7 +1462,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 181,
-        "package_sha256": "8a63d5ebc9ac16b7ace805fa6373f591d993a135e099eacdb209596db70f3bf2"
+        "package_sha256": "d3341950a7fb52a18a3a2a7453f7c697cc92e443c6604facdeeb83848d4f867c"
       },
       "skill_atlas": {
         "skill_count": 12,
@@ -1500,8 +1500,8 @@
           "trust_level": "local",
           "license": "MIT",
           "checksums": {
-            "package_sha256": "8a63d5ebc9ac16b7ace805fa6373f591d993a135e099eacdb209596db70f3bf2",
-            "archive_sha256": "501f298a9944ed9a597be439916dea3bb5812214488a46c0812bca920971f2c2"
+            "package_sha256": "d3341950a7fb52a18a3a2a7453f7c697cc92e443c6604facdeeb83848d4f867c",
+            "archive_sha256": "c2028f0a12c88f2cae3462c80af972be934333829252faf7c92816bcc54dc541"
           },
           "compatibility": {
             "openai": "pass",
@@ -1532,7 +1532,7 @@
           },
           "distribution": {
             "archive_verified": true,
-            "archive_sha256": "501f298a9944ed9a597be439916dea3bb5812214488a46c0812bca920971f2c2",
+            "archive_sha256": "c2028f0a12c88f2cae3462c80af972be934333829252faf7c92816bcc54dc541",
             "package_verification": "reports/package_verification.json",
             "install_simulated": true,
             "install_simulation": "reports/install_simulation.json"
@@ -1548,7 +1548,7 @@
           "target_count": 4,
           "adapter_count": 4,
           "archive_present": true,
-          "archive_sha256": "501f298a9944ed9a597be439916dea3bb5812214488a46c0812bca920971f2c2",
+          "archive_sha256": "c2028f0a12c88f2cae3462c80af972be934333829252faf7c92816bcc54dc541",
           "archive_entry_count": 576,
           "failure_count": 0,
           "warning_count": 0
@@ -1627,12 +1627,12 @@
             {
               "field": "archive_sha256",
               "from": "",
-              "to": "501f298a9944ed9a597be439916dea3bb5812214488a46c0812bca920971f2c2"
+              "to": "c2028f0a12c88f2cae3462c80af972be934333829252faf7c92816bcc54dc541"
             },
             {
               "field": "package_sha256",
               "from": "0000000000000000000000000000000000000000000000000000000000000000",
-              "to": "8a63d5ebc9ac16b7ace805fa6373f591d993a135e099eacdb209596db70f3bf2"
+              "to": "d3341950a7fb52a18a3a2a7453f7c697cc92e443c6604facdeeb83848d4f867c"
             }
           ]
         },
@@ -3811,7 +3811,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 31.58,
+          "duration_ms": 32.06,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3839,7 +3839,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 32.63,
+          "duration_ms": 33.11,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3862,7 +3862,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 32.45,
+          "duration_ms": 37.71,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3890,7 +3890,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 34.66,
+          "duration_ms": 38.71,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3913,7 +3913,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.55,
+          "duration_ms": 33.33,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3941,7 +3941,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 31.57,
+          "duration_ms": 32.57,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3964,7 +3964,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.22,
+          "duration_ms": 34.02,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3991,7 +3991,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.63,
+          "duration_ms": 34.28,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4014,7 +4014,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 29.99,
+          "duration_ms": 35.33,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4043,7 +4043,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.37,
+          "duration_ms": 33.22,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -10653,7 +10653,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 181,
-        "package_sha256": "8a63d5ebc9ac16b7ace805fa6373f591d993a135e099eacdb209596db70f3bf2"
+        "package_sha256": "d3341950a7fb52a18a3a2a7453f7c697cc92e443c6604facdeeb83848d4f867c"
       },
       "failures": [],
       "warnings": [],
@@ -17748,8 +17748,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "8a63d5ebc9ac16b7ace805fa6373f591d993a135e099eacdb209596db70f3bf2",
-          "archive_sha256": "501f298a9944ed9a597be439916dea3bb5812214488a46c0812bca920971f2c2"
+          "package_sha256": "d3341950a7fb52a18a3a2a7453f7c697cc92e443c6604facdeeb83848d4f867c",
+          "archive_sha256": "c2028f0a12c88f2cae3462c80af972be934333829252faf7c92816bcc54dc541"
         },
         "compatibility": {
           "openai": "pass",
@@ -17780,7 +17780,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "501f298a9944ed9a597be439916dea3bb5812214488a46c0812bca920971f2c2",
+          "archive_sha256": "c2028f0a12c88f2cae3462c80af972be934333829252faf7c92816bcc54dc541",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -17805,7 +17805,7 @@
               "vscode"
             ],
             "package_metadata": "registry/packages/yao-meta-skill.json",
-            "package_sha256": "8a63d5ebc9ac16b7ace805fa6373f591d993a135e099eacdb209596db70f3bf2"
+            "package_sha256": "d3341950a7fb52a18a3a2a7453f7c697cc92e443c6604facdeeb83848d4f867c"
           }
         ]
       },
@@ -17828,7 +17828,7 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "501f298a9944ed9a597be439916dea3bb5812214488a46c0812bca920971f2c2",
+        "archive_sha256": "c2028f0a12c88f2cae3462c80af972be934333829252faf7c92816bcc54dc541",
         "archive_entry_count": 576,
         "failure_count": 0,
         "warning_count": 0
@@ -18836,12 +18836,12 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "501f298a9944ed9a597be439916dea3bb5812214488a46c0812bca920971f2c2"
+            "to": "c2028f0a12c88f2cae3462c80af972be934333829252faf7c92816bcc54dc541"
           },
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "8a63d5ebc9ac16b7ace805fa6373f591d993a135e099eacdb209596db70f3bf2"
+            "to": "d3341950a7fb52a18a3a2a7453f7c697cc92e443c6604facdeeb83848d4f867c"
           }
         ]
       },
