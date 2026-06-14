@@ -8,7 +8,7 @@
   "installed_skill_dir": "dist/install-simulation/simulate-yao-meta-skill/yao-meta-skill",
   "summary": {
     "archive_present": true,
-    "archive_entry_count": 577,
+    "archive_entry_count": 579,
     "archive_extracted": true,
     "entrypoint_loaded": true,
     "manifest_loaded": true,

@@ -59,7 +59,7 @@
       "key": "trust-report",
       "label": "信任报告",
       "status": "pass",
-      "detail": "0 secrets; 98 scripts; 3 network-capable scripts; 0 help smoke failures",
+      "detail": "0 secrets; 99 scripts; 3 network-capable scripts; 0 help smoke failures",
       "evidence": "reports/security_trust_report.json",
       "link": "security_trust_report.md"
     },
@@ -851,7 +851,7 @@
             "path": "scripts",
             "label": "Deterministic helpers or local tooling",
             "kind": "folder",
-            "file_count": 98
+            "file_count": 99
           },
           {
             "path": "evals",
@@ -866,7 +866,7 @@
             "file_count": 203
           }
         ],
-        "file_count": 365,
+        "file_count": 366,
         "folder_count": 4,
         "distribution": [
           {
@@ -891,7 +891,7 @@
           },
           {
             "label": "scripts",
-            "value": 98
+            "value": 99
           },
           {
             "label": "evals",
@@ -1020,7 +1020,7 @@
           "path": "scripts",
           "label": "Deterministic helpers or local tooling",
           "kind": "folder",
-          "file_count": 98
+          "file_count": 99
         },
         {
           "path": "evals",
@@ -1332,13 +1332,13 @@
         "ok": true,
         "summary": {
           "reproducibility_ready": true,
-          "release_lock_ready": true,
+          "release_lock_ready": false,
           "methodology_complete": true,
           "required_artifact_count": 24,
           "missing_artifact_count": 0,
-          "evidence_bundle_sha256": "afc5bc7f282664d81209118651c4dbec918f745eb3d2ef4d52570b26c9c3aa9c",
-          "source_contract_sha256": "2e0e0877e481b2ffcf329c979d47c96a6be31858d091d6210624fed9154c72f2",
-          "archive_sha256": "581db0878142fdd7e63c2ff0e229d97e6a860986cd526ab8951a56993dae9943",
+          "evidence_bundle_sha256": "0b7c79cf4a585bdbd7acd1b328fb6dbceee35ef27999e609b0cf0a2e3c2ece83",
+          "source_contract_sha256": "23d757678bc61e183af53ac0724e02f44128857f51481984e6b6ffe6575fdfed",
+          "archive_sha256": "2a3600e27e24fc5799cce599f82763f78bbc6a682a96f08ecd9034f4510344bc",
           "output_case_count": 5,
           "failure_disclosure_count": 3,
           "command_count": 21,
@@ -1356,11 +1356,11 @@
           "world_class_source_pass_count": 6,
           "world_class_source_blocked_count": 7,
           "public_claim_ready": false,
-          "public_claim_blocker_count": 4,
-          "working_tree_dirty": false,
-          "changed_file_count": 0
+          "public_claim_blocker_count": 5,
+          "working_tree_dirty": true,
+          "changed_file_count": 14
         },
-        "commit": "a39964faef674746a31363db2215460cff9e1931",
+        "commit": "6f5f4db4a79c6178a7621f750063b6840e129fd8",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -1444,9 +1444,9 @@
         "failures": []
       },
       "trust_security": {
-        "scanned_files": 182,
-        "script_count": 98,
-        "internal_module_count": 21,
+        "scanned_files": 183,
+        "script_count": 99,
+        "internal_module_count": 22,
         "secret_findings": 0,
         "dependency_files": [
           "requirements-ci.txt"
@@ -1464,8 +1464,8 @@
         "help_smoke_failed_count": 0,
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
-        "package_hash_file_count": 182,
-        "package_sha256": "2e0e0877e481b2ffcf329c979d47c96a6be31858d091d6210624fed9154c72f2"
+        "package_hash_file_count": 183,
+        "package_sha256": "23d757678bc61e183af53ac0724e02f44128857f51481984e6b6ffe6575fdfed"
       },
       "skill_atlas": {
         "skill_count": 12,
@@ -1503,8 +1503,8 @@
           "trust_level": "local",
           "license": "MIT",
           "checksums": {
-            "package_sha256": "2e0e0877e481b2ffcf329c979d47c96a6be31858d091d6210624fed9154c72f2",
-            "archive_sha256": "581db0878142fdd7e63c2ff0e229d97e6a860986cd526ab8951a56993dae9943"
+            "package_sha256": "23d757678bc61e183af53ac0724e02f44128857f51481984e6b6ffe6575fdfed",
+            "archive_sha256": "2a3600e27e24fc5799cce599f82763f78bbc6a682a96f08ecd9034f4510344bc"
           },
           "compatibility": {
             "openai": "pass",
@@ -1535,7 +1535,7 @@
           },
           "distribution": {
             "archive_verified": true,
-            "archive_sha256": "581db0878142fdd7e63c2ff0e229d97e6a860986cd526ab8951a56993dae9943",
+            "archive_sha256": "2a3600e27e24fc5799cce599f82763f78bbc6a682a96f08ecd9034f4510344bc",
             "package_verification": "reports/package_verification.json",
             "install_simulated": true,
             "install_simulation": "reports/install_simulation.json"
@@ -1551,8 +1551,8 @@
           "target_count": 4,
           "adapter_count": 4,
           "archive_present": true,
-          "archive_sha256": "581db0878142fdd7e63c2ff0e229d97e6a860986cd526ab8951a56993dae9943",
-          "archive_entry_count": 577,
+          "archive_sha256": "2a3600e27e24fc5799cce599f82763f78bbc6a682a96f08ecd9034f4510344bc",
+          "archive_entry_count": 579,
           "failure_count": 0,
           "warning_count": 0
         },
@@ -1563,7 +1563,7 @@
         "ok": true,
         "summary": {
           "archive_present": true,
-          "archive_entry_count": 577,
+          "archive_entry_count": 579,
           "archive_extracted": true,
           "entrypoint_loaded": true,
           "manifest_loaded": true,
@@ -1630,12 +1630,12 @@
             {
               "field": "archive_sha256",
               "from": "",
-              "to": "581db0878142fdd7e63c2ff0e229d97e6a860986cd526ab8951a56993dae9943"
+              "to": "2a3600e27e24fc5799cce599f82763f78bbc6a682a96f08ecd9034f4510344bc"
             },
             {
               "field": "package_sha256",
               "from": "0000000000000000000000000000000000000000000000000000000000000000",
-              "to": "2e0e0877e481b2ffcf329c979d47c96a6be31858d091d6210624fed9154c72f2"
+              "to": "23d757678bc61e183af53ac0724e02f44128857f51481984e6b6ffe6575fdfed"
             }
           ]
         },
@@ -3967,7 +3967,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.93,
+          "duration_ms": 31.59,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3995,7 +3995,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.0,
+          "duration_ms": 32.08,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4018,7 +4018,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 33.51,
+          "duration_ms": 33.46,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4046,7 +4046,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 32.06,
+          "duration_ms": 35.55,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4069,7 +4069,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.08,
+          "duration_ms": 31.18,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4097,7 +4097,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 29.69,
+          "duration_ms": 31.3,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4120,7 +4120,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 29.64,
+          "duration_ms": 31.55,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4147,7 +4147,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 29.79,
+          "duration_ms": 31.32,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4170,7 +4170,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.87,
+          "duration_ms": 31.75,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4199,7 +4199,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 31.79,
+          "duration_ms": 32.17,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4920,23 +4920,36 @@
       "ok": true,
       "generated_at": "2026-06-14",
       "skill_dir": ".",
-      "commit": "a39964faef674746a31363db2215460cff9e1931",
+      "commit": "6f5f4db4a79c6178a7621f750063b6840e129fd8",
       "git_status": {
         "available": true,
-        "dirty": false,
-        "changed_file_count": 0,
-        "sample": [],
+        "dirty": true,
+        "changed_file_count": 14,
+        "sample": [
+          " M registry/index.json",
+          " M registry/packages/yao-meta-skill.json",
+          " M reports/install_simulation.json",
+          " M reports/output_execution_runs.json",
+          " M reports/output_execution_runs.md",
+          " M reports/package_verification.json",
+          " M reports/package_verification.md",
+          " M reports/registry_audit.json",
+          " M reports/registry_audit.md",
+          " M reports/security_trust_report.json",
+          " M reports/security_trust_report.md",
+          " M reports/skill_os2_coverage.json"
+        ],
         "scope": "generation-time status before this report is written"
       },
       "summary": {
         "reproducibility_ready": true,
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "methodology_complete": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "afc5bc7f282664d81209118651c4dbec918f745eb3d2ef4d52570b26c9c3aa9c",
-        "source_contract_sha256": "2e0e0877e481b2ffcf329c979d47c96a6be31858d091d6210624fed9154c72f2",
-        "archive_sha256": "581db0878142fdd7e63c2ff0e229d97e6a860986cd526ab8951a56993dae9943",
+        "evidence_bundle_sha256": "0b7c79cf4a585bdbd7acd1b328fb6dbceee35ef27999e609b0cf0a2e3c2ece83",
+        "source_contract_sha256": "23d757678bc61e183af53ac0724e02f44128857f51481984e6b6ffe6575fdfed",
+        "archive_sha256": "2a3600e27e24fc5799cce599f82763f78bbc6a682a96f08ecd9034f4510344bc",
         "output_case_count": 5,
         "failure_disclosure_count": 3,
         "command_count": 21,
@@ -4954,14 +4967,15 @@
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4,
-        "working_tree_dirty": false,
-        "changed_file_count": 0
+        "public_claim_blocker_count": 5,
+        "working_tree_dirty": true,
+        "changed_file_count": 14
       },
       "public_claim": {
         "ready": false,
         "scope": "public benchmark or world-class readiness claim",
         "blockers": [
+          "release lock is not clean or commit is unavailable",
           "provider-backed model holdout evidence is incomplete",
           "human blind-review adjudication is incomplete",
           "world-class evidence is not accepted yet (4 open gaps, 4 ledger pending)",
@@ -4970,10 +4984,10 @@
         "policy": "Local reproducibility can pass before public claims; public claims require provider evidence, human adjudication, clean release lock, accepted world-class evidence, and complete source checks."
       },
       "release_lock": {
-        "ready": true,
-        "commit": "a39964faef674746a31363db2215460cff9e1931",
+        "ready": false,
+        "commit": "6f5f4db4a79c6178a7621f750063b6840e129fd8",
         "status_scope": "generation-time status before this report is written",
-        "reason": "clean generation-time HEAD"
+        "reason": "working tree was dirty at generation time"
       },
       "evidence_bundle": {
         "algorithm": "sha256(path,label,exists,artifact_sha256)",
@@ -4981,7 +4995,7 @@
         "existing_count": 24,
         "missing_count": 0,
         "missing_paths": [],
-        "sha256": "afc5bc7f282664d81209118651c4dbec918f745eb3d2ef4d52570b26c9c3aa9c"
+        "sha256": "0b7c79cf4a585bdbd7acd1b328fb6dbceee35ef27999e609b0cf0a2e3c2ece83"
       },
       "methodology": {
         "path": "reports/benchmark_methodology.md",
@@ -5055,7 +5069,7 @@
           "path": "reports/output_execution_runs.json",
           "exists": true,
           "bytes": 7966,
-          "sha256": "ae868a54cec479c2427de198bd33ab871d553855ccd41527f7bd08a795dcc512"
+          "sha256": "a59b750aebed61481e2fa9a66bd196f1a8c87e5d5857c4e615c85eab156594ad"
         },
         {
           "label": "blind_review",
@@ -5089,8 +5103,8 @@
           "label": "trust_report",
           "path": "reports/security_trust_report.json",
           "exists": true,
-          "bytes": 99433,
-          "sha256": "a49ddfd11d3e4a9c54973547f25a9673f49446005d64165140a4df5c9f42f395"
+          "bytes": 100003,
+          "sha256": "0415c413f6f024e413df0afb4adea17e2c2efc1e3a37d2e8689e6a05241e153e"
         },
         {
           "label": "python_compatibility",
@@ -5104,21 +5118,21 @@
           "path": "reports/registry_audit.json",
           "exists": true,
           "bytes": 3183,
-          "sha256": "2c7799ff267bd856bd244e59160d01ea98b3cf11b1af966e02009c59141ab56f"
+          "sha256": "a3e00a3b9653da411f20ec24d488067efca021d1270b528f8e2facd1e9ddf743"
         },
         {
           "label": "package_verification",
           "path": "reports/package_verification.json",
           "exists": true,
           "bytes": 19325,
-          "sha256": "22c585f95229deebc627b5a103ae2bbfbf9c678535e2048f3472b373a70877c6"
+          "sha256": "3ca24a8ae4b7a3ab68398022754abdec97a5a4b8d451b969d9e7d062244a9617"
         },
         {
           "label": "install_simulation",
           "path": "reports/install_simulation.json",
           "exists": true,
           "bytes": 8604,
-          "sha256": "1ed7ce5266c2dd7ee8daf83a3a5c65cdb69ade1567a33b88b77b619d3f5afa16"
+          "sha256": "f0d1820d3da26ebc93187b64ec0cde14fa32cbef47dc865dd96200e43e9767b4"
         },
         {
           "label": "skill_os2_audit",
@@ -5432,7 +5446,7 @@
           "label": "Trust Security",
           "status": "pass",
           "objective": "Scripts, dependencies, permissions, secrets, and package hash are reviewable for team distribution.",
-          "current": "98 scripts; secrets 0; help failures 0",
+          "current": "99 scripts; secrets 0; help failures 0",
           "command": "python3 scripts/yao.py trust .",
           "test": "python3 tests/verify_trust_check.py",
           "evidence": [
@@ -5506,7 +5520,7 @@
           "label": "Registry Distribution",
           "status": "pass",
           "objective": "Skill packages are installable, versioned, checksumed, and upgrade-reviewable.",
-          "current": "archive entries 577; install failures 0",
+          "current": "archive entries 579; install failures 0",
           "command": "python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip && python3 scripts/yao.py registry-audit .",
           "test": "python3 tests/verify_registry_audit.py",
           "evidence": [
@@ -10792,9 +10806,9 @@
       "ok": true,
       "skill_dir": ".",
       "summary": {
-        "scanned_files": 182,
-        "script_count": 98,
-        "internal_module_count": 21,
+        "scanned_files": 183,
+        "script_count": 99,
+        "internal_module_count": 22,
         "secret_findings": 0,
         "dependency_files": [
           "requirements-ci.txt"
@@ -10812,8 +10826,8 @@
         "help_smoke_failed_count": 0,
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
-        "package_hash_file_count": 182,
-        "package_sha256": "2e0e0877e481b2ffcf329c979d47c96a6be31858d091d6210624fed9154c72f2"
+        "package_hash_file_count": 183,
+        "package_sha256": "23d757678bc61e183af53ac0724e02f44128857f51481984e6b6ffe6575fdfed"
       },
       "failures": [],
       "warnings": [],
@@ -11031,6 +11045,20 @@
           "interface_reason": "Default CLI classification; add SCRIPT_INTERFACE for internal modules.",
           "has_argparse": true,
           "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_file_write": false,
+          "uses_subprocess": false,
+          "network_urls": [],
+          "network_hosts": []
+        },
+        {
+          "path": "scripts/html_rendering.py",
+          "interface": "internal-module",
+          "interface_declared": true,
+          "interface_reason": "Used by report renderers to escape HTML while preserving meaningful falsey values.",
+          "has_argparse": false,
+          "has_main_guard": false,
           "uses_input": false,
           "uses_network": false,
           "uses_file_write": false,
@@ -12243,7 +12271,7 @@
         "checked_count": 77,
         "passed_count": 77,
         "failed_count": 0,
-        "skipped_count": 21,
+        "skipped_count": 22,
         "failed_scripts": [],
         "results": [
           {
@@ -13018,6 +13046,10 @@
           }
         ],
         "skipped": [
+          {
+            "path": "scripts/html_rendering.py",
+            "reason": "internal module"
+          },
           {
             "path": "scripts/review_studio_actions.py",
             "reason": "internal module"
@@ -18427,8 +18459,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "2e0e0877e481b2ffcf329c979d47c96a6be31858d091d6210624fed9154c72f2",
-          "archive_sha256": "581db0878142fdd7e63c2ff0e229d97e6a860986cd526ab8951a56993dae9943"
+          "package_sha256": "23d757678bc61e183af53ac0724e02f44128857f51481984e6b6ffe6575fdfed",
+          "archive_sha256": "2a3600e27e24fc5799cce599f82763f78bbc6a682a96f08ecd9034f4510344bc"
         },
         "compatibility": {
           "openai": "pass",
@@ -18459,7 +18491,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "581db0878142fdd7e63c2ff0e229d97e6a860986cd526ab8951a56993dae9943",
+          "archive_sha256": "2a3600e27e24fc5799cce599f82763f78bbc6a682a96f08ecd9034f4510344bc",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -18484,7 +18516,7 @@
               "vscode"
             ],
             "package_metadata": "registry/packages/yao-meta-skill.json",
-            "package_sha256": "2e0e0877e481b2ffcf329c979d47c96a6be31858d091d6210624fed9154c72f2"
+            "package_sha256": "23d757678bc61e183af53ac0724e02f44128857f51481984e6b6ffe6575fdfed"
           }
         ]
       },
@@ -18507,8 +18539,8 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "581db0878142fdd7e63c2ff0e229d97e6a860986cd526ab8951a56993dae9943",
-        "archive_entry_count": 577,
+        "archive_sha256": "2a3600e27e24fc5799cce599f82763f78bbc6a682a96f08ecd9034f4510344bc",
+        "archive_entry_count": 579,
         "failure_count": 0,
         "warning_count": 0
       },
@@ -19173,7 +19205,7 @@
       "installed_skill_dir": "dist/install-simulation/simulate-yao-meta-skill/yao-meta-skill",
       "summary": {
         "archive_present": true,
-        "archive_entry_count": 577,
+        "archive_entry_count": 579,
         "archive_extracted": true,
         "entrypoint_loaded": true,
         "manifest_loaded": true,
@@ -19515,12 +19547,12 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "581db0878142fdd7e63c2ff0e229d97e6a860986cd526ab8951a56993dae9943"
+            "to": "2a3600e27e24fc5799cce599f82763f78bbc6a682a96f08ecd9034f4510344bc"
           },
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "2e0e0877e481b2ffcf329c979d47c96a6be31858d091d6210624fed9154c72f2"
+            "to": "23d757678bc61e183af53ac0724e02f44128857f51481984e6b6ffe6575fdfed"
           }
         ]
       },

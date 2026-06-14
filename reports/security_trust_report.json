@@ -2,9 +2,9 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 182,
-    "script_count": 98,
-    "internal_module_count": 21,
+    "scanned_files": 183,
+    "script_count": 99,
+    "internal_module_count": 22,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 182,
-    "package_sha256": "2e0e0877e481b2ffcf329c979d47c96a6be31858d091d6210624fed9154c72f2"
+    "package_hash_file_count": 183,
+    "package_sha256": "23d757678bc61e183af53ac0724e02f44128857f51481984e6b6ffe6575fdfed"
   },
   "failures": [],
   "warnings": [],
@@ -241,6 +241,20 @@
       "interface_reason": "Default CLI classification; add SCRIPT_INTERFACE for internal modules.",
       "has_argparse": true,
       "has_main_guard": true,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
+      "path": "scripts/html_rendering.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Used by report renderers to escape HTML while preserving meaningful falsey values.",
+      "has_argparse": false,
+      "has_main_guard": false,
       "uses_input": false,
       "uses_network": false,
       "uses_file_write": false,
@@ -1453,7 +1467,7 @@
     "checked_count": 77,
     "passed_count": 77,
     "failed_count": 0,
-    "skipped_count": 21,
+    "skipped_count": 22,
     "failed_scripts": [],
     "results": [
       {
@@ -2228,6 +2242,10 @@
       }
     ],
     "skipped": [
+      {
+        "path": "scripts/html_rendering.py",
+        "reason": "internal module"
+      },
       {
         "path": "scripts/review_studio_actions.py",
         "reason": "internal module"

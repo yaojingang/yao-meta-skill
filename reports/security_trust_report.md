@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `182`
-- Scripts: `98`
-- Internal script modules: `21`
+- Scanned files: `183`
+- Scripts: `99`
+- Internal script modules: `22`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `182`
-- Package SHA256: `2e0e0877e481b2ffcf329c979d47c96a6be31858d091d6210624fed9154c72f2`
+- Package hash files: `183`
+- Package SHA256: `23d757678bc61e183af53ac0724e02f44128857f51481984e6b6ffe6575fdfed`
 
 ## Failures
 
@@ -77,6 +77,7 @@
 | scripts/export_skill_ir.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/github_benchmark_scan.py | cli | False | True | True | False | True | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/governance_check.py | cli | False | True | True | False | False | False | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
+| scripts/html_rendering.py | internal-module | True | False | False | False | False | False | False | Used by report renderers to escape HTML while preserving meaningful falsey values. |
 | scripts/import_telemetry_events.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/init_skill.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/judge_blind_eval.py | cli | False | True | True | False | False | False | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
