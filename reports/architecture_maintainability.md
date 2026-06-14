@@ -5,10 +5,10 @@ Generated at: `2026-06-13`
 ## Summary
 
 - decision: `pass`
-- python files: `153`
-- scripts: `94`
+- python files: `154`
+- scripts: `95`
 - tests: `59`
-- internal modules: `19`
+- internal modules: `20`
 - CLI scripts: `76`
 - Yao CLI command handlers: `34`
 - largest file lines: `899`

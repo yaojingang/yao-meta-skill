@@ -6,40 +6,12 @@ from pathlib import Path
 from typing import Any
 
 from render_world_class_evidence_plan import build_plan
+from world_class_evidence_contract import load_json, load_json_with_status, rel_path, validate_payload
 
 
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPT_INTERFACE = "cli"
 SCRIPT_INTERFACE_REASON = "Renders a machine-checkable ledger for world-class external and human evidence gaps."
-
-
-def load_json(path: Path) -> dict[str, Any]:
-    if not path.exists():
-        return {}
-    try:
-        payload = json.loads(path.read_text(encoding="utf-8"))
-    except json.JSONDecodeError:
-        return {}
-    return payload if isinstance(payload, dict) else {}
-
-
-def load_json_with_status(path: Path) -> tuple[dict[str, Any], str]:
-    if not path.exists():
-        return {}, "missing"
-    try:
-        payload = json.loads(path.read_text(encoding="utf-8"))
-    except json.JSONDecodeError:
-        return {}, "invalid-json"
-    if not isinstance(payload, dict):
-        return {}, "invalid-json"
-    return payload, "present"
-
-
-def rel_path(path: Path, root: Path) -> str:
-    try:
-        return str(path.resolve().relative_to(root.resolve()))
-    except ValueError:
-        return str(path.resolve())
 
 
 def provider_state(skill_dir: Path) -> dict[str, Any]:
@@ -120,7 +92,8 @@ PROVENANCE_REQUIREMENTS = {
 }
 
 
-def submission_state(skill_dir: Path, key: str, submissions_dir: Path) -> dict[str, Any]:
+def submission_state(skill_dir: Path, task: dict[str, Any], submissions_dir: Path) -> dict[str, Any]:
+    key = str(task.get("key", ""))
     path = submissions_dir / f"{key}.json"
     payload, load_status = load_json_with_status(path)
     if load_status != "present":
@@ -132,32 +105,32 @@ def submission_state(skill_dir: Path, key: str, submissions_dir: Path) -> dict[s
             "privacy_contract_satisfied": False,
             "ledger_counts_as_completion": False,
         }
-    errors = []
-    if payload.get("evidence_key") != key:
-        errors.append("evidence_key mismatch")
-    if payload.get("template_only") is not False:
-        errors.append("template_only must be false")
+    validation = validate_payload(payload, task, path=path, root=skill_dir, template_expected=False)
     refs = payload.get("artifact_refs", [])
     attestation = payload.get("attestation", {}) if isinstance(payload.get("attestation", {}), dict) else {}
-    status = "submitted" if not errors else "invalid-contract"
+    status = "submitted" if validation["status"] == "pass" else "invalid-contract"
+    artifact_integrity = validation.get("artifact_integrity", {})
     return {
         "status": status,
         "path": rel_path(path, skill_dir),
         "submitted_by": payload.get("submitted_by", ""),
         "submitted_at": payload.get("submitted_at", ""),
         "artifact_ref_count": len(refs) if isinstance(refs, list) else 0,
+        "artifact_existing_count": artifact_integrity.get("artifact_existing_count", 0),
+        "artifact_sha256_verified_count": artifact_integrity.get("artifact_sha256_verified_count", 0),
         "attested_real_evidence": attestation.get("real_external_or_human_evidence") is True,
         "reviewer_or_operator_identity_present": attestation.get("reviewer_or_operator_identity_present") is True,
         "privacy_contract_satisfied": attestation.get("privacy_contract_satisfied") is True,
-        "errors": errors,
+        "errors": validation.get("errors", []),
         "ledger_counts_as_completion": False,
     }
 
 
 def build_entry(skill_dir: Path, task: dict[str, Any], submissions_dir: Path) -> dict[str, Any]:
     state = STATE_LOADERS.get(task["key"], lambda _: {"accepted": task["status"] == "pass"})(skill_dir)
-    accepted = bool(state.get("accepted"))
-    submission = submission_state(skill_dir, task["key"], submissions_dir)
+    submission = submission_state(skill_dir, task, submissions_dir)
+    source_accepted = bool(state.get("accepted"))
+    accepted = source_accepted and submission.get("status") == "submitted"
     return {
         "key": task["key"],
         "label": task["label"],
@@ -165,6 +138,7 @@ def build_entry(skill_dir: Path, task: dict[str, Any], submissions_dir: Path) ->
         "owner": task["owner"],
         "status": "accepted" if accepted else "pending",
         "source_status": task["status"],
+        "source_accepted": source_accepted,
         "current": task["current"],
         "objective": task["objective"],
         "provenance_requirements": PROVENANCE_REQUIREMENTS.get(task["key"], ["release reviewer evidence"]),
@@ -186,7 +160,9 @@ def build_entry(skill_dir: Path, task: dict[str, Any], submissions_dir: Path) ->
 def build_ledger(skill_dir: Path, generated_at: str, submissions_dir: Path | None = None) -> dict[str, Any]:
     plan = build_plan(skill_dir, generated_at)
     submissions_dir = submissions_dir or (skill_dir / "evidence" / "world_class" / "submissions")
-    entries = [build_entry(skill_dir, task, submissions_dir) for task in plan["tasks"]]
+    evidence_requirements = plan.get("evidence_requirements") or plan.get("tasks", [])
+    entries = [build_entry(skill_dir, task, submissions_dir) for task in evidence_requirements]
+    source_accepted_count = sum(1 for entry in entries if entry.get("source_accepted") is True)
     accepted_count = sum(1 for entry in entries if entry["status"] == "accepted")
     pending_count = len(entries) - accepted_count
     human_pending_count = sum(1 for entry in entries if entry["category"] == "human" and entry["status"] == "pending")
@@ -197,7 +173,12 @@ def build_ledger(skill_dir: Path, generated_at: str, submissions_dir: Path | Non
     submitted_but_pending_count = sum(
         1 for entry in entries if entry["submission_state"]["status"] == "submitted" and entry["status"] == "pending"
     )
-    ready = pending_count == 0 and plan["summary"].get("world_class_ready") is True
+    source_accepted_without_valid_submission_count = sum(
+        1
+        for entry in entries
+        if entry.get("source_accepted") is True and entry["submission_state"]["status"] != "submitted"
+    )
+    ready = bool(entries) and pending_count == 0 and plan["summary"].get("world_class_ready") is True
     return {
         "schema_version": "1.0",
         "ok": True,
@@ -205,6 +186,7 @@ def build_ledger(skill_dir: Path, generated_at: str, submissions_dir: Path | Non
         "skill_dir": rel_path(skill_dir, ROOT),
         "summary": {
             "ledger_entry_count": len(entries),
+            "source_accepted_count": source_accepted_count,
             "accepted_count": accepted_count,
             "pending_count": pending_count,
             "human_pending_count": human_pending_count,
@@ -213,6 +195,7 @@ def build_ledger(skill_dir: Path, generated_at: str, submissions_dir: Path | Non
             "missing_submission_count": missing_submission_count,
             "invalid_submission_count": invalid_submission_count,
             "submitted_but_pending_count": submitted_but_pending_count,
+            "source_accepted_without_valid_submission_count": source_accepted_without_valid_submission_count,
             "overclaim_guard_active": True,
             "ready_to_claim_world_class": ready,
             "decision": "ready-for-completion-audit" if ready else "evidence-pending",
@@ -222,10 +205,12 @@ def build_ledger(skill_dir: Path, generated_at: str, submissions_dir: Path | Non
             "json": "reports/world_class_evidence_plan.json",
             "markdown": "reports/world_class_evidence_plan.md",
             "task_count": plan["summary"].get("task_count", 0),
+            "evidence_requirement_count": len(evidence_requirements),
         },
         "submissions": {
             "directory": rel_path(submissions_dir, skill_dir),
             "ledger_counts_submission_as_completion": False,
+            "source_pass_requires_valid_submission": True,
         },
         "artifacts": {
             "json": "reports/world_class_evidence_ledger.json",
@@ -247,16 +232,18 @@ def render_markdown(ledger: dict[str, Any]) -> str:
         f"- decision: `{summary['decision']}`",
         f"- ready to claim world-class: `{str(summary['ready_to_claim_world_class']).lower()}`",
         f"- entries: `{summary['ledger_entry_count']}`",
+        f"- source accepted: `{summary.get('source_accepted_count', 0)}`",
         f"- accepted: `{summary['accepted_count']}`",
         f"- pending: `{summary['pending_count']}`",
         f"- human pending: `{summary['human_pending_count']}`",
         f"- external pending: `{summary['external_pending_count']}`",
         f"- submitted entries: `{summary['submitted_entry_count']}`",
         f"- submitted but pending: `{summary['submitted_but_pending_count']}`",
+        f"- source accepted without valid submission: `{summary.get('source_accepted_without_valid_submission_count', 0)}`",
         f"- invalid submissions: `{summary['invalid_submission_count']}`",
         f"- overclaim guard active: `{str(summary['overclaim_guard_active']).lower()}`",
         "",
-        "This ledger records the current evidence state. It does not treat planned work, metadata fallback, pending review, or local command-runner output as world-class completion evidence.",
+        "This ledger records the current evidence state. It requires both passing source evidence and a validated intake submission with artifact SHA-256 checks before accepting an item. It does not treat planned work, metadata fallback, pending review, or local command-runner output as world-class completion evidence.",
         "",
         "## Ledger",
         "",

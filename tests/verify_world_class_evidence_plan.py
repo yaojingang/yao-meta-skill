@@ -38,18 +38,22 @@ def main() -> None:
     assert payload["ok"] is True, payload
     assert payload["summary"]["decision"] == "collect-external-evidence", payload
     assert payload["summary"]["ready_to_claim_world_class"] is False, payload
+    assert payload["summary"]["ledger_completion_required"] is True, payload
+    assert payload["summary"]["evidence_requirement_count"] == 4, payload
     assert payload["summary"]["task_count"] == 4, payload
     assert payload["summary"]["human_task_count"] == 1, payload
     assert payload["summary"]["external_task_count"] == 3, payload
     assert payload["artifacts"]["ledger"] == "reports/world_class_evidence_ledger.md", payload
     assert payload["artifacts"]["intake"] == "reports/world_class_evidence_intake.md", payload
     tasks = {item["key"]: item for item in payload["tasks"]}
+    requirements = {item["key"]: item for item in payload["evidence_requirements"]}
     assert set(tasks) == {
         "provider-holdout",
         "human-adjudication",
         "native-permission-enforcement",
         "native-client-telemetry",
     }, tasks
+    assert set(requirements) == set(tasks), requirements
     assert any("--provider-runner openai" in command for command in tasks["provider-holdout"]["runbook"]), tasks["provider-holdout"]
     assert any("world-class-intake" in command for command in tasks["provider-holdout"]["runbook"]), tasks["provider-holdout"]
     assert any("evidence/world_class/templates/provider-holdout.intake.json" in command for command in tasks["provider-holdout"]["runbook"]), tasks["provider-holdout"]
@@ -68,6 +72,7 @@ def main() -> None:
     assert "World-Class Evidence Plan" in markdown, markdown
     assert "`provider-holdout`" in markdown, markdown
     assert "ready to claim world-class: `false`" in markdown, markdown
+    assert "ledger completion required: `true`" in markdown, markdown
     print(json.dumps({"ok": True}, ensure_ascii=False, indent=2))
 
 

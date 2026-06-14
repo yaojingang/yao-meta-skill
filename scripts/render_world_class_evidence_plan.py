@@ -175,11 +175,14 @@ def build_task(item: dict[str, Any]) -> dict[str, Any]:
 
 def build_plan(skill_dir: Path, generated_at: str) -> dict[str, Any]:
     audit = build_audit(skill_dir, generated_at)
-    tasks = [build_task(item) for item in audit["items"] if item["status"] != "pass"]
+    evidence_keys = set(TASK_TEMPLATES)
+    evidence_requirements = [build_task(item) for item in audit["items"] if item["key"] in evidence_keys]
+    tasks = [task for task in evidence_requirements if task["status"] != "pass"]
+    tasks.extend(build_task(item) for item in audit["items"] if item["status"] != "pass" and item["key"] not in evidence_keys)
     category_counts: dict[str, int] = {}
     for task in tasks:
         category_counts[task["category"]] = category_counts.get(task["category"], 0) + 1
-    ready = len(tasks) == 0 and audit["summary"].get("world_class_ready") is True
+    audit_world_class_ready = audit["summary"].get("world_class_ready") is True
     return {
         "schema_version": "1.0",
         "ok": audit["ok"],
@@ -188,14 +191,18 @@ def build_plan(skill_dir: Path, generated_at: str) -> dict[str, Any]:
         "summary": {
             "audit_decision": audit["summary"]["decision"],
             "world_class_ready": bool(audit["summary"]["world_class_ready"]),
-            "ready_to_claim_world_class": ready,
+            "audit_world_class_ready": audit_world_class_ready,
+            "ready_to_claim_world_class": False,
+            "ledger_completion_required": True,
+            "evidence_requirement_count": len(evidence_requirements),
             "task_count": len(tasks),
             "human_task_count": category_counts.get("human", 0),
             "external_task_count": category_counts.get("external", 0),
             "review_task_count": category_counts.get("review", 0),
-            "decision": "ready-for-completion-audit" if ready else "collect-external-evidence",
+            "decision": "audit-ready-ledger-required" if audit_world_class_ready and not tasks else "collect-external-evidence",
         },
         "tasks": tasks,
+        "evidence_requirements": evidence_requirements,
         "source_audit": {
             "json": "reports/skill_os2_audit.json",
             "markdown": "reports/skill_os2_audit.md",
@@ -222,11 +229,13 @@ def render_markdown(plan: dict[str, Any]) -> str:
         f"- decision: `{summary['decision']}`",
         f"- audit decision: `{summary['audit_decision']}`",
         f"- ready to claim world-class: `{str(summary['ready_to_claim_world_class']).lower()}`",
+        f"- ledger completion required: `{str(summary.get('ledger_completion_required', True)).lower()}`",
+        f"- evidence requirements: `{summary.get('evidence_requirement_count', 0)}`",
         f"- tasks: `{summary['task_count']}`",
         f"- human tasks: `{summary['human_task_count']}`",
         f"- external tasks: `{summary['external_task_count']}`",
         "",
-        "This report is an execution plan for the remaining world-class evidence gaps. It does not count a plan as completion.",
+        "This report is an execution plan for the remaining world-class evidence gaps. It does not count a plan or source-report pass as completion; the ledger must still validate accepted submissions.",
         "",
         "## Task Table",
         "",
@@ -239,7 +248,7 @@ def render_markdown(plan: dict[str, Any]) -> str:
             f"| `{task['key']}` | `{task['status']}` | `{task['category']}` | {task['owner']} | {current} |"
         )
     if not plan["tasks"]:
-        lines.append("| `none` | `pass` | `none` | none | all evidence collected |")
+        lines.append("| `none` | `pass` | `none` | none | audit gaps closed; ledger validation still required |")
     for task in plan["tasks"]:
         lines.extend(
             [

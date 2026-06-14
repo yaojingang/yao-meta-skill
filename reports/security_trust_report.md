@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `178`
-- Scripts: `94`
-- Internal script modules: `17`
+- Scanned files: `179`
+- Scripts: `95`
+- Internal script modules: `18`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `178`
-- Package SHA256: `08d744e0aa33d726b497ecdbdb6eaf2a5ec666a6ea3938068f6007be27f5021c`
+- Package hash files: `179`
+- Package SHA256: `c42643ea854dd90bb03ca607595f6a6b2c00118da64a78e8bdbb4392d7f204fb`
 
 ## Failures
 
@@ -149,6 +149,7 @@
 | scripts/upgrade_check.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/validate_skill.py | cli | False | True | True | False | False | False | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/verify_package.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
+| scripts/world_class_evidence_contract.py | internal-module | True | False | False | False | False | False | False | Imported by world-class evidence reports to share intake validation and artifact integrity checks. |
 | scripts/yao.py | cli | False | True | True | False | False | False | True | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/yao_cli_config.py | internal-module | True | False | False | False | False | False | False | Imported by yao.py for CLI target maps and side-effect-free shaping helpers. |
 | scripts/yao_cli_create_commands.py | internal-module | True | True | False | False | False | False | False | Imported by yao.py to keep skill creation and quickstart command handlers out of the CLI orchestrator. |

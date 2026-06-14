@@ -1,22 +1,24 @@
 # World-Class Evidence Ledger
 
-Generated at: `2026-06-14`
+Generated at: `2026-06-13`
 
 ## Summary
 
 - decision: `evidence-pending`
 - ready to claim world-class: `false`
 - entries: `4`
+- source accepted: `0`
 - accepted: `0`
 - pending: `4`
 - human pending: `1`
 - external pending: `3`
 - submitted entries: `0`
 - submitted but pending: `0`
+- source accepted without valid submission: `0`
 - invalid submissions: `0`
 - overclaim guard active: `true`
 
-This ledger records the current evidence state. It does not treat planned work, metadata fallback, pending review, or local command-runner output as world-class completion evidence.
+This ledger records the current evidence state. It requires both passing source evidence and a validated intake submission with artifact SHA-256 checks before accepting an item. It does not treat planned work, metadata fallback, pending review, or local command-runner output as world-class completion evidence.
 
 ## Ledger
 

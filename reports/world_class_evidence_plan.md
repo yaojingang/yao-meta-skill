@@ -1,17 +1,19 @@
 # World-Class Evidence Plan
 
-Generated at: `2026-06-14`
+Generated at: `2026-06-13`
 
 ## Summary
 
 - decision: `collect-external-evidence`
 - audit decision: `continue-iteration`
 - ready to claim world-class: `false`
+- ledger completion required: `true`
+- evidence requirements: `4`
 - tasks: `4`
 - human tasks: `1`
 - external tasks: `3`
 
-This report is an execution plan for the remaining world-class evidence gaps. It does not count a plan as completion.
+This report is an execution plan for the remaining world-class evidence gaps. It does not count a plan or source-report pass as completion; the ledger must still validate accepted submissions.
 
 ## Task Table
 

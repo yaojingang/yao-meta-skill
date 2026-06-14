@@ -107,6 +107,7 @@
         "scripts/upgrade_check.py",
         "scripts/validate_skill.py",
         "scripts/verify_package.py",
+        "scripts/world_class_evidence_contract.py",
         "scripts/yao.py",
         "scripts/yao_cli_config.py",
         "scripts/yao_cli_create_commands.py",

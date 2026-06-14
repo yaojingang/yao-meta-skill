@@ -437,7 +437,7 @@
         "path": "scripts",
         "label": "Deterministic helpers or local tooling",
         "kind": "folder",
-        "file_count": 94
+        "file_count": 95
       },
       {
         "path": "evals",
@@ -452,7 +452,7 @@
         "file_count": 203
       }
     ],
-    "file_count": 361,
+    "file_count": 362,
     "folder_count": 4,
     "distribution": [
       {
@@ -477,7 +477,7 @@
       },
       {
         "label": "scripts",
-        "value": 94
+        "value": 95
       },
       {
         "label": "evals",
@@ -606,7 +606,7 @@
       "path": "scripts",
       "label": "Deterministic helpers or local tooling",
       "kind": "folder",
-      "file_count": 94
+      "file_count": 95
     },
     {
       "path": "evals",
@@ -935,9 +935,9 @@
       "world_class_task_count": 4,
       "world_class_ledger_pending_count": 4,
       "working_tree_dirty": true,
-      "changed_file_count": 45
+      "changed_file_count": 50
     },
-    "commit": "bd7f1d8cccbebac1222c0ee7bbc01c1e3b991126",
+    "commit": "48f2826b8c9ebad3a9cc90e6166f4fd253f98308",
     "missing_artifacts": [],
     "limitations": [
       "Local command-runner evidence is reproducible but does not replace provider-backed model holdout evidence.",
@@ -1020,9 +1020,9 @@
     "failures": []
   },
   "trust_security": {
-    "scanned_files": 178,
-    "script_count": 94,
-    "internal_module_count": 17,
+    "scanned_files": 179,
+    "script_count": 95,
+    "internal_module_count": 18,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -1040,8 +1040,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 178,
-    "package_sha256": "08d744e0aa33d726b497ecdbdb6eaf2a5ec666a6ea3938068f6007be27f5021c"
+    "package_hash_file_count": 179,
+    "package_sha256": "c42643ea854dd90bb03ca607595f6a6b2c00118da64a78e8bdbb4392d7f204fb"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -1079,8 +1079,8 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "08d744e0aa33d726b497ecdbdb6eaf2a5ec666a6ea3938068f6007be27f5021c",
-        "archive_sha256": "8d1c803b4008860c73b47f8abeed721877304521c2e2da11083aeb2e66ce156e"
+        "package_sha256": "c42643ea854dd90bb03ca607595f6a6b2c00118da64a78e8bdbb4392d7f204fb",
+        "archive_sha256": "76793bd367e9aaf6c25e6b11ac1139156950827bd87ba3dd8a1bdc883f7d70fe"
       },
       "compatibility": {
         "openai": "pass",
@@ -1111,12 +1111,12 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "8d1c803b4008860c73b47f8abeed721877304521c2e2da11083aeb2e66ce156e",
+        "archive_sha256": "76793bd367e9aaf6c25e6b11ac1139156950827bd87ba3dd8a1bdc883f7d70fe",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
       },
-      "generated_at": "2026-06-14"
+      "generated_at": "2026-06-13"
     },
     "failures": [],
     "warnings": []
@@ -1127,8 +1127,8 @@
       "target_count": 4,
       "adapter_count": 4,
       "archive_present": true,
-      "archive_sha256": "8d1c803b4008860c73b47f8abeed721877304521c2e2da11083aeb2e66ce156e",
-      "archive_entry_count": 573,
+      "archive_sha256": "76793bd367e9aaf6c25e6b11ac1139156950827bd87ba3dd8a1bdc883f7d70fe",
+      "archive_entry_count": 574,
       "failure_count": 0,
       "warning_count": 0
     },
@@ -1139,7 +1139,7 @@
     "ok": true,
     "summary": {
       "archive_present": true,
-      "archive_entry_count": 573,
+      "archive_entry_count": 574,
       "archive_extracted": true,
       "entrypoint_loaded": true,
       "manifest_loaded": true,
@@ -1206,12 +1206,12 @@
         {
           "field": "archive_sha256",
           "from": "",
-          "to": "8d1c803b4008860c73b47f8abeed721877304521c2e2da11083aeb2e66ce156e"
+          "to": "76793bd367e9aaf6c25e6b11ac1139156950827bd87ba3dd8a1bdc883f7d70fe"
         },
         {
           "field": "package_sha256",
           "from": "0000000000000000000000000000000000000000000000000000000000000000",
-          "to": "08d744e0aa33d726b497ecdbdb6eaf2a5ec666a6ea3938068f6007be27f5021c"
+          "to": "c42643ea854dd90bb03ca607595f6a6b2c00118da64a78e8bdbb4392d7f204fb"
         }
       ]
     },
@@ -1331,7 +1331,10 @@
     "summary": {
       "audit_decision": "continue-iteration",
       "world_class_ready": false,
+      "audit_world_class_ready": false,
       "ready_to_claim_world_class": false,
+      "ledger_completion_required": true,
+      "evidence_requirement_count": 4,
       "task_count": 4,
       "human_task_count": 1,
       "external_task_count": 3,
@@ -1506,6 +1509,7 @@
     "ok": true,
     "summary": {
       "ledger_entry_count": 4,
+      "source_accepted_count": 0,
       "accepted_count": 0,
       "pending_count": 4,
       "human_pending_count": 1,
@@ -1514,6 +1518,7 @@
       "missing_submission_count": 4,
       "invalid_submission_count": 0,
       "submitted_but_pending_count": 0,
+      "source_accepted_without_valid_submission_count": 0,
       "overclaim_guard_active": true,
       "ready_to_claim_world_class": false,
       "decision": "evidence-pending"
@@ -1526,6 +1531,7 @@
         "owner": "operator with provider credentials",
         "status": "pending",
         "source_status": "external_required",
+        "source_accepted": false,
         "current": "model-executed 0; token-observed 0",
         "objective": "Collect at least one provider-backed output-eval holdout run with model, timing, and token metadata.",
         "provenance_requirements": [
@@ -1581,6 +1587,7 @@
         "owner": "human reviewer",
         "status": "pending",
         "source_status": "human_required",
+        "source_accepted": false,
         "current": "0/5 decisions; pending 5",
         "objective": "Record real blind A/B reviewer decisions before claiming human output review completion.",
         "provenance_requirements": [
@@ -1640,6 +1647,7 @@
         "owner": "target client or installer integrator",
         "status": "pending",
         "source_status": "external_required",
+        "source_accepted": false,
         "current": "native-enforced targets 0; installer-enforced targets 4",
         "objective": "Prove at least one real target client or external installer runtime guard enforces approved high-permission capabilities.",
         "provenance_requirements": [
@@ -1702,6 +1710,7 @@
         "owner": "Browser/Chrome/IDE/provider client integrator",
         "status": "pending",
         "source_status": "external_required",
+        "source_accepted": false,
         "current": "external source events 0; adoption samples 1",
         "objective": "Import production metadata-only events from a real external client into the local drift loop.",
         "provenance_requirements": [
@@ -1755,7 +1764,8 @@
     "source_plan": {
       "json": "reports/world_class_evidence_plan.json",
       "markdown": "reports/world_class_evidence_plan.md",
-      "task_count": 4
+      "task_count": 4,
+      "evidence_requirement_count": 4
     }
   },
   "synthesis_highlights": [

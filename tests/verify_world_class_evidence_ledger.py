@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import hashlib
 import json
 import shutil
 import subprocess
@@ -11,7 +12,15 @@ SCRIPT = ROOT / "scripts" / "render_world_class_evidence_ledger.py"
 TMP = ROOT / "tests" / "tmp_world_class_evidence_ledger"
 
 
-def provider_submission() -> dict:
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def provider_submission(artifact_root: Path = ROOT) -> dict:
     return {
         "schema_version": "1.0",
         "evidence_key": "provider-holdout",
@@ -26,8 +35,26 @@ def provider_submission() -> dict:
                 "path": "reports/output_execution_runs.json",
                 "kind": "aggregate-report",
                 "contains_raw_content": False,
+                "sha256": sha256_file(artifact_root / "reports" / "output_execution_runs.json"),
             }
         ],
+        "provenance": {
+            "provider": "openai",
+            "model": "gpt-4.1-mini",
+            "credential_material_committed": False,
+        },
+        "privacy": {
+            "raw_user_content_included": False,
+            "raw_provider_prompt_included": False,
+            "credentials_included": False,
+            "secrets_included": False,
+        },
+        "anti_overclaim": {
+            "planned_work_counts_as_evidence": False,
+            "metadata_fallback_counts_as_native_enforcement": False,
+            "pending_review_counts_as_human_decision": False,
+            "local_command_runner_counts_as_provider_model": False,
+        },
         "attestation": {
             "real_external_or_human_evidence": True,
             "reviewer_or_operator_identity_present": True,
@@ -136,8 +163,90 @@ def main() -> None:
     submitted_provider = {entry["key"]: entry for entry in submitted_payload["entries"]}["provider-holdout"]
     assert submitted_provider["status"] == "pending", submitted_provider
     assert submitted_provider["submission_state"]["status"] == "submitted", submitted_provider
+    assert submitted_provider["submission_state"]["artifact_sha256_verified_count"] == 1, submitted_provider
     assert submitted_provider["submission_state"]["attested_real_evidence"] is True, submitted_provider
     assert submitted_provider["submission_state"]["ledger_counts_as_completion"] is False, submitted_provider
+
+    accepted_source_skill = TMP / "accepted_source_skill"
+    (accepted_source_skill / "reports").mkdir(parents=True)
+    (accepted_source_skill / "reports" / "output_execution_runs.json").write_text(
+        json.dumps(
+            {
+                "summary": {
+                    "model_executed_count": 1,
+                    "timing_observed_count": 1,
+                    "token_observed_count": 1,
+                }
+            },
+            ensure_ascii=False,
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    accepted_source_proc = subprocess.run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            str(accepted_source_skill),
+            "--output-json",
+            str(TMP / "accepted_source_without_submission.json"),
+            "--output-md",
+            str(TMP / "accepted_source_without_submission.md"),
+            "--generated-at",
+            "2026-06-13",
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    accepted_source_payload = json.loads(accepted_source_proc.stdout)
+    accepted_source_summary = accepted_source_payload["summary"]
+    assert accepted_source_summary["source_accepted_count"] == 1, accepted_source_summary
+    assert accepted_source_summary["accepted_count"] == 0, accepted_source_summary
+    assert accepted_source_summary["source_accepted_without_valid_submission_count"] == 1, accepted_source_summary
+    accepted_source_provider = {
+        entry["key"]: entry for entry in accepted_source_payload["entries"]
+    }["provider-holdout"]
+    assert accepted_source_provider["source_accepted"] is True, accepted_source_provider
+    assert accepted_source_provider["status"] == "pending", accepted_source_provider
+    assert accepted_source_provider["submission_state"]["status"] == "missing", accepted_source_provider
+
+    accepted_submissions = TMP / "accepted_submissions"
+    accepted_submissions.mkdir()
+    (accepted_submissions / "provider-holdout.json").write_text(
+        json.dumps(provider_submission(accepted_source_skill), ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    accepted_proc = subprocess.run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            str(accepted_source_skill),
+            "--output-json",
+            str(TMP / "accepted_provider_ledger.json"),
+            "--output-md",
+            str(TMP / "accepted_provider_ledger.md"),
+            "--submissions-dir",
+            str(accepted_submissions),
+            "--generated-at",
+            "2026-06-13",
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    accepted_payload = json.loads(accepted_proc.stdout)
+    accepted_summary = accepted_payload["summary"]
+    assert accepted_summary["source_accepted_count"] == 1, accepted_summary
+    assert accepted_summary["accepted_count"] == 1, accepted_summary
+    assert accepted_summary["pending_count"] == 3, accepted_summary
+    assert accepted_summary["source_accepted_without_valid_submission_count"] == 0, accepted_summary
+    accepted_provider = {entry["key"]: entry for entry in accepted_payload["entries"]}["provider-holdout"]
+    assert accepted_provider["status"] == "accepted", accepted_provider
+    assert accepted_provider["submission_state"]["status"] == "submitted", accepted_provider
     print(json.dumps({"ok": True}, ensure_ascii=False, indent=2))
 
 
