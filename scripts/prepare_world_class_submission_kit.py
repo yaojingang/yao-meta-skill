@@ -36,7 +36,7 @@ def write_json(path: Path, payload: dict[str, Any]) -> None:
 
 
 def html_text(value: Any) -> str:
-    return html.escape(str(value or ""), quote=True)
+    return html.escape("" if value is None else str(value), quote=True)
 
 
 def has_glob_pattern(value: str) -> bool:

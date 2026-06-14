@@ -232,6 +232,9 @@ def main() -> None:
     assert "provider-holdout" in kit_html, kit_html
     assert "Artifact Checklist" in kit_html, kit_html
     assert "Source Evidence Snapshot" in kit_html, kit_html
+    assert "<dt>Field</dt><dd><code>model_executed_count</code></dd>" in kit_html, kit_html
+    assert "<dt>Current</dt><dd><code>0</code></dd>" in kit_html, kit_html
+    assert "<dt>Expected</dt><dd><code>&gt;0</code></dd>" in kit_html, kit_html
     assert "World-Class Evidence Submission Kit" in kit_html, kit_html
     assert "Do not include credentials, raw prompts, raw outputs, transcripts, notes, or private user content." in kit_html, kit_html
 

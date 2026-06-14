@@ -24,7 +24,7 @@ def rel_path(path: Path, root: Path) -> str:
 
 
 def html_text(value: Any) -> str:
-    return html.escape(str(value or ""), quote=True)
+    return html.escape("" if value is None else str(value), quote=True)
 
 
 def by_key(items: list[dict[str, Any]], key_name: str) -> dict[str, dict[str, Any]]:
