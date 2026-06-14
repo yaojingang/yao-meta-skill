@@ -42,7 +42,7 @@ This runbook coordinates evidence collection only. It does not accept submission
 - prepare_submission: `python3 scripts/yao.py world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions`
 - validate_intake: `python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions`
 - review_queue: `python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions`
-- refresh_ledger: `python3 scripts/yao.py world-class-ledger .`
+- refresh_ledger: `python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions`
 - guard_claim: `python3 scripts/yao.py world-class-claim-guard .`
 
 ### Must Collect
@@ -85,7 +85,7 @@ This runbook coordinates evidence collection only. It does not accept submission
 - prepare_submission: `python3 scripts/yao.py world-class-submission-kit . --evidence-key human-adjudication --output-dir evidence/world_class/submissions`
 - validate_intake: `python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions`
 - review_queue: `python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions`
-- refresh_ledger: `python3 scripts/yao.py world-class-ledger .`
+- refresh_ledger: `python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions`
 - guard_claim: `python3 scripts/yao.py world-class-claim-guard .`
 
 ### Must Collect
@@ -130,7 +130,7 @@ This runbook coordinates evidence collection only. It does not accept submission
 - prepare_submission: `python3 scripts/yao.py world-class-submission-kit . --evidence-key native-permission-enforcement --output-dir evidence/world_class/submissions`
 - validate_intake: `python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions`
 - review_queue: `python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions`
-- refresh_ledger: `python3 scripts/yao.py world-class-ledger .`
+- refresh_ledger: `python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions`
 - guard_claim: `python3 scripts/yao.py world-class-claim-guard .`
 
 ### Must Collect
@@ -176,7 +176,7 @@ This runbook coordinates evidence collection only. It does not accept submission
 - prepare_submission: `python3 scripts/yao.py world-class-submission-kit . --evidence-key native-client-telemetry --output-dir evidence/world_class/submissions`
 - validate_intake: `python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions`
 - review_queue: `python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions`
-- refresh_ledger: `python3 scripts/yao.py world-class-ledger .`
+- refresh_ledger: `python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions`
 - guard_claim: `python3 scripts/yao.py world-class-claim-guard .`
 
 ### Must Collect

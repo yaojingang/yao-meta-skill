@@ -34,7 +34,7 @@ No file-size hotspots found.
 | `scripts/optimize_description.py` | `723` | `cli-script` | `pass` |
 | `scripts/trust_check.py` | `714` | `internal-module` | `pass` |
 | `scripts/render_review_viewer.py` | `685` | `cli-script` | `pass` |
-| `tests/verify_review_studio.py` | `677` | `test` | `pass` |
+| `tests/verify_review_studio.py` | `679` | `test` | `pass` |
 | `scripts/skill_report_layout.py` | `653` | `internal-module` | `pass` |
 | `scripts/render_reference_synthesis.py` | `644` | `cli-script` | `pass` |
 
