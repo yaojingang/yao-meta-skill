@@ -2,9 +2,9 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 180,
-    "script_count": 96,
-    "internal_module_count": 19,
+    "scanned_files": 181,
+    "script_count": 97,
+    "internal_module_count": 20,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 180,
-    "package_sha256": "e68243a9ecd99be64ffbc9fccaecbf6ba2453156121feec94b8f85250c6d88ca"
+    "package_hash_file_count": 181,
+    "package_sha256": "e38d34ebe54c377f47f6010c06716f8f972406cf1019a27e6ebc057371dd260f"
   },
   "failures": [],
   "warnings": [],
@@ -1013,6 +1013,20 @@
       "network_hosts": []
     },
     {
+      "path": "scripts/review_studio_waivers.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Imported by render_review_studio.py to keep waiver candidate layout out of the main renderer.",
+      "has_argparse": false,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
       "path": "scripts/review_studio_world_class.py",
       "interface": "internal-module",
       "interface_declared": true,
@@ -1425,7 +1439,7 @@
     "checked_count": 77,
     "passed_count": 77,
     "failed_count": 0,
-    "skipped_count": 19,
+    "skipped_count": 20,
     "failed_scripts": [],
     "results": [
       {
@@ -2222,6 +2236,10 @@
       },
       {
         "path": "scripts/review_studio_output_review.py",
+        "reason": "internal module"
+      },
+      {
+        "path": "scripts/review_studio_waivers.py",
         "reason": "internal module"
       },
       {

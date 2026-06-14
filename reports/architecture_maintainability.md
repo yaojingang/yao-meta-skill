@@ -5,10 +5,10 @@ Generated at: `2026-06-14`
 ## Summary
 
 - decision: `pass`
-- python files: `155`
-- scripts: `96`
+- python files: `156`
+- scripts: `97`
 - tests: `59`
-- internal modules: `22`
+- internal modules: `23`
 - CLI scripts: `76`
 - Yao CLI command handlers: `34`
 - largest file lines: `888`
@@ -34,8 +34,8 @@ No file-size hotspots found.
 | `scripts/trust_check.py` | `714` | `internal-module` | `pass` |
 | `scripts/render_review_viewer.py` | `685` | `cli-script` | `pass` |
 | `scripts/build_skill_atlas.py` | `674` | `cli-script` | `pass` |
+| `tests/verify_review_studio.py` | `674` | `test` | `pass` |
 | `scripts/skill_report_layout.py` | `653` | `internal-module` | `pass` |
-| `tests/verify_review_studio.py` | `647` | `test` | `pass` |
 | `scripts/render_reference_synthesis.py` | `644` | `cli-script` | `pass` |
 
 ## Release Rule

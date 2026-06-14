@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `180`
-- Scripts: `96`
-- Internal script modules: `19`
+- Scanned files: `181`
+- Scripts: `97`
+- Internal script modules: `20`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `180`
-- Package SHA256: `e68243a9ecd99be64ffbc9fccaecbf6ba2453156121feec94b8f85250c6d88ca`
+- Package hash files: `181`
+- Package SHA256: `e38d34ebe54c377f47f6010c06716f8f972406cf1019a27e6ebc057371dd260f`
 
 ## Failures
 
@@ -131,6 +131,7 @@
 | scripts/review_studio_gates.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to keep Review Studio gate evaluation separate from HTML rendering. |
 | scripts/review_studio_layout.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to keep Review Studio layout and CSS out of gate logic. |
 | scripts/review_studio_output_review.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to render output review checklist cards. |
+| scripts/review_studio_waivers.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to keep waiver candidate layout out of the main renderer. |
 | scripts/review_studio_world_class.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to render world-class evidence cards. |
 | scripts/review_viewer_data.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_viewer.py to assemble Review Viewer data before HTML rendering. |
 | scripts/run_conformance_suite.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
