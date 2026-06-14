@@ -375,10 +375,18 @@ def main() -> None:
     assert "1 warning gates still need reviewer decision" in waivers_gate["detail"], waivers_gate
     assert "reports/review_waivers.json" in waivers_gate["evidence"], waivers_gate
     world_class_gate = next(item for item in payload["gates"] if item["key"] == "world-class-evidence")
+    world_class_summary = json.loads((ROOT / "reports" / "world_class_evidence_ledger.json").read_text(encoding="utf-8"))[
+        "summary"
+    ]
     assert world_class_gate["status"] == "warn", world_class_gate
     assert "4 pending world-class evidence entries" in world_class_gate["detail"], world_class_gate
     assert "1 human pending" in world_class_gate["detail"], world_class_gate
     assert "3 external pending" in world_class_gate["detail"], world_class_gate
+    assert (
+        f"source checks {world_class_summary['source_pass_count']}/{world_class_summary['source_check_count']} pass"
+        in world_class_gate["detail"]
+    ), world_class_gate
+    assert f"{world_class_summary['source_blocked_count']} blocked" in world_class_gate["detail"], world_class_gate
     assert "overclaim guard true" in world_class_gate["detail"], world_class_gate
     assert world_class_gate["evidence"] == "reports/world_class_evidence_ledger.json", world_class_gate
     assert output_html.exists(), output_html

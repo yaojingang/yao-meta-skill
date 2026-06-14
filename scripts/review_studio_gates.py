@@ -498,6 +498,14 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
 
     world_class_ledger = data.get("world_class_evidence_ledger", {})
     world_class_summary = world_class_ledger.get("summary", {}) if isinstance(world_class_ledger, dict) else {}
+    source_check_count = int(world_class_summary.get("source_check_count", 0) or 0)
+    source_pass_count = int(world_class_summary.get("source_pass_count", 0) or 0)
+    source_blocked_count = int(world_class_summary.get("source_blocked_count", 0) or 0)
+    source_check_detail = (
+        f"source checks {source_pass_count}/{source_check_count} pass; {source_blocked_count} blocked"
+        if source_check_count
+        else "source checks unavailable"
+    )
     if not world_class_ledger and maturity == "governed":
         world_class_status = "warn"
         world_class_detail = "world-class evidence ledger is missing; public world-class readiness cannot be claimed"
@@ -508,7 +516,8 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
         world_class_status = "pass"
         world_class_detail = (
             f"{world_class_summary.get('accepted_count', 0)} accepted evidence entries; "
-            f"{world_class_summary.get('pending_count', 0)} pending"
+            f"{world_class_summary.get('pending_count', 0)} pending; "
+            f"{source_check_detail}"
         )
     else:
         world_class_status = "warn"
@@ -516,6 +525,7 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
             f"{world_class_summary.get('pending_count', 0)} pending world-class evidence entries; "
             f"{world_class_summary.get('human_pending_count', 0)} human pending; "
             f"{world_class_summary.get('external_pending_count', 0)} external pending; "
+            f"{source_check_detail}; "
             f"overclaim guard {str(world_class_summary.get('overclaim_guard_active', False)).lower()}"
         )
     gates.append(

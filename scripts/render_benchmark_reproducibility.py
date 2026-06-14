@@ -366,7 +366,11 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
     provider_evidence_complete = execution_summary.get("model_executed_count", 0) > 0 and execution_summary.get("token_observed_count", 0) > 0
     world_class_ready = bool(skill_os2.get("summary", {}).get("world_class_ready", False))
     world_class_open_gap_count = int(skill_os2.get("summary", {}).get("open_gap_count", 0) or 0)
-    world_class_ledger_pending_count = int(world_class_ledger.get("summary", {}).get("pending_count", 0) or 0)
+    world_class_summary = world_class_ledger.get("summary", {})
+    world_class_ledger_pending_count = int(world_class_summary.get("pending_count", 0) or 0)
+    world_class_source_check_count = int(world_class_summary.get("source_check_count", 0) or 0)
+    world_class_source_pass_count = int(world_class_summary.get("source_pass_count", 0) or 0)
+    world_class_source_blocked_count = int(world_class_summary.get("source_blocked_count", 0) or 0)
     claim_blockers = public_claim_blockers(
         local_reproducibility_ready,
         release_lock["ready"],
@@ -406,6 +410,9 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             "world_class_open_gap_count": world_class_open_gap_count,
             "world_class_task_count": world_class_plan.get("summary", {}).get("task_count", 0),
             "world_class_ledger_pending_count": world_class_ledger_pending_count,
+            "world_class_source_check_count": world_class_source_check_count,
+            "world_class_source_pass_count": world_class_source_pass_count,
+            "world_class_source_blocked_count": world_class_source_blocked_count,
             "public_claim_ready": public_claim_ready,
             "public_claim_blocker_count": len(claim_blockers),
             "working_tree_dirty": status.get("dirty"),
@@ -466,6 +473,7 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- provider evidence complete: `{str(summary['provider_evidence_complete']).lower()}`",
         f"- human review complete: `{str(summary['human_review_complete']).lower()}`",
         f"- world-class ready: `{str(summary['world_class_ready']).lower()}`",
+        f"- world-class source checks: `{summary.get('world_class_source_pass_count', 0)}` pass / `{summary.get('world_class_source_check_count', 0)}` total; `{summary.get('world_class_source_blocked_count', 0)}` blocked",
         f"- public claim ready: `{str(summary['public_claim_ready']).lower()}`",
         f"- public claim blockers: `{summary['public_claim_blocker_count']}`",
         f"- changed files at generation: `{summary.get('changed_file_count')}`",

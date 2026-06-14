@@ -138,6 +138,14 @@ def main() -> None:
     assert payload["summary"]["provider_evidence_complete"] is False, payload
     assert payload["summary"]["human_review_complete"] is False, payload
     assert payload["summary"]["world_class_ready"] is False, payload
+    assert payload["summary"]["world_class_source_check_count"] >= 13, payload
+    assert payload["summary"]["world_class_source_pass_count"] >= 6, payload
+    assert payload["summary"]["world_class_source_blocked_count"] >= 6, payload
+    assert (
+        payload["summary"]["world_class_source_pass_count"]
+        + payload["summary"]["world_class_source_blocked_count"]
+        == payload["summary"]["world_class_source_check_count"]
+    ), payload
     assert payload["summary"]["public_claim_ready"] is False, payload
     assert payload["summary"]["public_claim_blocker_count"] >= 3, payload
     assert payload["public_claim"]["ready"] is False, payload["public_claim"]
@@ -171,6 +179,7 @@ def main() -> None:
     assert "Benchmark Reproducibility" in markdown, markdown
     assert "Evidence bundle SHA256" in markdown, markdown
     assert "release lock ready" in markdown, markdown
+    assert "world-class source checks" in markdown, markdown
     assert "public claim ready: `false`" in markdown, markdown
     assert "## Public Claim Boundary" in markdown, markdown
     assert "provider-backed model holdout evidence is incomplete" in markdown, markdown
