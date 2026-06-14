@@ -138,6 +138,12 @@ def main() -> None:
     assert payload["summary"]["provider_evidence_complete"] is False, payload
     assert payload["summary"]["human_review_complete"] is False, payload
     assert payload["summary"]["world_class_ready"] is False, payload
+    assert payload["summary"]["public_claim_ready"] is False, payload
+    assert payload["summary"]["public_claim_blocker_count"] >= 3, payload
+    assert payload["public_claim"]["ready"] is False, payload["public_claim"]
+    assert any("provider-backed" in item for item in payload["public_claim"]["blockers"]), payload["public_claim"]
+    assert any("human blind-review" in item for item in payload["public_claim"]["blockers"]), payload["public_claim"]
+    assert any("world-class evidence" in item for item in payload["public_claim"]["blockers"]), payload["public_claim"]
     headings = {item["heading"]: item["exists"] for item in payload["methodology"]["sections"]}
     assert headings["## Benchmark Types"], headings
     assert headings["## Failure Disclosure"], headings
@@ -165,6 +171,9 @@ def main() -> None:
     assert "Benchmark Reproducibility" in markdown, markdown
     assert "Evidence bundle SHA256" in markdown, markdown
     assert "release lock ready" in markdown, markdown
+    assert "public claim ready: `false`" in markdown, markdown
+    assert "## Public Claim Boundary" in markdown, markdown
+    assert "provider-backed model holdout evidence is incomplete" in markdown, markdown
     assert "## Release Lock" in markdown, markdown
     assert "## Evidence Bundle" in markdown, markdown
     assert "reports/benchmark_methodology.md" in markdown, markdown

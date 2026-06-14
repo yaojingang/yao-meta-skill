@@ -305,6 +305,32 @@ def release_lock_status(status: dict[str, Any], commit: str) -> dict[str, Any]:
     }
 
 
+def public_claim_blockers(
+    local_reproducibility_ready: bool,
+    release_lock_ready: bool,
+    provider_evidence_complete: bool,
+    human_review_complete: bool,
+    world_class_ready: bool,
+    world_class_open_gap_count: int,
+    world_class_ledger_pending_count: int,
+) -> list[str]:
+    blockers = []
+    if not local_reproducibility_ready:
+        blockers.append("local benchmark reproducibility is incomplete")
+    if not release_lock_ready:
+        blockers.append("release lock is not clean or commit is unavailable")
+    if not provider_evidence_complete:
+        blockers.append("provider-backed model holdout evidence is incomplete")
+    if not human_review_complete:
+        blockers.append("human blind-review adjudication is incomplete")
+    if not world_class_ready:
+        blockers.append(
+            f"world-class evidence is not accepted yet ({world_class_open_gap_count} open gaps, "
+            f"{world_class_ledger_pending_count} ledger pending)"
+        )
+    return blockers
+
+
 def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
     reports = skill_dir / "reports"
     output_quality = load_json(reports / "output_quality_scorecard.json")
@@ -338,6 +364,19 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
     )
     human_review_complete = review_summary.get("pair_count", 0) > 0 and review_summary.get("pending_count", 0) == 0
     provider_evidence_complete = execution_summary.get("model_executed_count", 0) > 0 and execution_summary.get("token_observed_count", 0) > 0
+    world_class_ready = bool(skill_os2.get("summary", {}).get("world_class_ready", False))
+    world_class_open_gap_count = int(skill_os2.get("summary", {}).get("open_gap_count", 0) or 0)
+    world_class_ledger_pending_count = int(world_class_ledger.get("summary", {}).get("pending_count", 0) or 0)
+    claim_blockers = public_claim_blockers(
+        local_reproducibility_ready,
+        release_lock["ready"],
+        provider_evidence_complete,
+        human_review_complete,
+        world_class_ready,
+        world_class_open_gap_count,
+        world_class_ledger_pending_count,
+    )
+    public_claim_ready = not claim_blockers
     return {
         "schema_version": "1.0",
         "ok": local_reproducibility_ready,
@@ -363,12 +402,20 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             "token_observed_count": execution_summary.get("token_observed_count", 0),
             "human_review_complete": human_review_complete,
             "provider_evidence_complete": provider_evidence_complete,
-            "world_class_ready": bool(skill_os2.get("summary", {}).get("world_class_ready", False)),
-            "world_class_open_gap_count": skill_os2.get("summary", {}).get("open_gap_count", 0),
+            "world_class_ready": world_class_ready,
+            "world_class_open_gap_count": world_class_open_gap_count,
             "world_class_task_count": world_class_plan.get("summary", {}).get("task_count", 0),
-            "world_class_ledger_pending_count": world_class_ledger.get("summary", {}).get("pending_count", 0),
+            "world_class_ledger_pending_count": world_class_ledger_pending_count,
+            "public_claim_ready": public_claim_ready,
+            "public_claim_blocker_count": len(claim_blockers),
             "working_tree_dirty": status.get("dirty"),
             "changed_file_count": status.get("changed_file_count"),
+        },
+        "public_claim": {
+            "ready": public_claim_ready,
+            "scope": "public benchmark or world-class readiness claim",
+            "blockers": claim_blockers,
+            "policy": "Local reproducibility can pass before public claims; public claims require provider evidence, human adjudication, clean release lock, and accepted world-class evidence.",
         },
         "release_lock": release_lock,
         "evidence_bundle": evidence_bundle,
@@ -419,27 +466,51 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- provider evidence complete: `{str(summary['provider_evidence_complete']).lower()}`",
         f"- human review complete: `{str(summary['human_review_complete']).lower()}`",
         f"- world-class ready: `{str(summary['world_class_ready']).lower()}`",
+        f"- public claim ready: `{str(summary['public_claim_ready']).lower()}`",
+        f"- public claim blockers: `{summary['public_claim_blocker_count']}`",
         f"- changed files at generation: `{summary.get('changed_file_count')}`",
         "",
         "This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete. The git commit is generation-time context; the evidence bundle SHA is the durable anchor for the artifacts listed below.",
         "",
-        "## Release Lock",
+        "## Public Claim Boundary",
         "",
-        f"- ready: `{str(report.get('release_lock', {}).get('ready')).lower()}`",
-        f"- reason: {report.get('release_lock', {}).get('reason', 'unknown')}",
-        f"- status scope: {report.get('release_lock', {}).get('status_scope', 'generation-time status')}",
+        f"- ready: `{str(report.get('public_claim', {}).get('ready')).lower()}`",
+        f"- scope: {report.get('public_claim', {}).get('scope', 'public benchmark claim')}",
+        f"- policy: {report.get('public_claim', {}).get('policy', '')}",
         "",
-        "## Evidence Bundle",
-        "",
-        f"- algorithm: `{report.get('evidence_bundle', {}).get('algorithm', '')}`",
-        f"- artifacts: `{report.get('evidence_bundle', {}).get('existing_count', 0)}` / `{report.get('evidence_bundle', {}).get('artifact_count', 0)}`",
-        f"- sha256: `{report.get('evidence_bundle', {}).get('sha256', '')}`",
-        "",
-        "## Methodology Sections",
-        "",
-        "| Section | Status |",
-        "| --- | --- |",
+        "| Blocker |",
+        "| --- |",
     ]
+    blockers = report.get("public_claim", {}).get("blockers", [])
+    if blockers:
+        lines.extend(f"| {item} |" for item in blockers)
+    else:
+        lines.append("| none |")
+    lines.extend(
+        [
+            "",
+            "## Release Lock",
+            "",
+            f"- ready: `{str(report.get('release_lock', {}).get('ready')).lower()}`",
+            f"- reason: {report.get('release_lock', {}).get('reason', 'unknown')}",
+            f"- status scope: {report.get('release_lock', {}).get('status_scope', 'generation-time status')}",
+            "",
+            "## Evidence Bundle",
+        ]
+    )
+    lines.extend(
+        [
+            "",
+            f"- algorithm: `{report.get('evidence_bundle', {}).get('algorithm', '')}`",
+            f"- artifacts: `{report.get('evidence_bundle', {}).get('existing_count', 0)}` / `{report.get('evidence_bundle', {}).get('artifact_count', 0)}`",
+            f"- sha256: `{report.get('evidence_bundle', {}).get('sha256', '')}`",
+            "",
+            "## Methodology Sections",
+            "",
+            "| Section | Status |",
+            "| --- | --- |",
+        ]
+    )
     for section in report["methodology"]["sections"]:
         lines.append(f"| `{section['heading']}` | {'present' if section['exists'] else 'missing'} |")
     lines.extend(["", "## Required Artifacts", "", "| Label | Path | Status | SHA256 |", "| --- | --- | --- | --- |"])
