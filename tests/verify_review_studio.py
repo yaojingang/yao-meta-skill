@@ -419,6 +419,15 @@ def main() -> None:
     assert full_payload["data"]["output_review_adjudication"]["summary"]["reviewer_checklist_pending_count"] == 5, full_payload["data"]["output_review_adjudication"]
     assert full_payload["data"]["output_review_adjudication"]["summary"]["reviewer_checklist_ready_count"] == 0, full_payload["data"]["output_review_adjudication"]
     assert all(not item["expected_revealed"] for item in full_payload["data"]["output_review_adjudication"]["pairs"]), full_payload["data"]["output_review_adjudication"]
+    benchmark_summary = full_payload["data"]["benchmark_reproducibility"]["summary"]
+    assert benchmark_summary["reproducibility_ready"] is True, benchmark_summary
+    assert benchmark_summary["release_lock_ready"] == (benchmark_summary["working_tree_dirty"] is False), benchmark_summary
+    assert benchmark_summary["public_claim_ready"] is False, benchmark_summary
+    assert benchmark_summary["public_claim_blocker_count"] >= 3, benchmark_summary
+    public_claim = full_payload["data"]["benchmark_reproducibility"]["public_claim"]
+    assert public_claim["ready"] is False, public_claim
+    assert any("provider-backed model holdout evidence is incomplete" in item for item in public_claim["blockers"]), public_claim
+    assert any("human blind-review adjudication is incomplete" in item for item in public_claim["blockers"]), public_claim
     output_review_checklist = full_payload["data"]["output_review_adjudication"]["reviewer_checklist"]
     assert len(output_review_checklist) == 5, output_review_checklist
     assert all(not item["answer_key_visible"] for item in output_review_checklist), output_review_checklist
@@ -563,6 +572,11 @@ def main() -> None:
     assert "蓝图覆盖" in html, html
     assert "本地蓝图" in html, html
     assert "public world-class 仍以 world-class evidence ledger" in html, html
+    assert "公开声明" in html, html
+    assert "声明阻断" in html, html
+    assert "可公开声明" in html, html
+    assert "provider-backed model holdout evidence is incomplete" in html, html
+    assert "human blind-review adjudication is incomplete" in html, html
     assert "审查批注" in html, html[:9000]
     assert "当前没有 reviewer 批注" in html, html[:9000]
     assert "输出实验" in html, html[:2000]

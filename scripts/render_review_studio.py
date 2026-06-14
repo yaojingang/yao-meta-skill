@@ -130,6 +130,9 @@ def render_html(report: dict[str, Any]) -> str:
     output_execution_summary = report["data"]["output_execution"].get("summary", {})
     output_blind_summary = report["data"]["output_blind_review"].get("summary", {})
     output_review_summary = report["data"]["output_review_adjudication"].get("summary", {})
+    benchmark_report = report["data"].get("benchmark_reproducibility", {})
+    benchmark_summary = benchmark_report.get("summary", {})
+    public_claim = benchmark_report.get("public_claim", {}) if isinstance(benchmark_report.get("public_claim", {}), dict) else {}
     blueprint_summary = report["data"]["skill_os2_coverage"].get("summary", {})
     conformance_summary = report["data"]["conformance"].get("summary", {})
     compiled_summary = report["data"]["compiled_targets"].get("summary", {})
@@ -208,6 +211,31 @@ def render_html(report: dict[str, Any]) -> str:
         ],
         "review adjudication report missing",
     )
+    public_claim_panel = render_kv_grid(
+        benchmark_summary,
+        [
+            "reproducibility_ready",
+            "release_lock_ready",
+            "public_claim_ready",
+            "public_claim_blocker_count",
+            "provider_evidence_complete",
+            "human_review_complete",
+            "world_class_ready",
+        ],
+        "benchmark reproducibility report missing",
+    )
+    public_claim_blocker_rows = public_claim.get("blockers", [])
+    if public_claim_blocker_rows:
+        public_claim_blockers_html = (
+            "<ul class='issues'>"
+            + "".join(
+                f"<li><strong>阻断</strong><span>{html.escape(str(item))}</span></li>"
+                for item in public_claim_blocker_rows
+            )
+            + "</ul>"
+        )
+    else:
+        public_claim_blockers_html = "<p class='muted'>无公开声明阻断。</p>"
     output_review_section_html = render_output_review_section(report["data"].get("output_review_adjudication", {}))
     blueprint_panel = render_kv_grid(
         blueprint_summary,
@@ -489,6 +517,11 @@ def render_html(report: dict[str, Any]) -> str:
     <section class="twocol">
       <div class="panel"><h2>蓝图覆盖</h2>{blueprint_panel}</div>
       <div class="panel"><h2>覆盖边界</h2><p>蓝图覆盖只证明 2.0 模块、建议 PR、脚本、报告和测试在本地闭环；public world-class 仍以 world-class evidence ledger 的真人和外部证据为准。</p></div>
+    </section>
+
+    <section class="twocol">
+      <div class="panel"><h2>公开声明</h2>{public_claim_panel}</div>
+      <div class="panel"><h2>声明阻断</h2>{public_claim_blockers_html}</div>
     </section>
 
     <section class="twocol">

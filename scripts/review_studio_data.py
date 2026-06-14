@@ -109,6 +109,7 @@ def load_review_data(skill_dir: Path) -> dict[str, dict[str, Any]]:
         "output_blind_review": load_json(reports / "output_blind_review_pack.json"),
         "output_review_kit": load_json(reports / "output_review_kit.json"),
         "output_review_adjudication": load_json(reports / "output_review_adjudication.json"),
+        "benchmark_reproducibility": load_json(reports / "benchmark_reproducibility.json"),
         "skill_os2_coverage": load_json(reports / "skill_os2_coverage.json"),
         "compiled_targets": load_json(reports / "compiled_targets.json"),
         "conformance": load_json(reports / "conformance_matrix.json"),
@@ -144,6 +145,7 @@ def insight_cards(data: dict[str, dict[str, Any]]) -> list[dict[str, str]]:
     output_blind = data["output_blind_review"].get("summary", {})
     output_review_kit = data["output_review_kit"].get("summary", {})
     output_review = data["output_review_adjudication"].get("summary", {})
+    benchmark = data["benchmark_reproducibility"].get("summary", {})
     blueprint = data["skill_os2_coverage"].get("summary", {})
     compiled = data["compiled_targets"].get("summary", {})
     conformance = data["conformance"].get("summary", {})
@@ -200,6 +202,11 @@ def insight_cards(data: dict[str, dict[str, Any]]) -> list[dict[str, str]]:
             "label": "Review A/B",
             "value": f"{output_review.get('judgment_count', 0)}/{output_review.get('pair_count', 0)}",
             "detail": f"adjudication decisions; pending {output_review.get('pending_count', 0)}",
+        },
+        {
+            "label": "Public Claim",
+            "value": "ready" if benchmark.get("public_claim_ready") is True else "blocked",
+            "detail": f"{benchmark.get('public_claim_blocker_count', 0)} blockers; local reproducible {str(benchmark.get('reproducibility_ready', False)).lower()}",
         },
         {
             "label": "Blueprint",

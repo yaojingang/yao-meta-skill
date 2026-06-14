@@ -35,6 +35,7 @@ LABELS = {
     "fstring_311_violation_count": "F-string 3.11",
     "gate_pass": "Gate",
     "help_smoke_failed_count": "Help 失败",
+    "human_review_complete": "人审完成",
     "install_simulated": "安装模拟",
     "installer_enforcement_pass_count": "安装拦截",
     "installer_enforcement_ready": "安装拦截就绪",
@@ -68,12 +69,17 @@ LABELS = {
     "pending_answer_hidden_count": "答案隐藏",
     "permission_capability_count": "权限能力",
     "permission_target_count": "权限目标",
+    "provider_evidence_complete": "Provider 证据",
+    "public_claim_blocker_count": "声明阻断",
+    "public_claim_ready": "可公开声明",
     "public_world_class_ready": "世界级",
+    "reproducibility_ready": "本地复现",
     "recorded_fixture_count": "记录样本",
     "ready_for_external_collection": "可收证据",
     "ready_for_ledger_review": "可审台账",
     "recommended_pr_count": "建议 PR",
     "recommended_bump": "建议版本",
+    "release_lock_ready": "发布锁",
     "residual_risk_count": "残余风险",
     "risk_band": "风险带",
     "route_collision_count": "路由冲突",
@@ -99,6 +105,7 @@ LABELS = {
     "warning_count": "警告数",
     "with_skill_pass_rate": "With Skill",
     "world_class_evidence_pending_count": "待补证据",
+    "world_class_ready": "世界级就绪",
 }
 
 
