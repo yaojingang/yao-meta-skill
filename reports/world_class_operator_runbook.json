@@ -108,6 +108,11 @@
           "next_action": "Provider execution should return non-estimated token usage."
         }
       ],
+      "blocked_source_check_count": 2,
+      "next_source_actions": [
+        "Run provider-backed output-exec with real credentials.",
+        "Provider execution should return non-estimated token usage."
+      ],
       "submission_state": {
         "status": "missing",
         "path": "evidence/world_class/submissions/provider-holdout.json",
@@ -222,6 +227,11 @@
           "next_action": "Fix malformed winner/confidence entries."
         }
       ],
+      "blocked_source_check_count": 2,
+      "next_source_actions": [
+        "Record a reviewer choice for every pair.",
+        "Every pair needs one valid human judgment."
+      ],
       "submission_state": {
         "status": "missing",
         "path": "evidence/world_class/submissions/human-adjudication.json",
@@ -329,6 +339,10 @@
           "next_action": "Installer enforcement is supporting evidence, not native proof."
         }
       ],
+      "blocked_source_check_count": 1,
+      "next_source_actions": [
+        "Collect real target-client or external runtime guard proof."
+      ],
       "submission_state": {
         "status": "missing",
         "path": "evidence/world_class/submissions/native-permission-enforcement.json",
@@ -429,6 +443,11 @@
           "source_accepted": false,
           "next_action": "Telemetry must stay metadata-only."
         }
+      ],
+      "blocked_source_check_count": 2,
+      "next_source_actions": [
+        "Import at least one metadata-only event from a real client.",
+        "Telemetry must include adoption outcome evidence."
       ],
       "submission_state": {
         "status": "missing",

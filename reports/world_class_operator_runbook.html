@@ -22,7 +22,7 @@
     h3 { margin:4px 0 10px; font-size:22px; }
     h4 { margin:0 0 8px; font-size:16px; }
     .lede { max-width:800px; color:var(--muted); font-size:20px; }
-    .stats { display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); gap:12px; margin-top:26px; }
+    .stats { display:grid; grid-template-columns:repeat(6, minmax(0,1fr)); gap:12px; margin-top:26px; }
     .stats article, .panel, .item-card { border:1px solid var(--line); border-radius:8px; background:#fff; }
     .stats article { padding:16px; }
     .stats span, .item-card span, .muted { color:var(--muted); }
@@ -57,7 +57,7 @@
       <span class="eyebrow">Evidence Operations</span>
       <h1>World-Class Operator Runbook</h1>
       <p class="lede">A single operating page for collecting the remaining human and external evidence. It coordinates action, but does not accept evidence or change the ledger.</p>
-      <div class="stats"><article><span>Pending</span><strong>4</strong></article><article><span>Awaiting</span><strong>4</strong></article><article><span>Ready</span><strong></strong></article><article><span>Source</span><strong>6/13</strong></article><article><span>Invalid</span><strong></strong></article></div>
+      <div class="stats"><article><span>Pending</span><strong>4</strong></article><article><span>Awaiting</span><strong>4</strong></article><article><span>Ready</span><strong></strong></article><article><span>Source</span><strong>6/13</strong></article><article><span>Blocked</span><strong>7</strong></article><article><span>Invalid</span><strong></strong></article></div>
     </section>
     <section class="section panel" id="fast-path"><h2>Fast Path</h2><ol><li>Run the real external or human work for one evidence item.</li><li>Generate and fill the matching submission draft.</li><li>Validate intake and inspect the submission review queue.</li><li>Refresh the ledger and run the claim guard before making any completion claim.</li></ol></section>
     <section class="section" id="items"><h2>Evidence Items</h2><div class="item-grid"><article class="item-card awaiting-submission">
@@ -66,6 +66,7 @@
         <dl>
           <dt>Owner</dt><dd>operator with provider credentials</dd>
           <dt>Ledger</dt><dd><code>pending</code></dd>
+          <dt>Blocked</dt><dd><code>2</code></dd>
           <dt>Submission</dt><dd><code>evidence/world_class/submissions/provider-holdout.json</code></dd>
         </dl>
         <section><h4>Commands</h4><ul class="commands"><li><span>prepare submission</span><code>python3 scripts/yao.py world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions</code></li><li><span>validate intake</span><code>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</code></li><li><span>review queue</span><code>python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions</code></li><li><span>refresh ledger</span><code>python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions</code></li><li><span>guard claim</span><code>python3 scripts/yao.py world-class-claim-guard .</code></li></ul></section>
@@ -74,6 +75,7 @@
           <section><h4>Success Checks</h4><ul><li>reports/output_execution_runs.json summary.model_executed_count &gt; 0</li><li>reports/output_execution_runs.json summary.timing_observed_count &gt; 0</li><li>reports/output_execution_runs.json summary.token_observed_count &gt; 0</li><li>reports/skill_os2_audit.json item provider-holdout status becomes pass</li></ul></section>
           <section><h4>Privacy</h4><ul><li>Do not commit provider credentials or environment dumps.</li><li>The output execution report records output hashes and aggregate run metadata, not raw provider prompts.</li></ul></section>
         </div>
+        <section class="source-panel"><h4>Next Source Actions</h4><ul><li>Run provider-backed output-exec with real credentials.</li><li>Provider execution should return non-estimated token usage.</li></ul></section>
         <section class="source-panel"><h4>Source Evidence Snapshot</h4><ul class='source-checks'><li class='source-check blocked'><span>Provider model run</span><code>model_executed_count:  / &gt;0</code><small>Run provider-backed output-exec with real credentials.</small></li><li class='source-check pass'><span>Timing observed</span><code>timing_observed_count: 10 / &gt;0</code><small>Provider execution should record timing metadata.</small></li><li class='source-check blocked'><span>Token usage observed</span><code>token_observed_count:  / &gt;0</code><small>Provider execution should return non-estimated token usage.</small></li></ul></section>
       </article><article class="item-card awaiting-submission">
         <header><span>human · awaiting-submission</span><h3>Human Adjudication</h3></header>
@@ -81,6 +83,7 @@
         <dl>
           <dt>Owner</dt><dd>human reviewer</dd>
           <dt>Ledger</dt><dd><code>pending</code></dd>
+          <dt>Blocked</dt><dd><code>2</code></dd>
           <dt>Submission</dt><dd><code>evidence/world_class/submissions/human-adjudication.json</code></dd>
         </dl>
         <section><h4>Commands</h4><ul class="commands"><li><span>prepare submission</span><code>python3 scripts/yao.py world-class-submission-kit . --evidence-key human-adjudication --output-dir evidence/world_class/submissions</code></li><li><span>validate intake</span><code>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</code></li><li><span>review queue</span><code>python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions</code></li><li><span>refresh ledger</span><code>python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions</code></li><li><span>guard claim</span><code>python3 scripts/yao.py world-class-claim-guard .</code></li></ul></section>
@@ -89,6 +92,7 @@
           <section><h4>Success Checks</h4><ul><li>reports/output_review_adjudication.json summary.pending_count == 0</li><li>reports/output_review_adjudication.json summary.judgment_count == summary.pair_count</li><li>reports/output_review_adjudication.json summary.invalid_decision_count == 0</li><li>reports/skill_os2_audit.json item human-adjudication status becomes pass</li></ul></section>
           <section><h4>Privacy</h4><ul><li>Reviewer decisions should not include raw user data or private customer detail.</li><li>Keep the answer key separate until after decisions are recorded.</li></ul></section>
         </div>
+        <section class="source-panel"><h4>Next Source Actions</h4><ul><li>Record a reviewer choice for every pair.</li><li>Every pair needs one valid human judgment.</li></ul></section>
         <section class="source-panel"><h4>Source Evidence Snapshot</h4><ul class='source-checks'><li class='source-check pass'><span>Review pairs exist</span><code>pair_count: 5 / &gt;0</code><small>Generate the blind A/B review pack.</small></li><li class='source-check blocked'><span>No pending decisions</span><code>pending_count: 5 / ==0</code><small>Record a reviewer choice for every pair.</small></li><li class='source-check blocked'><span>Judgments complete</span><code>judgment_count:  / ==pair_count</code><small>Every pair needs one valid human judgment.</small></li><li class='source-check pass'><span>No invalid decisions</span><code>invalid_decision_count:  / ==0</code><small>Fix malformed winner/confidence entries.</small></li></ul></section>
       </article><article class="item-card awaiting-submission">
         <header><span>external · awaiting-submission</span><h3>Native Permission Enforcement</h3></header>
@@ -96,6 +100,7 @@
         <dl>
           <dt>Owner</dt><dd>target client or installer integrator</dd>
           <dt>Ledger</dt><dd><code>pending</code></dd>
+          <dt>Blocked</dt><dd><code>1</code></dd>
           <dt>Submission</dt><dd><code>evidence/world_class/submissions/native-permission-enforcement.json</code></dd>
         </dl>
         <section><h4>Commands</h4><ul class="commands"><li><span>prepare submission</span><code>python3 scripts/yao.py world-class-submission-kit . --evidence-key native-permission-enforcement --output-dir evidence/world_class/submissions</code></li><li><span>validate intake</span><code>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</code></li><li><span>review queue</span><code>python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions</code></li><li><span>refresh ledger</span><code>python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions</code></li><li><span>guard claim</span><code>python3 scripts/yao.py world-class-claim-guard .</code></li></ul></section>
@@ -104,6 +109,7 @@
           <section><h4>Success Checks</h4><ul><li>reports/runtime_permission_probes.json summary.native_enforcement_count &gt; 0</li><li>reports/runtime_permission_probes.json summary.failure_count == 0</li><li>reports/runtime_permission_probes.json summary.installer_enforcement_pass_count records local installer enforcement but does not replace native evidence</li><li>reports/skill_os2_audit.json item native-permission-enforcement status becomes pass</li></ul></section>
           <section><h4>Privacy</h4><ul><li>Do not mark native_enforcement true for metadata-only fallbacks.</li><li>Keep residual risks visible for targets that still rely on operator enforcement.</li></ul></section>
         </div>
+        <section class="source-panel"><h4>Next Source Actions</h4><ul><li>Collect real target-client or external runtime guard proof.</li></ul></section>
         <section class="source-panel"><h4>Source Evidence Snapshot</h4><ul class='source-checks'><li class='source-check blocked'><span>Native enforcement</span><code>native_enforcement_count:  / &gt;0</code><small>Collect real target-client or external runtime guard proof.</small></li><li class='source-check pass'><span>Probe failures</span><code>failure_count:  / ==0</code><small>Runtime permission probes must stay clean.</small></li><li class='source-check pass'><span>Installer support</span><code>installer_enforcement_ready: True / true</code><small>Installer enforcement is supporting evidence, not native proof.</small></li></ul></section>
       </article><article class="item-card awaiting-submission">
         <header><span>external · awaiting-submission</span><h3>Native Client Telemetry</h3></header>
@@ -111,6 +117,7 @@
         <dl>
           <dt>Owner</dt><dd>Browser/Chrome/IDE/provider client integrator</dd>
           <dt>Ledger</dt><dd><code>pending</code></dd>
+          <dt>Blocked</dt><dd><code>2</code></dd>
           <dt>Submission</dt><dd><code>evidence/world_class/submissions/native-client-telemetry.json</code></dd>
         </dl>
         <section><h4>Commands</h4><ul class="commands"><li><span>prepare submission</span><code>python3 scripts/yao.py world-class-submission-kit . --evidence-key native-client-telemetry --output-dir evidence/world_class/submissions</code></li><li><span>validate intake</span><code>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</code></li><li><span>review queue</span><code>python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions</code></li><li><span>refresh ledger</span><code>python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions</code></li><li><span>guard claim</span><code>python3 scripts/yao.py world-class-claim-guard .</code></li></ul></section>
@@ -119,6 +126,7 @@
           <section><h4>Success Checks</h4><ul><li>reports/adoption_drift_report.json summary.source_types.external &gt; 0</li><li>reports/adoption_drift_report.json summary.adoption_sample_count &gt; 0</li><li>reports/skill_os2_audit.json item native-client-telemetry status becomes pass</li></ul></section>
           <section><h4>Privacy</h4><ul><li>Telemetry must remain metadata-only and local-first.</li><li>Do not package reports/telemetry_events.jsonl or any raw prompt, output, transcript, note, or message field.</li></ul></section>
         </div>
+        <section class="source-panel"><h4>Next Source Actions</h4><ul><li>Import at least one metadata-only event from a real client.</li><li>Telemetry must include adoption outcome evidence.</li></ul></section>
         <section class="source-panel"><h4>Source Evidence Snapshot</h4><ul class='source-checks'><li class='source-check blocked'><span>External events</span><code>external_source_events:  / &gt;0</code><small>Import at least one metadata-only event from a real client.</small></li><li class='source-check blocked'><span>Adoption sample</span><code>adoption_sample_count:  / &gt;0</code><small>Telemetry must include adoption outcome evidence.</small></li><li class='source-check pass'><span>Raw content blocked</span><code>raw_content_allowed:  / false</code><small>Telemetry must stay metadata-only.</small></li></ul></section>
       </article></div></section>
     <section class="section panel" id="boundary"><h2>Boundary</h2><ul><li>Planned work, draft packets, metadata fallback, pending human decisions, and local command runners do not count as completion.</li><li>Valid intake means ready for submission review; ledger review still requires passing source evidence.</li><li>The world-class ledger and claim guard remain the source of truth.</li></ul></section>

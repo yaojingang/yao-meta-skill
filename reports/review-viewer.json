@@ -919,13 +919,13 @@
       "ok": true,
       "summary": {
         "reproducibility_ready": true,
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "methodology_complete": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "4ce0fa8542a1c30cb1d54d548da4069a4a50414fa5287685fd4c9d448a4b5160",
-        "source_contract_sha256": "05cedc73473b1c73d331270ff1d7d8fc09eeb3e7289c7ae63dc4fd535e261f80",
-        "archive_sha256": "8a35bd4cea27874b716bf3057fbe970284da60681a42bc85868c710be82df096",
+        "evidence_bundle_sha256": "28fa814ada12fb6fcdf82d29c37e72284ea33e861b6907a1df3fd683c815c974",
+        "source_contract_sha256": "2911f884e900178b0361f4d0e7435ec990f0b008636b1ed341a851aeac2d04e0",
+        "archive_sha256": "a514212a268d5f3ab464940854aea174f3389ae6481fed3191ae609961c2917c",
         "output_case_count": 5,
         "failure_disclosure_count": 3,
         "command_count": 21,
@@ -943,11 +943,11 @@
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4,
-        "working_tree_dirty": false,
-        "changed_file_count": 0
+        "public_claim_blocker_count": 5,
+        "working_tree_dirty": true,
+        "changed_file_count": 14
       },
-      "commit": "6cb499cb508900b02827fe74c7b0646d58d718cc",
+      "commit": "0fb2ebdeea5e7b36280b93a719df10bb8f08d54b",
       "missing_artifacts": [],
       "limitations": [
         "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -1052,7 +1052,7 @@
       "interactive_script_count": 0,
       "package_hash_scope": "source-contract-without-generated-reports",
       "package_hash_file_count": 182,
-      "package_sha256": "05cedc73473b1c73d331270ff1d7d8fc09eeb3e7289c7ae63dc4fd535e261f80"
+      "package_sha256": "2911f884e900178b0361f4d0e7435ec990f0b008636b1ed341a851aeac2d04e0"
     },
     "skill_atlas": {
       "skill_count": 12,
@@ -1090,8 +1090,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "05cedc73473b1c73d331270ff1d7d8fc09eeb3e7289c7ae63dc4fd535e261f80",
-          "archive_sha256": "8a35bd4cea27874b716bf3057fbe970284da60681a42bc85868c710be82df096"
+          "package_sha256": "2911f884e900178b0361f4d0e7435ec990f0b008636b1ed341a851aeac2d04e0",
+          "archive_sha256": "a514212a268d5f3ab464940854aea174f3389ae6481fed3191ae609961c2917c"
         },
         "compatibility": {
           "openai": "pass",
@@ -1122,7 +1122,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "8a35bd4cea27874b716bf3057fbe970284da60681a42bc85868c710be82df096",
+          "archive_sha256": "a514212a268d5f3ab464940854aea174f3389ae6481fed3191ae609961c2917c",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -1138,7 +1138,7 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "8a35bd4cea27874b716bf3057fbe970284da60681a42bc85868c710be82df096",
+        "archive_sha256": "a514212a268d5f3ab464940854aea174f3389ae6481fed3191ae609961c2917c",
         "archive_entry_count": 577,
         "failure_count": 0,
         "warning_count": 0
@@ -1217,12 +1217,12 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "8a35bd4cea27874b716bf3057fbe970284da60681a42bc85868c710be82df096"
+            "to": "a514212a268d5f3ab464940854aea174f3389ae6481fed3191ae609961c2917c"
           },
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "05cedc73473b1c73d331270ff1d7d8fc09eeb3e7289c7ae63dc4fd535e261f80"
+            "to": "2911f884e900178b0361f4d0e7435ec990f0b008636b1ed341a851aeac2d04e0"
           }
         ]
       },

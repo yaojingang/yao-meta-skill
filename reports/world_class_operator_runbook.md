@@ -23,17 +23,18 @@ This runbook coordinates evidence collection only. It does not accept submission
 
 ## Evidence Items
 
-| Evidence | Ledger | Intake | Review | Owner |
-| --- | --- | --- | --- | --- |
-| `provider-holdout` | `pending` | `awaiting-submission` | `awaiting-submission` | operator with provider credentials |
-| `human-adjudication` | `pending` | `awaiting-submission` | `awaiting-submission` | human reviewer |
-| `native-permission-enforcement` | `pending` | `awaiting-submission` | `awaiting-submission` | target client or installer integrator |
-| `native-client-telemetry` | `pending` | `awaiting-submission` | `awaiting-submission` | Browser/Chrome/IDE/provider client integrator |
+| Evidence | Ledger | Intake | Review | Blocked checks | Next source action | Owner |
+| --- | --- | --- | --- | ---: | --- | --- |
+| `provider-holdout` | `pending` | `awaiting-submission` | `awaiting-submission` | `2` | Run provider-backed output-exec with real credentials. | operator with provider credentials |
+| `human-adjudication` | `pending` | `awaiting-submission` | `awaiting-submission` | `2` | Record a reviewer choice for every pair. | human reviewer |
+| `native-permission-enforcement` | `pending` | `awaiting-submission` | `awaiting-submission` | `1` | Collect real target-client or external runtime guard proof. | target client or installer integrator |
+| `native-client-telemetry` | `pending` | `awaiting-submission` | `awaiting-submission` | `2` | Import at least one metadata-only event from a real client. | Browser/Chrome/IDE/provider client integrator |
 
 ## Provider Holdout
 
 - objective: Collect at least one provider-backed output-eval holdout run with model, timing, and token metadata.
 - blocking reason: No evidence packet has been submitted for review.
+- blocked source checks: `2`
 - submission: `evidence/world_class/submissions/provider-holdout.json`
 - template: `evidence/world_class/templates/provider-holdout.intake.json`
 
@@ -73,18 +74,24 @@ This runbook coordinates evidence collection only. It does not accept submission
 - reports/world_class_evidence_intake.json
 - reports/world_class_evidence_intake.md
 
+### Next Source Actions
+
+- Run provider-backed output-exec with real credentials.
+- Provider execution should return non-estimated token usage.
+
 ### Source Evidence Snapshot
 
-| Check | Current | Expected | Status |
-| --- | --- | --- | --- |
-| Provider model run | `0` | `>0` | `blocked` |
-| Timing observed | `10` | `>0` | `pass` |
-| Token usage observed | `0` | `>0` | `blocked` |
+| Check | Current | Expected | Status | Next action |
+| --- | --- | --- | --- | --- |
+| Provider model run | `0` | `>0` | `blocked` | Run provider-backed output-exec with real credentials. |
+| Timing observed | `10` | `>0` | `pass` | Provider execution should record timing metadata. |
+| Token usage observed | `0` | `>0` | `blocked` | Provider execution should return non-estimated token usage. |
 
 ## Human Adjudication
 
 - objective: Record real blind A/B reviewer decisions before claiming human output review completion.
 - blocking reason: No evidence packet has been submitted for review.
+- blocked source checks: `2`
 - submission: `evidence/world_class/submissions/human-adjudication.json`
 - template: `evidence/world_class/templates/human-adjudication.intake.json`
 
@@ -126,19 +133,25 @@ This runbook coordinates evidence collection only. It does not accept submission
 - reports/world_class_evidence_intake.json
 - reports/world_class_evidence_intake.md
 
+### Next Source Actions
+
+- Record a reviewer choice for every pair.
+- Every pair needs one valid human judgment.
+
 ### Source Evidence Snapshot
 
-| Check | Current | Expected | Status |
-| --- | --- | --- | --- |
-| Review pairs exist | `5` | `>0` | `pass` |
-| No pending decisions | `5` | `==0` | `blocked` |
-| Judgments complete | `0` | `==pair_count` | `blocked` |
-| No invalid decisions | `0` | `==0` | `pass` |
+| Check | Current | Expected | Status | Next action |
+| --- | --- | --- | --- | --- |
+| Review pairs exist | `5` | `>0` | `pass` | Generate the blind A/B review pack. |
+| No pending decisions | `5` | `==0` | `blocked` | Record a reviewer choice for every pair. |
+| Judgments complete | `0` | `==pair_count` | `blocked` | Every pair needs one valid human judgment. |
+| No invalid decisions | `0` | `==0` | `pass` | Fix malformed winner/confidence entries. |
 
 ## Native Permission Enforcement
 
 - objective: Prove at least one real target client or external installer runtime guard enforces approved high-permission capabilities.
 - blocking reason: No evidence packet has been submitted for review.
+- blocked source checks: `1`
 - submission: `evidence/world_class/submissions/native-permission-enforcement.json`
 - template: `evidence/world_class/templates/native-permission-enforcement.intake.json`
 
@@ -181,18 +194,23 @@ This runbook coordinates evidence collection only. It does not accept submission
 - reports/world_class_evidence_intake.json
 - reports/world_class_evidence_intake.md
 
+### Next Source Actions
+
+- Collect real target-client or external runtime guard proof.
+
 ### Source Evidence Snapshot
 
-| Check | Current | Expected | Status |
-| --- | --- | --- | --- |
-| Native enforcement | `0` | `>0` | `blocked` |
-| Probe failures | `0` | `==0` | `pass` |
-| Installer support | `True` | `true` | `pass` |
+| Check | Current | Expected | Status | Next action |
+| --- | --- | --- | --- | --- |
+| Native enforcement | `0` | `>0` | `blocked` | Collect real target-client or external runtime guard proof. |
+| Probe failures | `0` | `==0` | `pass` | Runtime permission probes must stay clean. |
+| Installer support | `True` | `true` | `pass` | Installer enforcement is supporting evidence, not native proof. |
 
 ## Native Client Telemetry
 
 - objective: Import production metadata-only events from a real external client into the local drift loop.
 - blocking reason: No evidence packet has been submitted for review.
+- blocked source checks: `2`
 - submission: `evidence/world_class/submissions/native-client-telemetry.json`
 - template: `evidence/world_class/templates/native-client-telemetry.intake.json`
 
@@ -232,13 +250,18 @@ This runbook coordinates evidence collection only. It does not accept submission
 - reports/world_class_evidence_intake.json
 - reports/world_class_evidence_intake.md
 
+### Next Source Actions
+
+- Import at least one metadata-only event from a real client.
+- Telemetry must include adoption outcome evidence.
+
 ### Source Evidence Snapshot
 
-| Check | Current | Expected | Status |
-| --- | --- | --- | --- |
-| External events | `0` | `>0` | `blocked` |
-| Adoption sample | `0` | `>0` | `blocked` |
-| Raw content blocked | `False` | `false` | `pass` |
+| Check | Current | Expected | Status | Next action |
+| --- | --- | --- | --- | --- |
+| External events | `0` | `>0` | `blocked` | Import at least one metadata-only event from a real client. |
+| Adoption sample | `0` | `>0` | `blocked` | Telemetry must include adoption outcome evidence. |
+| Raw content blocked | `False` | `false` | `pass` | Telemetry must stay metadata-only. |
 
 ## Boundary
 
