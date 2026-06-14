@@ -47,9 +47,22 @@ python3 scripts/render_world_class_evidence_intake.py . --generated-at "$GENERAT
 python3 scripts/render_world_class_submission_review.py . --generated-at "$GENERATED_AT"
 python3 scripts/render_world_class_operator_runbook.py . --generated-at "$GENERATED_AT"
 python3 scripts/render_world_class_claim_guard.py . --generated-at "$GENERATED_AT"
+python3 scripts/render_skill_os2_coverage.py . --generated-at "$GENERATED_AT"
 python3 scripts/render_skill_overview.py .
+python3 scripts/render_review_viewer.py .
 python3 scripts/render_review_studio.py . --output-html reports/review-studio.html --output-json reports/review-studio.json
 ```
+
+For final release evidence, commit source and generated package evidence first, then run the clean-lock reports from a clean worktree:
+
+```bash
+python3 scripts/render_benchmark_reproducibility.py . --generated-at "$GENERATED_AT"
+python3 scripts/render_skill_overview.py .
+python3 scripts/render_review_viewer.py .
+python3 scripts/render_review_studio.py . --output-html reports/review-studio.html --output-json reports/review-studio.json
+```
+
+If `reports/benchmark_reproducibility.json` reports `release_lock_ready: false`, do not commit that benchmark as release evidence. Restore the transient dirty-lock reports, commit the source/generated evidence that caused the dirty state, and regenerate the clean-lock reports on the resulting clean tree.
 
 Local sync into `~/.agents/skills.disabled/yao-meta-skill` or `~/.agents/skills/yao-meta-skill` must keep the install preflight enabled unless the user explicitly requests a diagnostic bypass. `make sync-local-install` and `make sync-active-install` rebuild the package first, then `scripts/sync_local_install.py` refuses to copy files when install simulation or installer permission enforcement fails.
 
