@@ -62,7 +62,7 @@ def build_runbook_item(
         "commands": {
             "prepare_submission": commands.get("prepare_submission", ""),
             "validate_intake": commands.get("validate_intake", ""),
-            "review_queue": "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions",
+            "review_queue": commands.get("submission_review", ""),
             "refresh_ledger": commands.get("refresh_ledger", "python3 scripts/yao.py world-class-ledger ."),
             "guard_claim": commands.get("guard_claim", "python3 scripts/yao.py world-class-claim-guard ."),
         },

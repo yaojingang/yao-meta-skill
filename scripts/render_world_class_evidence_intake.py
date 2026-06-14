@@ -101,7 +101,10 @@ def build_operator_checklist(
                         f"--evidence-key {shlex.quote(key)} --output-dir {shell_path(submission_path.parent, skill_dir)}"
                     ),
                     "validate_intake": f"python3 scripts/yao.py world-class-intake . --submissions-dir {submissions_dir_arg}",
-                    "refresh_ledger": "python3 scripts/yao.py world-class-ledger .",
+                    "submission_review": (
+                        f"python3 scripts/yao.py world-class-submission-review . --submissions-dir {submissions_dir_arg}"
+                    ),
+                    "refresh_ledger": f"python3 scripts/yao.py world-class-ledger . --submissions-dir {submissions_dir_arg}",
                     "guard_claim": "python3 scripts/yao.py world-class-claim-guard .",
                 },
                 "must_collect": {
@@ -255,7 +258,7 @@ def render_operator_checklist(items: list[dict[str, Any]]) -> list[str]:
         lines.append(f"- submission: `{item['submission_path']}`")
         lines.extend(["", "#### Commands", ""])
         commands = item.get("commands", {})
-        for label in ["prepare_submission", "validate_intake", "refresh_ledger", "guard_claim"]:
+        for label in ["prepare_submission", "validate_intake", "submission_review", "refresh_ledger", "guard_claim"]:
             if commands.get(label):
                 lines.append(f"- {label}: `{commands[label]}`")
         must_collect = item.get("must_collect", {})

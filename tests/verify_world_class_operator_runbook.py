@@ -167,6 +167,9 @@ def main() -> None:
     assert submitted_provider["intake_readiness"] == "source-evidence-incomplete", submitted_provider
     assert submitted_provider["review_state"] == "source-evidence-incomplete", submitted_provider
     assert submitted_provider["source_accepted"] is False, submitted_provider
+    assert "tests/tmp_world_class_operator_runbook/valid_submissions" in submitted_provider["commands"]["validate_intake"], submitted_provider
+    assert "tests/tmp_world_class_operator_runbook/valid_submissions" in submitted_provider["commands"]["review_queue"], submitted_provider
+    assert "tests/tmp_world_class_operator_runbook/valid_submissions" in submitted_provider["commands"]["refresh_ledger"], submitted_provider
     print(json.dumps({"ok": True}, ensure_ascii=False, indent=2))
 
 

@@ -493,6 +493,8 @@ def main() -> None:
     assert provider_checklist["readiness"] == "awaiting-submission", provider_checklist
     assert provider_checklist["submission_path"] == "evidence/world_class/submissions/provider-holdout.json", provider_checklist
     assert provider_checklist["commands"]["validate_intake"] == "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions", provider_checklist
+    assert provider_checklist["commands"]["submission_review"] == "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions", provider_checklist
+    assert provider_checklist["commands"]["refresh_ledger"] == "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions", provider_checklist
     assert "provider-backed model run" in provider_checklist["must_collect"]["provenance_requirements"], provider_checklist
     assert full_payload["data"]["world_class_claim_guard"]["summary"]["decision"] == "claim-guard-pass-evidence-pending", full_payload["data"]["world_class_claim_guard"]
     assert full_payload["data"]["world_class_claim_guard"]["summary"]["violation_count"] == 0, full_payload["data"]["world_class_claim_guard"]

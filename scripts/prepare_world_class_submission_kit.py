@@ -2,6 +2,7 @@
 import argparse
 import html
 import json
+import shlex
 import shutil
 from datetime import date
 from pathlib import Path
@@ -20,6 +21,10 @@ def rel_path(path: Path, root: Path) -> str:
         return str(path.resolve().relative_to(root.resolve()))
     except ValueError:
         return str(path.resolve())
+
+
+def shell_path(path: Path, root: Path) -> str:
+    return shlex.quote(rel_path(path, root))
 
 
 def write_json(path: Path, payload: dict[str, Any]) -> None:
@@ -338,8 +343,8 @@ def build_submission_kit(
         "files": files,
         "evidence_items": items,
         "commands": {
-            "validate_intake": f"python3 scripts/yao.py world-class-intake . --submissions-dir {rel_path(output_dir, skill_dir)}",
-            "refresh_ledger": f"python3 scripts/yao.py world-class-ledger . --submissions-dir {rel_path(output_dir, skill_dir)}",
+            "validate_intake": f"python3 scripts/yao.py world-class-intake . --submissions-dir {shell_path(output_dir, skill_dir)}",
+            "refresh_ledger": f"python3 scripts/yao.py world-class-ledger . --submissions-dir {shell_path(output_dir, skill_dir)}",
             "guard_claim": "python3 scripts/yao.py world-class-claim-guard .",
         },
         "safety": {

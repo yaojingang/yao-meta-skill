@@ -146,6 +146,8 @@ def main() -> None:
         "--evidence-key provider-holdout --output-dir evidence/world_class/submissions"
     ), checklist["provider-holdout"]
     assert checklist["provider-holdout"]["commands"]["validate_intake"] == "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions", checklist["provider-holdout"]
+    assert checklist["provider-holdout"]["commands"]["submission_review"] == "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions", checklist["provider-holdout"]
+    assert checklist["provider-holdout"]["commands"]["refresh_ledger"] == "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions", checklist["provider-holdout"]
     assert "provider-backed model run" in checklist["provider-holdout"]["must_collect"]["provenance_requirements"], checklist["provider-holdout"]
     assert "reports/output_execution_runs.json summary.model_executed_count > 0" in checklist["provider-holdout"]["must_collect"]["success_checks"], checklist["provider-holdout"]
     assert checklist["provider-holdout"]["anti_overclaim"]["local_command_runner_counts_as_provider_model"] is False, checklist["provider-holdout"]
@@ -158,7 +160,8 @@ def main() -> None:
     assert "0 existing / 0 sha256 verified / 0 required verified / 1 refs" in markdown, markdown
     assert "`evidence/world_class/submissions/provider-holdout.json`" in markdown, markdown
     assert "`python3 scripts/yao.py world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions`" in markdown, markdown
-    assert "`python3 scripts/yao.py world-class-ledger .`" in markdown, markdown
+    assert "`python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions`" in markdown, markdown
+    assert "`python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions`" in markdown, markdown
     assert "Templates and planned work do not count as accepted evidence." in markdown, markdown
     assert "Real submissions must include the evidence-key critical artifact paths with verified SHA-256 digests." in markdown, markdown
     assert "Real submissions must replace template submitter, date, and provenance placeholders with concrete evidence metadata." in markdown, markdown
@@ -196,6 +199,15 @@ def main() -> None:
     assert draft_intake["submissions"][0]["evidence_key"] == "provider-holdout", draft_intake["submissions"]
     assert all(item["evidence_key"] != "unknown" for item in draft_intake["submissions"]), draft_intake["submissions"]
 
+    spaced_kit_dir = TMP / "submission kit spaced"
+    spaced_kit_proc = run_kit("--output-dir", str(spaced_kit_dir), "--evidence-key", "provider-holdout")
+    spaced_kit_payload = json.loads(spaced_kit_proc.stdout)
+    quoted_spaced_dir = "'tests/tmp_world_class_evidence_intake/submission kit spaced'"
+    assert quoted_spaced_dir in spaced_kit_payload["commands"]["validate_intake"], spaced_kit_payload["commands"]
+    assert quoted_spaced_dir in spaced_kit_payload["commands"]["refresh_ledger"], spaced_kit_payload["commands"]
+    spaced_readme = (spaced_kit_dir / "README.md").read_text(encoding="utf-8")
+    assert quoted_spaced_dir in spaced_readme, spaced_readme
+
     existing_proc = run_kit("--output-dir", str(kit_dir), "--evidence-key", "provider-holdout")
     existing_payload = json.loads(existing_proc.stdout)
     assert existing_payload["summary"]["existing_count"] == 1, existing_payload["summary"]
@@ -223,6 +235,8 @@ def main() -> None:
     assert "source evidence checks still do not pass" in valid_checklist["provider-holdout"]["blocking_reason"], valid_checklist["provider-holdout"]
     assert valid_checklist["provider-holdout"]["submission_path"].endswith("tests/tmp_world_class_evidence_intake/valid_submissions/provider-holdout.json"), valid_checklist["provider-holdout"]
     assert "tests/tmp_world_class_evidence_intake/valid_submissions" in valid_checklist["provider-holdout"]["commands"]["validate_intake"], valid_checklist["provider-holdout"]
+    assert "tests/tmp_world_class_evidence_intake/valid_submissions" in valid_checklist["provider-holdout"]["commands"]["submission_review"], valid_checklist["provider-holdout"]
+    assert "tests/tmp_world_class_evidence_intake/valid_submissions" in valid_checklist["provider-holdout"]["commands"]["refresh_ledger"], valid_checklist["provider-holdout"]
 
     placeholder_dir = TMP / "placeholder_submissions"
     placeholder_dir.mkdir()
