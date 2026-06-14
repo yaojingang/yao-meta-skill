@@ -758,6 +758,9 @@ def main() -> None:
     assert "world_class_claim_guard" in report_result["payload"]["artifacts"], report_result
     assert "benchmark_reproducibility" in report_result["payload"]["artifacts"], report_result
     assert "skill_os2_coverage" in report_result["payload"]["artifacts"], report_result
+    assert report_result["payload"]["artifacts"]["skill_overview"] == "reports/skill-overview.json", report_result
+    assert report_result["payload"]["artifacts"]["review_viewer"] == "reports/review-viewer.json", report_result
+    assert report_result["payload"]["artifacts"]["review_viewer_html"] == "reports/review-viewer.html", report_result
     report_output_execution = json.loads((ROOT / "reports" / "output_execution_runs.json").read_text(encoding="utf-8"))
     assert report_output_execution["summary"]["command_executed_count"] == 10, report_output_execution
     assert report_output_execution["summary"]["recorded_fixture_count"] == 0, report_output_execution

@@ -8,7 +8,18 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 
 
+def assert_root_world_class_commands_are_current() -> None:
+    root_json = ROOT / "reports" / "review-viewer.json"
+    root_html = ROOT / "reports" / "review-viewer.html"
+    assert root_json.exists(), root_json
+    assert root_html.exists(), root_html
+    json_text = root_json.read_text(encoding="utf-8")
+    assert 'python3 scripts/yao.py world-class-intake ."' not in json_text, root_json
+    assert "world-class-intake . --submissions-dir evidence/world_class/submissions" in json_text, root_json
+
+
 def main() -> None:
+    assert_root_world_class_commands_are_current()
     tmp_root = ROOT / "tests" / "tmp_review_viewer"
     if tmp_root.exists():
         subprocess.run(["rm", "-rf", str(tmp_root)], check=True)

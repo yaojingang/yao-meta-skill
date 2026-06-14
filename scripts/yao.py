@@ -180,8 +180,10 @@ def command_report(args: argparse.Namespace) -> int:
             run_script("render_world_class_submission_review.py", [str(ROOT)]),
             run_script("render_world_class_operator_runbook.py", [str(ROOT)]),
             run_script("render_world_class_claim_guard.py", [str(ROOT)]),
-            run_script("render_benchmark_reproducibility.py", [str(ROOT)]),
             run_script("render_skill_os2_coverage.py", [str(ROOT)]),
+            run_script("render_benchmark_reproducibility.py", [str(ROOT)]),
+            run_script("render_skill_overview.py", [str(ROOT)]),
+            run_script("render_review_viewer.py", [str(ROOT)]),
         ]
     )
     report = {
@@ -218,8 +220,11 @@ def command_report(args: argparse.Namespace) -> int:
             "world_class_submission_review": "reports/world_class_submission_review.json",
             "world_class_operator_runbook": "reports/world_class_operator_runbook.json",
             "world_class_claim_guard": "reports/world_class_claim_guard.json",
-            "benchmark_reproducibility": "reports/benchmark_reproducibility.json",
             "skill_os2_coverage": "reports/skill_os2_coverage.json",
+            "benchmark_reproducibility": "reports/benchmark_reproducibility.json",
+            "skill_overview": "reports/skill-overview.json",
+            "review_viewer": "reports/review-viewer.json",
+            "review_viewer_html": "reports/review-viewer.html",
         },
     }
     print(json.dumps(report, ensure_ascii=False, indent=2))
@@ -749,8 +754,10 @@ def command_workspace_flow(args: argparse.Namespace) -> int:
             {"phase": "report-refresh", "result": run_script("render_world_class_submission_review.py", [str(ROOT)])},
             {"phase": "report-refresh", "result": run_script("render_world_class_operator_runbook.py", [str(ROOT)])},
             {"phase": "report-refresh", "result": run_script("render_world_class_claim_guard.py", [str(ROOT)])},
-            {"phase": "report-refresh", "result": run_script("render_benchmark_reproducibility.py", [str(ROOT)])},
             {"phase": "report-refresh", "result": run_script("render_skill_os2_coverage.py", [str(ROOT)])},
+            {"phase": "report-refresh", "result": run_script("render_benchmark_reproducibility.py", [str(ROOT)])},
+            {"phase": "report-refresh", "result": run_script("render_skill_overview.py", [str(ROOT)])},
+            {"phase": "report-refresh", "result": run_script("render_review_viewer.py", [str(ROOT)])},
         ]
     )
 
