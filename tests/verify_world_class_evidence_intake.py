@@ -189,25 +189,48 @@ def main() -> None:
     assert kit_payload["summary"]["decision"] == "submission-kit-ready", kit_payload["summary"]
     assert kit_payload["summary"]["requested_count"] == 1, kit_payload["summary"]
     assert kit_payload["summary"]["written_count"] == 1, kit_payload["summary"]
+    assert kit_payload["summary"]["artifact_checklist_count"] >= 1, kit_payload["summary"]
+    assert kit_payload["summary"]["artifact_ready_count"] >= 1, kit_payload["summary"]
     assert kit_payload["summary"]["drafts_count_as_evidence"] is False, kit_payload["summary"]
     assert kit_payload["safety"]["template_only_drafts"] is True, kit_payload["safety"]
     assert kit_payload["safety"]["raw_content_allowed"] is False, kit_payload["safety"]
     assert kit_payload["files"][0]["output_path"].endswith("tests/tmp_world_class_evidence_intake/submission_kit/provider-holdout.json"), kit_payload["files"]
+    artifact_rows = {item["path"]: item for item in kit_payload["artifact_checklist"]}
+    assert "reports/output_execution_runs.json" in artifact_rows, artifact_rows
+    assert artifact_rows["reports/output_execution_runs.json"]["artifact_ref_ready"] is True, artifact_rows
+    assert len(artifact_rows["reports/output_execution_runs.json"]["sha256"]) == 64, artifact_rows
+    assert artifact_rows["reports/output_execution_runs.json"]["contains_raw_content"] is False, artifact_rows
     kit_draft = json.loads((kit_dir / "provider-holdout.json").read_text(encoding="utf-8"))
     assert kit_draft["template_only"] is True, kit_draft
     assert kit_draft["attestation"]["real_external_or_human_evidence"] is False, kit_draft
     kit_manifest = json.loads((kit_dir / "submission_manifest.json").read_text(encoding="utf-8"))
     assert kit_manifest["summary"]["ledger_counts_submission_as_completion"] is False, kit_manifest["summary"]
+    assert kit_manifest["artifact_checklist"] == kit_payload["artifact_checklist"], kit_manifest["artifact_checklist"]
     assert kit_manifest["artifacts"]["html"].endswith("tests/tmp_world_class_evidence_intake/submission_kit/index.html"), kit_manifest["artifacts"]
     kit_readme = (kit_dir / "README.md").read_text(encoding="utf-8")
     assert "Drafts are not accepted evidence." in kit_readme, kit_readme
     assert "validate intake" in kit_readme, kit_readme
+    assert "Artifact Checklist" in kit_readme, kit_readme
+    assert "reports/output_execution_runs.json" in kit_readme, kit_readme
     kit_html = (kit_dir / "index.html").read_text(encoding="utf-8")
     assert "<title>World-Class Evidence Submission Kit</title>" in kit_html, kit_html
     assert "Drafts are not accepted evidence" in kit_html, kit_html
     assert "provider-holdout" in kit_html, kit_html
+    assert "Artifact Checklist" in kit_html, kit_html
     assert "World-Class Evidence Submission Kit" in kit_html, kit_html
     assert "Do not include credentials, raw prompts, raw outputs, transcripts, notes, or private user content." in kit_html, kit_html
+
+    native_kit_dir = TMP / "native_permission_kit"
+    native_kit_proc = run_kit("--output-dir", str(native_kit_dir), "--evidence-key", "native-permission-enforcement")
+    native_kit_payload = json.loads(native_kit_proc.stdout)
+    native_rows = {item["path"]: item for item in native_kit_payload["artifact_checklist"]}
+    assert native_kit_payload["summary"]["artifact_glob_expansion_count"] >= 4, native_kit_payload["summary"]
+    assert "dist/targets/openai/adapter.json" in native_rows, native_rows
+    assert native_rows["dist/targets/openai/adapter.json"]["source_pattern"] == "dist/targets/*/adapter.json", native_rows
+    assert native_rows["dist/targets/openai/adapter.json"]["artifact_ref_ready"] is True, native_rows
+    assert len(native_rows["dist/targets/openai/adapter.json"]["sha256"]) == 64, native_rows
+    native_readme = (native_kit_dir / "README.md").read_text(encoding="utf-8")
+    assert "Glob patterns are expanded into concrete files" in native_readme, native_readme
     draft_intake = run_intake("--submissions-dir", str(kit_dir))
     assert draft_intake["ok"] is False, draft_intake
     assert draft_intake["summary"]["submission_count"] == 1, draft_intake["summary"]
