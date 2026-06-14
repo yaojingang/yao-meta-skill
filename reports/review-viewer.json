@@ -923,9 +923,9 @@
         "methodology_complete": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "1198b50799447f2478da882a1dfc088a0043ac699a649142f7a983e33262cfff",
-        "source_contract_sha256": "8a63d5ebc9ac16b7ace805fa6373f591d993a135e099eacdb209596db70f3bf2",
-        "archive_sha256": "501f298a9944ed9a597be439916dea3bb5812214488a46c0812bca920971f2c2",
+        "evidence_bundle_sha256": "f81d4dd5985eff30c70e3b4720c44a9d5b4984318463637b98645b526bfcbd6b",
+        "source_contract_sha256": "d3341950a7fb52a18a3a2a7453f7c697cc92e443c6604facdeeb83848d4f867c",
+        "archive_sha256": "c2028f0a12c88f2cae3462c80af972be934333829252faf7c92816bcc54dc541",
         "output_case_count": 5,
         "failure_disclosure_count": 3,
         "command_count": 21,
@@ -944,7 +944,7 @@
         "working_tree_dirty": false,
         "changed_file_count": 0
       },
-      "commit": "b9d502bc96a8c90de10041ca111be9094ff29a5b",
+      "commit": "ef0089170c1f57ab337e452a8948ceb3ae625ca1",
       "missing_artifacts": [],
       "limitations": [
         "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
