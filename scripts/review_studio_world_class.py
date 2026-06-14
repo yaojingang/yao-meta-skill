@@ -64,6 +64,9 @@ def render_world_class_evidence_entries(ledger: dict[str, Any]) -> str:
             f"<dt>下一步</dt><dd>{html.escape(str(entry.get('next_action', '')))}</dd>"
             f"<dt>观测值</dt><dd>{html.escape(observed_summary or '无')}</dd>"
             f"<dt>提交态</dt><dd>{html.escape(submission_summary or 'missing')}</dd></dl>"
+            "<section class='world-runbook-panel'><h4>执行步骤</h4>"
+            + render_inline_list(entry.get("runbook", []), "暂无执行步骤。")
+            + "</section>"
             "<div class='world-evidence-columns'>"
             "<div><h4>完成定义</h4>"
             + render_inline_list(entry.get("success_checks", []), "暂无完成定义。")
@@ -124,6 +127,9 @@ def render_world_class_intake_checklist(intake: dict[str, Any]) -> str:
             + "</div>"
             "<div><h4>收集要求</h4>"
             + render_inline_list(must_collect.get("provenance_requirements", []), "暂无来源要求。")
+            + "</div>"
+            "<div><h4>执行步骤</h4>"
+            + render_inline_list(must_collect.get("runbook", []), "暂无执行步骤。")
             + "</div>"
             "<div><h4>通过条件</h4>"
             + render_inline_list(must_collect.get("success_checks", []), "暂无通过条件。")

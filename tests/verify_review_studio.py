@@ -507,6 +507,9 @@ def main() -> None:
     assert provider_checklist["commands"]["submission_review"] == "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions", provider_checklist
     assert provider_checklist["commands"]["refresh_ledger"] == "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions", provider_checklist
     assert "provider-backed model run" in provider_checklist["must_collect"]["provenance_requirements"], provider_checklist
+    assert any(
+        "output-exec --provider-runner openai" in step for step in provider_checklist["must_collect"]["runbook"]
+    ), provider_checklist
     assert full_payload["data"]["world_class_claim_guard"]["summary"]["decision"] == "claim-guard-pass-evidence-pending", full_payload["data"]["world_class_claim_guard"]
     assert full_payload["data"]["world_class_claim_guard"]["summary"]["violation_count"] == 0, full_payload["data"]["world_class_claim_guard"]
     assert full_payload["data"]["world_class_claim_guard"]["summary"]["ledger_pending_count"] == 4, full_payload["data"]["world_class_claim_guard"]
@@ -524,6 +527,7 @@ def main() -> None:
     provider_entry = next(item for item in world_class_entries if item["key"] == "provider-holdout")
     assert provider_entry["status"] == "pending", provider_entry
     assert "reports/output_execution_runs.json summary.model_executed_count > 0" in provider_entry["success_checks"], provider_entry
+    assert any("output-exec --provider-runner openai" in step for step in provider_entry["runbook"]), provider_entry
     assert provider_entry["observed_state"]["model_executed_count"] == 0, provider_entry
     assert provider_entry["submission_state"]["status"] == "missing", provider_entry
     assert provider_entry["submission_state"]["ledger_counts_as_completion"] is False, provider_entry
@@ -599,6 +603,9 @@ def main() -> None:
     assert "隐私约束" in html, html
     assert "reports/output_execution_runs.json summary.model_executed_count &gt; 0" in html, html
     assert "计划、metadata fallback、待评审和本地命令不会被当成完成证据" in html, html
+    assert "执行步骤" in html, html
+    assert "output-exec --provider-runner openai" in html, html
+    assert "world-runbook-panel" in html, html
     assert "源证据检查" in html, html
     assert "world-source-checks" in html, html
     assert "Provider model run" in html, html

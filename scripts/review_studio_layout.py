@@ -257,11 +257,20 @@ def review_studio_css() -> str:
       border-top: 1px solid var(--line);
       padding-top: 12px;
     }
+    .world-runbook-panel {
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+    }
+    .world-runbook-panel h4,
     .world-source-panel h4 {
       margin: 0 0 8px;
       color: var(--ink);
       font-size: 14px;
       font-weight: 500;
+    }
+    .world-runbook-panel ul {
+      margin: 0;
+      padding-left: 18px;
     }
     .world-source-checks {
       list-style: none;
