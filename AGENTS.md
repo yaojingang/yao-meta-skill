@@ -45,6 +45,7 @@ python3 scripts/render_world_class_evidence_plan.py . --generated-at "$GENERATED
 python3 scripts/render_world_class_evidence_ledger.py . --generated-at "$GENERATED_AT"
 python3 scripts/render_world_class_evidence_intake.py . --generated-at "$GENERATED_AT"
 python3 scripts/render_world_class_submission_review.py . --generated-at "$GENERATED_AT"
+python3 scripts/render_world_class_operator_runbook.py . --generated-at "$GENERATED_AT"
 python3 scripts/render_world_class_claim_guard.py . --generated-at "$GENERATED_AT"
 python3 scripts/render_skill_overview.py .
 python3 scripts/render_review_studio.py . --output-html reports/review-studio.html --output-json reports/review-studio.json
@@ -75,6 +76,7 @@ Clean test-only scratch directories after verification with `find tests -maxdept
 - `scripts/render_world_class_evidence_plan.py`: executable evidence task plan for the remaining world-class readiness gaps. Keep provider, human, native-permission, and real-client telemetry evidence requirements concrete without marking planned work as complete.
 - `scripts/render_world_class_evidence_ledger.py`: machine-checkable acceptance ledger for the remaining world-class evidence gaps. Keep anti-overclaim guards explicit so planned work, metadata fallbacks, pending review, and local command runners never count as final evidence.
 - `scripts/render_world_class_submission_review.py`: read-only queue for external and human evidence packets after intake validation. Keep it from accepting evidence; it may only compare packet validity, source evidence checks, and ledger state.
+- `scripts/render_world_class_operator_runbook.py`: operator-facing world-class evidence runbook. Keep it as coordination guidance only; it must not accept evidence or flip world-class readiness.
 - `scripts/render_benchmark_reproducibility.py`: release-facing benchmark reproducibility manifest. Keep methodology sections, required artifacts, failure disclosure, reproduction commands, and world-class limitations machine-checkable.
 - `scripts/skill_report_model.py`, `scripts/skill_report_metrics.py`, `scripts/skill_report_charts.py`: skill overview data model, scoring, and inline SVG chart generation.
 - `scripts/yao_cli_config.py`: CLI target maps, archetype heuristics, diagnosis copy, and side-effect-free shaping helpers.

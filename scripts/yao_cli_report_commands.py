@@ -100,6 +100,14 @@ def command_world_class_submission_review(args: argparse.Namespace) -> int:
     return emit_result(run_script("render_world_class_submission_review.py", cmd))
 
 
+def command_world_class_runbook(args: argparse.Namespace) -> int:
+    cmd = [resolved_skill_dir(args)]
+    if args.submissions_dir:
+        cmd.extend(["--submissions-dir", args.submissions_dir])
+    append_outputs(cmd, args, generated_at=True)
+    return emit_result(run_script("render_world_class_operator_runbook.py", cmd))
+
+
 def command_world_class_claim_guard(args: argparse.Namespace) -> int:
     cmd = [resolved_skill_dir(args)]
     for surface in args.claim_surface:

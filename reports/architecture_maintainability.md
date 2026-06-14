@@ -5,11 +5,11 @@ Generated at: `2026-06-13`
 ## Summary
 
 - decision: `pass`
-- python files: `151`
-- scripts: `93`
-- tests: `58`
+- python files: `153`
+- scripts: `94`
+- tests: `59`
 - internal modules: `19`
-- CLI scripts: `75`
+- CLI scripts: `76`
 - Yao CLI command handlers: `34`
 - largest file lines: `899`
 - hotspots: `0`
@@ -26,11 +26,11 @@ No file-size hotspots found.
 | File | Lines | Kind | Severity |
 | --- | ---: | --- | --- |
 | `scripts/render_review_studio.py` | `899` | `cli-script` | `pass` |
-| `tests/verify_yao_cli.py` | `899` | `test` | `pass` |
-| `scripts/yao.py` | `867` | `cli-script` | `pass` |
+| `tests/verify_yao_cli.py` | `888` | `test` | `pass` |
+| `scripts/yao.py` | `874` | `cli-script` | `pass` |
 | `scripts/skill_report_model.py` | `792` | `internal-module` | `pass` |
+| `scripts/yao_cli_parser.py` | `741` | `internal-module` | `pass` |
 | `scripts/compile_skill.py` | `734` | `cli-script` | `pass` |
-| `scripts/yao_cli_parser.py` | `729` | `internal-module` | `pass` |
 | `scripts/optimize_description.py` | `723` | `cli-script` | `pass` |
 | `scripts/trust_check.py` | `714` | `internal-module` | `pass` |
 | `scripts/render_review_viewer.py` | `685` | `cli-script` | `pass` |

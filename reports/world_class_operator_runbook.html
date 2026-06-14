@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>World-Class Operator Runbook</title>
+  <style>
+    :root { --ink:#1B365D; --text:#202124; --muted:#6f6a63; --line:#e8e1d8; --soft:#f8f6f2; --warn:#9b4d0f; --pass:#1f6f43; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:#fff; color:var(--text); font:16px/1.55 Georgia, "Times New Roman", serif; }
+    .topbar { position:sticky; top:0; z-index:10; background:rgba(255,255,255,.96); border-bottom:1px solid var(--line); }
+    .topbar-inner { max-width:1180px; margin:0 auto; padding:12px 24px; display:flex; justify-content:space-between; gap:16px; align-items:center; }
+    .brand, a { color:var(--ink); }
+    .links { display:flex; gap:14px; flex-wrap:wrap; }
+    .links a { text-decoration:none; }
+    .shell { max-width:1180px; margin:0 auto; padding:36px 24px 72px; }
+    .hero { border-bottom:1px solid var(--line); padding:32px 0 28px; }
+    .eyebrow { color:var(--ink); font-size:12px; text-transform:uppercase; font-weight:700; letter-spacing:0; }
+    h1 { margin:8px 0 12px; color:var(--ink); font-size:56px; line-height:1.04; letter-spacing:0; }
+    h2, h3, h4 { color:var(--ink); letter-spacing:0; }
+    h2 { margin:0 0 14px; font-size:30px; }
+    h3 { margin:4px 0 10px; font-size:22px; }
+    h4 { margin:0 0 8px; font-size:16px; }
+    .lede { max-width:800px; color:var(--muted); font-size:20px; }
+    .stats { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:12px; margin-top:26px; }
+    .stats article, .panel, .item-card { border:1px solid var(--line); border-radius:8px; background:#fff; }
+    .stats article { padding:16px; }
+    .stats span, .item-card span, .muted { color:var(--muted); }
+    .stats strong { display:block; color:var(--ink); font-size:34px; line-height:1; }
+    .section { padding:32px 0; border-bottom:1px solid var(--line); }
+    .item-grid { display:grid; grid-template-columns:1fr; gap:18px; }
+    .item-card { padding:20px; border-left:4px solid var(--warn); }
+    .item-card.ready-for-ledger-review, .item-card.accepted { border-left-color:var(--pass); }
+    dl { display:grid; grid-template-columns:96px minmax(0,1fr); gap:8px 12px; }
+    dt { color:var(--ink); }
+    dd { margin:0; min-width:0; overflow-wrap:anywhere; }
+    code { font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:13px; overflow-wrap:anywhere; }
+    ul, ol { padding-left:20px; }
+    .commands { list-style:none; padding:0; margin:0; display:grid; gap:10px; }
+    .commands li { padding:12px; background:var(--soft); border-radius:8px; }
+    .commands span { display:block; color:var(--ink); font-weight:700; margin-bottom:4px; }
+    .mini-grid { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:12px; margin-top:14px; }
+    .mini-grid section, .panel { background:var(--soft); border-radius:8px; padding:14px; min-width:0; }
+    .mini-grid li, .panel li { overflow-wrap:anywhere; }
+    @media (max-width:820px) { .stats, .mini-grid { grid-template-columns:1fr; } h1 { font-size:38px; } .topbar-inner { align-items:flex-start; flex-direction:column; } }
+  </style>
+</head>
+<body>
+  <nav class="topbar"><div class="topbar-inner"><span class="brand">World-Class Runbook</span><div class="links"><a href="#fast-path">Fast Path</a><a href="#items">Evidence</a><a href="#boundary">Boundary</a></div></div></nav>
+  <main class="shell">
+    <section class="hero">
+      <span class="eyebrow">Evidence Operations</span>
+      <h1>World-Class Operator Runbook</h1>
+      <p class="lede">A single operating page for collecting the remaining human and external evidence. It coordinates action, but does not accept evidence or change the ledger.</p>
+      <div class="stats"><article><span>Pending</span><strong>4</strong></article><article><span>Awaiting</span><strong>4</strong></article><article><span>Ready</span><strong></strong></article><article><span>Invalid</span><strong></strong></article></div>
+    </section>
+    <section class="section panel" id="fast-path"><h2>Fast Path</h2><ol><li>Run the real external or human work for one evidence item.</li><li>Generate and fill the matching submission draft.</li><li>Validate intake and inspect the submission review queue.</li><li>Refresh the ledger and run the claim guard before making any completion claim.</li></ol></section>
+    <section class="section" id="items"><h2>Evidence Items</h2><div class="item-grid"><article class="item-card awaiting-submission">
+        <header><span>external · awaiting-submission</span><h3>Provider Holdout</h3></header>
+        <p>No evidence packet has been submitted for review.</p>
+        <dl>
+          <dt>Owner</dt><dd>operator with provider credentials</dd>
+          <dt>Ledger</dt><dd><code>pending</code></dd>
+          <dt>Submission</dt><dd><code>evidence/world_class/submissions/provider-holdout.json</code></dd>
+        </dl>
+        <section><h4>Commands</h4><ul class="commands"><li><span>prepare submission</span><code>python3 scripts/yao.py world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions</code></li><li><span>validate intake</span><code>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</code></li><li><span>review queue</span><code>python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions</code></li><li><span>refresh ledger</span><code>python3 scripts/yao.py world-class-ledger .</code></li><li><span>guard claim</span><code>python3 scripts/yao.py world-class-claim-guard .</code></li></ul></section>
+        <div class="mini-grid">
+          <section><h4>Must Collect</h4><ul><li>provider-backed model run</li><li>observed timing</li><li>observed token metadata</li></ul></section>
+          <section><h4>Success Checks</h4><ul><li>reports/output_execution_runs.json summary.model_executed_count &gt; 0</li><li>reports/output_execution_runs.json summary.timing_observed_count &gt; 0</li><li>reports/output_execution_runs.json summary.token_observed_count &gt; 0</li><li>reports/skill_os2_audit.json item provider-holdout status becomes pass</li></ul></section>
+          <section><h4>Privacy</h4><ul><li>Do not commit provider credentials or environment dumps.</li><li>The output execution report records output hashes and aggregate run metadata, not raw provider prompts.</li></ul></section>
+        </div>
+      </article><article class="item-card awaiting-submission">
+        <header><span>human · awaiting-submission</span><h3>Human Adjudication</h3></header>
+        <p>No evidence packet has been submitted for review.</p>
+        <dl>
+          <dt>Owner</dt><dd>human reviewer</dd>
+          <dt>Ledger</dt><dd><code>pending</code></dd>
+          <dt>Submission</dt><dd><code>evidence/world_class/submissions/human-adjudication.json</code></dd>
+        </dl>
+        <section><h4>Commands</h4><ul class="commands"><li><span>prepare submission</span><code>python3 scripts/yao.py world-class-submission-kit . --evidence-key human-adjudication --output-dir evidence/world_class/submissions</code></li><li><span>validate intake</span><code>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</code></li><li><span>review queue</span><code>python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions</code></li><li><span>refresh ledger</span><code>python3 scripts/yao.py world-class-ledger .</code></li><li><span>guard claim</span><code>python3 scripts/yao.py world-class-claim-guard .</code></li></ul></section>
+        <div class="mini-grid">
+          <section><h4>Must Collect</h4><ul><li>real reviewer identity</li><li>blind A/B decisions</li><li>answer key unopened until decisions exist</li></ul></section>
+          <section><h4>Success Checks</h4><ul><li>reports/output_review_adjudication.json summary.pending_count == 0</li><li>reports/output_review_adjudication.json summary.judgment_count == summary.pair_count</li><li>reports/output_review_adjudication.json summary.invalid_decision_count == 0</li><li>reports/skill_os2_audit.json item human-adjudication status becomes pass</li></ul></section>
+          <section><h4>Privacy</h4><ul><li>Reviewer decisions should not include raw user data or private customer detail.</li><li>Keep the answer key separate until after decisions are recorded.</li></ul></section>
+        </div>
+      </article><article class="item-card awaiting-submission">
+        <header><span>external · awaiting-submission</span><h3>Native Permission Enforcement</h3></header>
+        <p>No evidence packet has been submitted for review.</p>
+        <dl>
+          <dt>Owner</dt><dd>target client or installer integrator</dd>
+          <dt>Ledger</dt><dd><code>pending</code></dd>
+          <dt>Submission</dt><dd><code>evidence/world_class/submissions/native-permission-enforcement.json</code></dd>
+        </dl>
+        <section><h4>Commands</h4><ul class="commands"><li><span>prepare submission</span><code>python3 scripts/yao.py world-class-submission-kit . --evidence-key native-permission-enforcement --output-dir evidence/world_class/submissions</code></li><li><span>validate intake</span><code>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</code></li><li><span>review queue</span><code>python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions</code></li><li><span>refresh ledger</span><code>python3 scripts/yao.py world-class-ledger .</code></li><li><span>guard claim</span><code>python3 scripts/yao.py world-class-claim-guard .</code></li></ul></section>
+        <div class="mini-grid">
+          <section><h4>Must Collect</h4><ul><li>real target client or external installer runtime guard</li><li>native enforcement flag or externally accepted guard proof</li><li>residual risk retained for fallback targets</li></ul></section>
+          <section><h4>Success Checks</h4><ul><li>reports/runtime_permission_probes.json summary.native_enforcement_count &gt; 0</li><li>reports/runtime_permission_probes.json summary.failure_count == 0</li><li>reports/runtime_permission_probes.json summary.installer_enforcement_pass_count records local installer enforcement but does not replace native evidence</li><li>reports/skill_os2_audit.json item native-permission-enforcement status becomes pass</li></ul></section>
+          <section><h4>Privacy</h4><ul><li>Do not mark native_enforcement true for metadata-only fallbacks.</li><li>Keep residual risks visible for targets that still rely on operator enforcement.</li></ul></section>
+        </div>
+      </article><article class="item-card awaiting-submission">
+        <header><span>external · awaiting-submission</span><h3>Native Client Telemetry</h3></header>
+        <p>No evidence packet has been submitted for review.</p>
+        <dl>
+          <dt>Owner</dt><dd>Browser/Chrome/IDE/provider client integrator</dd>
+          <dt>Ledger</dt><dd><code>pending</code></dd>
+          <dt>Submission</dt><dd><code>evidence/world_class/submissions/native-client-telemetry.json</code></dd>
+        </dl>
+        <section><h4>Commands</h4><ul class="commands"><li><span>prepare submission</span><code>python3 scripts/yao.py world-class-submission-kit . --evidence-key native-client-telemetry --output-dir evidence/world_class/submissions</code></li><li><span>validate intake</span><code>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</code></li><li><span>review queue</span><code>python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions</code></li><li><span>refresh ledger</span><code>python3 scripts/yao.py world-class-ledger .</code></li><li><span>guard claim</span><code>python3 scripts/yao.py world-class-claim-guard .</code></li></ul></section>
+        <div class="mini-grid">
+          <section><h4>Must Collect</h4><ul><li>real external client source</li><li>metadata-only event</li><li>local-first import path</li></ul></section>
+          <section><h4>Success Checks</h4><ul><li>reports/adoption_drift_report.json summary.source_types.external &gt; 0</li><li>reports/adoption_drift_report.json summary.adoption_sample_count &gt; 0</li><li>reports/skill_os2_audit.json item native-client-telemetry status becomes pass</li></ul></section>
+          <section><h4>Privacy</h4><ul><li>Telemetry must remain metadata-only and local-first.</li><li>Do not package reports/telemetry_events.jsonl or any raw prompt, output, transcript, note, or message field.</li></ul></section>
+        </div>
+      </article></div></section>
+    <section class="section panel" id="boundary"><h2>Boundary</h2><ul><li>Planned work, draft packets, metadata fallback, pending human decisions, and local command runners do not count as completion.</li><li>Valid intake means ready for ledger review, not accepted evidence.</li><li>The world-class ledger and claim guard remain the source of truth.</li></ul></section>
+  </main>
+</body>
+</html>

@@ -437,7 +437,7 @@
         "path": "scripts",
         "label": "Deterministic helpers or local tooling",
         "kind": "folder",
-        "file_count": 93
+        "file_count": 94
       },
       {
         "path": "evals",
@@ -449,10 +449,10 @@
         "path": "reports",
         "label": "Generated evidence and overview artifacts",
         "kind": "folder",
-        "file_count": 200
+        "file_count": 203
       }
     ],
-    "file_count": 357,
+    "file_count": 361,
     "folder_count": 4,
     "distribution": [
       {
@@ -477,7 +477,7 @@
       },
       {
         "label": "scripts",
-        "value": 93
+        "value": 94
       },
       {
         "label": "evals",
@@ -485,7 +485,7 @@
       },
       {
         "label": "reports",
-        "value": 200
+        "value": 203
       }
     ]
   },
@@ -606,7 +606,7 @@
       "path": "scripts",
       "label": "Deterministic helpers or local tooling",
       "kind": "folder",
-      "file_count": 93
+      "file_count": 94
     },
     {
       "path": "evals",
@@ -618,7 +618,7 @@
       "path": "reports",
       "label": "Generated evidence and overview artifacts",
       "kind": "folder",
-      "file_count": 200
+      "file_count": 203
     }
   ],
   "strengths": [
@@ -935,9 +935,9 @@
       "world_class_task_count": 4,
       "world_class_ledger_pending_count": 4,
       "working_tree_dirty": true,
-      "changed_file_count": 32
+      "changed_file_count": 61
     },
-    "commit": "6b71aa2fb1feac8342dc72ceb2a5d9c5e7572130",
+    "commit": "08347d5c2cae9528ae1fe3c50ad39bb3c773a6e1",
     "missing_artifacts": [],
     "limitations": [
       "Local command-runner evidence is reproducible but does not replace provider-backed model holdout evidence.",
@@ -1020,8 +1020,8 @@
     "failures": []
   },
   "trust_security": {
-    "scanned_files": 177,
-    "script_count": 93,
+    "scanned_files": 178,
+    "script_count": 94,
     "internal_module_count": 17,
     "secret_findings": 0,
     "dependency_files": [
@@ -1030,18 +1030,18 @@
     "network_script_count": 3,
     "network_policy_covered_count": 3,
     "network_policy_missing_count": 0,
-    "file_write_script_count": 63,
+    "file_write_script_count": 64,
     "permission_required_count": 3,
     "permission_approved_count": 3,
     "permission_missing_count": 0,
     "permission_invalid_count": 0,
     "permission_expired_count": 0,
-    "help_smoke_checked_count": 76,
+    "help_smoke_checked_count": 77,
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 177,
-    "package_sha256": "7f70f5ec6944b938933be61ba59499f6f65493c99a72213c59609b0f0cbd4771"
+    "package_hash_file_count": 178,
+    "package_sha256": "97ae1c187b764f2504ead4bf0c3063b466f8e8daef0de0ed8001d2722ea2d179"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -1079,8 +1079,8 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "7f70f5ec6944b938933be61ba59499f6f65493c99a72213c59609b0f0cbd4771",
-        "archive_sha256": "cc5a43f9a1a3cf2a75cd3dc31d1317b90b2a911f32e3667b62936943dc5d808b"
+        "package_sha256": "97ae1c187b764f2504ead4bf0c3063b466f8e8daef0de0ed8001d2722ea2d179",
+        "archive_sha256": "de2056721d0fddfbae7fbde46493213c0a5a2879ed9dd6b3875ae4625ae2072e"
       },
       "compatibility": {
         "openai": "pass",
@@ -1111,7 +1111,7 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "cc5a43f9a1a3cf2a75cd3dc31d1317b90b2a911f32e3667b62936943dc5d808b",
+        "archive_sha256": "de2056721d0fddfbae7fbde46493213c0a5a2879ed9dd6b3875ae4625ae2072e",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
@@ -1127,8 +1127,8 @@
       "target_count": 4,
       "adapter_count": 4,
       "archive_present": true,
-      "archive_sha256": "cc5a43f9a1a3cf2a75cd3dc31d1317b90b2a911f32e3667b62936943dc5d808b",
-      "archive_entry_count": 568,
+      "archive_sha256": "de2056721d0fddfbae7fbde46493213c0a5a2879ed9dd6b3875ae4625ae2072e",
+      "archive_entry_count": 573,
       "failure_count": 0,
       "warning_count": 0
     },
@@ -1139,7 +1139,7 @@
     "ok": true,
     "summary": {
       "archive_present": true,
-      "archive_entry_count": 568,
+      "archive_entry_count": 573,
       "archive_extracted": true,
       "entrypoint_loaded": true,
       "manifest_loaded": true,
@@ -1206,12 +1206,12 @@
         {
           "field": "archive_sha256",
           "from": "",
-          "to": "cc5a43f9a1a3cf2a75cd3dc31d1317b90b2a911f32e3667b62936943dc5d808b"
+          "to": "de2056721d0fddfbae7fbde46493213c0a5a2879ed9dd6b3875ae4625ae2072e"
         },
         {
           "field": "package_sha256",
           "from": "0000000000000000000000000000000000000000000000000000000000000000",
-          "to": "7f70f5ec6944b938933be61ba59499f6f65493c99a72213c59609b0f0cbd4771"
+          "to": "97ae1c187b764f2504ead4bf0c3063b466f8e8daef0de0ed8001d2722ea2d179"
         }
       ]
     },

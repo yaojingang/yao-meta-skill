@@ -245,6 +245,7 @@ def main() -> None:
         "render_world_class_evidence_ledger.py",
         "render_world_class_evidence_intake.py",
         "render_world_class_submission_review.py",
+        "render_world_class_operator_runbook.py",
         "render_world_class_claim_guard.py",
         "render_skill_os2_coverage.py",
     ]:
@@ -379,6 +380,10 @@ def main() -> None:
         assert full_payload["evidence_paths"]["world_class_evidence_intake"] == "reports/world_class_evidence_intake.md", full_payload["evidence_paths"]
     if (ROOT / "reports" / "world_class_submission_review.md").exists():
         assert full_payload["evidence_paths"]["world_class_submission_review"] == "reports/world_class_submission_review.md", full_payload["evidence_paths"]
+    if (ROOT / "reports" / "world_class_operator_runbook.md").exists():
+        assert full_payload["evidence_paths"]["world_class_operator_runbook"] == "reports/world_class_operator_runbook.md", full_payload["evidence_paths"]
+    if (ROOT / "reports" / "world_class_operator_runbook.html").exists():
+        assert full_payload["evidence_paths"]["world_class_operator_runbook_html"] == "reports/world_class_operator_runbook.html", full_payload["evidence_paths"]
     if (ROOT / "reports" / "world_class_claim_guard.md").exists():
         assert full_payload["evidence_paths"]["world_class_claim_guard"] == "reports/world_class_claim_guard.md", full_payload["evidence_paths"]
     assert full_payload["data"]["output_blind_review"]["summary"]["pair_count"] == 5, full_payload["data"]["output_blind_review"]
@@ -420,12 +425,16 @@ def main() -> None:
         "reports/skill_os2_audit.md",
     }, world_class_action
     assert all(item["exists"] for item in world_class_action["source_refs"]), world_class_action
-    assert "world-class-submission-review" in world_class_action["verification_command"], world_class_action
+    assert "world-class-runbook" in world_class_action["verification_command"], world_class_action
+    assert "reports/world_class_operator_runbook.html" in world_class_action["source_fix"], world_class_action
     assert full_payload["data"]["world_class_evidence_ledger"]["summary"]["pending_count"] == 4, full_payload["data"]["world_class_evidence_ledger"]
     assert full_payload["data"]["world_class_evidence_intake"]["summary"]["decision"] == "awaiting-submissions", full_payload["data"]["world_class_evidence_intake"]
     assert full_payload["data"]["world_class_submission_review"]["summary"]["decision"] == "awaiting-submissions", full_payload["data"]["world_class_submission_review"]
     assert full_payload["data"]["world_class_submission_review"]["summary"]["review_counts_submission_as_completion"] is False, full_payload["data"]["world_class_submission_review"]
     assert full_payload["data"]["world_class_submission_review"]["summary"]["awaiting_submission_count"] == 4, full_payload["data"]["world_class_submission_review"]
+    assert full_payload["data"]["world_class_operator_runbook"]["summary"]["decision"] == "collect-evidence", full_payload["data"]["world_class_operator_runbook"]
+    assert full_payload["data"]["world_class_operator_runbook"]["summary"]["runbook_counts_as_completion"] is False, full_payload["data"]["world_class_operator_runbook"]
+    assert full_payload["data"]["world_class_operator_runbook"]["summary"]["awaiting_submission_count"] == 4, full_payload["data"]["world_class_operator_runbook"]
     assert full_payload["data"]["world_class_evidence_intake"]["summary"]["template_pass_count"] == 4, full_payload["data"]["world_class_evidence_intake"]
     assert full_payload["data"]["world_class_evidence_intake"]["summary"]["operator_checklist_count"] == 4, full_payload["data"]["world_class_evidence_intake"]
     assert full_payload["data"]["world_class_evidence_intake"]["summary"]["operator_checklist_ready_count"] == 0, full_payload["data"]["world_class_evidence_intake"]
@@ -515,6 +524,7 @@ def main() -> None:
     assert "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions" in html, html
     assert "intake 只校验证据包格式、来源、隐私和反过度声明" in html, html
     assert "reports/world_class_evidence_intake.md" in html, html
+    assert "reports/world_class_operator_runbook.html" in html, html
     assert "reports/world_class_claim_guard.md" in html, html
     assert "英文完成断言、true 状态声明或中文完成态" in html, html
     assert "world-evidence-grid" in html, html

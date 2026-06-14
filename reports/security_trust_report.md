@@ -1,22 +1,22 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `177`
-- Scripts: `93`
+- Scanned files: `178`
+- Scripts: `94`
 - Internal script modules: `17`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
 - Network policy missing scripts: `0`
-- File-write scripts: `63`
+- File-write scripts: `64`
 - Permission approvals: `3 / 3`
 - Permission approval gaps: `0`
-- CLI help smoke checked: `76`
+- CLI help smoke checked: `77`
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `177`
-- Package SHA256: `7f70f5ec6944b938933be61ba59499f6f65493c99a72213c59609b0f0cbd4771`
+- Package hash files: `178`
+- Package SHA256: `97ae1c187b764f2504ead4bf0c3063b466f8e8daef0de0ed8001d2722ea2d179`
 
 ## Failures
 
@@ -54,8 +54,8 @@
 
 - Enabled: `True`
 - Timeout seconds: `5.0`
-- Checked scripts: `76`
-- Passed scripts: `76`
+- Checked scripts: `77`
+- Passed scripts: `77`
 - Failed scripts: `none`
 
 ## Script Surface
@@ -122,6 +122,7 @@
 | scripts/render_world_class_evidence_intake.py | cli | True | True | True | False | False | True | False | Validates world-class human and external evidence intake packets before ledger review. |
 | scripts/render_world_class_evidence_ledger.py | cli | True | True | True | False | False | True | False | Renders a machine-checkable ledger for world-class external and human evidence gaps. |
 | scripts/render_world_class_evidence_plan.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
+| scripts/render_world_class_operator_runbook.py | cli | True | True | True | False | False | True | False | Renders an operator runbook for collecting pending world-class evidence without accepting evidence. |
 | scripts/render_world_class_submission_review.py | cli | True | True | True | False | False | True | False | Renders a read-only review queue for world-class evidence submissions before ledger acceptance. |
 | scripts/resource_boundary_check.py | cli | False | True | True | False | False | False | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/review_studio_data.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to load Review Studio source reports and metric cards. |

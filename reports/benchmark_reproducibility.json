@@ -3,24 +3,24 @@
   "ok": true,
   "generated_at": "2026-06-14",
   "skill_dir": ".",
-  "commit": "6b71aa2fb1feac8342dc72ceb2a5d9c5e7572130",
+  "commit": "08347d5c2cae9528ae1fe3c50ad39bb3c773a6e1",
   "git_status": {
     "available": true,
     "dirty": true,
-    "changed_file_count": 49,
+    "changed_file_count": 61,
     "sample": [
-      " M registry/index.json",
-      " M registry/packages/yao-meta-skill.json",
-      " M reports/adoption_drift_report.json",
+      "M  AGENTS.md",
+      "M  Makefile",
+      "M  registry/index.json",
+      "M  registry/packages/yao-meta-skill.json",
+      "MM reports/adoption_drift_report.json",
       " M reports/adoption_drift_report.md",
-      " M reports/architecture_maintainability.json",
-      " M reports/architecture_maintainability.md",
-      " M reports/benchmark_reproducibility.json",
-      " M reports/benchmark_reproducibility.md",
-      " M reports/compiled_targets.json",
-      " M reports/context_budget.json",
-      " M reports/install_simulation.json",
-      " M reports/install_simulation.md"
+      "MM reports/architecture_maintainability.json",
+      "MM reports/architecture_maintainability.md",
+      "MM reports/benchmark_reproducibility.json",
+      "MM reports/benchmark_reproducibility.md",
+      "MM reports/compiled_targets.json",
+      "MM reports/context_budget.json"
     ]
   },
   "summary": {
@@ -42,7 +42,7 @@
     "world_class_task_count": 4,
     "world_class_ledger_pending_count": 4,
     "working_tree_dirty": true,
-    "changed_file_count": 49
+    "changed_file_count": 61
   },
   "methodology": {
     "path": "reports/benchmark_methodology.md",
@@ -115,8 +115,8 @@
       "label": "output_execution",
       "path": "reports/output_execution_runs.json",
       "exists": true,
-      "bytes": 7967,
-      "sha256": "b0953427365ce84f89454531d5819a2ce6f494875661fbbb3be33b012a0d8f13"
+      "bytes": 7965,
+      "sha256": "99b2e3f03710fdcee8fe66a476bc589f4e22a379bfcc1cd5561de49c184286e8"
     },
     {
       "label": "blind_review",
@@ -150,43 +150,43 @@
       "label": "trust_report",
       "path": "reports/security_trust_report.json",
       "exists": true,
-      "bytes": 95873,
-      "sha256": "cb599bf68524be22e7df189f1f09deac404bda493a3013c74be209d7ef7efae4"
+      "bytes": 97005,
+      "sha256": "252c580028df6ac2404b53cc10bb607fa82b98ef17965cb7354c4731f6c6b08e"
     },
     {
       "label": "python_compatibility",
       "path": "reports/python_compatibility.json",
       "exists": true,
-      "bytes": 20093,
-      "sha256": "e5dd973d0b5c78c5e40d52727939134b8167d742cb90bea2141744c0f7d5fa33"
+      "bytes": 20367,
+      "sha256": "a8d14087863459534fadac760a64c213c9474413e92046a9ac2e772d4174d347"
     },
     {
       "label": "registry_audit",
       "path": "reports/registry_audit.json",
       "exists": true,
       "bytes": 3183,
-      "sha256": "2ff87aeb6f3dc7f0614d33d291faad1a55da2ade3ba98014bee5143dfb8f4806"
+      "sha256": "6527b723a4bc367477e1090afbf7f1653f20d33fed0e0691725b7ee30896848b"
     },
     {
       "label": "package_verification",
       "path": "reports/package_verification.json",
       "exists": true,
       "bytes": 19325,
-      "sha256": "a5dac0ea2b6365c97d0b72ad695ed0ebbd5ac472745e20c1a98f695b26bdd827"
+      "sha256": "6bf19c9e29803ad8668914489d22b9e306ad0ad092c91c179c3aaffe81eed2c6"
     },
     {
       "label": "install_simulation",
       "path": "reports/install_simulation.json",
       "exists": true,
-      "bytes": 8604,
-      "sha256": "eebfba42d71e4082d3c801fd126e59c6401b3f8c00a00625c70eb82f927ebd65"
+      "bytes": 8758,
+      "sha256": "270a28b82dc49d80ba9c5a82f912cc960e50a5ac42f022c6a2c345e4e84fbb36"
     },
     {
       "label": "skill_os2_audit",
       "path": "reports/skill_os2_audit.json",
       "exists": true,
       "bytes": 14309,
-      "sha256": "78bcbcbc54711e63a6e34059c30748599a7e71d434182b78c307af6d2553cc81"
+      "sha256": "cad5296cd500a40cb0d83897d327b3542f31c1ce6bfe7eaa387ea2e88d229aa1"
     },
     {
       "label": "world_class_evidence_plan",
@@ -213,8 +213,8 @@
       "label": "world_class_claim_guard",
       "path": "reports/world_class_claim_guard.json",
       "exists": true,
-      "bytes": 8267,
-      "sha256": "79c5b29f0ff639189aa65f3487afab13150e95c7fa7a6a5b59309b1e87873c25"
+      "bytes": 8463,
+      "sha256": "250d616b028cf046e2033f9e2c5648c8d95c110d0d8990b35e4d481e14cfc558"
     }
   ],
   "missing_artifacts": [],

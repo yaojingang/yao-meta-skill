@@ -231,6 +231,18 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     world_class_submission_review_cmd.add_argument("--generated-at")
     world_class_submission_review_cmd.set_defaults(func=_handler(command_handlers, "command_world_class_submission_review"))
 
+    world_class_runbook_cmd = subparsers.add_parser(
+        "world-class-runbook",
+        help="Render an operator runbook for pending world-class evidence.",
+    )
+    world_class_runbook_cmd.add_argument("skill_dir", nargs="?", default=".")
+    world_class_runbook_cmd.add_argument("--submissions-dir")
+    world_class_runbook_cmd.add_argument("--output-json")
+    world_class_runbook_cmd.add_argument("--output-md")
+    world_class_runbook_cmd.add_argument("--output-html")
+    world_class_runbook_cmd.add_argument("--generated-at")
+    world_class_runbook_cmd.set_defaults(func=_handler(command_handlers, "command_world_class_runbook"))
+
     world_class_claim_guard_cmd = subparsers.add_parser(
         "world-class-claim-guard",
         help="Scan public claim surfaces for premature world-class completion claims.",

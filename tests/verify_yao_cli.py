@@ -76,24 +76,13 @@ def main() -> None:
     assert yao_cli_report_commands.SCRIPT_INTERFACE == "internal-module"
     assert callable(yao_cli_module.command_review_studio)
     parser_help = yao_cli_module.build_parser().format_help()
-    assert "quickstart" in parser_help, parser_help
-    assert "review-studio" in parser_help, parser_help
-    assert "python-compat" in parser_help, parser_help
-    assert "architecture-audit" in parser_help, parser_help
-    assert "skill-os2-audit" in parser_help, parser_help
-    assert "skill-os2-coverage" in parser_help, parser_help
-    assert "world-class-evidence" in parser_help, parser_help
-    assert "world-class-ledger" in parser_help, parser_help
-    assert "world-class-intake" in parser_help, parser_help
-    assert "world-class-submission-kit" in parser_help, parser_help
-    assert "world-class-submission-review" in parser_help, parser_help
-    assert "world-class-claim-guard" in parser_help, parser_help
-    assert "benchmark-reproducibility" in parser_help, parser_help
-    assert "output-review-kit" in parser_help, parser_help
-    assert "telemetry-import" in parser_help, parser_help
-    assert "telemetry-emit" in parser_help, parser_help
-    assert "telemetry-hooks" in parser_help, parser_help
-    assert "--record-cli-telemetry" in parser_help, parser_help
+    expected_help = (
+        "quickstart review-studio python-compat architecture-audit skill-os2-audit skill-os2-coverage "
+        "world-class-evidence world-class-ledger world-class-intake world-class-submission-kit "
+        "world-class-submission-review world-class-runbook world-class-claim-guard "
+        "benchmark-reproducibility output-review-kit telemetry-import telemetry-emit telemetry-hooks --record-cli-telemetry"
+    ).split()
+    assert all(item in parser_help for item in expected_help), parser_help
 
     init_result = run("init", "cli-demo-skill", "--description", "CLI demo skill.", "--output-dir", str(tmp_root))
     assert init_result["ok"], init_result

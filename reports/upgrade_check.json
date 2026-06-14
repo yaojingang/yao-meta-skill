@@ -1,7 +1,7 @@
 {
   "ok": true,
   "schema_version": "2.0",
-  "generated_at": "2026-06-13",
+  "generated_at": "2026-06-14",
   "previous": {
     "name": "yao-meta-skill",
     "version": "1.0.0",
@@ -70,12 +70,12 @@
       {
         "field": "archive_sha256",
         "from": "",
-        "to": "cc5a43f9a1a3cf2a75cd3dc31d1317b90b2a911f32e3667b62936943dc5d808b"
+        "to": "de2056721d0fddfbae7fbde46493213c0a5a2879ed9dd6b3875ae4625ae2072e"
       },
       {
         "field": "package_sha256",
         "from": "0000000000000000000000000000000000000000000000000000000000000000",
-        "to": "7f70f5ec6944b938933be61ba59499f6f65493c99a72213c59609b0f0cbd4771"
+        "to": "97ae1c187b764f2504ead4bf0c3063b466f8e8daef0de0ed8001d2722ea2d179"
       }
     ]
   },
@@ -90,7 +90,7 @@
   "artifacts": {
     "previous_package": "registry/examples/yao-meta-skill-1.0.0.json",
     "current_package": "reports/registry_audit.json",
-    "json": "tests/tmp_review_studio/upgrade_check.json",
-    "markdown": "tests/tmp_review_studio/upgrade_check.md"
+    "json": "reports/upgrade_check.json",
+    "markdown": "reports/upgrade_check.md"
   }
 }

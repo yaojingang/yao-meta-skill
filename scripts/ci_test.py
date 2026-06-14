@@ -58,6 +58,7 @@ DEFAULT_TARGETS = [
     "world-class-ledger-check",
     "world-class-intake-check",
     "world-class-submission-review-check",
+    "world-class-runbook-check",
     "world-class-claim-guard-check",
     "benchmark-reproducibility-check",
     "feedback-check",

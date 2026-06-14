@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-13",
+  "generated_at": "2026-06-14",
   "skill_dir": ".",
   "summary": {
     "ledger_ready_to_claim_world_class": false,
     "ledger_pending_count": 4,
-    "claim_surface_count": 71,
+    "claim_surface_count": 73,
     "violation_count": 0,
     "overclaim_guard_active": true,
     "decision": "claim-guard-pass-evidence-pending"
@@ -313,6 +313,14 @@
     },
     {
       "path": "reports/world_class_evidence_plan.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/world_class_operator_runbook.html",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/world_class_operator_runbook.md",
       "violation_count": 0
     },
     {
