@@ -1349,9 +1349,9 @@
           "world_class_task_count": 4,
           "world_class_ledger_pending_count": 4,
           "working_tree_dirty": true,
-          "changed_file_count": 41
+          "changed_file_count": 45
         },
-        "commit": "5d1d3bbd302aa9c6d0e5f5767c5bdc776b517a03",
+        "commit": "bd7f1d8cccbebac1222c0ee7bbc01c1e3b991126",
         "missing_artifacts": [],
         "limitations": [
           "Local command-runner evidence is reproducible but does not replace provider-backed model holdout evidence.",
@@ -1455,7 +1455,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 178,
-        "package_sha256": "2ce3f2625183c9fad67ea0e48c927f49d5f5051222f478986e03df2d22752a3d"
+        "package_sha256": "08d744e0aa33d726b497ecdbdb6eaf2a5ec666a6ea3938068f6007be27f5021c"
       },
       "skill_atlas": {
         "skill_count": 12,
@@ -1493,8 +1493,8 @@
           "trust_level": "local",
           "license": "MIT",
           "checksums": {
-            "package_sha256": "2ce3f2625183c9fad67ea0e48c927f49d5f5051222f478986e03df2d22752a3d",
-            "archive_sha256": "5b472f78172a45c1f7b95de9d133d9d295e4d2dc82ac5fe50e0834f2c8158f27"
+            "package_sha256": "08d744e0aa33d726b497ecdbdb6eaf2a5ec666a6ea3938068f6007be27f5021c",
+            "archive_sha256": "8d1c803b4008860c73b47f8abeed721877304521c2e2da11083aeb2e66ce156e"
           },
           "compatibility": {
             "openai": "pass",
@@ -1525,7 +1525,7 @@
           },
           "distribution": {
             "archive_verified": true,
-            "archive_sha256": "5b472f78172a45c1f7b95de9d133d9d295e4d2dc82ac5fe50e0834f2c8158f27",
+            "archive_sha256": "8d1c803b4008860c73b47f8abeed721877304521c2e2da11083aeb2e66ce156e",
             "package_verification": "reports/package_verification.json",
             "install_simulated": true,
             "install_simulation": "reports/install_simulation.json"
@@ -1541,7 +1541,7 @@
           "target_count": 4,
           "adapter_count": 4,
           "archive_present": true,
-          "archive_sha256": "5b472f78172a45c1f7b95de9d133d9d295e4d2dc82ac5fe50e0834f2c8158f27",
+          "archive_sha256": "8d1c803b4008860c73b47f8abeed721877304521c2e2da11083aeb2e66ce156e",
           "archive_entry_count": 573,
           "failure_count": 0,
           "warning_count": 0
@@ -1620,12 +1620,12 @@
             {
               "field": "archive_sha256",
               "from": "",
-              "to": "5b472f78172a45c1f7b95de9d133d9d295e4d2dc82ac5fe50e0834f2c8158f27"
+              "to": "8d1c803b4008860c73b47f8abeed721877304521c2e2da11083aeb2e66ce156e"
             },
             {
               "field": "package_sha256",
               "from": "0000000000000000000000000000000000000000000000000000000000000000",
-              "to": "2ce3f2625183c9fad67ea0e48c927f49d5f5051222f478986e03df2d22752a3d"
+              "to": "08d744e0aa33d726b497ecdbdb6eaf2a5ec666a6ea3938068f6007be27f5021c"
             }
           ]
         },
@@ -3794,7 +3794,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.47,
+          "duration_ms": 24.72,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3822,7 +3822,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.4,
+          "duration_ms": 23.92,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3845,7 +3845,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.37,
+          "duration_ms": 24.18,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3873,7 +3873,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 29.11,
+          "duration_ms": 25.49,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3896,7 +3896,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.04,
+          "duration_ms": 24.68,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3924,7 +3924,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 29.89,
+          "duration_ms": 24.46,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3947,7 +3947,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.27,
+          "duration_ms": 24.04,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3974,7 +3974,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.7,
+          "duration_ms": 24.01,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3997,7 +3997,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.72,
+          "duration_ms": 23.99,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4026,7 +4026,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.67,
+          "duration_ms": 24.34,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -10242,7 +10242,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 178,
-        "package_sha256": "2ce3f2625183c9fad67ea0e48c927f49d5f5051222f478986e03df2d22752a3d"
+        "package_sha256": "08d744e0aa33d726b497ecdbdb6eaf2a5ec666a6ea3938068f6007be27f5021c"
       },
       "failures": [],
       "warnings": [],
@@ -13724,9 +13724,9 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 751,
-        "other_text_tokens": 1176737,
+        "other_text_tokens": 1178333,
         "estimated_initial_load_tokens": 944,
-        "estimated_total_text_tokens": 1177488,
+        "estimated_total_text_tokens": 1179084,
         "relevant_file_count": 498,
         "unused_resource_dirs": [],
         "quality_signal_points": 130,
@@ -15580,7 +15580,7 @@
     "adoption_drift": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-14T00:16:48Z",
+      "generated_at": "2026-06-14T00:32:04Z",
       "skill_dir": ".",
       "privacy_contract": {
         "storage": "local-first",
@@ -16061,6 +16061,11 @@
           "evidence_key": "provider-holdout",
           "status": "pass",
           "template_only": true,
+          "artifact_integrity": {
+            "artifact_ref_count": 1,
+            "artifact_existing_count": 0,
+            "artifact_sha256_verified_count": 0
+          },
           "errors": []
         },
         {
@@ -16068,6 +16073,11 @@
           "evidence_key": "human-adjudication",
           "status": "pass",
           "template_only": true,
+          "artifact_integrity": {
+            "artifact_ref_count": 2,
+            "artifact_existing_count": 0,
+            "artifact_sha256_verified_count": 0
+          },
           "errors": []
         },
         {
@@ -16075,6 +16085,11 @@
           "evidence_key": "native-permission-enforcement",
           "status": "pass",
           "template_only": true,
+          "artifact_integrity": {
+            "artifact_ref_count": 3,
+            "artifact_existing_count": 0,
+            "artifact_sha256_verified_count": 0
+          },
           "errors": []
         },
         {
@@ -16082,6 +16097,11 @@
           "evidence_key": "native-client-telemetry",
           "status": "pass",
           "template_only": true,
+          "artifact_integrity": {
+            "artifact_ref_count": 2,
+            "artifact_existing_count": 0,
+            "artifact_sha256_verified_count": 0
+          },
           "errors": []
         }
       ],
@@ -17169,8 +17189,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "2ce3f2625183c9fad67ea0e48c927f49d5f5051222f478986e03df2d22752a3d",
-          "archive_sha256": "5b472f78172a45c1f7b95de9d133d9d295e4d2dc82ac5fe50e0834f2c8158f27"
+          "package_sha256": "08d744e0aa33d726b497ecdbdb6eaf2a5ec666a6ea3938068f6007be27f5021c",
+          "archive_sha256": "8d1c803b4008860c73b47f8abeed721877304521c2e2da11083aeb2e66ce156e"
         },
         "compatibility": {
           "openai": "pass",
@@ -17201,7 +17221,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "5b472f78172a45c1f7b95de9d133d9d295e4d2dc82ac5fe50e0834f2c8158f27",
+          "archive_sha256": "8d1c803b4008860c73b47f8abeed721877304521c2e2da11083aeb2e66ce156e",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -17226,7 +17246,7 @@
               "vscode"
             ],
             "package_metadata": "registry/packages/yao-meta-skill.json",
-            "package_sha256": "2ce3f2625183c9fad67ea0e48c927f49d5f5051222f478986e03df2d22752a3d"
+            "package_sha256": "08d744e0aa33d726b497ecdbdb6eaf2a5ec666a6ea3938068f6007be27f5021c"
           }
         ]
       },
@@ -17249,7 +17269,7 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "5b472f78172a45c1f7b95de9d133d9d295e4d2dc82ac5fe50e0834f2c8158f27",
+        "archive_sha256": "8d1c803b4008860c73b47f8abeed721877304521c2e2da11083aeb2e66ce156e",
         "archive_entry_count": 573,
         "failure_count": 0,
         "warning_count": 0
@@ -18257,12 +18277,12 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "5b472f78172a45c1f7b95de9d133d9d295e4d2dc82ac5fe50e0834f2c8158f27"
+            "to": "8d1c803b4008860c73b47f8abeed721877304521c2e2da11083aeb2e66ce156e"
           },
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "2ce3f2625183c9fad67ea0e48c927f49d5f5051222f478986e03df2d22752a3d"
+            "to": "08d744e0aa33d726b497ecdbdb6eaf2a5ec666a6ea3938068f6007be27f5021c"
           }
         ]
       },

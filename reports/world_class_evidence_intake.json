@@ -26,6 +26,11 @@
       "evidence_key": "provider-holdout",
       "status": "pass",
       "template_only": true,
+      "artifact_integrity": {
+        "artifact_ref_count": 1,
+        "artifact_existing_count": 0,
+        "artifact_sha256_verified_count": 0
+      },
       "errors": []
     },
     {
@@ -33,6 +38,11 @@
       "evidence_key": "human-adjudication",
       "status": "pass",
       "template_only": true,
+      "artifact_integrity": {
+        "artifact_ref_count": 2,
+        "artifact_existing_count": 0,
+        "artifact_sha256_verified_count": 0
+      },
       "errors": []
     },
     {
@@ -40,6 +50,11 @@
       "evidence_key": "native-permission-enforcement",
       "status": "pass",
       "template_only": true,
+      "artifact_integrity": {
+        "artifact_ref_count": 3,
+        "artifact_existing_count": 0,
+        "artifact_sha256_verified_count": 0
+      },
       "errors": []
     },
     {
@@ -47,6 +62,11 @@
       "evidence_key": "native-client-telemetry",
       "status": "pass",
       "template_only": true,
+      "artifact_integrity": {
+        "artifact_ref_count": 2,
+        "artifact_existing_count": 0,
+        "artifact_sha256_verified_count": 0
+      },
       "errors": []
     }
   ],

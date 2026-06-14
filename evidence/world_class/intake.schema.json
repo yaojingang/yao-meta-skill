@@ -78,7 +78,8 @@
             "type": "boolean"
           },
           "sha256": {
-            "type": "string"
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{64}$"
           },
           "note": {
             "type": "string"
@@ -170,5 +171,33 @@
       "additionalProperties": true
     }
   },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "template_only": {
+            "const": false
+          }
+        },
+        "required": [
+          "template_only"
+        ]
+      },
+      "then": {
+        "properties": {
+          "artifact_refs": {
+            "items": {
+              "required": [
+                "path",
+                "kind",
+                "contains_raw_content",
+                "sha256"
+              ]
+            }
+          }
+        }
+      }
+    }
+  ],
   "additionalProperties": true
 }

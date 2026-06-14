@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import hashlib
 import json
 import shutil
 import subprocess
@@ -10,6 +11,14 @@ ROOT = Path(__file__).resolve().parent.parent
 SCRIPT = ROOT / "scripts" / "render_world_class_evidence_intake.py"
 KIT_SCRIPT = ROOT / "scripts" / "prepare_world_class_submission_kit.py"
 TMP = ROOT / "tests" / "tmp_world_class_evidence_intake"
+
+
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def run_intake(*extra: str) -> dict:
@@ -62,7 +71,7 @@ def provider_submission(*, valid: bool) -> dict:
                 "path": "reports/output_execution_runs.json",
                 "kind": "aggregate-report",
                 "contains_raw_content": not valid,
-                "sha256": "example-only",
+                "sha256": sha256_file(ROOT / "reports" / "output_execution_runs.json") if valid else "example-only",
             }
         ],
         "provenance": {
@@ -144,6 +153,7 @@ def main() -> None:
     assert "ready to claim world-class: `false`" in markdown, markdown
     assert "Operator Checklist" in markdown, markdown
     assert "operator checklist: `0` ready / `4` total" in markdown, markdown
+    assert "0 existing / 0 sha256 verified / 1 refs" in markdown, markdown
     assert "`evidence/world_class/submissions/provider-holdout.json`" in markdown, markdown
     assert "`python3 scripts/yao.py world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions`" in markdown, markdown
     assert "`python3 scripts/yao.py world-class-ledger .`" in markdown, markdown
@@ -201,6 +211,8 @@ def main() -> None:
     assert valid_payload["summary"]["ready_for_ledger_review"] is True, valid_payload["summary"]
     assert valid_payload["summary"]["ready_to_claim_world_class"] is False, valid_payload["summary"]
     assert valid_payload["submissions"][0]["status"] == "pass", valid_payload["submissions"]
+    assert valid_payload["submissions"][0]["artifact_integrity"]["artifact_existing_count"] == 1, valid_payload["submissions"]
+    assert valid_payload["submissions"][0]["artifact_integrity"]["artifact_sha256_verified_count"] == 1, valid_payload["submissions"]
     valid_checklist = {item["evidence_key"]: item for item in valid_payload["operator_checklist"]}
     assert valid_checklist["provider-holdout"]["readiness"] == "ready-for-ledger-review", valid_checklist["provider-holdout"]
     assert valid_checklist["provider-holdout"]["submission_path"].endswith("tests/tmp_world_class_evidence_intake/valid_submissions/provider-holdout.json"), valid_checklist["provider-holdout"]
@@ -218,6 +230,7 @@ def main() -> None:
     assert invalid_payload["summary"]["invalid_submission_count"] == 1, invalid_payload["summary"]
     assert invalid_payload["summary"]["operator_checklist_ready_count"] == 0, invalid_payload["summary"]
     assert any("raw content" in error for error in invalid_payload["submissions"][0]["errors"]), invalid_payload["submissions"]
+    assert any("sha256" in error for error in invalid_payload["submissions"][0]["errors"]), invalid_payload["submissions"]
     assert any("attestation.real_external_or_human_evidence" in error for error in invalid_payload["submissions"][0]["errors"]), invalid_payload["submissions"]
     invalid_checklist = {item["evidence_key"]: item for item in invalid_payload["operator_checklist"]}
     assert invalid_checklist["provider-holdout"]["readiness"] == "fix-submission", invalid_checklist["provider-holdout"]

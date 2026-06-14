@@ -19,18 +19,18 @@ This report validates the intake contract for human and external evidence. A val
 
 ## Templates
 
-| Evidence | Status | Path | Errors |
-| --- | --- | --- | --- |
-| `provider-holdout` | `pass` | `evidence/world_class/templates/provider-holdout.intake.json` | none |
-| `human-adjudication` | `pass` | `evidence/world_class/templates/human-adjudication.intake.json` | none |
-| `native-permission-enforcement` | `pass` | `evidence/world_class/templates/native-permission-enforcement.intake.json` | none |
-| `native-client-telemetry` | `pass` | `evidence/world_class/templates/native-client-telemetry.intake.json` | none |
+| Evidence | Status | Path | Artifacts | Errors |
+| --- | --- | --- | --- | --- |
+| `provider-holdout` | `pass` | `evidence/world_class/templates/provider-holdout.intake.json` | 0 existing / 0 sha256 verified / 1 refs | none |
+| `human-adjudication` | `pass` | `evidence/world_class/templates/human-adjudication.intake.json` | 0 existing / 0 sha256 verified / 2 refs | none |
+| `native-permission-enforcement` | `pass` | `evidence/world_class/templates/native-permission-enforcement.intake.json` | 0 existing / 0 sha256 verified / 3 refs | none |
+| `native-client-telemetry` | `pass` | `evidence/world_class/templates/native-client-telemetry.intake.json` | 0 existing / 0 sha256 verified / 2 refs | none |
 
 ## Submissions
 
-| Evidence | Status | Path | Errors |
-| --- | --- | --- | --- |
-| `none` | `n/a` | none | none |
+| Evidence | Status | Path | Artifacts | Errors |
+| --- | --- | --- | --- | --- |
+| `none` | `n/a` | none | none | none |
 
 ## Operator Checklist
 

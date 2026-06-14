@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import argparse
+import hashlib
 import json
+import re
 import shlex
 from datetime import date
 from pathlib import Path
@@ -52,6 +54,8 @@ EXPECTED_SOURCE_TYPES = {
     "native-permission-enforcement": "runtime-permission-guard",
     "native-client-telemetry": "native-client-telemetry",
 }
+SHA256_RE = re.compile(r"^[0-9a-fA-F]{64}$")
+DISALLOWED_REAL_ARTIFACTS = {"reports/telemetry_events.jsonl"}
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -76,18 +80,81 @@ def add_error(errors: list[str], condition: bool, message: str) -> None:
         errors.append(message)
 
 
-def validate_artifact_refs(payload: dict[str, Any], errors: list[str]) -> None:
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def resolve_artifact_path(raw_path: str, root: Path) -> tuple[Path | None, str | None]:
+    text = raw_path.strip()
+    if any(token in text for token in ("<", ">", "*", "?")):
+        return None, "artifact_refs path must be concrete, not a placeholder or glob"
+    candidate = Path(text)
+    if candidate.is_absolute():
+        return None, "artifact_refs path must be relative to the skill directory"
+    if ".." in candidate.parts:
+        return None, "artifact_refs path must not escape the skill directory"
+    resolved = (root / candidate).resolve()
+    try:
+        resolved.relative_to(root.resolve())
+    except ValueError:
+        return None, "artifact_refs path must stay inside the skill directory"
+    return resolved, None
+
+
+def validate_artifact_refs(
+    payload: dict[str, Any],
+    errors: list[str],
+    *,
+    root: Path,
+    template_expected: bool,
+) -> dict[str, int]:
     refs = payload.get("artifact_refs")
     add_error(errors, isinstance(refs, list) and len(refs) > 0, "artifact_refs must contain at least one reference")
+    stats = {
+        "artifact_ref_count": len(refs) if isinstance(refs, list) else 0,
+        "artifact_existing_count": 0,
+        "artifact_sha256_verified_count": 0,
+    }
     if not isinstance(refs, list):
-        return
+        return stats
     for index, ref in enumerate(refs):
         if not isinstance(ref, dict):
             errors.append(f"artifact_refs[{index}] must be an object")
             continue
-        add_error(errors, bool(str(ref.get("path", "")).strip()), f"artifact_refs[{index}].path is required")
+        path_text = str(ref.get("path", "")).strip()
+        add_error(errors, bool(path_text), f"artifact_refs[{index}].path is required")
         add_error(errors, bool(str(ref.get("kind", "")).strip()), f"artifact_refs[{index}].kind is required")
         add_error(errors, ref.get("contains_raw_content") is False, f"artifact_refs[{index}] must not contain raw content")
+        if template_expected or not path_text:
+            continue
+        resolved, path_error = resolve_artifact_path(path_text, root)
+        if path_error:
+            errors.append(f"artifact_refs[{index}].path {path_error}")
+            continue
+        rel = rel_path(resolved, root)
+        if rel in DISALLOWED_REAL_ARTIFACTS:
+            errors.append(f"artifact_refs[{index}].path must not reference raw local telemetry logs")
+        if not resolved.exists() or not resolved.is_file():
+            errors.append(f"artifact_refs[{index}].path does not exist as a local file")
+            continue
+        stats["artifact_existing_count"] += 1
+        declared = str(ref.get("sha256", "")).strip()
+        if not declared:
+            errors.append(f"artifact_refs[{index}].sha256 is required for a real submission")
+            continue
+        if not SHA256_RE.match(declared):
+            errors.append(f"artifact_refs[{index}].sha256 must be a 64-character hex digest")
+            continue
+        actual = sha256_file(resolved)
+        if actual.lower() != declared.lower():
+            errors.append(f"artifact_refs[{index}].sha256 does not match local artifact")
+            continue
+        stats["artifact_sha256_verified_count"] += 1
+    return stats
 
 
 def validate_evidence_specific(payload: dict[str, Any], errors: list[str]) -> None:
@@ -161,7 +228,7 @@ def validate_payload(
     add_error(errors, bool(str(payload.get("submitted_by", "")).strip()), "submitted_by is required")
     add_error(errors, bool(str(payload.get("submitted_at", "")).strip()), "submitted_at is required")
     add_error(errors, bool(str(payload.get("summary", "")).strip()), "summary is required")
-    validate_artifact_refs(payload, errors)
+    artifact_integrity = validate_artifact_refs(payload, errors, root=root, template_expected=template_expected)
     privacy = payload.get("privacy", {}) if isinstance(payload.get("privacy", {}), dict) else {}
     for key in REQUIRED_PRIVACY_FALSE:
         add_error(errors, privacy.get(key) is False, f"privacy.{key} must be false")
@@ -178,6 +245,7 @@ def validate_payload(
         "evidence_key": evidence_key,
         "status": "pass" if not errors else "fail",
         "template_only": template_expected,
+        "artifact_integrity": artifact_integrity,
         "errors": errors,
     }
 
@@ -372,14 +440,22 @@ def build_intake(skill_dir: Path, generated_at: str, submissions_dir: Path | Non
 
 
 def render_table(items: list[dict[str, Any]]) -> list[str]:
-    lines = ["| Evidence | Status | Path | Errors |", "| --- | --- | --- | --- |"]
+    lines = ["| Evidence | Status | Path | Artifacts | Errors |", "| --- | --- | --- | --- | --- |"]
     if not items:
-        lines.append("| `none` | `n/a` | none | none |")
+        lines.append("| `none` | `n/a` | none | none | none |")
         return lines
     for item in items:
         errors = "; ".join(item.get("errors", [])) or "none"
         safe_errors = errors.replace("|", "\\|")
-        lines.append(f"| `{item['evidence_key']}` | `{item['status']}` | `{item['path']}` | {safe_errors} |")
+        integrity = item.get("artifact_integrity", {}) if isinstance(item.get("artifact_integrity", {}), dict) else {}
+        artifact_summary = (
+            f"{integrity.get('artifact_existing_count', 0)} existing / "
+            f"{integrity.get('artifact_sha256_verified_count', 0)} sha256 verified / "
+            f"{integrity.get('artifact_ref_count', 0)} refs"
+        )
+        lines.append(
+            f"| `{item['evidence_key']}` | `{item['status']}` | `{item['path']}` | {artifact_summary} | {safe_errors} |"
+        )
     return lines
 
 

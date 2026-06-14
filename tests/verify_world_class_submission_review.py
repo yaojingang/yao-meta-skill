@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import hashlib
 import json
 import shutil
 import subprocess
@@ -9,6 +10,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPT = ROOT / "scripts" / "render_world_class_submission_review.py"
 TMP = ROOT / "tests" / "tmp_world_class_submission_review"
+
+
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def provider_submission(*, valid: bool = True) -> dict:
@@ -26,6 +35,7 @@ def provider_submission(*, valid: bool = True) -> dict:
                 "path": "reports/output_execution_runs.json",
                 "kind": "aggregate-report",
                 "contains_raw_content": not valid,
+                "sha256": sha256_file(ROOT / "reports" / "output_execution_runs.json") if valid else "example-only",
             }
         ],
         "provenance": {
@@ -126,6 +136,7 @@ def main() -> None:
     assert submitted_provider["review_state"] == "source-evidence-incomplete", submitted_provider
     assert submitted_provider["intake_status"] == "pass", submitted_provider
     assert submitted_provider["submission_status"] == "submitted", submitted_provider
+    assert submitted_provider["artifact_ref_count"] == 1, submitted_provider
     assert submitted_provider["source_accepted"] is False, submitted_provider
     assert "model_executed_count" in submitted_provider["observed_state"], submitted_provider
 
@@ -151,6 +162,7 @@ def main() -> None:
     invalid_provider = {item["evidence_key"]: item for item in invalid_payload["items"]}["provider-holdout"]
     assert invalid_provider["review_state"] == "fix-submission", invalid_provider
     assert invalid_provider["intake_errors"], invalid_provider
+    assert any("sha256" in error for error in invalid_provider["intake_errors"]), invalid_provider
     print(json.dumps({"ok": True}, ensure_ascii=False, indent=2))
 
 

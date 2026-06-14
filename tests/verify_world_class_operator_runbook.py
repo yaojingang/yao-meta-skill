@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import hashlib
 import json
 import os
 import shutil
@@ -11,6 +12,14 @@ ROOT = Path(__file__).resolve().parent.parent
 SCRIPT = ROOT / "scripts" / "render_world_class_operator_runbook.py"
 CLI = ROOT / "scripts" / "yao.py"
 TMP = ROOT / "tests" / "tmp_world_class_operator_runbook"
+
+
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def provider_submission() -> dict:
@@ -28,7 +37,7 @@ def provider_submission() -> dict:
                 "path": "reports/output_execution_runs.json",
                 "kind": "aggregate-report",
                 "contains_raw_content": False,
-                "sha256": "example-only",
+                "sha256": sha256_file(ROOT / "reports" / "output_execution_runs.json"),
             }
         ],
         "provenance": {"provider": "openai", "model": "gpt-4.1-mini", "credential_material_committed": False},
