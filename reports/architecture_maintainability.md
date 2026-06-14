@@ -11,7 +11,7 @@ Generated at: `2026-06-14`
 - internal modules: `23`
 - CLI scripts: `76`
 - Yao CLI command handlers: `34`
-- largest file lines: `888`
+- largest file lines: `891`
 - hotspots: `0`
 - blockers: `0`
 
@@ -25,8 +25,8 @@ No file-size hotspots found.
 
 | File | Lines | Kind | Severity |
 | --- | ---: | --- | --- |
-| `tests/verify_yao_cli.py` | `888` | `test` | `pass` |
-| `scripts/yao.py` | `874` | `cli-script` | `pass` |
+| `tests/verify_yao_cli.py` | `891` | `test` | `pass` |
+| `scripts/yao.py` | `881` | `cli-script` | `pass` |
 | `scripts/skill_report_model.py` | `792` | `internal-module` | `pass` |
 | `scripts/yao_cli_parser.py` | `741` | `internal-module` | `pass` |
 | `scripts/compile_skill.py` | `734` | `cli-script` | `pass` |

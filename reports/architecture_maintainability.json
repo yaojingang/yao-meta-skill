@@ -12,7 +12,7 @@
     "command_handler_count": 34,
     "warn_line_threshold": 900,
     "block_line_threshold": 1500,
-    "largest_file_lines": 888,
+    "largest_file_lines": 891,
     "hotspot_count": 0,
     "blocker_count": 0,
     "decision": "pass"
@@ -20,14 +20,14 @@
   "largest_files": [
     {
       "path": "tests/verify_yao_cli.py",
-      "lines": 888,
+      "lines": 891,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
       "path": "scripts/yao.py",
-      "lines": 874,
+      "lines": 881,
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator."
