@@ -105,6 +105,9 @@ def main() -> None:
     assert summary["ready_for_ledger_review_count"] == 0, summary
     assert summary["valid_packet_source_incomplete_count"] == 0, summary
     assert summary["invalid_submission_count"] == 0, summary
+    assert summary["source_check_count"] >= 13, summary
+    assert summary["source_pass_count"] + summary["source_blocked_count"] == summary["source_check_count"], summary
+    assert summary["source_blocked_count"] >= 6, summary
     assert summary["ready_to_claim_world_class"] is False, summary
     assert summary["runbook_counts_as_completion"] is False, summary
     items = {item["evidence_key"]: item for item in payload["items"]}
@@ -124,14 +127,22 @@ def main() -> None:
     assert "world-class-claim-guard" in provider["commands"]["guard_claim"], provider
     assert "provider-backed model run" in provider["must_collect"]["provenance_requirements"], provider
     assert "reports/output_execution_runs.json summary.model_executed_count > 0" in provider["must_collect"]["success_checks"], provider
+    provider_source = {item["field"]: item for item in provider["source_checklist"]}
+    assert provider_source["model_executed_count"]["status"] == "blocked", provider_source
+    assert provider_source["timing_observed_count"]["status"] == "pass", provider_source
+    assert provider_source["token_observed_count"]["status"] == "blocked", provider_source
     markdown = output_md.read_text(encoding="utf-8")
     assert "World-Class Operator Runbook" in markdown, markdown
     assert "runbook counts as completion: `false`" in markdown, markdown
     assert "Valid intake means ready for submission review; ledger review still requires passing source evidence." in markdown, markdown
+    assert "Source Evidence Snapshot" in markdown, markdown
+    assert "| Provider model run | `0` | `>0` | `blocked` |" in markdown, markdown
     html = output_html.read_text(encoding="utf-8")
     assert "World-Class Operator Runbook" in html, html[:400]
     assert "ledger and claim guard" in html, html
     assert "position:sticky" in html, html
+    assert "Source Evidence Snapshot" in html, html
+    assert "model_executed_count" in html, html
     assert "<script" not in html.lower(), html
     assert "http://" not in html and "https://" not in html, html
 
@@ -162,6 +173,8 @@ def main() -> None:
     assert submitted_summary["awaiting_submission_count"] == 3, submitted_summary
     assert submitted_summary["valid_packet_source_incomplete_count"] == 1, submitted_summary
     assert submitted_summary["ready_for_ledger_review_count"] == 0, submitted_summary
+    assert submitted_summary["source_pass_count"] + submitted_summary["source_blocked_count"] == submitted_summary["source_check_count"], submitted_summary
+    assert submitted_summary["source_blocked_count"] >= 6, submitted_summary
     assert submitted_summary["ready_to_claim_world_class"] is False, submitted_summary
     submitted_provider = {item["evidence_key"]: item for item in submitted["items"]}["provider-holdout"]
     assert submitted_provider["intake_readiness"] == "source-evidence-incomplete", submitted_provider

@@ -481,6 +481,8 @@ def main() -> None:
     assert full_payload["data"]["world_class_submission_review"]["summary"]["decision"] == "awaiting-submissions", full_payload["data"]["world_class_submission_review"]
     assert full_payload["data"]["world_class_submission_review"]["summary"]["review_counts_submission_as_completion"] is False, full_payload["data"]["world_class_submission_review"]
     assert full_payload["data"]["world_class_submission_review"]["summary"]["awaiting_submission_count"] == 4, full_payload["data"]["world_class_submission_review"]
+    assert full_payload["data"]["world_class_submission_review"]["summary"]["source_check_count"] >= 13, full_payload["data"]["world_class_submission_review"]
+    assert full_payload["data"]["world_class_submission_review"]["summary"]["source_blocked_count"] >= 6, full_payload["data"]["world_class_submission_review"]
     assert full_payload["data"]["world_class_operator_runbook"]["summary"]["decision"] == "collect-evidence", full_payload["data"]["world_class_operator_runbook"]
     assert full_payload["data"]["world_class_operator_runbook"]["summary"]["runbook_counts_as_completion"] is False, full_payload["data"]["world_class_operator_runbook"]
     assert full_payload["data"]["world_class_operator_runbook"]["summary"]["awaiting_submission_count"] == 4, full_payload["data"]["world_class_operator_runbook"]
@@ -589,6 +591,11 @@ def main() -> None:
     assert "隐私约束" in html, html
     assert "reports/output_execution_runs.json summary.model_executed_count &gt; 0" in html, html
     assert "计划、metadata fallback、待评审和本地命令不会被当成完成证据" in html, html
+    assert "源证据检查" in html, html
+    assert "world-source-checks" in html, html
+    assert "Provider model run" in html, html
+    assert "model_executed_count: 0 / &gt;0" in html, html
+    assert "Token usage observed" in html, html
     assert "蓝图覆盖" in html, html
     assert "本地蓝图" in html, html
     assert "public world-class 仍以 world-class evidence ledger" in html, html

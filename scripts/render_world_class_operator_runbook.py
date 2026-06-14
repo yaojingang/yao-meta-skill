@@ -73,6 +73,7 @@ def build_runbook_item(
         },
         "evidence_artifacts": entry.get("evidence_artifacts", []),
         "observed_state": entry.get("observed_state", {}),
+        "source_checklist": review_item.get("source_checklist", []),
         "submission_state": entry.get("submission_state", {}),
         "anti_overclaim": entry.get("anti_overclaim", {}),
     }
@@ -104,6 +105,9 @@ def build_operator_runbook(skill_dir: Path, generated_at: str, submissions_dir: 
             "ready_for_ledger_review_count": review_summary.get("ready_for_ledger_review_count", 0),
             "valid_packet_source_incomplete_count": review_summary.get("valid_packet_source_incomplete_count", 0),
             "invalid_submission_count": review_summary.get("invalid_submission_count", 0),
+            "source_check_count": review_summary.get("source_check_count", 0),
+            "source_pass_count": review_summary.get("source_pass_count", 0),
+            "source_blocked_count": review_summary.get("source_blocked_count", 0),
             "ready_to_claim_world_class": summary.get("ready_to_claim_world_class") is True,
             "runbook_counts_as_completion": False,
             "decision": "ready-for-completion-audit" if summary.get("ready_to_claim_world_class") is True else "collect-evidence",
@@ -194,6 +198,23 @@ def render_markdown(report: dict[str, Any]) -> str:
         lines.extend(list_lines(item["must_collect"].get("privacy_contract", []), "No privacy contract listed."))
         lines.extend(["", "### Evidence Artifacts", ""])
         lines.extend(list_lines(item.get("evidence_artifacts", []), "No evidence artifacts listed."))
+        lines.extend(
+            [
+                "",
+                "### Source Evidence Snapshot",
+                "",
+                "| Check | Current | Expected | Status |",
+                "| --- | --- | --- | --- |",
+            ]
+        )
+        source_rows = item.get("source_checklist", [])
+        if source_rows:
+            for row in source_rows:
+                lines.append(
+                    f"| {row['label']} | `{row['actual']}` | `{row['expected']}` | `{row['status']}` |"
+                )
+        else:
+            lines.append("| No source checks listed. | `n/a` | `n/a` | `n/a` |")
     lines.extend(
         [
             "",
@@ -211,6 +232,23 @@ def html_list(values: list[Any], empty: str) -> str:
     if not values:
         return f"<li>{html_text(empty)}</li>"
     return "".join(f"<li>{html_text(value)}</li>" for value in values)
+
+
+def html_source_checks(rows: list[dict[str, Any]]) -> str:
+    if not rows:
+        return "<p class='muted'>No source checks listed.</p>"
+    items = []
+    for row in rows:
+        items.append(
+            "<li class='source-check "
+            + html_text(row.get("status", ""))
+            + "'>"
+            f"<span>{html_text(row.get('label', ''))}</span>"
+            f"<code>{html_text(row.get('field', ''))}: {html_text(row.get('actual', ''))} / {html_text(row.get('expected', ''))}</code>"
+            f"<small>{html_text(row.get('next_action', ''))}</small>"
+            "</li>"
+        )
+    return "<ul class='source-checks'>" + "".join(items) + "</ul>"
 
 
 def render_html_item(item: dict[str, Any]) -> str:
@@ -234,6 +272,7 @@ def render_html_item(item: dict[str, Any]) -> str:
           <section><h4>Success Checks</h4><ul>{html_list(must_collect.get('success_checks', []), 'No success checks listed.')}</ul></section>
           <section><h4>Privacy</h4><ul>{html_list(must_collect.get('privacy_contract', []), 'No privacy contract listed.')}</ul></section>
         </div>
+        <section class="source-panel"><h4>Source Evidence Snapshot</h4>{html_source_checks(item.get('source_checklist', []))}</section>
       </article>
     """.strip()
 
@@ -244,6 +283,7 @@ def render_html(report: dict[str, Any]) -> str:
         ("Pending", summary["pending_count"]),
         ("Awaiting", summary["awaiting_submission_count"]),
         ("Ready", summary["ready_for_ledger_review_count"]),
+        ("Source", f"{summary.get('source_pass_count', 0)}/{summary.get('source_check_count', 0)}"),
         ("Invalid", summary["invalid_submission_count"]),
     ]
     stat_html = "".join(f"<article><span>{html_text(label)}</span><strong>{html_text(value)}</strong></article>" for label, value in stats)
@@ -272,7 +312,7 @@ def render_html(report: dict[str, Any]) -> str:
     h3 {{ margin:4px 0 10px; font-size:22px; }}
     h4 {{ margin:0 0 8px; font-size:16px; }}
     .lede {{ max-width:800px; color:var(--muted); font-size:20px; }}
-    .stats {{ display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:12px; margin-top:26px; }}
+    .stats {{ display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); gap:12px; margin-top:26px; }}
     .stats article, .panel, .item-card {{ border:1px solid var(--line); border-radius:8px; background:#fff; }}
     .stats article {{ padding:16px; }}
     .stats span, .item-card span, .muted {{ color:var(--muted); }}
@@ -292,6 +332,11 @@ def render_html(report: dict[str, Any]) -> str:
     .mini-grid {{ display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:12px; margin-top:14px; }}
     .mini-grid section, .panel {{ background:var(--soft); border-radius:8px; padding:14px; min-width:0; }}
     .mini-grid li, .panel li {{ overflow-wrap:anywhere; }}
+    .source-panel {{ background:var(--soft); border-radius:8px; padding:14px; min-width:0; }}
+    .source-checks {{ list-style:none; padding:0; margin:0; display:grid; gap:8px; }}
+    .source-check {{ border-top:1px solid var(--line); padding-top:8px; display:grid; gap:3px; }}
+    .source-check span {{ color:var(--ink); }}
+    .source-check code, .source-check small {{ overflow-wrap:anywhere; }}
     @media (max-width:820px) {{ .stats, .mini-grid {{ grid-template-columns:1fr; }} h1 {{ font-size:38px; }} .topbar-inner {{ align-items:flex-start; flex-direction:column; }} }}
   </style>
 </head>

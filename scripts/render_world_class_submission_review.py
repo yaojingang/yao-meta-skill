@@ -7,6 +7,7 @@ from typing import Any
 
 from render_world_class_evidence_intake import build_intake
 from render_world_class_evidence_ledger import build_ledger
+from world_class_source_checks import build_source_checklist, summarize_source_checklist
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -55,6 +56,8 @@ def build_item(entry: dict[str, Any], intake_result: dict[str, Any] | None) -> d
     state, reason = review_state(entry, intake_result)
     submission = entry.get("submission_state", {}) if isinstance(entry.get("submission_state", {}), dict) else {}
     observed = entry.get("observed_state", {}) if isinstance(entry.get("observed_state", {}), dict) else {}
+    source_checklist = build_source_checklist([entry])
+    source_summary = summarize_source_checklist(source_checklist)
     return {
         "evidence_key": entry.get("key", ""),
         "label": entry.get("label", entry.get("key", "")),
@@ -72,6 +75,8 @@ def build_item(entry: dict[str, Any], intake_result: dict[str, Any] | None) -> d
         "artifact_ref_count": submission.get("artifact_ref_count", 0),
         "intake_errors": intake_result.get("errors", []) if intake_result else [],
         "observed_state": observed,
+        "source_checklist": source_checklist,
+        **source_summary,
         "success_checks": entry.get("success_checks", []),
         "privacy_contract": entry.get("privacy_contract", []),
         "next_action": entry.get("next_action", ""),
@@ -96,6 +101,8 @@ def build_submission_review(skill_dir: Path, generated_at: str, submissions_dir:
     accepted_count = counts.get("accepted", 0)
     source_incomplete_count = counts.get("source-evidence-incomplete", 0)
     awaiting_count = counts.get("awaiting-submission", 0)
+    source_rows = [row for item in items for row in item.get("source_checklist", [])]
+    source_summary = summarize_source_checklist(source_rows)
     if accepted_count == len(items) and items:
         decision = "ledger-complete"
     elif invalid_count:
@@ -120,6 +127,7 @@ def build_submission_review(skill_dir: Path, generated_at: str, submissions_dir:
             "fix_submission_count": counts.get("fix-submission", 0),
             "unmatched_submission_count": len(unmatched),
             "invalid_submission_count": invalid_count,
+            **source_summary,
             "ready_to_claim_world_class": ledger.get("summary", {}).get("ready_to_claim_world_class") is True,
             "review_counts_submission_as_completion": False,
             "decision": decision,
@@ -202,7 +210,17 @@ def render_markdown(report: dict[str, Any]) -> str:
                 "",
                 "#### Source Checks",
                 "",
-                *render_list(item.get("success_checks", []), "No source checks listed."),
+                *render_list(
+                    [
+                        f"{row['label']}: {row['actual']} / {row['expected']} => {row['status']}"
+                        for row in item.get("source_checklist", [])
+                    ],
+                    "No source checks listed.",
+                ),
+                "",
+                "#### Completion Assertions",
+                "",
+                *render_list(item.get("success_checks", []), "No completion assertions listed."),
                 "",
                 "#### Intake Errors",
                 "",

@@ -4,6 +4,8 @@
 import html
 from typing import Any
 
+from world_class_source_checks import build_source_checklist
+
 
 SCRIPT_INTERFACE = "internal-module"
 SCRIPT_INTERFACE_REASON = "Imported by render_review_studio.py to render world-class evidence cards."
@@ -13,6 +15,25 @@ def render_inline_list(items: list[Any], empty_label: str) -> str:
     if not items:
         return f"<p class='muted'>{html.escape(empty_label)}</p>"
     return "<ul>" + "".join(f"<li>{html.escape(str(item))}</li>" for item in items) + "</ul>"
+
+
+def render_source_checks(entry: dict[str, Any]) -> str:
+    rows = build_source_checklist([entry])
+    if not rows:
+        return "<p class='muted'>暂无源证据检查。</p>"
+    items = []
+    for row in rows:
+        status = str(row.get("status", "blocked"))
+        items.append(
+            "<li class='world-source-check "
+            + html.escape(status)
+            + "'>"
+            f"<span>{html.escape(str(row.get('label', '')))}</span>"
+            f"<code>{html.escape(str(row.get('field', '')))}: {html.escape(str(row.get('actual', '')))} / {html.escape(str(row.get('expected', '')))}</code>"
+            f"<small>{html.escape(str(row.get('next_action', '')))}</small>"
+            "</li>"
+        )
+    return "<ul class='world-source-checks'>" + "".join(items) + "</ul>"
 
 
 def render_world_class_evidence_entries(ledger: dict[str, Any]) -> str:
@@ -52,6 +73,9 @@ def render_world_class_evidence_entries(ledger: dict[str, Any]) -> str:
             + render_inline_list(entry.get("privacy_contract", []), "暂无隐私约束。")
             + "</div>"
             "</div>"
+            "<section class='world-source-panel'><h4>源证据检查</h4>"
+            + render_source_checks(entry)
+            + "</section>"
             "</article>"
         )
     return "<div class='world-evidence-grid'>" + "".join(cards) + "</div>"

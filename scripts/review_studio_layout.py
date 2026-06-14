@@ -253,6 +253,44 @@ def review_studio_css() -> str:
       margin: 0;
       padding-left: 18px;
     }
+    .world-source-panel {
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+    }
+    .world-source-panel h4 {
+      margin: 0 0 8px;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .world-source-checks {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 8px;
+    }
+    .world-source-check {
+      display: grid;
+      grid-template-columns: minmax(0, .7fr) minmax(0, .6fr) minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      min-width: 0;
+      padding: 9px 0 0;
+      border-top: 1px solid var(--line);
+    }
+    .world-source-check span {
+      color: var(--ink);
+      font-size: 14px;
+    }
+    .world-source-check code,
+    .world-source-check small {
+      color: var(--muted);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+    .world-source-check.pass { border-left: 3px solid var(--pass); padding-left: 8px; }
+    .world-source-check.blocked { border-left: 3px solid var(--warn); padding-left: 8px; }
     .output-review-grid {
       display: grid;
       grid-template-columns: minmax(0, 1fr);
@@ -515,7 +553,7 @@ def review_studio_css() -> str:
       font-size: 13px;
     }
     @media (max-width: 980px) {
-      .metrics, .gates, .twocol, .actions-grid, .annotations-grid, .output-review-grid, .output-review-steps, .world-evidence-grid, .world-evidence-columns, .world-intake-grid, .world-intake-steps, .waiver-candidate-grid, .waiver-card dl, .kv-grid { grid-template-columns: 1fr; }
+      .metrics, .gates, .twocol, .actions-grid, .annotations-grid, .output-review-grid, .output-review-steps, .world-evidence-grid, .world-evidence-columns, .world-source-check, .world-intake-grid, .world-intake-steps, .waiver-candidate-grid, .waiver-card dl, .kv-grid { grid-template-columns: 1fr; }
       main { padding: 32px 18px 60px; }
       nav { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; }
       nav a { flex: 0 0 auto; }
