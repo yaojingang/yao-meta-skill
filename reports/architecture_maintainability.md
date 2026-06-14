@@ -35,8 +35,8 @@ No file-size hotspots found.
 | `scripts/render_review_viewer.py` | `685` | `cli-script` | `pass` |
 | `scripts/build_skill_atlas.py` | `674` | `cli-script` | `pass` |
 | `scripts/skill_report_layout.py` | `653` | `internal-module` | `pass` |
+| `tests/verify_review_studio.py` | `647` | `test` | `pass` |
 | `scripts/render_reference_synthesis.py` | `644` | `cli-script` | `pass` |
-| `scripts/cross_packager.py` | `641` | `cli-script` | `pass` |
 
 ## Release Rule
 

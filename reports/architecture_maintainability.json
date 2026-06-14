@@ -89,15 +89,15 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
-      "path": "scripts/render_reference_synthesis.py",
-      "lines": 644,
-      "kind": "cli-script",
+      "path": "tests/verify_review_studio.py",
+      "lines": 647,
+      "kind": "test",
       "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
-      "path": "scripts/cross_packager.py",
-      "lines": 641,
+      "path": "scripts/render_reference_synthesis.py",
+      "lines": 644,
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
