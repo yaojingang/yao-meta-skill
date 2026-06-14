@@ -115,13 +115,26 @@ def main() -> None:
     assert payload["schema_version"] == "1.0", payload
     assert payload["ok"] is True, payload
     assert payload["summary"]["reproducibility_ready"] is True, payload
+    assert payload["summary"]["release_lock_ready"] == (payload["git_status"]["dirty"] is False), payload
     assert payload["summary"]["methodology_complete"] is True, payload
     assert payload["summary"]["missing_artifact_count"] == 0, payload
+    assert len(payload["summary"]["evidence_bundle_sha256"]) == 64, payload
+    assert payload["summary"]["evidence_bundle_sha256"] == payload["evidence_bundle"]["sha256"], payload
+    assert payload["summary"]["source_contract_sha256"], payload
+    assert payload["summary"]["archive_sha256"], payload
     assert payload["summary"]["output_case_count"] >= 5, payload
     assert payload["summary"]["failure_disclosure_count"] >= 1, payload
     assert payload["summary"]["command_count"] >= 10, payload
     assert "working_tree_dirty" in payload["summary"], payload
     assert payload["git_status"]["available"] is True, payload
+    assert payload["git_status"]["scope"] == "generation-time status before this report is written", payload
+    assert payload["release_lock"]["status_scope"] == "generation-time status before this report is written", payload
+    assert payload["release_lock"]["commit"] == payload["commit"], payload
+    assert payload["evidence_bundle"]["algorithm"] == "sha256(path,label,exists,artifact_sha256)", payload
+    assert payload["evidence_bundle"]["artifact_count"] == payload["summary"]["required_artifact_count"], payload
+    assert payload["evidence_bundle"]["existing_count"] == payload["summary"]["required_artifact_count"], payload
+    assert payload["evidence_bundle"]["missing_count"] == 0, payload
+    assert payload["evidence_bundle"]["missing_paths"] == [], payload
     assert payload["summary"]["provider_evidence_complete"] is False, payload
     assert payload["summary"]["human_review_complete"] is False, payload
     assert payload["summary"]["world_class_ready"] is False, payload
@@ -150,6 +163,10 @@ def main() -> None:
     assert any("provider-backed" in item for item in payload["limitations"]), payload["limitations"]
     markdown = output_md.read_text(encoding="utf-8")
     assert "Benchmark Reproducibility" in markdown, markdown
+    assert "Evidence bundle SHA256" in markdown, markdown
+    assert "release lock ready" in markdown, markdown
+    assert "## Release Lock" in markdown, markdown
+    assert "## Evidence Bundle" in markdown, markdown
     assert "reports/benchmark_methodology.md" in markdown, markdown
     assert "reports/world_class_operator_runbook.html" in markdown, markdown
     assert "python3 scripts/yao.py world-class-runbook ." in markdown, markdown

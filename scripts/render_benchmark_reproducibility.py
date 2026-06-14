@@ -213,6 +213,7 @@ def git_status(skill_dir: Path) -> dict[str, Any]:
         "dirty": bool(lines),
         "changed_file_count": len(lines),
         "sample": lines[:12],
+        "scope": "generation-time status before this report is written",
     }
 
 
@@ -252,6 +253,58 @@ def artifact_record(skill_dir: Path, label: str, rel: str) -> dict[str, Any]:
     return record
 
 
+def evidence_bundle_fingerprint(artifacts: list[dict[str, Any]]) -> dict[str, Any]:
+    digest = hashlib.sha256()
+    existing_count = 0
+    missing_paths = []
+    for artifact in sorted(artifacts, key=lambda item: str(item.get("path", ""))):
+        path = str(artifact.get("path", ""))
+        digest.update(path.encode("utf-8"))
+        digest.update(b"\0")
+        digest.update(str(artifact.get("label", "")).encode("utf-8"))
+        digest.update(b"\0")
+        digest.update(str(bool(artifact.get("exists"))).encode("utf-8"))
+        digest.update(b"\0")
+        digest.update(str(artifact.get("sha256", "")).encode("utf-8"))
+        digest.update(b"\0")
+        if artifact.get("exists"):
+            existing_count += 1
+        else:
+            missing_paths.append(path)
+    return {
+        "algorithm": "sha256(path,label,exists,artifact_sha256)",
+        "artifact_count": len(artifacts),
+        "existing_count": existing_count,
+        "missing_count": len(missing_paths),
+        "missing_paths": missing_paths,
+        "sha256": digest.hexdigest(),
+    }
+
+
+def release_lock_status(status: dict[str, Any], commit: str) -> dict[str, Any]:
+    available = status.get("available") is True
+    clean = status.get("dirty") is False
+    known_commit = bool(commit and commit != "unknown")
+    ready = available and clean and known_commit
+    reasons = []
+    if not available:
+        reasons.append("git status unavailable")
+    if not known_commit:
+        reasons.append("git commit unavailable")
+    if status.get("dirty") is True:
+        reasons.append("working tree was dirty at generation time")
+    if status.get("dirty") is None:
+        reasons.append("working tree cleanliness unknown")
+    if not reasons:
+        reasons.append("clean generation-time HEAD")
+    return {
+        "ready": ready,
+        "commit": commit,
+        "status_scope": status.get("scope", "generation-time status"),
+        "reason": "; ".join(reasons),
+    }
+
+
 def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
     reports = skill_dir / "reports"
     output_quality = load_json(reports / "output_quality_scorecard.json")
@@ -260,8 +313,11 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
     skill_os2 = load_json(reports / "skill_os2_audit.json")
     world_class_plan = load_json(reports / "world_class_evidence_plan.json")
     world_class_ledger = load_json(reports / "world_class_evidence_ledger.json")
+    trust = load_json(reports / "security_trust_report.json")
+    package_verification = load_json(reports / "package_verification.json")
     methodology = methodology_check(reports / "benchmark_methodology.md")
     artifacts = [artifact_record(skill_dir, label, rel) for label, rel in REQUIRED_ARTIFACTS]
+    evidence_bundle = evidence_bundle_fingerprint(artifacts)
     missing_artifacts = [item["path"] for item in artifacts if not item["exists"]]
     output_summary = output_quality.get("summary", {})
     execution_summary = output_execution.get("summary", {})
@@ -269,6 +325,8 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
     failure_case_count = count_failure_cases(skill_dir / "evals" / "failure-cases.md")
     output_case_count = count_jsonl(skill_dir / "evals" / "output" / "cases.jsonl")
     status = git_status(skill_dir)
+    commit = git_commit(skill_dir)
+    release_lock = release_lock_status(status, commit)
     local_reproducibility_ready = (
         not methodology["missing_sections"]
         and not missing_artifacts
@@ -285,13 +343,17 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
         "ok": local_reproducibility_ready,
         "generated_at": generated_at,
         "skill_dir": rel_path(skill_dir, ROOT),
-        "commit": git_commit(skill_dir),
+        "commit": commit,
         "git_status": status,
         "summary": {
             "reproducibility_ready": local_reproducibility_ready,
+            "release_lock_ready": release_lock["ready"],
             "methodology_complete": not methodology["missing_sections"],
             "required_artifact_count": len(artifacts),
             "missing_artifact_count": len(missing_artifacts),
+            "evidence_bundle_sha256": evidence_bundle["sha256"],
+            "source_contract_sha256": trust.get("summary", {}).get("package_sha256", ""),
+            "archive_sha256": package_verification.get("summary", {}).get("archive_sha256", ""),
             "output_case_count": output_case_count,
             "failure_disclosure_count": failure_case_count,
             "command_count": len(REPRODUCTION_COMMANDS),
@@ -308,6 +370,8 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             "working_tree_dirty": status.get("dirty"),
             "changed_file_count": status.get("changed_file_count"),
         },
+        "release_lock": release_lock,
+        "evidence_bundle": evidence_bundle,
         "methodology": methodology,
         "artifacts_checked": artifacts,
         "missing_artifacts": missing_artifacts,
@@ -318,6 +382,7 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             "policy": "Keep representative failures visible and tied to regression checks.",
         },
         "limitations": [
+            "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
             "Local command-runner evidence is reproducible but does not replace provider-backed model holdout evidence.",
             "Pending blind-review decisions are visible but do not count as human adjudication.",
             "World-class readiness remains false until external and human evidence gaps close.",
@@ -337,13 +402,17 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"Generated at: `{report['generated_at']}`",
         f"Commit: `{report['commit']}`",
         f"Working tree dirty at generation: `{str(summary.get('working_tree_dirty')).lower()}`",
+        f"Evidence bundle SHA256: `{summary.get('evidence_bundle_sha256', '')}`",
         "",
         "## Summary",
         "",
         f"- reproducibility ready: `{str(summary['reproducibility_ready']).lower()}`",
+        f"- release lock ready: `{str(summary.get('release_lock_ready')).lower()}`",
         f"- methodology complete: `{str(summary['methodology_complete']).lower()}`",
         f"- required artifacts: `{summary['required_artifact_count']}`",
         f"- missing artifacts: `{summary['missing_artifact_count']}`",
+        f"- source contract sha256: `{summary.get('source_contract_sha256', '')[:12]}`",
+        f"- archive sha256: `{summary.get('archive_sha256', '')[:12]}`",
         f"- output cases: `{summary['output_case_count']}`",
         f"- disclosed failure cases: `{summary['failure_disclosure_count']}`",
         f"- reproduction commands: `{summary['command_count']}`",
@@ -352,7 +421,19 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- world-class ready: `{str(summary['world_class_ready']).lower()}`",
         f"- changed files at generation: `{summary.get('changed_file_count')}`",
         "",
-        "This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete.",
+        "This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete. The git commit is generation-time context; the evidence bundle SHA is the durable anchor for the artifacts listed below.",
+        "",
+        "## Release Lock",
+        "",
+        f"- ready: `{str(report.get('release_lock', {}).get('ready')).lower()}`",
+        f"- reason: {report.get('release_lock', {}).get('reason', 'unknown')}",
+        f"- status scope: {report.get('release_lock', {}).get('status_scope', 'generation-time status')}",
+        "",
+        "## Evidence Bundle",
+        "",
+        f"- algorithm: `{report.get('evidence_bundle', {}).get('algorithm', '')}`",
+        f"- artifacts: `{report.get('evidence_bundle', {}).get('existing_count', 0)}` / `{report.get('evidence_bundle', {}).get('artifact_count', 0)}`",
+        f"- sha256: `{report.get('evidence_bundle', {}).get('sha256', '')}`",
         "",
         "## Methodology Sections",
         "",
