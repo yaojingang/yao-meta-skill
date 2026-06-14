@@ -76,7 +76,7 @@
     },
     {
       "path": "tests/verify_review_studio.py",
-      "lines": 695,
+      "lines": 702,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
