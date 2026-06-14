@@ -44,6 +44,11 @@ SKILL_BODY_WARN_RATIO = 0.85
 DEFERRED_RESOURCE_DIRS = {"references", "scripts", "evals", "templates", "assets", "input", "outputs"}
 DEFERRED_RESOURCE_WARN_TOKENS = 120_000
 DEFERRED_RESOURCE_WARN_DIR_TOKENS = 80_000
+SCRIPT_GOVERNANCE_REPORTS = (
+    "reports/security_trust_report.json",
+    "reports/architecture_maintainability.json",
+    "reports/python_compatibility.json",
+)
 
 
 def has_files(path: Path) -> bool:
@@ -63,6 +68,16 @@ def load_manifest(path: Path) -> dict:
     if not path.exists():
         return {}
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def load_json(path: Path) -> dict:
+    if not path.exists():
+        return {}
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return {}
+    return payload if isinstance(payload, dict) else {}
 
 
 def iter_relevant_files(root: Path) -> list[Path]:
@@ -110,6 +125,111 @@ def quality_signal_points(root: Path, manifest: dict, governance_score: int) -> 
     if has_files(root / "failures") or has_files(root / "tests"):
         points += 5
     return points
+
+
+def script_resource_governance(root: Path, expected_file_count: int) -> dict:
+    trust = load_json(root / "reports" / "security_trust_report.json")
+    architecture = load_json(root / "reports" / "architecture_maintainability.json")
+    python_compat = load_json(root / "reports" / "python_compatibility.json")
+    trust_summary = trust.get("summary", {}) if isinstance(trust.get("summary", {}), dict) else {}
+    architecture_summary = architecture.get("summary", {}) if isinstance(architecture.get("summary", {}), dict) else {}
+    python_summary = python_compat.get("summary", {}) if isinstance(python_compat.get("summary", {}), dict) else {}
+
+    reasons = []
+    missing = []
+    checks = [
+        (
+            "trust report covers scripts",
+            trust.get("ok") is True
+            and int(trust_summary.get("script_count", 0) or 0) >= expected_file_count
+            and int(trust_summary.get("secret_findings", 0) or 0) == 0
+            and int(trust_summary.get("help_smoke_failed_count", 0) or 0) == 0,
+        ),
+        (
+            "architecture report has no script hotspots or blockers",
+            architecture.get("ok") is True
+            and int(architecture_summary.get("hotspot_count", 0) or 0) == 0
+            and int(architecture_summary.get("blocker_count", 0) or 0) == 0,
+        ),
+        (
+            "Python compatibility report has no issues",
+            python_compat.get("ok") is True
+            and int(python_summary.get("issue_count", 0) or 0) == 0,
+        ),
+    ]
+    for label, ok in checks:
+        if ok:
+            reasons.append(label)
+        else:
+            missing.append(label)
+    return {
+        "status": "governed" if not missing else "needs-review",
+        "evidence": list(SCRIPT_GOVERNANCE_REPORTS),
+        "reasons": reasons,
+        "missing": missing,
+    }
+
+
+def deferred_dir_governance(
+    root: Path,
+    dirname: str,
+    payload: dict,
+    manifest: dict,
+    skill_text: str,
+) -> dict:
+    file_count = int(payload.get("file_count", 0) or 0)
+    if dirname == "scripts":
+        governance = script_resource_governance(root, file_count)
+        governance.update(
+            {
+                "path": dirname,
+                "estimated_tokens": int(payload.get("estimated_tokens", 0) or 0),
+                "file_count": file_count,
+                "rationale": "Script resources are deterministic deferred tools, not initial-load prompt context.",
+            }
+        )
+        return governance
+
+    referenced = explicit_dir_reference(dirname, root / dirname, skill_text, manifest)
+    declared = dirname in (manifest.get("factory_components") or [])
+    governed = referenced or declared
+    return {
+        "path": dirname,
+        "status": "governed" if governed else "needs-review",
+        "estimated_tokens": int(payload.get("estimated_tokens", 0) or 0),
+        "file_count": file_count,
+        "evidence": ["SKILL.md", "manifest.json"],
+        "reasons": ["directory is explicitly referenced or declared as a factory component"] if governed else [],
+        "missing": [] if governed else ["directory is not referenced in SKILL.md or manifest factory_components"],
+        "rationale": "Deferred resources are acceptable when they are discoverable and intentionally part of the package contract.",
+    }
+
+
+def deferred_resource_governance(
+    root: Path,
+    manifest: dict,
+    skill_text: str,
+    deferred_resource_dirs: dict[str, dict[str, int | str]],
+    large_deferred_resource_dirs: list[dict],
+) -> dict:
+    governed_dirs = [
+        deferred_dir_governance(root, str(item["path"]), item, manifest, skill_text)
+        for item in large_deferred_resource_dirs
+    ]
+    missing = [item for item in governed_dirs if item["status"] != "governed"]
+    return {
+        "status": "governed" if governed_dirs and not missing else ("not-required" if not governed_dirs else "needs-review"),
+        "large_dir_count": len(governed_dirs),
+        "governed_large_dir_count": len(governed_dirs) - len(missing),
+        "directories": governed_dirs,
+        "summary": (
+            "Large deferred resources are indexed and backed by evidence."
+            if governed_dirs and not missing
+            else "No large deferred resource directory exceeds the per-dir threshold."
+            if not governed_dirs
+            else "One or more large deferred resource directories still need explicit governance evidence."
+        ),
+    }
 
 
 def analyze_skill(
@@ -197,7 +317,15 @@ def analyze_skill(
         )
         if int(item["estimated_tokens"]) > DEFERRED_RESOURCE_WARN_DIR_TOKENS
     ]
-    if deferred_resource_tokens > DEFERRED_RESOURCE_WARN_TOKENS:
+    deferred_governance = deferred_resource_governance(
+        root,
+        manifest,
+        skill_text,
+        deferred_resource_dirs,
+        large_deferred_resource_dirs,
+    )
+
+    if deferred_resource_tokens > DEFERRED_RESOURCE_WARN_TOKENS and deferred_governance["status"] != "governed":
         warnings.append(
             "Deferred resource footprint is high: "
             f"{deferred_resource_tokens} estimated tokens across references/scripts/evals. "
@@ -228,6 +356,7 @@ def analyze_skill(
                 reverse=True,
             ),
             "large_deferred_resource_dirs": large_deferred_resource_dirs,
+            "deferred_resource_governance": deferred_governance,
             "relevant_file_count": len(files),
             "unused_resource_dirs": unused_resource_dirs,
             "quality_signal_points": signal_points,

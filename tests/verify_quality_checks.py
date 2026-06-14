@@ -47,6 +47,7 @@ def require_context_targets(case: dict, max_initial: int, min_density: float) ->
     deferred = stats.get("deferred_resource_tokens")
     deferred_threshold = stats.get("deferred_resource_warn_threshold")
     deferred_dirs = stats.get("deferred_resource_dirs", [])
+    deferred_governance = stats.get("deferred_resource_governance", {})
     unused = stats.get("unused_resource_dirs", [])
     case["max_initial_load"] = max_initial
     case["observed_initial_load"] = initial
@@ -55,6 +56,7 @@ def require_context_targets(case: dict, max_initial: int, min_density: float) ->
     case["observed_deferred_resource_tokens"] = deferred
     case["deferred_resource_warn_threshold"] = deferred_threshold
     case["deferred_resource_dir_count"] = len(deferred_dirs) if isinstance(deferred_dirs, list) else None
+    case["deferred_resource_governance_status"] = deferred_governance.get("status") if isinstance(deferred_governance, dict) else None
     case["unused_resource_dirs"] = unused
     case["passed"] = (
         case["passed"]
@@ -63,6 +65,8 @@ def require_context_targets(case: dict, max_initial: int, min_density: float) ->
         and deferred is not None
         and deferred_threshold is not None
         and isinstance(deferred_dirs, list)
+        and isinstance(deferred_governance, dict)
+        and deferred_governance.get("status") in {"governed", "not-required", "needs-review"}
         and initial <= max_initial
         and density >= min_density
         and not unused
@@ -136,6 +140,13 @@ def main() -> None:
         [python, "scripts/resource_boundary_check.py", str(ROOT)],
     )
     require_context_targets(root_resource, 1000, 100.0)
+    root_payload = root_resource.get("payload", {})
+    root_governance_status = root_resource.get("deferred_resource_governance_status")
+    root_resource["passed"] = (
+        root_resource["passed"]
+        and root_governance_status == "governed"
+        and not any("Deferred resource footprint is high" in item for item in root_payload.get("warnings", []))
+    )
     cases.append(root_resource)
 
     complex_resource = run(

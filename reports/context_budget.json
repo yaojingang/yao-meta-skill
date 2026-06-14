@@ -1,22 +1,20 @@
 {
   "ok": true,
   "failures": [],
-  "warnings": [
-    "Deferred resource footprint is high: 382073 estimated tokens across references/scripts/evals. Keep Review Studio warnings visible until the largest resource dirs are split, archived, or justified."
-  ],
+  "warnings": [],
   "stats": {
     "context_budget_tier": "production",
     "context_budget_limit": 1000,
     "skill_body_tokens": 751,
-    "other_text_tokens": 1188506,
+    "other_text_tokens": 1190325,
     "estimated_initial_load_tokens": 944,
-    "estimated_total_text_tokens": 1189257,
-    "deferred_resource_tokens": 382073,
+    "estimated_total_text_tokens": 1191076,
+    "deferred_resource_tokens": 383511,
     "deferred_resource_warn_threshold": 120000,
     "deferred_resource_dirs": [
       {
         "path": "scripts",
-        "estimated_tokens": 334590,
+        "estimated_tokens": 336028,
         "file_count": 96
       },
       {
@@ -33,11 +31,37 @@
     "large_deferred_resource_dirs": [
       {
         "path": "scripts",
-        "estimated_tokens": 334590,
+        "estimated_tokens": 336028,
         "file_count": 96
       }
     ],
-    "relevant_file_count": 502,
+    "deferred_resource_governance": {
+      "status": "governed",
+      "large_dir_count": 1,
+      "governed_large_dir_count": 1,
+      "directories": [
+        {
+          "status": "governed",
+          "evidence": [
+            "reports/security_trust_report.json",
+            "reports/architecture_maintainability.json",
+            "reports/python_compatibility.json"
+          ],
+          "reasons": [
+            "trust report covers scripts",
+            "architecture report has no script hotspots or blockers",
+            "Python compatibility report has no issues"
+          ],
+          "missing": [],
+          "path": "scripts",
+          "estimated_tokens": 336028,
+          "file_count": 96,
+          "rationale": "Script resources are deterministic deferred tools, not initial-load prompt context."
+        }
+      ],
+      "summary": "Large deferred resources are indexed and backed by evidence."
+    },
+    "relevant_file_count": 504,
     "unused_resource_dirs": [],
     "quality_signal_points": 130,
     "quality_density": 137.7

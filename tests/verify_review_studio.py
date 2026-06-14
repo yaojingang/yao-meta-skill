@@ -117,6 +117,33 @@ def main() -> None:
         text=True,
     )
     subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "trust_check.py"), str(ROOT)],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "python_compat_check.py"), str(ROOT), "--generated-at", "2026-06-13"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    subprocess.run(
+        [
+            sys.executable,
+            str(ROOT / "scripts" / "render_architecture_maintainability.py"),
+            str(ROOT),
+            "--generated-at",
+            "2026-06-13",
+        ],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    subprocess.run(
         [sys.executable, str(ROOT / "scripts" / "render_context_reports.py")],
         cwd=ROOT,
         check=True,
@@ -226,26 +253,6 @@ def main() -> None:
         capture_output=True,
         text=True,
     )
-    subprocess.run(
-        [sys.executable, str(ROOT / "scripts" / "python_compat_check.py"), str(ROOT), "--generated-at", "2026-06-13"],
-        cwd=ROOT,
-        check=True,
-        capture_output=True,
-        text=True,
-    )
-    subprocess.run(
-        [
-            sys.executable,
-            str(ROOT / "scripts" / "render_architecture_maintainability.py"),
-            str(ROOT),
-            "--generated-at",
-            "2026-06-13",
-        ],
-        cwd=ROOT,
-        check=True,
-        capture_output=True,
-        text=True,
-    )
     for script_name in [
         "render_skill_os2_audit.py",
         "render_world_class_evidence_plan.py",
@@ -286,16 +293,15 @@ def main() -> None:
     assert payload["schema_version"] == "2.0", payload
     assert payload["summary"]["decision"] == "review", payload
     assert payload["summary"]["gate_count"] == 16, payload
-    assert payload["summary"]["world_class_score"] == 89, payload
-    assert payload["summary"]["warning_count"] == 4, payload
+    assert payload["summary"]["world_class_score"] == 91, payload
+    assert payload["summary"]["warning_count"] == 3, payload
     assert payload["summary"]["blocker_count"] == 0, payload
-    assert payload["summary"]["action_count"] == 4, payload
+    assert payload["summary"]["action_count"] == 3, payload
     assert payload["summary"]["annotation_count"] == 0, payload
     assert payload["summary"]["open_annotation_blocker_count"] == 0, payload
     assert payload["summary"]["action_count"] == payload["summary"]["warning_count"] + payload["summary"]["blocker_count"], payload
     assert {item["gate_key"] for item in payload["review_actions"]} == {
         "output-lab",
-        "context-budget",
         "review-waivers",
         "world-class-evidence",
     }, payload
@@ -311,11 +317,12 @@ def main() -> None:
     assert "reviewed 0/5" in output_gate["detail"], output_gate
     assert "review pending 5" in output_gate["detail"], output_gate
     context_gate = next(item for item in payload["gates"] if item["key"] == "context-budget")
-    assert context_gate["status"] == "warn", context_gate
+    assert context_gate["status"] == "pass", context_gate
     assert "initial load 944/1000" in context_gate["detail"], context_gate
     assert "deferred " in context_gate["detail"], context_gate
     assert "/120000" in context_gate["detail"], context_gate
     assert "top deferred scripts" in context_gate["detail"], context_gate
+    assert "resource governance governed" in context_gate["detail"], context_gate
     assert "quality density" in context_gate["detail"], context_gate
     release_gate = next(item for item in payload["gates"] if item["key"] == "release-notes")
     assert "upgrade minor declared / minor recommended" in release_gate["detail"], release_gate
@@ -362,7 +369,7 @@ def main() -> None:
     assert "reports/adoption_drift_report.json" in operations_gate["evidence"], operations_gate
     waivers_gate = next(item for item in payload["gates"] if item["key"] == "review-waivers")
     assert waivers_gate["status"] == "warn", waivers_gate
-    assert "2 warning gates still need reviewer decision" in waivers_gate["detail"], waivers_gate
+    assert "1 warning gates still need reviewer decision" in waivers_gate["detail"], waivers_gate
     assert "reports/review_waivers.json" in waivers_gate["evidence"], waivers_gate
     world_class_gate = next(item for item in payload["gates"] if item["key"] == "world-class-evidence")
     assert world_class_gate["status"] == "warn", world_class_gate
@@ -426,17 +433,7 @@ def main() -> None:
     assert full_payload["data"]["architecture_maintainability"]["summary"]["hotspot_count"] == 0, full_payload["data"]["architecture_maintainability"]
     assert full_payload["data"]["architecture_maintainability"]["summary"]["blocker_count"] == 0, full_payload["data"]["architecture_maintainability"]
     action_keys = {item["gate_key"] for item in full_payload["review_actions"]}
-    assert action_keys == {"output-lab", "context-budget", "review-waivers", "world-class-evidence"}, full_payload["review_actions"]
-    context_action = next(item for item in full_payload["review_actions"] if item["gate_key"] == "context-budget")
-    assert "deferred resources" in context_action["summary"], context_action
-    assert {item["path"] for item in context_action["source_refs"]} >= {
-        "SKILL.md",
-        "reports/context_budget.md",
-        "scripts/resource_boundary_check.py",
-        "references/skill-engineering-method.md",
-    }, context_action
-    assert all(item["exists"] for item in context_action["source_refs"]), context_action
-    assert "python3 scripts/render_context_reports.py" == context_action["verification_command"], context_action
+    assert action_keys == {"output-lab", "review-waivers", "world-class-evidence"}, full_payload["review_actions"]
     world_class_action = next(item for item in full_payload["review_actions"] if item["gate_key"] == "world-class-evidence")
     assert {item["path"] for item in world_class_action["source_refs"]} >= {
         "reports/world_class_evidence_ledger.md",
@@ -530,7 +527,7 @@ def main() -> None:
     assert "审查闸门" in html, html[:1200]
     assert "修复动作" in html, html[:3000]
     assert "补足 output eval 覆盖、execution evidence、blind A/B 和 reviewer adjudication。" in html, html[:9000]
-    assert "压缩或拆分高成本 deferred resources" in html, html[:9000]
+    assert "resource governance governed" in html, html[:9000]
     assert "reports/output_review_kit.html" in html, html[:9000]
     assert "python3 scripts/adjudicate_output_review.py --write-template" in html, html[:9000]
     assert "对保留的 warning 写入 reviewer、理由、范围和到期时间，或修掉 warning。" in html, html[:9000]

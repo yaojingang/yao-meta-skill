@@ -4,11 +4,11 @@
   "skill_dir": ".",
   "summary": {
     "decision": "review",
-    "world_class_score": 89,
+    "world_class_score": 91,
     "gate_count": 16,
     "blocker_count": 0,
-    "warning_count": 4,
-    "action_count": 4,
+    "warning_count": 3,
+    "action_count": 3,
     "annotation_count": 0,
     "open_annotation_count": 0,
     "open_annotation_blocker_count": 0,
@@ -42,8 +42,8 @@
     {
       "key": "context-budget",
       "label": "上下文",
-      "status": "warn",
-      "detail": "initial load 944/1000; deferred 382073/120000; top deferred scripts 334590; quality density 137.7",
+      "status": "pass",
+      "detail": "initial load 944/1000; deferred 383511/120000; top deferred scripts 336028; resource governance governed; quality density 137.7",
       "evidence": "reports/context_budget.json",
       "link": "context_budget.md"
     },
@@ -115,7 +115,7 @@
       "key": "review-waivers",
       "label": "人工批准",
       "status": "warn",
-      "detail": "0 active waivers; 2 warning gates still need reviewer decision",
+      "detail": "0 active waivers; 1 warning gates still need reviewer decision",
       "evidence": "reports/review_waivers.json",
       "link": "review_waivers.md"
     },
@@ -155,18 +155,10 @@
       "link": "output_quality_scorecard.md"
     },
     {
-      "key": "context-budget",
-      "label": "上下文",
-      "status": "warn",
-      "detail": "initial load 944/1000; deferred 382073/120000; top deferred scripts 334590; quality density 137.7",
-      "evidence": "reports/context_budget.json",
-      "link": "context_budget.md"
-    },
-    {
       "key": "review-waivers",
       "label": "人工批准",
       "status": "warn",
-      "detail": "0 active waivers; 2 warning gates still need reviewer decision",
+      "detail": "0 active waivers; 1 warning gates still need reviewer decision",
       "evidence": "reports/review_waivers.json",
       "link": "review_waivers.md"
     },
@@ -241,52 +233,6 @@
       "evidence": "reports/output_quality_scorecard.json",
       "evidence_link": "output_quality_scorecard.md",
       "verification_command": "python3 scripts/adjudicate_output_review.py --write-template && python3 scripts/yao.py output-review"
-    },
-    {
-      "gate_key": "context-budget",
-      "label": "上下文",
-      "status": "warn",
-      "priority": "warning",
-      "summary": "压缩或拆分高成本 deferred resources，保留最小可路由上下文。",
-      "why": "初始加载可以安全，但后续 references、scripts、evals 体量过大时，reviewer 仍需要看到维护和读取成本。",
-      "source_fix": "SKILL.md + references/ + scripts/ + evals/",
-      "source_refs": [
-        {
-          "path": "SKILL.md",
-          "label": "entrypoint",
-          "kind": "source",
-          "line": 9,
-          "exists": true,
-          "link": "../SKILL.md"
-        },
-        {
-          "path": "reports/context_budget.md",
-          "label": "context budget",
-          "kind": "report",
-          "line": 1,
-          "exists": true,
-          "link": "context_budget.md"
-        },
-        {
-          "path": "scripts/resource_boundary_check.py",
-          "label": "resource boundary checker",
-          "kind": "source",
-          "line": 44,
-          "exists": true,
-          "link": "../scripts/resource_boundary_check.py"
-        },
-        {
-          "path": "references/skill-engineering-method.md",
-          "label": "skill engineering method",
-          "kind": "method",
-          "line": 208,
-          "exists": true,
-          "link": "../references/skill-engineering-method.md"
-        }
-      ],
-      "evidence": "reports/context_budget.json",
-      "evidence_link": "context_budget.md",
-      "verification_command": "python3 scripts/render_context_reports.py"
     },
     {
       "gate_key": "review-waivers",
@@ -1514,7 +1460,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 180,
-        "package_sha256": "0bfa15bdf8bc3feff98ee0e66dcdac3f0bc9565aede9c6c0ca139e6a07a9d102"
+        "package_sha256": "59b0f65b269be1bcd9b8ab46997136fd5c19da796d0797702fb6a0dc96274cb8"
       },
       "skill_atlas": {
         "skill_count": 12,
@@ -1552,8 +1498,8 @@
           "trust_level": "local",
           "license": "MIT",
           "checksums": {
-            "package_sha256": "0bfa15bdf8bc3feff98ee0e66dcdac3f0bc9565aede9c6c0ca139e6a07a9d102",
-            "archive_sha256": "05019e918bf5d80388fc5be41e68b91f492ceeb64c96b9f0974a2de160b0bbf7"
+            "package_sha256": "59b0f65b269be1bcd9b8ab46997136fd5c19da796d0797702fb6a0dc96274cb8",
+            "archive_sha256": "5f3d7a018d80277336598d3bf78c546f37a301c0e4d8be6691a9f8de349c6576"
           },
           "compatibility": {
             "openai": "pass",
@@ -1584,7 +1530,7 @@
           },
           "distribution": {
             "archive_verified": true,
-            "archive_sha256": "05019e918bf5d80388fc5be41e68b91f492ceeb64c96b9f0974a2de160b0bbf7",
+            "archive_sha256": "5f3d7a018d80277336598d3bf78c546f37a301c0e4d8be6691a9f8de349c6576",
             "package_verification": "reports/package_verification.json",
             "install_simulated": true,
             "install_simulation": "reports/install_simulation.json"
@@ -1600,7 +1546,7 @@
           "target_count": 4,
           "adapter_count": 4,
           "archive_present": true,
-          "archive_sha256": "05019e918bf5d80388fc5be41e68b91f492ceeb64c96b9f0974a2de160b0bbf7",
+          "archive_sha256": "5f3d7a018d80277336598d3bf78c546f37a301c0e4d8be6691a9f8de349c6576",
           "archive_entry_count": 575,
           "failure_count": 0,
           "warning_count": 0
@@ -1679,12 +1625,12 @@
             {
               "field": "archive_sha256",
               "from": "",
-              "to": "05019e918bf5d80388fc5be41e68b91f492ceeb64c96b9f0974a2de160b0bbf7"
+              "to": "5f3d7a018d80277336598d3bf78c546f37a301c0e4d8be6691a9f8de349c6576"
             },
             {
               "field": "package_sha256",
               "from": "0000000000000000000000000000000000000000000000000000000000000000",
-              "to": "0bfa15bdf8bc3feff98ee0e66dcdac3f0bc9565aede9c6c0ca139e6a07a9d102"
+              "to": "59b0f65b269be1bcd9b8ab46997136fd5c19da796d0797702fb6a0dc96274cb8"
             }
           ]
         },
@@ -3863,7 +3809,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.68,
+          "duration_ms": 31.91,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3891,7 +3837,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.53,
+          "duration_ms": 31.46,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3914,7 +3860,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 29.59,
+          "duration_ms": 31.55,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3942,7 +3888,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 31.84,
+          "duration_ms": 31.52,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3965,7 +3911,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.95,
+          "duration_ms": 31.58,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3993,7 +3939,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 27.6,
+          "duration_ms": 31.11,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4016,7 +3962,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.76,
+          "duration_ms": 30.98,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4043,7 +3989,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.87,
+          "duration_ms": 30.56,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4066,7 +4012,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.9,
+          "duration_ms": 31.13,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4095,7 +4041,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 27.3,
+          "duration_ms": 31.4,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -5050,7 +4996,7 @@
           "label": "Review Studio",
           "status": "pass",
           "objective": "One HTML page supports first-pass production review across trigger, output, runtime, trust, release, and evidence actions.",
-          "current": "16 gates; decision review; warnings 4",
+          "current": "16 gates; decision review; warnings 3",
           "command": "python3 scripts/yao.py review-studio .",
           "test": "python3 tests/verify_review_studio.py",
           "evidence": [
@@ -10311,7 +10257,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 180,
-        "package_sha256": "0bfa15bdf8bc3feff98ee0e66dcdac3f0bc9565aede9c6c0ca139e6a07a9d102"
+        "package_sha256": "59b0f65b269be1bcd9b8ab46997136fd5c19da796d0797702fb6a0dc96274cb8"
       },
       "failures": [],
       "warnings": [],
@@ -13836,22 +13782,20 @@
     "context_budget": {
       "ok": true,
       "failures": [],
-      "warnings": [
-        "Deferred resource footprint is high: 382073 estimated tokens across references/scripts/evals. Keep Review Studio warnings visible until the largest resource dirs are split, archived, or justified."
-      ],
+      "warnings": [],
       "stats": {
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 751,
-        "other_text_tokens": 1188506,
+        "other_text_tokens": 1190325,
         "estimated_initial_load_tokens": 944,
-        "estimated_total_text_tokens": 1189257,
-        "deferred_resource_tokens": 382073,
+        "estimated_total_text_tokens": 1191076,
+        "deferred_resource_tokens": 383511,
         "deferred_resource_warn_threshold": 120000,
         "deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 334590,
+            "estimated_tokens": 336028,
             "file_count": 96
           },
           {
@@ -13868,11 +13812,37 @@
         "large_deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 334590,
+            "estimated_tokens": 336028,
             "file_count": 96
           }
         ],
-        "relevant_file_count": 502,
+        "deferred_resource_governance": {
+          "status": "governed",
+          "large_dir_count": 1,
+          "governed_large_dir_count": 1,
+          "directories": [
+            {
+              "status": "governed",
+              "evidence": [
+                "reports/security_trust_report.json",
+                "reports/architecture_maintainability.json",
+                "reports/python_compatibility.json"
+              ],
+              "reasons": [
+                "trust report covers scripts",
+                "architecture report has no script hotspots or blockers",
+                "Python compatibility report has no issues"
+              ],
+              "missing": [],
+              "path": "scripts",
+              "estimated_tokens": 336028,
+              "file_count": 96,
+              "rationale": "Script resources are deterministic deferred tools, not initial-load prompt context."
+            }
+          ],
+          "summary": "Large deferred resources are indexed and backed by evidence."
+        },
+        "relevant_file_count": 504,
         "unused_resource_dirs": [],
         "quality_signal_points": 130,
         "quality_density": 137.7
@@ -15727,7 +15697,7 @@
     "adoption_drift": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-14T00:52:22Z",
+      "generated_at": "2026-06-14T02:13:52Z",
       "skill_dir": ".",
       "privacy_contract": {
         "storage": "local-first",
@@ -17344,8 +17314,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "0bfa15bdf8bc3feff98ee0e66dcdac3f0bc9565aede9c6c0ca139e6a07a9d102",
-          "archive_sha256": "05019e918bf5d80388fc5be41e68b91f492ceeb64c96b9f0974a2de160b0bbf7"
+          "package_sha256": "59b0f65b269be1bcd9b8ab46997136fd5c19da796d0797702fb6a0dc96274cb8",
+          "archive_sha256": "5f3d7a018d80277336598d3bf78c546f37a301c0e4d8be6691a9f8de349c6576"
         },
         "compatibility": {
           "openai": "pass",
@@ -17376,7 +17346,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "05019e918bf5d80388fc5be41e68b91f492ceeb64c96b9f0974a2de160b0bbf7",
+          "archive_sha256": "5f3d7a018d80277336598d3bf78c546f37a301c0e4d8be6691a9f8de349c6576",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -17401,7 +17371,7 @@
               "vscode"
             ],
             "package_metadata": "registry/packages/yao-meta-skill.json",
-            "package_sha256": "0bfa15bdf8bc3feff98ee0e66dcdac3f0bc9565aede9c6c0ca139e6a07a9d102"
+            "package_sha256": "59b0f65b269be1bcd9b8ab46997136fd5c19da796d0797702fb6a0dc96274cb8"
           }
         ]
       },
@@ -17424,7 +17394,7 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "05019e918bf5d80388fc5be41e68b91f492ceeb64c96b9f0974a2de160b0bbf7",
+        "archive_sha256": "5f3d7a018d80277336598d3bf78c546f37a301c0e4d8be6691a9f8de349c6576",
         "archive_entry_count": 575,
         "failure_count": 0,
         "warning_count": 0
@@ -18432,12 +18402,12 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "05019e918bf5d80388fc5be41e68b91f492ceeb64c96b9f0974a2de160b0bbf7"
+            "to": "5f3d7a018d80277336598d3bf78c546f37a301c0e4d8be6691a9f8de349c6576"
           },
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "0bfa15bdf8bc3feff98ee0e66dcdac3f0bc9565aede9c6c0ca139e6a07a9d102"
+            "to": "59b0f65b269be1bcd9b8ab46997136fd5c19da796d0797702fb6a0dc96274cb8"
           }
         ]
       },

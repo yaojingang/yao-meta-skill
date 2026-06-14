@@ -205,12 +205,15 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
     if large_deferred_dirs:
         first = large_deferred_dirs[0]
         top_deferred = f"{first.get('path', 'resource')} {first.get('estimated_tokens', 'n/a')}"
+    deferred_governance = context_stats.get("deferred_resource_governance", {}) if isinstance(context_stats, dict) else {}
+    governance_status = deferred_governance.get("status", "unknown") if isinstance(deferred_governance, dict) else "unknown"
     context_detail = (
         f"initial load {context_stats.get('estimated_initial_load_tokens', 'n/a')}/"
         f"{context_stats.get('context_budget_limit', 'n/a')}; "
         f"deferred {context_stats.get('deferred_resource_tokens', 'n/a')}/"
         f"{context_stats.get('deferred_resource_warn_threshold', 'n/a')}; "
         f"top deferred {top_deferred}; "
+        f"resource governance {governance_status}; "
         f"quality density {context_stats.get('quality_density', 'n/a')}"
     )
     gates.append(

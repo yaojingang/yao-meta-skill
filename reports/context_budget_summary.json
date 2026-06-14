@@ -8,20 +8,44 @@
       "budget_limit": 1000,
       "initial_tokens": 944,
       "skill_body_tokens": 751,
-      "deferred_resource_tokens": 382073,
+      "deferred_resource_tokens": 383511,
       "large_deferred_resource_dirs": [
         {
           "path": "scripts",
-          "estimated_tokens": 334590,
+          "estimated_tokens": 336028,
           "file_count": 96
         }
       ],
+      "deferred_resource_governance": {
+        "status": "governed",
+        "large_dir_count": 1,
+        "governed_large_dir_count": 1,
+        "directories": [
+          {
+            "status": "governed",
+            "evidence": [
+              "reports/security_trust_report.json",
+              "reports/architecture_maintainability.json",
+              "reports/python_compatibility.json"
+            ],
+            "reasons": [
+              "trust report covers scripts",
+              "architecture report has no script hotspots or blockers",
+              "Python compatibility report has no issues"
+            ],
+            "missing": [],
+            "path": "scripts",
+            "estimated_tokens": 336028,
+            "file_count": 96,
+            "rationale": "Script resources are deterministic deferred tools, not initial-load prompt context."
+          }
+        ],
+        "summary": "Large deferred resources are indexed and backed by evidence."
+      },
       "quality_density": 137.7,
       "unused_resource_dirs": [],
       "ok": true,
-      "warnings": [
-        "Deferred resource footprint is high: 382073 estimated tokens across references/scripts/evals. Keep Review Studio warnings visible until the largest resource dirs are split, archived, or justified."
-      ]
+      "warnings": []
     },
     {
       "label": "complex-release-orchestrator",
@@ -32,6 +56,13 @@
       "skill_body_tokens": 718,
       "deferred_resource_tokens": 1657,
       "large_deferred_resource_dirs": [],
+      "deferred_resource_governance": {
+        "status": "not-required",
+        "large_dir_count": 0,
+        "governed_large_dir_count": 0,
+        "directories": [],
+        "summary": "No large deferred resource directory exceeds the per-dir threshold."
+      },
       "quality_density": 164.6,
       "unused_resource_dirs": [],
       "ok": true,
@@ -46,6 +77,13 @@
       "skill_body_tokens": 658,
       "deferred_resource_tokens": 1030,
       "large_deferred_resource_dirs": [],
+      "deferred_resource_governance": {
+        "status": "not-required",
+        "large_dir_count": 0,
+        "governed_large_dir_count": 0,
+        "directories": [],
+        "summary": "No large deferred resource directory exceeds the per-dir threshold."
+      },
       "quality_density": 171.1,
       "unused_resource_dirs": [],
       "ok": true,

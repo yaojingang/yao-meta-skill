@@ -6,9 +6,9 @@
     "context_budget_tier": "production",
     "context_budget_limit": 1000,
     "skill_body_tokens": 718,
-    "other_text_tokens": 2113,
+    "other_text_tokens": 2176,
     "estimated_initial_load_tokens": 790,
-    "estimated_total_text_tokens": 2831,
+    "estimated_total_text_tokens": 2894,
     "deferred_resource_tokens": 1657,
     "deferred_resource_warn_threshold": 120000,
     "deferred_resource_dirs": [
@@ -39,6 +39,13 @@
       }
     ],
     "large_deferred_resource_dirs": [],
+    "deferred_resource_governance": {
+      "status": "not-required",
+      "large_dir_count": 0,
+      "governed_large_dir_count": 0,
+      "directories": [],
+      "summary": "No large deferred resource directory exceeds the per-dir threshold."
+    },
     "relevant_file_count": 12,
     "unused_resource_dirs": [],
     "quality_signal_points": 130,

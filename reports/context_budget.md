@@ -1,9 +1,9 @@
 # Context Budget Summary
 
-| Target | Path | Tier | Limit | Initial | SKILL | Deferred | Large Deferred Dirs | Quality Density | Unused Dirs | Status |
-| --- | --- | --- | ---: | ---: | ---: | ---: | --- | ---: | --- | --- |
-| root | `.` | `production` | 1000 | 944 | 751 | 382073 | scripts:334590 | 137.7 | - | ok |
-| complex-release-orchestrator | `examples/complex-release-orchestrator/generated-skill` | `production` | 1000 | 790 | 718 | 1657 | - | 164.6 | - | ok |
-| governed-incident-command | `examples/governed-incident-command/generated-skill` | `production` | 1000 | 760 | 658 | 1030 | - | 171.1 | - | ok |
+| Target | Path | Tier | Limit | Initial | SKILL | Deferred | Resource Governance | Large Deferred Dirs | Quality Density | Unused Dirs | Status |
+| --- | --- | --- | ---: | ---: | ---: | ---: | --- | --- | ---: | --- | --- |
+| root | `.` | `production` | 1000 | 944 | 751 | 383511 | `governed` | scripts:336028 | 137.7 | - | ok |
+| complex-release-orchestrator | `examples/complex-release-orchestrator/generated-skill` | `production` | 1000 | 790 | 718 | 1657 | `not-required` | - | 164.6 | - | ok |
+| governed-incident-command | `examples/governed-incident-command/generated-skill` | `production` | 1000 | 760 | 658 | 1030 | `not-required` | - | 171.1 | - | ok |
 
 Per-target JSON reports are written beside each target and under `reports/`.
