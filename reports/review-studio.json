@@ -1332,9 +1332,13 @@
         "ok": true,
         "summary": {
           "reproducibility_ready": true,
+          "release_lock_ready": true,
           "methodology_complete": true,
           "required_artifact_count": 24,
           "missing_artifact_count": 0,
+          "evidence_bundle_sha256": "de8906187bdb5ad75cfc4e606ed9cd38b88cd23232fce6a60912be45b16bce06",
+          "source_contract_sha256": "c42643ea854dd90bb03ca607595f6a6b2c00118da64a78e8bdbb4392d7f204fb",
+          "archive_sha256": "76793bd367e9aaf6c25e6b11ac1139156950827bd87ba3dd8a1bdc883f7d70fe",
           "output_case_count": 5,
           "failure_disclosure_count": 3,
           "command_count": 21,
@@ -1348,12 +1352,13 @@
           "world_class_open_gap_count": 4,
           "world_class_task_count": 4,
           "world_class_ledger_pending_count": 4,
-          "working_tree_dirty": true,
-          "changed_file_count": 50
+          "working_tree_dirty": false,
+          "changed_file_count": 0
         },
-        "commit": "48f2826b8c9ebad3a9cc90e6166f4fd253f98308",
+        "commit": "165ef11daf45ffff44169935c71de280348af936",
         "missing_artifacts": [],
         "limitations": [
+          "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
           "Local command-runner evidence is reproducible but does not replace provider-backed model holdout evidence.",
           "Pending blind-review decisions are visible but do not count as human adjudication.",
           "World-class readiness remains false until external and human evidence gaps close."
@@ -3804,7 +3809,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.38,
+          "duration_ms": 30.68,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3832,7 +3837,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 27.21,
+          "duration_ms": 28.53,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3855,7 +3860,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 27.7,
+          "duration_ms": 29.59,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3883,7 +3888,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 27.35,
+          "duration_ms": 31.84,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3906,7 +3911,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.38,
+          "duration_ms": 30.95,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3934,7 +3939,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.65,
+          "duration_ms": 27.6,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3957,7 +3962,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.6,
+          "duration_ms": 26.76,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3984,7 +3989,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 27.75,
+          "duration_ms": 26.87,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4007,7 +4012,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 27.86,
+          "duration_ms": 26.9,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4036,7 +4041,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 27.32,
+          "duration_ms": 27.3,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -15615,7 +15620,7 @@
     "adoption_drift": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-14T00:50:30Z",
+      "generated_at": "2026-06-14T00:52:22Z",
       "skill_dir": ".",
       "privacy_contract": {
         "storage": "local-first",
