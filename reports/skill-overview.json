@@ -79,7 +79,7 @@
       "label": "可维护性",
       "score": 100,
       "reasons": [
-        "SKILL.md 约 350 个词/字。",
+        "SKILL.md 约 356 个词/字。",
         "入口文件保持克制，可维护性较好。",
         "references/ 已承载扩展指导。",
         "scripts/ 已承载确定性逻辑。",
@@ -100,7 +100,7 @@
       "label": "上下文成本",
       "score": 42,
       "reasons": [
-        "入口约 350 个词/字，references 约 15431 个词/字。",
+        "入口约 356 个词/字，references 约 15566 个词/字。",
         "分数越高代表上下文成本越低。",
         "上下文成本偏高，建议压缩入口或拆分 references。"
       ]
@@ -204,7 +204,7 @@
       "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
     ],
     "gaps": [
-      "上下文成本需要补强：入口约 350 个词/字，references 约 15431 个词/字。"
+      "上下文成本需要补强：入口约 356 个词/字，references 约 15566 个词/字。"
     ],
     "recommendations": [
       "先改触发边界，再扩展工作流。",
@@ -269,7 +269,7 @@
         "name": "包体膨胀风险",
         "impact": 2,
         "probability": 1,
-        "signal": "SKILL.md 约 350 个词/字。",
+        "signal": "SKILL.md 约 356 个词/字。",
         "response": "先补证据和边界，再增加包体复杂度。"
       },
       {
@@ -918,13 +918,13 @@
     "ok": true,
     "summary": {
       "reproducibility_ready": true,
-      "release_lock_ready": true,
+      "release_lock_ready": false,
       "methodology_complete": true,
       "required_artifact_count": 24,
       "missing_artifact_count": 0,
-      "evidence_bundle_sha256": "d1e46322a670ebd2d3977fd716c13b3d00bc37816e83343fc21978eba96d40bb",
-      "source_contract_sha256": "e38d34ebe54c377f47f6010c06716f8f972406cf1019a27e6ebc057371dd260f",
-      "archive_sha256": "0e4ba92cd88c099965383daf5c3d6319b917d7c83d5ef29917f1cd932c1bd6f8",
+      "evidence_bundle_sha256": "f54d5131bea27a3c055b8a2d7fd6d647f69148b293518eff57592eb35d5f6983",
+      "source_contract_sha256": "0de594f90374f72387eea382b32ad0dd220d0f1d6f809b8fdd39859a1f35d5b7",
+      "archive_sha256": "1bb01abccae0984f63251cb73a7782163bcf4b0afb260c73230dcb35da68d0dc",
       "output_case_count": 5,
       "failure_disclosure_count": 3,
       "command_count": 21,
@@ -939,11 +939,11 @@
       "world_class_task_count": 4,
       "world_class_ledger_pending_count": 4,
       "public_claim_ready": false,
-      "public_claim_blocker_count": 3,
-      "working_tree_dirty": false,
-      "changed_file_count": 0
+      "public_claim_blocker_count": 4,
+      "working_tree_dirty": true,
+      "changed_file_count": 33
     },
-    "commit": "78f94e47fd7ab999fdfc6d18ffb9917cf8848dba",
+    "commit": "c2d15206e25551022b02b86f36e7e6f0158888f2",
     "missing_artifacts": [],
     "limitations": [
       "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -1048,7 +1048,7 @@
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
     "package_hash_file_count": 181,
-    "package_sha256": "8b89cae0e2eaf8456b9e97940706576db7ecaf0f46e5de8153c45486f3ab1677"
+    "package_sha256": "0de594f90374f72387eea382b32ad0dd220d0f1d6f809b8fdd39859a1f35d5b7"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -1086,8 +1086,8 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "8b89cae0e2eaf8456b9e97940706576db7ecaf0f46e5de8153c45486f3ab1677",
-        "archive_sha256": "1bb01abccae0984f63251cb73a7782163bcf4b0afb260c73230dcb35da68d0dc"
+        "package_sha256": "0de594f90374f72387eea382b32ad0dd220d0f1d6f809b8fdd39859a1f35d5b7",
+        "archive_sha256": "9761608424bbab003651eb643921a13f86b51220de705a3255d7c201e267dc68"
       },
       "compatibility": {
         "openai": "pass",
@@ -1118,7 +1118,7 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "1bb01abccae0984f63251cb73a7782163bcf4b0afb260c73230dcb35da68d0dc",
+        "archive_sha256": "9761608424bbab003651eb643921a13f86b51220de705a3255d7c201e267dc68",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
@@ -1134,7 +1134,7 @@
       "target_count": 4,
       "adapter_count": 4,
       "archive_present": true,
-      "archive_sha256": "1bb01abccae0984f63251cb73a7782163bcf4b0afb260c73230dcb35da68d0dc",
+      "archive_sha256": "9761608424bbab003651eb643921a13f86b51220de705a3255d7c201e267dc68",
       "archive_entry_count": 576,
       "failure_count": 0,
       "warning_count": 0
@@ -1213,12 +1213,12 @@
         {
           "field": "archive_sha256",
           "from": "",
-          "to": "1bb01abccae0984f63251cb73a7782163bcf4b0afb260c73230dcb35da68d0dc"
+          "to": "9761608424bbab003651eb643921a13f86b51220de705a3255d7c201e267dc68"
         },
         {
           "field": "package_sha256",
           "from": "0000000000000000000000000000000000000000000000000000000000000000",
-          "to": "8b89cae0e2eaf8456b9e97940706576db7ecaf0f46e5de8153c45486f3ab1677"
+          "to": "0de594f90374f72387eea382b32ad0dd220d0f1d6f809b8fdd39859a1f35d5b7"
         }
       ]
     },

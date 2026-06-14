@@ -6,9 +6,9 @@
       "path": ".",
       "budget_tier": "production",
       "budget_limit": 1000,
-      "initial_tokens": 944,
-      "skill_body_tokens": 751,
-      "deferred_resource_tokens": 387788,
+      "initial_tokens": 960,
+      "skill_body_tokens": 767,
+      "deferred_resource_tokens": 388041,
       "large_deferred_resource_dirs": [
         {
           "path": "scripts",
@@ -42,7 +42,7 @@
         ],
         "summary": "Large deferred resources are indexed and backed by evidence."
       },
-      "quality_density": 137.7,
+      "quality_density": 135.4,
       "unused_resource_dirs": [],
       "ok": true,
       "warnings": []

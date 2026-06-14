@@ -55,6 +55,7 @@
       "`Scaffold`: exploratory or personal.",
       "`Production`: team reuse.",
       "`Library`: shared infrastructure.",
+      "`Governed`: high-trust, policy-sensitive, or release-critical.",
       "Ask one focused clarification when the real job, output, or exclusion boundary is unclear.",
       "Escalate visible tradeoffs when benchmark patterns conflict with local privacy, naming, or governance constraints.",
       "Do not silently broaden the skill into adjacent jobs just because the examples are nearby."
@@ -177,6 +178,7 @@
       "scripts/review_studio_gates.py",
       "scripts/review_studio_layout.py",
       "scripts/review_studio_output_review.py",
+      "scripts/review_studio_waivers.py",
       "scripts/review_studio_world_class.py",
       "scripts/review_viewer_data.py",
       "scripts/run_conformance_suite.py",
@@ -186,8 +188,7 @@
       "scripts/run_output_execution.py",
       "scripts/simulate_install.py",
       "scripts/skill_report_charts.py",
-      "scripts/skill_report_layout.py",
-      "scripts/skill_report_metrics.py"
+      "scripts/skill_report_layout.py"
     ],
     "assets": [
       "templates/basic_skill.md.j2",
