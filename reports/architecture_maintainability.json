@@ -16,7 +16,7 @@
     "watch_line_threshold": 720,
     "block_line_threshold": 1500,
     "largest_file_lines": 899,
-    "watchlist_count": 8,
+    "watchlist_count": 9,
     "hotspot_count": 0,
     "blocker_count": 0,
     "decision": "pass"
@@ -28,6 +28,13 @@
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
+      "path": "scripts/render_evidence_consistency.py",
+      "lines": 859,
+      "kind": "cli-script",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
       "path": "scripts/yao_cli_parser.py",
@@ -98,13 +105,6 @@
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
-      "path": "scripts/render_review_viewer.py",
-      "lines": 685,
-      "kind": "cli-script",
-      "severity": "pass",
-      "recommendation": "Split viewer data assembly from HTML section rendering."
     }
   ],
   "watchlist": [
@@ -114,6 +114,13 @@
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
+      "path": "scripts/render_evidence_consistency.py",
+      "lines": 859,
+      "kind": "cli-script",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
       "path": "scripts/yao_cli_parser.py",
