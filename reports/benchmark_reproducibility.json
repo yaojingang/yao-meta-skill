@@ -3,30 +3,17 @@
   "ok": true,
   "generated_at": "2026-06-16",
   "skill_dir": ".",
-  "commit": "3677dd4664b0777391fb82ab9987a7b6ea975af5",
+  "commit": "904969b91f6ce1407ea5d973f359b73d5f80ca7a",
   "git_status": {
     "available": true,
-    "dirty": true,
-    "changed_file_count": 69,
-    "sample": [
-      " M registry/index.json",
-      " M registry/packages/yao-meta-skill.json",
-      " M reports/adaptation_proposals.json",
-      " M reports/adaptation_proposals.md",
-      " M reports/adoption_drift_report.json",
-      " M reports/adoption_drift_report.md",
-      " M reports/architecture_maintainability.json",
-      " M reports/architecture_maintainability.md",
-      " M reports/benchmark_reproducibility.json",
-      " M reports/benchmark_reproducibility.md",
-      " M reports/compiled_targets.json",
-      " M reports/context_budget.json"
-    ],
+    "dirty": false,
+    "changed_file_count": 0,
+    "sample": [],
     "scope": "generation-time status before this report is written"
   },
   "summary": {
     "reproducibility_ready": true,
-    "release_lock_ready": false,
+    "release_lock_ready": true,
     "methodology_complete": true,
     "required_artifact_count": 25,
     "missing_artifact_count": 0,
@@ -50,15 +37,14 @@
     "world_class_source_pass_count": 6,
     "world_class_source_blocked_count": 7,
     "public_claim_ready": false,
-    "public_claim_blocker_count": 5,
-    "working_tree_dirty": true,
-    "changed_file_count": 69
+    "public_claim_blocker_count": 4,
+    "working_tree_dirty": false,
+    "changed_file_count": 0
   },
   "public_claim": {
     "ready": false,
     "scope": "public benchmark or world-class readiness claim",
     "blockers": [
-      "release lock is not clean or commit is unavailable",
       "provider-backed model holdout evidence is incomplete",
       "human blind-review adjudication is incomplete",
       "world-class evidence is not accepted yet (4 open gaps, 4 ledger pending)",
@@ -67,10 +53,10 @@
     "policy": "Local reproducibility can pass before public claims; public claims require provider evidence, human adjudication, clean release lock, accepted world-class evidence, and complete source checks."
   },
   "release_lock": {
-    "ready": false,
-    "commit": "3677dd4664b0777391fb82ab9987a7b6ea975af5",
+    "ready": true,
+    "commit": "904969b91f6ce1407ea5d973f359b73d5f80ca7a",
     "status_scope": "generation-time status before this report is written",
-    "reason": "working tree was dirty at generation time"
+    "reason": "clean generation-time HEAD"
   },
   "evidence_bundle": {
     "algorithm": "sha256(path,label,exists,artifact_sha256)",
