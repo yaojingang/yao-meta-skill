@@ -16,7 +16,7 @@
     "watch_line_threshold": 720,
     "block_line_threshold": 1500,
     "largest_file_lines": 899,
-    "watchlist_count": 9,
+    "watchlist_count": 11,
     "hotspot_count": 0,
     "blocker_count": 0,
     "decision": "pass"
@@ -38,7 +38,7 @@
     },
     {
       "path": "scripts/yao_cli_parser.py",
-      "lines": 822,
+      "lines": 827,
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
@@ -58,6 +58,13 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
+      "path": "tests/verify_world_class_evidence_intake.py",
+      "lines": 795,
+      "kind": "test",
+      "severity": "pass",
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
       "path": "tests/verify_review_studio.py",
       "lines": 766,
       "kind": "test",
@@ -67,6 +74,13 @@
     {
       "path": "scripts/build_skill_atlas.py",
       "lines": 730,
+      "kind": "cli-script",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/prepare_world_class_submission_kit.py",
+      "lines": 724,
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
@@ -91,20 +105,6 @@
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
-      "path": "scripts/apply_adaptation.py",
-      "lines": 706,
-      "kind": "cli-script",
-      "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
-      "path": "scripts/review_studio_layout.py",
-      "lines": 694,
-      "kind": "internal-module",
-      "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     }
   ],
   "watchlist": [
@@ -124,7 +124,7 @@
     },
     {
       "path": "scripts/yao_cli_parser.py",
-      "lines": 822,
+      "lines": 827,
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
@@ -144,6 +144,13 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
+      "path": "tests/verify_world_class_evidence_intake.py",
+      "lines": 795,
+      "kind": "test",
+      "severity": "pass",
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
       "path": "tests/verify_review_studio.py",
       "lines": 766,
       "kind": "test",
@@ -153,6 +160,13 @@
     {
       "path": "scripts/build_skill_atlas.py",
       "lines": 730,
+      "kind": "cli-script",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/prepare_world_class_submission_kit.py",
+      "lines": 724,
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
