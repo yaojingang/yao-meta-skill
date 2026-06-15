@@ -1,22 +1,22 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `204`
-- Scripts: `116`
+- Scanned files: `205`
+- Scripts: `117`
 - Internal script modules: `32`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
 - Network policy missing scripts: `0`
-- File-write scripts: `71`
+- File-write scripts: `72`
 - Permission approvals: `3 / 3`
 - Permission approval gaps: `0`
-- CLI help smoke checked: `84`
+- CLI help smoke checked: `85`
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `204`
-- Package SHA256: `7de584946cac8f2ed241aa331ba4c0c2d69fa1c4eae2c06b92882b8af6ad07d7`
+- Package hash files: `205`
+- Package SHA256: `c29e7a583ec56e9ab8ec665f9a4e152e4135f0babb4806b4564e6aface56dada`
 
 ## Failures
 
@@ -54,8 +54,8 @@
 
 - Enabled: `True`
 - Timeout seconds: `5.0`
-- Checked scripts: `84`
-- Passed scripts: `84`
+- Checked scripts: `85`
+- Passed scripts: `85`
 - Failed scripts: `none`
 
 ## Script Surface
@@ -126,6 +126,7 @@
 | scripts/render_social_preview.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/render_system_model.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/render_telemetry_hook_recipes.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
+| scripts/render_weekly_curator_report.py | cli | True | True | True | False | False | True | False | Renders a weekly SkillOps curator report from generated reports without scanning private logs or writing source files. |
 | scripts/render_world_class_claim_guard.py | cli | True | True | True | False | False | True | False | Scans public claim surfaces so world-class completion is not claimed before accepted evidence exists. |
 | scripts/render_world_class_evidence_intake.py | cli | True | True | True | False | False | True | False | Validates world-class human and external evidence intake packets before ledger review. |
 | scripts/render_world_class_evidence_ledger.py | cli | True | True | True | False | False | True | False | Renders a machine-checkable ledger for world-class external and human evidence gaps. |

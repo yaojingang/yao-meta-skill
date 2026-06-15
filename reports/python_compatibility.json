@@ -5,7 +5,7 @@
   "root": ".",
   "summary": {
     "target_python": "3.11",
-    "file_count": 186,
+    "file_count": 189,
     "issue_count": 0,
     "syntax_error_count": 0,
     "fstring_311_violation_count": 0,
@@ -420,6 +420,12 @@
     },
     {
       "path": "scripts/render_telemetry_hook_recipes.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "scripts/render_weekly_curator_report.py",
       "ok": true,
       "issue_count": 0,
       "issues": []
@@ -1091,6 +1097,12 @@
       "issues": []
     },
     {
+      "path": "tests/verify_weekly_curator.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
       "path": "tests/verify_world_class_claim_guard.py",
       "ok": true,
       "issue_count": 0,
@@ -1134,6 +1146,12 @@
     },
     {
       "path": "tests/verify_yao_cli.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "tests/yao_cli_report_refresh.py",
       "ok": true,
       "issue_count": 0,
       "issues": []

@@ -421,7 +421,7 @@
             },
             "file_write": {
               "required": true,
-              "script_count": 71,
+              "script_count": 72,
               "scripts": [
                 "scripts/adjudicate_output_review.py",
                 "scripts/apply_adaptation.py",
@@ -476,6 +476,7 @@
                 "scripts/render_social_preview.py",
                 "scripts/render_system_model.py",
                 "scripts/render_telemetry_hook_recipes.py",
+                "scripts/render_weekly_curator_report.py",
                 "scripts/render_world_class_claim_guard.py",
                 "scripts/render_world_class_evidence_intake.py",
                 "scripts/render_world_class_evidence_ledger.py",
@@ -533,14 +534,14 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 84,
+            "checked_count": 85,
             "failed_count": 0,
             "failed_scripts": []
           },
           "trust_summary": {
             "secret_findings": 0,
             "network_script_count": 3,
-            "file_write_script_count": 71,
+            "file_write_script_count": 72,
             "subprocess_script_count": 10,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
@@ -562,7 +563,7 @@
           ],
           "capability_counts": {
             "network": 3,
-            "file_write": 71,
+            "file_write": 72,
             "subprocess": 10,
             "interactive": 0
           },
@@ -675,7 +676,7 @@
           },
           "file_write": {
             "required": true,
-            "script_count": 71,
+            "script_count": 72,
             "scripts": [
               "scripts/adjudicate_output_review.py",
               "scripts/apply_adaptation.py",
@@ -730,6 +731,7 @@
               "scripts/render_social_preview.py",
               "scripts/render_system_model.py",
               "scripts/render_telemetry_hook_recipes.py",
+              "scripts/render_weekly_curator_report.py",
               "scripts/render_world_class_claim_guard.py",
               "scripts/render_world_class_evidence_intake.py",
               "scripts/render_world_class_evidence_ledger.py",
@@ -787,14 +789,14 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 84,
+          "checked_count": 85,
           "failed_count": 0,
           "failed_scripts": []
         },
         "trust_summary": {
           "secret_findings": 0,
           "network_script_count": 3,
-          "file_write_script_count": 71,
+          "file_write_script_count": 72,
           "subprocess_script_count": 10,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
@@ -814,7 +816,7 @@
         ],
         "capability_counts": {
           "network": 3,
-          "file_write": 71,
+          "file_write": 72,
           "subprocess": 10,
           "interactive": 0
         },
@@ -1324,7 +1326,7 @@
             },
             "file_write": {
               "required": true,
-              "script_count": 71,
+              "script_count": 72,
               "scripts": [
                 "scripts/adjudicate_output_review.py",
                 "scripts/apply_adaptation.py",
@@ -1379,6 +1381,7 @@
                 "scripts/render_social_preview.py",
                 "scripts/render_system_model.py",
                 "scripts/render_telemetry_hook_recipes.py",
+                "scripts/render_weekly_curator_report.py",
                 "scripts/render_world_class_claim_guard.py",
                 "scripts/render_world_class_evidence_intake.py",
                 "scripts/render_world_class_evidence_ledger.py",
@@ -1436,14 +1439,14 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 84,
+            "checked_count": 85,
             "failed_count": 0,
             "failed_scripts": []
           },
           "trust_summary": {
             "secret_findings": 0,
             "network_script_count": 3,
-            "file_write_script_count": 71,
+            "file_write_script_count": 72,
             "subprocess_script_count": 10,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
@@ -1465,7 +1468,7 @@
           ],
           "capability_counts": {
             "network": 3,
-            "file_write": 71,
+            "file_write": 72,
             "subprocess": 10,
             "interactive": 0
           },
@@ -1578,7 +1581,7 @@
           },
           "file_write": {
             "required": true,
-            "script_count": 71,
+            "script_count": 72,
             "scripts": [
               "scripts/adjudicate_output_review.py",
               "scripts/apply_adaptation.py",
@@ -1633,6 +1636,7 @@
               "scripts/render_social_preview.py",
               "scripts/render_system_model.py",
               "scripts/render_telemetry_hook_recipes.py",
+              "scripts/render_weekly_curator_report.py",
               "scripts/render_world_class_claim_guard.py",
               "scripts/render_world_class_evidence_intake.py",
               "scripts/render_world_class_evidence_ledger.py",
@@ -1690,14 +1694,14 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 84,
+          "checked_count": 85,
           "failed_count": 0,
           "failed_scripts": []
         },
         "trust_summary": {
           "secret_findings": 0,
           "network_script_count": 3,
-          "file_write_script_count": 71,
+          "file_write_script_count": 72,
           "subprocess_script_count": 10,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
@@ -1717,7 +1721,7 @@
         ],
         "capability_counts": {
           "network": 3,
-          "file_write": 71,
+          "file_write": 72,
           "subprocess": 10,
           "interactive": 0
         },
@@ -2227,7 +2231,7 @@
             },
             "file_write": {
               "required": true,
-              "script_count": 71,
+              "script_count": 72,
               "scripts": [
                 "scripts/adjudicate_output_review.py",
                 "scripts/apply_adaptation.py",
@@ -2282,6 +2286,7 @@
                 "scripts/render_social_preview.py",
                 "scripts/render_system_model.py",
                 "scripts/render_telemetry_hook_recipes.py",
+                "scripts/render_weekly_curator_report.py",
                 "scripts/render_world_class_claim_guard.py",
                 "scripts/render_world_class_evidence_intake.py",
                 "scripts/render_world_class_evidence_ledger.py",
@@ -2339,14 +2344,14 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 84,
+            "checked_count": 85,
             "failed_count": 0,
             "failed_scripts": []
           },
           "trust_summary": {
             "secret_findings": 0,
             "network_script_count": 3,
-            "file_write_script_count": 71,
+            "file_write_script_count": 72,
             "subprocess_script_count": 10,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
@@ -2368,7 +2373,7 @@
           ],
           "capability_counts": {
             "network": 3,
-            "file_write": 71,
+            "file_write": 72,
             "subprocess": 10,
             "interactive": 0
           },
@@ -2474,7 +2479,7 @@
           },
           "file_write": {
             "required": true,
-            "script_count": 71,
+            "script_count": 72,
             "scripts": [
               "scripts/adjudicate_output_review.py",
               "scripts/apply_adaptation.py",
@@ -2529,6 +2534,7 @@
               "scripts/render_social_preview.py",
               "scripts/render_system_model.py",
               "scripts/render_telemetry_hook_recipes.py",
+              "scripts/render_weekly_curator_report.py",
               "scripts/render_world_class_claim_guard.py",
               "scripts/render_world_class_evidence_intake.py",
               "scripts/render_world_class_evidence_ledger.py",
@@ -2586,14 +2592,14 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 84,
+          "checked_count": 85,
           "failed_count": 0,
           "failed_scripts": []
         },
         "trust_summary": {
           "secret_findings": 0,
           "network_script_count": 3,
-          "file_write_script_count": 71,
+          "file_write_script_count": 72,
           "subprocess_script_count": 10,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
@@ -2613,7 +2619,7 @@
         ],
         "capability_counts": {
           "network": 3,
-          "file_write": 71,
+          "file_write": 72,
           "subprocess": 10,
           "interactive": 0
         },
@@ -3114,7 +3120,7 @@
             },
             "file_write": {
               "required": true,
-              "script_count": 71,
+              "script_count": 72,
               "scripts": [
                 "scripts/adjudicate_output_review.py",
                 "scripts/apply_adaptation.py",
@@ -3169,6 +3175,7 @@
                 "scripts/render_social_preview.py",
                 "scripts/render_system_model.py",
                 "scripts/render_telemetry_hook_recipes.py",
+                "scripts/render_weekly_curator_report.py",
                 "scripts/render_world_class_claim_guard.py",
                 "scripts/render_world_class_evidence_intake.py",
                 "scripts/render_world_class_evidence_ledger.py",
@@ -3226,14 +3233,14 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 84,
+            "checked_count": 85,
             "failed_count": 0,
             "failed_scripts": []
           },
           "trust_summary": {
             "secret_findings": 0,
             "network_script_count": 3,
-            "file_write_script_count": 71,
+            "file_write_script_count": 72,
             "subprocess_script_count": 10,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
@@ -3255,7 +3262,7 @@
           ],
           "capability_counts": {
             "network": 3,
-            "file_write": 71,
+            "file_write": 72,
             "subprocess": 10,
             "interactive": 0
           },
@@ -3361,7 +3368,7 @@
           },
           "file_write": {
             "required": true,
-            "script_count": 71,
+            "script_count": 72,
             "scripts": [
               "scripts/adjudicate_output_review.py",
               "scripts/apply_adaptation.py",
@@ -3416,6 +3423,7 @@
               "scripts/render_social_preview.py",
               "scripts/render_system_model.py",
               "scripts/render_telemetry_hook_recipes.py",
+              "scripts/render_weekly_curator_report.py",
               "scripts/render_world_class_claim_guard.py",
               "scripts/render_world_class_evidence_intake.py",
               "scripts/render_world_class_evidence_ledger.py",
@@ -3473,14 +3481,14 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 84,
+          "checked_count": 85,
           "failed_count": 0,
           "failed_scripts": []
         },
         "trust_summary": {
           "secret_findings": 0,
           "network_script_count": 3,
-          "file_write_script_count": 71,
+          "file_write_script_count": 72,
           "subprocess_script_count": 10,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
@@ -3500,7 +3508,7 @@
         ],
         "capability_counts": {
           "network": 3,
-          "file_write": 71,
+          "file_write": 72,
           "subprocess": 10,
           "interactive": 0
         },
@@ -4001,7 +4009,7 @@
             },
             "file_write": {
               "required": true,
-              "script_count": 71,
+              "script_count": 72,
               "scripts": [
                 "scripts/adjudicate_output_review.py",
                 "scripts/apply_adaptation.py",
@@ -4056,6 +4064,7 @@
                 "scripts/render_social_preview.py",
                 "scripts/render_system_model.py",
                 "scripts/render_telemetry_hook_recipes.py",
+                "scripts/render_weekly_curator_report.py",
                 "scripts/render_world_class_claim_guard.py",
                 "scripts/render_world_class_evidence_intake.py",
                 "scripts/render_world_class_evidence_ledger.py",
@@ -4113,14 +4122,14 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 84,
+            "checked_count": 85,
             "failed_count": 0,
             "failed_scripts": []
           },
           "trust_summary": {
             "secret_findings": 0,
             "network_script_count": 3,
-            "file_write_script_count": 71,
+            "file_write_script_count": 72,
             "subprocess_script_count": 10,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
@@ -4142,7 +4151,7 @@
           ],
           "capability_counts": {
             "network": 3,
-            "file_write": 71,
+            "file_write": 72,
             "subprocess": 10,
             "interactive": 0
           },
@@ -4252,7 +4261,7 @@
           },
           "file_write": {
             "required": true,
-            "script_count": 71,
+            "script_count": 72,
             "scripts": [
               "scripts/adjudicate_output_review.py",
               "scripts/apply_adaptation.py",
@@ -4307,6 +4316,7 @@
               "scripts/render_social_preview.py",
               "scripts/render_system_model.py",
               "scripts/render_telemetry_hook_recipes.py",
+              "scripts/render_weekly_curator_report.py",
               "scripts/render_world_class_claim_guard.py",
               "scripts/render_world_class_evidence_intake.py",
               "scripts/render_world_class_evidence_ledger.py",
@@ -4364,14 +4374,14 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 84,
+          "checked_count": 85,
           "failed_count": 0,
           "failed_scripts": []
         },
         "trust_summary": {
           "secret_findings": 0,
           "network_script_count": 3,
-          "file_write_script_count": 71,
+          "file_write_script_count": 72,
           "subprocess_script_count": 10,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
@@ -4391,7 +4401,7 @@
         ],
         "capability_counts": {
           "network": 3,
-          "file_write": 71,
+          "file_write": 72,
           "subprocess": 10,
           "interactive": 0
         },

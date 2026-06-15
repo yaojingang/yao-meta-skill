@@ -128,6 +128,7 @@
           "scripts/render_social_preview.py",
           "scripts/render_system_model.py",
           "scripts/render_telemetry_hook_recipes.py",
+          "scripts/render_weekly_curator_report.py",
           "scripts/render_world_class_claim_guard.py",
           "scripts/render_world_class_evidence_intake.py",
           "scripts/render_world_class_evidence_ledger.py",

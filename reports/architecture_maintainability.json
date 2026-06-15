@@ -4,12 +4,12 @@
   "generated_at": "2026-06-16",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 183,
-    "script_file_count": 116,
-    "test_file_count": 67,
+    "python_file_count": 186,
+    "script_file_count": 117,
+    "test_file_count": 69,
     "internal_module_count": 35,
-    "cli_script_count": 83,
-    "command_handler_count": 66,
+    "cli_script_count": 84,
+    "command_handler_count": 67,
     "entrypoint_command_handler_count": 18,
     "command_module_count": 6,
     "warn_line_threshold": 900,
@@ -38,7 +38,7 @@
     },
     {
       "path": "scripts/yao_cli_parser.py",
-      "lines": 843,
+      "lines": 854,
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
@@ -66,7 +66,7 @@
     },
     {
       "path": "tests/verify_review_studio.py",
-      "lines": 767,
+      "lines": 768,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
@@ -124,7 +124,7 @@
     },
     {
       "path": "scripts/yao_cli_parser.py",
-      "lines": 843,
+      "lines": 854,
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
@@ -152,7 +152,7 @@
     },
     {
       "path": "tests/verify_review_studio.py",
-      "lines": 767,
+      "lines": 768,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."

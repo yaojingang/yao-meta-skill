@@ -10,10 +10,10 @@
     "pass_count": 21,
     "warn_count": 0,
     "missing_count": 0,
-    "extension_track_count": 3,
+    "extension_track_count": 4,
     "extension_partial_count": 0,
     "extension_planned_count": 0,
-    "extension_covered_count": 3,
+    "extension_covered_count": 4,
     "adaptive_extension_ready": true,
     "local_blueprint_ready": true,
     "public_world_class_ready": false,
@@ -26,7 +26,7 @@
     "missing": 0
   },
   "extension_status_counts": {
-    "covered": 3
+    "covered": 4
   },
   "modules": [
     {
@@ -130,7 +130,7 @@
       "label": "Trust Security",
       "status": "pass",
       "objective": "Scripts, dependencies, permissions, secrets, and package hash are reviewable for team distribution.",
-      "current": "116 scripts; secrets 0; help failures 0",
+      "current": "117 scripts; secrets 0; help failures 0",
       "command": "python3 scripts/yao.py trust .",
       "test": "python3 tests/verify_trust_check.py",
       "evidence": [
@@ -204,7 +204,7 @@
       "label": "Registry Distribution",
       "status": "pass",
       "objective": "Skill packages are installable, versioned, checksumed, and upgrade-reviewable.",
-      "current": "archive entries 634; install failures 0",
+      "current": "archive entries 639; install failures 0",
       "command": "python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip && python3 scripts/yao.py registry-audit .",
       "test": "python3 tests/verify_registry_audit.py",
       "evidence": [
@@ -758,6 +758,33 @@
         }
       ],
       "next_action": "Keep Daily SkillOps report aligned with proposal, approval, coverage, and world-class ledger contracts as the operations layer evolves."
+    },
+    {
+      "key": "weekly-curator-report",
+      "label": "Weekly Curator Report",
+      "status": "covered",
+      "objective": "Weekly curator layer aggregates Daily SkillOps opportunities, Skill Atlas portfolio signals, release locks, and world-class evidence gaps into a maintenance queue.",
+      "current": "Weekly curator report is CLI-backed, proposal-only, and backed by committed weekly JSON/Markdown evidence.",
+      "target": "Generate reports/skillops/weekly/YYYY-WNN.* without private log scanning, source writes, auto-patching, or world-class overclaiming.",
+      "evidence": [
+        {
+          "path": "scripts/render_weekly_curator_report.py",
+          "exists": true
+        },
+        {
+          "path": "tests/verify_weekly_curator.py",
+          "exists": true
+        },
+        {
+          "path": "reports/skillops/weekly/2026-W25.json",
+          "exists": true
+        },
+        {
+          "path": "reports/skillops/weekly/2026-W25.md",
+          "exists": true
+        }
+      ],
+      "next_action": "Use weekly curator output as the Skill Librarian maintenance queue before approving any durable skill-library changes."
     }
   ],
   "next_highest_leverage": [
@@ -770,7 +797,7 @@
     "title": "Skill Overview / Skill OS 2.0 upgrade plan",
     "core_module_count": 8,
     "recommended_pr_count": 13,
-    "reference_extension_count": 3,
+    "reference_extension_count": 4,
     "reference_extensions": [
       "Skill interpretation report",
       "Adaptive self-iteration with local preference memory and approval gates",

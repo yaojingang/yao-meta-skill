@@ -41,6 +41,7 @@ Yao Meta Skill is no longer only a Meta Skill factory. The current working tree 
 - Review Studio Output Lab actions now link directly to `reports/output_review_decisions.json`, so pending blind A/B reviewer decisions have a concrete template instead of only a general adjudication warning.
 - Output Review Adjudication now preserves blind-review integrity by hiding expected winners for pending or invalid reviewer decisions; answer keys are revealed only after a valid A/B decision exists for that case.
 - Provider Output Eval Runner v0 so `python3 scripts/yao.py output-exec --provider-runner openai` can collect real provider-backed model evidence through a reviewed OpenAI Responses API compatible runner instead of ad hoc shell glue.
+- Weekly SkillOps Curator v0 so daily SkillOps opportunities, Skill Atlas portfolio signals, release-lock state, and world-class evidence gaps roll up into a proposal-only weekly maintenance queue without source-file writes.
 
 This is still not the final world-class state. Target-native behavior contracts are now explicit, VS Code / Copilot package metadata is auditable, local output-eval command execution is wired, blind-review answers remain hidden until valid decisions exist, a provider-backed output runner exists, installer-level permission coverage is now locally enforced during install simulation and local install sync, opt-in `yao.py` CLI telemetry can capture metadata-only real run signals, external clients can now emit one validated metadata-only event into a local spool, hook recipes now make Browser/Chrome/VS Code/wrapper/provider-adapter integration commands auditable, a Browser/Chrome Native Messaging host can receive length-prefixed metadata events and generate a local launcher plus manifest, validated external JSONL imports can bring those non-CLI client signals into the same drift loop, and Skill Atlas now consumes aggregate drift reports. Review Studio keeps pending human adjudication and pending world-class evidence visible as warnings instead of treating them as a clean pass. Deeper provider-native execution transforms, installed platform-native client telemetry implementations, provider-native installer integration, real provider holdout runs, real human adjudication decisions, accepted external evidence, and native runtime permission enforcement remain open.
 
@@ -61,6 +62,7 @@ This is still not the final world-class state. Target-native behavior contracts 
 | Review Studio 2.0 | `scripts/render_review_studio.py`, `reports/review-studio.html`, `reports/review-studio.json` with per-warning `review_actions` | v0 landed |
 | Review Studio Source Refs | `scripts/render_review_studio.py`, `tests/verify_review_studio.py`, `references/review-studio-method.md` | v0 landed |
 | Review Annotations | `scripts/render_review_annotations.py`, `reports/review_annotations.md`, `tests/verify_review_annotations.py`, Review Studio annotation panel and blocker decision hook | v0 landed |
+| Weekly SkillOps Curator | `scripts/render_weekly_curator_report.py`, `reports/skillops/weekly/2026-W25.md`, `tests/verify_weekly_curator.py`, proposal-only maintenance queue with no source writes | v0 landed |
 | Skill Atlas | `scripts/build_skill_atlas.py`, `skill_atlas/catalog.json`, `skill_atlas/route_overlap_matrix.csv`, `skill_atlas/drift_signals.json`, `reports/skill_atlas.html` | v0 landed |
 | Registry & Distribution | `registry/*.schema.json`, `scripts/registry_audit.py`, `reports/registry_audit.md`, `registry/packages/yao-meta-skill.json` | v0 landed |
 | Package Verification | `scripts/verify_package.py`, `reports/package_verification.md`, `tests/verify_package_verification.py` | v0 landed |
@@ -114,13 +116,13 @@ Next move: add real client or installer permission enforcement integration.
 | Output Eval | `5` cases, with-skill pass rate `100`, baseline pass rate `0`, with file-backed, near-neighbor, boundary coverage, `10` local command-runner execution runs, `0` recorded fixture runs, `0` provider model-executed runs in root release evidence, `10` estimated token counts, provider runner v0 available, `5` blind A/B review pairs, a generated `reports/output_review_decisions.json` template, `0 / 5` reviewer decisions pending, `0` answer keys revealed, and `5` pending answers hidden |
 | Runtime Conformance | `5 / 5` targets passing |
 | Target Compiler | `5 / 5` compiled target contracts generated for OpenAI, Claude, generic, Agent Skills compatible, and VS Code / Copilot outputs, including target permission contracts and target-native behavior contracts |
-| Trust | `0` secret findings, `1` pinned dependency file, `32` declared internal modules, `3 / 3` network-capable scripts covered by bounded host policy, `84 / 84` CLI help smoke checks passing across `116` scripts, source-contract hash scope explicit |
+| Trust | `0` secret findings, `1` pinned dependency file, `32` declared internal modules, `3 / 3` network-capable scripts covered by bounded host policy, `85 / 85` CLI help smoke checks passing across `117` scripts, source-contract hash scope explicit |
 | Permission Governance | `3 / 3` required high-permission capabilities approved, `0` missing, `0` invalid, `0` expired |
 | Runtime Permission Probes | `4 / 4` target adapters probed, `0` native-enforcement adapters, `4` explicit metadata fallbacks, `4` residual risks retained for reviewer visibility |
 | Skill Atlas | `12` scanned skills, `1` actionable root skill, `1` telemetry report, `0` actionable route collisions, `0` actionable owner gaps, `0` actionable stale skills, `0` actionable drift signals, `24` scoped non-actionable issue signals retained for visibility |
 | Registry Audit | package metadata generated with version, owner, license, source checksum, archive checksum, Skill IR provenance, and compatibility matrix |
-| Package Verification | `4 / 4` target adapters present, archive verified, `634` zip entries, `0` failures, `0` warnings |
-| Install Simulation | archive with `634` entries extracted into a local verification root, entrypoint/manifest/interface loaded, reports present, `4` adapters readable, `12` installer permission checks enforced, `0` permission failures, `0` failures, `0` warnings |
+| Package Verification | `4 / 4` target adapters present, archive verified, `639` zip entries, `0` failures, `0` warnings |
+| Install Simulation | archive with `639` entries extracted into a local verification root, entrypoint/manifest/interface loaded, reports present, `4` adapters readable, `12` installer permission checks enforced, `0` permission failures, `0` failures, `0` warnings |
 | Local Install Sync Preflight | `make sync-local-install` and `make sync-active-install` rebuild the package first, then sync only after install simulation passes with `12` enforced installer permission checks and `0` permission failures |
 | Upgrade Check | current package declares `minor` over the 1.0.0 baseline, recommended bump is `minor`, and release notes include added targets plus checksum changes |
 | Adoption Drift | `1` metadata-only review event, `1` adoption sample, adoption `100`, risk band `low`; optional `yao.py` CLI capture, external client `telemetry-emit`, `5` `telemetry-hooks` recipes, Browser/Chrome native messaging host, and validated external JSONL import are available but off by default for reproducible release evidence; raw `reports/telemetry_events.jsonl` is gitignored and blocked from zip packages |
@@ -133,7 +135,7 @@ Next move: add real client or installer permission enforcement integration.
 | Benchmark Reproducibility | local reproducibility ready with `25` required artifacts, `0` missing artifacts, `23` reproduction commands, and `3` disclosed failure cases; provider and human evidence remain explicit limitations |
 | IR-first Packaging | `openai`, `claude`, `generic`, and `vscode` adapters include compiler contracts, permission contracts, target-native behavior contracts, IR provenance, semantic parity checks, and install-scope notes where applicable |
 | Context Budget | initial load `990/1000`, under the production budget |
-| CI | `make ci-test` target count is `79` after the SkillOps opportunity scoring gate update |
+| CI | `make ci-test` target count is `80` after the Weekly SkillOps Curator gate update |
 
 ## Next Highest-Leverage Moves
 

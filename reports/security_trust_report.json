@@ -2,8 +2,8 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 204,
-    "script_count": 116,
+    "scanned_files": 205,
+    "script_count": 117,
     "internal_module_count": 32,
     "secret_findings": 0,
     "dependency_files": [
@@ -12,18 +12,18 @@
     "network_script_count": 3,
     "network_policy_covered_count": 3,
     "network_policy_missing_count": 0,
-    "file_write_script_count": 71,
+    "file_write_script_count": 72,
     "permission_required_count": 3,
     "permission_approved_count": 3,
     "permission_missing_count": 0,
     "permission_invalid_count": 0,
     "permission_expired_count": 0,
-    "help_smoke_checked_count": 84,
+    "help_smoke_checked_count": 85,
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 204,
-    "package_sha256": "7de584946cac8f2ed241aa331ba4c0c2d69fa1c4eae2c06b92882b8af6ad07d7"
+    "package_hash_file_count": 205,
+    "package_sha256": "c29e7a583ec56e9ab8ec665f9a4e152e4135f0babb4806b4564e6aface56dada"
   },
   "failures": [],
   "warnings": [],
@@ -943,6 +943,20 @@
       "network_hosts": []
     },
     {
+      "path": "scripts/render_weekly_curator_report.py",
+      "interface": "cli",
+      "interface_declared": true,
+      "interface_reason": "Renders a weekly SkillOps curator report from generated reports without scanning private logs or writing source files.",
+      "has_argparse": true,
+      "has_main_guard": true,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": true,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
       "path": "scripts/render_world_class_claim_guard.py",
       "interface": "cli",
       "interface_declared": true,
@@ -1701,9 +1715,9 @@
   "help_smoke": {
     "enabled": true,
     "timeout_seconds": 5.0,
-    "candidate_count": 84,
-    "checked_count": 84,
-    "passed_count": 84,
+    "candidate_count": 85,
+    "checked_count": 85,
+    "passed_count": 85,
     "failed_count": 0,
     "skipped_count": 32,
     "failed_scripts": [],
@@ -2319,6 +2333,16 @@
         "stderr_excerpt": ""
       },
       {
+        "path": "scripts/render_weekly_curator_report.py",
+        "command": "python3 scripts/render_weekly_curator_report.py --help",
+        "returncode": 0,
+        "timed_out": false,
+        "passed": true,
+        "has_help_text": true,
+        "stdout_excerpt": "usage: render_weekly_curator_report.py [-h] [--daily-json DAILY_JSON]\n                                       [--output-json OUTPUT_JSON]\n                                       [--output-md OUTPUT_MD]\n                                       [",
+        "stderr_excerpt": ""
+      },
+      {
         "path": "scripts/render_world_class_claim_guard.py",
         "command": "python3 scripts/render_world_class_claim_guard.py --help",
         "returncode": 0,
@@ -2785,6 +2809,7 @@
           "scripts/render_social_preview.py",
           "scripts/render_system_model.py",
           "scripts/render_telemetry_hook_recipes.py",
+          "scripts/render_weekly_curator_report.py",
           "scripts/render_world_class_claim_guard.py",
           "scripts/render_world_class_evidence_intake.py",
           "scripts/render_world_class_evidence_ledger.py",
