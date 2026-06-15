@@ -51,6 +51,7 @@
         "approval_required",
         "writes_repository_files",
         "allowlisted_targets_required",
+        "target_file_sha256_required_for_apply",
         "rollback_required_for_apply",
         "apply_command_available"
       ],
@@ -65,6 +66,9 @@
           "const": false
         },
         "allowlisted_targets_required": {
+          "const": true
+        },
+        "target_file_sha256_required_for_apply": {
           "const": true
         },
         "rollback_required_for_apply": {

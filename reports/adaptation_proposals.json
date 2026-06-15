@@ -15,6 +15,7 @@
     "approval_required": true,
     "writes_repository_files": false,
     "allowlisted_targets_required": true,
+    "target_file_sha256_required_for_apply": true,
     "rollback_required_for_apply": true,
     "apply_command_available": true
   },

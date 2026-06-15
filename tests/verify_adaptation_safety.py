@@ -91,6 +91,7 @@ def main() -> None:
     assert proposal_payload["proposal_contract"]["proposal_only"] is True, proposal_payload
     assert proposal_payload["proposal_contract"]["writes_repository_files"] is False, proposal_payload
     assert proposal_payload["proposal_contract"]["apply_command_available"] is True, proposal_payload
+    assert proposal_payload["proposal_contract"]["target_file_sha256_required_for_apply"] is True, proposal_payload
     assert proposal_payload["summary"]["proposal_count"] >= 3, proposal_payload
     assert all(item["status"] == "proposal-only" for item in proposal_payload["proposals"]), proposal_payload
     assert all(item["requires_approval"] is True for item in proposal_payload["proposals"]), proposal_payload
@@ -107,6 +108,7 @@ def main() -> None:
     template_payload = json.loads(template_proc.stdout)
     assert template_payload["summary"]["apply_supported"] is True, template_payload
     assert template_payload["summary"]["attempt_count"] == 0, template_payload
+    assert template_payload["apply_contract"]["target_file_sha256_required"] is True, template_payload
     assert (reports_dir / "adaptation_approval_ledger.json").exists(), reports_dir
     assert (reports_dir / "adaptation_regression_report.json").exists(), reports_dir
 
@@ -166,6 +168,7 @@ def main() -> None:
     assert cli_proposal_payload["proposal_contract"]["proposal_only"] is True, cli_proposal_payload
     assert cli_proposal_payload["proposal_contract"]["writes_repository_files"] is False, cli_proposal_payload
     assert cli_proposal_payload["proposal_contract"]["apply_command_available"] is True, cli_proposal_payload
+    assert cli_proposal_payload["proposal_contract"]["target_file_sha256_required_for_apply"] is True, cli_proposal_payload
 
     policy_path = cli_skill_dir / "references" / "user-memory-policy.md"
     policy_path.parent.mkdir(parents=True, exist_ok=True)
@@ -198,6 +201,7 @@ def main() -> None:
             "approval_required": True,
             "patch_sha256_required": True,
             "allowlisted_targets_required": True,
+            "target_file_sha256_required": True,
             "dry_run_default": True,
             "writes_repository_files_only_with_apply": True,
             "rollback_required": True,
@@ -212,6 +216,9 @@ def main() -> None:
                 "expires_at": "2026-12-31",
                 "patch_sha256": sha256_text(patch_text),
                 "target_files": ["references/user-memory-policy.md"],
+                "target_file_sha256": {
+                    "references/user-memory-policy.md": sha256_text("old policy\n"),
+                },
                 "verification_commands": ["python3 tests/check_policy.py"],
                 "rollback_plan": "git apply -R approved-adaptation.patch",
             }
@@ -219,6 +226,29 @@ def main() -> None:
     }
     ledger_path = cli_skill_dir / "reports" / "adaptation_approval_ledger.json"
     ledger_path.write_text(json.dumps(approval_ledger, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    policy_path.write_text("changed outside approval\n", encoding="utf-8")
+    stale_proc = run_script(
+        str(CLI),
+        "adapt-apply",
+        str(cli_skill_dir),
+        "--proposal-id",
+        approval_proposal["proposal_id"],
+        "--patch-file",
+        str(patch_path),
+        "--output-json",
+        str(cli_skill_dir / "reports" / "stale_baseline_regression.json"),
+        "--output-md",
+        str(cli_skill_dir / "reports" / "stale_baseline_regression.md"),
+        "--generated-at",
+        "2026-06-15T00:00:00Z",
+        "--today",
+        "2026-06-15",
+    )
+    assert stale_proc.returncode == 2, stale_proc.stdout
+    stale_payload = json.loads(stale_proc.stdout)
+    assert any("baseline sha256" in item for item in stale_payload["failures"]), stale_payload
+    assert "approved adaptive note" not in policy_path.read_text(encoding="utf-8"), policy_path
+    policy_path.write_text("old policy\n", encoding="utf-8")
     dry_run = run_script(
         str(CLI),
         "adapt-apply",

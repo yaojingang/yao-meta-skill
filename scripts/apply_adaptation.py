@@ -18,6 +18,7 @@ SCRIPT_INTERFACE = "cli"
 SCRIPT_INTERFACE_REASON = "Approval-gated adaptive patch application with dry-run, allowlist, regression, and rollback evidence."
 
 BLOCKED_PATH_PARTS = {".git", "__pycache__", ".pytest_cache", "dist"}
+ABSENT_FILE_SHA256 = "__absent__"
 
 
 def utc_now() -> str:
@@ -109,7 +110,16 @@ def parse_date(value: str) -> date | None:
 
 def validate_approval(approval: dict[str, Any], today: date) -> list[str]:
     failures = []
-    required = ["reviewer", "reason", "approved_at", "patch_sha256", "target_files", "verification_commands", "rollback_plan"]
+    required = [
+        "reviewer",
+        "reason",
+        "approved_at",
+        "patch_sha256",
+        "target_files",
+        "target_file_sha256",
+        "verification_commands",
+        "rollback_plan",
+    ]
     for key in required:
         if not approval.get(key):
             failures.append(f"Approval entry missing required field: {key}")
@@ -118,9 +128,34 @@ def validate_approval(approval: dict[str, Any], today: date) -> list[str]:
         failures.append(f"Approval entry is expired: {approval.get('expires_at')}")
     if not isinstance(approval.get("target_files"), list):
         failures.append("Approval target_files must be a list.")
+    if not isinstance(approval.get("target_file_sha256"), dict):
+        failures.append("Approval target_file_sha256 must be an object.")
     if not isinstance(approval.get("verification_commands"), list):
         failures.append("Approval verification_commands must be a list.")
     return failures
+
+
+def validate_target_file_sha256(
+    skill_dir: Path,
+    target_files: list[str],
+    expected_sha256: dict[str, Any],
+) -> tuple[list[str], dict[str, str]]:
+    failures: list[str] = []
+    observed: dict[str, str] = {}
+    for target in target_files:
+        path = skill_dir / target
+        expected = str(expected_sha256.get(target, ""))
+        if not expected:
+            failures.append(f"Approval target_file_sha256 missing target: {target}")
+            continue
+        if path.exists() and not path.is_file():
+            failures.append(f"Patch target is not a file: {target}")
+            continue
+        current = sha256_file(path) if path.exists() else ABSENT_FILE_SHA256
+        observed[target] = current
+        if current != expected:
+            failures.append(f"Target file baseline sha256 does not match approval ledger: {target}")
+    return failures, observed
 
 
 def safe_command(command: str) -> tuple[bool, list[str], str]:
@@ -189,6 +224,7 @@ def empty_approval_ledger(generated_at: str) -> dict[str, Any]:
             "approval_required": True,
             "patch_sha256_required": True,
             "allowlisted_targets_required": True,
+            "target_file_sha256_required": True,
             "dry_run_default": True,
             "writes_repository_files_only_with_apply": True,
             "rollback_required": True,
@@ -217,6 +253,7 @@ def empty_regression_report(skill_dir: Path, generated_at: str) -> dict[str, Any
             "approval_required": True,
             "patch_sha256_required": True,
             "allowlisted_targets_required": True,
+            "target_file_sha256_required": True,
             "dry_run_default": True,
             "writes_repository_files_only_with_apply": True,
             "rollback_required": True,
@@ -320,6 +357,7 @@ def build_report(args: argparse.Namespace) -> dict[str, Any]:
 
     patch_sha = sha256_file(patch_path) if patch_path.exists() else ""
     target_files: list[str] = []
+    observed_target_file_sha256: dict[str, str] = {}
     if not failures:
         try:
             target_files = patch_target_files(patch_path.read_text(encoding="utf-8", errors="replace"))
@@ -337,6 +375,13 @@ def build_report(args: argparse.Namespace) -> dict[str, Any]:
             failures.append("Patch touches files outside approval target_files.")
         if not patch_targets <= proposal_targets:
             failures.append("Patch touches files outside proposal target_files.")
+        if not failures:
+            baseline_failures, observed_target_file_sha256 = validate_target_file_sha256(
+                skill_dir,
+                target_files,
+                approval.get("target_file_sha256", {}),
+            )
+            failures.extend(baseline_failures)
 
     check = git_apply_check(skill_dir, patch_path) if not failures else {"ok": False, "returncode": None, "stdout": "", "stderr": ""}
     if not failures and not check["ok"]:
@@ -378,6 +423,13 @@ def build_report(args: argparse.Namespace) -> dict[str, Any]:
             "approved_at": approval.get("approved_at", ""),
             "expires_at": approval.get("expires_at", ""),
         },
+        "target_file_sha256": {
+            "expected": {
+                target: str(approval.get("target_file_sha256", {}).get(target, ""))
+                for target in target_files
+            },
+            "observed": observed_target_file_sha256,
+        },
         "git_apply_check": check,
         "git_apply": apply_result,
         "regression_runs": regression_runs,
@@ -406,6 +458,7 @@ def build_report(args: argparse.Namespace) -> dict[str, Any]:
             "approval_required": True,
             "patch_sha256_required": True,
             "allowlisted_targets_required": True,
+            "target_file_sha256_required": True,
             "dry_run_default": True,
             "writes_repository_files_only_with_apply": True,
             "rollback_required": True,

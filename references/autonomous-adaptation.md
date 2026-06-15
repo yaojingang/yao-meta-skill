@@ -10,8 +10,8 @@ Adaptive iteration is proposal-only until a human explicitly approves a patch ap
 - redact sensitive text before storing evidence excerpts;
 - summarize repeated preferences and operational signals;
 - produce adaptation proposals with target files, risks, tests, and rollback plans.
-- dry-run an approved patch through `adapt-apply`, after patch hash, approval, and target allowlist checks pass.
-- apply a patch only when the operator passes `--apply` and the approval ledger names the reviewer, reason, patch hash, target files, verification commands, and rollback plan.
+- dry-run an approved patch through `adapt-apply`, after patch hash, approval, target allowlist, and target baseline hash checks pass.
+- apply a patch only when the operator passes `--apply` and the approval ledger names the reviewer, reason, patch hash, target files, target file SHA-256 baselines, verification commands, and rollback plan.
 - automatically reverse an applied patch when `--run-verification` fails, unless the operator explicitly passes `--no-rollback-on-failure`.
 
 It must not:
@@ -21,6 +21,7 @@ It must not:
 - write source files as part of scan or proposal generation;
 - write source files through `adapt-apply` without explicit `--apply`;
 - apply a patch whose target files are outside both the proposal and approval allowlists;
+- apply a patch when an approved target file has changed since the reviewer recorded its baseline SHA-256;
 - leave a failed verified apply in place by default;
 - count proposals as completed implementation evidence.
 
@@ -31,7 +32,7 @@ It must not:
 3. A reviewer decides whether any proposal is worth implementing.
 4. `adapt-apply --write-template` creates `reports/adaptation_approval_ledger.json` and `reports/adaptation_regression_report.json` so the review surface exists before any patch is applied.
 5. `adapt-apply --proposal-id <id> --patch-file <patch>` defaults to a dry-run and records patch, target, approval, regression, and rollback evidence.
-6. `adapt-apply --apply --run-verification` may write files only after approval, patch hash, allowlist, `git apply --check`, and safe regression command checks pass.
+6. `adapt-apply --apply --run-verification` may write files only after approval, patch hash, allowlist, target baseline hash, `git apply --check`, and safe regression command checks pass.
 7. If a verification command fails after a patch is applied, `adapt-apply` runs `git apply -R <patch>` by default and records `failed-rolled-back` plus rollback evidence in `reports/adaptation_regression_report.json`.
 
 ## Evidence Standard
@@ -51,6 +52,7 @@ Each approved application should include:
 - reviewer, reason, approval date, and optional expiry;
 - exact patch SHA-256;
 - target file allowlist;
+- target file SHA-256 baselines for every patch target, or `__absent__` for approved new files;
 - regression commands restricted to local `make` targets or local Python verifier scripts;
 - rollback command or plan.
 - rollback result if regression failed after an apply attempt.
