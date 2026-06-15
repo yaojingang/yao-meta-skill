@@ -3,34 +3,21 @@
   "ok": true,
   "generated_at": "2026-06-16",
   "skill_dir": ".",
-  "commit": "5338a770167da589a140c71ff0cd589ee5a3e8f4",
+  "commit": "30451d41f615562dfd0380414cc8447d4dad5e38",
   "git_status": {
     "available": true,
-    "dirty": true,
-    "changed_file_count": 52,
-    "sample": [
-      " M AGENTS.md",
-      " M references/review-studio-method.md",
-      " M registry/index.json",
-      " M registry/packages/yao-meta-skill.json",
-      " M reports/architecture_maintainability.json",
-      " M reports/architecture_maintainability.md",
-      " M reports/benchmark_reproducibility.json",
-      " M reports/benchmark_reproducibility.md",
-      " M reports/compiled_targets.json",
-      " M reports/context_budget.json",
-      " M reports/context_budget.md",
-      " M reports/context_budget_summary.json"
-    ],
+    "dirty": false,
+    "changed_file_count": 0,
+    "sample": [],
     "scope": "generation-time status before this report is written"
   },
   "summary": {
     "reproducibility_ready": true,
-    "release_lock_ready": false,
+    "release_lock_ready": true,
     "methodology_complete": true,
     "required_artifact_count": 25,
     "missing_artifact_count": 0,
-    "evidence_bundle_sha256": "a6a800e88be9348c69020f14560db3a902a8e24bbafc79b5d31200f42d3a6191",
+    "evidence_bundle_sha256": "f7b6c8fac83208f863f1e110b175eac345a7da3dc76240fd4a027a8a5745cd8b",
     "source_contract_sha256": "1b03b1e4bab90eac18aa1ee7f0ddd1d7293c3bdfb32620531c4fc231e33e2b60",
     "archive_sha256": "38e8e607c1ed5bd016ea242f8fac3e8dfdfe16b165876bc4e19f587481e7c5ca",
     "output_case_count": 5,
@@ -50,15 +37,14 @@
     "world_class_source_pass_count": 6,
     "world_class_source_blocked_count": 7,
     "public_claim_ready": false,
-    "public_claim_blocker_count": 5,
-    "working_tree_dirty": true,
-    "changed_file_count": 52
+    "public_claim_blocker_count": 4,
+    "working_tree_dirty": false,
+    "changed_file_count": 0
   },
   "public_claim": {
     "ready": false,
     "scope": "public benchmark or world-class readiness claim",
     "blockers": [
-      "release lock is not clean or commit is unavailable",
       "provider-backed model holdout evidence is incomplete",
       "human blind-review adjudication is incomplete",
       "world-class evidence is not accepted yet (4 open gaps, 4 ledger pending)",
@@ -67,10 +53,10 @@
     "policy": "Local reproducibility can pass before public claims; public claims require provider evidence, human adjudication, clean release lock, accepted world-class evidence, and complete source checks."
   },
   "release_lock": {
-    "ready": false,
-    "commit": "5338a770167da589a140c71ff0cd589ee5a3e8f4",
+    "ready": true,
+    "commit": "30451d41f615562dfd0380414cc8447d4dad5e38",
     "status_scope": "generation-time status before this report is written",
-    "reason": "working tree was dirty at generation time"
+    "reason": "clean generation-time HEAD"
   },
   "evidence_bundle": {
     "algorithm": "sha256(path,label,exists,artifact_sha256)",
@@ -78,7 +64,7 @@
     "existing_count": 25,
     "missing_count": 0,
     "missing_paths": [],
-    "sha256": "a6a800e88be9348c69020f14560db3a902a8e24bbafc79b5d31200f42d3a6191"
+    "sha256": "f7b6c8fac83208f863f1e110b175eac345a7da3dc76240fd4a027a8a5745cd8b"
   },
   "methodology": {
     "path": "reports/benchmark_methodology.md",
@@ -249,8 +235,8 @@
       "label": "world_class_evidence_preflight",
       "path": "reports/world_class_evidence_preflight.json",
       "exists": true,
-      "bytes": 36067,
-      "sha256": "1e6c66fc5e3ceec580313f3dbdc7e26d3526832c591c2c4281f52779d2f6242d"
+      "bytes": 36073,
+      "sha256": "5576411ceb4aeb9d0c2fd1ecbcd78d08f49c62149615c20cc77d4ab5db1736cc"
     },
     {
       "label": "world_class_submission_review",

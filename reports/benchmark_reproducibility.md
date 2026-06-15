@@ -1,14 +1,14 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-16`
-Commit: `5338a770167da589a140c71ff0cd589ee5a3e8f4`
-Working tree dirty at generation: `true`
-Evidence bundle SHA256: `a6a800e88be9348c69020f14560db3a902a8e24bbafc79b5d31200f42d3a6191`
+Commit: `30451d41f615562dfd0380414cc8447d4dad5e38`
+Working tree dirty at generation: `false`
+Evidence bundle SHA256: `f7b6c8fac83208f863f1e110b175eac345a7da3dc76240fd4a027a8a5745cd8b`
 
 ## Summary
 
 - reproducibility ready: `true`
-- release lock ready: `false`
+- release lock ready: `true`
 - methodology complete: `true`
 - required artifacts: `25`
 - missing artifacts: `0`
@@ -22,8 +22,8 @@ Evidence bundle SHA256: `a6a800e88be9348c69020f14560db3a902a8e24bbafc79b5d31200f
 - world-class ready: `false`
 - world-class source checks: `6` pass / `13` total; `7` blocked
 - public claim ready: `false`
-- public claim blockers: `5`
-- changed files at generation: `52`
+- public claim blockers: `4`
+- changed files at generation: `0`
 
 This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete. The git commit is generation-time context; the evidence bundle SHA is the durable anchor for the artifacts listed below.
 
@@ -35,7 +35,6 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 | Blocker |
 | --- |
-| release lock is not clean or commit is unavailable |
 | provider-backed model holdout evidence is incomplete |
 | human blind-review adjudication is incomplete |
 | world-class evidence is not accepted yet (4 open gaps, 4 ledger pending) |
@@ -43,15 +42,15 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 ## Release Lock
 
-- ready: `false`
-- reason: working tree was dirty at generation time
+- ready: `true`
+- reason: clean generation-time HEAD
 - status scope: generation-time status before this report is written
 
 ## Evidence Bundle
 
 - algorithm: `sha256(path,label,exists,artifact_sha256)`
 - artifacts: `25` / `25`
-- sha256: `a6a800e88be9348c69020f14560db3a902a8e24bbafc79b5d31200f42d3a6191`
+- sha256: `f7b6c8fac83208f863f1e110b175eac345a7da3dc76240fd4a027a8a5745cd8b`
 
 ## Methodology Sections
 
@@ -87,7 +86,7 @@ This report proves local benchmark reproducibility only. It keeps external provi
 | world_class_evidence_plan | `reports/world_class_evidence_plan.json` | present | `38e95161404d` |
 | world_class_evidence_ledger | `reports/world_class_evidence_ledger.json` | present | `d08019f31a78` |
 | world_class_evidence_intake | `reports/world_class_evidence_intake.json` | present | `4a9119aba62b` |
-| world_class_evidence_preflight | `reports/world_class_evidence_preflight.json` | present | `1e6c66fc5e3c` |
+| world_class_evidence_preflight | `reports/world_class_evidence_preflight.json` | present | `5576411ceb4a` |
 | world_class_submission_review | `reports/world_class_submission_review.json` | present | `6aaf868374ba` |
 | world_class_operator_runbook | `reports/world_class_operator_runbook.json` | present | `40d179696445` |
 | world_class_operator_runbook_markdown | `reports/world_class_operator_runbook.md` | present | `ebfa3a4b5280` |
