@@ -206,6 +206,7 @@
       ],
       "privacy_contract": [
         "Reviewer decisions should not include raw user data or private customer detail.",
+        "The decision importer rejects raw prompt, output, transcript, message, and answer-key fields.",
         "Keep the answer key separate until after decisions are recorded."
       ],
       "next_action": "Record real A/B choices in the decision template, then regenerate adjudication."

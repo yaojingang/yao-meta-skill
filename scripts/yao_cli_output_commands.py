@@ -104,3 +104,26 @@ def command_output_review(args: argparse.Namespace) -> int:
     if args.write_template:
         cmd.append("--write-template")
     return emit_result(run_script("adjudicate_output_review.py", cmd))
+
+
+def command_output_review_import(args: argparse.Namespace) -> int:
+    cmd = ["--input", args.input]
+    if args.format:
+        cmd.extend(["--format", args.format])
+    if args.blind_pack:
+        cmd.extend(["--blind-pack", args.blind_pack])
+    if args.output_json:
+        cmd.extend(["--output-json", args.output_json])
+    if args.reviewer:
+        cmd.extend(["--reviewer", args.reviewer])
+    if args.reviewed_at:
+        cmd.extend(["--reviewed-at", args.reviewed_at])
+    if args.run_adjudication:
+        cmd.append("--run-adjudication")
+    if args.answer_key:
+        cmd.extend(["--answer-key", args.answer_key])
+    if args.adjudication_json:
+        cmd.extend(["--adjudication-json", args.adjudication_json])
+    if args.adjudication_md:
+        cmd.extend(["--adjudication-md", args.adjudication_md])
+    return emit_result(run_script("import_output_review_decisions.py", cmd))

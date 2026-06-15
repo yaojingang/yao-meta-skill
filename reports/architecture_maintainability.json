@@ -4,12 +4,12 @@
   "generated_at": "2026-06-16",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 187,
-    "script_file_count": 118,
+    "python_file_count": 188,
+    "script_file_count": 119,
     "test_file_count": 69,
     "internal_module_count": 36,
-    "cli_script_count": 84,
-    "command_handler_count": 67,
+    "cli_script_count": 85,
+    "command_handler_count": 68,
     "entrypoint_command_handler_count": 18,
     "command_module_count": 6,
     "warn_line_threshold": 900,
@@ -30,16 +30,16 @@
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
-      "path": "scripts/render_evidence_consistency.py",
-      "lines": 859,
-      "kind": "cli-script",
+      "path": "scripts/yao_cli_parser.py",
+      "lines": 870,
+      "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
-      "path": "scripts/yao_cli_parser.py",
-      "lines": 854,
-      "kind": "internal-module",
+      "path": "scripts/render_evidence_consistency.py",
+      "lines": 859,
+      "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
@@ -116,16 +116,16 @@
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
-      "path": "scripts/render_evidence_consistency.py",
-      "lines": 859,
-      "kind": "cli-script",
+      "path": "scripts/yao_cli_parser.py",
+      "lines": 870,
+      "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
-      "path": "scripts/yao_cli_parser.py",
-      "lines": 854,
-      "kind": "internal-module",
+      "path": "scripts/render_evidence_consistency.py",
+      "lines": 859,
+      "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },

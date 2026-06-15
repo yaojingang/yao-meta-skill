@@ -35,6 +35,7 @@ from yao_cli_output_commands import (
     command_output_eval,
     command_output_execution,
     command_output_review,
+    command_output_review_import,
     command_output_review_kit,
 )
 from yao_cli_parser import build_parser as build_cli_parser

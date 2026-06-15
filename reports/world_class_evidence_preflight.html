@@ -107,7 +107,7 @@
             <dt>Action</dt><dd>Keep output holdout cases available before provider execution.</dd>
           </dl>
         </article>
-        
+
         <article class="check-row pass">
           <div>
             <span>file</span>
@@ -119,7 +119,7 @@
             <dt>Action</dt><dd>Use the provider runner instead of the local command runner for model-backed evidence.</dd>
           </dl>
         </article>
-        
+
         <article class="check-row missing">
           <div>
             <span>env</span>
@@ -131,7 +131,7 @@
             <dt>Action</dt><dd>Set OPENAI_API_KEY in the operator shell; never commit or print the value.</dd>
           </dl>
         </article>
-        
+
         <article class="check-row optional">
           <div>
             <span>env</span>
@@ -160,7 +160,7 @@
             <dt>Action</dt><dd>Run provider-backed output-exec with real credentials.</dd>
           </dl>
         </article>
-        
+
         <article class="check-row pass">
           <div>
             <span>timing_observed_count</span>
@@ -173,7 +173,7 @@
             <dt>Action</dt><dd>Provider execution should record timing metadata.</dd>
           </dl>
         </article>
-        
+
         <article class="check-row blocked">
           <div>
             <span>token_observed_count</span>
@@ -193,7 +193,7 @@
           <ul><li>YAO_OUTPUT_EVAL_MODEL=gpt-4.1-mini OPENAI_API_KEY=&lt;redacted&gt; python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60</li><li>python3 scripts/yao.py skill-os2-audit . --generated-at &lt;YYYY-MM-DD&gt;</li><li>Copy evidence/world_class/templates/provider-holdout.intake.json to evidence/world_class/submissions/provider-holdout.json and fill only real evidence fields.</li><li>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</li></ul>
         </section>
       </article>
-    
+
       <article class="evidence-card ready-for-human-review">
         <header>
           <span>human · ready-for-human-review</span>
@@ -226,7 +226,7 @@
             <dt>Action</dt><dd>Open the blind review kit and record real reviewer choices.</dd>
           </dl>
         </article>
-        
+
         <article class="check-row pass">
           <div>
             <span>file</span>
@@ -235,10 +235,22 @@
           <dl>
             <dt>Current</dt><dd><code>present</code></dd>
             <dt>Status</dt><dd>pass</dd>
-            <dt>Action</dt><dd>Fill winner_variant values with real A/B decisions.</dd>
+            <dt>Action</dt><dd>Import real A/B decisions with `python3 scripts/yao.py output-review-import --input &lt;reviewer-decisions.json&gt; --run-adjudication`.</dd>
           </dl>
         </article>
-        
+
+        <article class="check-row pass">
+          <div>
+            <span>file</span>
+            <strong>Decision importer</strong>
+          </div>
+          <dl>
+            <dt>Current</dt><dd><code>present</code></dd>
+            <dt>Status</dt><dd>pass</dd>
+            <dt>Action</dt><dd>Use the importer to reject raw content fields and normalize reviewer decisions before adjudication.</dd>
+          </dl>
+        </article>
+
         <article class="check-row human-required">
           <div>
             <span>human</span>
@@ -267,7 +279,7 @@
             <dt>Action</dt><dd>Generate the blind A/B review pack.</dd>
           </dl>
         </article>
-        
+
         <article class="check-row blocked">
           <div>
             <span>pending_count</span>
@@ -280,7 +292,7 @@
             <dt>Action</dt><dd>Record a reviewer choice for every pair.</dd>
           </dl>
         </article>
-        
+
         <article class="check-row blocked">
           <div>
             <span>judgment_count</span>
@@ -293,7 +305,7 @@
             <dt>Action</dt><dd>Every pair needs one valid human judgment.</dd>
           </dl>
         </article>
-        
+
         <article class="check-row pass">
           <div>
             <span>invalid_decision_count</span>
@@ -310,10 +322,10 @@
         </section>
         <section class="runbook">
           <h4>Runbook</h4>
-          <ul><li>python3 scripts/yao.py output-review-kit --write-template</li><li>Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.</li><li>python3 scripts/adjudicate_output_review.py --write-template</li><li>Edit reports/output_review_decisions.json with winner_variant values and reviewer metadata.</li><li>python3 scripts/yao.py output-review</li><li>python3 scripts/yao.py skill-os2-audit . --generated-at &lt;YYYY-MM-DD&gt;</li><li>Copy evidence/world_class/templates/human-adjudication.intake.json to evidence/world_class/submissions/human-adjudication.json and fill only real evidence fields.</li><li>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</li></ul>
+          <ul><li>python3 scripts/yao.py output-review-kit --write-template</li><li>Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.</li><li>python3 scripts/adjudicate_output_review.py --write-template</li><li>Record reviewer choices in a separate JSON, JSONL, or CSV decision source with case_id, winner_variant, confidence, and reason only.</li><li>python3 scripts/yao.py output-review-import --input &lt;reviewer-decisions.json&gt; --run-adjudication</li><li>python3 scripts/yao.py output-review</li><li>python3 scripts/yao.py skill-os2-audit . --generated-at &lt;YYYY-MM-DD&gt;</li><li>Copy evidence/world_class/templates/human-adjudication.intake.json to evidence/world_class/submissions/human-adjudication.json and fill only real evidence fields.</li><li>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</li></ul>
         </section>
       </article>
-    
+
       <article class="evidence-card blocked">
         <header>
           <span>external · blocked</span>
@@ -346,7 +358,7 @@
             <dt>Action</dt><dd>Keep approved high-permission capabilities explicit.</dd>
           </dl>
         </article>
-        
+
         <article class="check-row pass">
           <div>
             <span>file</span>
@@ -358,7 +370,7 @@
             <dt>Action</dt><dd>Refresh runtime permission probes after packaging changes.</dd>
           </dl>
         </article>
-        
+
         <article class="check-row external-required">
           <div>
             <span>external</span>
@@ -387,7 +399,7 @@
             <dt>Action</dt><dd>Collect real target-client or external runtime guard proof.</dd>
           </dl>
         </article>
-        
+
         <article class="check-row pass">
           <div>
             <span>failure_count</span>
@@ -400,7 +412,7 @@
             <dt>Action</dt><dd>Runtime permission probes must stay clean.</dd>
           </dl>
         </article>
-        
+
         <article class="check-row pass">
           <div>
             <span>installer_enforcement_ready</span>
@@ -420,7 +432,7 @@
           <ul><li>Implement or connect a real target client or external installer runtime guard that blocks undeclared network, file_write, or subprocess capabilities.</li><li>Update the generated target adapter only when the guard is actually enforced by that target.</li><li>python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip</li><li>python3 scripts/yao.py install-simulate . --package-dir dist --install-root dist/install-simulation</li><li>python3 scripts/yao.py runtime-permissions . --package-dir dist</li><li>python3 scripts/yao.py skill-os2-audit . --generated-at &lt;YYYY-MM-DD&gt;</li><li>Copy evidence/world_class/templates/native-permission-enforcement.intake.json to evidence/world_class/submissions/native-permission-enforcement.json and fill only real evidence fields.</li><li>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</li></ul>
         </section>
       </article>
-    
+
       <article class="evidence-card blocked">
         <header>
           <span>external · blocked</span>
@@ -453,7 +465,7 @@
             <dt>Action</dt><dd>Use the native host to receive metadata-only client events.</dd>
           </dl>
         </article>
-        
+
         <article class="check-row pass">
           <div>
             <span>file</span>
@@ -465,7 +477,7 @@
             <dt>Action</dt><dd>Refresh telemetry hook recipes before external client installation.</dd>
           </dl>
         </article>
-        
+
         <article class="check-row external-required">
           <div>
             <span>external</span>
@@ -494,7 +506,7 @@
             <dt>Action</dt><dd>Import at least one metadata-only event from a real client.</dd>
           </dl>
         </article>
-        
+
         <article class="check-row blocked">
           <div>
             <span>adoption_sample_count</span>
@@ -507,7 +519,7 @@
             <dt>Action</dt><dd>Telemetry must include adoption outcome evidence.</dd>
           </dl>
         </article>
-        
+
         <article class="check-row pass">
           <div>
             <span>raw_content_allowed</span>

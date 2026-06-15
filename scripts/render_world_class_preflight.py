@@ -72,7 +72,15 @@ PREFLIGHT_SPECS: dict[str, list[dict[str, Any]]] = {
             "kind": "file",
             "path": "reports/output_review_decisions.json",
             "required": True,
-            "next_action": "Fill winner_variant values with real A/B decisions.",
+            "next_action": "Import real A/B decisions with `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication`.",
+        },
+        {
+            "key": "decision-importer",
+            "label": "Decision importer",
+            "kind": "file",
+            "path": "scripts/import_output_review_decisions.py",
+            "required": True,
+            "next_action": "Use the importer to reject raw content fields and normalize reviewer decisions before adjudication.",
         },
         {
             "key": "human-reviewer",
@@ -562,7 +570,7 @@ def render_html(report: dict[str, Any]) -> str:
         for label, value in stats
     )
     item_cards = "".join(render_html_item(item) for item in report.get("items", []))
-    return f"""<!doctype html>
+    html = f"""<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -647,6 +655,7 @@ def render_html(report: dict[str, Any]) -> str:
 </body>
 </html>
 """
+    return "\n".join(line.rstrip() for line in html.splitlines()) + "\n"
 
 
 def main() -> None:

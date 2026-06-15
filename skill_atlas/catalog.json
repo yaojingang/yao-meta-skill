@@ -39,6 +39,7 @@
         "scripts/github_benchmark_scan.py",
         "scripts/governance_check.py",
         "scripts/html_rendering.py",
+        "scripts/import_output_review_decisions.py",
         "scripts/import_telemetry_events.py",
         "scripts/init_skill.py",
         "scripts/judge_blind_eval.py",

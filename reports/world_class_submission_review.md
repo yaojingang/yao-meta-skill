@@ -91,6 +91,7 @@ This report is a read-only reviewer queue. It does not accept evidence or make w
 #### Privacy Contract
 
 - Reviewer decisions should not include raw user data or private customer detail.
+- The decision importer rejects raw prompt, output, transcript, message, and answer-key fields.
 - Keep the answer key separate until after decisions are recorded.
 
 ### Native Permission Enforcement

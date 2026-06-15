@@ -247,6 +247,7 @@ def build_reviewer_checklist(
                 "commands": {
                     "prepare_review_kit": "python3 scripts/yao.py output-review-kit",
                     "write_template": "python3 scripts/adjudicate_output_review.py --write-template",
+                    "import_decisions": "python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication",
                     "adjudicate": "python3 scripts/yao.py output-review",
                     "refresh_review_studio": "python3 scripts/yao.py review-studio .",
                 },

@@ -75,7 +75,8 @@ Generate the submission kit after the real provider, human, native-permission, o
 | Check | Kind | Current | Status | Next action |
 | --- | --- | --- | --- | --- |
 | Blind review kit | `file` | `present` | `pass` | Open the blind review kit and record real reviewer choices. |
-| Decision template | `file` | `present` | `pass` | Fill winner_variant values with real A/B decisions. |
+| Decision template | `file` | `present` | `pass` | Import real A/B decisions with `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication`. |
+| Decision importer | `file` | `present` | `pass` | Use the importer to reject raw content fields and normalize reviewer decisions before adjudication. |
 | Human reviewer | `human` | `external-human-action` | `human-required` | Assign a real reviewer identity before claiming human adjudication. |
 
 ### Source Checks

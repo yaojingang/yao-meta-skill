@@ -9,6 +9,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_EVAL = ROOT / "scripts" / "run_output_eval.py"
 ADJUDICATOR = ROOT / "scripts" / "adjudicate_output_review.py"
+IMPORTER = ROOT / "scripts" / "import_output_review_decisions.py"
+CLI = ROOT / "scripts" / "yao.py"
 
 
 def run(args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]:
@@ -87,6 +89,7 @@ def main() -> None:
     assert checklist["skill-package-contract"]["answer_key_visible"] is False, checklist["skill-package-contract"]
     assert checklist["skill-package-contract"]["decisions_path"].endswith("tests/tmp_output_review_adjudication/missing_decisions.json"), checklist["skill-package-contract"]
     assert checklist["skill-package-contract"]["commands"]["write_template"] == "python3 scripts/adjudicate_output_review.py --write-template", checklist["skill-package-contract"]
+    assert checklist["skill-package-contract"]["commands"]["import_decisions"].startswith("python3 scripts/yao.py output-review-import"), checklist["skill-package-contract"]
     assert checklist["skill-package-contract"]["required_fields"]["winner_variant"].startswith("A or B"), checklist["skill-package-contract"]
     assert "No reviewer decisions recorded yet" in pending_md.read_text(encoding="utf-8"), pending_md
     pending_text = pending_md.read_text(encoding="utf-8")
@@ -166,6 +169,180 @@ def main() -> None:
     assert all(item["expected_winner_variant"] in {"A", "B"} and item["expected_revealed"] for item in filled_payload["pairs"]), filled_payload
     filled_checklist = {item["case_id"]: item for item in filled_payload["reviewer_checklist"]}
     assert all(item["readiness"] == "adjudicated" and item["answer_key_visible"] for item in filled_checklist.values()), filled_checklist
+
+    import_source = tmp_root / "reviewer_source.json"
+    import_source.write_text(json.dumps(decisions, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    imported_path = tmp_root / "imported_decisions.json"
+    imported_proc = run(
+        [
+            str(IMPORTER),
+            "--input",
+            str(import_source),
+            "--blind-pack",
+            str(blind_pack_json),
+            "--output-json",
+            str(imported_path),
+            "--run-adjudication",
+            "--answer-key",
+            str(answer_key_json),
+            "--adjudication-json",
+            str(tmp_root / "imported_adjudication.json"),
+            "--adjudication-md",
+            str(tmp_root / "imported_adjudication.md"),
+        ]
+    )
+    imported_payload = json.loads(imported_proc.stdout)
+    assert imported_payload["ok"], imported_payload
+    assert imported_payload["summary"]["canonical_written"] is True, imported_payload
+    assert imported_payload["summary"]["adjudication_run"] is True, imported_payload
+    assert imported_payload["summary"]["adjudication_pending_count"] == 0, imported_payload
+    imported_decisions = json.loads(imported_path.read_text(encoding="utf-8"))
+    assert imported_decisions["import_contract"]["raw_content_allowed"] is False, imported_decisions
+    assert imported_decisions["import_contract"]["answer_key_fields_allowed"] is False, imported_decisions
+    assert imported_decisions["import_contract"]["answer_key_opened_by_importer"] is False, imported_decisions
+    assert imported_decisions["reviewer"] == "Yao QA", imported_decisions
+
+    cli_import_proc = run(
+        [
+            str(CLI),
+            "output-review-import",
+            "--input",
+            str(import_source),
+            "--blind-pack",
+            str(blind_pack_json),
+            "--output-json",
+            str(tmp_root / "cli_imported_decisions.json"),
+            "--run-adjudication",
+            "--answer-key",
+            str(answer_key_json),
+            "--adjudication-json",
+            str(tmp_root / "cli_imported_adjudication.json"),
+            "--adjudication-md",
+            str(tmp_root / "cli_imported_adjudication.md"),
+        ]
+    )
+    cli_import_payload = json.loads(cli_import_proc.stdout)
+    assert cli_import_payload["ok"], cli_import_payload
+    assert cli_import_payload["summary"]["canonical_written"] is True, cli_import_payload
+    assert cli_import_payload["summary"]["adjudication_pending_count"] == 0, cli_import_payload
+
+    jsonl_source = tmp_root / "reviewer_source.jsonl"
+    jsonl_source.write_text("\n".join(json.dumps(item, ensure_ascii=False) for item in decisions["decisions"]) + "\n", encoding="utf-8")
+    jsonl_proc = run(
+        [
+            str(IMPORTER),
+            "--input",
+            str(jsonl_source),
+            "--blind-pack",
+            str(blind_pack_json),
+            "--output-json",
+            str(tmp_root / "jsonl_decisions.json"),
+            "--reviewer",
+            "Yao QA",
+            "--reviewed-at",
+            "2026-06-13",
+        ]
+    )
+    jsonl_payload = json.loads(jsonl_proc.stdout)
+    assert jsonl_payload["ok"], jsonl_payload
+    assert jsonl_payload["summary"]["completed_decision_count"] == 5, jsonl_payload
+
+    csv_source = tmp_root / "reviewer_source.csv"
+    csv_source.write_text(
+        "case_id,winner_variant,confidence,reason\n"
+        + "\n".join(
+            f"{item['case_id']},{item['expected_winner_variant']},0.8,CSV reviewer choice"
+            for item in answer_key["answers"]
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    csv_proc = run(
+        [
+            str(IMPORTER),
+            "--input",
+            str(csv_source),
+            "--blind-pack",
+            str(blind_pack_json),
+            "--output-json",
+            str(tmp_root / "csv_decisions.json"),
+            "--reviewer",
+            "Yao QA",
+            "--reviewed-at",
+            "2026-06-13",
+        ]
+    )
+    csv_payload = json.loads(csv_proc.stdout)
+    assert csv_payload["ok"], csv_payload
+    assert csv_payload["summary"]["completed_decision_count"] == 5, csv_payload
+
+    private_source = tmp_root / "private_source.json"
+    private_source.write_text(
+        json.dumps(
+            {
+                "reviewer": "Yao QA",
+                "reviewed_at": "2026-06-13",
+                "decisions": [
+                    {
+                        "case_id": answer_key["answers"][0]["case_id"],
+                        "winner_variant": "A",
+                        "prompt": "raw prompt must not be imported",
+                    }
+                ],
+            },
+            ensure_ascii=False,
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    private_proc = run(
+        [
+            str(IMPORTER),
+            "--input",
+            str(private_source),
+            "--blind-pack",
+            str(blind_pack_json),
+            "--output-json",
+            str(tmp_root / "private_decisions.json"),
+        ],
+        check=False,
+    )
+    private_payload = json.loads(private_proc.stdout)
+    assert private_proc.returncode == 2, private_payload
+    assert private_payload["ok"] is False, private_payload
+    assert any("forbidden raw or answer-key fields" in failure for failure in private_payload["failures"]), private_payload
+    assert not (tmp_root / "private_decisions.json").exists(), private_payload
+
+    unknown_case = tmp_root / "unknown_case.json"
+    unknown_case.write_text(
+        json.dumps(
+            {
+                "reviewer": "Yao QA",
+                "reviewed_at": "2026-06-13",
+                "decisions": [{"case_id": "unknown", "winner_variant": "A"}],
+            },
+            ensure_ascii=False,
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    unknown_proc = run(
+        [
+            str(IMPORTER),
+            "--input",
+            str(unknown_case),
+            "--blind-pack",
+            str(blind_pack_json),
+            "--output-json",
+            str(tmp_root / "unknown_decisions.json"),
+        ],
+        check=False,
+    )
+    unknown_payload = json.loads(unknown_proc.stdout)
+    assert unknown_proc.returncode == 2, unknown_payload
+    assert any("unknown case_id" in failure for failure in unknown_payload["failures"]), unknown_payload
 
     invalid = {
         "schema_version": "1.0",

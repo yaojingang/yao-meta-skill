@@ -759,6 +759,22 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     output_review_cmd.add_argument("--write-template", action="store_true")
     output_review_cmd.set_defaults(func=_handler(command_handlers, "command_output_review"))
 
+    output_review_import_cmd = subparsers.add_parser(
+        "output-review-import",
+        help="Import human blind A/B reviewer decisions into the canonical decision file.",
+    )
+    output_review_import_cmd.add_argument("--input", required=True)
+    output_review_import_cmd.add_argument("--format", choices=["auto", "json", "jsonl", "csv"], default="auto")
+    output_review_import_cmd.add_argument("--blind-pack")
+    output_review_import_cmd.add_argument("--output-json")
+    output_review_import_cmd.add_argument("--reviewer")
+    output_review_import_cmd.add_argument("--reviewed-at")
+    output_review_import_cmd.add_argument("--run-adjudication", action="store_true")
+    output_review_import_cmd.add_argument("--answer-key")
+    output_review_import_cmd.add_argument("--adjudication-json")
+    output_review_import_cmd.add_argument("--adjudication-md")
+    output_review_import_cmd.set_defaults(func=_handler(command_handlers, "command_output_review_import"))
+
     conformance_cmd = subparsers.add_parser("conformance", help="Run runtime conformance checks for Skill OS targets.")
     conformance_cmd.add_argument("skill_dir", nargs="?", default=".")
     conformance_cmd.add_argument("--target", action="append", choices=["openai", "claude", "agent-skills", "vscode", "generic"])

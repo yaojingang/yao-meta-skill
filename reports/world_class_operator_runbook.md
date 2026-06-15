@@ -107,7 +107,8 @@ This runbook coordinates evidence collection only. It does not accept submission
 - python3 scripts/yao.py output-review-kit --write-template
 - Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.
 - python3 scripts/adjudicate_output_review.py --write-template
-- Edit reports/output_review_decisions.json with winner_variant values and reviewer metadata.
+- Record reviewer choices in a separate JSON, JSONL, or CSV decision source with case_id, winner_variant, confidence, and reason only.
+- python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication
 - python3 scripts/yao.py output-review
 - python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>
 - Copy evidence/world_class/templates/human-adjudication.intake.json to evidence/world_class/submissions/human-adjudication.json and fill only real evidence fields.
@@ -137,6 +138,7 @@ This runbook coordinates evidence collection only. It does not accept submission
 ### Privacy Contract
 
 - Reviewer decisions should not include raw user data or private customer detail.
+- The decision importer rejects raw prompt, output, transcript, message, and answer-key fields.
 - Keep the answer key separate until after decisions are recorded.
 
 ### Evidence Artifacts
@@ -146,6 +148,7 @@ This runbook coordinates evidence collection only. It does not accept submission
 - reports/output_review_decisions.json
 - reports/output_review_adjudication.json
 - reports/output_review_adjudication.md
+- scripts/import_output_review_decisions.py
 - evidence/world_class/intake.schema.json
 - evidence/world_class/templates/human-adjudication.intake.json
 - reports/world_class_evidence_intake.json
