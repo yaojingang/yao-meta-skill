@@ -19,6 +19,12 @@ REPORT_FILES = [
     "reports/world_class_evidence_ledger.json",
     "reports/skill_os2_coverage.json",
     "reports/review-studio.json",
+    "reports/package_verification.json",
+    "reports/install_simulation.json",
+    "reports/security_trust_report.json",
+    "reports/context_budget.json",
+    "reports/skill-os-2-review.md",
+    "scripts/ci_test.py",
 ]
 
 
@@ -110,6 +116,9 @@ def main() -> None:
     assert checks["interpretation-adoption-summary"]["status"] == "pass", checks["interpretation-adoption-summary"]
     assert checks["coverage-world-class-boundary"]["status"] == "pass", checks["coverage-world-class-boundary"]
     assert checks["review-studio-no-overclaim"]["status"] == "pass", checks["review-studio-no-overclaim"]
+    assert checks["skill-os-2-review-current-evidence"]["status"] == "pass", checks[
+        "skill-os-2-review-current-evidence"
+    ]
     markdown = output_md.read_text(encoding="utf-8")
     assert "Evidence Consistency" in markdown, markdown
     assert "decision: `consistent`" in markdown, markdown

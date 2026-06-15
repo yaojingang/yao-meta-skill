@@ -1,12 +1,12 @@
 # Evidence Consistency
 
-Generated at: `2026-06-15`
+Generated at: `2026-06-16`
 
 ## Summary
 
 - decision: `consistent`
-- checks: `26`
-- pass: `26`
+- checks: `27`
+- pass: `27`
 - warn: `0`
 - fail: `0`
 
@@ -16,7 +16,7 @@ This gate compares generated evidence reports against each other. It does not cr
 
 | Check | Status | Detail | Paths |
 | --- | --- | --- | --- |
-| Required report artifacts are readable | `pass` | The consistency gate can only be trusted when every source report is present and valid JSON. | `reports/benchmark_reproducibility.json`, `reports/skill-overview.json`, `reports/skill-interpretation.json`, `reports/adoption_drift_report.json`, `reports/world_class_evidence_ledger.json`, `reports/skill_os2_coverage.json`, `reports/review-studio.json` |
+| Required report artifacts are readable | `pass` | The consistency gate can only be trusted when every source JSON report parses and every source Markdown report is readable. | `reports/benchmark_reproducibility.json`, `reports/skill-overview.json`, `reports/skill-interpretation.json`, `reports/adoption_drift_report.json`, `reports/world_class_evidence_ledger.json`, `reports/skill_os2_coverage.json`, `reports/review-studio.json`, `reports/package_verification.json`, `reports/install_simulation.json`, `reports/security_trust_report.json`, `reports/context_budget.json`, `reports/skill-os-2-review.md` |
 | Benchmark release lock matches git dirty state | `pass` | The benchmark release lock must reflect the generation-time git dirty flag. | `reports/benchmark_reproducibility.json` |
 | overview embeds the benchmark commit | `pass` | Human-facing reports must point to the same benchmark release-lock commit. | `reports/benchmark_reproducibility.json`, `reports/skill-overview.json` |
 | overview embeds benchmark summary fields | `pass` | Selected summary fields must match exactly across generated reports. | `reports/benchmark_reproducibility.json`, `reports/skill-overview.json` |
@@ -42,3 +42,4 @@ This gate compares generated evidence reports against each other. It does not cr
 | Coverage report mirrors world-class evidence boundary | `pass` | Blueprint coverage can be locally complete while public world-class evidence remains pending. | `reports/world_class_evidence_ledger.json`, `reports/skill_os2_coverage.json` |
 | Benchmark report mirrors world-class evidence boundary | `pass` | Benchmark reproducibility must not overstate public claim readiness. | `reports/world_class_evidence_ledger.json`, `reports/benchmark_reproducibility.json` |
 | Review Studio does not overclaim pending world-class evidence | `pass` | When world-class evidence is pending, Review Studio must stay in a review or warning posture. | `reports/world_class_evidence_ledger.json`, `reports/review-studio.json` |
+| Skill OS 2.0 review summary mirrors current evidence | `pass` | Manual 2.0 review summaries must not drift from generated gate, package, trust, context, benchmark, or CI evidence. | `reports/skill-os-2-review.md`, `reports/review-studio.json`, `reports/package_verification.json`, `reports/install_simulation.json`, `reports/security_trust_report.json`, `reports/context_budget.json`, `reports/benchmark_reproducibility.json`, `scripts/ci_test.py` |

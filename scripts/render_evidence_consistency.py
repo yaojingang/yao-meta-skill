@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import argparse
+import ast
 import json
 from datetime import date
 from pathlib import Path
@@ -17,6 +18,13 @@ REQUIRED_REPORTS = {
     "world_class_ledger": "reports/world_class_evidence_ledger.json",
     "skill_os2_coverage": "reports/skill_os2_coverage.json",
     "review_studio": "reports/review-studio.json",
+    "package_verification": "reports/package_verification.json",
+    "install_simulation": "reports/install_simulation.json",
+    "trust": "reports/security_trust_report.json",
+    "context_budget": "reports/context_budget.json",
+}
+REQUIRED_TEXT_REPORTS = {
+    "skill_os2_review": "reports/skill-os-2-review.md",
 }
 BENCHMARK_SUMMARY_KEYS = [
     "release_lock_ready",
@@ -76,6 +84,26 @@ def load_json(path: Path) -> tuple[dict[str, Any], str | None]:
     if not isinstance(payload, dict):
         return {}, "json-root-not-object"
     return payload, None
+
+
+def load_text(path: Path) -> tuple[str, str | None]:
+    if not path.exists():
+        return "", "missing"
+    return path.read_text(encoding="utf-8"), None
+
+
+def ci_default_target_count(path: Path) -> int | None:
+    if not path.exists():
+        return None
+    tree = ast.parse(path.read_text(encoding="utf-8"))
+    for node in tree.body:
+        if not isinstance(node, ast.Assign):
+            continue
+        if not any(isinstance(target, ast.Name) and target.id == "DEFAULT_TARGETS" for target in node.targets):
+            continue
+        if isinstance(node.value, (ast.List, ast.Tuple)):
+            return len(node.value.elts)
+    return None
 
 
 def rel_path(path: Path, root: Path) -> str:
@@ -170,6 +198,7 @@ def report_contract(payload: dict[str, Any]) -> dict[str, Any]:
 
 def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
     reports: dict[str, dict[str, Any]] = {}
+    text_reports: dict[str, str] = {}
     checks: list[dict[str, Any]] = []
     load_failures: dict[str, str] = {}
     for name, relative in REQUIRED_REPORTS.items():
@@ -177,15 +206,20 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
         reports[name] = payload
         if failure:
             load_failures[relative] = failure
+    for name, relative in REQUIRED_TEXT_REPORTS.items():
+        text, failure = load_text(skill_dir / relative)
+        text_reports[name] = text
+        if failure:
+            load_failures[relative] = failure
     add_check(
         checks,
         key="required-report-artifacts",
         label="Required report artifacts are readable",
         status="pass" if not load_failures else "fail",
-        expected="all required JSON reports exist and parse",
+        expected="all required JSON and Markdown reports exist and parse",
         actual=load_failures or "all readable",
-        paths=list(REQUIRED_REPORTS.values()),
-        detail="The consistency gate can only be trusted when every source report is present and valid JSON.",
+        paths=list(REQUIRED_REPORTS.values()) + list(REQUIRED_TEXT_REPORTS.values()),
+        detail="The consistency gate can only be trusted when every source JSON report parses and every source Markdown report is readable.",
     )
 
     benchmark = reports["benchmark"]
@@ -195,12 +229,20 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
     ledger = reports["world_class_ledger"]
     coverage = reports["skill_os2_coverage"]
     review_studio = reports["review_studio"]
+    package_verification = reports["package_verification"]
+    install_simulation = reports["install_simulation"]
+    trust = reports["trust"]
+    context_budget = reports["context_budget"]
 
     benchmark_summary = nested(benchmark, ["summary"], {})
     adoption_summary = nested(adoption, ["summary"], {})
     ledger_summary = nested(ledger, ["summary"], {})
     coverage_summary = nested(coverage, ["summary"], {})
     studio_summary = nested(review_studio, ["summary"], {})
+    package_summary = nested(package_verification, ["summary"], {})
+    install_summary = nested(install_simulation, ["summary"], {})
+    trust_summary = nested(trust, ["summary"], {})
+    context_stats = nested(context_budget, ["stats"], {})
     if isinstance(benchmark_summary, dict):
         compare_values(
             checks,
@@ -363,6 +405,49 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
         else None,
         paths=[REQUIRED_REPORTS["world_class_ledger"], REQUIRED_REPORTS["review_studio"]],
         detail="When world-class evidence is pending, Review Studio must stay in a review or warning posture.",
+    )
+    skill_os2_review = text_reports.get("skill_os2_review", "")
+    ci_target_count = ci_default_target_count(skill_dir / "scripts" / "ci_test.py")
+    expected_review_snippets = [
+        f"score `{studio_summary.get('world_class_score')}`",
+        f"`{studio_summary.get('gate_count')}` gates",
+        f"`{studio_summary.get('warning_count')}` warnings",
+        f"`{trust_summary.get('internal_module_count')}` declared internal modules",
+        (
+            f"`{trust_summary.get('help_smoke_checked_count')} / {trust_summary.get('help_smoke_checked_count')}` "
+            f"CLI help smoke checks passing across `{trust_summary.get('script_count')}` scripts"
+        ),
+        f"`{package_summary.get('archive_entry_count')}` zip entries",
+        f"archive with `{package_summary.get('archive_entry_count')}` entries",
+        f"`{install_summary.get('installer_permission_enforced_count')}` installer permission checks enforced",
+        f"`{install_summary.get('installer_permission_failure_count')}` permission failures",
+        f"`{benchmark_summary.get('required_artifact_count')}` required artifacts",
+        f"`{benchmark_summary.get('command_count')}` reproduction commands",
+        (
+            f"initial load `{context_stats.get('estimated_initial_load_tokens')}/"
+            f"{context_stats.get('context_budget_limit')}`"
+        ),
+        f"target count is `{ci_target_count}`",
+    ]
+    missing_review_snippets = [snippet for snippet in expected_review_snippets if snippet not in skill_os2_review]
+    add_check(
+        checks,
+        key="skill-os-2-review-current-evidence",
+        label="Skill OS 2.0 review summary mirrors current evidence",
+        status="pass" if not missing_review_snippets else "fail",
+        expected=expected_review_snippets,
+        actual="all present" if not missing_review_snippets else {"missing": missing_review_snippets},
+        paths=[
+            REQUIRED_TEXT_REPORTS["skill_os2_review"],
+            REQUIRED_REPORTS["review_studio"],
+            REQUIRED_REPORTS["package_verification"],
+            REQUIRED_REPORTS["install_simulation"],
+            REQUIRED_REPORTS["trust"],
+            REQUIRED_REPORTS["context_budget"],
+            REQUIRED_REPORTS["benchmark"],
+            "scripts/ci_test.py",
+        ],
+        detail="Manual 2.0 review summaries must not drift from generated gate, package, trust, context, benchmark, or CI evidence.",
     )
     status_counts: dict[str, int] = {"pass": 0, "warn": 0, "fail": 0}
     for check in checks:

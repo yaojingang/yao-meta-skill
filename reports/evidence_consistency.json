@@ -1,17 +1,17 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-15",
+  "generated_at": "2026-06-16",
   "skill_dir": ".",
   "summary": {
-    "check_count": 26,
-    "pass_count": 26,
+    "check_count": 27,
+    "pass_count": 27,
     "warn_count": 0,
     "fail_count": 0,
     "decision": "consistent"
   },
   "status_counts": {
-    "pass": 26,
+    "pass": 27,
     "warn": 0,
     "fail": 0
   },
@@ -20,7 +20,7 @@
       "key": "required-report-artifacts",
       "label": "Required report artifacts are readable",
       "status": "pass",
-      "expected": "all required JSON reports exist and parse",
+      "expected": "all required JSON and Markdown reports exist and parse",
       "actual": "all readable",
       "paths": [
         "reports/benchmark_reproducibility.json",
@@ -29,9 +29,14 @@
         "reports/adoption_drift_report.json",
         "reports/world_class_evidence_ledger.json",
         "reports/skill_os2_coverage.json",
-        "reports/review-studio.json"
+        "reports/review-studio.json",
+        "reports/package_verification.json",
+        "reports/install_simulation.json",
+        "reports/security_trust_report.json",
+        "reports/context_budget.json",
+        "reports/skill-os-2-review.md"
       ],
-      "detail": "The consistency gate can only be trusted when every source report is present and valid JSON."
+      "detail": "The consistency gate can only be trusted when every source JSON report parses and every source Markdown report is readable."
     },
     {
       "key": "benchmark-release-lock-self-consistency",
@@ -1639,6 +1644,38 @@
         "reports/review-studio.json"
       ],
       "detail": "When world-class evidence is pending, Review Studio must stay in a review or warning posture."
+    },
+    {
+      "key": "skill-os-2-review-current-evidence",
+      "label": "Skill OS 2.0 review summary mirrors current evidence",
+      "status": "pass",
+      "expected": [
+        "score `91`",
+        "`16` gates",
+        "`3` warnings",
+        "`28` declared internal modules",
+        "`82 / 82` CLI help smoke checks passing across `110` scripts",
+        "`613` zip entries",
+        "archive with `613` entries",
+        "`12` installer permission checks enforced",
+        "`0` permission failures",
+        "`24` required artifacts",
+        "`22` reproduction commands",
+        "initial load `960/1000`",
+        "target count is `76`"
+      ],
+      "actual": "all present",
+      "paths": [
+        "reports/skill-os-2-review.md",
+        "reports/review-studio.json",
+        "reports/package_verification.json",
+        "reports/install_simulation.json",
+        "reports/security_trust_report.json",
+        "reports/context_budget.json",
+        "reports/benchmark_reproducibility.json",
+        "scripts/ci_test.py"
+      ],
+      "detail": "Manual 2.0 review summaries must not drift from generated gate, package, trust, context, benchmark, or CI evidence."
     }
   ],
   "artifacts": {
