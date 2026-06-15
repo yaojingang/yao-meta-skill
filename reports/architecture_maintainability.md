@@ -1,14 +1,14 @@
 # Architecture Maintainability
 
-Generated at: `2026-06-14`
+Generated at: `2026-06-15`
 
 ## Summary
 
 - decision: `pass`
-- python files: `159`
-- scripts: `99`
+- python files: `162`
+- scripts: `102`
 - tests: `60`
-- internal modules: `25`
+- internal modules: `28`
 - CLI scripts: `76`
 - Yao CLI command handlers: `34`
 - largest file lines: `891`
@@ -27,16 +27,16 @@ No file-size hotspots found.
 | --- | ---: | --- | --- |
 | `tests/verify_yao_cli.py` | `891` | `test` | `pass` |
 | `scripts/yao.py` | `881` | `cli-script` | `pass` |
-| `scripts/skill_report_model.py` | `792` | `internal-module` | `pass` |
+| `scripts/skill_report_layout.py` | `805` | `internal-module` | `pass` |
+| `scripts/skill_report_model.py` | `800` | `internal-module` | `pass` |
 | `scripts/yao_cli_parser.py` | `741` | `internal-module` | `pass` |
 | `scripts/compile_skill.py` | `734` | `cli-script` | `pass` |
+| `tests/verify_review_studio.py` | `734` | `test` | `pass` |
 | `scripts/build_skill_atlas.py` | `730` | `cli-script` | `pass` |
 | `scripts/optimize_description.py` | `723` | `cli-script` | `pass` |
 | `scripts/trust_check.py` | `714` | `internal-module` | `pass` |
-| `tests/verify_review_studio.py` | `702` | `test` | `pass` |
+| `scripts/review_studio_layout.py` | `694` | `internal-module` | `pass` |
 | `scripts/render_review_viewer.py` | `685` | `cli-script` | `pass` |
-| `scripts/skill_report_layout.py` | `653` | `internal-module` | `pass` |
-| `scripts/review_studio_gates.py` | `645` | `internal-module` | `pass` |
 
 ## Release Rule
 

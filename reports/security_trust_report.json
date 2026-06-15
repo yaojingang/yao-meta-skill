@@ -2,9 +2,9 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 183,
-    "script_count": 99,
-    "internal_module_count": 22,
+    "scanned_files": 186,
+    "script_count": 102,
+    "internal_module_count": 25,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 183,
-    "package_sha256": "026ad61bd6b06edd733e3ddd951bfcadaf41106a6f6d6a622c307d39b4a63a71"
+    "package_hash_file_count": 186,
+    "package_sha256": "0a4768c86c9af215719c0b76036499fc1b2324a0045914d54f3df1e2860fb822"
   },
   "failures": [],
   "warnings": [],
@@ -943,6 +943,20 @@
       "network_hosts": []
     },
     {
+      "path": "scripts/review_studio_action_evidence.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Imported by review_studio_actions.py to keep world-class evidence action cards out of generic Review Studio action wiring.",
+      "has_argparse": false,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
       "path": "scripts/review_studio_actions.py",
       "interface": "internal-module",
       "interface_declared": true,
@@ -1167,6 +1181,20 @@
       "network_hosts": []
     },
     {
+      "path": "scripts/skill_report_i18n.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Imported by render_skill_overview.py to keep bilingual report copy and fallback rules out of HTML rendering.",
+      "has_argparse": false,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
       "path": "scripts/skill_report_layout.py",
       "interface": "internal-module",
       "interface_declared": true,
@@ -1199,6 +1227,20 @@
       "interface": "internal-module",
       "interface_declared": true,
       "interface_reason": "Imported by render_skill_overview.py to build the v2 report data model.",
+      "has_argparse": false,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
+      "path": "scripts/skill_report_world_class.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Imported by skill_report_model.py to summarize world-class evidence readiness and roadmap actions.",
       "has_argparse": false,
       "has_main_guard": false,
       "uses_input": false,
@@ -1467,7 +1509,7 @@
     "checked_count": 77,
     "passed_count": 77,
     "failed_count": 0,
-    "skipped_count": 22,
+    "skipped_count": 25,
     "failed_scripts": [],
     "results": [
       {
@@ -2247,6 +2289,10 @@
         "reason": "internal module"
       },
       {
+        "path": "scripts/review_studio_action_evidence.py",
+        "reason": "internal module"
+      },
+      {
         "path": "scripts/review_studio_actions.py",
         "reason": "internal module"
       },
@@ -2287,6 +2333,10 @@
         "reason": "internal module"
       },
       {
+        "path": "scripts/skill_report_i18n.py",
+        "reason": "internal module"
+      },
+      {
         "path": "scripts/skill_report_layout.py",
         "reason": "internal module"
       },
@@ -2296,6 +2346,10 @@
       },
       {
         "path": "scripts/skill_report_model.py",
+        "reason": "internal module"
+      },
+      {
+        "path": "scripts/skill_report_world_class.py",
         "reason": "internal module"
       },
       {

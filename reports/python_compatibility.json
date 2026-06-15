@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-14",
+  "generated_at": "2026-06-15",
   "root": ".",
   "summary": {
     "target_python": "3.11",
-    "file_count": 162,
+    "file_count": 165,
     "issue_count": 0,
     "syntax_error_count": 0,
     "fstring_311_violation_count": 0,
@@ -425,6 +425,12 @@
       "issues": []
     },
     {
+      "path": "scripts/review_studio_action_evidence.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
       "path": "scripts/review_studio_actions.py",
       "ok": true,
       "issue_count": 0,
@@ -521,6 +527,12 @@
       "issues": []
     },
     {
+      "path": "scripts/skill_report_i18n.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
       "path": "scripts/skill_report_layout.py",
       "ok": true,
       "issue_count": 0,
@@ -534,6 +546,12 @@
     },
     {
       "path": "scripts/skill_report_model.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "scripts/skill_report_world_class.py",
       "ok": true,
       "issue_count": 0,
       "issues": []

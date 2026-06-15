@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-14",
+  "generated_at": "2026-06-15",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 159,
-    "script_file_count": 99,
+    "python_file_count": 162,
+    "script_file_count": 102,
     "test_file_count": 60,
-    "internal_module_count": 25,
+    "internal_module_count": 28,
     "cli_script_count": 76,
     "command_handler_count": 34,
     "warn_line_threshold": 900,
@@ -33,8 +33,15 @@
       "recommendation": "Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator."
     },
     {
+      "path": "scripts/skill_report_layout.py",
+      "lines": 805,
+      "kind": "internal-module",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
       "path": "scripts/skill_report_model.py",
-      "lines": 792,
+      "lines": 800,
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
@@ -52,6 +59,13 @@
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "tests/verify_review_studio.py",
+      "lines": 734,
+      "kind": "test",
+      "severity": "pass",
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
       "path": "scripts/build_skill_atlas.py",
@@ -75,11 +89,11 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
-      "path": "tests/verify_review_studio.py",
-      "lines": 702,
-      "kind": "test",
+      "path": "scripts/review_studio_layout.py",
+      "lines": 694,
+      "kind": "internal-module",
       "severity": "pass",
-      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
       "path": "scripts/render_review_viewer.py",
@@ -87,20 +101,6 @@
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Split viewer data assembly from HTML section rendering."
-    },
-    {
-      "path": "scripts/skill_report_layout.py",
-      "lines": 653,
-      "kind": "internal-module",
-      "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
-      "path": "scripts/review_studio_gates.py",
-      "lines": 645,
-      "kind": "internal-module",
-      "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     }
   ],
   "hotspots": [],

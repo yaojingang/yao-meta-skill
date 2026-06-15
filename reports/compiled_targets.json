@@ -161,6 +161,7 @@
             "scripts/export_skill_ir.py",
             "scripts/github_benchmark_scan.py",
             "scripts/governance_check.py",
+            "scripts/html_rendering.py",
             "scripts/import_telemetry_events.py",
             "scripts/init_skill.py",
             "scripts/judge_blind_eval.py",
@@ -209,6 +210,7 @@
             "scripts/render_world_class_operator_runbook.py",
             "scripts/render_world_class_submission_review.py",
             "scripts/resource_boundary_check.py",
+            "scripts/review_studio_action_evidence.py",
             "scripts/review_studio_actions.py",
             "scripts/review_studio_data.py",
             "scripts/review_studio_formatting.py",
@@ -223,9 +225,7 @@
             "scripts/run_eval_suite.py",
             "scripts/run_output_eval.py",
             "scripts/run_output_execution.py",
-            "scripts/simulate_install.py",
-            "scripts/skill_report_charts.py",
-            "scripts/skill_report_layout.py"
+            "scripts/simulate_install.py"
           ],
           "assets": [
             "templates/basic_skill.md.j2",
@@ -1011,6 +1011,7 @@
             "scripts/export_skill_ir.py",
             "scripts/github_benchmark_scan.py",
             "scripts/governance_check.py",
+            "scripts/html_rendering.py",
             "scripts/import_telemetry_events.py",
             "scripts/init_skill.py",
             "scripts/judge_blind_eval.py",
@@ -1059,6 +1060,7 @@
             "scripts/render_world_class_operator_runbook.py",
             "scripts/render_world_class_submission_review.py",
             "scripts/resource_boundary_check.py",
+            "scripts/review_studio_action_evidence.py",
             "scripts/review_studio_actions.py",
             "scripts/review_studio_data.py",
             "scripts/review_studio_formatting.py",
@@ -1073,9 +1075,7 @@
             "scripts/run_eval_suite.py",
             "scripts/run_output_eval.py",
             "scripts/run_output_execution.py",
-            "scripts/simulate_install.py",
-            "scripts/skill_report_charts.py",
-            "scripts/skill_report_layout.py"
+            "scripts/simulate_install.py"
           ],
           "assets": [
             "templates/basic_skill.md.j2",
@@ -1861,6 +1861,7 @@
             "scripts/export_skill_ir.py",
             "scripts/github_benchmark_scan.py",
             "scripts/governance_check.py",
+            "scripts/html_rendering.py",
             "scripts/import_telemetry_events.py",
             "scripts/init_skill.py",
             "scripts/judge_blind_eval.py",
@@ -1909,6 +1910,7 @@
             "scripts/render_world_class_operator_runbook.py",
             "scripts/render_world_class_submission_review.py",
             "scripts/resource_boundary_check.py",
+            "scripts/review_studio_action_evidence.py",
             "scripts/review_studio_actions.py",
             "scripts/review_studio_data.py",
             "scripts/review_studio_formatting.py",
@@ -1923,9 +1925,7 @@
             "scripts/run_eval_suite.py",
             "scripts/run_output_eval.py",
             "scripts/run_output_execution.py",
-            "scripts/simulate_install.py",
-            "scripts/skill_report_charts.py",
-            "scripts/skill_report_layout.py"
+            "scripts/simulate_install.py"
           ],
           "assets": [
             "templates/basic_skill.md.j2",
@@ -2695,6 +2695,7 @@
             "scripts/export_skill_ir.py",
             "scripts/github_benchmark_scan.py",
             "scripts/governance_check.py",
+            "scripts/html_rendering.py",
             "scripts/import_telemetry_events.py",
             "scripts/init_skill.py",
             "scripts/judge_blind_eval.py",
@@ -2743,6 +2744,7 @@
             "scripts/render_world_class_operator_runbook.py",
             "scripts/render_world_class_submission_review.py",
             "scripts/resource_boundary_check.py",
+            "scripts/review_studio_action_evidence.py",
             "scripts/review_studio_actions.py",
             "scripts/review_studio_data.py",
             "scripts/review_studio_formatting.py",
@@ -2757,9 +2759,7 @@
             "scripts/run_eval_suite.py",
             "scripts/run_output_eval.py",
             "scripts/run_output_execution.py",
-            "scripts/simulate_install.py",
-            "scripts/skill_report_charts.py",
-            "scripts/skill_report_layout.py"
+            "scripts/simulate_install.py"
           ],
           "assets": [
             "templates/basic_skill.md.j2",
@@ -3529,6 +3529,7 @@
             "scripts/export_skill_ir.py",
             "scripts/github_benchmark_scan.py",
             "scripts/governance_check.py",
+            "scripts/html_rendering.py",
             "scripts/import_telemetry_events.py",
             "scripts/init_skill.py",
             "scripts/judge_blind_eval.py",
@@ -3577,6 +3578,7 @@
             "scripts/render_world_class_operator_runbook.py",
             "scripts/render_world_class_submission_review.py",
             "scripts/resource_boundary_check.py",
+            "scripts/review_studio_action_evidence.py",
             "scripts/review_studio_actions.py",
             "scripts/review_studio_data.py",
             "scripts/review_studio_formatting.py",
@@ -3591,9 +3593,7 @@
             "scripts/run_eval_suite.py",
             "scripts/run_output_eval.py",
             "scripts/run_output_execution.py",
-            "scripts/simulate_install.py",
-            "scripts/skill_report_charts.py",
-            "scripts/skill_report_layout.py"
+            "scripts/simulate_install.py"
           ],
           "assets": [
             "templates/basic_skill.md.j2",

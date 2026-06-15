@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `183`
-- Scripts: `99`
-- Internal script modules: `22`
+- Scanned files: `186`
+- Scripts: `102`
+- Internal script modules: `25`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `183`
-- Package SHA256: `026ad61bd6b06edd733e3ddd951bfcadaf41106a6f6d6a622c307d39b4a63a71`
+- Package hash files: `186`
+- Package SHA256: `0a4768c86c9af215719c0b76036499fc1b2324a0045914d54f3df1e2860fb822`
 
 ## Failures
 
@@ -126,6 +126,7 @@
 | scripts/render_world_class_operator_runbook.py | cli | True | True | True | False | False | True | False | Renders an operator runbook for collecting pending world-class evidence without accepting evidence. |
 | scripts/render_world_class_submission_review.py | cli | True | True | True | False | False | True | False | Renders a read-only review queue for world-class evidence submissions before ledger acceptance. |
 | scripts/resource_boundary_check.py | cli | False | True | True | False | False | False | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
+| scripts/review_studio_action_evidence.py | internal-module | True | False | False | False | False | False | False | Imported by review_studio_actions.py to keep world-class evidence action cards out of generic Review Studio action wiring. |
 | scripts/review_studio_actions.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to keep Review Studio action guidance and source refs out of HTML rendering. |
 | scripts/review_studio_data.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to load Review Studio source reports and metric cards. |
 | scripts/review_studio_formatting.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to format report dictionaries as audit UI panels. |
@@ -142,9 +143,11 @@
 | scripts/run_output_execution.py | cli | False | True | True | False | False | True | True | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/simulate_install.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/skill_report_charts.py | internal-module | True | False | False | False | False | False | False | Imported by render_skill_overview.py to render inline SVG report charts. |
+| scripts/skill_report_i18n.py | internal-module | True | False | False | False | False | False | False | Imported by render_skill_overview.py to keep bilingual report copy and fallback rules out of HTML rendering. |
 | scripts/skill_report_layout.py | internal-module | True | False | False | False | False | False | False | Imported by render_skill_overview.py to keep overview report layout and CSS out of data rendering. |
 | scripts/skill_report_metrics.py | internal-module | True | False | False | False | False | False | False | Imported by skill_report_model.py to calculate overview report metrics. |
 | scripts/skill_report_model.py | internal-module | True | False | False | False | False | False | False | Imported by render_skill_overview.py to build the v2 report data model. |
+| scripts/skill_report_world_class.py | internal-module | True | False | False | False | False | False | False | Imported by skill_report_model.py to summarize world-class evidence readiness and roadmap actions. |
 | scripts/sync_local_install.py | cli | False | True | True | False | False | True | True | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/telemetry_native_host.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/trigger_eval.py | cli | False | True | True | False | False | False | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
