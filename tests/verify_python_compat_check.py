@@ -52,7 +52,16 @@ def main() -> None:
         "result = f'{escaped}'\n",
         encoding="utf-8",
     )
-    safe_proc = run_check("--path", safe.relative_to(ROOT).as_posix(), check=True, cwd=TMP)
+    safe_proc = run_check(
+        "--path",
+        safe.relative_to(ROOT).as_posix(),
+        "--output-json",
+        str(TMP / "safe_python_compatibility.json"),
+        "--output-md",
+        str(TMP / "safe_python_compatibility.md"),
+        check=True,
+        cwd=TMP,
+    )
     safe_payload = json.loads(safe_proc.stdout)
     assert safe_payload["summary"]["file_count"] == 1, safe_payload
     assert safe_payload["summary"]["issue_count"] == 0, safe_payload
@@ -63,7 +72,16 @@ def main() -> None:
         "result = f\"{value.replace('|', '\\\\|')}\"\n",
         encoding="utf-8",
     )
-    unsafe_proc = run_check("--path", unsafe.relative_to(ROOT).as_posix(), check=False, cwd=TMP)
+    unsafe_proc = run_check(
+        "--path",
+        unsafe.relative_to(ROOT).as_posix(),
+        "--output-json",
+        str(TMP / "unsafe_python_compatibility.json"),
+        "--output-md",
+        str(TMP / "unsafe_python_compatibility.md"),
+        check=False,
+        cwd=TMP,
+    )
     assert unsafe_proc.returncode == 2, unsafe_proc.stdout
     unsafe_payload = json.loads(unsafe_proc.stdout)
     assert unsafe_payload["ok"] is False, unsafe_payload
