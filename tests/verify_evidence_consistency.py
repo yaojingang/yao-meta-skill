@@ -95,11 +95,26 @@ def assert_world_class_roadmap_matches_ledger() -> None:
             assert expected_breakdown in actions, actions
 
 
+def assert_release_evidence_instructions_cover_first_class_reports() -> None:
+    agents_text = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+    source_refresh_header = "After source changes that affect scripts"
+    clean_lock_header = "For final release evidence"
+    assert source_refresh_header in agents_text, agents_text
+    assert clean_lock_header in agents_text, agents_text
+
+    source_refresh = agents_text.split(source_refresh_header, 1)[1].split(clean_lock_header, 1)[0]
+    clean_lock = agents_text.split(clean_lock_header, 1)[1].split("If `reports/benchmark_reproducibility.json`", 1)[0]
+    for block in [source_refresh, clean_lock]:
+        assert "python3 scripts/render_skill_interpretation.py ." in block, block
+        assert "python3 scripts/render_evidence_consistency.py . --generated-at \"$GENERATED_AT\"" in block, block
+
+
 def main() -> None:
     shutil.rmtree(TMP, ignore_errors=True)
     TMP.mkdir(parents=True, exist_ok=True)
     refresh_embedded_reports()
     assert_world_class_roadmap_matches_ledger()
+    assert_release_evidence_instructions_cover_first_class_reports()
     output_json = TMP / "evidence_consistency.json"
     output_md = TMP / "evidence_consistency.md"
     proc = run(

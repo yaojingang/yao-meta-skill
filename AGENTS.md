@@ -49,8 +49,10 @@ python3 scripts/render_world_class_operator_runbook.py . --generated-at "$GENERA
 python3 scripts/render_world_class_claim_guard.py . --generated-at "$GENERATED_AT"
 python3 scripts/render_skill_os2_coverage.py . --generated-at "$GENERATED_AT"
 python3 scripts/render_skill_overview.py .
+python3 scripts/render_skill_interpretation.py .
 python3 scripts/render_review_viewer.py .
 python3 scripts/render_review_studio.py . --output-html reports/review-studio.html --output-json reports/review-studio.json
+python3 scripts/render_evidence_consistency.py . --generated-at "$GENERATED_AT"
 ```
 
 For final release evidence, commit source and generated package evidence first, then run the clean-lock reports from a clean worktree:
@@ -58,8 +60,10 @@ For final release evidence, commit source and generated package evidence first, 
 ```bash
 python3 scripts/render_benchmark_reproducibility.py . --generated-at "$GENERATED_AT"
 python3 scripts/render_skill_overview.py .
+python3 scripts/render_skill_interpretation.py .
 python3 scripts/render_review_viewer.py .
 python3 scripts/render_review_studio.py . --output-html reports/review-studio.html --output-json reports/review-studio.json
+python3 scripts/render_evidence_consistency.py . --generated-at "$GENERATED_AT"
 ```
 
 If `reports/benchmark_reproducibility.json` reports `release_lock_ready: false`, do not commit that benchmark as release evidence. Restore the transient dirty-lock reports, commit the source/generated evidence that caused the dirty state, and regenerate the clean-lock reports on the resulting clean tree.

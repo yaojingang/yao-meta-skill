@@ -999,9 +999,9 @@
       "methodology_complete": true,
       "required_artifact_count": 24,
       "missing_artifact_count": 0,
-      "evidence_bundle_sha256": "5ad19434d41f67e6a8dbcbccbd22ffefed11008d75ebb00a78f0d24f3f8910a8",
+      "evidence_bundle_sha256": "60f3799e92d774a4f737edfdd3cdf402a427a326b25adf5322c6bc61b3a39e8a",
       "source_contract_sha256": "9fde13846a41c2d1442b6e80350313246dedebe02590ce1f2f07f2da1109c9ea",
-      "archive_sha256": "83ece575ef740a97b6a398f77ed4bc9f1869cde756257c64fdd90d8785c6f3a5",
+      "archive_sha256": "2fd9a3f8c7c4aa72b0bd03e9cfbf0449a0fa9215f949459324895c72c9abf6b9",
       "output_case_count": 5,
       "failure_disclosure_count": 3,
       "command_count": 22,
@@ -1021,9 +1021,9 @@
       "public_claim_ready": false,
       "public_claim_blocker_count": 5,
       "working_tree_dirty": true,
-      "changed_file_count": 9
+      "changed_file_count": 22
     },
-    "commit": "a7960d4cfd2d9a17cbaebcee7b823f0db13df0cf",
+    "commit": "bc999b9508da329c8ce09f98cffa6f02aae5bb2b",
     "missing_artifacts": [],
     "limitations": [
       "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -1167,7 +1167,7 @@
       "license": "MIT",
       "checksums": {
         "package_sha256": "9fde13846a41c2d1442b6e80350313246dedebe02590ce1f2f07f2da1109c9ea",
-        "archive_sha256": "83ece575ef740a97b6a398f77ed4bc9f1869cde756257c64fdd90d8785c6f3a5"
+        "archive_sha256": "2fd9a3f8c7c4aa72b0bd03e9cfbf0449a0fa9215f949459324895c72c9abf6b9"
       },
       "compatibility": {
         "openai": "pass",
@@ -1198,7 +1198,7 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "83ece575ef740a97b6a398f77ed4bc9f1869cde756257c64fdd90d8785c6f3a5",
+        "archive_sha256": "2fd9a3f8c7c4aa72b0bd03e9cfbf0449a0fa9215f949459324895c72c9abf6b9",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
@@ -1214,7 +1214,7 @@
       "target_count": 4,
       "adapter_count": 4,
       "archive_present": true,
-      "archive_sha256": "83ece575ef740a97b6a398f77ed4bc9f1869cde756257c64fdd90d8785c6f3a5",
+      "archive_sha256": "2fd9a3f8c7c4aa72b0bd03e9cfbf0449a0fa9215f949459324895c72c9abf6b9",
       "archive_entry_count": 618,
       "failure_count": 0,
       "warning_count": 0
@@ -1293,7 +1293,7 @@
         {
           "field": "archive_sha256",
           "from": "",
-          "to": "83ece575ef740a97b6a398f77ed4bc9f1869cde756257c64fdd90d8785c6f3a5"
+          "to": "2fd9a3f8c7c4aa72b0bd03e9cfbf0449a0fa9215f949459324895c72c9abf6b9"
         },
         {
           "field": "package_sha256",

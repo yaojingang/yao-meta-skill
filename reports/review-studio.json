@@ -1676,7 +1676,7 @@
         "ok": true,
         "summary": {
           "reproducibility_ready": true,
-          "release_lock_ready": true,
+          "release_lock_ready": false,
           "methodology_complete": true,
           "required_artifact_count": 24,
           "missing_artifact_count": 0,
@@ -1700,11 +1700,11 @@
           "world_class_source_pass_count": 6,
           "world_class_source_blocked_count": 7,
           "public_claim_ready": false,
-          "public_claim_blocker_count": 4,
-          "working_tree_dirty": false,
-          "changed_file_count": 0
+          "public_claim_blocker_count": 5,
+          "working_tree_dirty": true,
+          "changed_file_count": 2
         },
-        "commit": "a7960d4cfd2d9a17cbaebcee7b823f0db13df0cf",
+        "commit": "bc999b9508da329c8ce09f98cffa6f02aae5bb2b",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -1848,7 +1848,7 @@
           "license": "MIT",
           "checksums": {
             "package_sha256": "9fde13846a41c2d1442b6e80350313246dedebe02590ce1f2f07f2da1109c9ea",
-            "archive_sha256": "83ece575ef740a97b6a398f77ed4bc9f1869cde756257c64fdd90d8785c6f3a5"
+            "archive_sha256": "2fd9a3f8c7c4aa72b0bd03e9cfbf0449a0fa9215f949459324895c72c9abf6b9"
           },
           "compatibility": {
             "openai": "pass",
@@ -1879,7 +1879,7 @@
           },
           "distribution": {
             "archive_verified": true,
-            "archive_sha256": "83ece575ef740a97b6a398f77ed4bc9f1869cde756257c64fdd90d8785c6f3a5",
+            "archive_sha256": "2fd9a3f8c7c4aa72b0bd03e9cfbf0449a0fa9215f949459324895c72c9abf6b9",
             "package_verification": "reports/package_verification.json",
             "install_simulated": true,
             "install_simulation": "reports/install_simulation.json"
@@ -1895,7 +1895,7 @@
           "target_count": 4,
           "adapter_count": 4,
           "archive_present": true,
-          "archive_sha256": "83ece575ef740a97b6a398f77ed4bc9f1869cde756257c64fdd90d8785c6f3a5",
+          "archive_sha256": "2fd9a3f8c7c4aa72b0bd03e9cfbf0449a0fa9215f949459324895c72c9abf6b9",
           "archive_entry_count": 618,
           "failure_count": 0,
           "warning_count": 0
@@ -1974,7 +1974,7 @@
             {
               "field": "archive_sha256",
               "from": "",
-              "to": "83ece575ef740a97b6a398f77ed4bc9f1869cde756257c64fdd90d8785c6f3a5"
+              "to": "2fd9a3f8c7c4aa72b0bd03e9cfbf0449a0fa9215f949459324895c72c9abf6b9"
             },
             {
               "field": "package_sha256",
@@ -4346,7 +4346,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.79,
+          "duration_ms": 28.59,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4374,7 +4374,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 27.31,
+          "duration_ms": 28.37,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4397,7 +4397,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.66,
+          "duration_ms": 27.45,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4425,7 +4425,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.21,
+          "duration_ms": 29.67,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4448,7 +4448,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.62,
+          "duration_ms": 30.1,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4476,7 +4476,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.34,
+          "duration_ms": 30.07,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4499,7 +4499,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.51,
+          "duration_ms": 27.43,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4526,7 +4526,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.37,
+          "duration_ms": 27.52,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4549,7 +4549,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.44,
+          "duration_ms": 27.47,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4578,7 +4578,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.21,
+          "duration_ms": 27.12,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -5299,17 +5299,20 @@
       "ok": true,
       "generated_at": "2026-06-16",
       "skill_dir": ".",
-      "commit": "a7960d4cfd2d9a17cbaebcee7b823f0db13df0cf",
+      "commit": "bc999b9508da329c8ce09f98cffa6f02aae5bb2b",
       "git_status": {
         "available": true,
-        "dirty": false,
-        "changed_file_count": 0,
-        "sample": [],
+        "dirty": true,
+        "changed_file_count": 2,
+        "sample": [
+          " M AGENTS.md",
+          " M tests/verify_evidence_consistency.py"
+        ],
         "scope": "generation-time status before this report is written"
       },
       "summary": {
         "reproducibility_ready": true,
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "methodology_complete": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
@@ -5333,14 +5336,15 @@
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4,
-        "working_tree_dirty": false,
-        "changed_file_count": 0
+        "public_claim_blocker_count": 5,
+        "working_tree_dirty": true,
+        "changed_file_count": 2
       },
       "public_claim": {
         "ready": false,
         "scope": "public benchmark or world-class readiness claim",
         "blockers": [
+          "release lock is not clean or commit is unavailable",
           "provider-backed model holdout evidence is incomplete",
           "human blind-review adjudication is incomplete",
           "world-class evidence is not accepted yet (4 open gaps, 4 ledger pending)",
@@ -5349,10 +5353,10 @@
         "policy": "Local reproducibility can pass before public claims; public claims require provider evidence, human adjudication, clean release lock, accepted world-class evidence, and complete source checks."
       },
       "release_lock": {
-        "ready": true,
-        "commit": "a7960d4cfd2d9a17cbaebcee7b823f0db13df0cf",
+        "ready": false,
+        "commit": "bc999b9508da329c8ce09f98cffa6f02aae5bb2b",
         "status_scope": "generation-time status before this report is written",
-        "reason": "clean generation-time HEAD"
+        "reason": "working tree was dirty at generation time"
       },
       "evidence_bundle": {
         "algorithm": "sha256(path,label,exists,artifact_sha256)",
@@ -5939,7 +5943,7 @@
           "label": "Review Studio",
           "status": "pass",
           "objective": "One HTML page supports first-pass production review across trigger, output, runtime, trust, release, and evidence actions.",
-          "current": "16 gates; decision review; warnings 4",
+          "current": "16 gates; decision review; warnings 3",
           "command": "python3 scripts/yao.py review-studio .",
           "test": "python3 tests/verify_review_studio.py",
           "evidence": [
@@ -20463,7 +20467,7 @@
         "license": "MIT",
         "checksums": {
           "package_sha256": "9fde13846a41c2d1442b6e80350313246dedebe02590ce1f2f07f2da1109c9ea",
-          "archive_sha256": "83ece575ef740a97b6a398f77ed4bc9f1869cde756257c64fdd90d8785c6f3a5"
+          "archive_sha256": "2fd9a3f8c7c4aa72b0bd03e9cfbf0449a0fa9215f949459324895c72c9abf6b9"
         },
         "compatibility": {
           "openai": "pass",
@@ -20494,7 +20498,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "83ece575ef740a97b6a398f77ed4bc9f1869cde756257c64fdd90d8785c6f3a5",
+          "archive_sha256": "2fd9a3f8c7c4aa72b0bd03e9cfbf0449a0fa9215f949459324895c72c9abf6b9",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -20542,7 +20546,7 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "83ece575ef740a97b6a398f77ed4bc9f1869cde756257c64fdd90d8785c6f3a5",
+        "archive_sha256": "2fd9a3f8c7c4aa72b0bd03e9cfbf0449a0fa9215f949459324895c72c9abf6b9",
         "archive_entry_count": 618,
         "failure_count": 0,
         "warning_count": 0
@@ -21550,7 +21554,7 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "83ece575ef740a97b6a398f77ed4bc9f1869cde756257c64fdd90d8785c6f3a5"
+            "to": "2fd9a3f8c7c4aa72b0bd03e9cfbf0449a0fa9215f949459324895c72c9abf6b9"
           },
           {
             "field": "package_sha256",
