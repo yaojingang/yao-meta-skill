@@ -43,7 +43,7 @@
       "key": "context-budget",
       "label": "上下文",
       "status": "pass",
-      "detail": "initial load 960/1000; deferred 430459/120000; top deferred scripts 381248; resource governance governed; quality density 135.4",
+      "detail": "initial load 960/1000; deferred 431377/120000; top deferred scripts 382166; resource governance governed; quality density 135.4",
       "evidence": "reports/context_budget.json",
       "link": "context_budget.md"
     },
@@ -662,6 +662,9 @@
     "adoption_drift": "reports/adoption_drift_report.md",
     "review_waivers": "reports/review_waivers.md",
     "review_annotations": "reports/review_annotations.md",
+    "adaptation_proposals": "reports/adaptation_proposals.md",
+    "adaptation_approval_ledger": "reports/adaptation_approval_ledger.json",
+    "adaptation_regression": "reports/adaptation_regression_report.md",
     "world_class_evidence_plan": "reports/world_class_evidence_plan.md",
     "world_class_evidence_ledger": "reports/world_class_evidence_ledger.md",
     "world_class_evidence_intake": "reports/world_class_evidence_intake.md",
@@ -1677,9 +1680,9 @@
           "methodology_complete": true,
           "required_artifact_count": 24,
           "missing_artifact_count": 0,
-          "evidence_bundle_sha256": "0a70d0473f2ff5d7c55e0fee650a1986f8a0856798aba21886759fa887bbf345",
-          "source_contract_sha256": "773f9e54feada3b4f05868fcb78106a61317571613dd15f551236fc86b916c23",
-          "archive_sha256": "2d7c5573ff9508162f96da8fa4875bb4c259b9263fbe814dcd76573b8b7b87e0",
+          "evidence_bundle_sha256": "a11d5c9221a33b6246cd4d8cb3cee0df7fab09e111ad882f6c061ef2f46378e0",
+          "source_contract_sha256": "b95bef623d392ba57c1e564a3befc73ab46930fbb963a066b3077d7b60b93773",
+          "archive_sha256": "f19e7330e1d7daaf649df480985eb0dfa07c1622aca7ac135c4aa763d6258eb4",
           "output_case_count": 5,
           "failure_disclosure_count": 3,
           "command_count": 22,
@@ -1701,7 +1704,7 @@
           "working_tree_dirty": false,
           "changed_file_count": 0
         },
-        "commit": "51a946594a268066c1a4b696e5440b5bf2eba1c0",
+        "commit": "dc7cc48a1d6102af1667986409bc88644b3ff5b1",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -1806,7 +1809,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 197,
-        "package_sha256": "773f9e54feada3b4f05868fcb78106a61317571613dd15f551236fc86b916c23"
+        "package_sha256": "b95bef623d392ba57c1e564a3befc73ab46930fbb963a066b3077d7b60b93773"
       },
       "skill_atlas": {
         "skill_count": 12,
@@ -1844,8 +1847,8 @@
           "trust_level": "local",
           "license": "MIT",
           "checksums": {
-            "package_sha256": "773f9e54feada3b4f05868fcb78106a61317571613dd15f551236fc86b916c23",
-            "archive_sha256": "2d7c5573ff9508162f96da8fa4875bb4c259b9263fbe814dcd76573b8b7b87e0"
+            "package_sha256": "b95bef623d392ba57c1e564a3befc73ab46930fbb963a066b3077d7b60b93773",
+            "archive_sha256": "f19e7330e1d7daaf649df480985eb0dfa07c1622aca7ac135c4aa763d6258eb4"
           },
           "compatibility": {
             "openai": "pass",
@@ -1876,7 +1879,7 @@
           },
           "distribution": {
             "archive_verified": true,
-            "archive_sha256": "2d7c5573ff9508162f96da8fa4875bb4c259b9263fbe814dcd76573b8b7b87e0",
+            "archive_sha256": "f19e7330e1d7daaf649df480985eb0dfa07c1622aca7ac135c4aa763d6258eb4",
             "package_verification": "reports/package_verification.json",
             "install_simulated": true,
             "install_simulation": "reports/install_simulation.json"
@@ -1892,7 +1895,7 @@
           "target_count": 4,
           "adapter_count": 4,
           "archive_present": true,
-          "archive_sha256": "2d7c5573ff9508162f96da8fa4875bb4c259b9263fbe814dcd76573b8b7b87e0",
+          "archive_sha256": "f19e7330e1d7daaf649df480985eb0dfa07c1622aca7ac135c4aa763d6258eb4",
           "archive_entry_count": 613,
           "failure_count": 0,
           "warning_count": 0
@@ -5296,7 +5299,7 @@
       "ok": true,
       "generated_at": "2026-06-15",
       "skill_dir": ".",
-      "commit": "51a946594a268066c1a4b696e5440b5bf2eba1c0",
+      "commit": "dc7cc48a1d6102af1667986409bc88644b3ff5b1",
       "git_status": {
         "available": true,
         "dirty": false,
@@ -5310,9 +5313,9 @@
         "methodology_complete": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "0a70d0473f2ff5d7c55e0fee650a1986f8a0856798aba21886759fa887bbf345",
-        "source_contract_sha256": "773f9e54feada3b4f05868fcb78106a61317571613dd15f551236fc86b916c23",
-        "archive_sha256": "2d7c5573ff9508162f96da8fa4875bb4c259b9263fbe814dcd76573b8b7b87e0",
+        "evidence_bundle_sha256": "a11d5c9221a33b6246cd4d8cb3cee0df7fab09e111ad882f6c061ef2f46378e0",
+        "source_contract_sha256": "b95bef623d392ba57c1e564a3befc73ab46930fbb963a066b3077d7b60b93773",
+        "archive_sha256": "f19e7330e1d7daaf649df480985eb0dfa07c1622aca7ac135c4aa763d6258eb4",
         "output_case_count": 5,
         "failure_disclosure_count": 3,
         "command_count": 22,
@@ -5347,7 +5350,7 @@
       },
       "release_lock": {
         "ready": true,
-        "commit": "51a946594a268066c1a4b696e5440b5bf2eba1c0",
+        "commit": "dc7cc48a1d6102af1667986409bc88644b3ff5b1",
         "status_scope": "generation-time status before this report is written",
         "reason": "clean generation-time HEAD"
       },
@@ -5357,7 +5360,7 @@
         "existing_count": 24,
         "missing_count": 0,
         "missing_paths": [],
-        "sha256": "0a70d0473f2ff5d7c55e0fee650a1986f8a0856798aba21886759fa887bbf345"
+        "sha256": "a11d5c9221a33b6246cd4d8cb3cee0df7fab09e111ad882f6c061ef2f46378e0"
       },
       "methodology": {
         "path": "reports/benchmark_methodology.md",
@@ -5466,7 +5469,7 @@
           "path": "reports/security_trust_report.json",
           "exists": true,
           "bytes": 109099,
-          "sha256": "0dc3b8697ce8c5466dec159686ee1d6af1d9541ba44a26f3c9d8c102d8e4e4d1"
+          "sha256": "4dc1060cb4140bc9fc5a14287c4580c1073fd9c103fcc86c6a0054cb4374f999"
         },
         {
           "label": "python_compatibility",
@@ -5480,14 +5483,14 @@
           "path": "reports/registry_audit.json",
           "exists": true,
           "bytes": 3183,
-          "sha256": "f46a8ca240fd8c898844d63ad549f94063987798830bd921333cf62bf089ae14"
+          "sha256": "3c7a15dabfc3dd2e78e835cb40841197751ead1ae5be705b5b001ccc6e9411d9"
         },
         {
           "label": "package_verification",
           "path": "reports/package_verification.json",
           "exists": true,
           "bytes": 19338,
-          "sha256": "d0435a912aca9827df6c4da97daa17f54ed3f5d0dccc767fdc94c15534d7703f"
+          "sha256": "8f4157a51fa6047cf3d99675b319cd9d1ea590f364b527016c10da6a00ccede6"
         },
         {
           "label": "install_simulation",
@@ -11389,7 +11392,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 197,
-        "package_sha256": "773f9e54feada3b4f05868fcb78106a61317571613dd15f551236fc86b916c23"
+        "package_sha256": "b95bef623d392ba57c1e564a3befc73ab46930fbb963a066b3077d7b60b93773"
       },
       "failures": [],
       "warnings": [],
@@ -15247,7 +15250,7 @@
         },
         {
           "path": "tests/verify_review_studio.py",
-          "lines": 751,
+          "lines": 760,
           "kind": "test",
           "severity": "pass",
           "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
@@ -15281,6 +15284,13 @@
           "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
         },
         {
+          "path": "scripts/apply_adaptation.py",
+          "lines": 706,
+          "kind": "cli-script",
+          "severity": "pass",
+          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+        },
+        {
           "path": "scripts/review_studio_layout.py",
           "lines": 694,
           "kind": "internal-module",
@@ -15293,13 +15303,6 @@
           "kind": "cli-script",
           "severity": "pass",
           "recommendation": "Split viewer data assembly from HTML section rendering."
-        },
-        {
-          "path": "scripts/cross_packager.py",
-          "lines": 650,
-          "kind": "cli-script",
-          "severity": "pass",
-          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
         }
       ],
       "hotspots": [],
@@ -15317,15 +15320,15 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 767,
-        "other_text_tokens": 1349904,
+        "other_text_tokens": 1353404,
         "estimated_initial_load_tokens": 960,
-        "estimated_total_text_tokens": 1350671,
-        "deferred_resource_tokens": 430459,
+        "estimated_total_text_tokens": 1354171,
+        "deferred_resource_tokens": 431377,
         "deferred_resource_warn_threshold": 120000,
         "deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 381248,
+            "estimated_tokens": 382166,
             "file_count": 110
           },
           {
@@ -15342,7 +15345,7 @@
         "large_deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 381248,
+            "estimated_tokens": 382166,
             "file_count": 110
           }
         ],
@@ -15365,14 +15368,14 @@
               ],
               "missing": [],
               "path": "scripts",
-              "estimated_tokens": 381248,
+              "estimated_tokens": 382166,
               "file_count": 110,
               "rationale": "Script resources are deterministic deferred tools, not initial-load prompt context."
             }
           ],
           "summary": "Large deferred resources are indexed and backed by evidence."
         },
-        "relevant_file_count": 560,
+        "relevant_file_count": 561,
         "unused_resource_dirs": [],
         "quality_signal_points": 130,
         "quality_density": 135.4
@@ -17423,6 +17426,404 @@
       "artifacts": {
         "json": "reports/review_annotations.json",
         "markdown": "reports/review_annotations.md"
+      }
+    },
+    "adaptation_proposals": {
+      "schema_version": "1.0",
+      "ok": true,
+      "generated_at": "2026-06-15T00:00:00Z",
+      "skill_dir": ".",
+      "source_patterns": "reports/user_patterns.json",
+      "pattern_count": 5,
+      "proposal_count": 5,
+      "apply_supported": true,
+      "failure_count": 0,
+      "proposal_only": true,
+      "approval_required": true,
+      "writes_repository_files": false,
+      "allowlisted_targets_required": true,
+      "target_file_sha256_required_for_apply": true,
+      "approval_draft_supported": true,
+      "rollback_required_for_apply": true,
+      "apply_command_available": true,
+      "summary": {
+        "pattern_count": 5,
+        "proposal_count": 5,
+        "apply_supported": true,
+        "failure_count": 0
+      },
+      "proposal_contract": {
+        "proposal_only": true,
+        "approval_required": true,
+        "writes_repository_files": false,
+        "allowlisted_targets_required": true,
+        "target_file_sha256_required_for_apply": true,
+        "approval_draft_supported": true,
+        "rollback_required_for_apply": true,
+        "apply_command_available": true
+      },
+      "report_contract": {
+        "schema_version": "1.0",
+        "contract": "adaptation-proposals",
+        "top_level_mirrors_summary": true,
+        "top_level_mirrors_proposal_contract": true,
+        "summary_fields": [
+          "pattern_count",
+          "proposal_count",
+          "apply_supported",
+          "failure_count"
+        ],
+        "proposal_contract_fields": [
+          "proposal_only",
+          "approval_required",
+          "writes_repository_files",
+          "allowlisted_targets_required",
+          "target_file_sha256_required_for_apply",
+          "approval_draft_supported",
+          "rollback_required_for_apply",
+          "apply_command_available"
+        ],
+        "source_of_truth": [
+          "summary",
+          "proposal_contract"
+        ]
+      },
+      "proposals": [
+        {
+          "proposal_id": "adapt-18c7517f3d",
+          "pattern_id": "language_default",
+          "title": "Keep reports Chinese-first with optional English",
+          "change_type": "report-default-language",
+          "status": "proposal-only",
+          "requires_approval": true,
+          "write_allowed_without_approval": false,
+          "risk_level": "low",
+          "reason": "2 redacted records matched repeated report-language signals.",
+          "support_count": 2,
+          "target_files": [
+            "scripts/render_skill_overview.py",
+            "references/artifact-design-doctrine.md"
+          ],
+          "suggested_changes": [
+            "Keep user-facing report copy Simplified Chinese by default.",
+            "Expose English through the existing language switch instead of mixing languages in the default view."
+          ],
+          "verification_commands": [
+            "python3 tests/verify_skill_overview.py"
+          ],
+          "rollback_plan": "Revert report language template changes and rerun the overview verifier.",
+          "evidence_refs": [
+            {
+              "record_id": "line-1",
+              "excerpt": "新生成的 Skill 报告默认使用中文简体，并在右上角提供英文切换。"
+            },
+            {
+              "record_id": "line-2",
+              "excerpt": "HTML 报告需要双语能力，但默认内容应该保持中文简体。"
+            }
+          ]
+        },
+        {
+          "proposal_id": "adapt-fbfe921ba5",
+          "pattern_id": "report_ui",
+          "title": "Improve report layout, visual hierarchy, and chart readability",
+          "change_type": "artifact-ui-polish",
+          "status": "proposal-only",
+          "requires_approval": true,
+          "write_allowed_without_approval": false,
+          "risk_level": "medium",
+          "reason": "5 redacted records matched repeated artifact-design signals.",
+          "support_count": 5,
+          "target_files": [
+            "scripts/render_skill_overview.py",
+            "references/artifact-design-doctrine.md",
+            "tests/verify_skill_overview.py"
+          ],
+          "suggested_changes": [
+            "Prefer vertical narrative sections with limited two-column layouts only when content has enough width.",
+            "Keep charts inline SVG, with captions and stable responsive constraints."
+          ],
+          "verification_commands": [
+            "python3 tests/verify_skill_overview.py",
+            "python3 tests/verify_skill_report_charts.py"
+          ],
+          "rollback_plan": "Restore the previous report renderer and regenerate the demo report.",
+          "evidence_refs": [
+            {
+              "record_id": "line-1",
+              "excerpt": "新生成的 Skill 报告默认使用中文简体，并在右上角提供英文切换。"
+            },
+            {
+              "record_id": "line-2",
+              "excerpt": "HTML 报告需要双语能力，但默认内容应该保持中文简体。"
+            },
+            {
+              "record_id": "line-3",
+              "excerpt": "报告排版采用白底 Kami 风格，图表、模块和导航都要清晰。"
+            }
+          ]
+        },
+        {
+          "proposal_id": "adapt-59d219a1fb",
+          "pattern_id": "approval_safety",
+          "title": "Keep adaptive iteration approval-gated",
+          "change_type": "privacy-governance",
+          "status": "proposal-only",
+          "requires_approval": true,
+          "write_allowed_without_approval": false,
+          "risk_level": "low",
+          "reason": "2 redacted records matched repeated governance signals.",
+          "support_count": 2,
+          "target_files": [
+            "references/user-memory-policy.md",
+            "references/autonomous-adaptation.md",
+            "schemas/adaptation-proposal.schema.json"
+          ],
+          "suggested_changes": [
+            "Require explicit source paths for memory scans.",
+            "Generate proposals before any source patching.",
+            "Reserve automatic apply for a future approval ledger and rollback implementation."
+          ],
+          "verification_commands": [
+            "python3 tests/verify_adaptation_safety.py"
+          ],
+          "rollback_plan": "Remove the adaptive proposal artifacts and keep feedback/adoption drift as the only iteration inputs.",
+          "evidence_refs": [
+            {
+              "record_id": "line-5",
+              "excerpt": "自适应升级必须先生成提案，不能直接自动修改源文件。"
+            },
+            {
+              "record_id": "line-6",
+              "excerpt": "用户偏好扫描必须由用户提供明确路径，不要默认扫描私人日志。"
+            }
+          ]
+        },
+        {
+          "proposal_id": "adapt-457baca160",
+          "pattern_id": "delivery_format",
+          "title": "Make generated artifact paths explicit in CLI output",
+          "change_type": "artifact-discoverability",
+          "status": "proposal-only",
+          "requires_approval": true,
+          "write_allowed_without_approval": false,
+          "risk_level": "low",
+          "reason": "2 redacted records matched repeated artifact-format signals.",
+          "support_count": 2,
+          "target_files": [
+            "scripts/yao.py",
+            "README.md"
+          ],
+          "suggested_changes": [
+            "Include stable report paths in command output.",
+            "Document which artifacts are meant for human review."
+          ],
+          "verification_commands": [
+            "python3 tests/verify_yao_cli.py"
+          ],
+          "rollback_plan": "Revert CLI copy/documentation changes and keep artifact paths unchanged.",
+          "evidence_refs": [
+            {
+              "record_id": "line-2",
+              "excerpt": "HTML 报告需要双语能力，但默认内容应该保持中文简体。"
+            },
+            {
+              "record_id": "line-6",
+              "excerpt": "用户偏好扫描必须由用户提供明确路径，不要默认扫描私人日志。"
+            }
+          ]
+        },
+        {
+          "proposal_id": "adapt-abfee25d3a",
+          "pattern_id": "evidence_testing",
+          "title": "Attach tests and evidence refresh to each upgrade",
+          "change_type": "quality-gate",
+          "status": "proposal-only",
+          "requires_approval": true,
+          "write_allowed_without_approval": false,
+          "risk_level": "medium",
+          "reason": "2 redacted records matched repeated quality-gate signals.",
+          "support_count": 2,
+          "target_files": [
+            "tests/verify_adaptation_safety.py",
+            "scripts/render_skill_os2_coverage.py",
+            "reports/skill_os2_coverage.json"
+          ],
+          "suggested_changes": [
+            "Add focused verifier coverage for every new adaptive behavior.",
+            "Refresh Skill OS 2.0 coverage so planned, partial, and covered states remain visible."
+          ],
+          "verification_commands": [
+            "python3 tests/verify_adaptation_safety.py",
+            "python3 tests/verify_skill_os2_coverage.py"
+          ],
+          "rollback_plan": "Revert the new verifier and coverage status updates, then regenerate coverage reports.",
+          "evidence_refs": [
+            {
+              "record_id": "line-7",
+              "excerpt": "每次升级都需要测试、覆盖报告和可审计证据，推送前要跑 CI。"
+            },
+            {
+              "record_id": "line-8",
+              "excerpt": "涉及 GitHub 推送时，要保留证据链，避免把计划当作完成证明。"
+            }
+          ]
+        }
+      ],
+      "failures": [],
+      "artifacts": {
+        "json": "reports/adaptation_proposals.json",
+        "markdown": "reports/adaptation_proposals.md"
+      }
+    },
+    "adaptation_approval_ledger": {
+      "schema_version": "1.0",
+      "ok": true,
+      "generated_at": "2026-06-15T00:00:00Z",
+      "summary": {
+        "approval_count": 0,
+        "active_approval_count": 0,
+        "pending_review_count": 0,
+        "applied_count": 0,
+        "rollback_count": 0
+      },
+      "approval_contract": {
+        "approval_required": true,
+        "patch_sha256_required": true,
+        "allowlisted_targets_required": true,
+        "target_file_sha256_required": true,
+        "approval_draft_supported": true,
+        "dry_run_default": true,
+        "writes_repository_files_only_with_apply": true,
+        "rollback_required": true
+      },
+      "entries": [],
+      "approval_count": 0,
+      "active_approval_count": 0,
+      "pending_review_count": 0,
+      "applied_count": 0,
+      "rollback_count": 0,
+      "approval_required": true,
+      "patch_sha256_required": true,
+      "allowlisted_targets_required": true,
+      "target_file_sha256_required": true,
+      "approval_draft_supported": true,
+      "dry_run_default": true,
+      "writes_repository_files_only_with_apply": true,
+      "rollback_required": true,
+      "report_contract": {
+        "schema_version": "1.0",
+        "contract": "adaptation-approval-ledger",
+        "top_level_mirrors_summary": true,
+        "top_level_mirrors_approval_contract": true,
+        "summary_fields": [
+          "approval_count",
+          "active_approval_count",
+          "pending_review_count",
+          "applied_count",
+          "rollback_count"
+        ],
+        "approval_contract_fields": [
+          "approval_required",
+          "patch_sha256_required",
+          "allowlisted_targets_required",
+          "target_file_sha256_required",
+          "approval_draft_supported",
+          "dry_run_default",
+          "writes_repository_files_only_with_apply",
+          "rollback_required"
+        ],
+        "source_of_truth": [
+          "summary",
+          "approval_contract"
+        ]
+      }
+    },
+    "adaptation_regression": {
+      "schema_version": "1.0",
+      "ok": true,
+      "generated_at": "2026-06-15T00:00:00Z",
+      "skill_dir": ".",
+      "summary": {
+        "apply_supported": true,
+        "attempt_count": 0,
+        "approval_draft_count": 0,
+        "applied_count": 0,
+        "dry_run_count": 0,
+        "rollback_count": 0,
+        "regression_run_count": 0,
+        "regression_pass_count": 0,
+        "failure_count": 0
+      },
+      "apply_contract": {
+        "approval_required": true,
+        "patch_sha256_required": true,
+        "allowlisted_targets_required": true,
+        "target_file_sha256_required": true,
+        "approval_draft_supported": true,
+        "dry_run_default": true,
+        "writes_repository_files_only_with_apply": true,
+        "rollback_required": true,
+        "safe_regression_commands_only": true,
+        "rollback_on_failure_default": true
+      },
+      "attempts": [],
+      "failures": [],
+      "artifacts": {
+        "json": "reports/adaptation_regression_report.json",
+        "approval_ledger": "reports/adaptation_approval_ledger.json"
+      },
+      "apply_supported": true,
+      "attempt_count": 0,
+      "approval_draft_count": 0,
+      "applied_count": 0,
+      "dry_run_count": 0,
+      "rollback_count": 0,
+      "regression_run_count": 0,
+      "regression_pass_count": 0,
+      "failure_count": 0,
+      "approval_required": true,
+      "patch_sha256_required": true,
+      "allowlisted_targets_required": true,
+      "target_file_sha256_required": true,
+      "approval_draft_supported": true,
+      "dry_run_default": true,
+      "writes_repository_files_only_with_apply": true,
+      "rollback_required": true,
+      "safe_regression_commands_only": true,
+      "rollback_on_failure_default": true,
+      "report_contract": {
+        "schema_version": "1.0",
+        "contract": "adaptation-regression-report",
+        "top_level_mirrors_summary": true,
+        "top_level_mirrors_apply_contract": true,
+        "summary_fields": [
+          "apply_supported",
+          "attempt_count",
+          "approval_draft_count",
+          "applied_count",
+          "dry_run_count",
+          "rollback_count",
+          "regression_run_count",
+          "regression_pass_count",
+          "failure_count"
+        ],
+        "apply_contract_fields": [
+          "approval_required",
+          "patch_sha256_required",
+          "allowlisted_targets_required",
+          "target_file_sha256_required",
+          "approval_draft_supported",
+          "dry_run_default",
+          "writes_repository_files_only_with_apply",
+          "rollback_required",
+          "safe_regression_commands_only",
+          "rollback_on_failure_default"
+        ],
+        "source_of_truth": [
+          "summary",
+          "apply_contract"
+        ]
       }
     },
     "world_class_evidence_ledger": {
@@ -19574,8 +19975,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "773f9e54feada3b4f05868fcb78106a61317571613dd15f551236fc86b916c23",
-          "archive_sha256": "2d7c5573ff9508162f96da8fa4875bb4c259b9263fbe814dcd76573b8b7b87e0"
+          "package_sha256": "b95bef623d392ba57c1e564a3befc73ab46930fbb963a066b3077d7b60b93773",
+          "archive_sha256": "f19e7330e1d7daaf649df480985eb0dfa07c1622aca7ac135c4aa763d6258eb4"
         },
         "compatibility": {
           "openai": "pass",
@@ -19606,7 +20007,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "2d7c5573ff9508162f96da8fa4875bb4c259b9263fbe814dcd76573b8b7b87e0",
+          "archive_sha256": "f19e7330e1d7daaf649df480985eb0dfa07c1622aca7ac135c4aa763d6258eb4",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -19631,7 +20032,7 @@
               "vscode"
             ],
             "package_metadata": "registry/packages/yao-meta-skill.json",
-            "package_sha256": "773f9e54feada3b4f05868fcb78106a61317571613dd15f551236fc86b916c23"
+            "package_sha256": "b95bef623d392ba57c1e564a3befc73ab46930fbb963a066b3077d7b60b93773"
           }
         ]
       },
@@ -19654,7 +20055,7 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "2d7c5573ff9508162f96da8fa4875bb4c259b9263fbe814dcd76573b8b7b87e0",
+        "archive_sha256": "f19e7330e1d7daaf649df480985eb0dfa07c1622aca7ac135c4aa763d6258eb4",
         "archive_entry_count": 613,
         "failure_count": 0,
         "warning_count": 0
