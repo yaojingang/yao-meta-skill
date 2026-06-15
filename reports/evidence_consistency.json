@@ -4,14 +4,14 @@
   "generated_at": "2026-06-16",
   "skill_dir": ".",
   "summary": {
-    "check_count": 33,
-    "pass_count": 33,
+    "check_count": 34,
+    "pass_count": 34,
     "warn_count": 0,
     "fail_count": 0,
     "decision": "consistent"
   },
   "status_counts": {
-    "pass": 33,
+    "pass": 34,
     "warn": 0,
     "fail": 0
   },
@@ -179,12 +179,12 @@
       "status": "pass",
       "expected": {
         "status": "pass",
-        "detail": "initial load 960/1000; deferred 449071/120000; top deferred scripts 399860; resource governance governed; quality density 135.4",
+        "detail": "initial load 960/1000; deferred 450265/120000; top deferred scripts 401054; resource governance governed; quality density 135.4",
         "evidence": "reports/context_budget.json"
       },
       "actual": {
         "status": "pass",
-        "detail": "initial load 960/1000; deferred 449071/120000; top deferred scripts 399860; resource governance governed; quality density 135.4",
+        "detail": "initial load 960/1000; deferred 450265/120000; top deferred scripts 401054; resource governance governed; quality density 135.4",
         "evidence": "reports/context_budget.json"
       },
       "paths": [
@@ -205,11 +205,41 @@
       "detail": "The benchmark release lock must reflect the generation-time git dirty flag."
     },
     {
+      "key": "skill-ir-evidence-path-contract",
+      "label": "Human-facing reports expose the canonical Skill IR artifact",
+      "status": "pass",
+      "expected": {
+        "overview_source_path": "skill-ir/examples/yao-meta-skill.json",
+        "interpretation_source_path": "skill-ir/examples/yao-meta-skill.json",
+        "review_studio_evidence_path": "skill-ir/examples/yao-meta-skill.json",
+        "overview_deliverable": true,
+        "interpretation_deliverable": true,
+        "exists": true,
+        "schema_version": "2.0.0"
+      },
+      "actual": {
+        "overview_source_path": "skill-ir/examples/yao-meta-skill.json",
+        "interpretation_source_path": "skill-ir/examples/yao-meta-skill.json",
+        "review_studio_evidence_path": "skill-ir/examples/yao-meta-skill.json",
+        "overview_deliverable": true,
+        "interpretation_deliverable": true,
+        "exists": true,
+        "schema_version": "2.0.0"
+      },
+      "paths": [
+        "reports/skill-overview.json",
+        "reports/skill-interpretation.json",
+        "reports/review-studio.json",
+        "skill-ir/examples/yao-meta-skill.json"
+      ],
+      "detail": "Skill IR is the 2.0 platform-neutral semantic source, so user-facing reports must link to the artifact that actually exists."
+    },
+    {
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "aa72595e5600a12626277c9bbb967a6d76737e2a",
-      "actual": "aa72595e5600a12626277c9bbb967a6d76737e2a",
+      "expected": "c617e4719eaf7fae4221ac59ac62665db5caa1a0",
+      "actual": "c617e4719eaf7fae4221ac59ac62665db5caa1a0",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -224,8 +254,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "c0c5e61a719efa6217dedd4e04de0b4a175ab73194a4b4ee2cbd18394240ce98",
-        "archive_sha256": "889886dd1eaeed6a4996a739f9312f47d67ec04ba3a1396bae7dc351b9b40dcf",
+        "source_contract_sha256": "7734802eb54b761e419b62d6d7e0d5861aa10401b8e8cf956934e51f9b87ba0d",
+        "archive_sha256": "1727ee08ba08d88ca55122937ec07dabb2a8a515acc5c6e375052554335da296",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -237,8 +267,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "c0c5e61a719efa6217dedd4e04de0b4a175ab73194a4b4ee2cbd18394240ce98",
-        "archive_sha256": "889886dd1eaeed6a4996a739f9312f47d67ec04ba3a1396bae7dc351b9b40dcf",
+        "source_contract_sha256": "7734802eb54b761e419b62d6d7e0d5861aa10401b8e8cf956934e51f9b87ba0d",
+        "archive_sha256": "1727ee08ba08d88ca55122937ec07dabb2a8a515acc5c6e375052554335da296",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -354,8 +384,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "aa72595e5600a12626277c9bbb967a6d76737e2a",
-      "actual": "aa72595e5600a12626277c9bbb967a6d76737e2a",
+      "expected": "c617e4719eaf7fae4221ac59ac62665db5caa1a0",
+      "actual": "c617e4719eaf7fae4221ac59ac62665db5caa1a0",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
@@ -370,8 +400,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "c0c5e61a719efa6217dedd4e04de0b4a175ab73194a4b4ee2cbd18394240ce98",
-        "archive_sha256": "889886dd1eaeed6a4996a739f9312f47d67ec04ba3a1396bae7dc351b9b40dcf",
+        "source_contract_sha256": "7734802eb54b761e419b62d6d7e0d5861aa10401b8e8cf956934e51f9b87ba0d",
+        "archive_sha256": "1727ee08ba08d88ca55122937ec07dabb2a8a515acc5c6e375052554335da296",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -383,8 +413,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "c0c5e61a719efa6217dedd4e04de0b4a175ab73194a4b4ee2cbd18394240ce98",
-        "archive_sha256": "889886dd1eaeed6a4996a739f9312f47d67ec04ba3a1396bae7dc351b9b40dcf",
+        "source_contract_sha256": "7734802eb54b761e419b62d6d7e0d5861aa10401b8e8cf956934e51f9b87ba0d",
+        "archive_sha256": "1727ee08ba08d88ca55122937ec07dabb2a8a515acc5c6e375052554335da296",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
