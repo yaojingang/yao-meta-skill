@@ -36,7 +36,7 @@ This report maps the Skill OS 2.0 upgrade blueprint to concrete local artifacts,
 
 | Item | Status | Current | Command | Test |
 | --- | --- | --- | --- | --- |
-| Benchmark Methodology | `pass` | 24 required artifacts checked | `make ci-test` | `tests/verify_benchmark_reproducibility.py` |
+| Benchmark Methodology | `pass` | 25 required artifacts checked | `make ci-test` | `tests/verify_benchmark_reproducibility.py` |
 | Output Eval Schema | `pass` | 5 output cases | `make ci-test` | `tests/verify_output_eval_lab.py` |
 | Output Eval Runner | `pass` | delta 100.0 | `make ci-test` | `tests/verify_output_eval_lab.py` |
 | Output Quality Scorecard | `pass` | gate pass True | `make ci-test` | `tests/verify_output_eval_lab.py` |

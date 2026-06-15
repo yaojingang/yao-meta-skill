@@ -102,12 +102,14 @@ def assert_release_evidence_instructions_cover_first_class_reports() -> None:
     agents_text = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
     source_refresh_header = "After source changes that affect scripts"
     clean_lock_header = "For final release evidence"
+    benchmark_command = 'python3 scripts/render_benchmark_reproducibility.py . --generated-at "$GENERATED_AT"'
     assert source_refresh_header in agents_text, agents_text
     assert clean_lock_header in agents_text, agents_text
 
     source_refresh = agents_text.split(source_refresh_header, 1)[1].split(clean_lock_header, 1)[0]
     clean_lock = agents_text.split(clean_lock_header, 1)[1].split("If `reports/benchmark_reproducibility.json`", 1)[0]
     for block in [source_refresh, clean_lock]:
+        assert benchmark_command in block, block
         assert "python3 scripts/render_skill_interpretation.py ." in block, block
         assert "python3 scripts/render_world_class_preflight.py . --generated-at \"$GENERATED_AT\"" in block, block
         assert "python3 scripts/render_evidence_consistency.py . --generated-at \"$GENERATED_AT\"" in block, block
@@ -272,6 +274,37 @@ def main() -> None:
     release_flow_drift_checks = {item["key"]: item for item in release_flow_drift_payload["checks"]}
     assert release_flow_drift_checks["release-evidence-flow-covers-first-class-reports"]["status"] == "fail", (
         release_flow_drift_checks["release-evidence-flow-covers-first-class-reports"]
+    )
+
+    benchmark_flow_drift_root = TMP / "benchmark-flow-drift-skill"
+    copy_reports(benchmark_flow_drift_root)
+    agents_path = benchmark_flow_drift_root / "AGENTS.md"
+    agents_text = agents_path.read_text(encoding="utf-8")
+    clean_lock_header = "For final release evidence"
+    benchmark_command = 'python3 scripts/render_benchmark_reproducibility.py . --generated-at "$GENERATED_AT"\n'
+    prefix, suffix = agents_text.split(clean_lock_header, 1)
+    agents_path.write_text(
+        prefix + clean_lock_header + suffix.replace(benchmark_command, "", 1),
+        encoding="utf-8",
+    )
+    benchmark_flow_drift_proc = run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            str(benchmark_flow_drift_root),
+            "--output-json",
+            str(TMP / "benchmark_flow_drift.json"),
+            "--output-md",
+            str(TMP / "benchmark_flow_drift.md"),
+            "--generated-at",
+            "2026-06-15",
+        ]
+    )
+    assert benchmark_flow_drift_proc.returncode == 2, benchmark_flow_drift_proc.stdout
+    benchmark_flow_drift_payload = json.loads(benchmark_flow_drift_proc.stdout)
+    benchmark_flow_drift_checks = {item["key"]: item for item in benchmark_flow_drift_payload["checks"]}
+    assert benchmark_flow_drift_checks["release-evidence-flow-covers-first-class-reports"]["status"] == "fail", (
+        benchmark_flow_drift_checks["release-evidence-flow-covers-first-class-reports"]
     )
 
     workflow_drift_root = TMP / "workflow-drift-skill"

@@ -9,7 +9,8 @@ SOURCE_REFRESH_HEADER = "After source changes that affect scripts"
 CLEAN_LOCK_HEADER = "For final release evidence"
 CLEAN_LOCK_END = "If `reports/benchmark_reproducibility.json`"
 
-FIRST_CLASS_REPORT_COMMANDS = [
+SOURCE_REFRESH_REPORT_COMMANDS = [
+    'python3 scripts/render_benchmark_reproducibility.py . --generated-at "$GENERATED_AT"',
     "python3 scripts/render_skill_overview.py .",
     "python3 scripts/render_skill_interpretation.py .",
     "python3 scripts/render_review_viewer.py .",
@@ -17,6 +18,7 @@ FIRST_CLASS_REPORT_COMMANDS = [
     "python3 scripts/render_review_studio.py . --output-html reports/review-studio.html --output-json reports/review-studio.json",
     'python3 scripts/render_evidence_consistency.py . --generated-at "$GENERATED_AT"',
 ]
+CLEAN_LOCK_REPORT_COMMANDS = list(SOURCE_REFRESH_REPORT_COMMANDS)
 
 
 def section_between(text: str, start: str, end: str) -> str:
@@ -28,8 +30,8 @@ def section_between(text: str, start: str, end: str) -> str:
     return section
 
 
-def command_presence(section: str) -> dict[str, bool]:
-    return {command: command in section for command in FIRST_CLASS_REPORT_COMMANDS}
+def command_presence(section: str, commands: list[str]) -> dict[str, bool]:
+    return {command: command in section for command in commands}
 
 
 def build_release_evidence_flow_check(skill_dir: Path) -> dict[str, Any]:
@@ -41,15 +43,15 @@ def build_release_evidence_flow_check(skill_dir: Path) -> dict[str, Any]:
         "AGENTS.md": True,
         "source_refresh_section": True,
         "clean_lock_section": True,
-        "source_refresh_commands": {command: True for command in FIRST_CLASS_REPORT_COMMANDS},
-        "clean_lock_commands": {command: True for command in FIRST_CLASS_REPORT_COMMANDS},
+        "source_refresh_commands": {command: True for command in SOURCE_REFRESH_REPORT_COMMANDS},
+        "clean_lock_commands": {command: True for command in CLEAN_LOCK_REPORT_COMMANDS},
     }
     actual = {
         "AGENTS.md": agents_path.exists(),
         "source_refresh_section": bool(source_refresh),
         "clean_lock_section": bool(clean_lock),
-        "source_refresh_commands": command_presence(source_refresh),
-        "clean_lock_commands": command_presence(clean_lock),
+        "source_refresh_commands": command_presence(source_refresh, SOURCE_REFRESH_REPORT_COMMANDS),
+        "clean_lock_commands": command_presence(clean_lock, CLEAN_LOCK_REPORT_COMMANDS),
     }
     return {
         "key": "release-evidence-flow-covers-first-class-reports",
