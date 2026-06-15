@@ -3,7 +3,7 @@
   "ok": true,
   "generated_at": "2026-06-16",
   "skill_dir": ".",
-  "commit": "d3fb78f4feb4ff6db70f4339159cc8b0019ab3b0",
+  "commit": "959fcaee0893a21850d82acccd9d630f3f1bd495",
   "git_status": {
     "available": true,
     "dirty": false,
@@ -17,9 +17,9 @@
     "methodology_complete": true,
     "required_artifact_count": 25,
     "missing_artifact_count": 0,
-    "evidence_bundle_sha256": "2e0765bd7b1c3aca5e05b0c87b495f7454c17c020387c6b1f265897f38e97504",
-    "source_contract_sha256": "c031eba962def76fe31e98da4220d9db7f58a1ed8c6c6d1c8906d71f0c24c93d",
-    "archive_sha256": "729d4a307944e544a830974363f436149fc647f9eb12e6e712d66a96f79b022d",
+    "evidence_bundle_sha256": "3cb681ab4634331610f30ea080c8c33a8aa66509402ca38e0f4fdbdd29276e7a",
+    "source_contract_sha256": "fa285e57f36fb8f33b0c9cdc5de924532a4ec3f30be5880fd3bcde6d53d363ee",
+    "archive_sha256": "19810129f02c71eb00d04a5eb9c9570febded99beac0230de82a09610e027050",
     "output_case_count": 5,
     "failure_disclosure_count": 3,
     "command_count": 23,
@@ -54,7 +54,7 @@
   },
   "release_lock": {
     "ready": true,
-    "commit": "d3fb78f4feb4ff6db70f4339159cc8b0019ab3b0",
+    "commit": "959fcaee0893a21850d82acccd9d630f3f1bd495",
     "status_scope": "generation-time status before this report is written",
     "reason": "clean generation-time HEAD"
   },
@@ -64,7 +64,7 @@
     "existing_count": 25,
     "missing_count": 0,
     "missing_paths": [],
-    "sha256": "2e0765bd7b1c3aca5e05b0c87b495f7454c17c020387c6b1f265897f38e97504"
+    "sha256": "3cb681ab4634331610f30ea080c8c33a8aa66509402ca38e0f4fdbdd29276e7a"
   },
   "methodology": {
     "path": "reports/benchmark_methodology.md",
@@ -137,8 +137,8 @@
       "label": "output_execution",
       "path": "reports/output_execution_runs.json",
       "exists": true,
-      "bytes": 7965,
-      "sha256": "f076e09900b42558342643daa14eb9864e86223a8c80818e7686749efa40662d"
+      "bytes": 7967,
+      "sha256": "2e35417d7bf9982271ad1f692c1dee92f368a417fbb2e686078869b01b10b080"
     },
     {
       "label": "blind_review",
@@ -173,7 +173,7 @@
       "path": "reports/security_trust_report.json",
       "exists": true,
       "bytes": 111439,
-      "sha256": "a61a6ff31166f379eaaa9cb3acfc9e9a7ba7d111363a9b9f0f5fbe64cde8856c"
+      "sha256": "0e7e96eda8ee29bb253842f555a5123d81b161cde9d31e66c0b91ed0af0fb566"
     },
     {
       "label": "python_compatibility",
@@ -187,14 +187,14 @@
       "path": "reports/registry_audit.json",
       "exists": true,
       "bytes": 3183,
-      "sha256": "41dfe1467cb415e638982fc5f81cdda8f2758071e29306460b149d12ce177781"
+      "sha256": "11c4be579a25c785b50bab84444ff0ad6640df52d7b375136c4ac1d30558b9f2"
     },
     {
       "label": "package_verification",
       "path": "reports/package_verification.json",
       "exists": true,
       "bytes": 19338,
-      "sha256": "b1dbf4798c7af9491eca90f2adba0fd80b74f80bd3a0aafe289605832e648e92"
+      "sha256": "415cdec157889b39069e2ff5b189015a4d1fe586acf088aeebe6bd6e6af746ae"
     },
     {
       "label": "install_simulation",

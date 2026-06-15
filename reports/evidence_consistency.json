@@ -53,6 +53,7 @@
         "source_refresh_section": true,
         "clean_lock_section": true,
         "source_refresh_commands": {
+          "python3 scripts/render_benchmark_reproducibility.py . --generated-at \"$GENERATED_AT\"": true,
           "python3 scripts/render_skill_overview.py .": true,
           "python3 scripts/render_skill_interpretation.py .": true,
           "python3 scripts/render_review_viewer.py .": true,
@@ -61,6 +62,7 @@
           "python3 scripts/render_evidence_consistency.py . --generated-at \"$GENERATED_AT\"": true
         },
         "clean_lock_commands": {
+          "python3 scripts/render_benchmark_reproducibility.py . --generated-at \"$GENERATED_AT\"": true,
           "python3 scripts/render_skill_overview.py .": true,
           "python3 scripts/render_skill_interpretation.py .": true,
           "python3 scripts/render_review_viewer.py .": true,
@@ -74,6 +76,7 @@
         "source_refresh_section": true,
         "clean_lock_section": true,
         "source_refresh_commands": {
+          "python3 scripts/render_benchmark_reproducibility.py . --generated-at \"$GENERATED_AT\"": true,
           "python3 scripts/render_skill_overview.py .": true,
           "python3 scripts/render_skill_interpretation.py .": true,
           "python3 scripts/render_review_viewer.py .": true,
@@ -82,6 +85,7 @@
           "python3 scripts/render_evidence_consistency.py . --generated-at \"$GENERATED_AT\"": true
         },
         "clean_lock_commands": {
+          "python3 scripts/render_benchmark_reproducibility.py . --generated-at \"$GENERATED_AT\"": true,
           "python3 scripts/render_skill_overview.py .": true,
           "python3 scripts/render_skill_interpretation.py .": true,
           "python3 scripts/render_review_viewer.py .": true,
@@ -117,8 +121,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "d3fb78f4feb4ff6db70f4339159cc8b0019ab3b0",
-      "actual": "d3fb78f4feb4ff6db70f4339159cc8b0019ab3b0",
+      "expected": "959fcaee0893a21850d82acccd9d630f3f1bd495",
+      "actual": "959fcaee0893a21850d82acccd9d630f3f1bd495",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -133,8 +137,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "c031eba962def76fe31e98da4220d9db7f58a1ed8c6c6d1c8906d71f0c24c93d",
-        "archive_sha256": "729d4a307944e544a830974363f436149fc647f9eb12e6e712d66a96f79b022d",
+        "source_contract_sha256": "fa285e57f36fb8f33b0c9cdc5de924532a4ec3f30be5880fd3bcde6d53d363ee",
+        "archive_sha256": "19810129f02c71eb00d04a5eb9c9570febded99beac0230de82a09610e027050",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -146,8 +150,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "c031eba962def76fe31e98da4220d9db7f58a1ed8c6c6d1c8906d71f0c24c93d",
-        "archive_sha256": "729d4a307944e544a830974363f436149fc647f9eb12e6e712d66a96f79b022d",
+        "source_contract_sha256": "fa285e57f36fb8f33b0c9cdc5de924532a4ec3f30be5880fd3bcde6d53d363ee",
+        "archive_sha256": "19810129f02c71eb00d04a5eb9c9570febded99beac0230de82a09610e027050",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -263,8 +267,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "d3fb78f4feb4ff6db70f4339159cc8b0019ab3b0",
-      "actual": "d3fb78f4feb4ff6db70f4339159cc8b0019ab3b0",
+      "expected": "959fcaee0893a21850d82acccd9d630f3f1bd495",
+      "actual": "959fcaee0893a21850d82acccd9d630f3f1bd495",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
@@ -279,8 +283,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "c031eba962def76fe31e98da4220d9db7f58a1ed8c6c6d1c8906d71f0c24c93d",
-        "archive_sha256": "729d4a307944e544a830974363f436149fc647f9eb12e6e712d66a96f79b022d",
+        "source_contract_sha256": "fa285e57f36fb8f33b0c9cdc5de924532a4ec3f30be5880fd3bcde6d53d363ee",
+        "archive_sha256": "19810129f02c71eb00d04a5eb9c9570febded99beac0230de82a09610e027050",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -292,8 +296,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "c031eba962def76fe31e98da4220d9db7f58a1ed8c6c6d1c8906d71f0c24c93d",
-        "archive_sha256": "729d4a307944e544a830974363f436149fc647f9eb12e6e712d66a96f79b022d",
+        "source_contract_sha256": "fa285e57f36fb8f33b0c9cdc5de924532a4ec3f30be5880fd3bcde6d53d363ee",
+        "archive_sha256": "19810129f02c71eb00d04a5eb9c9570febded99beac0230de82a09610e027050",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
