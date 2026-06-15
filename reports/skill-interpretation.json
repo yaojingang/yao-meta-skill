@@ -513,7 +513,7 @@
         "path": "scripts",
         "label": "Deterministic helpers or local tooling",
         "kind": "folder",
-        "file_count": 118
+        "file_count": 119
       },
       {
         "path": "evals",
@@ -528,7 +528,7 @@
         "file_count": 229
       }
     ],
-    "file_count": 415,
+    "file_count": 416,
     "folder_count": 4,
     "distribution": [
       {
@@ -553,7 +553,7 @@
       },
       {
         "label": "scripts",
-        "value": 118
+        "value": 119
       },
       {
         "label": "evals",
@@ -687,7 +687,7 @@
       "path": "scripts",
       "label": "Deterministic helpers or local tooling",
       "kind": "folder",
-      "file_count": 118
+      "file_count": 119
     },
     {
       "path": "evals",
@@ -1005,9 +1005,9 @@
       "methodology_complete": true,
       "required_artifact_count": 25,
       "missing_artifact_count": 0,
-      "evidence_bundle_sha256": "df9565b74928d8de31eaead6944881e98bad541c3f651df36edf5bd5eccccc4c",
-      "source_contract_sha256": "dc875f356573a393c274e3dbee59dc85c78687add384e1e4a193957a57233183",
-      "archive_sha256": "7d597e2b1385e312d344995cb934549731a7378d0f146d77a93f08d68101b9e4",
+      "evidence_bundle_sha256": "1eafff3c379bfbd4b2bea4ce0be889bea0c0eb33d97a4ee1ae0c278021104e70",
+      "source_contract_sha256": "0037f80b78c16ae634875998f48b81b76734006923e2efbd9c40a35f8d5d9a75",
+      "archive_sha256": "3b2b433b7c57d0a354a145f6755f84a1775b1429efa54f9b7a79ae809c9c79ae",
       "output_case_count": 5,
       "failure_disclosure_count": 3,
       "command_count": 23,
@@ -1029,7 +1029,7 @@
       "working_tree_dirty": false,
       "changed_file_count": 0
     },
-    "commit": "6e04832315a704332c85417c857f10741e4afba4",
+    "commit": "a7f3cdad8488df9adc47ce76015d7a88e3dc6422",
     "missing_artifacts": [],
     "limitations": [
       "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -1113,8 +1113,8 @@
     "failures": []
   },
   "trust_security": {
-    "scanned_files": 206,
-    "script_count": 118,
+    "scanned_files": 207,
+    "script_count": 119,
     "internal_module_count": 33,
     "secret_findings": 0,
     "dependency_files": [
@@ -1123,18 +1123,18 @@
     "network_script_count": 3,
     "network_policy_covered_count": 3,
     "network_policy_missing_count": 0,
-    "file_write_script_count": 72,
+    "file_write_script_count": 73,
     "permission_required_count": 3,
     "permission_approved_count": 3,
     "permission_missing_count": 0,
     "permission_invalid_count": 0,
     "permission_expired_count": 0,
-    "help_smoke_checked_count": 85,
+    "help_smoke_checked_count": 86,
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 206,
-    "package_sha256": "dc875f356573a393c274e3dbee59dc85c78687add384e1e4a193957a57233183"
+    "package_hash_file_count": 207,
+    "package_sha256": "0037f80b78c16ae634875998f48b81b76734006923e2efbd9c40a35f8d5d9a75"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -1172,8 +1172,8 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "dc875f356573a393c274e3dbee59dc85c78687add384e1e4a193957a57233183",
-        "archive_sha256": "7d597e2b1385e312d344995cb934549731a7378d0f146d77a93f08d68101b9e4"
+        "package_sha256": "0037f80b78c16ae634875998f48b81b76734006923e2efbd9c40a35f8d5d9a75",
+        "archive_sha256": "3b2b433b7c57d0a354a145f6755f84a1775b1429efa54f9b7a79ae809c9c79ae"
       },
       "compatibility": {
         "openai": "pass",
@@ -1204,7 +1204,7 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "7d597e2b1385e312d344995cb934549731a7378d0f146d77a93f08d68101b9e4",
+        "archive_sha256": "3b2b433b7c57d0a354a145f6755f84a1775b1429efa54f9b7a79ae809c9c79ae",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
@@ -1220,8 +1220,8 @@
       "target_count": 4,
       "adapter_count": 4,
       "archive_present": true,
-      "archive_sha256": "7d597e2b1385e312d344995cb934549731a7378d0f146d77a93f08d68101b9e4",
-      "archive_entry_count": 640,
+      "archive_sha256": "3b2b433b7c57d0a354a145f6755f84a1775b1429efa54f9b7a79ae809c9c79ae",
+      "archive_entry_count": 641,
       "failure_count": 0,
       "warning_count": 0
     },
@@ -1232,7 +1232,7 @@
     "ok": true,
     "summary": {
       "archive_present": true,
-      "archive_entry_count": 640,
+      "archive_entry_count": 641,
       "archive_extracted": true,
       "entrypoint_loaded": true,
       "manifest_loaded": true,
@@ -1299,12 +1299,12 @@
         {
           "field": "archive_sha256",
           "from": "",
-          "to": "7d597e2b1385e312d344995cb934549731a7378d0f146d77a93f08d68101b9e4"
+          "to": "3b2b433b7c57d0a354a145f6755f84a1775b1429efa54f9b7a79ae809c9c79ae"
         },
         {
           "field": "package_sha256",
           "from": "0000000000000000000000000000000000000000000000000000000000000000",
-          "to": "dc875f356573a393c274e3dbee59dc85c78687add384e1e4a193957a57233183"
+          "to": "0037f80b78c16ae634875998f48b81b76734006923e2efbd9c40a35f8d5d9a75"
         }
       ]
     },
@@ -1482,7 +1482,8 @@
           "python3 scripts/yao.py output-review-kit --write-template",
           "Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.",
           "python3 scripts/adjudicate_output_review.py --write-template",
-          "Edit reports/output_review_decisions.json with winner_variant values and reviewer metadata.",
+          "Record reviewer choices in a separate JSON, JSONL, or CSV decision source with case_id, winner_variant, confidence, and reason only.",
+          "python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication",
           "python3 scripts/yao.py output-review",
           "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
           "Copy evidence/world_class/templates/human-adjudication.intake.json to evidence/world_class/submissions/human-adjudication.json and fill only real evidence fields.",
@@ -1500,6 +1501,7 @@
           "reports/output_review_decisions.json",
           "reports/output_review_adjudication.json",
           "reports/output_review_adjudication.md",
+          "scripts/import_output_review_decisions.py",
           "evidence/world_class/intake.schema.json",
           "evidence/world_class/templates/human-adjudication.intake.json",
           "reports/world_class_evidence_intake.json",
@@ -1507,6 +1509,7 @@
         ],
         "privacy_contract": [
           "Reviewer decisions should not include raw user data or private customer detail.",
+          "The decision importer rejects raw prompt, output, transcript, message, and answer-key fields.",
           "Keep the answer key separate until after decisions are recorded."
         ],
         "audit_next_action": "Record real A/B choices in the decision template, then regenerate adjudication."
@@ -1731,7 +1734,8 @@
           "python3 scripts/yao.py output-review-kit --write-template",
           "Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.",
           "python3 scripts/adjudicate_output_review.py --write-template",
-          "Edit reports/output_review_decisions.json with winner_variant values and reviewer metadata.",
+          "Record reviewer choices in a separate JSON, JSONL, or CSV decision source with case_id, winner_variant, confidence, and reason only.",
+          "python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication",
           "python3 scripts/yao.py output-review",
           "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
           "Copy evidence/world_class/templates/human-adjudication.intake.json to evidence/world_class/submissions/human-adjudication.json and fill only real evidence fields.",
@@ -1754,6 +1758,7 @@
           "reports/output_review_decisions.json",
           "reports/output_review_adjudication.json",
           "reports/output_review_adjudication.md",
+          "scripts/import_output_review_decisions.py",
           "evidence/world_class/intake.schema.json",
           "evidence/world_class/templates/human-adjudication.intake.json",
           "reports/world_class_evidence_intake.json",
@@ -1761,6 +1766,7 @@
         ],
         "privacy_contract": [
           "Reviewer decisions should not include raw user data or private customer detail.",
+          "The decision importer rejects raw prompt, output, transcript, message, and answer-key fields.",
           "Keep the answer key separate until after decisions are recorded."
         ],
         "observed_state": {
