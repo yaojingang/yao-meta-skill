@@ -13,6 +13,8 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import yao as yao_cli_module  # noqa: E402
 import yao_cli_adaptation_commands  # noqa: E402
 import yao_cli_config  # noqa: E402
+import yao_cli_distribution_commands  # noqa: E402
+import yao_cli_output_commands  # noqa: E402
 import yao_cli_parser  # noqa: E402
 import yao_cli_report_commands  # noqa: E402
 import yao_cli_runtime  # noqa: E402
@@ -72,10 +74,8 @@ def main() -> None:
     assert "--entry" in yao_cli_config.baseline_compare_args()
     assert "scripts/provider_output_eval_runner.py" in yao_cli_config.provider_output_runner_command("openai")
     assert "--allow-custom-base-url" in yao_cli_config.provider_output_runner_command("openai", allow_custom_base_url=True)
-    assert yao_cli_parser.SCRIPT_INTERFACE == "internal-module"
-    assert yao_cli_runtime.SCRIPT_INTERFACE == "internal-module"
-    assert yao_cli_adaptation_commands.SCRIPT_INTERFACE == "internal-module"
-    assert yao_cli_report_commands.SCRIPT_INTERFACE == "internal-module"
+    for module in (yao_cli_parser, yao_cli_runtime, yao_cli_adaptation_commands, yao_cli_distribution_commands, yao_cli_output_commands, yao_cli_report_commands):
+        assert module.SCRIPT_INTERFACE == "internal-module"
     assert callable(yao_cli_module.command_review_studio)
     parser_help = yao_cli_module.build_parser().format_help()
     expected_help = (
@@ -205,7 +205,8 @@ def main() -> None:
     assert architecture_result["ok"], architecture_result
     assert architecture_result["payload"]["summary"]["hotspot_count"] == 0, architecture_result
     assert architecture_result["payload"]["summary"]["blocker_count"] == 0, architecture_result
-    assert 30 <= architecture_result["payload"]["summary"]["command_handler_count"] < 55, architecture_result
+    assert architecture_result["payload"]["summary"]["command_handler_count"] >= 60, architecture_result
+    assert architecture_result["payload"]["summary"]["entrypoint_command_handler_count"] < 30, architecture_result
 
     world_class_evidence_result = run(
         "world-class-evidence",

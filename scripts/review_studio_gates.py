@@ -323,7 +323,8 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
             f"{hotspot_count} {hotspot_label}; "
             f"{blocker_count} {blocker_label}; "
             f"largest {architecture_summary.get('largest_file_lines', 0)} lines; "
-            f"{architecture_summary.get('command_handler_count', 0)} CLI handlers"
+            f"{architecture_summary.get('command_handler_count', 0)} CLI handlers; "
+            f"{architecture_summary.get('entrypoint_command_handler_count', 0)} in entrypoint"
         )
     gates.append(
         gate(

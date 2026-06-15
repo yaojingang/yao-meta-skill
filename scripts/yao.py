@@ -7,12 +7,30 @@ from pathlib import Path
 from yao_cli_config import (
     baseline_compare_args,
     local_output_runner_command,
-    provider_output_runner_command,
     resolve_promotion_target,
     resolve_target,
 )
 from yao_cli_adaptation_commands import command_adapt_propose, command_adapt_scan
 from yao_cli_create_commands import command_init, command_quickstart
+from yao_cli_distribution_commands import (
+    command_compile_skill,
+    command_conformance,
+    command_install_simulate,
+    command_package,
+    command_package_verify,
+    command_registry_audit,
+    command_runtime_permissions,
+    command_skill_atlas,
+    command_skill_ir,
+    command_trust,
+    command_upgrade_check,
+)
+from yao_cli_output_commands import (
+    command_output_eval,
+    command_output_execution,
+    command_output_review,
+    command_output_review_kit,
+)
 from yao_cli_parser import build_parser as build_cli_parser
 from yao_cli_report_commands import (
     command_artifact_design_profile,
@@ -26,6 +44,7 @@ from yao_cli_report_commands import (
     command_prompt_quality_profile,
     command_reference_scan,
     command_reference_synthesis,
+    command_report,
     command_review_studio,
     command_review_viewer,
     command_skill_os2_audit,
@@ -144,99 +163,6 @@ def command_architecture_audit(args: argparse.Namespace) -> int:
     result = run_script("render_architecture_maintainability.py", cmd)
     print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
     return 0 if result["ok"] else 2
-
-
-def command_report(args: argparse.Namespace) -> int:
-    steps = []
-    if args.refresh_optimization:
-        steps.append(run_script("run_description_optimization_suite.py", []))
-    steps.extend(
-        [
-            run_script("build_confusion_matrix.py", []),
-            run_script("promotion_checker.py", []),
-            run_script("render_eval_dashboard.py", []),
-            run_script("render_intent_confidence.py", [str(ROOT)]),
-            run_script("render_description_drift_history.py", []),
-            run_script("render_iteration_ledger.py", []),
-            run_script("render_baseline_compare.py", baseline_compare_args()),
-            run_script("render_regression_history.py", []),
-            run_script("render_context_reports.py", []),
-            run_script("render_portability_report.py", []),
-            run_script("python_compat_check.py", [str(ROOT)]),
-            run_script("render_architecture_maintainability.py", [str(ROOT)]),
-            run_script("render_reference_synthesis.py", [str(ROOT)]),
-            run_script("render_artifact_design_profile.py", [str(ROOT)]),
-            run_script("render_prompt_quality_profile.py", [str(ROOT)]),
-            run_script("render_system_model.py", [str(ROOT)]),
-            run_script("compile_skill.py", [str(ROOT)]),
-            run_script("run_output_eval.py", []),
-            run_script("run_output_execution.py", ["--runner-command", local_output_runner_command()]),
-            run_script("prepare_output_review_kit.py", []),
-            run_script("adjudicate_output_review.py", []),
-            run_script("render_adoption_drift_report.py", [str(ROOT)]),
-            run_script("render_telemetry_hook_recipes.py", [str(ROOT)]),
-            run_script("render_review_waivers.py", [str(ROOT)]),
-            run_script("render_review_annotations.py", [str(ROOT)]),
-            run_script("render_world_class_evidence_plan.py", [str(ROOT)]),
-            run_script("render_world_class_evidence_ledger.py", [str(ROOT)]),
-            run_script("render_world_class_evidence_intake.py", [str(ROOT)]),
-            run_script("render_world_class_submission_review.py", [str(ROOT)]),
-            run_script("render_world_class_operator_runbook.py", [str(ROOT)]),
-            run_script("render_world_class_claim_guard.py", [str(ROOT)]),
-            run_script("render_skill_os2_coverage.py", [str(ROOT)]),
-            run_script("render_benchmark_reproducibility.py", [str(ROOT)]),
-            run_script("render_skill_overview.py", [str(ROOT)]),
-            run_script("render_skill_interpretation.py", [str(ROOT)]),
-            run_script("render_evidence_consistency.py", [str(ROOT)]),
-            run_script("render_review_viewer.py", [str(ROOT)]),
-        ]
-    )
-    report = {
-        "ok": all(step["ok"] for step in steps),
-        "steps": [{"command": step["command"], "ok": step["ok"], "returncode": step["returncode"]} for step in steps],
-        "artifacts": {
-            "eval_results": "reports/eval_suite.json",
-            "route_scorecard": "reports/route_scorecard.json",
-            "promotion_decisions": "reports/promotion_decisions.json",
-            "intent_confidence": "reports/intent-confidence.json",
-            "iteration_ledger": "reports/iteration_ledger.md",
-            "baseline_compare": "reports/baseline-compare.json",
-            "regression_history": "reports/regression_history.md",
-            "context_budget": "reports/context_budget.json",
-            "portability_score": "reports/portability_score.json",
-            "python_compatibility": "reports/python_compatibility.json",
-            "architecture_maintainability": "reports/architecture_maintainability.json",
-            "reference_synthesis": "reports/reference-synthesis.json",
-            "artifact_design_profile": "reports/artifact-design-profile.json",
-            "prompt_quality_profile": "reports/prompt-quality-profile.json",
-            "system_model": "reports/system-model.json",
-            "compiled_targets": "reports/compiled_targets.json",
-            "output_execution": "reports/output_execution_runs.json",
-            "output_review_kit": "reports/output_review_kit.json",
-            "output_review_kit_html": "reports/output_review_kit.html",
-            "output_review_adjudication": "reports/output_review_adjudication.json",
-            "adoption_drift": "reports/adoption_drift_report.json",
-            "telemetry_hooks": "reports/telemetry_hook_recipes.json",
-            "review_waivers": "reports/review_waivers.json",
-            "review_annotations": "reports/review_annotations.json",
-            "world_class_evidence_plan": "reports/world_class_evidence_plan.json",
-            "world_class_evidence_ledger": "reports/world_class_evidence_ledger.json",
-            "world_class_evidence_intake": "reports/world_class_evidence_intake.json",
-            "world_class_submission_review": "reports/world_class_submission_review.json",
-            "world_class_operator_runbook": "reports/world_class_operator_runbook.json",
-            "world_class_claim_guard": "reports/world_class_claim_guard.json",
-            "skill_os2_coverage": "reports/skill_os2_coverage.json",
-            "benchmark_reproducibility": "reports/benchmark_reproducibility.json",
-            "skill_overview": "reports/skill-overview.json",
-            "skill_interpretation": "reports/skill-interpretation.json",
-            "skill_interpretation_html": "reports/skill-interpretation.html",
-            "evidence_consistency": "reports/evidence_consistency.json",
-            "review_viewer": "reports/review-viewer.json",
-            "review_viewer_html": "reports/review-viewer.html",
-        },
-    }
-    print(json.dumps(report, ensure_ascii=False, indent=2))
-    return 0 if report["ok"] else 2
 
 
 def command_feedback(args: argparse.Namespace) -> int:
@@ -438,257 +364,6 @@ def command_baseline_compare(args: argparse.Namespace) -> int:
     return 0 if result["ok"] else 2
 
 
-def command_skill_ir(args: argparse.Namespace) -> int:
-    cmd = [str(Path(args.skill_dir).resolve())]
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    if args.validate_only:
-        cmd.append("--validate-only")
-    result = run_script("export_skill_ir.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
-def command_compile_skill(args: argparse.Namespace) -> int:
-    cmd = [str(Path(args.skill_dir).resolve())]
-    for target in args.target or []:
-        cmd.extend(["--target", target])
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    if args.output_md:
-        cmd.extend(["--output-md", args.output_md])
-    if args.generated_at:
-        cmd.extend(["--generated-at", args.generated_at])
-    result = run_script("compile_skill.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
-def command_output_eval(args: argparse.Namespace) -> int:
-    cmd = []
-    if args.cases:
-        cmd.extend(["--cases", args.cases])
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    if args.output_md:
-        cmd.extend(["--output-md", args.output_md])
-    if args.blind_pack_json:
-        cmd.extend(["--blind-pack-json", args.blind_pack_json])
-    if args.blind_pack_md:
-        cmd.extend(["--blind-pack-md", args.blind_pack_md])
-    if args.blind_answer_key_json:
-        cmd.extend(["--blind-answer-key-json", args.blind_answer_key_json])
-    result = run_script("run_output_eval.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
-def command_output_execution(args: argparse.Namespace) -> int:
-    cmd = []
-    if args.cases:
-        cmd.extend(["--cases", args.cases])
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    if args.output_md:
-        cmd.extend(["--output-md", args.output_md])
-    if args.runner_command and args.provider_runner:
-        payload = {
-            "schema_version": "1.0",
-            "ok": False,
-            "failures": ["Use either --runner-command or --provider-runner, not both."],
-        }
-        print(json.dumps(payload, ensure_ascii=False, indent=2))
-        return 2
-    if args.provider_runner:
-        cmd.extend(
-            [
-                "--runner-command",
-                provider_output_runner_command(
-                    args.provider_runner,
-                    model=args.provider_model,
-                    base_url=args.provider_base_url,
-                    api_key_env=args.api_key_env,
-                    allow_insecure_localhost=args.allow_insecure_localhost,
-                    allow_custom_base_url=args.allow_custom_base_url,
-                ),
-            ]
-        )
-    elif args.runner_command:
-        cmd.extend(["--runner-command", args.runner_command])
-    if args.timeout_seconds is not None:
-        cmd.extend(["--timeout-seconds", str(args.timeout_seconds)])
-    result = run_script("run_output_execution.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
-def command_output_review_kit(args: argparse.Namespace) -> int:
-    cmd = []
-    if args.blind_pack_json:
-        cmd.extend(["--blind-pack-json", args.blind_pack_json])
-    if args.blind_pack_md:
-        cmd.extend(["--blind-pack-md", args.blind_pack_md])
-    if args.decisions:
-        cmd.extend(["--decisions", args.decisions])
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    if args.output_md:
-        cmd.extend(["--output-md", args.output_md])
-    if args.output_html:
-        cmd.extend(["--output-html", args.output_html])
-    if args.write_template:
-        cmd.append("--write-template")
-    result = run_script("prepare_output_review_kit.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
-def command_output_review(args: argparse.Namespace) -> int:
-    cmd = []
-    if args.blind_pack:
-        cmd.extend(["--blind-pack", args.blind_pack])
-    if args.answer_key:
-        cmd.extend(["--answer-key", args.answer_key])
-    if args.decisions:
-        cmd.extend(["--decisions", args.decisions])
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    if args.output_md:
-        cmd.extend(["--output-md", args.output_md])
-    if args.write_template:
-        cmd.append("--write-template")
-    result = run_script("adjudicate_output_review.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
-def command_conformance(args: argparse.Namespace) -> int:
-    cmd = [str(Path(args.skill_dir).resolve())]
-    for target in args.target or []:
-        cmd.extend(["--target", target])
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    if args.output_md:
-        cmd.extend(["--output-md", args.output_md])
-    result = run_script("run_conformance_suite.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
-def command_runtime_permissions(args: argparse.Namespace) -> int:
-    cmd = [str(Path(args.skill_dir).resolve())]
-    if args.package_dir:
-        cmd.extend(["--package-dir", args.package_dir])
-    for target in args.target or []:
-        cmd.extend(["--target", target])
-    if getattr(args, "install_simulation_json", None):
-        cmd.extend(["--install-simulation-json", args.install_simulation_json])
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    if args.output_md:
-        cmd.extend(["--output-md", args.output_md])
-    result = run_script("probe_runtime_permissions.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
-def command_trust(args: argparse.Namespace) -> int:
-    cmd = [str(Path(args.skill_dir).resolve())]
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    if args.output_md:
-        cmd.extend(["--output-md", args.output_md])
-    result = run_script("trust_check.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
-def command_skill_atlas(args: argparse.Namespace) -> int:
-    cmd = ["--workspace-root", str(Path(args.workspace_root).resolve())]
-    if args.output_dir:
-        cmd.extend(["--output-dir", args.output_dir])
-    if args.report_html:
-        cmd.extend(["--report-html", args.report_html])
-    if args.report_json:
-        cmd.extend(["--report-json", args.report_json])
-    if args.overlap_threshold is not None:
-        cmd.extend(["--overlap-threshold", str(args.overlap_threshold)])
-    if args.today:
-        cmd.extend(["--today", args.today])
-    result = run_script("build_skill_atlas.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
-def command_registry_audit(args: argparse.Namespace) -> int:
-    cmd = [str(Path(args.skill_dir).resolve())]
-    if args.registry_dir:
-        cmd.extend(["--registry-dir", args.registry_dir])
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    if args.output_md:
-        cmd.extend(["--output-md", args.output_md])
-    if args.generated_at:
-        cmd.extend(["--generated-at", args.generated_at])
-    result = run_script("registry_audit.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
-def command_package_verify(args: argparse.Namespace) -> int:
-    cmd = [str(Path(args.skill_dir).resolve())]
-    if args.package_dir:
-        cmd.extend(["--package-dir", args.package_dir])
-    if args.expectations:
-        cmd.extend(["--expectations", args.expectations])
-    if args.registry_json:
-        cmd.extend(["--registry-json", args.registry_json])
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    if args.output_md:
-        cmd.extend(["--output-md", args.output_md])
-    if args.require_zip:
-        cmd.append("--require-zip")
-    if args.generated_at:
-        cmd.extend(["--generated-at", args.generated_at])
-    result = run_script("verify_package.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
-def command_install_simulate(args: argparse.Namespace) -> int:
-    cmd = [str(Path(args.skill_dir).resolve())]
-    if args.package_dir:
-        cmd.extend(["--package-dir", args.package_dir])
-    if args.install_root:
-        cmd.extend(["--install-root", args.install_root])
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    if args.output_md:
-        cmd.extend(["--output-md", args.output_md])
-    if args.generated_at:
-        cmd.extend(["--generated-at", args.generated_at])
-    result = run_script("simulate_install.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
-def command_upgrade_check(args: argparse.Namespace) -> int:
-    cmd = [str(Path(args.skill_dir).resolve())]
-    cmd.extend(["--previous-package-json", args.previous_package_json])
-    if args.current_package_json:
-        cmd.extend(["--current-package-json", args.current_package_json])
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    if args.output_md:
-        cmd.extend(["--output-md", args.output_md])
-    if args.generated_at:
-        cmd.extend(["--generated-at", args.generated_at])
-    result = run_script("upgrade_check.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
 def command_review(args: argparse.Namespace) -> int:
     target_name = resolve_promotion_target(args.target)
     bundle_dir = ROOT / "reports" / "iteration_bundles" / target_name
@@ -812,23 +487,6 @@ def command_workspace_flow(args: argparse.Namespace) -> int:
     }
     print(json.dumps(report, ensure_ascii=False, indent=2))
     return 0 if report["ok"] else 2
-
-
-def command_package(args: argparse.Namespace) -> int:
-    cmd = [
-        str(Path(args.skill_dir).resolve()),
-        "--output-dir",
-        args.output_dir,
-    ]
-    for platform in args.platform or ["generic"]:
-        cmd.extend(["--platform", platform])
-    if args.expectations:
-        cmd.extend(["--expectations", args.expectations])
-    if args.zip:
-        cmd.append("--zip")
-    result = run_script("cross_packager.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
 
 
 def command_test(args: argparse.Namespace) -> int:

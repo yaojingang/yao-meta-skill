@@ -66,15 +66,23 @@ def recommendation_for(path: str) -> str:
     return "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
 
 
-def count_command_handlers(skill_dir: Path) -> int:
-    path = skill_dir / "scripts" / "yao.py"
+def count_handlers_in_file(path: Path) -> int:
     if not path.exists():
         return 0
-    count = 0
-    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
-        if line.startswith("def command_"):
-            count += 1
-    return count
+    return sum(1 for line in path.read_text(encoding="utf-8", errors="replace").splitlines() if line.startswith("def command_"))
+
+
+def command_module_paths(skill_dir: Path) -> list[Path]:
+    scripts_dir = skill_dir / "scripts"
+    if not scripts_dir.exists():
+        return []
+    paths = [scripts_dir / "yao.py"]
+    paths.extend(sorted(scripts_dir.glob("yao_cli_*commands.py")))
+    return [path for path in paths if path.exists()]
+
+
+def count_cli_command_handlers(skill_dir: Path) -> int:
+    return sum(count_handlers_in_file(path) for path in command_module_paths(skill_dir))
 
 
 def build_report(skill_dir: Path, warn_lines: int, block_lines: int, generated_at: str) -> dict[str, Any]:
@@ -120,7 +128,9 @@ def build_report(skill_dir: Path, warn_lines: int, block_lines: int, generated_a
         "test_file_count": test_count,
         "internal_module_count": internal_count,
         "cli_script_count": cli_count,
-        "command_handler_count": count_command_handlers(skill_dir),
+        "command_handler_count": count_cli_command_handlers(skill_dir),
+        "entrypoint_command_handler_count": count_handlers_in_file(skill_dir / "scripts" / "yao.py"),
+        "command_module_count": len(command_module_paths(skill_dir)),
         "warn_line_threshold": warn_lines,
         "block_line_threshold": block_lines,
         "largest_file_lines": records[0]["lines"] if records else 0,
@@ -167,6 +177,8 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- internal modules: `{summary['internal_module_count']}`",
         f"- CLI scripts: `{summary['cli_script_count']}`",
         f"- Yao CLI command handlers: `{summary['command_handler_count']}`",
+        f"- entrypoint command handlers: `{summary['entrypoint_command_handler_count']}`",
+        f"- command modules: `{summary['command_module_count']}`",
         f"- largest file lines: `{summary['largest_file_lines']}`",
         f"- hotspots: `{summary['hotspot_count']}`",
         f"- blockers: `{summary['blocker_count']}`",

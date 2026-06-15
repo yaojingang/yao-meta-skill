@@ -40,7 +40,9 @@ def main() -> None:
     assert payload["summary"]["decision"] == "pass", payload["summary"]
     assert payload["summary"]["hotspot_count"] == 0, payload["summary"]
     assert payload["summary"]["blocker_count"] == 0, payload["summary"]
-    assert 30 <= payload["summary"]["command_handler_count"] < 50, payload["summary"]
+    assert payload["summary"]["command_handler_count"] >= 60, payload["summary"]
+    assert payload["summary"]["entrypoint_command_handler_count"] < 30, payload["summary"]
+    assert payload["summary"]["command_module_count"] >= 5, payload["summary"]
     assert payload["summary"]["largest_file_lines"] < 900, payload["summary"]
     assert all(item["severity"] == "pass" for item in payload["largest_files"]), payload["largest_files"]
     renderer_lines = len((ROOT / "scripts" / "render_review_studio.py").read_text(encoding="utf-8").splitlines())
