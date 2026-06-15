@@ -6,6 +6,7 @@ from datetime import date
 from pathlib import Path
 from typing import Any
 
+from evidence_consistency_release import build_release_evidence_flow_check
 from evidence_consistency_world_class import build_world_class_workflow_check
 
 
@@ -250,6 +251,7 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
         paths=list(REQUIRED_REPORTS.values()) + list(REQUIRED_TEXT_REPORTS.values()),
         detail="The consistency gate can only be trusted when every source JSON report parses and every source Markdown report is readable.",
     )
+    checks.append(build_release_evidence_flow_check(skill_dir))
 
     benchmark = reports["benchmark"]
     overview = reports["overview"]

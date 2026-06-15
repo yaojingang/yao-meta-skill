@@ -4,14 +4,14 @@
   "generated_at": "2026-06-16",
   "skill_dir": ".",
   "summary": {
-    "check_count": 29,
-    "pass_count": 29,
+    "check_count": 30,
+    "pass_count": 30,
     "warn_count": 0,
     "fail_count": 0,
     "decision": "consistent"
   },
   "status_counts": {
-    "pass": 29,
+    "pass": 30,
     "warn": 0,
     "fail": 0
   },
@@ -42,6 +42,59 @@
         "reports/skill-os-2-review.md"
       ],
       "detail": "The consistency gate can only be trusted when every source JSON report parses and every source Markdown report is readable."
+    },
+    {
+      "key": "release-evidence-flow-covers-first-class-reports",
+      "label": "Release evidence flow covers first-class reports",
+      "status": "pass",
+      "expected": {
+        "AGENTS.md": true,
+        "source_refresh_section": true,
+        "clean_lock_section": true,
+        "source_refresh_commands": {
+          "python3 scripts/render_skill_overview.py .": true,
+          "python3 scripts/render_skill_interpretation.py .": true,
+          "python3 scripts/render_review_viewer.py .": true,
+          "python3 scripts/render_review_studio.py . --output-html reports/review-studio.html --output-json reports/review-studio.json": true,
+          "python3 scripts/render_evidence_consistency.py . --generated-at \"$GENERATED_AT\"": true
+        },
+        "clean_lock_commands": {
+          "python3 scripts/render_skill_overview.py .": true,
+          "python3 scripts/render_skill_interpretation.py .": true,
+          "python3 scripts/render_review_viewer.py .": true,
+          "python3 scripts/render_review_studio.py . --output-html reports/review-studio.html --output-json reports/review-studio.json": true,
+          "python3 scripts/render_evidence_consistency.py . --generated-at \"$GENERATED_AT\"": true
+        }
+      },
+      "actual": {
+        "AGENTS.md": true,
+        "source_refresh_section": true,
+        "clean_lock_section": true,
+        "source_refresh_commands": {
+          "python3 scripts/render_skill_overview.py .": true,
+          "python3 scripts/render_skill_interpretation.py .": true,
+          "python3 scripts/render_review_viewer.py .": true,
+          "python3 scripts/render_review_studio.py . --output-html reports/review-studio.html --output-json reports/review-studio.json": true,
+          "python3 scripts/render_evidence_consistency.py . --generated-at \"$GENERATED_AT\"": true
+        },
+        "clean_lock_commands": {
+          "python3 scripts/render_skill_overview.py .": true,
+          "python3 scripts/render_skill_interpretation.py .": true,
+          "python3 scripts/render_review_viewer.py .": true,
+          "python3 scripts/render_review_studio.py . --output-html reports/review-studio.html --output-json reports/review-studio.json": true,
+          "python3 scripts/render_evidence_consistency.py . --generated-at \"$GENERATED_AT\"": true
+        }
+      },
+      "paths": [
+        "AGENTS.md",
+        "reports/benchmark_reproducibility.json",
+        "reports/skill-overview.json",
+        "reports/skill-interpretation.json",
+        "reports/review-viewer.json",
+        "reports/review-studio.json",
+        "reports/evidence_consistency.json"
+      ],
+      "detail": "Release refresh and clean-lock instructions must regenerate every first-class report before evidence consistency can be trusted."
     },
     {
       "key": "benchmark-release-lock-self-consistency",
@@ -1322,7 +1375,7 @@
             "path": "scripts",
             "label": "Deterministic helpers or local tooling",
             "kind": "folder",
-            "file_count": 111
+            "file_count": 112
           },
           {
             "path": "evals",
@@ -1337,7 +1390,7 @@
             "file_count": 222
           }
         ],
-        "file_count": 400,
+        "file_count": 401,
         "folder_count": 4,
         "distribution": [
           {
@@ -1362,7 +1415,7 @@
           },
           {
             "label": "scripts",
-            "value": 111
+            "value": 112
           },
           {
             "label": "evals",
@@ -1410,7 +1463,7 @@
             "path": "scripts",
             "label": "Deterministic helpers or local tooling",
             "kind": "folder",
-            "file_count": 111
+            "file_count": 112
           },
           {
             "path": "evals",
@@ -1425,7 +1478,7 @@
             "file_count": 222
           }
         ],
-        "file_count": 400,
+        "file_count": 401,
         "folder_count": 4,
         "distribution": [
           {
@@ -1450,7 +1503,7 @@
           },
           {
             "label": "scripts",
-            "value": 111
+            "value": 112
           },
           {
             "label": "evals",
@@ -2028,10 +2081,10 @@
         "score `91`",
         "`16` gates",
         "`3` warnings",
-        "`29` declared internal modules",
-        "`82 / 82` CLI help smoke checks passing across `111` scripts",
-        "`618` zip entries",
-        "archive with `618` entries",
+        "`30` declared internal modules",
+        "`82 / 82` CLI help smoke checks passing across `112` scripts",
+        "`619` zip entries",
+        "archive with `619` entries",
         "`12` installer permission checks enforced",
         "`0` permission failures",
         "`24` required artifacts",

@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SCRIPT = ROOT / "scripts" / "render_evidence_consistency.py"
 TMP = ROOT / "tests" / "tmp_evidence_consistency"
 REPORT_FILES = [
+    "AGENTS.md",
     "reports/benchmark_reproducibility.json",
     "reports/skill-overview.json",
     "reports/skill-overview.html",
@@ -136,8 +137,11 @@ def main() -> None:
     assert payload["ok"] is True, payload
     assert payload["summary"]["decision"] == "consistent", payload
     assert payload["summary"]["fail_count"] == 0, payload
-    assert payload["summary"]["check_count"] >= 29, payload
+    assert payload["summary"]["check_count"] >= 30, payload
     checks = {item["key"]: item for item in payload["checks"]}
+    assert checks["release-evidence-flow-covers-first-class-reports"]["status"] == "pass", checks[
+        "release-evidence-flow-covers-first-class-reports"
+    ]
     assert checks["overview-benchmark-summary"]["status"] == "pass", checks["overview-benchmark-summary"]
     assert checks["interpretation-adoption-summary"]["status"] == "pass", checks["interpretation-adoption-summary"]
     assert checks["coverage-world-class-boundary"]["status"] == "pass", checks["coverage-world-class-boundary"]
@@ -210,6 +214,34 @@ def main() -> None:
     claim_guard_drift_checks = {item["key"]: item for item in claim_guard_drift_payload["checks"]}
     assert claim_guard_drift_checks["claim-guard-package-runtime-surface"]["status"] == "fail", (
         claim_guard_drift_checks["claim-guard-package-runtime-surface"]
+    )
+
+    release_flow_drift_root = TMP / "release-flow-drift-skill"
+    copy_reports(release_flow_drift_root)
+    agents_path = release_flow_drift_root / "AGENTS.md"
+    agents_text = agents_path.read_text(encoding="utf-8")
+    agents_path.write_text(
+        agents_text.replace("python3 scripts/render_skill_interpretation.py .\n", "", 1),
+        encoding="utf-8",
+    )
+    release_flow_drift_proc = run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            str(release_flow_drift_root),
+            "--output-json",
+            str(TMP / "release_flow_drift.json"),
+            "--output-md",
+            str(TMP / "release_flow_drift.md"),
+            "--generated-at",
+            "2026-06-15",
+        ]
+    )
+    assert release_flow_drift_proc.returncode == 2, release_flow_drift_proc.stdout
+    release_flow_drift_payload = json.loads(release_flow_drift_proc.stdout)
+    release_flow_drift_checks = {item["key"]: item for item in release_flow_drift_payload["checks"]}
+    assert release_flow_drift_checks["release-evidence-flow-covers-first-class-reports"]["status"] == "fail", (
+        release_flow_drift_checks["release-evidence-flow-covers-first-class-reports"]
     )
 
     workflow_drift_root = TMP / "workflow-drift-skill"
