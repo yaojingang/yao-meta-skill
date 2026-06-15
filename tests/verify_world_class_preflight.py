@@ -90,6 +90,16 @@ def main() -> None:
         "--output-dir evidence/world_class/submissions --prefill-artifacts"
     ), payload["submissions"]
     assert payload["submissions"]["artifact_prefill_counts_as_evidence"] is False, payload
+    role_contract = payload["submissions"]["artifact_role_contract"]
+    assert role_contract["role_source"] == "world-class-submission-kit", role_contract
+    assert role_contract["counts_as_evidence"] is False, role_contract
+    assert role_contract["artifact_prefill_counts_as_evidence"] is False, role_contract
+    assert role_contract["submission_ref_total_count"] >= 4, role_contract
+    assert role_contract["submission_ref_ready_count"] <= role_contract["submission_ref_total_count"], role_contract
+    assert role_contract["supporting_evidence_total_count"] >= 4, role_contract
+    roles = {item["role"]: item for item in role_contract["roles"]}
+    assert roles["submission-ref"]["copy_to_artifact_refs"] is True, roles
+    assert roles["supporting-evidence"]["copy_to_artifact_refs"] is False, roles
     assert payload["artifacts"]["html"] == "reports/world_class_evidence_preflight.html", payload["artifacts"]
     submission_commands = payload["submissions"]["commands"]
     assert submission_commands["prepare_submission"] == (
@@ -126,6 +136,10 @@ def main() -> None:
     assert provider["submission_kit"]["prefill_command"] == provider["commands"]["prepare_prefilled_submission"], provider
     assert provider["submission_kit"]["output_dir"] == "evidence/world_class/submissions", provider
     assert provider["submission_kit"]["draft_path"] == "evidence/world_class/submissions/provider-holdout.json", provider
+    provider_roles = provider["submission_kit"]["artifact_role_contract"]
+    assert provider_roles["submission_ref_total_count"] == 1, provider_roles
+    assert provider_roles["submission_ref_ready_count"] == 1, provider_roles
+    assert provider_roles["supporting_evidence_total_count"] >= 1, provider_roles
     provider_checks = {item["key"]: item for item in provider["prechecks"]}
     assert provider_checks["openai-api-key"]["status"] == "missing", provider_checks
     assert provider_checks["openai-api-key"]["actual"] == "not-set", provider_checks
@@ -158,6 +172,9 @@ def main() -> None:
     assert "drafts count as evidence: `false`" in markdown, markdown
     assert "artifact prefill counts as evidence: `false`" in markdown, markdown
     assert "does not make a draft count as evidence" in markdown, markdown
+    assert "submission refs ready:" in markdown, markdown
+    assert "`submission-ref` rows are the only checklist rows expected in `artifact_refs`" in markdown, markdown
+    assert "| `supporting-evidence` | `false` |" in markdown, markdown
     assert "values are never printed" in markdown, markdown
     html = output_html.read_text(encoding="utf-8")
     assert "<title>World-Class Evidence Preflight</title>" in html, html
@@ -169,6 +186,9 @@ def main() -> None:
     assert "provider-holdout" in html, html
     assert "Artifact prefill is convenience data only." in html, html
     assert "artifact prefill counts as evidence" in html, html
+    assert "Artifact Roles" in html, html
+    assert "copy to artifact_refs: <code>true</code>" in html, html
+    assert "supporting-evidence" in html, html
     assert "Source Checks" in html, html
     assert "ready_to_claim_world_class" in html, html
     assert "Environment variables are displayed only as set or not-set" in html, html

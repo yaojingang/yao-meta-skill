@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from html_rendering import html_text
+from prepare_world_class_submission_kit import build_artifact_checklist
 from render_world_class_evidence_intake import build_intake
 from render_world_class_evidence_ledger import build_ledger
 from render_world_class_submission_review import build_submission_review
@@ -167,6 +168,45 @@ def build_submission_commands(skill_dir: Path, submissions_dir: Path, evidence_k
     }
 
 
+def build_artifact_role_contract(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    submission_ref_rows = [row for row in rows if row.get("submission_ref_required") is True]
+    supporting_rows = [row for row in rows if row.get("submission_ref_required") is not True]
+    return {
+        "schema_version": "1.0",
+        "role_source": "world-class-submission-kit",
+        "counts_as_evidence": False,
+        "artifact_prefill_counts_as_evidence": False,
+        "submission_ref_total_count": len(submission_ref_rows),
+        "submission_ref_ready_count": sum(1 for row in submission_ref_rows if row.get("artifact_ref_ready")),
+        "supporting_evidence_total_count": len(supporting_rows),
+        "supporting_evidence_ready_count": sum(1 for row in supporting_rows if row.get("artifact_ref_ready")),
+        "roles": [
+            {
+                "role": "submission-ref",
+                "label": "Submission refs",
+                "copy_to_artifact_refs": True,
+                "description": "Rows marked submission-ref are the aggregate paths expected in artifact_refs.",
+            },
+            {
+                "role": "supporting-evidence",
+                "label": "Supporting evidence",
+                "copy_to_artifact_refs": False,
+                "description": "Supporting-evidence rows help reviewers audit the packet but do not all need to be copied into artifact_refs.",
+            },
+        ],
+    }
+
+
+def artifact_role_contract_for_key(contract: dict[str, Any], rows: list[dict[str, Any]], evidence_key: str) -> dict[str, Any]:
+    item_rows = [row for row in rows if row.get("evidence_key") == evidence_key]
+    role_contract = build_artifact_role_contract(item_rows)
+    return {
+        **role_contract,
+        "schema_version": contract.get("schema_version", "1.0"),
+        "role_source": contract.get("role_source", "world-class-submission-kit"),
+    }
+
+
 def build_precheck(skill_dir: Path, evidence_key: str, spec: dict[str, Any]) -> dict[str, Any]:
     kind = str(spec.get("kind", ""))
     required = spec.get("required") is True
@@ -256,6 +296,10 @@ def build_preflight(skill_dir: Path, generated_at: str, submissions_dir: Path | 
     review = build_submission_review(skill_dir, generated_at, submissions_dir=submissions_dir)
     review_by_key = {str(item.get("evidence_key", "")): item for item in review.get("items", [])}
     intake_by_key = {str(item.get("evidence_key", "")): item for item in intake.get("operator_checklist", [])}
+    operator_items = intake.get("operator_checklist", [])
+    operator_items = operator_items if isinstance(operator_items, list) else []
+    artifact_checklist = build_artifact_checklist(skill_dir, operator_items)
+    artifact_role_contract = build_artifact_role_contract(artifact_checklist)
     items: list[dict[str, Any]] = []
     precheck_rows: list[dict[str, Any]] = []
     source_rows: list[dict[str, Any]] = []
@@ -289,6 +333,11 @@ def build_preflight(skill_dir: Path, generated_at: str, submissions_dir: Path | 
                 "output_dir": rel_path(submissions_dir, skill_dir),
                 "draft_path": intake_by_key.get(key, {}).get("submission_path", ""),
                 "template_path": intake_by_key.get(key, {}).get("template_path", ""),
+                "artifact_role_contract": artifact_role_contract_for_key(
+                    artifact_role_contract,
+                    artifact_checklist,
+                    key,
+                ),
                 "drafts_count_as_evidence": False,
                 "artifact_prefill_counts_as_evidence": False,
             },
@@ -343,6 +392,7 @@ def build_preflight(skill_dir: Path, generated_at: str, submissions_dir: Path | 
             "preflight_counts_submission_as_completion": False,
             "drafts_count_as_evidence": False,
             "artifact_prefill_counts_as_evidence": False,
+            "artifact_role_contract": artifact_role_contract,
         },
         "source_reports": {
             "ledger": "reports/world_class_evidence_ledger.json",
@@ -360,6 +410,7 @@ def build_preflight(skill_dir: Path, generated_at: str, submissions_dir: Path | 
 
 def render_markdown(report: dict[str, Any]) -> str:
     summary = report["summary"]
+    role_contract = report["submissions"]["artifact_role_contract"]
     lines = [
         "# World-Class Evidence Preflight",
         "",
@@ -388,14 +439,37 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- guard claims: `{report['submissions']['commands']['guard_claim']}`",
         f"- drafts count as evidence: `{str(report['submissions']['drafts_count_as_evidence']).lower()}`",
         f"- artifact prefill counts as evidence: `{str(report['submissions']['artifact_prefill_counts_as_evidence']).lower()}`",
+        f"- submission refs ready: `{role_contract['submission_ref_ready_count']}` / `{role_contract['submission_ref_total_count']}`",
+        f"- supporting evidence ready: `{role_contract['supporting_evidence_ready_count']}` / `{role_contract['supporting_evidence_total_count']}`",
         "",
         "Generate the submission kit after the real provider, human, native-permission, or native-client work exists. The generated JSON drafts remain `template_only: true` until an operator edits them with real aggregate artifact references and matching SHA-256 digests. The prefill command only inserts local artifact SHA-256 digests; it does not make a draft count as evidence.",
         "",
+        "| Role | Copy to artifact_refs | Ready | Meaning |",
+        "| --- | --- | --- | --- |",
+    ]
+    for role in role_contract.get("roles", []):
+        if role.get("role") == "submission-ref":
+            ready = f"{role_contract['submission_ref_ready_count']} / {role_contract['submission_ref_total_count']}"
+        else:
+            ready = (
+                f"{role_contract['supporting_evidence_ready_count']} / "
+                f"{role_contract['supporting_evidence_total_count']}"
+            )
+        lines.append(
+            f"| `{role['role']}` | `{str(role['copy_to_artifact_refs']).lower()}` | `{ready}` | "
+            f"{md_cell(role['description'])} |"
+        )
+    lines.extend(
+        [
+            "",
+            "`submission-ref` rows are the only checklist rows expected in `artifact_refs`; `supporting-evidence` rows stay available for audit context and reviewer traceability.",
+            "",
         "## Evidence Items",
         "",
         "| Evidence | Status | Intake | Review | Next action |",
         "| --- | --- | --- | --- | --- |",
-    ]
+        ]
+    )
     for item in report["items"]:
         next_action = str(item.get("next_action", "")).replace("|", "\\|")
         lines.append(
@@ -412,6 +486,8 @@ def render_markdown(report: dict[str, Any]) -> str:
                 f"- submission: `{item.get('submission_path') or 'missing'}`",
                 f"- prepare draft: `{item['commands']['prepare_submission']}`",
                 f"- prepare draft with artifact SHA prefill: `{item['commands']['prepare_prefilled_submission']}`",
+                f"- submission refs ready: `{item['submission_kit']['artifact_role_contract']['submission_ref_ready_count']}` / `{item['submission_kit']['artifact_role_contract']['submission_ref_total_count']}`",
+                f"- supporting evidence ready: `{item['submission_kit']['artifact_role_contract']['supporting_evidence_ready_count']}` / `{item['submission_kit']['artifact_role_contract']['supporting_evidence_total_count']}`",
                 "",
                 "### Prechecks",
                 "",
@@ -520,7 +596,39 @@ def render_html_source_checks(rows: list[dict[str, Any]]) -> str:
     )
 
 
+def render_html_artifact_roles(contract: dict[str, Any]) -> str:
+    cards = []
+    for role in contract.get("roles", []):
+        role_name = str(role.get("role", ""))
+        if role_name == "submission-ref":
+            ready = f"{contract.get('submission_ref_ready_count', 0)}/{contract.get('submission_ref_total_count', 0)} ready"
+        else:
+            ready = (
+                f"{contract.get('supporting_evidence_ready_count', 0)}/"
+                f"{contract.get('supporting_evidence_total_count', 0)} ready"
+            )
+        cards.append(
+            """
+        <article class="role-card">
+          <span>{label}</span>
+          <h3>{role}</h3>
+          <strong>{ready}</strong>
+          <p>{description}</p>
+          <small>copy to artifact_refs: <code>{copy}</code></small>
+        </article>
+        """.format(
+                label=html_text(role.get("label", "")),
+                role=html_text(role_name),
+                ready=html_text(ready),
+                description=html_text(role.get("description", "")),
+                copy=html_text(str(role.get("copy_to_artifact_refs") is True).lower()),
+            )
+        )
+    return "".join(cards)
+
+
 def render_html_item(item: dict[str, Any]) -> str:
+    role_contract = item.get("submission_kit", {}).get("artifact_role_contract", {})
     return f"""
       <article class="evidence-card {html_text(item.get('status', ''))}">
         <header>
@@ -539,6 +647,10 @@ def render_html_item(item: dict[str, Any]) -> str:
           <p>{html_text(item.get('next_action', ''))}</p>
           <code>{html_text(item.get('commands', {}).get('prepare_submission', ''))}</code>
           <code>{html_text(item.get('commands', {}).get('prepare_prefilled_submission', ''))}</code>
+        </section>
+        <section class="check-section">
+          <h4>Artifact Roles</h4>
+          <div class="role-grid compact">{render_html_artifact_roles(role_contract)}</div>
         </section>
         <section class="check-section">
           <h4>Prechecks</h4>
@@ -569,6 +681,7 @@ def render_html(report: dict[str, Any]) -> str:
         f"<article><span>{html_text(label)}</span><strong>{html_text(value)}</strong></article>"
         for label, value in stats
     )
+    role_contract = report["submissions"]["artifact_role_contract"]
     item_cards = "".join(render_html_item(item) for item in report.get("items", []))
     html = f"""<!doctype html>
 <html lang="en">
@@ -604,6 +717,12 @@ def render_html(report: dict[str, Any]) -> str:
     .commands {{ list-style:none; padding:0; margin:0; display:grid; gap:10px; }}
     .commands li {{ padding:12px; background:var(--soft); border-radius:8px; }}
     .commands span {{ display:block; color:var(--ink); font-weight:700; margin-bottom:4px; }}
+    .role-grid {{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px; margin-top:16px; }}
+    .role-grid.compact {{ margin-top:0; }}
+    .role-card {{ border:1px solid var(--line); border-radius:8px; padding:14px; background:#fff; min-width:0; }}
+    .role-card span, .role-card small {{ color:var(--muted); }}
+    .role-card strong {{ display:block; color:var(--ink); font-size:22px; margin:4px 0 6px; overflow-wrap:anywhere; }}
+    .role-card p {{ margin:0 0 8px; }}
     .evidence-grid {{ display:grid; gap:18px; }}
     .evidence-card {{ padding:20px; min-width:0; }}
     .evidence-card.blocked {{ border-left:4px solid var(--block); }}
@@ -621,7 +740,7 @@ def render_html(report: dict[str, Any]) -> str:
     .check-section {{ margin-top:16px; }}
     .notice {{ background:var(--soft); border-left:4px solid var(--ink); padding:16px; border-radius:8px; }}
     li {{ overflow-wrap:anywhere; }}
-    @media (max-width:820px) {{ .stats, .two-col, .check-grid {{ grid-template-columns:1fr; }} h1 {{ font-size:38px; }} .topbar-inner {{ align-items:flex-start; flex-direction:column; }} }}
+    @media (max-width:820px) {{ .stats, .two-col, .check-grid, .role-grid {{ grid-template-columns:1fr; }} h1 {{ font-size:38px; }} .topbar-inner {{ align-items:flex-start; flex-direction:column; }} }}
   </style>
 </head>
 <body>
@@ -643,6 +762,8 @@ def render_html(report: dict[str, Any]) -> str:
           <li>artifact prefill counts as evidence: <code>{html_text(str(report['submissions']['artifact_prefill_counts_as_evidence']).lower())}</code></li>
           <li>preflight accepts evidence: <code>{html_text(str(report['summary']['preflight_counts_as_evidence']).lower())}</code></li>
         </ul>
+        <div class="role-grid">{render_html_artifact_roles(role_contract)}</div>
+        <p class="muted"><code>submission-ref</code> rows are the paths expected in <code>artifact_refs</code>; <code>supporting-evidence</code> rows stay available for audit context.</p>
       </article>
       <aside class="panel"><h2>Commands</h2><ul class="commands">{render_html_commands(report['submissions']['commands'])}</ul></aside>
     </section>

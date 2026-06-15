@@ -145,6 +145,30 @@
         "output_dir": "evidence/world_class/submissions",
         "draft_path": "evidence/world_class/submissions/provider-holdout.json",
         "template_path": "evidence/world_class/templates/provider-holdout.intake.json",
+        "artifact_role_contract": {
+          "schema_version": "1.0",
+          "role_source": "world-class-submission-kit",
+          "counts_as_evidence": false,
+          "artifact_prefill_counts_as_evidence": false,
+          "submission_ref_total_count": 1,
+          "submission_ref_ready_count": 1,
+          "supporting_evidence_total_count": 6,
+          "supporting_evidence_ready_count": 6,
+          "roles": [
+            {
+              "role": "submission-ref",
+              "label": "Submission refs",
+              "copy_to_artifact_refs": true,
+              "description": "Rows marked submission-ref are the aggregate paths expected in artifact_refs."
+            },
+            {
+              "role": "supporting-evidence",
+              "label": "Supporting evidence",
+              "copy_to_artifact_refs": false,
+              "description": "Supporting-evidence rows help reviewers audit the packet but do not all need to be copied into artifact_refs."
+            }
+          ]
+        },
         "drafts_count_as_evidence": false,
         "artifact_prefill_counts_as_evidence": false
       },
@@ -273,6 +297,30 @@
         "output_dir": "evidence/world_class/submissions",
         "draft_path": "evidence/world_class/submissions/human-adjudication.json",
         "template_path": "evidence/world_class/templates/human-adjudication.intake.json",
+        "artifact_role_contract": {
+          "schema_version": "1.0",
+          "role_source": "world-class-submission-kit",
+          "counts_as_evidence": false,
+          "artifact_prefill_counts_as_evidence": false,
+          "submission_ref_total_count": 2,
+          "submission_ref_ready_count": 2,
+          "supporting_evidence_total_count": 8,
+          "supporting_evidence_ready_count": 8,
+          "roles": [
+            {
+              "role": "submission-ref",
+              "label": "Submission refs",
+              "copy_to_artifact_refs": true,
+              "description": "Rows marked submission-ref are the aggregate paths expected in artifact_refs."
+            },
+            {
+              "role": "supporting-evidence",
+              "label": "Supporting evidence",
+              "copy_to_artifact_refs": false,
+              "description": "Supporting-evidence rows help reviewers audit the packet but do not all need to be copied into artifact_refs."
+            }
+          ]
+        },
         "drafts_count_as_evidence": false,
         "artifact_prefill_counts_as_evidence": false
       },
@@ -384,6 +432,30 @@
         "output_dir": "evidence/world_class/submissions",
         "draft_path": "evidence/world_class/submissions/native-permission-enforcement.json",
         "template_path": "evidence/world_class/templates/native-permission-enforcement.intake.json",
+        "artifact_role_contract": {
+          "schema_version": "1.0",
+          "role_source": "world-class-submission-kit",
+          "counts_as_evidence": false,
+          "artifact_prefill_counts_as_evidence": false,
+          "submission_ref_total_count": 2,
+          "submission_ref_ready_count": 2,
+          "supporting_evidence_total_count": 11,
+          "supporting_evidence_ready_count": 11,
+          "roles": [
+            {
+              "role": "submission-ref",
+              "label": "Submission refs",
+              "copy_to_artifact_refs": true,
+              "description": "Rows marked submission-ref are the aggregate paths expected in artifact_refs."
+            },
+            {
+              "role": "supporting-evidence",
+              "label": "Supporting evidence",
+              "copy_to_artifact_refs": false,
+              "description": "Supporting-evidence rows help reviewers audit the packet but do not all need to be copied into artifact_refs."
+            }
+          ]
+        },
         "drafts_count_as_evidence": false,
         "artifact_prefill_counts_as_evidence": false
       },
@@ -494,6 +566,30 @@
         "output_dir": "evidence/world_class/submissions",
         "draft_path": "evidence/world_class/submissions/native-client-telemetry.json",
         "template_path": "evidence/world_class/templates/native-client-telemetry.intake.json",
+        "artifact_role_contract": {
+          "schema_version": "1.0",
+          "role_source": "world-class-submission-kit",
+          "counts_as_evidence": false,
+          "artifact_prefill_counts_as_evidence": false,
+          "submission_ref_total_count": 2,
+          "submission_ref_ready_count": 2,
+          "supporting_evidence_total_count": 6,
+          "supporting_evidence_ready_count": 6,
+          "roles": [
+            {
+              "role": "submission-ref",
+              "label": "Submission refs",
+              "copy_to_artifact_refs": true,
+              "description": "Rows marked submission-ref are the aggregate paths expected in artifact_refs."
+            },
+            {
+              "role": "supporting-evidence",
+              "label": "Supporting evidence",
+              "copy_to_artifact_refs": false,
+              "description": "Supporting-evidence rows help reviewers audit the packet but do not all need to be copied into artifact_refs."
+            }
+          ]
+        },
         "drafts_count_as_evidence": false,
         "artifact_prefill_counts_as_evidence": false
       },
@@ -823,7 +919,31 @@
     "submission_kit_prefill_command": "python3 scripts/yao.py world-class-submission-kit . --output-dir evidence/world_class/submissions --prefill-artifacts",
     "preflight_counts_submission_as_completion": false,
     "drafts_count_as_evidence": false,
-    "artifact_prefill_counts_as_evidence": false
+    "artifact_prefill_counts_as_evidence": false,
+    "artifact_role_contract": {
+      "schema_version": "1.0",
+      "role_source": "world-class-submission-kit",
+      "counts_as_evidence": false,
+      "artifact_prefill_counts_as_evidence": false,
+      "submission_ref_total_count": 7,
+      "submission_ref_ready_count": 7,
+      "supporting_evidence_total_count": 31,
+      "supporting_evidence_ready_count": 31,
+      "roles": [
+        {
+          "role": "submission-ref",
+          "label": "Submission refs",
+          "copy_to_artifact_refs": true,
+          "description": "Rows marked submission-ref are the aggregate paths expected in artifact_refs."
+        },
+        {
+          "role": "supporting-evidence",
+          "label": "Supporting evidence",
+          "copy_to_artifact_refs": false,
+          "description": "Supporting-evidence rows help reviewers audit the packet but do not all need to be copied into artifact_refs."
+        }
+      ]
+    }
   },
   "source_reports": {
     "ledger": "reports/world_class_evidence_ledger.json",

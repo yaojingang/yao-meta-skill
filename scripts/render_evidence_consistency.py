@@ -557,6 +557,16 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             if isinstance(preflight_submissions.get("commands", {}), dict)
             else {}
         )
+        preflight_role_contract = (
+            preflight_submissions.get("artifact_role_contract", {})
+            if isinstance(preflight_submissions.get("artifact_role_contract", {}), dict)
+            else {}
+        )
+        preflight_roles = {
+            str(item.get("role", "")): item
+            for item in preflight_role_contract.get("roles", [])
+            if isinstance(item, dict)
+        }
         default_submissions_dir = "evidence/world_class/submissions"
         expected_preflight_handoff = {
             "directory": default_submissions_dir,
@@ -574,6 +584,15 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             "refresh_ledger": f"python3 scripts/yao.py world-class-ledger . --submissions-dir {default_submissions_dir}",
             "guard_claim": "python3 scripts/yao.py world-class-claim-guard .",
             "artifact_prefill_counts_as_evidence": False,
+            "artifact_role_source": "world-class-submission-kit",
+            "artifact_role_counts_as_evidence": False,
+            "artifact_role_prefill_counts_as_evidence": False,
+            "submission_ref_role_present": True,
+            "supporting_evidence_role_present": True,
+            "submission_ref_copy_to_artifact_refs": True,
+            "supporting_evidence_copy_to_artifact_refs": False,
+            "submission_ref_total_present": True,
+            "supporting_evidence_total_present": True,
         }
         actual_preflight_handoff = {
             "directory": preflight_submissions.get("directory"),
@@ -594,6 +613,24 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             "artifact_prefill_counts_as_evidence": preflight_submissions.get(
                 "artifact_prefill_counts_as_evidence"
             ),
+            "artifact_role_source": preflight_role_contract.get("role_source"),
+            "artifact_role_counts_as_evidence": preflight_role_contract.get("counts_as_evidence"),
+            "artifact_role_prefill_counts_as_evidence": preflight_role_contract.get(
+                "artifact_prefill_counts_as_evidence"
+            ),
+            "submission_ref_role_present": "submission-ref" in preflight_roles,
+            "supporting_evidence_role_present": "supporting-evidence" in preflight_roles,
+            "submission_ref_copy_to_artifact_refs": preflight_roles.get("submission-ref", {}).get(
+                "copy_to_artifact_refs"
+            ),
+            "supporting_evidence_copy_to_artifact_refs": preflight_roles.get("supporting-evidence", {}).get(
+                "copy_to_artifact_refs"
+            ),
+            "submission_ref_total_present": int(preflight_role_contract.get("submission_ref_total_count", 0)) > 0,
+            "supporting_evidence_total_present": int(
+                preflight_role_contract.get("supporting_evidence_total_count", 0)
+            )
+            > 0,
         }
         compare_values(
             checks,

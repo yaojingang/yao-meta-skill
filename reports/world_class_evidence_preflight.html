@@ -32,6 +32,12 @@
     .commands { list-style:none; padding:0; margin:0; display:grid; gap:10px; }
     .commands li { padding:12px; background:var(--soft); border-radius:8px; }
     .commands span { display:block; color:var(--ink); font-weight:700; margin-bottom:4px; }
+    .role-grid { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px; margin-top:16px; }
+    .role-grid.compact { margin-top:0; }
+    .role-card { border:1px solid var(--line); border-radius:8px; padding:14px; background:#fff; min-width:0; }
+    .role-card span, .role-card small { color:var(--muted); }
+    .role-card strong { display:block; color:var(--ink); font-size:22px; margin:4px 0 6px; overflow-wrap:anywhere; }
+    .role-card p { margin:0 0 8px; }
     .evidence-grid { display:grid; gap:18px; }
     .evidence-card { padding:20px; min-width:0; }
     .evidence-card.blocked { border-left:4px solid var(--block); }
@@ -49,7 +55,7 @@
     .check-section { margin-top:16px; }
     .notice { background:var(--soft); border-left:4px solid var(--ink); padding:16px; border-radius:8px; }
     li { overflow-wrap:anywhere; }
-    @media (max-width:820px) { .stats, .two-col, .check-grid { grid-template-columns:1fr; } h1 { font-size:38px; } .topbar-inner { align-items:flex-start; flex-direction:column; } }
+    @media (max-width:820px) { .stats, .two-col, .check-grid, .role-grid { grid-template-columns:1fr; } h1 { font-size:38px; } .topbar-inner { align-items:flex-start; flex-direction:column; } }
   </style>
 </head>
 <body>
@@ -71,6 +77,24 @@
           <li>artifact prefill counts as evidence: <code>false</code></li>
           <li>preflight accepts evidence: <code>false</code></li>
         </ul>
+        <div class="role-grid">
+        <article class="role-card">
+          <span>Submission refs</span>
+          <h3>submission-ref</h3>
+          <strong>7/7 ready</strong>
+          <p>Rows marked submission-ref are the aggregate paths expected in artifact_refs.</p>
+          <small>copy to artifact_refs: <code>true</code></small>
+        </article>
+
+        <article class="role-card">
+          <span>Supporting evidence</span>
+          <h3>supporting-evidence</h3>
+          <strong>31/31 ready</strong>
+          <p>Supporting-evidence rows help reviewers audit the packet but do not all need to be copied into artifact_refs.</p>
+          <small>copy to artifact_refs: <code>false</code></small>
+        </article>
+        </div>
+        <p class="muted"><code>submission-ref</code> rows are the paths expected in <code>artifact_refs</code>; <code>supporting-evidence</code> rows stay available for audit context.</p>
       </article>
       <aside class="panel"><h2>Commands</h2><ul class="commands"><li><span>prepare submission</span><code>python3 scripts/yao.py world-class-submission-kit . --output-dir evidence/world_class/submissions</code></li><li><span>prepare prefilled submission</span><code>python3 scripts/yao.py world-class-submission-kit . --output-dir evidence/world_class/submissions --prefill-artifacts</code></li><li><span>validate intake</span><code>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</code></li><li><span>submission review</span><code>python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions</code></li><li><span>refresh ledger</span><code>python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions</code></li><li><span>guard claim</span><code>python3 scripts/yao.py world-class-claim-guard .</code></li></ul></aside>
     </section>
@@ -92,6 +116,26 @@
           <p>Set OPENAI_API_KEY in the operator shell; never commit or print the value.</p>
           <code>python3 scripts/yao.py world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions</code>
           <code>python3 scripts/yao.py world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions --prefill-artifacts</code>
+        </section>
+        <section class="check-section">
+          <h4>Artifact Roles</h4>
+          <div class="role-grid compact">
+        <article class="role-card">
+          <span>Submission refs</span>
+          <h3>submission-ref</h3>
+          <strong>1/1 ready</strong>
+          <p>Rows marked submission-ref are the aggregate paths expected in artifact_refs.</p>
+          <small>copy to artifact_refs: <code>true</code></small>
+        </article>
+
+        <article class="role-card">
+          <span>Supporting evidence</span>
+          <h3>supporting-evidence</h3>
+          <strong>6/6 ready</strong>
+          <p>Supporting-evidence rows help reviewers audit the packet but do not all need to be copied into artifact_refs.</p>
+          <small>copy to artifact_refs: <code>false</code></small>
+        </article>
+        </div>
         </section>
         <section class="check-section">
           <h4>Prechecks</h4>
@@ -211,6 +255,26 @@
           <p>Assign a real reviewer identity before claiming human adjudication.</p>
           <code>python3 scripts/yao.py world-class-submission-kit . --evidence-key human-adjudication --output-dir evidence/world_class/submissions</code>
           <code>python3 scripts/yao.py world-class-submission-kit . --evidence-key human-adjudication --output-dir evidence/world_class/submissions --prefill-artifacts</code>
+        </section>
+        <section class="check-section">
+          <h4>Artifact Roles</h4>
+          <div class="role-grid compact">
+        <article class="role-card">
+          <span>Submission refs</span>
+          <h3>submission-ref</h3>
+          <strong>2/2 ready</strong>
+          <p>Rows marked submission-ref are the aggregate paths expected in artifact_refs.</p>
+          <small>copy to artifact_refs: <code>true</code></small>
+        </article>
+
+        <article class="role-card">
+          <span>Supporting evidence</span>
+          <h3>supporting-evidence</h3>
+          <strong>8/8 ready</strong>
+          <p>Supporting-evidence rows help reviewers audit the packet but do not all need to be copied into artifact_refs.</p>
+          <small>copy to artifact_refs: <code>false</code></small>
+        </article>
+        </div>
         </section>
         <section class="check-section">
           <h4>Prechecks</h4>
@@ -345,6 +409,26 @@
           <code>python3 scripts/yao.py world-class-submission-kit . --evidence-key native-permission-enforcement --output-dir evidence/world_class/submissions --prefill-artifacts</code>
         </section>
         <section class="check-section">
+          <h4>Artifact Roles</h4>
+          <div class="role-grid compact">
+        <article class="role-card">
+          <span>Submission refs</span>
+          <h3>submission-ref</h3>
+          <strong>2/2 ready</strong>
+          <p>Rows marked submission-ref are the aggregate paths expected in artifact_refs.</p>
+          <small>copy to artifact_refs: <code>true</code></small>
+        </article>
+
+        <article class="role-card">
+          <span>Supporting evidence</span>
+          <h3>supporting-evidence</h3>
+          <strong>11/11 ready</strong>
+          <p>Supporting-evidence rows help reviewers audit the packet but do not all need to be copied into artifact_refs.</p>
+          <small>copy to artifact_refs: <code>false</code></small>
+        </article>
+        </div>
+        </section>
+        <section class="check-section">
           <h4>Prechecks</h4>
           <div class="check-grid">
         <article class="check-row pass">
@@ -450,6 +534,26 @@
           <p>Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events.</p>
           <code>python3 scripts/yao.py world-class-submission-kit . --evidence-key native-client-telemetry --output-dir evidence/world_class/submissions</code>
           <code>python3 scripts/yao.py world-class-submission-kit . --evidence-key native-client-telemetry --output-dir evidence/world_class/submissions --prefill-artifacts</code>
+        </section>
+        <section class="check-section">
+          <h4>Artifact Roles</h4>
+          <div class="role-grid compact">
+        <article class="role-card">
+          <span>Submission refs</span>
+          <h3>submission-ref</h3>
+          <strong>2/2 ready</strong>
+          <p>Rows marked submission-ref are the aggregate paths expected in artifact_refs.</p>
+          <small>copy to artifact_refs: <code>true</code></small>
+        </article>
+
+        <article class="role-card">
+          <span>Supporting evidence</span>
+          <h3>supporting-evidence</h3>
+          <strong>6/6 ready</strong>
+          <p>Supporting-evidence rows help reviewers audit the packet but do not all need to be copied into artifact_refs.</p>
+          <small>copy to artifact_refs: <code>false</code></small>
+        </article>
+        </div>
         </section>
         <section class="check-section">
           <h4>Prechecks</h4>
