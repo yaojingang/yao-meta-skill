@@ -510,6 +510,14 @@ def main() -> None:
         "reports/skill_os2_audit.md",
     }, world_class_action
     assert all(item["exists"] for item in world_class_action["source_refs"]), world_class_action
+    assert all("matched_pattern" in item for item in world_class_action["source_refs"]), world_class_action
+    assert all("excerpt" in item for item in world_class_action["source_refs"]), world_class_action
+    assert any(
+        item["path"] == "reports/world_class_evidence_ledger.md"
+        and item["matched_pattern"] == "# World-Class Evidence Ledger"
+        and "World-Class Evidence Ledger" in item["excerpt"]
+        for item in world_class_action["source_refs"]
+    ), world_class_action
     assert "world-class-runbook" in world_class_action["verification_command"], world_class_action
     assert "--submissions-dir evidence/world_class/submissions" in world_class_action["verification_command"], world_class_action
     assert "reports/world_class_operator_runbook.html" in world_class_action["source_fix"], world_class_action
@@ -621,13 +629,24 @@ def main() -> None:
     }, synthetic_actions
     assert all(item["exists"] for item in synthetic_actions[0]["source_refs"]), synthetic_actions
     assert all(isinstance(item["line"], int) and item["line"] >= 1 for item in synthetic_actions[0]["source_refs"]), synthetic_actions
+    assert all("excerpt" in item for item in synthetic_actions[0]["source_refs"]), synthetic_actions
+    assert any(
+        item["path"] == "reports/output_review_kit.html"
+        and item["matched_pattern"] == "Output Review Kit"
+        and "Output Review Kit" in item["excerpt"]
+        for item in synthetic_actions[0]["source_refs"]
+    ), synthetic_actions
     synthetic_json = json.dumps(synthetic_actions, ensure_ascii=False)
     assert str(ROOT) not in synthetic_json, synthetic_json
     synthetic_html = review_studio.render_review_actions(synthetic_actions)
     assert "source-ref-list" in synthetic_html, synthetic_html
     assert "evals/output/cases.jsonl" in synthetic_html, synthetic_html
+    assert "<blockquote>" in synthetic_html, synthetic_html
+    assert "pattern: Output Review Kit" in synthetic_html, synthetic_html
     html = output_html.read_text(encoding="utf-8")
     assert "Review Studio 2.0" in html, html[:400]
+    assert "<blockquote>" in html, html
+    assert "pattern: # World-Class Evidence Ledger" in html, html
     assert "审查闸门" in html, html[:1200]
     assert "修复动作" in html, html[:3000]
     assert "补足 output eval 覆盖、execution evidence、blind A/B 和 reviewer adjudication。" in html, html[:9000]

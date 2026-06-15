@@ -65,7 +65,7 @@ Each action must include:
 - `evidence`
 - `verification_command`
 
-`source_refs` must be structured entries with relative `path`, human label, kind, existence flag, best-effort line number, and relative link when the file exists. They should point to the smallest useful report or source file, not just a broad directory.
+`source_refs` must be structured entries with relative `path`, human label, kind, existence flag, best-effort line number, matched pattern, short source excerpt, and relative link when the file exists. They should point to the smallest useful report or source file, not just a broad directory. The HTML page should render the excerpt next to the link so reviewers can understand why a line anchor matters before opening the full artifact.
 
 The HTML page should render these actions before the detailed supporting sections so a reviewer can move directly from warning to fix. Action entries do not change gate count or score; they make the current decision more operational.
 

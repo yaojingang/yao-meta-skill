@@ -16,7 +16,7 @@
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
 - Package hash files: `211`
-- Package SHA256: `8db4f8cfb8963484c2afb548453c44adca024b726e3f8cbd2ce1dcd4411cadfa`
+- Package SHA256: `f7b3e6749356356d3cc8b8e36bdf46a9eeedd6615f6831e033540d5bdda2b2bc`
 
 ## Failures
 

@@ -681,6 +681,15 @@ def review_studio_css() -> str:
       font-size: 12px;
       color: var(--muted);
     }
+    .source-ref-list blockquote {
+      margin: 2px 0 0;
+      padding: 7px 9px;
+      border-left: 3px solid var(--line);
+      background: var(--soft);
+      color: var(--muted);
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
     code {
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       font-size: 13px;

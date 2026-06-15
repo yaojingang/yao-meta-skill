@@ -15,20 +15,36 @@ def link_from(output_html: Path, target: Path) -> str:
     return os.path.relpath(target.resolve(), output_html.parent.resolve())
 
 
-def find_line(path: Path, patterns: list[str] | None = None) -> int | None:
+def compact_excerpt(text: str, limit: int = 180) -> str:
+    normalized = " ".join(text.strip().split())
+    if len(normalized) <= limit:
+        return normalized
+    return normalized[: limit - 1].rstrip() + "…"
+
+
+def find_line_anchor(path: Path, patterns: list[str] | None = None) -> dict[str, Any]:
     if not path.exists():
-        return None
+        return {"line": None, "matched_pattern": "", "excerpt": ""}
     if not patterns:
-        return 1
+        return {"line": 1, "matched_pattern": "", "excerpt": ""}
     try:
         lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
     except OSError:
-        return 1
+        return {"line": 1, "matched_pattern": "", "excerpt": ""}
     for pattern in patterns:
         for index, line in enumerate(lines, start=1):
             if pattern in line:
-                return index
-    return 1
+                return {
+                    "line": index,
+                    "matched_pattern": pattern,
+                    "excerpt": compact_excerpt(line),
+                }
+    first_line = compact_excerpt(lines[0]) if lines else ""
+    return {"line": 1, "matched_pattern": "", "excerpt": first_line}
+
+
+def find_line(path: Path, patterns: list[str] | None = None) -> int | None:
+    return find_line_anchor(path, patterns).get("line")
 
 
 def source_refs(
@@ -43,13 +59,15 @@ def source_refs(
             continue
         path = skill_dir / rel_path
         exists = path.exists()
-        line = find_line(path, spec.get("patterns", []))
+        anchor = find_line_anchor(path, spec.get("patterns", []))
         refs.append(
             {
                 "path": rel_path,
                 "label": str(spec.get("label", rel_path)),
                 "kind": str(spec.get("kind", "source")),
-                "line": line,
+                "line": anchor.get("line"),
+                "matched_pattern": anchor.get("matched_pattern", ""),
+                "excerpt": anchor.get("excerpt", ""),
                 "exists": exists,
                 "link": link_from(output_html, path) if exists else "",
             }
@@ -307,10 +325,18 @@ def render_action_source_refs(refs: list[dict[str, Any]]) -> str:
             path_html = f"<a href='{html.escape(ref['link'])}'>{html.escape(label)}</a>"
         else:
             path_html = f"<span>{html.escape(label)} · missing</span>"
+        pattern = str(ref.get("matched_pattern", "")).strip()
+        excerpt = str(ref.get("excerpt", "")).strip()
+        anchor_bits = [html.escape(str(ref.get("label", "source"))), html.escape(str(ref.get("kind", "source")))]
+        if pattern:
+            anchor_bits.append("pattern: " + html.escape(pattern))
+        meta_html = " · ".join(anchor_bits)
+        excerpt_html = f"<blockquote>{html.escape(excerpt)}</blockquote>" if excerpt else ""
         items.append(
             "<li>"
             f"{path_html}"
-            f"<small>{html.escape(ref.get('label', 'source'))} · {html.escape(ref.get('kind', 'source'))}</small>"
+            f"<small>{meta_html}</small>"
+            f"{excerpt_html}"
             "</li>"
         )
     return "<ul class='source-ref-list'>" + "".join(items) + "</ul>"

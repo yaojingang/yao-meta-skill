@@ -33,8 +33,8 @@ No file-size hotspots found.
 | `scripts/yao_cli_parser.py` | `870` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/render_evidence_consistency.py` | `859` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `tests/verify_world_class_evidence_intake.py` | `842` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
+| `tests/verify_review_studio.py` | `803` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
 | `scripts/skill_report_model.py` | `800` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
-| `tests/verify_review_studio.py` | `784` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
 | `scripts/build_skill_atlas.py` | `730` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/compile_skill.py` | `723` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/optimize_description.py` | `723` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
@@ -47,14 +47,14 @@ No file-size hotspots found.
 | `scripts/yao_cli_parser.py` | `870` | `internal-module` | `pass` |
 | `scripts/render_evidence_consistency.py` | `859` | `cli-script` | `pass` |
 | `tests/verify_world_class_evidence_intake.py` | `842` | `test` | `pass` |
+| `tests/verify_review_studio.py` | `803` | `test` | `pass` |
 | `scripts/skill_report_model.py` | `800` | `internal-module` | `pass` |
-| `tests/verify_review_studio.py` | `784` | `test` | `pass` |
 | `scripts/build_skill_atlas.py` | `730` | `cli-script` | `pass` |
 | `scripts/compile_skill.py` | `723` | `cli-script` | `pass` |
 | `scripts/optimize_description.py` | `723` | `cli-script` | `pass` |
 | `scripts/trust_check.py` | `714` | `internal-module` | `pass` |
 | `scripts/apply_adaptation.py` | `706` | `cli-script` | `pass` |
-| `scripts/review_studio_layout.py` | `694` | `internal-module` | `pass` |
+| `scripts/review_studio_layout.py` | `703` | `internal-module` | `pass` |
 
 ## Release Rule
 

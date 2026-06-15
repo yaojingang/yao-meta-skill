@@ -51,18 +51,18 @@
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
+      "path": "tests/verify_review_studio.py",
+      "lines": 803,
+      "kind": "test",
+      "severity": "pass",
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
       "path": "scripts/skill_report_model.py",
       "lines": 800,
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
-      "path": "tests/verify_review_studio.py",
-      "lines": 784,
-      "kind": "test",
-      "severity": "pass",
-      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
       "path": "scripts/build_skill_atlas.py",
@@ -101,7 +101,7 @@
     },
     {
       "path": "scripts/review_studio_layout.py",
-      "lines": 694,
+      "lines": 703,
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
@@ -137,18 +137,18 @@
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
+      "path": "tests/verify_review_studio.py",
+      "lines": 803,
+      "kind": "test",
+      "severity": "pass",
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
       "path": "scripts/skill_report_model.py",
       "lines": 800,
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
-      "path": "tests/verify_review_studio.py",
-      "lines": 784,
-      "kind": "test",
-      "severity": "pass",
-      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
       "path": "scripts/build_skill_atlas.py",

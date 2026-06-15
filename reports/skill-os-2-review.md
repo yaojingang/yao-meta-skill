@@ -14,6 +14,7 @@ Yao Meta Skill is no longer only a Meta Skill factory. The current working tree 
 - Skill Atlas v0 for portfolio catalog, route overlap, stale ownership, dependency signals, aggregate drift signals, and no-route opportunities.
 - Bilingual Skill Overview v2 that includes these evidence surfaces.
 - Skill Overview Asset Split v0 so long report CSS and JavaScript live in `assets/skill-overview.css` and `assets/skill-overview.js`, while the Python layout module keeps the generated report single-file by inlining those assets at render time.
+- Review Studio Source Anchor Excerpts v0 so every non-pass action source ref carries a matched pattern and short line excerpt, letting reviewers understand the anchor before opening the full artifact.
 - Skill OS 2.0 Audit v0 for requirement-by-requirement evidence mapping, with explicit separation between local evidence, human-required review, and external-required provider/client integrations.
 - World-Class Evidence Plan v0 that turns the remaining provider holdout, human adjudication, native permission enforcement, and native client telemetry gaps into executable runbooks with success checks and privacy contracts.
 - World-Class Evidence Ledger v0 that records current acceptance state, provenance requirements, privacy contracts, and anti-overclaim guards for those remaining gaps.
