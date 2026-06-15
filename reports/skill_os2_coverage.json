@@ -11,9 +11,9 @@
     "warn_count": 0,
     "missing_count": 0,
     "extension_track_count": 2,
-    "extension_partial_count": 2,
+    "extension_partial_count": 1,
     "extension_planned_count": 0,
-    "extension_covered_count": 0,
+    "extension_covered_count": 1,
     "adaptive_extension_ready": false,
     "local_blueprint_ready": true,
     "public_world_class_ready": false,
@@ -26,7 +26,8 @@
     "missing": 0
   },
   "extension_status_counts": {
-    "partial": 2
+    "covered": 1,
+    "partial": 1
   },
   "modules": [
     {
@@ -130,7 +131,7 @@
       "label": "Trust Security",
       "status": "pass",
       "objective": "Scripts, dependencies, permissions, secrets, and package hash are reviewable for team distribution.",
-      "current": "105 scripts; secrets 0; help failures 0",
+      "current": "106 scripts; secrets 0; help failures 0",
       "command": "python3 scripts/yao.py trust .",
       "test": "python3 tests/verify_trust_check.py",
       "evidence": [
@@ -612,9 +613,9 @@
     {
       "key": "skill-interpretation-report",
       "label": "Skill Interpretation Report",
-      "status": "partial",
+      "status": "covered",
       "objective": "User-facing deep interpretation report explains use cases, triggers, inputs, outputs, workflow, principles, boundaries, quality gates, examples, and next iterations.",
-      "current": "Skill Overview v2 already covers much of the explainer experience, but dedicated skill-interpretation JSON/MD/HTML artifacts are not first-class yet.",
+      "current": "Skill Overview v2 is canonical and mirrored as first-class skill-interpretation HTML/JSON with schema and tests.",
       "target": "Either keep skill-overview as the canonical interpretation report with an explicit contract, or split a dedicated reports/skill-interpretation.* renderer and tests.",
       "evidence": [
         {
@@ -631,18 +632,18 @@
         },
         {
           "path": "scripts/render_skill_interpretation.py",
-          "exists": false
+          "exists": true
         },
         {
           "path": "schemas/skill-interpretation.schema.json",
-          "exists": false
+          "exists": true
         },
         {
           "path": "tests/verify_skill_interpretation.py",
-          "exists": false
+          "exists": true
         }
       ],
-      "next_action": "Decide whether overview v2 is the canonical interpretation surface; if not, add a dedicated schema, renderer, and CJK/path-safety tests."
+      "next_action": "Keep overview and interpretation contracts in lockstep when report sections, metrics, or layout semantics change."
     },
     {
       "key": "adaptive-self-iteration",
@@ -710,7 +711,7 @@
   ],
   "next_highest_leverage": [
     "Close the four world-class evidence ledger entries with accepted human or external evidence.",
-    "Clarify whether Skill Overview v2 is the canonical interpretation report or split a dedicated skill-interpretation renderer.",
+    "Keep the first-class skill interpretation report and Skill Overview v2 contract synchronized as the report model evolves.",
     "Start adaptive self-iteration as explicit-source, proposal-only, approval-gated work; do not scan private logs by default.",
     "Keep the blueprint coverage report in CI so 2.0 plan drift is visible."
   ],

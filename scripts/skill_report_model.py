@@ -544,6 +544,7 @@ def build_report_model(skill_dir: Path) -> dict:
         "reports/review_waivers.md",
         "reports/review_annotations.md",
         "reports/review-studio.html",
+        "reports/skill-interpretation.html",
         "reports/skill-overview.html",
     ]
     if (skill_dir / "reports" / "runtime_permission_probes.md").exists():

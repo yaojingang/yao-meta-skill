@@ -264,8 +264,11 @@ def command_quickstart(args: argparse.Namespace) -> int:
         sys.stderr.write("I will keep the underlying benchmark evidence in the reviewer reports and move ahead with this recommendation.\n")
     if payload.get("report_view", {}).get("html_report"):
         sys.stderr.write(f"Skill report: {payload['report_view']['html_report']}\n")
+    if payload.get("report_view", {}).get("interpretation_report"):
+        sys.stderr.write(f"Skill interpretation: {payload['report_view']['interpretation_report']}\n")
 
     next_steps = [
+        "Open reports/skill-interpretation.html to review the generated Skill interpretation report.",
         "Open reports/skill-overview.html to review the generated Skill audit report.",
         "Open reports/intent-dialogue.md and tighten the real job, outputs, and exclusions.",
         "Open reports/review-studio.html to inspect the Review Studio 2.0 gate view before release.",
@@ -303,6 +306,7 @@ def command_quickstart(args: argparse.Namespace) -> int:
                 "artifact_design_profile": payload.get("artifacts", {}).get("artifact_design_profile_md"),
                 "prompt_quality_profile": payload.get("artifacts", {}).get("prompt_quality_profile_md"),
                 "system_model": payload.get("artifacts", {}).get("system_model_md"),
+                "skill_interpretation": payload.get("artifacts", {}).get("skill_interpretation_html"),
                 "review_studio": payload.get("artifacts", {}).get("review_studio_html"),
                 "review_viewer": payload.get("artifacts", {}).get("review_viewer_html"),
             },

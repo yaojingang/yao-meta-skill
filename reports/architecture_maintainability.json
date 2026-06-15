@@ -4,58 +4,58 @@
   "generated_at": "2026-06-13",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 166,
-    "script_file_count": 105,
-    "test_file_count": 61,
+    "python_file_count": 168,
+    "script_file_count": 106,
+    "test_file_count": 62,
     "internal_module_count": 29,
-    "cli_script_count": 78,
+    "cli_script_count": 79,
     "command_handler_count": 34,
     "warn_line_threshold": 900,
     "block_line_threshold": 1500,
-    "largest_file_lines": 894,
+    "largest_file_lines": 886,
     "hotspot_count": 0,
     "blocker_count": 0,
     "decision": "pass"
   },
   "largest_files": [
     {
-      "path": "tests/verify_yao_cli.py",
-      "lines": 894,
-      "kind": "test",
-      "severity": "pass",
-      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
-    },
-    {
       "path": "scripts/yao.py",
-      "lines": 882,
+      "lines": 886,
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator."
     },
     {
+      "path": "tests/verify_yao_cli.py",
+      "lines": 886,
+      "kind": "test",
+      "severity": "pass",
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
       "path": "scripts/skill_report_layout.py",
-      "lines": 805,
+      "lines": 808,
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
       "path": "scripts/skill_report_model.py",
-      "lines": 800,
+      "lines": 801,
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
       "path": "scripts/yao_cli_parser.py",
-      "lines": 765,
+      "lines": 774,
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
       "path": "tests/verify_review_studio.py",
-      "lines": 749,
+      "lines": 751,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."

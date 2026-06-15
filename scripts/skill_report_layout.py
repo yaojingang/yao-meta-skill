@@ -387,7 +387,7 @@ def skill_overview_css() -> str:
     }
     .metrics-primary {
       display: grid;
-      grid-template-columns: minmax(420px, 1fr) minmax(360px, 0.88fr);
+      grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
       gap: 22px;
       align-items: start;
     }
@@ -455,7 +455,7 @@ def skill_overview_css() -> str:
       margin-top: 2px;
     }
     .metric-detail-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
       align-items: stretch;
     }
     .list, .compact-list, .step-list {
@@ -485,18 +485,20 @@ def skill_overview_css() -> str:
     }
     .metric-card {
       display: grid;
-      grid-template-columns: minmax(96px, 118px) minmax(0, 1fr);
-      gap: 18px;
+      grid-template-columns: 1fr;
+      gap: 14px;
       align-content: start;
       min-height: 0;
     }
     .metric-card-head {
-      display: grid;
-      align-content: start;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      justify-content: space-between;
     }
     .metric-card strong {
       display: block;
-      margin: 8px 0 10px;
+      margin: 0;
       color: var(--brand);
       font-family: var(--mono);
       font-size: 2rem;
@@ -507,6 +509,7 @@ def skill_overview_css() -> str:
     .metric-label {
       color: var(--muted);
       font-size: 13px;
+      line-height: 1.45;
     }
     .metric-card-body {
       min-width: 0;

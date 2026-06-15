@@ -248,6 +248,7 @@ def render_html(report: dict[str, Any]) -> str:
             "warn_count",
             "missing_count",
             "extension_track_count",
+            "extension_covered_count",
             "extension_partial_count",
             "extension_planned_count",
             "adaptive_extension_ready",

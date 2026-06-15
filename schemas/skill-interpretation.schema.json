@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yao.local/schemas/skill-interpretation.schema.json",
+  "title": "Yao Skill Interpretation Report",
+  "type": "object",
+  "required": [
+    "skill_summary",
+    "scorecard",
+    "capability_profile",
+    "principle_model",
+    "contract_boundary",
+    "quality_review",
+    "risk_governance",
+    "package_assets",
+    "iteration_roadmap",
+    "report_contract",
+    "interpretation_contract"
+  ],
+  "properties": {
+    "report_contract": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "report_kind",
+        "html_report",
+        "json_report",
+        "default_language",
+        "languages",
+        "layout",
+        "nav_labels"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "2.0"
+        },
+        "report_kind": {
+          "const": "skill-interpretation"
+        },
+        "html_report": {
+          "const": "reports/skill-interpretation.html"
+        },
+        "json_report": {
+          "const": "reports/skill-interpretation.json"
+        },
+        "default_language": {
+          "const": "zh-CN"
+        },
+        "languages": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "const": "zh-CN"
+            },
+            {
+              "const": "en"
+            }
+          ],
+          "minItems": 2
+        },
+        "layout": {
+          "const": "kami-white-audit-v2"
+        },
+        "nav_labels": {
+          "type": "array",
+          "minItems": 9,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "interpretation_contract": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "source_model",
+        "source_model_reused",
+        "overview_report",
+        "html_report",
+        "json_report",
+        "includes"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "2.0"
+        },
+        "source_model": {
+          "const": "skill-overview-v2"
+        },
+        "source_model_reused": {
+          "const": true
+        },
+        "overview_report": {
+          "const": "reports/skill-overview.html"
+        },
+        "html_report": {
+          "const": "reports/skill-interpretation.html"
+        },
+        "json_report": {
+          "const": "reports/skill-interpretation.json"
+        },
+        "includes": {
+          "type": "array",
+          "minItems": 10,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

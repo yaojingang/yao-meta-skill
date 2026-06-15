@@ -45,8 +45,9 @@ def main() -> None:
     assert summary["warn_count"] == 0, summary
     assert summary["missing_count"] == 0, summary
     assert summary["extension_track_count"] == 2, summary
-    assert summary["extension_partial_count"] == 2, summary
+    assert summary["extension_partial_count"] == 1, summary
     assert summary["extension_planned_count"] == 0, summary
+    assert summary["extension_covered_count"] == 1, summary
     assert summary["adaptive_extension_ready"] is False, summary
     assert summary["local_blueprint_ready"] is True, summary
     assert summary["public_world_class_ready"] is False, summary
@@ -87,10 +88,18 @@ def main() -> None:
     assert payload["source_blueprint"]["recommended_pr_count"] == 12, payload
     assert payload["source_blueprint"]["reference_extension_count"] == 2, payload
     extension_tracks = {item["key"]: item for item in payload["reference_extension_tracks"]}
-    assert extension_tracks["skill-interpretation-report"]["status"] == "partial", extension_tracks
+    assert extension_tracks["skill-interpretation-report"]["status"] == "covered", extension_tracks
     assert extension_tracks["adaptive-self-iteration"]["status"] == "partial", extension_tracks
     assert any(
         entry["path"] == "reports/skill-overview.html" and entry["exists"]
+        for entry in extension_tracks["skill-interpretation-report"]["evidence"]
+    ), extension_tracks["skill-interpretation-report"]
+    assert any(
+        entry["path"] == "scripts/render_skill_interpretation.py" and entry["exists"]
+        for entry in extension_tracks["skill-interpretation-report"]["evidence"]
+    ), extension_tracks["skill-interpretation-report"]
+    assert any(
+        entry["path"] == "schemas/skill-interpretation.schema.json" and entry["exists"]
         for entry in extension_tracks["skill-interpretation-report"]["evidence"]
     ), extension_tracks["skill-interpretation-report"]
     assert any(
@@ -102,11 +111,14 @@ def main() -> None:
         for entry in extension_tracks["adaptive-self-iteration"]["evidence"]
     ), extension_tracks["adaptive-self-iteration"]
     assert "Close the four world-class evidence ledger entries" in payload["next_highest_leverage"][0], payload
+    assert "skill interpretation report" in " ".join(payload["next_highest_leverage"]), payload
     assert "adaptive self-iteration" in " ".join(payload["next_highest_leverage"]), payload
     markdown = output_md.read_text(encoding="utf-8")
     assert "Skill OS 2.0 Blueprint Coverage" in markdown, markdown
     assert "local blueprint ready: `true`" in markdown, markdown
     assert "public world-class ready: `false`" in markdown, markdown
+    assert "extension covered: `1`" in markdown, markdown
+    assert "extension partial: `1`" in markdown, markdown
     assert "## Core Modules" in markdown, markdown
     assert "## Recommended PR Coverage" in markdown, markdown
     assert "## Reference Extension Tracks" in markdown, markdown

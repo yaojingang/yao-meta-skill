@@ -29,6 +29,7 @@ from yao_cli_report_commands import (
     command_review_viewer,
     command_skill_os2_audit,
     command_skill_os2_coverage,
+    command_skill_interpretation,
     command_skill_report,
     command_system_model,
     command_world_class_claim_guard,
@@ -184,6 +185,7 @@ def command_report(args: argparse.Namespace) -> int:
             run_script("render_skill_os2_coverage.py", [str(ROOT)]),
             run_script("render_benchmark_reproducibility.py", [str(ROOT)]),
             run_script("render_skill_overview.py", [str(ROOT)]),
+            run_script("render_skill_interpretation.py", [str(ROOT)]),
             run_script("render_review_viewer.py", [str(ROOT)]),
         ]
     )
@@ -224,6 +226,8 @@ def command_report(args: argparse.Namespace) -> int:
             "skill_os2_coverage": "reports/skill_os2_coverage.json",
             "benchmark_reproducibility": "reports/benchmark_reproducibility.json",
             "skill_overview": "reports/skill-overview.json",
+            "skill_interpretation": "reports/skill-interpretation.json",
+            "skill_interpretation_html": "reports/skill-interpretation.html",
             "review_viewer": "reports/review-viewer.json",
             "review_viewer_html": "reports/review-viewer.html",
         },

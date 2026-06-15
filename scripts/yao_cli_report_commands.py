@@ -41,6 +41,10 @@ def command_skill_report(args: argparse.Namespace) -> int:
     return render_skill_report_command(args, "render_skill_overview.py", markdown=False)
 
 
+def command_skill_interpretation(args: argparse.Namespace) -> int:
+    return render_skill_report_command(args, "render_skill_interpretation.py", markdown=False)
+
+
 def command_review_viewer(args: argparse.Namespace) -> int:
     return render_skill_report_command(args, "render_review_viewer.py", markdown=False)
 

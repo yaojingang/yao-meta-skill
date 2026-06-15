@@ -254,6 +254,9 @@ def render_html(summary: dict) -> str:
     output_execution_summary = output_execution.get("summary", {})
     output_review = summary.get("output_review_adjudication", {})
     output_review_summary = output_review.get("summary", {})
+    report_contract = summary.get("report_contract", {})
+    html_report_path = str(report_contract.get("html_report") or "reports/skill-overview.html")
+    open_report_message = f"创建完成后建议先打开 {html_report_path}，再继续扩展包体。"
     hero_meta = [
         (f"技能名称：{summary['name']}", f"Skill name: {summary['name']}"),
         (f"成熟度：{mode_zh(metadata.get('maturity_tier', 'scaffold'))}", f"Maturity: {metadata.get('maturity_tier', 'scaffold')}"),
@@ -340,7 +343,7 @@ def render_html(summary: dict) -> str:
         </div>
         <aside class="hero-card">
           <h3>{bi_span("核心判断", "Core reading")}</h3>
-          {render_list([skill.get("core_value", ""), skill.get("audience", ""), "创建完成后建议先打开 reports/skill-overview.html，再继续扩展包体。"])}
+          {render_list([skill.get("core_value", ""), skill.get("audience", ""), open_report_message])}
         </aside>
       </div>
       <div class="score-strip" aria-label="报告关键指标">{score_strip}</div>

@@ -163,6 +163,7 @@
       "scripts/render_review_studio.py",
       "scripts/render_review_viewer.py",
       "scripts/render_review_waivers.py",
+      "scripts/render_skill_interpretation.py",
       "scripts/render_skill_os2_audit.py",
       "scripts/render_skill_os2_coverage.py",
       "scripts/render_skill_overview.py",
@@ -189,8 +190,7 @@
       "scripts/run_conformance_suite.py",
       "scripts/run_description_optimization_suite.py",
       "scripts/run_eval_suite.py",
-      "scripts/run_output_eval.py",
-      "scripts/run_output_execution.py"
+      "scripts/run_output_eval.py"
     ],
     "assets": [
       "templates/basic_skill.md.j2",

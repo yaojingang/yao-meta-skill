@@ -79,7 +79,7 @@ def main() -> None:
     assert callable(yao_cli_module.command_review_studio)
     parser_help = yao_cli_module.build_parser().format_help()
     expected_help = (
-        "quickstart review-studio python-compat architecture-audit skill-os2-audit skill-os2-coverage "
+        "quickstart skill-interpretation review-studio python-compat architecture-audit skill-os2-audit skill-os2-coverage "
         "world-class-evidence world-class-ledger world-class-intake world-class-submission-kit "
         "world-class-submission-review world-class-runbook world-class-claim-guard "
         "benchmark-reproducibility output-review-kit adapt-scan adapt-propose "
@@ -92,35 +92,26 @@ def main() -> None:
     created = Path(init_result["payload"]["root"])
     assert (created / "SKILL.md").exists(), created
     assert (created / "README.md").exists(), created
-    assert (created / "reports" / "intent-dialogue.md").exists(), created
-    assert (created / "reports" / "intent-confidence.md").exists(), created
-    assert (created / "reports" / "skill-overview.html").exists(), created
-    assert (created / "reports" / "review-studio.html").exists(), created
-    assert (created / "reports" / "review-studio.json").exists(), created
-    assert (created / "reports" / "review-viewer.html").exists(), created
-    assert (created / "reports" / "reference-scan.md").exists(), created
-    assert (created / "reports" / "reference-synthesis.md").exists(), created
-    assert (created / "reports" / "output-risk-profile.md").exists(), created
-    assert (created / "reports" / "artifact-design-profile.md").exists(), created
-    assert (created / "reports" / "prompt-quality-profile.md").exists(), created
-    assert (created / "reports" / "system-model.md").exists(), created
-    assert (created / "reports" / "skill-ir.json").exists(), created
-    assert (created / "reports" / "compiled_targets.md").exists(), created
-    assert (created / "reports" / "compiled_targets.json").exists(), created
-    assert (created / "reports" / "iteration-directions.md").exists(), created
-    assert (created / "reports" / "adoption_drift_report.md").exists(), created
-    assert (created / "reports" / "adoption_drift_report.json").exists(), created
-    assert (created / "reports" / "review_waivers.md").exists(), created
-    assert (created / "reports" / "review_waivers.json").exists(), created
-    assert (created / "reports" / "review_annotations.md").exists(), created
-    assert (created / "reports" / "review_annotations.json").exists(), created
+    expected_reports = [
+        "intent-dialogue.md", "intent-confidence.md", "skill-overview.html", "skill-interpretation.html",
+        "skill-interpretation.json", "review-studio.html", "review-studio.json", "review-viewer.html",
+        "reference-scan.md", "reference-synthesis.md", "output-risk-profile.md", "artifact-design-profile.md",
+        "prompt-quality-profile.md", "system-model.md", "skill-ir.json", "compiled_targets.md",
+        "compiled_targets.json", "iteration-directions.md", "adoption_drift_report.md",
+        "adoption_drift_report.json", "review_waivers.md", "review_waivers.json", "review_annotations.md",
+        "review_annotations.json",
+    ]
+    assert all((created / "reports" / path).exists() for path in expected_reports), created
     assert "Honest Boundaries" in (created / "SKILL.md").read_text(encoding="utf-8"), created
     init_report_view = init_result["payload"]["report_view"]
     assert init_report_view["html_report"].endswith("reports/skill-overview.html"), init_report_view
+    assert init_report_view["interpretation_report"].endswith("reports/skill-interpretation.html"), init_report_view
     assert Path(init_report_view["html_report"]).exists(), init_report_view
+    assert Path(init_report_view["interpretation_report"]).exists(), init_report_view
     assert init_report_view["review_studio"].endswith("reports/review-studio.html"), init_report_view
     assert Path(init_report_view["review_studio"]).exists(), init_report_view
     assert "Skill 已创建完成" in init_report_view["message"], init_report_view
+    assert "reports/skill-interpretation.html" in init_report_view["message"], init_report_view
     assert "Review Studio 2.0" in init_report_view["message"], init_report_view
     assert "目标编译" in init_report_view["message"], init_report_view
     assert "reports/compiled_targets.md" in init_report_view["message"], init_report_view
@@ -360,19 +351,13 @@ def main() -> None:
     )
     assert quickstart_result["ok"], quickstart_result
     quickstart_root = Path(quickstart_result["payload"]["root"])
-    assert (quickstart_root / "reports" / "review-viewer.html").exists(), quickstart_root
-    assert (quickstart_root / "reports" / "review-studio.html").exists(), quickstart_root
-    assert (quickstart_root / "reports" / "github-benchmark-scan.md").exists(), quickstart_root
-    assert (quickstart_root / "reports" / "intent-confidence.md").exists(), quickstart_root
-    assert (quickstart_root / "reports" / "reference-synthesis.md").exists(), quickstart_root
-    assert (quickstart_root / "reports" / "artifact-design-profile.md").exists(), quickstart_root
-    assert (quickstart_root / "reports" / "prompt-quality-profile.md").exists(), quickstart_root
-    assert (quickstart_root / "reports" / "system-model.md").exists(), quickstart_root
-    assert (quickstart_root / "reports" / "compiled_targets.md").exists(), quickstart_root
-    assert (quickstart_root / "reports" / "compiled_targets.json").exists(), quickstart_root
-    assert (quickstart_root / "reports" / "adoption_drift_report.md").exists(), quickstart_root
-    assert (quickstart_root / "reports" / "review_waivers.md").exists(), quickstart_root
-    assert (quickstart_root / "reports" / "review_annotations.md").exists(), quickstart_root
+    quickstart_reports = [
+        "review-viewer.html", "skill-interpretation.html", "skill-interpretation.json", "review-studio.html",
+        "github-benchmark-scan.md", "intent-confidence.md", "reference-synthesis.md",
+        "artifact-design-profile.md", "prompt-quality-profile.md", "system-model.md", "compiled_targets.md",
+        "compiled_targets.json", "adoption_drift_report.md", "review_waivers.md", "review_annotations.md",
+    ]
+    assert all((quickstart_root / "reports" / path).exists() for path in quickstart_reports), quickstart_root
     assert quickstart_result["payload"]["archetype"] == "production", quickstart_result
     assert quickstart_result["payload"]["guidance"]["experience_note"], quickstart_result
     assert quickstart_result["payload"]["guidance"]["problem_diagnosis"]["candidates"], quickstart_result
@@ -381,25 +366,22 @@ def main() -> None:
     assert quickstart_result["payload"]["reference_mode"]["mode"] == "silent", quickstart_result
     quickstart_report_view = quickstart_result["payload"]["report_view"]
     assert quickstart_report_view["html_report"].endswith("reports/skill-overview.html"), quickstart_report_view
+    assert quickstart_report_view["interpretation_report"].endswith("reports/skill-interpretation.html"), quickstart_report_view
     assert Path(quickstart_report_view["html_report"]).exists(), quickstart_report_view
+    assert Path(quickstart_report_view["interpretation_report"]).exists(), quickstart_report_view
     assert Path(quickstart_report_view["review_studio"]).exists(), quickstart_report_view
     assert "Skill 已创建完成" in quickstart_report_view["message"], quickstart_report_view
     assert "默认使用中文简体" in quickstart_report_view["message"], quickstart_report_view
-    assert quickstart_result["payload"]["guidance"]["next_steps"][0].startswith("Open reports/skill-overview.html"), quickstart_result
-    assert "reports/review-studio.html" in quickstart_result["payload"]["guidance"]["next_steps"][2], quickstart_result
-    assert "audit report" in quickstart_result["payload"]["guidance"]["next_steps"][0], quickstart_result
-    assert quickstart_result["payload"]["reviewer_evidence"]["artifacts"]["reference_synthesis"].endswith(
-        "reports/reference-synthesis.md"
-    ), quickstart_result
-    assert quickstart_result["payload"]["reviewer_evidence"]["artifacts"]["prompt_quality_profile"].endswith(
-        "reports/prompt-quality-profile.md"
-    ), quickstart_result
-    assert quickstart_result["payload"]["reviewer_evidence"]["artifacts"]["system_model"].endswith(
-        "reports/system-model.md"
-    ), quickstart_result
-    assert quickstart_result["payload"]["reviewer_evidence"]["artifacts"]["review_studio"].endswith(
-        "reports/review-studio.html"
-    ), quickstart_result
+    assert quickstart_result["payload"]["guidance"]["next_steps"][0].startswith("Open reports/skill-interpretation.html"), quickstart_result
+    assert quickstart_result["payload"]["guidance"]["next_steps"][1].startswith("Open reports/skill-overview.html"), quickstart_result
+    assert "reports/review-studio.html" in quickstart_result["payload"]["guidance"]["next_steps"][3], quickstart_result
+    assert "interpretation report" in quickstart_result["payload"]["guidance"]["next_steps"][0], quickstart_result
+    evidence_artifacts = quickstart_result["payload"]["reviewer_evidence"]["artifacts"]
+    assert evidence_artifacts["reference_synthesis"].endswith("reports/reference-synthesis.md"), quickstart_result
+    assert evidence_artifacts["prompt_quality_profile"].endswith("reports/prompt-quality-profile.md"), quickstart_result
+    assert evidence_artifacts["system_model"].endswith("reports/system-model.md"), quickstart_result
+    assert evidence_artifacts["skill_interpretation"].endswith("reports/skill-interpretation.html"), quickstart_result
+    assert evidence_artifacts["review_studio"].endswith("reports/review-studio.html"), quickstart_result
     assert "uncertainty_or_conflict" not in quickstart_result["payload"], quickstart_result
     quickstart_manifest = json.loads((quickstart_root / "manifest.json").read_text(encoding="utf-8"))
     assert quickstart_manifest["status"] == "active", quickstart_manifest
@@ -439,6 +421,14 @@ def main() -> None:
     skill_report_result = run("skill-report", str(created))
     assert skill_report_result["ok"], skill_report_result
     assert skill_report_result["payload"]["artifacts"]["html"].endswith("reports/skill-overview.html"), skill_report_result
+
+    skill_interpretation_result = run("skill-interpretation", str(created))
+    assert skill_interpretation_result["ok"], skill_interpretation_result
+    assert skill_interpretation_result["payload"]["artifacts"]["html"].endswith(
+        "reports/skill-interpretation.html"
+    ), skill_interpretation_result
+    assert skill_interpretation_result["payload"]["summary"]["report_kind"] == "skill-interpretation", skill_interpretation_result
+    assert skill_interpretation_result["payload"]["summary"]["default_language"] == "zh-CN", skill_interpretation_result
 
     review_viewer_result = run("review-viewer", str(created))
     assert review_viewer_result["ok"], review_viewer_result
@@ -762,6 +752,8 @@ def main() -> None:
     assert "benchmark_reproducibility" in report_result["payload"]["artifacts"], report_result
     assert "skill_os2_coverage" in report_result["payload"]["artifacts"], report_result
     assert report_result["payload"]["artifacts"]["skill_overview"] == "reports/skill-overview.json", report_result
+    assert report_result["payload"]["artifacts"]["skill_interpretation"] == "reports/skill-interpretation.json", report_result
+    assert report_result["payload"]["artifacts"]["skill_interpretation_html"] == "reports/skill-interpretation.html", report_result
     assert report_result["payload"]["artifacts"]["review_viewer"] == "reports/review-viewer.json", report_result
     assert report_result["payload"]["artifacts"]["review_viewer_html"] == "reports/review-viewer.html", report_result
     report_output_execution = json.loads((ROOT / "reports" / "output_execution_runs.json").read_text(encoding="utf-8"))

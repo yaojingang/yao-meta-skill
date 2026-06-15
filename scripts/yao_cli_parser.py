@@ -144,6 +144,15 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     skill_report_cmd.add_argument("--output-json")
     skill_report_cmd.set_defaults(func=_handler(command_handlers, "command_skill_report"))
 
+    skill_interpretation_cmd = subparsers.add_parser(
+        "skill-interpretation",
+        help="Render the first-class skill interpretation report for a skill package.",
+    )
+    skill_interpretation_cmd.add_argument("skill_dir", nargs="?", default=".")
+    skill_interpretation_cmd.add_argument("--output-html")
+    skill_interpretation_cmd.add_argument("--output-json")
+    skill_interpretation_cmd.set_defaults(func=_handler(command_handlers, "command_skill_interpretation"))
+
     review_viewer_cmd = subparsers.add_parser("review-viewer", help="Render a compact HTML review page for a skill package.")
     review_viewer_cmd.add_argument("skill_dir", nargs="?", default=".")
     review_viewer_cmd.add_argument("--output-html")

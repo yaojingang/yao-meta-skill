@@ -261,6 +261,9 @@ def en_for(text: str) -> str:
         return TEXT_EN[value]
     if value in METRIC_LABEL_EN:
         return METRIC_LABEL_EN[value]
+    if value.startswith("创建完成后建议先打开 ") and value.endswith("，再继续扩展包体。"):
+        path = value.removeprefix("创建完成后建议先打开 ").removesuffix("，再继续扩展包体。")
+        return f"After creation, open {path} before expanding the package further."
     if value.startswith("交付结果："):
         return "Deliverables: " + value.removeprefix("交付结果：")
     if value.startswith("能力类型："):

@@ -34,6 +34,7 @@ DEFAULT_TARGETS = [
     "architecture-maintainability-check",
     "yao-cli-check",
     "skill-overview-check",
+    "skill-interpretation-check",
     "skill-report-metrics-check",
     "skill-report-charts-check",
     "html-rendering-check",

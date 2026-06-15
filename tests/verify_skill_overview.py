@@ -51,8 +51,8 @@ def main() -> None:
     assert ".metrics-primary" in css_contract, css_contract[:7000]
     assert ".metrics-flow" in css_contract, css_contract[:9000]
     assert ".metric-detail-grid" in css_contract, css_contract[:9000]
-    assert "repeat(2, minmax(0, 1fr))" in css_contract, css_contract[:9000]
-    assert "repeat(auto-fit, minmax(320px, 1fr))" not in css_contract, css_contract[:9000]
+    assert "repeat(auto-fit, minmax(min(100%, 340px), 1fr))" in css_contract, css_contract[:9000]
+    assert "grid-template-columns: minmax(420px, 1fr)" not in css_contract, css_contract[:9000]
     assert "overflow-wrap: break-word" in css_contract, css_contract[:9000]
     assert "@media (max-width: 980px)" in css_contract, css_contract[-2200:]
 
@@ -107,6 +107,8 @@ def main() -> None:
     assert (created / "reports" / "intent-confidence.json").exists(), created
     assert (created / "reports" / "skill-overview.html").exists(), created
     assert (created / "reports" / "skill-overview.json").exists(), created
+    assert (created / "reports" / "skill-interpretation.html").exists(), created
+    assert (created / "reports" / "skill-interpretation.json").exists(), created
     assert (created / "reports" / "compiled_targets.md").exists(), created
     assert (created / "reports" / "compiled_targets.json").exists(), created
     assert (created / "reports" / "reference-synthesis.md").exists(), created
@@ -158,6 +160,7 @@ def main() -> None:
     assert "reports/adoption_drift_report.md" in overview_json["skill_summary"]["deliverables"], overview_json["skill_summary"]
     assert "reports/review_waivers.md" in overview_json["skill_summary"]["deliverables"], overview_json["skill_summary"]
     assert "reports/review-studio.html" in overview_json["skill_summary"]["deliverables"], overview_json["skill_summary"]
+    assert "reports/skill-interpretation.html" in overview_json["skill_summary"]["deliverables"], overview_json["skill_summary"]
     assert overview_json["skill_ir"]["schema_version"] in {"", "2.0.0"}, overview_json.get("skill_ir")
     assert overview_json["compiled_targets"]["summary"]["target_count"] >= 3, overview_json.get("compiled_targets")
     assert overview_json["compiled_targets"]["summary"]["block_count"] == 0, overview_json.get("compiled_targets")

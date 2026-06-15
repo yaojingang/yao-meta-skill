@@ -102,7 +102,7 @@ Weighted score formula: `sum(score / 10 * weight)`.
 2. Start with a short, human intent dialogue so the real job, outputs, exclusions, constraints, and standards are explicit.
 3. Let `quickstart` clarify intent first, then run silent benchmark scan and reference synthesis; it only surfaces explicit questions when intent is still unclear or when there is a real design conflict.
 4. Use the archetype-aware `quickstart` or the full authoring flow to generate or improve the package in scaffold, production, library, or governed mode.
-5. Review the generated `reports/skill-overview.html` first for the bilingual HTML skill report. It defaults to Simplified Chinese and provides an English switch in the top right. Then open `reports/review-studio.html` to inspect release blockers, permission approvals, and evidence paths in one page before adding more structure.
+5. Review the generated `reports/skill-interpretation.html` first for the bilingual interpretation report. It defaults to Simplified Chinese and provides an English switch in the top right. Then open `reports/skill-overview.html` for the audit scorecard and `reports/review-studio.html` to inspect release blockers, permission approvals, and evidence paths in one page before adding more structure.
 
 Or use the unified authoring CLI:
 
@@ -113,6 +113,7 @@ python3 scripts/yao.py reference-scan my-skill \
   --external-reference "World Class Method::method::Borrow a tight evaluation loop.::Do not copy heavy process." \
   --user-reference "A product or repo I admire::taste::Learn the clarity and operating standard.::Do not copy wording." \
   --local-constraint "Current Library Naming::structure::Keep naming aligned with the local skill library.::Do not inherit private references."
+python3 scripts/yao.py skill-interpretation my-skill
 python3 scripts/yao.py review-viewer my-skill
 python3 scripts/yao.py review-studio my-skill
 python3 scripts/yao.py artifact-design-profile my-skill
@@ -424,7 +425,7 @@ Utility scripts that make the meta-skill operational:
 - `run_description_optimization_suite.py`: runs description optimization across the root skill and governed examples, then writes reusable reports and optional drift snapshots with calibration and family summaries
 - `promotion_checker.py`: applies promotion policy to current description candidates, writes promotion decisions, builds candidate registries, and emits iteration bundles with review stubs
 - `create_iteration_snapshot.py`: freezes the current promotion decision into a versioned release snapshot with review, route, and context evidence
-- `yao.py`: unified authoring CLI that exposes init, validate, optimize-description, promote-check, python-compat, review, release-snapshot, workspace-flow, report, skill-ir, compile-skill, output-exec, output-review, skill-os2-audit, skill-os2-coverage, world-class-evidence, world-class-ledger, world-class-intake, world-class-submission-kit, world-class-submission-review, world-class-runbook, world-class-claim-guard, benchmark-reproducibility, telemetry-emit, telemetry-hooks, telemetry-import, package, registry-audit, package-verify, install-simulate, upgrade-check, review-waivers, and test as one entrypoint
+- `yao.py`: unified authoring CLI that exposes init, validate, optimize-description, promote-check, python-compat, review, release-snapshot, workspace-flow, report, skill-report, skill-interpretation, skill-ir, compile-skill, output-exec, output-review, skill-os2-audit, skill-os2-coverage, world-class-evidence, world-class-ledger, world-class-intake, world-class-submission-kit, world-class-submission-review, world-class-runbook, world-class-claim-guard, benchmark-reproducibility, telemetry-emit, telemetry-hooks, telemetry-import, package, registry-audit, package-verify, install-simulate, upgrade-check, review-waivers, and test as one entrypoint
 - `render_description_drift_history.py`: turns description-optimization snapshots into a readable drift-history report
 - `build_confusion_matrix.py`: scores route confusion across tracked sibling skills and `no_route` cases, then writes a route scorecard and optional milestone snapshot
 - `render_iteration_ledger.py`: compresses regression milestones, description optimization drift, and route scorecards into one iteration-facing ledger
@@ -446,6 +447,7 @@ Utility scripts that make the meta-skill operational:
 - `cross_packager.py`: builds client-specific export artifacts from Skill IR plus neutral metadata, with explicit platform contracts and validation
 - `render_portability_report.py`: scores cross-environment portability from neutral metadata, degradation rules, and consumer validation coverage
 - `render_skill_overview.py`: generates the white-background bilingual HTML skill audit report with sticky four-character Chinese navigation, top-right language switch, v2 scorecard, inline SVG charts, contract boundary, quality review, risk governance, assets, and iteration roadmap
+- `render_skill_interpretation.py`: renders `reports/skill-interpretation.html/json` as the first-class post-creation interpretation report while reusing the Skill Overview v2 model and Kami white layout
 - `export_skill_ir.py`: exports the 2.0 platform-neutral Skill IR contract from `SKILL.md`, manifest, interface metadata, evals, resources, and reports
 - `compile_skill.py`: compiles Skill IR into target-specific semantic contracts, generated-file maps, adapter modes, target-native behavior contracts, preserved semantics, warnings, and unsupported-feature notes
 - `run_output_eval.py`: runs the Output Eval Lab v0 with static with-skill vs baseline assertion grading, blind A/B review pack generation, and separate answer key artifacts

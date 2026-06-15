@@ -35,7 +35,8 @@
       "reports/review_annotations.md",
       "reports/review-studio.html",
       "reports/skill-interpretation.html",
-      "reports/skill-overview.html"
+      "reports/skill-overview.html",
+      "reports/skill-interpretation.json"
     ],
     "flow": [
       "输入材料",
@@ -601,7 +602,7 @@
   },
   "report_contract": {
     "schema_version": "2.0",
-    "html_report": "reports/skill-overview.html",
+    "html_report": "reports/skill-interpretation.html",
     "language": "zh-CN",
     "default_language": "zh-CN",
     "languages": [
@@ -630,7 +631,11 @@
       "Risk",
       "Assets",
       "Roadmap"
-    ]
+    ],
+    "report_kind": "skill-interpretation",
+    "canonical_overview_report": "reports/skill-overview.html",
+    "json_report": "reports/skill-interpretation.json",
+    "purpose": "Explain the generated skill's role, principles, usage scenarios, trigger contract, inputs, outputs, quality evidence, risks, assets, highlights, and next upgrade directions."
   },
   "name": "yao-meta-skill",
   "title": "Yao Meta Skill",
@@ -2089,5 +2094,30 @@
     "maturity_tier": "governed",
     "skill_archetype": "governed",
     "updated_at": "2026-03-31"
+  },
+  "interpretation_contract": {
+    "schema_version": "2.0",
+    "source_model": "skill-overview-v2",
+    "source_model_reused": true,
+    "overview_report": "reports/skill-overview.html",
+    "html_report": "reports/skill-interpretation.html",
+    "json_report": "reports/skill-interpretation.json",
+    "default_language": "zh-CN",
+    "languages": [
+      "zh-CN",
+      "en"
+    ],
+    "includes": [
+      "skill role",
+      "principles",
+      "usage scenarios",
+      "trigger contract",
+      "inputs and outputs",
+      "quality evidence",
+      "risk governance",
+      "package assets",
+      "highlights",
+      "upgrade roadmap"
+    ]
   }
 }

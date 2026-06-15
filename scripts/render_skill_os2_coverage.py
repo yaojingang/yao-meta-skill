@@ -301,23 +301,36 @@ def build_coverage(skill_dir: Path, generated_at: str) -> dict[str, Any]:
         for key, path_a, path_b, path_c, condition, current in recommended_prs
     ]
 
+    interpretation_paths = [
+        "reports/skill-overview.html",
+        "reports/skill-overview.json",
+        "scripts/render_skill_overview.py",
+        "scripts/render_skill_interpretation.py",
+        "schemas/skill-interpretation.schema.json",
+        "tests/verify_skill_interpretation.py",
+    ]
+    interpretation_ready = paths_exist(skill_dir, interpretation_paths)
+    interpretation_status = "covered" if interpretation_ready else "partial"
+    interpretation_current = (
+        "Skill Overview v2 is canonical and mirrored as first-class skill-interpretation HTML/JSON with schema and tests."
+        if interpretation_ready
+        else "Skill Overview v2 already covers much of the explainer experience, but dedicated skill-interpretation JSON/HTML artifacts are not first-class yet."
+    )
+    interpretation_next_action = (
+        "Keep overview and interpretation contracts in lockstep when report sections, metrics, or layout semantics change."
+        if interpretation_ready
+        else "Decide whether overview v2 is the canonical interpretation surface; if not, add a dedicated schema, renderer, and CJK/path-safety tests."
+    )
     extension_tracks = [
         build_extension_track(
             key="skill-interpretation-report",
             label="Skill Interpretation Report",
-            status="partial",
+            status=interpretation_status,
             objective="User-facing deep interpretation report explains use cases, triggers, inputs, outputs, workflow, principles, boundaries, quality gates, examples, and next iterations.",
-            current="Skill Overview v2 already covers much of the explainer experience, but dedicated skill-interpretation JSON/MD/HTML artifacts are not first-class yet.",
+            current=interpretation_current,
             target="Either keep skill-overview as the canonical interpretation report with an explicit contract, or split a dedicated reports/skill-interpretation.* renderer and tests.",
-            artifact_paths=[
-                "reports/skill-overview.html",
-                "reports/skill-overview.json",
-                "scripts/render_skill_overview.py",
-                "scripts/render_skill_interpretation.py",
-                "schemas/skill-interpretation.schema.json",
-                "tests/verify_skill_interpretation.py",
-            ],
-            next_action="Decide whether overview v2 is the canonical interpretation surface; if not, add a dedicated schema, renderer, and CJK/path-safety tests.",
+            artifact_paths=interpretation_paths,
+            next_action=interpretation_next_action,
             skill_dir=skill_dir,
         ),
     ]
@@ -412,7 +425,7 @@ def build_coverage(skill_dir: Path, generated_at: str) -> dict[str, Any]:
         "reference_extension_tracks": extension_tracks,
         "next_highest_leverage": [
             "Close the four world-class evidence ledger entries with accepted human or external evidence.",
-            "Clarify whether Skill Overview v2 is the canonical interpretation report or split a dedicated skill-interpretation renderer.",
+            "Keep the first-class skill interpretation report and Skill Overview v2 contract synchronized as the report model evolves.",
             "Start adaptive self-iteration as explicit-source, proposal-only, approval-gated work; do not scan private logs by default.",
             "Keep the blueprint coverage report in CI so 2.0 plan drift is visible.",
         ],
@@ -468,6 +481,7 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- missing: `{summary['missing_count']}`",
         f"- warn: `{summary['warn_count']}`",
         f"- reference extensions: `{summary['extension_track_count']}`",
+        f"- extension covered: `{summary['extension_covered_count']}`",
         f"- extension partial: `{summary['extension_partial_count']}`",
         f"- extension planned: `{summary['extension_planned_count']}`",
         f"- adaptive extension ready: `{str(summary['adaptive_extension_ready']).lower()}`",

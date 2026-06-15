@@ -1,22 +1,22 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `192`
-- Scripts: `105`
+- Scanned files: `193`
+- Scripts: `106`
 - Internal script modules: `26`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
 - Network policy missing scripts: `0`
-- File-write scripts: `66`
+- File-write scripts: `67`
 - Permission approvals: `3 / 3`
 - Permission approval gaps: `0`
-- CLI help smoke checked: `79`
+- CLI help smoke checked: `80`
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `192`
-- Package SHA256: `37a1ec0f35323886bdae64523b4113f5dc4ba3153117ee4980b8e5cd54b49aba`
+- Package hash files: `193`
+- Package SHA256: `652c3a4a1f091d875bfacdd44da9a91bc02fec90af3fe76cf3a71a6dc80aba58`
 
 ## Failures
 
@@ -54,8 +54,8 @@
 
 - Enabled: `True`
 - Timeout seconds: `5.0`
-- Checked scripts: `79`
-- Passed scripts: `79`
+- Checked scripts: `80`
+- Passed scripts: `80`
 - Failed scripts: `none`
 
 ## Script Surface
@@ -114,6 +114,7 @@
 | scripts/render_review_studio.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/render_review_viewer.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/render_review_waivers.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
+| scripts/render_skill_interpretation.py | cli | True | True | True | False | False | True | False | Renders the first-class skill interpretation report while reusing the Skill Overview v2 model and layout. |
 | scripts/render_skill_os2_audit.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/render_skill_os2_coverage.py | cli | True | True | True | False | False | True | False | Renders a Skill OS 2.0 blueprint-to-evidence coverage audit. |
 | scripts/render_skill_overview.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |

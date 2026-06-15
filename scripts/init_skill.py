@@ -21,6 +21,7 @@ from render_reference_scan import parse_reference, render_reference_scan
 from render_reference_synthesis import render_reference_synthesis
 from render_review_studio import render_review_studio
 from render_review_viewer import render_review_viewer
+from render_skill_interpretation import render_skill_interpretation
 from render_skill_overview import render_skill_overview
 from render_system_model import render_system_model
 
@@ -73,19 +74,20 @@ README_TEMPLATE = """# {title}
 4. Review `reports/intent-confidence.md` to see whether the real job, inputs, outputs, and exclusions are clear enough yet.
 5. Open `reports/reference-synthesis.md` to see the GitHub benchmarks plus curated official, research, and principle tracks in one place.
 6. Follow the workflow steps in `SKILL.md`.
-7. Check `reports/skill-overview.html` for the generated bilingual HTML skill audit report: overview, metrics, capability profile, principle, contract, quality, risk, assets, and iteration roadmap. It defaults to Simplified Chinese and includes an English switch in the top right.
-8. Open `reports/review-studio.html` for the one-page Review Studio 2.0 gate view.
-9. Record source-line reviewer comments in `reports/review_annotations.md` when review needs follow-up.
-10. Open `reports/review-viewer.html` for a compact visual review of the package.
-11. Check `reports/output-risk-profile.md` to see likely output mistakes and self-repair checks.
-12. Check `reports/artifact-design-profile.md` to see the intended artifact direction, layout patterns, visual quality gates, and anti-patterns.
-13. Check `reports/prompt-quality-profile.md` to see the need model, RTF-to-skill mapping, complexity, and prompt-facing quality matrix.
-14. Review `reports/skill-ir.json` for the platform-neutral Skill IR contract before platform-specific packaging.
-15. Review `reports/compiled_targets.md` to see how Skill IR compiles into OpenAI, Claude, generic, and Agent Skills compatible target contracts.
-16. Review `reports/iteration-directions.md` for the three most valuable next moves.
-17. Review `reports/system-model.md` to understand the boundary, feedback loops, drift watch, failure map, and highest-leverage next changes.
-18. Review `reports/adoption_drift_report.md` to see local-first metadata-only adoption and drift signals.
-19. Review `reports/review_waivers.md` to see human reviewer risk approvals and expiry dates.
+7. Open `reports/skill-interpretation.html` first for the first-class bilingual interpretation report: role, principle, scenarios, trigger, inputs, outputs, highlights, risks, assets, and upgrade directions. It defaults to Simplified Chinese and includes an English switch in the top right.
+8. Check `reports/skill-overview.html` for the generated bilingual HTML skill audit report: overview, metrics, capability profile, principle, contract, quality, risk, assets, and iteration roadmap.
+9. Open `reports/review-studio.html` for the one-page Review Studio 2.0 gate view.
+10. Record source-line reviewer comments in `reports/review_annotations.md` when review needs follow-up.
+11. Open `reports/review-viewer.html` for a compact visual review of the package.
+12. Check `reports/output-risk-profile.md` to see likely output mistakes and self-repair checks.
+13. Check `reports/artifact-design-profile.md` to see the intended artifact direction, layout patterns, visual quality gates, and anti-patterns.
+14. Check `reports/prompt-quality-profile.md` to see the need model, RTF-to-skill mapping, complexity, and prompt-facing quality matrix.
+15. Review `reports/skill-ir.json` for the platform-neutral Skill IR contract before platform-specific packaging.
+16. Review `reports/compiled_targets.md` to see how Skill IR compiles into OpenAI, Claude, generic, and Agent Skills compatible target contracts.
+17. Review `reports/iteration-directions.md` for the three most valuable next moves.
+18. Review `reports/system-model.md` to understand the boundary, feedback loops, drift watch, failure map, and highest-leverage next changes.
+19. Review `reports/adoption_drift_report.md` to see local-first metadata-only adoption and drift signals.
+20. Review `reports/review_waivers.md` to see human reviewer risk approvals and expiry dates.
 
 ## Honest Boundaries
 
@@ -109,6 +111,7 @@ README_TEMPLATE = """# {title}
 - `reports/system-model.md`: systems-thinking model for boundary, feedback loops, drift, failure patterns, and leverage points
 - `reports/skill-ir.json`: platform-neutral 2.0 Skill IR contract for trigger, workflow, resources, evals, risk, and governance
 - `reports/compiled_targets.md`: target compiler report showing generated contracts, adapter modes, preserved semantics, warnings, and unsupported features
+- `reports/skill-interpretation.html`: first-class bilingual interpretation report for role, principle, scenarios, trigger, inputs, outputs, quality evidence, risks, assets, highlights, and upgrade directions
 - `reports/skill-overview.html`: white-background bilingual HTML skill audit report with sticky four-character Chinese navigation, a top-right language switch, metrics, SVG charts, contract boundary, quality review, risk governance, assets, and iteration roadmap
 - `reports/review-studio.html`: Review Studio 2.0 gate page for intent, trigger, output eval, context, runtime conformance, trust, atlas, and release readiness
 - `reports/review-viewer.html`: compact review page for architecture, usage, feedback, and next steps
@@ -228,23 +231,26 @@ def build_manifest(name: str, mode: str, archetype: str) -> dict:
 def build_report_view(artifacts: dict) -> dict:
     html_report = artifacts.get("skill_overview_html", "")
     json_report = artifacts.get("skill_overview_json", "")
+    interpretation_report = artifacts.get("skill_interpretation_html", "")
     system_model = artifacts.get("system_model_md", "")
     review_studio = artifacts.get("review_studio_html", "")
     return {
         "title": "Skill 总结报告",
         "html_report": html_report,
         "json_report": json_report,
+        "interpretation_report": interpretation_report,
         "system_model": system_model,
         "review_studio": review_studio,
         "message": (
-            f"Skill 已创建完成。建议先打开总结报告：{html_report}。"
-            "它会展示这个 Skill 的概述、指标、原理、触发边界、输入输出、目标编译、质量评估、风险治理、包体资产和升级路线；"
+            f"Skill 已创建完成。建议先打开解读报告：{interpretation_report}；再查看总结报告：{html_report}。"
+            "解读报告会用中文简体默认展示这个 Skill 的作用、原理、使用场景、触发方式、输入输出、亮点和后续升级方向；"
+            "总结报告会展示概述、指标、原理、触发边界、输入输出、目标编译、质量评估、风险治理、包体资产和升级路线；"
             f"然后打开 Review Studio 2.0：{review_studio}，检查意图、触发、输出评测、运行一致性、信任和发布闸门。"
             "后续 reviewer 的文件级或行级意见可以记录到 reports/review_annotations.md。"
             "如需审查平台适配细节，请打开 reports/compiled_targets.md。"
             "报告默认使用中文简体，右上角可以切换英文版。"
         ),
-        "next_action": "Open reports/skill-overview.html before editing more files.",
+        "next_action": "Open reports/skill-interpretation.html before editing more files.",
     }
 
 
@@ -359,6 +365,7 @@ def initialize_skill(
     review_waivers = render_review_waivers(root)
     review_annotations = render_review_annotations(root)
     overview = render_skill_overview(root)
+    interpretation = render_skill_interpretation(root)
     review_viewer = render_review_viewer(root)
     review_studio = render_review_studio(root)
     artifacts = {
@@ -369,6 +376,8 @@ def initialize_skill(
         "intent_context_json": intent_confidence["artifacts"]["context_json"],
         "skill_overview_html": overview["artifacts"]["html"],
         "skill_overview_json": overview["artifacts"]["json"],
+        "skill_interpretation_html": interpretation["artifacts"]["html"],
+        "skill_interpretation_json": interpretation["artifacts"]["json"],
         "intent_dialogue_md": intent_dialogue["artifacts"]["markdown"],
         "intent_dialogue_json": intent_dialogue["artifacts"]["json"],
         "reference_scan_md": reference_scan["artifacts"]["markdown"],

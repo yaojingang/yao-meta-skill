@@ -11,7 +11,8 @@ Generated at: `2026-06-13`
 - missing: `0`
 - warn: `0`
 - reference extensions: `2`
-- extension partial: `2`
+- extension covered: `1`
+- extension partial: `1`
 - extension planned: `0`
 - adaptive extension ready: `false`
 - world-class evidence pending: `4`
@@ -25,7 +26,7 @@ This report maps the Skill OS 2.0 upgrade blueprint to concrete local artifacts,
 | Skill IR | `pass` | schema 2.0.0; targets 5 | `python3 scripts/yao.py skill-ir .` | `python3 tests/verify_skill_ir.py` |
 | Output Eval Lab | `pass` | 5 cases; delta 100.0; execution 10 | `python3 scripts/yao.py output-exec . && python3 scripts/yao.py output-review .` | `python3 tests/verify_output_eval_lab.py` |
 | Runtime Conformance | `pass` | 5/5 targets pass | `python3 scripts/yao.py conformance .` | `python3 tests/verify_conformance_suite.py` |
-| Trust Security | `pass` | 105 scripts; secrets 0; help failures 0 | `python3 scripts/yao.py trust .` | `python3 tests/verify_trust_check.py` |
+| Trust Security | `pass` | 106 scripts; secrets 0; help failures 0 | `python3 scripts/yao.py trust .` | `python3 tests/verify_trust_check.py` |
 | Skill Atlas | `pass` | 12 scanned skills; actionable collisions 0 | `python3 scripts/yao.py skill-atlas --workspace-root .` | `python3 tests/verify_skill_atlas.py` |
 | Registry Distribution | `pass` | archive entries 586; install failures 0 | `python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip && python3 scripts/yao.py registry-audit .` | `python3 tests/verify_registry_audit.py` |
 | Review Studio | `pass` | 16 gates; decision review; warnings 3 | `python3 scripts/yao.py review-studio .` | `python3 tests/verify_review_studio.py` |
@@ -52,7 +53,7 @@ This report maps the Skill OS 2.0 upgrade blueprint to concrete local artifacts,
 
 | Track | Status | Current | Target | Next action |
 | --- | --- | --- | --- | --- |
-| Skill Interpretation Report | `partial` | Skill Overview v2 already covers much of the explainer experience, but dedicated skill-interpretation JSON/MD/HTML artifacts are not first-class yet. | Either keep skill-overview as the canonical interpretation report with an explicit contract, or split a dedicated reports/skill-interpretation.* renderer and tests. | Decide whether overview v2 is the canonical interpretation surface; if not, add a dedicated schema, renderer, and CJK/path-safety tests. |
+| Skill Interpretation Report | `covered` | Skill Overview v2 is canonical and mirrored as first-class skill-interpretation HTML/JSON with schema and tests. | Either keep skill-overview as the canonical interpretation report with an explicit contract, or split a dedicated reports/skill-interpretation.* renderer and tests. | Keep overview and interpretation contracts in lockstep when report sections, metrics, or layout semantics change. |
 | Adaptive Self-Iteration | `partial` | Proposal-only adapt-scan/adapt-propose foundation exists with policy, schema, and safety tests; approval-gated patch application is not implemented yet. | Proposal-only adaptation with explicit input source, redaction, allowlisted write targets, approval ledger, regression report, and rollback plan. | Add adapt-apply only after approval ledger, allowlisted targets, dry-run diffs, regression reports, and rollback artifacts are designed. |
 
 These extension tracks come from the user-supplied 2.0 reference plan. They are tracked separately from the formal Skill OS blueprint so the report can distinguish landed local architecture from planned explainer/adaptor evolution.
@@ -60,7 +61,7 @@ These extension tracks come from the user-supplied 2.0 reference plan. They are 
 ## Next Highest-Leverage Moves
 
 - Close the four world-class evidence ledger entries with accepted human or external evidence.
-- Clarify whether Skill Overview v2 is the canonical interpretation report or split a dedicated skill-interpretation renderer.
+- Keep the first-class skill interpretation report and Skill Overview v2 contract synchronized as the report model evolves.
 - Start adaptive self-iteration as explicit-source, proposal-only, approval-gated work; do not scan private logs by default.
 - Keep the blueprint coverage report in CI so 2.0 plan drift is visible.
 
@@ -209,10 +210,9 @@ These extension tracks come from the user-supplied 2.0 reference plan. They are 
 ### Skill Interpretation Report
 
 - objective: User-facing deep interpretation report explains use cases, triggers, inputs, outputs, workflow, principles, boundaries, quality gates, examples, and next iterations.
-- status: `partial`
-- existing evidence: `reports/skill-overview.html`, `reports/skill-overview.json`, `scripts/render_skill_overview.py`
-- missing evidence: `scripts/render_skill_interpretation.py`, `schemas/skill-interpretation.schema.json`, `tests/verify_skill_interpretation.py`
-- next action: Decide whether overview v2 is the canonical interpretation surface; if not, add a dedicated schema, renderer, and CJK/path-safety tests.
+- status: `covered`
+- existing evidence: `reports/skill-overview.html`, `reports/skill-overview.json`, `scripts/render_skill_overview.py`, `scripts/render_skill_interpretation.py`, `schemas/skill-interpretation.schema.json`, `tests/verify_skill_interpretation.py`
+- next action: Keep overview and interpretation contracts in lockstep when report sections, metrics, or layout semantics change.
 
 ### Adaptive Self-Iteration
 
