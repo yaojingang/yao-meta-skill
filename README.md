@@ -46,6 +46,7 @@ It turns rough workflows, transcripts, prompts, notes, and runbooks into reusabl
 - a local-first metadata-only adoption and drift report that turns real usage signals into next iteration candidates, with optional `yao.py` CLI run capture, external client event emit hooks, hook recipes, and JSONL import that record command names and outcomes without arguments or raw content
 - an explicit-source adaptive proposal loop that summarizes redacted repeated user preferences and generates approval-gated adaptation proposals without scanning private logs or writing source files
 - a SkillOps opportunity scorer and decision policy that ranks redacted repeated signals, maps them to report-only, AGENTS update, existing-skill patch, or eval-addition actions, and keeps every durable write approval-gated
+- a weekly SkillOps curator report that aggregates daily opportunities, Skill Atlas portfolio signals, release lock state, and world-class evidence gaps into a proposal-only maintenance queue
 - a Browser/Chrome Native Messaging telemetry host that can receive length-prefixed metadata-only client events and generate a local launcher plus manifest without storing raw content
 - a Skill Atlas drift layer that reads aggregate adoption reports and surfaces portfolio-level drift signals without packaging raw telemetry logs
 - a baseline compare report for with-skill vs baseline review
@@ -126,6 +127,7 @@ python3 scripts/yao.py feedback my-skill --note "Tighten exclusions before addin
 python3 scripts/yao.py adapt-scan my-skill --source ./curated-user-signals.jsonl
 python3 scripts/yao.py adapt-propose my-skill
 python3 scripts/yao.py daily-skillops my-skill --source ./curated-user-signals.jsonl
+python3 scripts/yao.py weekly-curator my-skill
 python3 scripts/yao.py adoption-drift my-skill --record-event skill_activation --activation-type explicit --outcome accepted
 YAO_CLI_TELEMETRY=1 python3 scripts/yao.py validate my-skill
 python3 scripts/yao.py telemetry-emit my-skill --event skill_activation --activation-type explicit --outcome accepted --command browser-extension
@@ -434,7 +436,7 @@ Utility scripts that make the meta-skill operational:
 - `run_description_optimization_suite.py`: runs description optimization across the root skill and governed examples, then writes reusable reports and optional drift snapshots with calibration and family summaries
 - `promotion_checker.py`: applies promotion policy to current description candidates, writes promotion decisions, builds candidate registries, and emits iteration bundles with review stubs
 - `create_iteration_snapshot.py`: freezes the current promotion decision into a versioned release snapshot with review, route, and context evidence
-- `yao.py`: unified authoring CLI that exposes init, validate, optimize-description, promote-check, python-compat, review, release-snapshot, workspace-flow, report, skill-report, skill-interpretation, skill-ir, compile-skill, output-exec, output-review, skill-os2-audit, skill-os2-coverage, world-class-evidence, world-class-ledger, world-class-intake, world-class-preflight, world-class-submission-kit, world-class-submission-review, world-class-runbook, world-class-claim-guard, benchmark-reproducibility, evidence-consistency, adapt-scan, adapt-propose, adapt-apply, daily-skillops, telemetry-emit, telemetry-hooks, telemetry-import, package, registry-audit, package-verify, install-simulate, upgrade-check, review-waivers, and test as one entrypoint
+- `yao.py`: unified authoring CLI that exposes init, validate, optimize-description, promote-check, python-compat, review, release-snapshot, workspace-flow, report, skill-report, skill-interpretation, skill-ir, compile-skill, output-exec, output-review, skill-os2-audit, skill-os2-coverage, world-class-evidence, world-class-ledger, world-class-intake, world-class-preflight, world-class-submission-kit, world-class-submission-review, world-class-runbook, world-class-claim-guard, benchmark-reproducibility, evidence-consistency, adapt-scan, adapt-propose, adapt-apply, daily-skillops, weekly-curator, telemetry-emit, telemetry-hooks, telemetry-import, package, registry-audit, package-verify, install-simulate, upgrade-check, review-waivers, and test as one entrypoint
 - `render_description_drift_history.py`: turns description-optimization snapshots into a readable drift-history report
 - `build_confusion_matrix.py`: scores route confusion across tracked sibling skills and `no_route` cases, then writes a route scorecard and optional milestone snapshot
 - `render_iteration_ledger.py`: compresses regression milestones, description optimization drift, and route scorecards into one iteration-facing ledger
@@ -446,6 +448,7 @@ Utility scripts that make the meta-skill operational:
 - `render_skill_os2_audit.py`: renders a requirement-by-requirement Skill OS 2.0 audit that separates landed local evidence from human-required and external-required gaps
 - `render_skill_os2_coverage.py`: maps the Skill OS 2.0 upgrade blueprint to local artifacts, commands, tests, and remaining evidence boundaries
 - `render_daily_skillops_report.py`: renders an explicit-source Daily SkillOps operations report that summarizes redacted user patterns, proposal-only adaptations, approval state, release evidence, and world-class evidence gaps without scanning private logs or applying patches
+- `render_weekly_curator_report.py`: renders a weekly SkillOps curator report from generated daily reports, Skill Atlas, benchmark lock, evidence consistency, and world-class ledger state without scanning private logs or applying patches
 - `skillops_opportunity.py`: scores redacted SkillOps opportunities and maps them to approval-gated action types such as report-only, AGENTS update, existing-skill patch, or eval addition
 - `render_world_class_evidence_plan.py`: renders executable evidence tasks for remaining world-class gaps without treating planned external work as completed evidence
 - `render_world_class_evidence_ledger.py`: renders a machine-checkable ledger for current world-class evidence acceptance, anti-overclaim guards, provenance requirements, and privacy contracts

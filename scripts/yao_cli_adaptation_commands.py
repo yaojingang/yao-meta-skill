@@ -103,3 +103,19 @@ def command_daily_skillops(args: argparse.Namespace) -> int:
     result = run_script("render_daily_skillops_report.py", cmd)
     print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
     return 0 if result["ok"] else 2
+
+
+def command_weekly_curator(args: argparse.Namespace) -> int:
+    skill_dir = str(Path(args.skill_dir).resolve())
+    cmd = [skill_dir]
+    for path in args.daily_json:
+        cmd.extend(["--daily-json", path])
+    if args.output_json:
+        cmd.extend(["--output-json", args.output_json])
+    if args.output_md:
+        cmd.extend(["--output-md", args.output_md])
+    if args.generated_at:
+        cmd.extend(["--generated-at", args.generated_at])
+    result = run_script("render_weekly_curator_report.py", cmd)
+    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
+    return 0 if result["ok"] else 2

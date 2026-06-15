@@ -475,6 +475,17 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     daily_skillops_cmd.add_argument("--no-refresh-source-reports", action="store_true")
     daily_skillops_cmd.set_defaults(func=_handler(command_handlers, "command_daily_skillops"))
 
+    weekly_curator_cmd = subparsers.add_parser(
+        "weekly-curator",
+        help="Render a weekly SkillOps curator report from generated daily reports and portfolio evidence.",
+    )
+    weekly_curator_cmd.add_argument("skill_dir", nargs="?", default=".")
+    weekly_curator_cmd.add_argument("--daily-json", action="append", default=[])
+    weekly_curator_cmd.add_argument("--output-json")
+    weekly_curator_cmd.add_argument("--output-md")
+    weekly_curator_cmd.add_argument("--generated-at")
+    weekly_curator_cmd.set_defaults(func=_handler(command_handlers, "command_weekly_curator"))
+
     adoption_drift_cmd = subparsers.add_parser(
         "adoption-drift",
         help="Render local-first metadata-only adoption and drift telemetry for a skill package.",

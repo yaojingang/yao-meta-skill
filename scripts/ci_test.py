@@ -69,6 +69,7 @@ DEFAULT_TARGETS = [
     "adaptation-safety-check",
     "skillops-opportunity-check",
     "daily-skillops-check",
+    "weekly-curator-check",
     "adoption-drift-check",
     "telemetry-import-check",
     "telemetry-emit-check",

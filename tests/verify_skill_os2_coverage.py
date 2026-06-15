@@ -44,10 +44,10 @@ def main() -> None:
     assert summary["pass_count"] == 21, summary
     assert summary["warn_count"] == 0, summary
     assert summary["missing_count"] == 0, summary
-    assert summary["extension_track_count"] == 3, summary
+    assert summary["extension_track_count"] == 4, summary
     assert summary["extension_partial_count"] == 0, summary
     assert summary["extension_planned_count"] == 0, summary
-    assert summary["extension_covered_count"] == 3, summary
+    assert summary["extension_covered_count"] == 4, summary
     assert summary["adaptive_extension_ready"] is True, summary
     assert summary["local_blueprint_ready"] is True, summary
     assert summary["public_world_class_ready"] is False, summary
@@ -88,11 +88,12 @@ def main() -> None:
     assert any(entry["path"] == "reports/benchmark_reproducibility.json" and entry["exists"] for entry in prs["benchmark-methodology"]["evidence"])
     assert payload["source_blueprint"]["core_module_count"] == 8, payload
     assert payload["source_blueprint"]["recommended_pr_count"] == 13, payload
-    assert payload["source_blueprint"]["reference_extension_count"] == 3, payload
+    assert payload["source_blueprint"]["reference_extension_count"] == 4, payload
     extension_tracks = {item["key"]: item for item in payload["reference_extension_tracks"]}
     assert extension_tracks["skill-interpretation-report"]["status"] == "covered", extension_tracks
     assert extension_tracks["adaptive-self-iteration"]["status"] == "covered", extension_tracks
     assert extension_tracks["daily-skillops-report"]["status"] == "covered", extension_tracks
+    assert extension_tracks["weekly-curator-report"]["status"] == "covered", extension_tracks
     assert any(
         entry["path"] == "reports/skill-overview.html" and entry["exists"]
         for entry in extension_tracks["skill-interpretation-report"]["evidence"]
@@ -141,6 +142,26 @@ def main() -> None:
         and entry["exists"]
         for entry in extension_tracks["daily-skillops-report"]["evidence"]
     ), extension_tracks["daily-skillops-report"]
+    assert any(
+        entry["path"] == "scripts/render_weekly_curator_report.py" and entry["exists"]
+        for entry in extension_tracks["weekly-curator-report"]["evidence"]
+    ), extension_tracks["weekly-curator-report"]
+    assert any(
+        entry["path"] == "tests/verify_weekly_curator.py" and entry["exists"]
+        for entry in extension_tracks["weekly-curator-report"]["evidence"]
+    ), extension_tracks["weekly-curator-report"]
+    assert any(
+        entry["path"].startswith("reports/skillops/weekly/")
+        and entry["path"].endswith(".json")
+        and entry["exists"]
+        for entry in extension_tracks["weekly-curator-report"]["evidence"]
+    ), extension_tracks["weekly-curator-report"]
+    assert any(
+        entry["path"].startswith("reports/skillops/weekly/")
+        and entry["path"].endswith(".md")
+        and entry["exists"]
+        for entry in extension_tracks["weekly-curator-report"]["evidence"]
+    ), extension_tracks["weekly-curator-report"]
     assert "Close the four world-class evidence ledger entries" in payload["next_highest_leverage"][0], payload
     assert "skill interpretation report" in " ".join(payload["next_highest_leverage"]), payload
     assert "Daily SkillOps" in " ".join(payload["next_highest_leverage"]), payload
@@ -148,7 +169,7 @@ def main() -> None:
     assert "Skill OS 2.0 Blueprint Coverage" in markdown, markdown
     assert "local blueprint ready: `true`" in markdown, markdown
     assert "public world-class ready: `false`" in markdown, markdown
-    assert "extension covered: `3`" in markdown, markdown
+    assert "extension covered: `4`" in markdown, markdown
     assert "extension partial: `0`" in markdown, markdown
     assert "## Core Modules" in markdown, markdown
     assert "## Recommended PR Coverage" in markdown, markdown
@@ -157,6 +178,7 @@ def main() -> None:
     assert "Skill Interpretation Report" in markdown, markdown
     assert "Adaptive Self-Iteration" in markdown, markdown
     assert "Daily SkillOps Report" in markdown, markdown
+    assert "Weekly Curator Report" in markdown, markdown
     assert "user-supplied 2.0 reference plan" in markdown, markdown
     assert "`agent-skills-conformance`" not in markdown, markdown
     assert "Agent Skills Conformance" in markdown, markdown

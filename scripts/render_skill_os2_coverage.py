@@ -73,6 +73,24 @@ def latest_daily_skillops_paths(skill_dir: Path) -> list[str]:
     return [*base_paths, rel_path(latest_json, skill_dir), rel_path(latest_md, skill_dir)]
 
 
+def latest_weekly_curator_paths(skill_dir: Path) -> list[str]:
+    base_paths = [
+        "scripts/render_weekly_curator_report.py",
+        "tests/verify_weekly_curator.py",
+    ]
+    weekly_dir = skill_dir / "reports" / "skillops" / "weekly"
+    weekly_json_reports = sorted(weekly_dir.glob("*.json")) if weekly_dir.exists() else []
+    if not weekly_json_reports:
+        return [
+            *base_paths,
+            "reports/skillops/weekly/YYYY-WNN.json",
+            "reports/skillops/weekly/YYYY-WNN.md",
+        ]
+    latest_json = weekly_json_reports[-1]
+    latest_md = latest_json.with_suffix(".md")
+    return [*base_paths, rel_path(latest_json, skill_dir), rel_path(latest_md, skill_dir)]
+
+
 def condition_status(condition: bool, evidence_items: list[dict[str, Any]]) -> str:
     if not all_exist(evidence_items):
         return "missing"
@@ -422,6 +440,26 @@ def build_coverage(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             target="Generate reports/skillops/daily/YYYY-MM-DD.* from explicit sources without private log scanning, source writes, auto-patching, or world-class overclaiming.",
             artifact_paths=daily_skillops_paths,
             next_action="Keep Daily SkillOps report aligned with proposal, approval, coverage, and world-class ledger contracts as the operations layer evolves.",
+            skill_dir=skill_dir,
+        )
+    )
+    weekly_curator_paths = latest_weekly_curator_paths(skill_dir)
+    weekly_curator_ready = paths_exist(skill_dir, weekly_curator_paths)
+    weekly_curator_status = "covered" if weekly_curator_ready else "partial"
+    extension_tracks.append(
+        build_extension_track(
+            key="weekly-curator-report",
+            label="Weekly Curator Report",
+            status=weekly_curator_status,
+            objective="Weekly curator layer aggregates Daily SkillOps opportunities, Skill Atlas portfolio signals, release locks, and world-class evidence gaps into a maintenance queue.",
+            current=(
+                "Weekly curator report is CLI-backed, proposal-only, and backed by committed weekly JSON/Markdown evidence."
+                if weekly_curator_ready
+                else "Daily SkillOps and Skill Atlas exist, but weekly curator aggregation is not fully wired into scripts, tests, and evidence artifacts."
+            ),
+            target="Generate reports/skillops/weekly/YYYY-WNN.* without private log scanning, source writes, auto-patching, or world-class overclaiming.",
+            artifact_paths=weekly_curator_paths,
+            next_action="Use weekly curator output as the Skill Librarian maintenance queue before approving any durable skill-library changes.",
             skill_dir=skill_dir,
         )
     )
