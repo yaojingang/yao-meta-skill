@@ -43,7 +43,7 @@
       "key": "context-budget",
       "label": "上下文",
       "status": "pass",
-      "detail": "initial load 990/1000; deferred 470742/120000; top deferred scripts 420962; resource governance governed; quality density 131.3",
+      "detail": "initial load 990/1000; deferred 470839/120000; top deferred scripts 421059; resource governance governed; quality density 131.3",
       "evidence": "reports/context_budget.json",
       "link": "context_budget.md"
     },
@@ -59,7 +59,7 @@
       "key": "trust-report",
       "label": "信任报告",
       "status": "pass",
-      "detail": "0 secrets; 117 scripts; 3 network-capable scripts; 0 help smoke failures",
+      "detail": "0 secrets; 118 scripts; 3 network-capable scripts; 0 help smoke failures",
       "evidence": "reports/security_trust_report.json",
       "link": "security_trust_report.md"
     },
@@ -67,7 +67,7 @@
       "key": "python-compat",
       "label": "Python 兼容",
       "status": "pass",
-      "detail": "Python 3.11; 189 files; 0 compatibility issues; 0 syntax; 0 f-string 3.11 hazards",
+      "detail": "Python 3.11; 190 files; 0 compatibility issues; 0 syntax; 0 f-string 3.11 hazards",
       "evidence": "reports/python_compatibility.json",
       "link": "python_compatibility.md"
     },
@@ -75,7 +75,7 @@
       "key": "architecture-maintainability",
       "label": "架构维护",
       "status": "pass",
-      "detail": "186 Python files; 0 hotspots; 11 watchlist files; 0 blockers; largest 899 lines; 67 CLI handlers; 18 in entrypoint",
+      "detail": "187 Python files; 0 hotspots; 11 watchlist files; 0 blockers; largest 899 lines; 67 CLI handlers; 18 in entrypoint",
       "evidence": "reports/architecture_maintainability.json",
       "link": "architecture_maintainability.md"
     },
@@ -1196,7 +1196,7 @@
             "path": "scripts",
             "label": "Deterministic helpers or local tooling",
             "kind": "folder",
-            "file_count": 117
+            "file_count": 118
           },
           {
             "path": "evals",
@@ -1211,7 +1211,7 @@
             "file_count": 229
           }
         ],
-        "file_count": 414,
+        "file_count": 415,
         "folder_count": 4,
         "distribution": [
           {
@@ -1236,7 +1236,7 @@
           },
           {
             "label": "scripts",
-            "value": 117
+            "value": 118
           },
           {
             "label": "evals",
@@ -1366,7 +1366,7 @@
           "path": "scripts",
           "label": "Deterministic helpers or local tooling",
           "kind": "folder",
-          "file_count": 117
+          "file_count": 118
         },
         {
           "path": "evals",
@@ -1684,9 +1684,9 @@
           "methodology_complete": true,
           "required_artifact_count": 25,
           "missing_artifact_count": 0,
-          "evidence_bundle_sha256": "db10d796efc15c125ab945c8102b5846f853b61e5cf2e5e63e945085f327915d",
-          "source_contract_sha256": "eccfa7712df8fbf24eaf9f678b9a611da305f5c98e0f7d12738469377853d6aa",
-          "archive_sha256": "97caaa2c79ef6128500d2b5026f5d93fa96dab0c83e6d6594ad10b9f7d602af7",
+          "evidence_bundle_sha256": "df9565b74928d8de31eaead6944881e98bad541c3f651df36edf5bd5eccccc4c",
+          "source_contract_sha256": "dc875f356573a393c274e3dbee59dc85c78687add384e1e4a193957a57233183",
+          "archive_sha256": "7d597e2b1385e312d344995cb934549731a7378d0f146d77a93f08d68101b9e4",
           "output_case_count": 5,
           "failure_disclosure_count": 3,
           "command_count": 23,
@@ -1708,7 +1708,7 @@
           "working_tree_dirty": false,
           "changed_file_count": 0
         },
-        "commit": "69e1f7a8981499eb5694d2141cf105ae290a24c6",
+        "commit": "6e04832315a704332c85417c857f10741e4afba4",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -1792,9 +1792,9 @@
         "failures": []
       },
       "trust_security": {
-        "scanned_files": 205,
-        "script_count": 117,
-        "internal_module_count": 32,
+        "scanned_files": 206,
+        "script_count": 118,
+        "internal_module_count": 33,
         "secret_findings": 0,
         "dependency_files": [
           "requirements-ci.txt"
@@ -1812,8 +1812,8 @@
         "help_smoke_failed_count": 0,
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
-        "package_hash_file_count": 205,
-        "package_sha256": "eccfa7712df8fbf24eaf9f678b9a611da305f5c98e0f7d12738469377853d6aa"
+        "package_hash_file_count": 206,
+        "package_sha256": "dc875f356573a393c274e3dbee59dc85c78687add384e1e4a193957a57233183"
       },
       "skill_atlas": {
         "skill_count": 12,
@@ -1851,8 +1851,8 @@
           "trust_level": "local",
           "license": "MIT",
           "checksums": {
-            "package_sha256": "eccfa7712df8fbf24eaf9f678b9a611da305f5c98e0f7d12738469377853d6aa",
-            "archive_sha256": "97caaa2c79ef6128500d2b5026f5d93fa96dab0c83e6d6594ad10b9f7d602af7"
+            "package_sha256": "dc875f356573a393c274e3dbee59dc85c78687add384e1e4a193957a57233183",
+            "archive_sha256": "7d597e2b1385e312d344995cb934549731a7378d0f146d77a93f08d68101b9e4"
           },
           "compatibility": {
             "openai": "pass",
@@ -1883,7 +1883,7 @@
           },
           "distribution": {
             "archive_verified": true,
-            "archive_sha256": "97caaa2c79ef6128500d2b5026f5d93fa96dab0c83e6d6594ad10b9f7d602af7",
+            "archive_sha256": "7d597e2b1385e312d344995cb934549731a7378d0f146d77a93f08d68101b9e4",
             "package_verification": "reports/package_verification.json",
             "install_simulated": true,
             "install_simulation": "reports/install_simulation.json"
@@ -1899,8 +1899,8 @@
           "target_count": 4,
           "adapter_count": 4,
           "archive_present": true,
-          "archive_sha256": "97caaa2c79ef6128500d2b5026f5d93fa96dab0c83e6d6594ad10b9f7d602af7",
-          "archive_entry_count": 639,
+          "archive_sha256": "7d597e2b1385e312d344995cb934549731a7378d0f146d77a93f08d68101b9e4",
+          "archive_entry_count": 640,
           "failure_count": 0,
           "warning_count": 0
         },
@@ -1911,7 +1911,7 @@
         "ok": true,
         "summary": {
           "archive_present": true,
-          "archive_entry_count": 639,
+          "archive_entry_count": 640,
           "archive_extracted": true,
           "entrypoint_loaded": true,
           "manifest_loaded": true,
@@ -1978,12 +1978,12 @@
             {
               "field": "archive_sha256",
               "from": "",
-              "to": "97caaa2c79ef6128500d2b5026f5d93fa96dab0c83e6d6594ad10b9f7d602af7"
+              "to": "7d597e2b1385e312d344995cb934549731a7378d0f146d77a93f08d68101b9e4"
             },
             {
               "field": "package_sha256",
               "from": "0000000000000000000000000000000000000000000000000000000000000000",
-              "to": "eccfa7712df8fbf24eaf9f678b9a611da305f5c98e0f7d12738469377853d6aa"
+              "to": "dc875f356573a393c274e3dbee59dc85c78687add384e1e4a193957a57233183"
             }
           ]
         },
@@ -5303,7 +5303,7 @@
       "ok": true,
       "generated_at": "2026-06-16",
       "skill_dir": ".",
-      "commit": "69e1f7a8981499eb5694d2141cf105ae290a24c6",
+      "commit": "6e04832315a704332c85417c857f10741e4afba4",
       "git_status": {
         "available": true,
         "dirty": false,
@@ -5317,9 +5317,9 @@
         "methodology_complete": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "db10d796efc15c125ab945c8102b5846f853b61e5cf2e5e63e945085f327915d",
-        "source_contract_sha256": "eccfa7712df8fbf24eaf9f678b9a611da305f5c98e0f7d12738469377853d6aa",
-        "archive_sha256": "97caaa2c79ef6128500d2b5026f5d93fa96dab0c83e6d6594ad10b9f7d602af7",
+        "evidence_bundle_sha256": "df9565b74928d8de31eaead6944881e98bad541c3f651df36edf5bd5eccccc4c",
+        "source_contract_sha256": "dc875f356573a393c274e3dbee59dc85c78687add384e1e4a193957a57233183",
+        "archive_sha256": "7d597e2b1385e312d344995cb934549731a7378d0f146d77a93f08d68101b9e4",
         "output_case_count": 5,
         "failure_disclosure_count": 3,
         "command_count": 23,
@@ -5354,7 +5354,7 @@
       },
       "release_lock": {
         "ready": true,
-        "commit": "69e1f7a8981499eb5694d2141cf105ae290a24c6",
+        "commit": "6e04832315a704332c85417c857f10741e4afba4",
         "status_scope": "generation-time status before this report is written",
         "reason": "clean generation-time HEAD"
       },
@@ -5364,7 +5364,7 @@
         "existing_count": 25,
         "missing_count": 0,
         "missing_paths": [],
-        "sha256": "db10d796efc15c125ab945c8102b5846f853b61e5cf2e5e63e945085f327915d"
+        "sha256": "df9565b74928d8de31eaead6944881e98bad541c3f651df36edf5bd5eccccc4c"
       },
       "methodology": {
         "path": "reports/benchmark_methodology.md",
@@ -5472,43 +5472,43 @@
           "label": "trust_report",
           "path": "reports/security_trust_report.json",
           "exists": true,
-          "bytes": 114928,
-          "sha256": "0cf0f460fb34c371aed5d0cd0485ae72bc641ce8579c148884c909850620a8d6"
+          "bytes": 115530,
+          "sha256": "3a31037d6aa8c68dd235ee5cff1134c876640fd76eb43a248802253ae3408873"
         },
         {
           "label": "python_compatibility",
           "path": "reports/python_compatibility.json",
           "exists": true,
-          "bytes": 24532,
-          "sha256": "2740264f51ef8b1b1d197c7a03cc78095b04b846b0f1909266f12a14db323552"
+          "bytes": 24657,
+          "sha256": "6589b183b95b221d25dff0ca995b8b9ec4f0290e3c5792d7864136737b9133d9"
         },
         {
           "label": "registry_audit",
           "path": "reports/registry_audit.json",
           "exists": true,
           "bytes": 3183,
-          "sha256": "3c5b99ff942846a12b67bb208cf6070997c5f4d5975837616759cb81e4cd85fb"
+          "sha256": "7d5dce8cbbf7a5d78fc6e59da0b625a35c73dcded94cbb1b67705b0835f01f75"
         },
         {
           "label": "package_verification",
           "path": "reports/package_verification.json",
           "exists": true,
           "bytes": 19338,
-          "sha256": "37647e60c52706f69c9b961ca546f33ae24856795fe24d79f5bc71376c8deccf"
+          "sha256": "a0973f5f3fb359a03347fbe20ee7c72cd456f94ff012bbd7784d8ebc1315d945"
         },
         {
           "label": "install_simulation",
           "path": "reports/install_simulation.json",
           "exists": true,
           "bytes": 8604,
-          "sha256": "2556db81df85b8c7b8a2df34a8f116459cf0f6aad3c47c4f0f2c7202f8065be1"
+          "sha256": "273eb278c5710e9aeb9a98b92dc3d214e5e25a9e80c72cd53e400503765e9324"
         },
         {
           "label": "skill_os2_audit",
           "path": "reports/skill_os2_audit.json",
           "exists": true,
           "bytes": 14310,
-          "sha256": "15fd40e0809088f83fd80797864ec256d6860007fd46cf2507475c4a72da70e8"
+          "sha256": "532e99ab09ac889e528aa469f64a8ac2d49f2de0091570c9c0570f32c8787945"
         },
         {
           "label": "world_class_evidence_plan",
@@ -5840,7 +5840,7 @@
           "label": "Trust Security",
           "status": "pass",
           "objective": "Scripts, dependencies, permissions, secrets, and package hash are reviewable for team distribution.",
-          "current": "117 scripts; secrets 0; help failures 0",
+          "current": "118 scripts; secrets 0; help failures 0",
           "command": "python3 scripts/yao.py trust .",
           "test": "python3 tests/verify_trust_check.py",
           "evidence": [
@@ -5914,7 +5914,7 @@
           "label": "Registry Distribution",
           "status": "pass",
           "objective": "Skill packages are installable, versioned, checksumed, and upgrade-reviewable.",
-          "current": "archive entries 639; install failures 0",
+          "current": "archive entries 640; install failures 0",
           "command": "python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip && python3 scripts/yao.py registry-audit .",
           "test": "python3 tests/verify_registry_audit.py",
           "evidence": [
@@ -11662,9 +11662,9 @@
       "ok": true,
       "skill_dir": ".",
       "summary": {
-        "scanned_files": 205,
-        "script_count": 117,
-        "internal_module_count": 32,
+        "scanned_files": 206,
+        "script_count": 118,
+        "internal_module_count": 33,
         "secret_findings": 0,
         "dependency_files": [
           "requirements-ci.txt"
@@ -11682,8 +11682,8 @@
         "help_smoke_failed_count": 0,
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
-        "package_hash_file_count": 205,
-        "package_sha256": "eccfa7712df8fbf24eaf9f678b9a611da305f5c98e0f7d12738469377853d6aa"
+        "package_hash_file_count": 206,
+        "package_sha256": "dc875f356573a393c274e3dbee59dc85c78687add384e1e4a193957a57233183"
       },
       "failures": [],
       "warnings": [],
@@ -12827,6 +12827,20 @@
           "network_hosts": []
         },
         {
+          "path": "scripts/review_studio_skillops.py",
+          "interface": "internal-module",
+          "interface_declared": true,
+          "interface_reason": "Imported by render_review_studio.py to keep SkillOps summary panels out of the main HTML renderer.",
+          "has_argparse": false,
+          "has_main_guard": false,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_file_write": false,
+          "uses_subprocess": false,
+          "network_urls": [],
+          "network_hosts": []
+        },
+        {
           "path": "scripts/review_studio_waivers.py",
           "interface": "internal-module",
           "interface_declared": true,
@@ -13379,7 +13393,7 @@
         "checked_count": 85,
         "passed_count": 85,
         "failed_count": 0,
-        "skipped_count": 32,
+        "skipped_count": 33,
         "failed_scripts": [],
         "results": [
           {
@@ -14275,6 +14289,10 @@
             "reason": "internal module"
           },
           {
+            "path": "scripts/review_studio_skillops.py",
+            "reason": "internal module"
+          },
+          {
             "path": "scripts/review_studio_waivers.py",
             "reason": "internal module"
           },
@@ -14556,7 +14574,7 @@
       "root": ".",
       "summary": {
         "target_python": "3.11",
-        "file_count": 189,
+        "file_count": 190,
         "issue_count": 0,
         "syntax_error_count": 0,
         "fstring_311_violation_count": 0,
@@ -15067,6 +15085,12 @@
         },
         {
           "path": "scripts/review_studio_output_review.py",
+          "ok": true,
+          "issue_count": 0,
+          "issues": []
+        },
+        {
+          "path": "scripts/review_studio_skillops.py",
           "ok": true,
           "issue_count": 0,
           "issues": []
@@ -15720,10 +15744,10 @@
       "generated_at": "2026-06-16",
       "skill_dir": ".",
       "summary": {
-        "python_file_count": 186,
-        "script_file_count": 117,
+        "python_file_count": 187,
+        "script_file_count": 118,
         "test_file_count": 69,
-        "internal_module_count": 35,
+        "internal_module_count": 36,
         "cli_script_count": 84,
         "command_handler_count": 67,
         "entrypoint_command_handler_count": 18,
@@ -15917,16 +15941,16 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 797,
-        "other_text_tokens": 1022286,
+        "other_text_tokens": 1022629,
         "estimated_initial_load_tokens": 990,
-        "estimated_total_text_tokens": 1023083,
-        "deferred_resource_tokens": 470742,
+        "estimated_total_text_tokens": 1023426,
+        "deferred_resource_tokens": 470839,
         "deferred_resource_warn_threshold": 120000,
         "deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 420962,
-            "file_count": 117
+            "estimated_tokens": 421059,
+            "file_count": 118
           },
           {
             "path": "references",
@@ -15942,8 +15966,8 @@
         "large_deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 420962,
-            "file_count": 117
+            "estimated_tokens": 421059,
+            "file_count": 118
           }
         ],
         "deferred_resource_governance": {
@@ -15965,14 +15989,14 @@
               ],
               "missing": [],
               "path": "scripts",
-              "estimated_tokens": 420962,
-              "file_count": 117,
+              "estimated_tokens": 421059,
+              "file_count": 118,
               "rationale": "Script resources are deterministic deferred tools, not initial-load prompt context."
             }
           ],
           "summary": "Large deferred resources are indexed and backed by evidence."
         },
-        "relevant_file_count": 617,
+        "relevant_file_count": 619,
         "unused_resource_dirs": [],
         "quality_signal_points": 130,
         "quality_density": 131.3
@@ -16916,6 +16940,7 @@
               "scripts/review_studio_gates.py",
               "scripts/review_studio_layout.py",
               "scripts/review_studio_output_review.py",
+              "scripts/review_studio_skillops.py",
               "scripts/review_studio_waivers.py",
               "scripts/review_studio_world_class.py",
               "scripts/review_viewer_data.py",
@@ -21828,8 +21853,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "eccfa7712df8fbf24eaf9f678b9a611da305f5c98e0f7d12738469377853d6aa",
-          "archive_sha256": "97caaa2c79ef6128500d2b5026f5d93fa96dab0c83e6d6594ad10b9f7d602af7"
+          "package_sha256": "dc875f356573a393c274e3dbee59dc85c78687add384e1e4a193957a57233183",
+          "archive_sha256": "7d597e2b1385e312d344995cb934549731a7378d0f146d77a93f08d68101b9e4"
         },
         "compatibility": {
           "openai": "pass",
@@ -21860,7 +21885,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "97caaa2c79ef6128500d2b5026f5d93fa96dab0c83e6d6594ad10b9f7d602af7",
+          "archive_sha256": "7d597e2b1385e312d344995cb934549731a7378d0f146d77a93f08d68101b9e4",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -21885,7 +21910,7 @@
               "vscode"
             ],
             "package_metadata": "registry/packages/yao-meta-skill.json",
-            "package_sha256": "eccfa7712df8fbf24eaf9f678b9a611da305f5c98e0f7d12738469377853d6aa"
+            "package_sha256": "dc875f356573a393c274e3dbee59dc85c78687add384e1e4a193957a57233183"
           }
         ]
       },
@@ -21908,8 +21933,8 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "97caaa2c79ef6128500d2b5026f5d93fa96dab0c83e6d6594ad10b9f7d602af7",
-        "archive_entry_count": 639,
+        "archive_sha256": "7d597e2b1385e312d344995cb934549731a7378d0f146d77a93f08d68101b9e4",
+        "archive_entry_count": 640,
         "failure_count": 0,
         "warning_count": 0
       },
@@ -22574,7 +22599,7 @@
       "installed_skill_dir": "dist/install-simulation/simulate-yao-meta-skill/yao-meta-skill",
       "summary": {
         "archive_present": true,
-        "archive_entry_count": 639,
+        "archive_entry_count": 640,
         "archive_extracted": true,
         "entrypoint_loaded": true,
         "manifest_loaded": true,
@@ -22916,12 +22941,12 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "97caaa2c79ef6128500d2b5026f5d93fa96dab0c83e6d6594ad10b9f7d602af7"
+            "to": "7d597e2b1385e312d344995cb934549731a7378d0f146d77a93f08d68101b9e4"
           },
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "eccfa7712df8fbf24eaf9f678b9a611da305f5c98e0f7d12738469377853d6aa"
+            "to": "dc875f356573a393c274e3dbee59dc85c78687add384e1e4a193957a57233183"
           }
         ]
       },
