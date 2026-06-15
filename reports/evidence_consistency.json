@@ -179,12 +179,12 @@
       "status": "pass",
       "expected": {
         "status": "pass",
-        "detail": "initial load 960/1000; deferred 450265/120000; top deferred scripts 401054; resource governance governed; quality density 135.4",
+        "detail": "initial load 960/1000; deferred 449953/120000; top deferred scripts 400742; resource governance governed; quality density 135.4",
         "evidence": "reports/context_budget.json"
       },
       "actual": {
         "status": "pass",
-        "detail": "initial load 960/1000; deferred 450265/120000; top deferred scripts 401054; resource governance governed; quality density 135.4",
+        "detail": "initial load 960/1000; deferred 449953/120000; top deferred scripts 400742; resource governance governed; quality density 135.4",
         "evidence": "reports/context_budget.json"
       },
       "paths": [
@@ -238,8 +238,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "c617e4719eaf7fae4221ac59ac62665db5caa1a0",
-      "actual": "c617e4719eaf7fae4221ac59ac62665db5caa1a0",
+      "expected": "290134b4d1d5c2f5c9760434127080d1f2e47ddb",
+      "actual": "290134b4d1d5c2f5c9760434127080d1f2e47ddb",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -254,8 +254,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "7734802eb54b761e419b62d6d7e0d5861aa10401b8e8cf956934e51f9b87ba0d",
-        "archive_sha256": "1727ee08ba08d88ca55122937ec07dabb2a8a515acc5c6e375052554335da296",
+        "source_contract_sha256": "836b5ebaf4a608a1a89fa84306ab9b4bb7e0555c74b6ca8e572ffb1833cc0f8c",
+        "archive_sha256": "ed1bc47c56c8d247bf5dd351bf29201e60471b4785a86e16ae1ede5e71d1582f",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -267,8 +267,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "7734802eb54b761e419b62d6d7e0d5861aa10401b8e8cf956934e51f9b87ba0d",
-        "archive_sha256": "1727ee08ba08d88ca55122937ec07dabb2a8a515acc5c6e375052554335da296",
+        "source_contract_sha256": "836b5ebaf4a608a1a89fa84306ab9b4bb7e0555c74b6ca8e572ffb1833cc0f8c",
+        "archive_sha256": "ed1bc47c56c8d247bf5dd351bf29201e60471b4785a86e16ae1ede5e71d1582f",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -384,8 +384,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "c617e4719eaf7fae4221ac59ac62665db5caa1a0",
-      "actual": "c617e4719eaf7fae4221ac59ac62665db5caa1a0",
+      "expected": "290134b4d1d5c2f5c9760434127080d1f2e47ddb",
+      "actual": "290134b4d1d5c2f5c9760434127080d1f2e47ddb",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
@@ -400,8 +400,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "7734802eb54b761e419b62d6d7e0d5861aa10401b8e8cf956934e51f9b87ba0d",
-        "archive_sha256": "1727ee08ba08d88ca55122937ec07dabb2a8a515acc5c6e375052554335da296",
+        "source_contract_sha256": "836b5ebaf4a608a1a89fa84306ab9b4bb7e0555c74b6ca8e572ffb1833cc0f8c",
+        "archive_sha256": "ed1bc47c56c8d247bf5dd351bf29201e60471b4785a86e16ae1ede5e71d1582f",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -413,8 +413,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "7734802eb54b761e419b62d6d7e0d5861aa10401b8e8cf956934e51f9b87ba0d",
-        "archive_sha256": "1727ee08ba08d88ca55122937ec07dabb2a8a515acc5c6e375052554335da296",
+        "source_contract_sha256": "836b5ebaf4a608a1a89fa84306ab9b4bb7e0555c74b6ca8e572ffb1833cc0f8c",
+        "archive_sha256": "ed1bc47c56c8d247bf5dd351bf29201e60471b4785a86e16ae1ede5e71d1582f",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -1502,7 +1502,7 @@
             "path": "scripts",
             "label": "Deterministic helpers or local tooling",
             "kind": "folder",
-            "file_count": 113
+            "file_count": 114
           },
           {
             "path": "evals",
@@ -1517,7 +1517,7 @@
             "file_count": 225
           }
         ],
-        "file_count": 405,
+        "file_count": 406,
         "folder_count": 4,
         "distribution": [
           {
@@ -1542,7 +1542,7 @@
           },
           {
             "label": "scripts",
-            "value": 113
+            "value": 114
           },
           {
             "label": "evals",
@@ -1590,7 +1590,7 @@
             "path": "scripts",
             "label": "Deterministic helpers or local tooling",
             "kind": "folder",
-            "file_count": 113
+            "file_count": 114
           },
           {
             "path": "evals",
@@ -1605,7 +1605,7 @@
             "file_count": 225
           }
         ],
-        "file_count": 405,
+        "file_count": 406,
         "folder_count": 4,
         "distribution": [
           {
@@ -1630,7 +1630,7 @@
           },
           {
             "label": "scripts",
-            "value": 113
+            "value": 114
           },
           {
             "label": "evals",
@@ -2270,10 +2270,10 @@
         "score `91`",
         "`16` gates",
         "`3` warnings",
-        "`30` declared internal modules",
-        "`83 / 83` CLI help smoke checks passing across `113` scripts",
-        "`624` zip entries",
-        "archive with `624` entries",
+        "`31` declared internal modules",
+        "`83 / 83` CLI help smoke checks passing across `114` scripts",
+        "`626` zip entries",
+        "archive with `626` entries",
         "`12` installer permission checks enforced",
         "`0` permission failures",
         "`25` required artifacts",
