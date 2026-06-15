@@ -55,6 +55,7 @@ python3 scripts/render_world_class_submission_review.py . --generated-at "$GENER
 python3 scripts/render_world_class_operator_runbook.py . --generated-at "$GENERATED_AT"
 python3 scripts/render_world_class_claim_guard.py . --generated-at "$GENERATED_AT"
 python3 scripts/render_daily_skillops_report.py . --generated-at "$GENERATED_AT"
+python3 scripts/render_weekly_curator_report.py . --generated-at "$GENERATED_AT"
 python3 scripts/render_skill_os2_audit.py . --generated-at "$GENERATED_AT"
 python3 scripts/render_skill_os2_coverage.py . --generated-at "$GENERATED_AT"
 python3 scripts/render_context_reports.py --generated-at "$GENERATED_AT"
@@ -73,6 +74,7 @@ For final release evidence, commit source and generated package evidence first, 
 python3 scripts/render_context_reports.py --generated-at "$GENERATED_AT"
 python3 scripts/render_benchmark_reproducibility.py . --generated-at "$GENERATED_AT"
 python3 scripts/render_daily_skillops_report.py . --generated-at "$GENERATED_AT"
+python3 scripts/render_weekly_curator_report.py . --generated-at "$GENERATED_AT"
 python3 scripts/render_skill_overview.py .
 python3 scripts/render_skill_interpretation.py .
 python3 scripts/render_review_viewer.py .

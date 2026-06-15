@@ -17,7 +17,7 @@ import yao_cli_output_commands  # noqa: E402
 import yao_cli_parser  # noqa: E402
 import yao_cli_report_commands  # noqa: E402
 import yao_cli_runtime  # noqa: E402
-
+from yao_cli_report_refresh import refresh_root_report_consistency_inputs  # noqa: E402
 
 def run(*args: str, input_text: str | None = None) -> dict:
     env = dict(os.environ)
@@ -79,10 +79,8 @@ def main() -> None:
     parser_help = yao_cli_module.build_parser().format_help()
     expected_help = (
         "quickstart skill-interpretation review-studio python-compat architecture-audit skill-os2-audit skill-os2-coverage "
-        "world-class-evidence world-class-ledger world-class-intake world-class-preflight world-class-submission-kit "
-        "world-class-submission-review world-class-runbook world-class-claim-guard "
-        "benchmark-reproducibility evidence-consistency output-review-kit adapt-scan adapt-propose adapt-apply "
-        "telemetry-import telemetry-emit telemetry-hooks --record-cli-telemetry"
+        "world-class-evidence world-class-ledger world-class-intake world-class-preflight world-class-submission-kit world-class-submission-review world-class-runbook world-class-claim-guard "
+        "benchmark-reproducibility evidence-consistency output-review-kit adapt-scan adapt-propose adapt-apply telemetry-import telemetry-emit telemetry-hooks weekly-curator --record-cli-telemetry"
     ).split()
     assert all(item in parser_help for item in expected_help), parser_help
 
@@ -329,6 +327,8 @@ def main() -> None:
     assert benchmark_reproducibility_result["ok"], benchmark_reproducibility_result
     assert benchmark_reproducibility_result["payload"]["summary"]["reproducibility_ready"] is True, benchmark_reproducibility_result
     assert benchmark_reproducibility_result["payload"]["summary"]["world_class_ready"] is False, benchmark_reproducibility_result
+
+    refresh_root_report_consistency_inputs(run, ROOT)
 
     evidence_consistency_result = run(
         "evidence-consistency", str(ROOT),
@@ -763,6 +763,7 @@ def main() -> None:
     assert "benchmark_reproducibility" in report_result["payload"]["artifacts"], report_result
     assert "evidence_consistency" in report_result["payload"]["artifacts"], report_result
     assert "skill_os2_coverage" in report_result["payload"]["artifacts"], report_result
+    assert "weekly_curator" in report_result["payload"]["artifacts"], report_result
     assert report_result["payload"]["artifacts"]["skill_overview"] == "reports/skill-overview.json", report_result
     assert report_result["payload"]["artifacts"]["skill_interpretation"] == "reports/skill-interpretation.json", report_result
     assert report_result["payload"]["artifacts"]["skill_interpretation_html"] == "reports/skill-interpretation.html", report_result
@@ -893,7 +894,6 @@ def main() -> None:
     assert test_result["ok"], test_result
 
     print(json.dumps({"ok": True}, ensure_ascii=False, indent=2))
-
 
 if __name__ == "__main__":
     main()
