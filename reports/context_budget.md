@@ -2,7 +2,7 @@
 
 | Target | Path | Tier | Limit | Initial | SKILL | Deferred | Resource Governance | Large Deferred Dirs | Quality Density | Unused Dirs | Status |
 | --- | --- | --- | ---: | ---: | ---: | ---: | --- | --- | ---: | --- | --- |
-| root | `.` | `production` | 1000 | 960 | 767 | 451359 | `governed` | scripts:402148 | 135.4 | - | ok |
+| root | `.` | `production` | 1000 | 960 | 767 | 451511 | `governed` | scripts:402300 | 135.4 | - | ok |
 | complex-release-orchestrator | `examples/complex-release-orchestrator/generated-skill` | `production` | 1000 | 790 | 718 | 1657 | `not-required` | - | 164.6 | - | ok |
 | governed-incident-command | `examples/governed-incident-command/generated-skill` | `production` | 1000 | 760 | 658 | 1030 | `not-required` | - | 171.1 | - | ok |
 
