@@ -2,9 +2,9 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 207,
-    "script_count": 119,
-    "internal_module_count": 33,
+    "scanned_files": 208,
+    "script_count": 120,
+    "internal_module_count": 34,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 207,
-    "package_sha256": "cd77d787e9e8f85993a28db9320f8ea329052c0a6772c32ac40dae5ddcf2072f"
+    "package_hash_file_count": 208,
+    "package_sha256": "c6d6f2a9b0e22b9ecdf1d8ff74a9d18b16d34729b063c813dc5e16e8328e66f9"
   },
   "failures": [],
   "warnings": [],
@@ -1573,6 +1573,20 @@
       "network_hosts": []
     },
     {
+      "path": "scripts/world_class_submission_matrix.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Shared by submission kit rendering to summarize draft, artifact, and source-check readiness.",
+      "has_argparse": false,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
       "path": "scripts/yao.py",
       "interface": "cli",
       "interface_declared": false,
@@ -1747,7 +1761,7 @@
     "checked_count": 86,
     "passed_count": 86,
     "failed_count": 0,
-    "skipped_count": 33,
+    "skipped_count": 34,
     "failed_scripts": [],
     "results": [
       {
@@ -2706,6 +2720,10 @@
       },
       {
         "path": "scripts/world_class_source_checks.py",
+        "reason": "internal module"
+      },
+      {
+        "path": "scripts/world_class_submission_matrix.py",
         "reason": "internal module"
       },
       {

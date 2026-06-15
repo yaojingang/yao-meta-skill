@@ -4,10 +4,10 @@
   "generated_at": "2026-06-16",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 188,
-    "script_file_count": 119,
+    "python_file_count": 189,
+    "script_file_count": 120,
     "test_file_count": 69,
-    "internal_module_count": 36,
+    "internal_module_count": 37,
     "cli_script_count": 85,
     "command_handler_count": 68,
     "entrypoint_command_handler_count": 18,
@@ -45,7 +45,7 @@
     },
     {
       "path": "tests/verify_world_class_evidence_intake.py",
-      "lines": 817,
+      "lines": 842,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
@@ -72,15 +72,15 @@
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
-      "path": "scripts/build_skill_atlas.py",
-      "lines": 730,
+      "path": "scripts/prepare_world_class_submission_kit.py",
+      "lines": 783,
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
-      "path": "scripts/prepare_world_class_submission_kit.py",
-      "lines": 724,
+      "path": "scripts/build_skill_atlas.py",
+      "lines": 730,
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
@@ -131,7 +131,7 @@
     },
     {
       "path": "tests/verify_world_class_evidence_intake.py",
-      "lines": 817,
+      "lines": 842,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
@@ -158,15 +158,15 @@
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
-      "path": "scripts/build_skill_atlas.py",
-      "lines": 730,
+      "path": "scripts/prepare_world_class_submission_kit.py",
+      "lines": 783,
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
-      "path": "scripts/prepare_world_class_submission_kit.py",
-      "lines": 724,
+      "path": "scripts/build_skill_atlas.py",
+      "lines": 730,
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."

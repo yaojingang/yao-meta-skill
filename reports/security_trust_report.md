@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `207`
-- Scripts: `119`
-- Internal script modules: `33`
+- Scanned files: `208`
+- Scripts: `120`
+- Internal script modules: `34`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `207`
-- Package SHA256: `cd77d787e9e8f85993a28db9320f8ea329052c0a6772c32ac40dae5ddcf2072f`
+- Package hash files: `208`
+- Package SHA256: `c6d6f2a9b0e22b9ecdf1d8ff74a9d18b16d34729b063c813dc5e16e8328e66f9`
 
 ## Failures
 
@@ -171,6 +171,7 @@
 | scripts/verify_package.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/world_class_evidence_contract.py | internal-module | True | False | False | False | False | False | False | Imported by world-class evidence reports to share intake validation and artifact integrity checks. |
 | scripts/world_class_source_checks.py | internal-module | True | False | False | False | False | False | False | Imported by world-class evidence reports to keep source-evidence readiness checks consistent. |
+| scripts/world_class_submission_matrix.py | internal-module | True | False | False | False | False | False | False | Shared by submission kit rendering to summarize draft, artifact, and source-check readiness. |
 | scripts/yao.py | cli | False | True | True | False | False | False | True | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/yao_cli_adaptation_commands.py | internal-module | True | True | False | False | False | False | False | Imported by yao.py to keep adaptive scan/proposal/apply command handlers outside the thin CLI orchestrator. |
 | scripts/yao_cli_config.py | internal-module | True | False | False | False | False | False | False | Imported by yao.py for CLI target maps and side-effect-free shaping helpers. |

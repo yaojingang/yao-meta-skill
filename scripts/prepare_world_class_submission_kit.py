@@ -11,6 +11,7 @@ from html_rendering import html_text
 from render_world_class_evidence_intake import build_intake
 from world_class_evidence_contract import DISALLOWED_REAL_ARTIFACTS
 from world_class_source_checks import build_source_checklist, summarize_source_checklist
+from world_class_submission_matrix import build_evidence_matrix, summarize_evidence_matrix
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -296,6 +297,23 @@ def render_readme(report: dict[str, Any]) -> str:
         lines.append(
             f"| `{item['evidence_key']}` | `{item['output_path']}` | `{item['status']}` | `{item.get('prefilled_artifact_ref_count', 0)}` |"
         )
+    lines.extend(
+        [
+            "",
+            "## Evidence Matrix",
+            "",
+            "This matrix combines draft, artifact, and source-check readiness into one operator action list. Matrix rows are guidance only; they do not count as completion evidence.",
+            "",
+            "| Evidence | Stage | Draft | Artifacts | Source checks | Next action |",
+            "| --- | --- | --- | ---: | ---: | --- |",
+        ]
+    )
+    for item in report.get("evidence_matrix", []):
+        lines.append(
+            f"| `{item['evidence_key']}` | `{item['stage']}` | `{item['draft_status']}` | "
+            f"`{item['artifact_ready_count']}/{item['artifact_total_count']}` | "
+            f"`{item['source_pass_count']}/{item['source_check_count']}` | {item['next_action']} |"
+        )
     lines.extend(["", "## Execution Runbook", ""])
     for item in report.get("evidence_items", []):
         must_collect = item.get("must_collect", {}) if isinstance(item.get("must_collect", {}), dict) else {}
@@ -455,6 +473,39 @@ def render_html_source_checklist(items: list[dict[str, Any]]) -> str:
     )
 
 
+def render_html_matrix(items: list[dict[str, Any]]) -> str:
+    if not items:
+        return "<p class=\"muted\">No evidence matrix rows were generated.</p>"
+    return "".join(
+        """
+        <article class="matrix-card {stage}">
+          <header>
+            <span>{stage}</span>
+            <h3>{key}</h3>
+          </header>
+          <dl>
+            <dt>Draft</dt><dd>{draft}</dd>
+            <dt>Artifacts</dt><dd>{artifact_ready}/{artifact_total} ready</dd>
+            <dt>Source</dt><dd>{source_pass}/{source_total} pass</dd>
+            <dt>Owner</dt><dd>{owner}</dd>
+          </dl>
+          <p>{action}</p>
+        </article>
+        """.format(
+            stage=html_text(item.get("stage", "")),
+            key=html_text(item.get("evidence_key", "")),
+            draft=html_text(item.get("draft_status", "")),
+            artifact_ready=html_text(item.get("artifact_ready_count", 0)),
+            artifact_total=html_text(item.get("artifact_total_count", 0)),
+            source_pass=html_text(item.get("source_pass_count", 0)),
+            source_total=html_text(item.get("source_check_count", 0)),
+            owner=html_text(item.get("owner", "")),
+            action=html_text(item.get("next_action", "")),
+        )
+        for item in items
+    )
+
+
 def render_html_item(item: dict[str, Any]) -> str:
     must_collect = item.get("must_collect", {}) if isinstance(item.get("must_collect", {}), dict) else {}
     runbook = must_collect.get("runbook", [])
@@ -506,6 +557,7 @@ def render_html(report: dict[str, Any]) -> str:
     ]
     stat_html = "".join(f"<article><span>{html_text(label)}</span><strong>{html_text(value)}</strong></article>" for label, value in stats)
     evidence_html = "".join(render_html_item(item) for item in report.get("evidence_items", []))
+    matrix_html = render_html_matrix(report.get("evidence_matrix", []))
     artifact_html = render_html_artifact_checklist(report.get("artifact_checklist", []))
     source_html = render_html_source_checklist(report.get("source_checklist", []))
     return f"""<!doctype html>
@@ -540,10 +592,12 @@ def render_html(report: dict[str, Any]) -> str:
     .section {{ padding:32px 0; border-bottom:1px solid var(--line); }}
     .panel {{ padding:20px; }}
     .two-col {{ display:grid; grid-template-columns:minmax(0, .45fr) minmax(0, 1fr); gap:18px; align-items:start; }}
-    .draft-grid, .evidence-grid, .artifact-grid, .source-grid {{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px; }}
-    .draft-card, .evidence-card, .artifact-card, .source-card {{ padding:18px; min-width:0; }}
+    .draft-grid, .evidence-grid, .artifact-grid, .source-grid, .matrix-grid {{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px; }}
+    .draft-card, .evidence-card, .artifact-card, .source-card, .matrix-card {{ padding:18px; min-width:0; border:1px solid var(--line); border-radius:8px; background:#fff; }}
     .draft-card.written, .draft-card.exists {{ border-left:4px solid var(--pass); }}
     .draft-card.skipped {{ border-left:4px solid var(--warn); }}
+    .matrix-card.collect-source, .matrix-card.prepare-draft, .matrix-card.fix-artifacts, .matrix-card.fix-draft {{ border-left:4px solid var(--warn); }}
+    .matrix-card.validate-packet {{ border-left:4px solid var(--pass); }}
     .evidence-card.awaiting-submission, .evidence-card.fix-submission, .evidence-card.fix-template, .artifact-card.missing, .artifact-card.glob-no-match, .artifact-card.unsafe-path, .artifact-card.raw-content-disallowed {{ border-left:4px solid var(--warn); }}
     .artifact-card.ready {{ border-left:4px solid var(--pass); }}
     .source-card.blocked {{ border-left:4px solid var(--warn); }}
@@ -561,11 +615,11 @@ def render_html(report: dict[str, Any]) -> str:
     .mini-grid li, .runbook-panel li, .notice li {{ overflow-wrap:anywhere; }}
     .notice {{ background:var(--soft); border-left:4px solid var(--ink); padding:16px; border-radius:8px; }}
     .errors {{ color:var(--warn); }}
-    @media (max-width:820px) {{ .stats, .two-col, .draft-grid, .evidence-grid, .artifact-grid, .source-grid, .mini-grid {{ grid-template-columns:1fr; }} h1 {{ font-size:38px; }} .topbar-inner {{ align-items:flex-start; flex-direction:column; }} }}
+    @media (max-width:820px) {{ .stats, .two-col, .draft-grid, .evidence-grid, .artifact-grid, .source-grid, .matrix-grid, .mini-grid {{ grid-template-columns:1fr; }} h1 {{ font-size:38px; }} .topbar-inner {{ align-items:flex-start; flex-direction:column; }} }}
   </style>
 </head>
 <body>
-  <nav class="topbar"><div class="topbar-inner"><span class="brand">World-Class Kit</span><div class="links"><a href="#workflow">Workflow</a><a href="#drafts">Drafts</a><a href="#artifacts">Artifacts</a><a href="#source">Source</a><a href="#evidence">Evidence</a><a href="#safety">Safety</a></div></div></nav>
+  <nav class="topbar"><div class="topbar-inner"><span class="brand">World-Class Kit</span><div class="links"><a href="#workflow">Workflow</a><a href="#matrix">Matrix</a><a href="#drafts">Drafts</a><a href="#artifacts">Artifacts</a><a href="#source">Source</a><a href="#evidence">Evidence</a><a href="#safety">Safety</a></div></div></nav>
   <main class="shell">
     <section class="hero">
       <span class="eyebrow">Evidence Intake</span>
@@ -577,6 +631,7 @@ def render_html(report: dict[str, Any]) -> str:
       <article class="panel"><h2>Workflow</h2><ol><li>Run the real provider, human review, native permission, or native client telemetry work first.</li><li>Edit the matching JSON draft with aggregate artifact references and provenance metadata.</li><li>Set template_only to false only after real evidence exists.</li><li>Use prefilled SHA-256 values as convenience data, not evidence acceptance.</li><li>Validate intake, refresh the ledger, then guard public claims.</li></ol></article>
       <aside class="panel"><h2>Commands</h2><ul class="commands">{render_html_commands(report['commands'])}</ul></aside>
     </section>
+    <section class="section" id="matrix"><h2>Evidence Matrix</h2><p class="muted">The matrix combines draft status, artifact readiness, source checks, and the next operator action. It is guidance only and never counts as accepted evidence.</p><div class="matrix-grid">{matrix_html}</div></section>
     <section class="section" id="drafts"><h2>Drafts</h2><div class="draft-grid">{render_html_files(report['files'])}</div></section>
     <section class="section" id="artifacts"><h2>Artifact Checklist</h2><p class="muted">Copy concrete paths and SHA-256 digests from here into artifact_refs after real evidence exists. Glob patterns are expanded for operator convenience only.</p><div class="artifact-grid">{artifact_html}</div></section>
     <section class="section" id="source"><h2>Source Evidence Snapshot</h2><p class="muted">This section shows current aggregate source checks. It explains remaining blockers without changing the ledger.</p><div class="source-grid">{source_html}</div></section>
@@ -617,6 +672,7 @@ def build_submission_kit(
         for item in items
     ]
     source_checklist = build_source_checklist(items)
+    evidence_matrix = build_evidence_matrix(items, files, artifact_checklist, source_checklist)
     manifest_path = output_dir / "submission_manifest.json"
     readme_path = output_dir / "README.md"
     output_html = output_html or (output_dir / "index.html")
@@ -629,6 +685,7 @@ def build_submission_kit(
     artifact_missing_count = sum(1 for item in artifact_checklist if not item.get("artifact_ref_ready"))
     artifact_glob_count = sum(1 for item in artifact_checklist if item.get("concrete_reference_required"))
     source_summary = summarize_source_checklist(source_checklist)
+    matrix_summary = summarize_evidence_matrix(evidence_matrix)
     ok = not unknown_keys and skipped_count == 0
     report = {
         "schema_version": "1.0",
@@ -651,6 +708,7 @@ def build_submission_kit(
             "artifact_ref_prefill_count": prefilled_artifact_ref_count,
             "artifact_ref_unfilled_count": unfilled_artifact_ref_count,
             **source_summary,
+            **matrix_summary,
             "drafts_count_as_evidence": False,
             "ledger_counts_submission_as_completion": False,
             "decision": "submission-kit-ready" if ok else "fix-submission-kit",
@@ -659,6 +717,7 @@ def build_submission_kit(
         "files": files,
         "artifact_checklist": artifact_checklist,
         "source_checklist": source_checklist,
+        "evidence_matrix": evidence_matrix,
         "evidence_items": items,
         "commands": {
             "validate_intake": f"python3 scripts/yao.py world-class-intake . --submissions-dir {shell_path(output_dir, skill_dir)}",

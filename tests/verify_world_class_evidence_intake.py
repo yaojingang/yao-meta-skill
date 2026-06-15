@@ -620,10 +620,25 @@ def main() -> None:
     assert kit_payload["summary"]["source_check_count"] == 3, kit_payload["summary"]
     assert kit_payload["summary"]["source_pass_count"] == 1, kit_payload["summary"]
     assert kit_payload["summary"]["source_blocked_count"] == 2, kit_payload["summary"]
+    assert kit_payload["summary"]["evidence_matrix_count"] == 1, kit_payload["summary"]
+    assert kit_payload["summary"]["evidence_matrix_collect_source_count"] == 1, kit_payload["summary"]
+    assert kit_payload["summary"]["evidence_matrix_counts_as_completion"] == 0, kit_payload["summary"]
     assert kit_payload["summary"]["drafts_count_as_evidence"] is False, kit_payload["summary"]
     assert kit_payload["safety"]["template_only_drafts"] is True, kit_payload["safety"]
     assert kit_payload["safety"]["raw_content_allowed"] is False, kit_payload["safety"]
     assert kit_payload["files"][0]["output_path"].endswith("tests/tmp_world_class_evidence_intake/submission_kit/provider-holdout.json"), kit_payload["files"]
+    assert len(kit_payload["evidence_matrix"]) == 1, kit_payload["evidence_matrix"]
+    matrix_row = kit_payload["evidence_matrix"][0]
+    assert matrix_row["evidence_key"] == "provider-holdout", matrix_row
+    assert matrix_row["stage"] == "collect-source", matrix_row
+    assert matrix_row["draft_status"] == "written", matrix_row
+    assert matrix_row["artifact_ready_count"] >= 1, matrix_row
+    assert matrix_row["artifact_total_count"] >= matrix_row["artifact_ready_count"], matrix_row
+    assert matrix_row["source_pass_count"] == 1, matrix_row
+    assert matrix_row["source_check_count"] == 3, matrix_row
+    assert matrix_row["source_blocked_count"] == 2, matrix_row
+    assert matrix_row["counts_as_completion"] is False, matrix_row
+    assert "real credentials" in matrix_row["next_action"], matrix_row
     artifact_rows = {item["path"]: item for item in kit_payload["artifact_checklist"]}
     assert "reports/output_execution_runs.json" in artifact_rows, artifact_rows
     assert artifact_rows["reports/output_execution_runs.json"]["artifact_ref_ready"] is True, artifact_rows
@@ -651,6 +666,9 @@ def main() -> None:
     assert "output-exec --provider-runner openai" in kit_readme, kit_readme
     assert "validate intake" in kit_readme, kit_readme
     assert "Artifact Checklist" in kit_readme, kit_readme
+    assert "Evidence Matrix" in kit_readme, kit_readme
+    assert "`collect-source`" in kit_readme, kit_readme
+    assert "Matrix rows are guidance only" in kit_readme, kit_readme
     assert "Source Evidence Snapshot" in kit_readme, kit_readme
     assert "reports/output_execution_runs.json" in kit_readme, kit_readme
     assert "Provider model run" in kit_readme, kit_readme
@@ -659,6 +677,13 @@ def main() -> None:
     assert "Drafts are not accepted evidence" in kit_html, kit_html
     assert "provider-holdout" in kit_html, kit_html
     assert "Artifact Checklist" in kit_html, kit_html
+    assert "Evidence Matrix" in kit_html, kit_html
+    assert "matrix-card collect-source" in kit_html, kit_html
+    assert (
+        f"<dt>Artifacts</dt><dd>{matrix_row['artifact_ready_count']}/{matrix_row['artifact_total_count']} ready</dd>"
+        in kit_html
+    ), kit_html
+    assert "<dt>Source</dt><dd>1/3 pass</dd>" in kit_html, kit_html
     assert "Source Evidence Snapshot" in kit_html, kit_html
     assert "<dt>Field</dt><dd><code>model_executed_count</code></dd>" in kit_html, kit_html
     assert "<dt>Current</dt><dd><code>0</code></dd>" in kit_html, kit_html
