@@ -29,6 +29,7 @@ TEXT_ZH = {
     "Borrow one proven pattern on purpose": "有选择地借鉴一个成熟模式",
     "Harden portability semantics": "加固跨环境语义",
     "Create an iteration evidence loop": "建立迭代证据回路",
+    "补齐世界证据": "补齐世界证据",
     "The package needs clearer near-neighbor exclusions before it grows.": "在继续扩展前，需要先把相邻但不应触发的场景说清楚。",
     "The package is still mostly prose. Add one asset that removes repeated manual work.": "当前包体仍偏文本说明，应先增加一个能减少重复人工操作的资产。",
     "The first version exists; the next gain usually comes from adding the smallest useful gates.": "第一版已经存在，下一步收益通常来自补上最小但有效的质量门禁。",
@@ -58,6 +59,8 @@ TEXT_ZH = {
     "A cleaner package shape with less accidental over-design.": "包体形态更清晰，也减少偶然过度设计。",
     "Safer cross-environment reuse with less target drift.": "跨环境复用更安全，目标漂移更少。",
     "A clearer path for the next author or reviewer.": "让下一位作者或评审者更容易接手。",
+    "提交有效 intake packet，并让 ledger 通过 artifact SHA-256 校验。": "提交有效 intake packet，并让 ledger 通过 artifact SHA-256 校验。",
+    "全部外部/人工证据被 ledger 接受后，才能进入公开 world-class claim 复核。": "全部外部/人工证据被 ledger 接受后，才能进入公开 world-class claim 复核。",
 }
 
 TEXT_EN = {
@@ -154,6 +157,13 @@ TEXT_EN = {
     "只把重复且稳定的步骤沉淀为脚本。": "Turn only repeated and stable steps into scripts.",
     "每次升级后重新生成报告并检查分数原因。": "Regenerate the report after each upgrade and inspect score reasons.",
     "先补证据和边界，再增加包体复杂度。": "Improve evidence and boundaries before adding package complexity.",
+    "补齐世界证据": "Close world-class evidence",
+    "提交有效 intake packet，并让 ledger 通过 artifact SHA-256 校验。": "Submit valid intake packets and let the ledger verify artifact SHA-256 digests.",
+    "全部外部/人工证据被 ledger 接受后，才能进入公开 world-class claim 复核。": "Only after the ledger accepts all external and human evidence should the public world-class claim move to review.",
+    "缺少真实 provider 模型运行和 token metadata。": "Missing a real provider model run and token metadata.",
+    "盲评 pair 仍待真实 reviewer 决策。": "Blind-review pairs still need real reviewer decisions.",
+    "原生 runtime enforcement 仍待目标客户端或外部安装器证明。": "Native runtime enforcement still needs target-client or external-installer proof.",
+    "真实外部客户端 metadata-only 事件仍未导入。": "Real external-client metadata-only events have not been imported yet.",
 }
 
 MODE_ZH = {
@@ -198,6 +208,13 @@ METRIC_LABEL_EN = {
     "可维护性": "Maintainability",
     "可迁移性": "Portability",
     "上下文成本": "Context cost",
+}
+
+WORLD_CLASS_LABEL_EN = {
+    "提供商留出": "provider holdout",
+    "人工盲评": "human adjudication",
+    "原生权限": "native permission",
+    "原生遥测": "native telemetry",
 }
 
 
@@ -271,6 +288,16 @@ def en_for(text: str) -> str:
         return "Recorded fixtures: " + value.removeprefix("记录样本：")
     if value.startswith("Token 估算："):
         return "Token estimates: " + value.removeprefix("Token 估算：")
+    match = re.match(r"^世界级证据仍有\s+(\d+)\s+项待补；公开完成态 claim 必须继续保持阻塞。$", value)
+    if match:
+        return f"World-class evidence still has {match.group(1)} pending item(s); public completion claims must stay blocked."
+    match = re.match(r"^补齐(.+?)证据：(.+)$", value)
+    if match:
+        label = WORLD_CLASS_LABEL_EN.get(match.group(1), match.group(1))
+        return f"Close {label} evidence: {en_for(match.group(2))}"
+    match = re.match(r"^继续补齐剩余\s+(\d+)\s+项外部/人工证据，并保持 claim guard 为 pending 状态。$", value)
+    if match:
+        return f"Close the remaining {match.group(1)} external or human evidence item(s) and keep the claim guard pending."
     match = re.match(r"^已生成\s+(\d+)\s+/\s+(\d+)\s+类报告证据。$", value)
     if match:
         return f"Generated {match.group(1)} / {match.group(2)} evidence report types."

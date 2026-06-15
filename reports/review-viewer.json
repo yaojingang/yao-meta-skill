@@ -512,7 +512,7 @@
           "path": "scripts",
           "label": "Deterministic helpers or local tooling",
           "kind": "folder",
-          "file_count": 101
+          "file_count": 102
         },
         {
           "path": "evals",
@@ -527,7 +527,7 @@
           "file_count": 207
         }
       ],
-      "file_count": 372,
+      "file_count": 373,
       "folder_count": 4,
       "distribution": [
         {
@@ -552,7 +552,7 @@
         },
         {
           "label": "scripts",
-          "value": 101
+          "value": 102
         },
         {
           "label": "evals",
@@ -566,6 +566,17 @@
     },
     "iteration_roadmap": {
       "items": [
+        {
+          "title": "补齐世界证据",
+          "why": "世界级证据仍有 4 项待补；公开完成态 claim 必须继续保持阻塞。",
+          "actions": [
+            "补齐提供商留出证据：缺少真实 provider 模型运行和 token metadata。",
+            "补齐人工盲评证据：盲评 pair 仍待真实 reviewer 决策。",
+            "继续补齐剩余 2 项外部/人工证据，并保持 claim guard 为 pending 状态。"
+          ],
+          "unlocks": "全部外部/人工证据被 ledger 接受后，才能进入公开 world-class claim 复核。",
+          "source": "world_class_evidence_ledger"
+        },
         {
           "title": "Borrow one proven pattern on purpose",
           "why": "You already have public benchmark objects. The next gain is to choose one pattern intentionally instead of absorbing everything loosely.",
@@ -585,16 +596,6 @@
             "Package the skill once to verify adapter expectations."
           ],
           "unlocks": "Safer cross-environment reuse with less target drift."
-        },
-        {
-          "title": "Create an iteration evidence loop",
-          "why": "The package should show what changed and why after the first draft.",
-          "actions": [
-            "Generate the HTML skill report and keep it aligned with the package.",
-            "Record reference scan choices and non-goals.",
-            "Capture the next iteration choice explicitly before adding more files."
-          ],
-          "unlocks": "A clearer path for the next author or reviewer."
         }
       ]
     },
@@ -681,7 +682,7 @@
         "path": "scripts",
         "label": "Deterministic helpers or local tooling",
         "kind": "folder",
-        "file_count": 101
+        "file_count": 102
       },
       {
         "path": "evals",
@@ -756,6 +757,17 @@
     ],
     "roadmap": [
       {
+        "title": "补齐世界证据",
+        "why": "世界级证据仍有 4 项待补；公开完成态 claim 必须继续保持阻塞。",
+        "actions": [
+          "补齐提供商留出证据：缺少真实 provider 模型运行和 token metadata。",
+          "补齐人工盲评证据：盲评 pair 仍待真实 reviewer 决策。",
+          "继续补齐剩余 2 项外部/人工证据，并保持 claim guard 为 pending 状态。"
+        ],
+        "unlocks": "全部外部/人工证据被 ledger 接受后，才能进入公开 world-class claim 复核。",
+        "source": "world_class_evidence_ledger"
+      },
+      {
         "title": "Borrow one proven pattern on purpose",
         "why": "You already have public benchmark objects. The next gain is to choose one pattern intentionally instead of absorbing everything loosely.",
         "actions": [
@@ -774,16 +786,6 @@
           "Package the skill once to verify adapter expectations."
         ],
         "unlocks": "Safer cross-environment reuse with less target drift."
-      },
-      {
-        "title": "Create an iteration evidence loop",
-        "why": "The package should show what changed and why after the first draft.",
-        "actions": [
-          "Generate the HTML skill report and keep it aligned with the package.",
-          "Record reference scan choices and non-goals.",
-          "Capture the next iteration choice explicitly before adding more files."
-        ],
-        "unlocks": "A clearer path for the next author or reviewer."
       }
     ],
     "cards": [],

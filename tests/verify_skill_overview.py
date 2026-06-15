@@ -72,6 +72,16 @@ def main() -> None:
     assert en_for("Use this skill when the request matches: 中文描述") == (
         "Use this skill when the request matches the frontmatter description."
     )
+    assert en_for("补齐世界证据") == "Close world-class evidence"
+    assert en_for("世界级证据仍有 2 项待补；公开完成态 claim 必须继续保持阻塞。") == (
+        "World-class evidence still has 2 pending item(s); public completion claims must stay blocked."
+    )
+    assert en_for("补齐提供商留出证据：缺少真实 provider 模型运行和 token metadata。") == (
+        "Close provider holdout evidence: Missing a real provider model run and token metadata."
+    )
+    assert en_for("提交有效 intake packet，并让 ledger 通过 artifact SHA-256 校验。") == (
+        "Submit valid intake packets and let the ledger verify artifact SHA-256 digests."
+    )
 
     tmp_root = ROOT / "tests" / "tmp_skill_overview"
     if tmp_root.exists():
@@ -296,6 +306,11 @@ def main() -> None:
     assert overview_json["world_class_readiness"]["pending_count"] == 2, overview_json["world_class_readiness"]
     assert overview_json["world_class_readiness"]["source_pass_count"] == 1, overview_json["world_class_readiness"]
     assert overview_json["world_class_readiness"]["source_check_count"] == 4, overview_json["world_class_readiness"]
+    assert overview_json["iteration_roadmap"]["items"][0]["title"] == "补齐世界证据", overview_json["iteration_roadmap"]
+    assert overview_json["iteration_roadmap"]["items"][0]["source"] == "world_class_evidence_ledger", overview_json["iteration_roadmap"]
+    assert "世界级证据仍有 2 项待补" in overview_json["iteration_roadmap"]["items"][0]["why"], overview_json["iteration_roadmap"]
+    assert any("补齐提供商留出证据" in item for item in overview_json["iteration_roadmap"]["items"][0]["actions"]), overview_json["iteration_roadmap"]
+    assert "Close world-class evidence" in report_html, report_html
     assert "执行流程" in report_html, report_html[:5000]
     assert "调用方式" in report_html, report_html[:5000]
     assert "证据不足" in report_html or "证据充分" in report_html, report_html[:8000]
