@@ -415,14 +415,16 @@ def render_html(summary: dict) -> str:
         </article>
       </div>
       <div class="section-body metrics-report">
-        <div class="metrics-primary">
-          {charts["radar"]}
-          <article class="panel metrics-note">
-            <h3>{bi_span("成熟度条", "Maturity Bar")}</h3>
-            {render_metric_summary(scorecard)}
-          </article>
+        <div class="metrics-flow">
+          <div class="metrics-primary">
+            {charts["radar"]}
+            <article class="panel metrics-note metrics-summary-panel">
+              <h3>{bi_span("成熟度条", "Maturity Bar")}</h3>
+              {render_metric_summary(scorecard)}
+            </article>
+          </div>
+          <div class="metric-grid metric-detail-grid">{render_metric_cards(scorecard)}</div>
         </div>
-        <div class="metric-grid">{render_metric_cards(scorecard)}</div>
       </div>
     </section>
 

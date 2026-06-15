@@ -350,18 +350,25 @@
     }
     .metrics-report {
       display: grid;
-      gap: 20px;
+      gap: 22px;
+    }
+    .metrics-flow {
+      display: grid;
+      gap: 22px;
     }
     .metrics-primary {
       display: grid;
-      grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
-      gap: 20px;
-      align-items: stretch;
+      grid-template-columns: minmax(420px, 1fr) minmax(360px, 0.88fr);
+      gap: 22px;
+      align-items: start;
     }
     .metrics-primary .chart-figure {
-      min-height: 100%;
+      min-height: 0;
       display: grid;
       align-content: center;
+    }
+    .metrics-primary .chart-figure svg {
+      max-height: 520px;
     }
     .metrics-note {
       display: grid;
@@ -416,8 +423,11 @@
       font-size: 12px;
     }
     .metric-grid {
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       margin-top: 2px;
+    }
+    .metric-detail-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: stretch;
     }
     .list, .compact-list, .step-list {
       margin: 0;
@@ -446,7 +456,7 @@
     }
     .metric-card {
       display: grid;
-      grid-template-columns: 92px minmax(0, 1fr);
+      grid-template-columns: minmax(96px, 118px) minmax(0, 1fr);
       gap: 18px;
       align-content: start;
       min-height: 0;
@@ -474,6 +484,11 @@
     }
     .metric-card-body .compact-list {
       gap: 7px;
+      max-width: 62ch;
+    }
+    .metric-card-body .compact-list li {
+      overflow-wrap: break-word;
+      word-break: normal;
     }
     .chart-figure {
       margin: 0;
@@ -658,14 +673,16 @@
         </article>
       </div>
       <div class="section-body metrics-report">
-        <div class="metrics-primary">
-          <figure class="chart-figure" data-chart="radar"><svg viewBox="0 0 300 300" role="img" aria-label="评分雷达"><text x="20" y="28" class="chart-title">评分雷达</text><polygon points="150.0,127.0 171.9,142.9 163.5,168.6 136.5,168.6 128.1,142.9" fill="none" stroke="#e8e6dc" stroke-width="1"/><polygon points="150.0,104.0 193.7,135.8 177.0,187.2 123.0,187.2 106.3,135.8" fill="none" stroke="#e8e6dc" stroke-width="1"/><polygon points="150.0,81.0 215.6,128.7 190.6,205.8 109.4,205.8 84.4,128.7" fill="none" stroke="#e8e6dc" stroke-width="1"/><polygon points="150.0,58.0 237.5,121.6 204.1,224.4 95.9,224.4 62.5,121.6" fill="none" stroke="#e8e6dc" stroke-width="1"/><polygon points="150.0,65.4 237.5,121.6 182.4,194.7 104.0,213.3 62.5,121.6" fill="#E4ECF5" stroke="#1B365D" stroke-width="2"/><text x="150.0" y="26.0" text-anchor="middle" dominant-baseline="middle">完整度</text><text x="267.9" y="111.7" text-anchor="middle" dominant-baseline="middle">触发清晰</text><text x="222.9" y="250.3" text-anchor="middle" dominant-baseline="middle">证据充分</text><text x="77.1" y="250.3" text-anchor="middle" dominant-baseline="middle">可维护性</text><text x="32.1" y="111.7" text-anchor="middle" dominant-baseline="middle">可迁移性</text></svg><figcaption>评分雷达展示结构完整度、触发边界、证据、维护和迁移的相对强弱。</figcaption></figure>
-          <article class="panel metrics-note">
-            <h3><span data-lang="zh-CN">成熟度条</span><span data-lang="en">Maturity Bar</span></h3>
-            <ol class='metric-summary-list'><li><span class='metric-status'><span data-lang="zh-CN">稳定</span><span data-lang="en">Stable</span></span><b>完整度</b><em>92</em><small><span data-lang="zh-CN">SKILL.md 已存在，是 Skill 的入口。</span><span data-lang="en">SKILL.md 已存在，是 Skill 的入口。</span></small></li><li><span class='metric-status'><span data-lang="zh-CN">稳定</span><span data-lang="en">Stable</span></span><b>触发清晰</b><em>100</em><small><span data-lang="zh-CN">frontmatter description 已存在，具备基础路由面。</span><span data-lang="en">frontmatter description 已存在，具备基础路由面。</span></small></li><li><span class='metric-status'><span data-lang="zh-CN">关注</span><span data-lang="en">Watch</span></span><b>证据充分</b><em>60</em><small><span data-lang="zh-CN">已生成 12 / 20 类报告证据。</span><span data-lang="en">已生成 12 / 20 类报告证据。</span></small></li><li><span class='metric-status'><span data-lang="zh-CN">稳定</span><span data-lang="en">Stable</span></span><b>可维护性</b><em>85</em><small><span data-lang="zh-CN">SKILL.md 约 864 个词/字。</span><span data-lang="en">SKILL.md 约 864 个词/字。</span></small></li><li><span class='metric-status'><span data-lang="zh-CN">稳定</span><span data-lang="en">Stable</span></span><b>可迁移性</b><em>100</em><small><span data-lang="zh-CN">agents/interface.yaml 已存在。</span><span data-lang="en">agents/interface.yaml 已存在。</span></small></li><li><span class='metric-status'><span data-lang="zh-CN">可用</span><span data-lang="en">Usable</span></span><b>上下文成本</b><em>78</em><small><span data-lang="zh-CN">入口约 864 个词/字，references 约 565 个词/字。</span><span data-lang="en">入口约 864 个词/字，references 约 565 个词/字。</span></small></li></ol>
-          </article>
+        <div class="metrics-flow">
+          <div class="metrics-primary">
+            <figure class="chart-figure" data-chart="radar"><svg viewBox="0 0 300 300" role="img" aria-label="评分雷达"><text x="20" y="28" class="chart-title">评分雷达</text><polygon points="150.0,127.0 171.9,142.9 163.5,168.6 136.5,168.6 128.1,142.9" fill="none" stroke="#e8e6dc" stroke-width="1"/><polygon points="150.0,104.0 193.7,135.8 177.0,187.2 123.0,187.2 106.3,135.8" fill="none" stroke="#e8e6dc" stroke-width="1"/><polygon points="150.0,81.0 215.6,128.7 190.6,205.8 109.4,205.8 84.4,128.7" fill="none" stroke="#e8e6dc" stroke-width="1"/><polygon points="150.0,58.0 237.5,121.6 204.1,224.4 95.9,224.4 62.5,121.6" fill="none" stroke="#e8e6dc" stroke-width="1"/><polygon points="150.0,65.4 237.5,121.6 182.4,194.7 104.0,213.3 62.5,121.6" fill="#E4ECF5" stroke="#1B365D" stroke-width="2"/><text x="150.0" y="26.0" text-anchor="middle" dominant-baseline="middle">完整度</text><text x="267.9" y="111.7" text-anchor="middle" dominant-baseline="middle">触发清晰</text><text x="222.9" y="250.3" text-anchor="middle" dominant-baseline="middle">证据充分</text><text x="77.1" y="250.3" text-anchor="middle" dominant-baseline="middle">可维护性</text><text x="32.1" y="111.7" text-anchor="middle" dominant-baseline="middle">可迁移性</text></svg><figcaption>评分雷达展示结构完整度、触发边界、证据、维护和迁移的相对强弱。</figcaption></figure>
+            <article class="panel metrics-note metrics-summary-panel">
+              <h3><span data-lang="zh-CN">成熟度条</span><span data-lang="en">Maturity Bar</span></h3>
+              <ol class='metric-summary-list'><li><span class='metric-status'><span data-lang="zh-CN">稳定</span><span data-lang="en">Stable</span></span><b>完整度</b><em>92</em><small><span data-lang="zh-CN">SKILL.md 已存在，是 Skill 的入口。</span><span data-lang="en">SKILL.md 已存在，是 Skill 的入口。</span></small></li><li><span class='metric-status'><span data-lang="zh-CN">稳定</span><span data-lang="en">Stable</span></span><b>触发清晰</b><em>100</em><small><span data-lang="zh-CN">frontmatter description 已存在，具备基础路由面。</span><span data-lang="en">frontmatter description 已存在，具备基础路由面。</span></small></li><li><span class='metric-status'><span data-lang="zh-CN">关注</span><span data-lang="en">Watch</span></span><b>证据充分</b><em>60</em><small><span data-lang="zh-CN">已生成 12 / 20 类报告证据。</span><span data-lang="en">已生成 12 / 20 类报告证据。</span></small></li><li><span class='metric-status'><span data-lang="zh-CN">稳定</span><span data-lang="en">Stable</span></span><b>可维护性</b><em>85</em><small><span data-lang="zh-CN">SKILL.md 约 864 个词/字。</span><span data-lang="en">SKILL.md 约 864 个词/字。</span></small></li><li><span class='metric-status'><span data-lang="zh-CN">稳定</span><span data-lang="en">Stable</span></span><b>可迁移性</b><em>100</em><small><span data-lang="zh-CN">agents/interface.yaml 已存在。</span><span data-lang="en">agents/interface.yaml 已存在。</span></small></li><li><span class='metric-status'><span data-lang="zh-CN">可用</span><span data-lang="en">Usable</span></span><b>上下文成本</b><em>78</em><small><span data-lang="zh-CN">入口约 864 个词/字，references 约 565 个词/字。</span><span data-lang="en">入口约 864 个词/字，references 约 565 个词/字。</span></small></li></ol>
+            </article>
+          </div>
+          <div class="metric-grid metric-detail-grid"><article class='metric-card'><div class='metric-card-head'><span class='metric-label'>完整度</span><strong>92</strong></div><div class='metric-card-body'><ul class="compact-list"><li><span data-lang="zh-CN">SKILL.md 已存在，是 Skill 的入口。</span><span data-lang="en">SKILL.md 已存在，是 Skill 的入口。</span></li><li><span data-lang="zh-CN">README.md 已存在，便于人工阅读。</span><span data-lang="en">README.md 已存在，便于人工阅读。</span></li><li><span data-lang="zh-CN">agents/interface.yaml 已存在，便于跨平台适配。</span><span data-lang="en">agents/interface.yaml 已存在，便于跨平台适配。</span></li></ul></div></article><article class='metric-card'><div class='metric-card-head'><span class='metric-label'>触发清晰</span><strong>100</strong></div><div class='metric-card-body'><ul class="compact-list"><li><span data-lang="zh-CN">frontmatter description 已存在，具备基础路由面。</span><span data-lang="en">frontmatter description 已存在，具备基础路由面。</span></li><li><span data-lang="zh-CN">description 有足够长度说明任务边界。</span><span data-lang="en">description 有足够长度说明任务边界。</span></li><li><span data-lang="zh-CN">description 已包含使用场景或排除边界信号。</span><span data-lang="en">description 已包含使用场景或排除边界信号。</span></li></ul></div></article><article class='metric-card'><div class='metric-card-head'><span class='metric-label'>证据充分</span><strong>60</strong></div><div class='metric-card-body'><ul class="compact-list"><li><span data-lang="zh-CN">已生成 12 / 20 类报告证据。</span><span data-lang="en">已生成 12 / 20 类报告证据。</span></li><li><span data-lang="zh-CN">skill-ir.json 已存在。</span><span data-lang="en">skill-ir.json 已存在。</span></li><li><span data-lang="zh-CN">compiled_targets.json 已存在。</span><span data-lang="en">compiled_targets.json 已存在。</span></li></ul></div></article><article class='metric-card'><div class='metric-card-head'><span class='metric-label'>可维护性</span><strong>85</strong></div><div class='metric-card-body'><ul class="compact-list"><li><span data-lang="zh-CN">SKILL.md 约 864 个词/字。</span><span data-lang="en">SKILL.md 约 864 个词/字。</span></li><li><span data-lang="zh-CN">入口文件保持克制，可维护性较好。</span><span data-lang="en">入口文件保持克制，可维护性较好。</span></li><li><span data-lang="zh-CN">references/ 已承载扩展指导。</span><span data-lang="en">references/ 已承载扩展指导。</span></li></ul></div></article><article class='metric-card'><div class='metric-card-head'><span class='metric-label'>可迁移性</span><strong>100</strong></div><div class='metric-card-body'><ul class="compact-list"><li><span data-lang="zh-CN">agents/interface.yaml 已存在。</span><span data-lang="en">agents/interface.yaml 已存在。</span></li><li><span data-lang="zh-CN">manifest.json 已存在。</span><span data-lang="en">manifest.json 已存在。</span></li><li><span data-lang="zh-CN">目标平台或 adapter target 已声明。</span><span data-lang="en">目标平台或 adapter target 已声明。</span></li></ul></div></article><article class='metric-card'><div class='metric-card-head'><span class='metric-label'>上下文成本</span><strong>78</strong></div><div class='metric-card-body'><ul class="compact-list"><li><span data-lang="zh-CN">入口约 864 个词/字，references 约 565 个词/字。</span><span data-lang="en">入口约 864 个词/字，references 约 565 个词/字。</span></li><li><span data-lang="zh-CN">分数越高代表上下文成本越低。</span><span data-lang="en">分数越高代表上下文成本越低。</span></li><li><span data-lang="zh-CN">上下文成本处于可控区间。</span><span data-lang="en">上下文成本处于可控区间。</span></li></ul></div></article></div>
         </div>
-        <div class="metric-grid"><article class='metric-card'><div class='metric-card-head'><span class='metric-label'>完整度</span><strong>92</strong></div><div class='metric-card-body'><ul class="compact-list"><li><span data-lang="zh-CN">SKILL.md 已存在，是 Skill 的入口。</span><span data-lang="en">SKILL.md 已存在，是 Skill 的入口。</span></li><li><span data-lang="zh-CN">README.md 已存在，便于人工阅读。</span><span data-lang="en">README.md 已存在，便于人工阅读。</span></li><li><span data-lang="zh-CN">agents/interface.yaml 已存在，便于跨平台适配。</span><span data-lang="en">agents/interface.yaml 已存在，便于跨平台适配。</span></li></ul></div></article><article class='metric-card'><div class='metric-card-head'><span class='metric-label'>触发清晰</span><strong>100</strong></div><div class='metric-card-body'><ul class="compact-list"><li><span data-lang="zh-CN">frontmatter description 已存在，具备基础路由面。</span><span data-lang="en">frontmatter description 已存在，具备基础路由面。</span></li><li><span data-lang="zh-CN">description 有足够长度说明任务边界。</span><span data-lang="en">description 有足够长度说明任务边界。</span></li><li><span data-lang="zh-CN">description 已包含使用场景或排除边界信号。</span><span data-lang="en">description 已包含使用场景或排除边界信号。</span></li></ul></div></article><article class='metric-card'><div class='metric-card-head'><span class='metric-label'>证据充分</span><strong>60</strong></div><div class='metric-card-body'><ul class="compact-list"><li><span data-lang="zh-CN">已生成 12 / 20 类报告证据。</span><span data-lang="en">已生成 12 / 20 类报告证据。</span></li><li><span data-lang="zh-CN">skill-ir.json 已存在。</span><span data-lang="en">skill-ir.json 已存在。</span></li><li><span data-lang="zh-CN">compiled_targets.json 已存在。</span><span data-lang="en">compiled_targets.json 已存在。</span></li></ul></div></article><article class='metric-card'><div class='metric-card-head'><span class='metric-label'>可维护性</span><strong>85</strong></div><div class='metric-card-body'><ul class="compact-list"><li><span data-lang="zh-CN">SKILL.md 约 864 个词/字。</span><span data-lang="en">SKILL.md 约 864 个词/字。</span></li><li><span data-lang="zh-CN">入口文件保持克制，可维护性较好。</span><span data-lang="en">入口文件保持克制，可维护性较好。</span></li><li><span data-lang="zh-CN">references/ 已承载扩展指导。</span><span data-lang="en">references/ 已承载扩展指导。</span></li></ul></div></article><article class='metric-card'><div class='metric-card-head'><span class='metric-label'>可迁移性</span><strong>100</strong></div><div class='metric-card-body'><ul class="compact-list"><li><span data-lang="zh-CN">agents/interface.yaml 已存在。</span><span data-lang="en">agents/interface.yaml 已存在。</span></li><li><span data-lang="zh-CN">manifest.json 已存在。</span><span data-lang="en">manifest.json 已存在。</span></li><li><span data-lang="zh-CN">目标平台或 adapter target 已声明。</span><span data-lang="en">目标平台或 adapter target 已声明。</span></li></ul></div></article><article class='metric-card'><div class='metric-card-head'><span class='metric-label'>上下文成本</span><strong>78</strong></div><div class='metric-card-body'><ul class="compact-list"><li><span data-lang="zh-CN">入口约 864 个词/字，references 约 565 个词/字。</span><span data-lang="en">入口约 864 个词/字，references 约 565 个词/字。</span></li><li><span data-lang="zh-CN">分数越高代表上下文成本越低。</span><span data-lang="en">分数越高代表上下文成本越低。</span></li><li><span data-lang="zh-CN">上下文成本处于可控区间。</span><span data-lang="en">上下文成本处于可控区间。</span></li></ul></div></article></div>
       </div>
     </section>
 

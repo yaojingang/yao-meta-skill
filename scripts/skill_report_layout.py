@@ -379,18 +379,25 @@ def skill_overview_css() -> str:
     }
     .metrics-report {
       display: grid;
-      gap: 20px;
+      gap: 22px;
+    }
+    .metrics-flow {
+      display: grid;
+      gap: 22px;
     }
     .metrics-primary {
       display: grid;
-      grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
-      gap: 20px;
-      align-items: stretch;
+      grid-template-columns: minmax(420px, 1fr) minmax(360px, 0.88fr);
+      gap: 22px;
+      align-items: start;
     }
     .metrics-primary .chart-figure {
-      min-height: 100%;
+      min-height: 0;
       display: grid;
       align-content: center;
+    }
+    .metrics-primary .chart-figure svg {
+      max-height: 520px;
     }
     .metrics-note {
       display: grid;
@@ -445,8 +452,11 @@ def skill_overview_css() -> str:
       font-size: 12px;
     }
     .metric-grid {
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       margin-top: 2px;
+    }
+    .metric-detail-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: stretch;
     }
     .list, .compact-list, .step-list {
       margin: 0;
@@ -475,7 +485,7 @@ def skill_overview_css() -> str:
     }
     .metric-card {
       display: grid;
-      grid-template-columns: 92px minmax(0, 1fr);
+      grid-template-columns: minmax(96px, 118px) minmax(0, 1fr);
       gap: 18px;
       align-content: start;
       min-height: 0;
@@ -503,6 +513,11 @@ def skill_overview_css() -> str:
     }
     .metric-card-body .compact-list {
       gap: 7px;
+      max-width: 62ch;
+    }
+    .metric-card-body .compact-list li {
+      overflow-wrap: break-word;
+      word-break: normal;
     }
     .chart-figure {
       margin: 0;
