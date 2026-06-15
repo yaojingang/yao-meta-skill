@@ -1,0 +1,1648 @@
+{
+  "schema_version": "1.0",
+  "ok": true,
+  "generated_at": "2026-06-15",
+  "skill_dir": ".",
+  "summary": {
+    "check_count": 26,
+    "pass_count": 26,
+    "warn_count": 0,
+    "fail_count": 0,
+    "decision": "consistent"
+  },
+  "status_counts": {
+    "pass": 26,
+    "warn": 0,
+    "fail": 0
+  },
+  "checks": [
+    {
+      "key": "required-report-artifacts",
+      "label": "Required report artifacts are readable",
+      "status": "pass",
+      "expected": "all required JSON reports exist and parse",
+      "actual": "all readable",
+      "paths": [
+        "reports/benchmark_reproducibility.json",
+        "reports/skill-overview.json",
+        "reports/skill-interpretation.json",
+        "reports/adoption_drift_report.json",
+        "reports/world_class_evidence_ledger.json",
+        "reports/skill_os2_coverage.json",
+        "reports/review-studio.json"
+      ],
+      "detail": "The consistency gate can only be trusted when every source report is present and valid JSON."
+    },
+    {
+      "key": "benchmark-release-lock-self-consistency",
+      "label": "Benchmark release lock matches git dirty state",
+      "status": "pass",
+      "expected": false,
+      "actual": false,
+      "paths": [
+        "reports/benchmark_reproducibility.json"
+      ],
+      "detail": "The benchmark release lock must reflect the generation-time git dirty flag."
+    },
+    {
+      "key": "overview-benchmark-commit",
+      "label": "overview embeds the benchmark commit",
+      "status": "pass",
+      "expected": "effbf3f74c4ce959c7444d873d0586d884a43202",
+      "actual": "effbf3f74c4ce959c7444d873d0586d884a43202",
+      "paths": [
+        "reports/benchmark_reproducibility.json",
+        "reports/skill-overview.json"
+      ],
+      "detail": "Human-facing reports must point to the same benchmark release-lock commit."
+    },
+    {
+      "key": "overview-benchmark-summary",
+      "label": "overview embeds benchmark summary fields",
+      "status": "pass",
+      "expected": {
+        "release_lock_ready": false,
+        "required_artifact_count": 24,
+        "missing_artifact_count": 0,
+        "source_contract_sha256": "278b4ff6c0c7e8406dfa62e5813013532af58e35d12b22f8bef25d59ac544713",
+        "archive_sha256": "6852cf91a74d232c32d732b7c159c971827abf23af50153987193b084ad3b5cc",
+        "world_class_ledger_pending_count": 4,
+        "world_class_source_check_count": 13,
+        "world_class_source_pass_count": 6,
+        "world_class_source_blocked_count": 7,
+        "public_claim_ready": false,
+        "public_claim_blocker_count": 5
+      },
+      "actual": {
+        "release_lock_ready": false,
+        "required_artifact_count": 24,
+        "missing_artifact_count": 0,
+        "source_contract_sha256": "278b4ff6c0c7e8406dfa62e5813013532af58e35d12b22f8bef25d59ac544713",
+        "archive_sha256": "6852cf91a74d232c32d732b7c159c971827abf23af50153987193b084ad3b5cc",
+        "world_class_ledger_pending_count": 4,
+        "world_class_source_check_count": 13,
+        "world_class_source_pass_count": 6,
+        "world_class_source_blocked_count": 7,
+        "public_claim_ready": false,
+        "public_claim_blocker_count": 5
+      },
+      "paths": [
+        "reports/benchmark_reproducibility.json",
+        "reports/skill-overview.json"
+      ],
+      "detail": "Selected summary fields must match exactly across generated reports."
+    },
+    {
+      "key": "overview-adoption-summary",
+      "label": "overview embeds adoption drift summary fields",
+      "status": "pass",
+      "expected": {
+        "event_count": 1,
+        "adoption_sample_count": 0,
+        "activation_count": 0,
+        "accepted_count": 0,
+        "adoption_rate": 0,
+        "risk_band": "low",
+        "event_types": {
+          "review_event": 1
+        },
+        "source_types": {
+          "manual": 1
+        }
+      },
+      "actual": {
+        "event_count": 1,
+        "adoption_sample_count": 0,
+        "activation_count": 0,
+        "accepted_count": 0,
+        "adoption_rate": 0,
+        "risk_band": "low",
+        "event_types": {
+          "review_event": 1
+        },
+        "source_types": {
+          "manual": 1
+        }
+      },
+      "paths": [
+        "reports/adoption_drift_report.json",
+        "reports/skill-overview.json"
+      ],
+      "detail": "Selected summary fields must match exactly across generated reports."
+    },
+    {
+      "key": "overview-world-class-ledger-summary",
+      "label": "overview embeds world-class ledger summary fields",
+      "status": "pass",
+      "expected": {
+        "ledger_entry_count": 4,
+        "accepted_count": 0,
+        "pending_count": 4,
+        "human_pending_count": 1,
+        "external_pending_count": 3,
+        "source_check_count": 13,
+        "source_pass_count": 6,
+        "source_blocked_count": 7,
+        "ready_to_claim_world_class": false,
+        "decision": "evidence-pending"
+      },
+      "actual": {
+        "ledger_entry_count": 4,
+        "accepted_count": 0,
+        "pending_count": 4,
+        "human_pending_count": 1,
+        "external_pending_count": 3,
+        "source_check_count": 13,
+        "source_pass_count": 6,
+        "source_blocked_count": 7,
+        "ready_to_claim_world_class": false,
+        "decision": "evidence-pending"
+      },
+      "paths": [
+        "reports/world_class_evidence_ledger.json",
+        "reports/skill-overview.json"
+      ],
+      "detail": "Selected summary fields must match exactly across generated reports."
+    },
+    {
+      "key": "overview-world-class-readiness",
+      "label": "overview derives readiness from the ledger",
+      "status": "pass",
+      "expected": {
+        "ready": false,
+        "decision": "evidence-pending",
+        "pending_count": 4,
+        "accepted_count": 0,
+        "source_check_count": 13,
+        "source_pass_count": 6
+      },
+      "actual": {
+        "ready": false,
+        "decision": "evidence-pending",
+        "pending_count": 4,
+        "accepted_count": 0,
+        "source_check_count": 13,
+        "source_pass_count": 6
+      },
+      "paths": [
+        "reports/world_class_evidence_ledger.json",
+        "reports/skill-overview.json"
+      ],
+      "detail": "Readiness summaries must be derived from the evidence ledger, not hand-maintained copy."
+    },
+    {
+      "key": "interpretation-benchmark-commit",
+      "label": "interpretation embeds the benchmark commit",
+      "status": "pass",
+      "expected": "effbf3f74c4ce959c7444d873d0586d884a43202",
+      "actual": "effbf3f74c4ce959c7444d873d0586d884a43202",
+      "paths": [
+        "reports/benchmark_reproducibility.json",
+        "reports/skill-interpretation.json"
+      ],
+      "detail": "Human-facing reports must point to the same benchmark release-lock commit."
+    },
+    {
+      "key": "interpretation-benchmark-summary",
+      "label": "interpretation embeds benchmark summary fields",
+      "status": "pass",
+      "expected": {
+        "release_lock_ready": false,
+        "required_artifact_count": 24,
+        "missing_artifact_count": 0,
+        "source_contract_sha256": "278b4ff6c0c7e8406dfa62e5813013532af58e35d12b22f8bef25d59ac544713",
+        "archive_sha256": "6852cf91a74d232c32d732b7c159c971827abf23af50153987193b084ad3b5cc",
+        "world_class_ledger_pending_count": 4,
+        "world_class_source_check_count": 13,
+        "world_class_source_pass_count": 6,
+        "world_class_source_blocked_count": 7,
+        "public_claim_ready": false,
+        "public_claim_blocker_count": 5
+      },
+      "actual": {
+        "release_lock_ready": false,
+        "required_artifact_count": 24,
+        "missing_artifact_count": 0,
+        "source_contract_sha256": "278b4ff6c0c7e8406dfa62e5813013532af58e35d12b22f8bef25d59ac544713",
+        "archive_sha256": "6852cf91a74d232c32d732b7c159c971827abf23af50153987193b084ad3b5cc",
+        "world_class_ledger_pending_count": 4,
+        "world_class_source_check_count": 13,
+        "world_class_source_pass_count": 6,
+        "world_class_source_blocked_count": 7,
+        "public_claim_ready": false,
+        "public_claim_blocker_count": 5
+      },
+      "paths": [
+        "reports/benchmark_reproducibility.json",
+        "reports/skill-interpretation.json"
+      ],
+      "detail": "Selected summary fields must match exactly across generated reports."
+    },
+    {
+      "key": "interpretation-adoption-summary",
+      "label": "interpretation embeds adoption drift summary fields",
+      "status": "pass",
+      "expected": {
+        "event_count": 1,
+        "adoption_sample_count": 0,
+        "activation_count": 0,
+        "accepted_count": 0,
+        "adoption_rate": 0,
+        "risk_band": "low",
+        "event_types": {
+          "review_event": 1
+        },
+        "source_types": {
+          "manual": 1
+        }
+      },
+      "actual": {
+        "event_count": 1,
+        "adoption_sample_count": 0,
+        "activation_count": 0,
+        "accepted_count": 0,
+        "adoption_rate": 0,
+        "risk_band": "low",
+        "event_types": {
+          "review_event": 1
+        },
+        "source_types": {
+          "manual": 1
+        }
+      },
+      "paths": [
+        "reports/adoption_drift_report.json",
+        "reports/skill-interpretation.json"
+      ],
+      "detail": "Selected summary fields must match exactly across generated reports."
+    },
+    {
+      "key": "interpretation-world-class-ledger-summary",
+      "label": "interpretation embeds world-class ledger summary fields",
+      "status": "pass",
+      "expected": {
+        "ledger_entry_count": 4,
+        "accepted_count": 0,
+        "pending_count": 4,
+        "human_pending_count": 1,
+        "external_pending_count": 3,
+        "source_check_count": 13,
+        "source_pass_count": 6,
+        "source_blocked_count": 7,
+        "ready_to_claim_world_class": false,
+        "decision": "evidence-pending"
+      },
+      "actual": {
+        "ledger_entry_count": 4,
+        "accepted_count": 0,
+        "pending_count": 4,
+        "human_pending_count": 1,
+        "external_pending_count": 3,
+        "source_check_count": 13,
+        "source_pass_count": 6,
+        "source_blocked_count": 7,
+        "ready_to_claim_world_class": false,
+        "decision": "evidence-pending"
+      },
+      "paths": [
+        "reports/world_class_evidence_ledger.json",
+        "reports/skill-interpretation.json"
+      ],
+      "detail": "Selected summary fields must match exactly across generated reports."
+    },
+    {
+      "key": "interpretation-world-class-readiness",
+      "label": "interpretation derives readiness from the ledger",
+      "status": "pass",
+      "expected": {
+        "ready": false,
+        "decision": "evidence-pending",
+        "pending_count": 4,
+        "accepted_count": 0,
+        "source_check_count": 13,
+        "source_pass_count": 6
+      },
+      "actual": {
+        "ready": false,
+        "decision": "evidence-pending",
+        "pending_count": 4,
+        "accepted_count": 0,
+        "source_check_count": 13,
+        "source_pass_count": 6
+      },
+      "paths": [
+        "reports/world_class_evidence_ledger.json",
+        "reports/skill-interpretation.json"
+      ],
+      "detail": "Readiness summaries must be derived from the evidence ledger, not hand-maintained copy."
+    },
+    {
+      "key": "overview-interpretation-lockstep-scorecard",
+      "label": "Overview and interpretation share scorecard",
+      "status": "pass",
+      "expected": {
+        "completeness_score": {
+          "label": "完整度",
+          "score": 100,
+          "reasons": [
+            "SKILL.md 已存在，是 Skill 的入口。",
+            "README.md 已存在，便于人工阅读。",
+            "agents/interface.yaml 已存在，便于跨平台适配。",
+            "manifest.json 已存在，生命周期信息可追踪。",
+            "reports/ 已存在，生成证据可以随包体迁移。"
+          ]
+        },
+        "trigger_score": {
+          "label": "触发清晰",
+          "score": 100,
+          "reasons": [
+            "frontmatter description 已存在，具备基础路由面。",
+            "description 有足够长度说明任务边界。",
+            "description 已包含使用场景或排除边界信号。",
+            "evals/ 已存在，可承载触发样例或质量检查。",
+            "intent-confidence 报告已生成，可辅助判断触发稳定性。"
+          ]
+        },
+        "evidence_score": {
+          "label": "证据充分",
+          "score": 100,
+          "reasons": [
+            "已生成 20 / 20 类报告证据。",
+            "skill-ir.json 已存在。",
+            "compiled_targets.json 已存在。",
+            "intent-dialogue.json 已存在。"
+          ]
+        },
+        "maintainability_score": {
+          "label": "可维护性",
+          "score": 100,
+          "reasons": [
+            "SKILL.md 约 356 个词/字。",
+            "入口文件保持克制，可维护性较好。",
+            "references/ 已承载扩展指导。",
+            "scripts/ 已承载确定性逻辑。",
+            "evals/ 已承载可迁移检查。"
+          ]
+        },
+        "portability_score": {
+          "label": "可迁移性",
+          "score": 100,
+          "reasons": [
+            "agents/interface.yaml 已存在。",
+            "manifest.json 已存在。",
+            "目标平台或 adapter target 已声明。",
+            "入口文件未发现明显私有绝对路径。"
+          ]
+        },
+        "context_cost": {
+          "label": "上下文成本",
+          "score": 42,
+          "reasons": [
+            "入口约 356 个词/字，references 约 16045 个词/字。",
+            "分数越高代表上下文成本越低。",
+            "上下文成本偏高，建议压缩入口或拆分 references。"
+          ]
+        }
+      },
+      "actual": {
+        "completeness_score": {
+          "label": "完整度",
+          "score": 100,
+          "reasons": [
+            "SKILL.md 已存在，是 Skill 的入口。",
+            "README.md 已存在，便于人工阅读。",
+            "agents/interface.yaml 已存在，便于跨平台适配。",
+            "manifest.json 已存在，生命周期信息可追踪。",
+            "reports/ 已存在，生成证据可以随包体迁移。"
+          ]
+        },
+        "trigger_score": {
+          "label": "触发清晰",
+          "score": 100,
+          "reasons": [
+            "frontmatter description 已存在，具备基础路由面。",
+            "description 有足够长度说明任务边界。",
+            "description 已包含使用场景或排除边界信号。",
+            "evals/ 已存在，可承载触发样例或质量检查。",
+            "intent-confidence 报告已生成，可辅助判断触发稳定性。"
+          ]
+        },
+        "evidence_score": {
+          "label": "证据充分",
+          "score": 100,
+          "reasons": [
+            "已生成 20 / 20 类报告证据。",
+            "skill-ir.json 已存在。",
+            "compiled_targets.json 已存在。",
+            "intent-dialogue.json 已存在。"
+          ]
+        },
+        "maintainability_score": {
+          "label": "可维护性",
+          "score": 100,
+          "reasons": [
+            "SKILL.md 约 356 个词/字。",
+            "入口文件保持克制，可维护性较好。",
+            "references/ 已承载扩展指导。",
+            "scripts/ 已承载确定性逻辑。",
+            "evals/ 已承载可迁移检查。"
+          ]
+        },
+        "portability_score": {
+          "label": "可迁移性",
+          "score": 100,
+          "reasons": [
+            "agents/interface.yaml 已存在。",
+            "manifest.json 已存在。",
+            "目标平台或 adapter target 已声明。",
+            "入口文件未发现明显私有绝对路径。"
+          ]
+        },
+        "context_cost": {
+          "label": "上下文成本",
+          "score": 42,
+          "reasons": [
+            "入口约 356 个词/字，references 约 16045 个词/字。",
+            "分数越高代表上下文成本越低。",
+            "上下文成本偏高，建议压缩入口或拆分 references。"
+          ]
+        }
+      },
+      "paths": [
+        "reports/skill-overview.json",
+        "reports/skill-interpretation.json"
+      ],
+      "detail": "The first-class interpretation report must stay in lockstep with the canonical overview model."
+    },
+    {
+      "key": "overview-interpretation-lockstep-capability-profile",
+      "label": "Overview and interpretation share capability_profile",
+      "status": "pass",
+      "expected": {
+        "archetype": "governed",
+        "task_family": "Execution operation",
+        "maturity": "governed",
+        "trigger_strength": "手动触发 + description 路由",
+        "reuse_scope": "跨平台",
+        "matrix": {
+          "execution_certainty": 72,
+          "knowledge_density": 80
+        }
+      },
+      "actual": {
+        "archetype": "governed",
+        "task_family": "Execution operation",
+        "maturity": "governed",
+        "trigger_strength": "手动触发 + description 路由",
+        "reuse_scope": "跨平台",
+        "matrix": {
+          "execution_certainty": 72,
+          "knowledge_density": 80
+        }
+      },
+      "paths": [
+        "reports/skill-overview.json",
+        "reports/skill-interpretation.json"
+      ],
+      "detail": "The first-class interpretation report must stay in lockstep with the canonical overview model."
+    },
+    {
+      "key": "overview-interpretation-lockstep-principle-model",
+      "label": "Overview and interpretation share principle_model",
+      "status": "pass",
+      "expected": {
+        "nodes": [
+          {
+            "title": "意图澄清",
+            "body": "Turn repeated workflows, prompts, transcripts, runbooks, documents, or existing skill packages into routeable, evaluable, packageable, and governable agent skills for personal, team, library, or governed reuse."
+          },
+          {
+            "title": "边界路由",
+            "body": "用 frontmatter description 决定是否触发，并写明相邻非目标。"
+          },
+          {
+            "title": "资产分层",
+            "body": "把入口、参考、脚本、评估和报告拆到各自目录，避免 SKILL.md 膨胀。"
+          },
+          {
+            "title": "证据回路",
+            "body": "Ask only the highest-leverage clarification before adding package weight."
+          },
+          {
+            "title": "漂移观察",
+            "body": "Add near-neighbor exclusions and route evals before expanding workflow steps."
+          },
+          {
+            "title": "杠杆升级",
+            "body": "Name the recurring job, expected input, output, and strongest non-goal in compact language."
+          }
+        ],
+        "layers": [
+          "入口层",
+          "参考层",
+          "脚本层",
+          "评估层",
+          "报告层"
+        ]
+      },
+      "actual": {
+        "nodes": [
+          {
+            "title": "意图澄清",
+            "body": "Turn repeated workflows, prompts, transcripts, runbooks, documents, or existing skill packages into routeable, evaluable, packageable, and governable agent skills for personal, team, library, or governed reuse."
+          },
+          {
+            "title": "边界路由",
+            "body": "用 frontmatter description 决定是否触发，并写明相邻非目标。"
+          },
+          {
+            "title": "资产分层",
+            "body": "把入口、参考、脚本、评估和报告拆到各自目录，避免 SKILL.md 膨胀。"
+          },
+          {
+            "title": "证据回路",
+            "body": "Ask only the highest-leverage clarification before adding package weight."
+          },
+          {
+            "title": "漂移观察",
+            "body": "Add near-neighbor exclusions and route evals before expanding workflow steps."
+          },
+          {
+            "title": "杠杆升级",
+            "body": "Name the recurring job, expected input, output, and strongest non-goal in compact language."
+          }
+        ],
+        "layers": [
+          "入口层",
+          "参考层",
+          "脚本层",
+          "评估层",
+          "报告层"
+        ]
+      },
+      "paths": [
+        "reports/skill-overview.json",
+        "reports/skill-interpretation.json"
+      ],
+      "detail": "The first-class interpretation report must stay in lockstep with the canonical overview model."
+    },
+    {
+      "key": "overview-interpretation-lockstep-contract-boundary",
+      "label": "Overview and interpretation share contract_boundary",
+      "status": "pass",
+      "expected": {
+        "trigger": {
+          "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
+          "activation": "manual",
+          "execution": "inline",
+          "shell": "bash"
+        },
+        "inputs": [
+          "rough workflow notes, SOPs, runbooks, prompts, transcripts, documents, or repeated task descriptions",
+          "an existing skill directory that needs refactor, evaluation, packaging, or governance hardening",
+          "target platform requirements such as OpenAI, Claude, generic Agent Skills, or team distribution",
+          "benchmark references, local constraints, desired maturity tier, and review standards"
+        ],
+        "outputs": [
+          "A working skill package with lean SKILL.md, aligned agents/interface.yaml, justified references, scripts only when useful, eval evidence, reports, packaging metadata, and clear next iteration recommendations.",
+          "结构化 Skill 目录，共 8 类关键资产。"
+        ],
+        "should_trigger": [
+          "把重复流程沉淀为可复用的 agent skill。",
+          "把分散提示词、对话记录或操作规范整理为稳定能力。",
+          "团队复用前，需要明确触发边界、质量证据和维护责任。"
+        ],
+        "should_not_trigger": [
+          "只需要一次性回答、没有复用价值的临时请求。",
+          "要求直接执行相邻任务，而不是沉淀或使用这个 Skill。",
+          "缺少必要事实且用户不允许澄清的场景。"
+        ],
+        "boundary_cards": [
+          {
+            "label": "Owned",
+            "body": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse."
+          },
+          {
+            "label": "Adjacent",
+            "body": "相邻任务需要先确认是否应转为独立 Skill。"
+          },
+          {
+            "label": "Excluded",
+            "body": "不替代人工事实核查，也不静默扩大职责。"
+          }
+        ]
+      },
+      "actual": {
+        "trigger": {
+          "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
+          "activation": "manual",
+          "execution": "inline",
+          "shell": "bash"
+        },
+        "inputs": [
+          "rough workflow notes, SOPs, runbooks, prompts, transcripts, documents, or repeated task descriptions",
+          "an existing skill directory that needs refactor, evaluation, packaging, or governance hardening",
+          "target platform requirements such as OpenAI, Claude, generic Agent Skills, or team distribution",
+          "benchmark references, local constraints, desired maturity tier, and review standards"
+        ],
+        "outputs": [
+          "A working skill package with lean SKILL.md, aligned agents/interface.yaml, justified references, scripts only when useful, eval evidence, reports, packaging metadata, and clear next iteration recommendations.",
+          "结构化 Skill 目录，共 8 类关键资产。"
+        ],
+        "should_trigger": [
+          "把重复流程沉淀为可复用的 agent skill。",
+          "把分散提示词、对话记录或操作规范整理为稳定能力。",
+          "团队复用前，需要明确触发边界、质量证据和维护责任。"
+        ],
+        "should_not_trigger": [
+          "只需要一次性回答、没有复用价值的临时请求。",
+          "要求直接执行相邻任务，而不是沉淀或使用这个 Skill。",
+          "缺少必要事实且用户不允许澄清的场景。"
+        ],
+        "boundary_cards": [
+          {
+            "label": "Owned",
+            "body": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse."
+          },
+          {
+            "label": "Adjacent",
+            "body": "相邻任务需要先确认是否应转为独立 Skill。"
+          },
+          {
+            "label": "Excluded",
+            "body": "不替代人工事实核查，也不静默扩大职责。"
+          }
+        ]
+      },
+      "paths": [
+        "reports/skill-overview.json",
+        "reports/skill-interpretation.json"
+      ],
+      "detail": "The first-class interpretation report must stay in lockstep with the canonical overview model."
+    },
+    {
+      "key": "overview-interpretation-lockstep-quality-review",
+      "label": "Overview and interpretation share quality_review",
+      "status": "pass",
+      "expected": {
+        "strengths": [
+          "触发面保持精简，并锚定在 frontmatter description。",
+          "已生成 Skill IR，核心语义可先于平台打包被审查和迁移。",
+          "已生成目标编译报告，可审查 IR 到 OpenAI、Claude、generic 等目标契约的映射。",
+          "已生成 Output Eval Lab scorecard，可比较 with-skill 与 baseline 输出质量。",
+          "已生成 Output Execution Runs，可区分记录样本、命令执行和模型执行证据。",
+          "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
+        ],
+        "gaps": [
+          "上下文成本需要补强：入口约 356 个词/字，references 约 16045 个词/字。"
+        ],
+        "recommendations": [
+          "先改触发边界，再扩展工作流。",
+          "只把重复且稳定的步骤沉淀为脚本。",
+          "每次升级后重新生成报告并检查分数原因。"
+        ],
+        "artifact_design": {
+          "design_system": "metric editorial",
+          "highlights": [
+            "Execution-focused technical artifact with environment assumptions, copyable commands, expected outputs, and side effects made explicit.",
+            "Name the working directory and required inputs for commands.",
+            "Mark destructive, networked, or external side-effect operations.",
+            "Prefer the smallest runnable snippet over broad framework scaffolding."
+          ]
+        },
+        "prompt_quality": {
+          "overall_quality_score": 89.0,
+          "highlights": [
+            "Primary prompt task family: Execution operation.",
+            "Complexity: expert — multiple task families plus governance, evaluation, or expert-level constraints",
+            "Completeness: 100/100.",
+            "Clarity: 85/100."
+          ]
+        },
+        "system_model": {
+          "stability": {
+            "score": 100,
+            "band": "system-ready"
+          },
+          "highlights": [
+            "Stability: system-ready (100/100).",
+            "Owned job: Turn repeated workflows, prompts, transcripts, runbooks, documents, or existing skill packages into routeable, evaluable, packageable, and governable agent skills for personal, team, library, or governed reuse.",
+            "Leverage: Tune the frontmatter description — Name the recurring job, expected input, output, and strongest non-goal in compact language.",
+            "Leverage: Install output self-repair checks — Add only the checks that prevent recurring output mistakes."
+          ]
+        }
+      },
+      "actual": {
+        "strengths": [
+          "触发面保持精简，并锚定在 frontmatter description。",
+          "已生成 Skill IR，核心语义可先于平台打包被审查和迁移。",
+          "已生成目标编译报告，可审查 IR 到 OpenAI、Claude、generic 等目标契约的映射。",
+          "已生成 Output Eval Lab scorecard，可比较 with-skill 与 baseline 输出质量。",
+          "已生成 Output Execution Runs，可区分记录样本、命令执行和模型执行证据。",
+          "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
+        ],
+        "gaps": [
+          "上下文成本需要补强：入口约 356 个词/字，references 约 16045 个词/字。"
+        ],
+        "recommendations": [
+          "先改触发边界，再扩展工作流。",
+          "只把重复且稳定的步骤沉淀为脚本。",
+          "每次升级后重新生成报告并检查分数原因。"
+        ],
+        "artifact_design": {
+          "design_system": "metric editorial",
+          "highlights": [
+            "Execution-focused technical artifact with environment assumptions, copyable commands, expected outputs, and side effects made explicit.",
+            "Name the working directory and required inputs for commands.",
+            "Mark destructive, networked, or external side-effect operations.",
+            "Prefer the smallest runnable snippet over broad framework scaffolding."
+          ]
+        },
+        "prompt_quality": {
+          "overall_quality_score": 89.0,
+          "highlights": [
+            "Primary prompt task family: Execution operation.",
+            "Complexity: expert — multiple task families plus governance, evaluation, or expert-level constraints",
+            "Completeness: 100/100.",
+            "Clarity: 85/100."
+          ]
+        },
+        "system_model": {
+          "stability": {
+            "score": 100,
+            "band": "system-ready"
+          },
+          "highlights": [
+            "Stability: system-ready (100/100).",
+            "Owned job: Turn repeated workflows, prompts, transcripts, runbooks, documents, or existing skill packages into routeable, evaluable, packageable, and governable agent skills for personal, team, library, or governed reuse.",
+            "Leverage: Tune the frontmatter description — Name the recurring job, expected input, output, and strongest non-goal in compact language.",
+            "Leverage: Install output self-repair checks — Add only the checks that prevent recurring output mistakes."
+          ]
+        }
+      },
+      "paths": [
+        "reports/skill-overview.json",
+        "reports/skill-interpretation.json"
+      ],
+      "detail": "The first-class interpretation report must stay in lockstep with the canonical overview model."
+    },
+    {
+      "key": "overview-interpretation-lockstep-risk-governance",
+      "label": "Overview and interpretation share risk_governance",
+      "status": "pass",
+      "expected": {
+        "risks": [
+          {
+            "name": "误触发风险",
+            "impact": 3,
+            "probability": 1,
+            "signal": "frontmatter description 已存在，具备基础路由面。",
+            "response": "先补证据和边界，再增加包体复杂度。"
+          },
+          {
+            "name": "输出漂移风险",
+            "impact": 2,
+            "probability": 1,
+            "signal": "已生成 20 / 20 类报告证据。",
+            "response": "先补证据和边界，再增加包体复杂度。"
+          },
+          {
+            "name": "证据不足风险",
+            "impact": 3,
+            "probability": 1,
+            "signal": "已生成 20 / 20 类报告证据。",
+            "response": "先补证据和边界，再增加包体复杂度。"
+          },
+          {
+            "name": "包体膨胀风险",
+            "impact": 2,
+            "probability": 1,
+            "signal": "SKILL.md 约 356 个词/字。",
+            "response": "先补证据和边界，再增加包体复杂度。"
+          },
+          {
+            "name": "跨平台迁移风险",
+            "impact": 3,
+            "probability": 1,
+            "signal": "agents/interface.yaml 已存在。",
+            "response": "先补证据和边界，再增加包体复杂度。"
+          }
+        ],
+        "risk_families": [
+          {
+            "key": "markdown_readability",
+            "label": "Markdown readability",
+            "matched_keywords": [
+              "md",
+              "report",
+              "doc"
+            ],
+            "score": 3,
+            "risks": [
+              "Tables can render as dense grids with weak hierarchy or poor mobile readability.",
+              "Long bullets can make the output look complete while hiding the actual decision logic.",
+              "Mixed heading levels can reduce scanability."
+            ],
+            "constraints": [
+              "Use tables only when comparison is the main job; otherwise prefer compact cards or grouped bullets.",
+              "Keep table cells short and move explanations below the table.",
+              "Use heading levels consistently and keep each section anchored to a user-facing outcome."
+            ],
+            "self_repair": [
+              "Preview whether each table still reads well when columns are narrow.",
+              "Convert any table with paragraph-length cells into bullets or cards."
+            ]
+          },
+          {
+            "key": "citation_clutter",
+            "label": "Citation and footnote clutter",
+            "matched_keywords": [
+              "source",
+              "reference"
+            ],
+            "score": 2,
+            "risks": [
+              "Footnote markers or dense citation notes can interrupt the reading flow.",
+              "Evidence can be over-attached to obvious statements and under-attached to risky claims.",
+              "Source notes may become more prominent than the tutorial itself."
+            ],
+            "constraints": [
+              "Attach citations only to claims that need evidence, not to every sentence.",
+              "Group source notes at the end of a section when inline markers would hurt readability.",
+              "Keep the main sentence readable without requiring the reader to chase a footnote."
+            ],
+            "self_repair": [
+              "Remove decorative citations that do not support a material claim.",
+              "Move repeated source explanations into one compact source note."
+            ]
+          },
+          {
+            "key": "visual_capture",
+            "label": "Screenshot and visual capture",
+            "matched_keywords": [
+              "capture"
+            ],
+            "score": 1,
+            "risks": [
+              "Screenshots can be captured from the wrong state, wrong viewport, or wrong crop.",
+              "Missing screenshots can cause the skill to invent visual references instead of declaring the gap.",
+              "Image descriptions can omit the action-relevant region."
+            ],
+            "constraints": [
+              "Never invent a screenshot; state when visual evidence is missing.",
+              "Record the source, viewport, and crop intent for any screenshot-dependent output.",
+              "Describe what the reader should inspect in the image, not just that an image exists."
+            ],
+            "self_repair": [
+              "Check that every screenshot reference points to a real provided or generated asset.",
+              "Reword any visual instruction that depends on an unseen screen state."
+            ]
+          },
+          {
+            "key": "code_or_command_safety",
+            "label": "Code and command safety",
+            "matched_keywords": [
+              "script"
+            ],
+            "score": 1,
+            "risks": [
+              "Commands can omit environment assumptions, working directory, or rollback notes.",
+              "Code snippets can look runnable while missing required inputs.",
+              "Error handling can be either absent or over-engineered."
+            ],
+            "constraints": [
+              "Name the working directory, required inputs, and expected output for each command.",
+              "Mark destructive or external side-effect operations explicitly.",
+              "Prefer the smallest runnable snippet over broad framework code."
+            ],
+            "self_repair": [
+              "Scan each command for cwd, input, output, and side-effect assumptions.",
+              "Remove speculative error handling that is not tied to a real failure mode."
+            ]
+          },
+          {
+            "key": "tone_and_specificity",
+            "label": "Tone and specificity",
+            "matched_keywords": [
+              "summary"
+            ],
+            "score": 1,
+            "risks": [
+              "Headings and summaries can drift into generic, interchangeable language.",
+              "The output can sound polished but lose the user's actual taste, audience, or scenario.",
+              "Strong claims can appear without examples or constraints."
+            ],
+            "constraints": [
+              "Anchor titles and summaries in the user's audience, object, and concrete outcome.",
+              "Avoid placeholder phrases such as comprehensive guide, ultimate solution, or key insights unless the source demands them.",
+              "Preserve one distinctive phrase, constraint, or standard from the user's input."
+            ],
+            "self_repair": [
+              "Replace generic title candidates with scenario-specific alternatives.",
+              "Delete any polished sentence that could fit almost any project unchanged."
+            ]
+          }
+        ],
+        "human_judgment_boundary": [
+          "Ask one focused clarification when the real job, output, or exclusion boundary is unclear.",
+          "Escalate visible tradeoffs when benchmark patterns conflict with local privacy, naming, or governance constraints.",
+          "Do not silently broaden the skill into adjacent jobs just because the examples are nearby."
+        ]
+      },
+      "actual": {
+        "risks": [
+          {
+            "name": "误触发风险",
+            "impact": 3,
+            "probability": 1,
+            "signal": "frontmatter description 已存在，具备基础路由面。",
+            "response": "先补证据和边界，再增加包体复杂度。"
+          },
+          {
+            "name": "输出漂移风险",
+            "impact": 2,
+            "probability": 1,
+            "signal": "已生成 20 / 20 类报告证据。",
+            "response": "先补证据和边界，再增加包体复杂度。"
+          },
+          {
+            "name": "证据不足风险",
+            "impact": 3,
+            "probability": 1,
+            "signal": "已生成 20 / 20 类报告证据。",
+            "response": "先补证据和边界，再增加包体复杂度。"
+          },
+          {
+            "name": "包体膨胀风险",
+            "impact": 2,
+            "probability": 1,
+            "signal": "SKILL.md 约 356 个词/字。",
+            "response": "先补证据和边界，再增加包体复杂度。"
+          },
+          {
+            "name": "跨平台迁移风险",
+            "impact": 3,
+            "probability": 1,
+            "signal": "agents/interface.yaml 已存在。",
+            "response": "先补证据和边界，再增加包体复杂度。"
+          }
+        ],
+        "risk_families": [
+          {
+            "key": "markdown_readability",
+            "label": "Markdown readability",
+            "matched_keywords": [
+              "md",
+              "report",
+              "doc"
+            ],
+            "score": 3,
+            "risks": [
+              "Tables can render as dense grids with weak hierarchy or poor mobile readability.",
+              "Long bullets can make the output look complete while hiding the actual decision logic.",
+              "Mixed heading levels can reduce scanability."
+            ],
+            "constraints": [
+              "Use tables only when comparison is the main job; otherwise prefer compact cards or grouped bullets.",
+              "Keep table cells short and move explanations below the table.",
+              "Use heading levels consistently and keep each section anchored to a user-facing outcome."
+            ],
+            "self_repair": [
+              "Preview whether each table still reads well when columns are narrow.",
+              "Convert any table with paragraph-length cells into bullets or cards."
+            ]
+          },
+          {
+            "key": "citation_clutter",
+            "label": "Citation and footnote clutter",
+            "matched_keywords": [
+              "source",
+              "reference"
+            ],
+            "score": 2,
+            "risks": [
+              "Footnote markers or dense citation notes can interrupt the reading flow.",
+              "Evidence can be over-attached to obvious statements and under-attached to risky claims.",
+              "Source notes may become more prominent than the tutorial itself."
+            ],
+            "constraints": [
+              "Attach citations only to claims that need evidence, not to every sentence.",
+              "Group source notes at the end of a section when inline markers would hurt readability.",
+              "Keep the main sentence readable without requiring the reader to chase a footnote."
+            ],
+            "self_repair": [
+              "Remove decorative citations that do not support a material claim.",
+              "Move repeated source explanations into one compact source note."
+            ]
+          },
+          {
+            "key": "visual_capture",
+            "label": "Screenshot and visual capture",
+            "matched_keywords": [
+              "capture"
+            ],
+            "score": 1,
+            "risks": [
+              "Screenshots can be captured from the wrong state, wrong viewport, or wrong crop.",
+              "Missing screenshots can cause the skill to invent visual references instead of declaring the gap.",
+              "Image descriptions can omit the action-relevant region."
+            ],
+            "constraints": [
+              "Never invent a screenshot; state when visual evidence is missing.",
+              "Record the source, viewport, and crop intent for any screenshot-dependent output.",
+              "Describe what the reader should inspect in the image, not just that an image exists."
+            ],
+            "self_repair": [
+              "Check that every screenshot reference points to a real provided or generated asset.",
+              "Reword any visual instruction that depends on an unseen screen state."
+            ]
+          },
+          {
+            "key": "code_or_command_safety",
+            "label": "Code and command safety",
+            "matched_keywords": [
+              "script"
+            ],
+            "score": 1,
+            "risks": [
+              "Commands can omit environment assumptions, working directory, or rollback notes.",
+              "Code snippets can look runnable while missing required inputs.",
+              "Error handling can be either absent or over-engineered."
+            ],
+            "constraints": [
+              "Name the working directory, required inputs, and expected output for each command.",
+              "Mark destructive or external side-effect operations explicitly.",
+              "Prefer the smallest runnable snippet over broad framework code."
+            ],
+            "self_repair": [
+              "Scan each command for cwd, input, output, and side-effect assumptions.",
+              "Remove speculative error handling that is not tied to a real failure mode."
+            ]
+          },
+          {
+            "key": "tone_and_specificity",
+            "label": "Tone and specificity",
+            "matched_keywords": [
+              "summary"
+            ],
+            "score": 1,
+            "risks": [
+              "Headings and summaries can drift into generic, interchangeable language.",
+              "The output can sound polished but lose the user's actual taste, audience, or scenario.",
+              "Strong claims can appear without examples or constraints."
+            ],
+            "constraints": [
+              "Anchor titles and summaries in the user's audience, object, and concrete outcome.",
+              "Avoid placeholder phrases such as comprehensive guide, ultimate solution, or key insights unless the source demands them.",
+              "Preserve one distinctive phrase, constraint, or standard from the user's input."
+            ],
+            "self_repair": [
+              "Replace generic title candidates with scenario-specific alternatives.",
+              "Delete any polished sentence that could fit almost any project unchanged."
+            ]
+          }
+        ],
+        "human_judgment_boundary": [
+          "Ask one focused clarification when the real job, output, or exclusion boundary is unclear.",
+          "Escalate visible tradeoffs when benchmark patterns conflict with local privacy, naming, or governance constraints.",
+          "Do not silently broaden the skill into adjacent jobs just because the examples are nearby."
+        ]
+      },
+      "paths": [
+        "reports/skill-overview.json",
+        "reports/skill-interpretation.json"
+      ],
+      "detail": "The first-class interpretation report must stay in lockstep with the canonical overview model."
+    },
+    {
+      "key": "overview-interpretation-lockstep-world-class-readiness",
+      "label": "Overview and interpretation share world_class_readiness",
+      "status": "pass",
+      "expected": {
+        "ready": false,
+        "decision": "evidence-pending",
+        "entry_count": 4,
+        "pending_count": 4,
+        "accepted_count": 0,
+        "external_pending_count": 3,
+        "human_pending_count": 1,
+        "source_check_count": 13,
+        "source_pass_count": 6,
+        "conclusion_zh": "世界级证据尚未完成：4 项待补，0 项已接受。",
+        "conclusion_en": "World-class evidence is not complete: 4 pending, 0 accepted.",
+        "entries": [
+          {
+            "key": "provider-holdout",
+            "label_zh": "提供商留出",
+            "label_en": "Provider Holdout",
+            "category": "external",
+            "category_zh": "外部证据",
+            "category_en": "External evidence",
+            "status": "pending",
+            "summary_zh": "缺少真实 provider 模型运行和 token metadata。",
+            "summary_en": "Missing a real provider model run and token metadata.",
+            "blocked_checks": [
+              "Provider model run",
+              "Token usage observed"
+            ]
+          },
+          {
+            "key": "human-adjudication",
+            "label_zh": "人工盲评",
+            "label_en": "Human Adjudication",
+            "category": "human",
+            "category_zh": "人工证据",
+            "category_en": "Human evidence",
+            "status": "pending",
+            "summary_zh": "盲评 pair 仍待真实 reviewer 决策。",
+            "summary_en": "Blind-review pairs still need real reviewer decisions.",
+            "blocked_checks": [
+              "No pending decisions",
+              "Judgments complete"
+            ]
+          },
+          {
+            "key": "native-permission-enforcement",
+            "label_zh": "原生权限",
+            "label_en": "Native Permission",
+            "category": "external",
+            "category_zh": "外部证据",
+            "category_en": "External evidence",
+            "status": "pending",
+            "summary_zh": "原生 runtime enforcement 仍待目标客户端或外部安装器证明。",
+            "summary_en": "Native runtime enforcement still needs target-client or external-installer proof.",
+            "blocked_checks": [
+              "Native enforcement"
+            ]
+          },
+          {
+            "key": "native-client-telemetry",
+            "label_zh": "原生遥测",
+            "label_en": "Native Telemetry",
+            "category": "external",
+            "category_zh": "外部证据",
+            "category_en": "External evidence",
+            "status": "pending",
+            "summary_zh": "真实外部客户端 metadata-only 事件仍未导入。",
+            "summary_en": "Real external-client metadata-only events have not been imported yet.",
+            "blocked_checks": [
+              "External events",
+              "Adoption sample"
+            ]
+          }
+        ]
+      },
+      "actual": {
+        "ready": false,
+        "decision": "evidence-pending",
+        "entry_count": 4,
+        "pending_count": 4,
+        "accepted_count": 0,
+        "external_pending_count": 3,
+        "human_pending_count": 1,
+        "source_check_count": 13,
+        "source_pass_count": 6,
+        "conclusion_zh": "世界级证据尚未完成：4 项待补，0 项已接受。",
+        "conclusion_en": "World-class evidence is not complete: 4 pending, 0 accepted.",
+        "entries": [
+          {
+            "key": "provider-holdout",
+            "label_zh": "提供商留出",
+            "label_en": "Provider Holdout",
+            "category": "external",
+            "category_zh": "外部证据",
+            "category_en": "External evidence",
+            "status": "pending",
+            "summary_zh": "缺少真实 provider 模型运行和 token metadata。",
+            "summary_en": "Missing a real provider model run and token metadata.",
+            "blocked_checks": [
+              "Provider model run",
+              "Token usage observed"
+            ]
+          },
+          {
+            "key": "human-adjudication",
+            "label_zh": "人工盲评",
+            "label_en": "Human Adjudication",
+            "category": "human",
+            "category_zh": "人工证据",
+            "category_en": "Human evidence",
+            "status": "pending",
+            "summary_zh": "盲评 pair 仍待真实 reviewer 决策。",
+            "summary_en": "Blind-review pairs still need real reviewer decisions.",
+            "blocked_checks": [
+              "No pending decisions",
+              "Judgments complete"
+            ]
+          },
+          {
+            "key": "native-permission-enforcement",
+            "label_zh": "原生权限",
+            "label_en": "Native Permission",
+            "category": "external",
+            "category_zh": "外部证据",
+            "category_en": "External evidence",
+            "status": "pending",
+            "summary_zh": "原生 runtime enforcement 仍待目标客户端或外部安装器证明。",
+            "summary_en": "Native runtime enforcement still needs target-client or external-installer proof.",
+            "blocked_checks": [
+              "Native enforcement"
+            ]
+          },
+          {
+            "key": "native-client-telemetry",
+            "label_zh": "原生遥测",
+            "label_en": "Native Telemetry",
+            "category": "external",
+            "category_zh": "外部证据",
+            "category_en": "External evidence",
+            "status": "pending",
+            "summary_zh": "真实外部客户端 metadata-only 事件仍未导入。",
+            "summary_en": "Real external-client metadata-only events have not been imported yet.",
+            "blocked_checks": [
+              "External events",
+              "Adoption sample"
+            ]
+          }
+        ]
+      },
+      "paths": [
+        "reports/skill-overview.json",
+        "reports/skill-interpretation.json"
+      ],
+      "detail": "The first-class interpretation report must stay in lockstep with the canonical overview model."
+    },
+    {
+      "key": "overview-interpretation-lockstep-package-assets",
+      "label": "Overview and interpretation share package_assets",
+      "status": "pass",
+      "expected": {
+        "entries": [
+          {
+            "path": "SKILL.md",
+            "label": "Skill entrypoint",
+            "kind": "file",
+            "file_count": 1
+          },
+          {
+            "path": "README.md",
+            "label": "Human-readable usage guide",
+            "kind": "file",
+            "file_count": 1
+          },
+          {
+            "path": "agents/interface.yaml",
+            "label": "Neutral interface metadata",
+            "kind": "file",
+            "file_count": 1
+          },
+          {
+            "path": "manifest.json",
+            "label": "Lifecycle and portability metadata",
+            "kind": "file",
+            "file_count": 1
+          },
+          {
+            "path": "references",
+            "label": "Extended guidance and reusable notes",
+            "kind": "folder",
+            "file_count": 34
+          },
+          {
+            "path": "scripts",
+            "label": "Deterministic helpers or local tooling",
+            "kind": "folder",
+            "file_count": 107
+          },
+          {
+            "path": "evals",
+            "label": "Trigger and quality checks",
+            "kind": "folder",
+            "file_count": 29
+          },
+          {
+            "path": "reports",
+            "label": "Generated evidence and overview artifacts",
+            "kind": "folder",
+            "file_count": 215
+          }
+        ],
+        "file_count": 389,
+        "folder_count": 4,
+        "distribution": [
+          {
+            "label": "SKILL.md",
+            "value": 1
+          },
+          {
+            "label": "README.md",
+            "value": 1
+          },
+          {
+            "label": "agents/interface.yaml",
+            "value": 1
+          },
+          {
+            "label": "manifest.json",
+            "value": 1
+          },
+          {
+            "label": "references",
+            "value": 34
+          },
+          {
+            "label": "scripts",
+            "value": 107
+          },
+          {
+            "label": "evals",
+            "value": 29
+          },
+          {
+            "label": "reports",
+            "value": 215
+          }
+        ]
+      },
+      "actual": {
+        "entries": [
+          {
+            "path": "SKILL.md",
+            "label": "Skill entrypoint",
+            "kind": "file",
+            "file_count": 1
+          },
+          {
+            "path": "README.md",
+            "label": "Human-readable usage guide",
+            "kind": "file",
+            "file_count": 1
+          },
+          {
+            "path": "agents/interface.yaml",
+            "label": "Neutral interface metadata",
+            "kind": "file",
+            "file_count": 1
+          },
+          {
+            "path": "manifest.json",
+            "label": "Lifecycle and portability metadata",
+            "kind": "file",
+            "file_count": 1
+          },
+          {
+            "path": "references",
+            "label": "Extended guidance and reusable notes",
+            "kind": "folder",
+            "file_count": 34
+          },
+          {
+            "path": "scripts",
+            "label": "Deterministic helpers or local tooling",
+            "kind": "folder",
+            "file_count": 107
+          },
+          {
+            "path": "evals",
+            "label": "Trigger and quality checks",
+            "kind": "folder",
+            "file_count": 29
+          },
+          {
+            "path": "reports",
+            "label": "Generated evidence and overview artifacts",
+            "kind": "folder",
+            "file_count": 215
+          }
+        ],
+        "file_count": 389,
+        "folder_count": 4,
+        "distribution": [
+          {
+            "label": "SKILL.md",
+            "value": 1
+          },
+          {
+            "label": "README.md",
+            "value": 1
+          },
+          {
+            "label": "agents/interface.yaml",
+            "value": 1
+          },
+          {
+            "label": "manifest.json",
+            "value": 1
+          },
+          {
+            "label": "references",
+            "value": 34
+          },
+          {
+            "label": "scripts",
+            "value": 107
+          },
+          {
+            "label": "evals",
+            "value": 29
+          },
+          {
+            "label": "reports",
+            "value": 215
+          }
+        ]
+      },
+      "paths": [
+        "reports/skill-overview.json",
+        "reports/skill-interpretation.json"
+      ],
+      "detail": "The first-class interpretation report must stay in lockstep with the canonical overview model."
+    },
+    {
+      "key": "overview-interpretation-lockstep-iteration-roadmap",
+      "label": "Overview and interpretation share iteration_roadmap",
+      "status": "pass",
+      "expected": {
+        "items": [
+          {
+            "title": "补齐世界证据",
+            "why": "世界级证据仍有 4 项待补；公开完成态 claim 必须继续保持阻塞。",
+            "actions": [
+              "补齐提供商留出证据：缺少真实 provider 模型运行和 token metadata。",
+              "补齐人工盲评证据：盲评 pair 仍待真实 reviewer 决策。",
+              "继续补齐剩余 2 项外部/人工证据，并保持 claim guard 为 pending 状态。"
+            ],
+            "unlocks": "全部外部/人工证据被 ledger 接受后，才能进入公开 world-class claim 复核。",
+            "source": "world_class_evidence_ledger"
+          },
+          {
+            "title": "Borrow one proven pattern on purpose",
+            "why": "You already have public benchmark objects. The next gain is to choose one pattern intentionally instead of absorbing everything loosely.",
+            "actions": [
+              "Read the strongest pattern from obra/superpowers.",
+              "Decide whether to borrow method, structure, execution, or portability, but only one of them first.",
+              "Record what you will not borrow so the package stays light."
+            ],
+            "unlocks": "A cleaner package shape with less accidental over-design."
+          },
+          {
+            "title": "Harden portability semantics",
+            "why": "The skill already signals reuse across environments, so contract clarity matters early.",
+            "actions": [
+              "Confirm activation mode, execution context, and trust assumptions.",
+              "Add or review degradation strategy for non-native targets.",
+              "Package the skill once to verify adapter expectations."
+            ],
+            "unlocks": "Safer cross-environment reuse with less target drift."
+          }
+        ]
+      },
+      "actual": {
+        "items": [
+          {
+            "title": "补齐世界证据",
+            "why": "世界级证据仍有 4 项待补；公开完成态 claim 必须继续保持阻塞。",
+            "actions": [
+              "补齐提供商留出证据：缺少真实 provider 模型运行和 token metadata。",
+              "补齐人工盲评证据：盲评 pair 仍待真实 reviewer 决策。",
+              "继续补齐剩余 2 项外部/人工证据，并保持 claim guard 为 pending 状态。"
+            ],
+            "unlocks": "全部外部/人工证据被 ledger 接受后，才能进入公开 world-class claim 复核。",
+            "source": "world_class_evidence_ledger"
+          },
+          {
+            "title": "Borrow one proven pattern on purpose",
+            "why": "You already have public benchmark objects. The next gain is to choose one pattern intentionally instead of absorbing everything loosely.",
+            "actions": [
+              "Read the strongest pattern from obra/superpowers.",
+              "Decide whether to borrow method, structure, execution, or portability, but only one of them first.",
+              "Record what you will not borrow so the package stays light."
+            ],
+            "unlocks": "A cleaner package shape with less accidental over-design."
+          },
+          {
+            "title": "Harden portability semantics",
+            "why": "The skill already signals reuse across environments, so contract clarity matters early.",
+            "actions": [
+              "Confirm activation mode, execution context, and trust assumptions.",
+              "Add or review degradation strategy for non-native targets.",
+              "Package the skill once to verify adapter expectations."
+            ],
+            "unlocks": "Safer cross-environment reuse with less target drift."
+          }
+        ]
+      },
+      "paths": [
+        "reports/skill-overview.json",
+        "reports/skill-interpretation.json"
+      ],
+      "detail": "The first-class interpretation report must stay in lockstep with the canonical overview model."
+    },
+    {
+      "key": "overview-html-contract",
+      "label": "overview has a stable HTML contract",
+      "status": "pass",
+      "expected": {
+        "schema_version": "2.0",
+        "default_language": "zh-CN",
+        "layout": "kami-white-audit-v2",
+        "html_report": "reports/skill-overview.html",
+        "html_exists": true
+      },
+      "actual": {
+        "schema_version": "2.0",
+        "default_language": "zh-CN",
+        "layout": "kami-white-audit-v2",
+        "html_report": "reports/skill-overview.html",
+        "html_exists": true
+      },
+      "paths": [
+        "reports/skill-overview.json",
+        "reports/skill-overview.html"
+      ],
+      "detail": "Report output paths and language defaults are part of the user-facing contract."
+    },
+    {
+      "key": "interpretation-html-contract",
+      "label": "interpretation has a stable HTML contract",
+      "status": "pass",
+      "expected": {
+        "schema_version": "2.0",
+        "default_language": "zh-CN",
+        "layout": "kami-white-audit-v2",
+        "html_report": "reports/skill-interpretation.html",
+        "html_exists": true
+      },
+      "actual": {
+        "schema_version": "2.0",
+        "default_language": "zh-CN",
+        "layout": "kami-white-audit-v2",
+        "html_report": "reports/skill-interpretation.html",
+        "html_exists": true
+      },
+      "paths": [
+        "reports/skill-interpretation.json",
+        "reports/skill-interpretation.html"
+      ],
+      "detail": "Report output paths and language defaults are part of the user-facing contract."
+    },
+    {
+      "key": "coverage-world-class-boundary",
+      "label": "Coverage report mirrors world-class evidence boundary",
+      "status": "pass",
+      "expected": {
+        "world_class_evidence_pending_count": 4,
+        "public_world_class_ready": false
+      },
+      "actual": {
+        "world_class_evidence_pending_count": 4,
+        "public_world_class_ready": false
+      },
+      "paths": [
+        "reports/world_class_evidence_ledger.json",
+        "reports/skill_os2_coverage.json"
+      ],
+      "detail": "Blueprint coverage can be locally complete while public world-class evidence remains pending."
+    },
+    {
+      "key": "benchmark-world-class-boundary",
+      "label": "Benchmark report mirrors world-class evidence boundary",
+      "status": "pass",
+      "expected": {
+        "world_class_ledger_pending_count": 4,
+        "world_class_source_check_count": 13,
+        "world_class_source_pass_count": 6,
+        "world_class_source_blocked_count": 7,
+        "public_claim_ready": false
+      },
+      "actual": {
+        "world_class_ledger_pending_count": 4,
+        "world_class_source_check_count": 13,
+        "world_class_source_pass_count": 6,
+        "world_class_source_blocked_count": 7,
+        "public_claim_ready": false
+      },
+      "paths": [
+        "reports/world_class_evidence_ledger.json",
+        "reports/benchmark_reproducibility.json"
+      ],
+      "detail": "Benchmark reproducibility must not overstate public claim readiness."
+    },
+    {
+      "key": "review-studio-no-overclaim",
+      "label": "Review Studio does not overclaim pending world-class evidence",
+      "status": "pass",
+      "expected": false,
+      "actual": false,
+      "paths": [
+        "reports/world_class_evidence_ledger.json",
+        "reports/review-studio.json"
+      ],
+      "detail": "When world-class evidence is pending, Review Studio must stay in a review or warning posture."
+    }
+  ],
+  "artifacts": {
+    "json": "reports/evidence_consistency.json",
+    "markdown": "reports/evidence_consistency.md"
+  }
+}

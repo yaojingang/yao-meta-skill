@@ -1,36 +1,36 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-13",
+  "generated_at": "2026-06-15",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 168,
-    "script_file_count": 106,
-    "test_file_count": 62,
+    "python_file_count": 170,
+    "script_file_count": 107,
+    "test_file_count": 63,
     "internal_module_count": 29,
-    "cli_script_count": 79,
+    "cli_script_count": 80,
     "command_handler_count": 34,
     "warn_line_threshold": 900,
     "block_line_threshold": 1500,
-    "largest_file_lines": 886,
+    "largest_file_lines": 896,
     "hotspot_count": 0,
     "blocker_count": 0,
     "decision": "pass"
   },
   "largest_files": [
     {
-      "path": "scripts/yao.py",
-      "lines": 886,
-      "kind": "cli-script",
-      "severity": "pass",
-      "recommendation": "Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator."
-    },
-    {
       "path": "tests/verify_yao_cli.py",
-      "lines": 886,
+      "lines": 896,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
+      "path": "scripts/yao.py",
+      "lines": 889,
+      "kind": "cli-script",
+      "severity": "pass",
+      "recommendation": "Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator."
     },
     {
       "path": "scripts/skill_report_layout.py",
@@ -48,7 +48,7 @@
     },
     {
       "path": "scripts/yao_cli_parser.py",
-      "lines": 774,
+      "lines": 784,
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."

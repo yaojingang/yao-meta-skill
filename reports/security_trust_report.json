@@ -2,8 +2,8 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 193,
-    "script_count": 106,
+    "scanned_files": 194,
+    "script_count": 107,
     "internal_module_count": 26,
     "secret_findings": 0,
     "dependency_files": [
@@ -12,18 +12,18 @@
     "network_script_count": 3,
     "network_policy_covered_count": 3,
     "network_policy_missing_count": 0,
-    "file_write_script_count": 67,
+    "file_write_script_count": 68,
     "permission_required_count": 3,
     "permission_approved_count": 3,
     "permission_missing_count": 0,
     "permission_invalid_count": 0,
     "permission_expired_count": 0,
-    "help_smoke_checked_count": 80,
+    "help_smoke_checked_count": 81,
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 193,
-    "package_sha256": "652c3a4a1f091d875bfacdd44da9a91bc02fec90af3fe76cf3a71a6dc80aba58"
+    "package_hash_file_count": 194,
+    "package_sha256": "278b4ff6c0c7e8406dfa62e5813013532af58e35d12b22f8bef25d59ac544713"
   },
   "failures": [],
   "warnings": [],
@@ -571,6 +571,20 @@
       "uses_network": false,
       "uses_file_write": true,
       "uses_subprocess": true,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
+      "path": "scripts/render_evidence_consistency.py",
+      "interface": "cli",
+      "interface_declared": true,
+      "interface_reason": "Renders a cross-report evidence consistency gate for generated Skill OS reports.",
+      "has_argparse": true,
+      "has_main_guard": true,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": true,
+      "uses_subprocess": false,
       "network_urls": [],
       "network_hosts": []
     },
@@ -1561,9 +1575,9 @@
   "help_smoke": {
     "enabled": true,
     "timeout_seconds": 5.0,
-    "candidate_count": 80,
-    "checked_count": 80,
-    "passed_count": 80,
+    "candidate_count": 81,
+    "checked_count": 81,
+    "passed_count": 81,
     "failed_count": 0,
     "skipped_count": 26,
     "failed_scripts": [],
@@ -1936,6 +1950,16 @@
         "passed": true,
         "has_help_text": true,
         "stdout_excerpt": "usage: render_eval_dashboard.py [-h] [--eval-dir EVAL_DIR]\n                                [--description-file DESCRIPTION_FILE]\n                                [--baseline-description-file BASELINE_DESCRIPTION_FILE]\n                       ",
+        "stderr_excerpt": ""
+      },
+      {
+        "path": "scripts/render_evidence_consistency.py",
+        "command": "python3 scripts/render_evidence_consistency.py --help",
+        "returncode": 0,
+        "timed_out": false,
+        "passed": true,
+        "has_help_text": true,
+        "stdout_excerpt": "usage: render_evidence_consistency.py [-h] [--output-json OUTPUT_JSON]\n                                      [--output-md OUTPUT_MD]\n                                      [--generated-at GENERATED_AT]\n                                      [",
         "stderr_excerpt": ""
       },
       {
@@ -2557,6 +2581,7 @@
           "scripts/render_context_reports.py",
           "scripts/render_description_drift_history.py",
           "scripts/render_eval_dashboard.py",
+          "scripts/render_evidence_consistency.py",
           "scripts/render_intent_confidence.py",
           "scripts/render_intent_dialogue.py",
           "scripts/render_iteration_directions.py",

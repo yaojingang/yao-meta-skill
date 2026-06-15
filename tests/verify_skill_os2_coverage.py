@@ -39,9 +39,9 @@ def main() -> None:
     summary = payload["summary"]
     assert summary["decision"] == "local-blueprint-covered-evidence-pending", summary
     assert summary["module_count"] == 8, summary
-    assert summary["recommended_pr_count"] == 12, summary
-    assert summary["item_count"] == 20, summary
-    assert summary["pass_count"] == 20, summary
+    assert summary["recommended_pr_count"] == 13, summary
+    assert summary["item_count"] == 21, summary
+    assert summary["pass_count"] == 21, summary
     assert summary["warn_count"] == 0, summary
     assert summary["missing_count"] == 0, summary
     assert summary["extension_track_count"] == 2, summary
@@ -80,12 +80,14 @@ def main() -> None:
         "registry-package-format",
         "review-studio-2",
         "migration-v2-docs",
+        "evidence-consistency",
     }, prs
     assert prs["agent-skills-conformance"]["status"] == "pass", prs["agent-skills-conformance"]
     assert prs["benchmark-methodology"]["status"] == "pass", prs["benchmark-methodology"]
+    assert prs["evidence-consistency"]["status"] == "pass", prs["evidence-consistency"]
     assert any(entry["path"] == "reports/benchmark_reproducibility.json" and entry["exists"] for entry in prs["benchmark-methodology"]["evidence"])
     assert payload["source_blueprint"]["core_module_count"] == 8, payload
-    assert payload["source_blueprint"]["recommended_pr_count"] == 12, payload
+    assert payload["source_blueprint"]["recommended_pr_count"] == 13, payload
     assert payload["source_blueprint"]["reference_extension_count"] == 2, payload
     extension_tracks = {item["key"]: item for item in payload["reference_extension_tracks"]}
     assert extension_tracks["skill-interpretation-report"]["status"] == "covered", extension_tracks
@@ -121,6 +123,7 @@ def main() -> None:
     assert "extension partial: `1`" in markdown, markdown
     assert "## Core Modules" in markdown, markdown
     assert "## Recommended PR Coverage" in markdown, markdown
+    assert "Evidence Consistency" in markdown, markdown
     assert "## Reference Extension Tracks" in markdown, markdown
     assert "Skill Interpretation Report" in markdown, markdown
     assert "Adaptive Self-Iteration" in markdown, markdown

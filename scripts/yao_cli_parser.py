@@ -273,6 +273,16 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     benchmark_reproducibility_cmd.add_argument("--generated-at")
     benchmark_reproducibility_cmd.set_defaults(func=_handler(command_handlers, "command_benchmark_reproducibility"))
 
+    evidence_consistency_cmd = subparsers.add_parser(
+        "evidence-consistency",
+        help="Render cross-report evidence consistency checks.",
+    )
+    evidence_consistency_cmd.add_argument("skill_dir", nargs="?", default=".")
+    evidence_consistency_cmd.add_argument("--output-json")
+    evidence_consistency_cmd.add_argument("--output-md")
+    evidence_consistency_cmd.add_argument("--generated-at")
+    evidence_consistency_cmd.set_defaults(func=_handler(command_handlers, "command_evidence_consistency"))
+
     reference_scan_cmd = subparsers.add_parser(
         "reference-scan",
         help="Render a controlled benchmark scan report for a skill package.",

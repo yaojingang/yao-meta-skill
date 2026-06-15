@@ -150,6 +150,11 @@ REPRODUCTION_COMMANDS = [
         "evidence": "reports/world_class_claim_guard.json",
     },
     {
+        "label": "evidence consistency",
+        "command": "python3 scripts/yao.py evidence-consistency .",
+        "evidence": "reports/evidence_consistency.json",
+    },
+    {
         "label": "full ci",
         "command": "make ci-test",
         "evidence": "CI target output",

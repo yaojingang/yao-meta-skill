@@ -82,7 +82,7 @@ def main() -> None:
         "quickstart skill-interpretation review-studio python-compat architecture-audit skill-os2-audit skill-os2-coverage "
         "world-class-evidence world-class-ledger world-class-intake world-class-submission-kit "
         "world-class-submission-review world-class-runbook world-class-claim-guard "
-        "benchmark-reproducibility output-review-kit adapt-scan adapt-propose "
+        "benchmark-reproducibility evidence-consistency output-review-kit adapt-scan adapt-propose "
         "telemetry-import telemetry-emit telemetry-hooks --record-cli-telemetry"
     ).split()
     assert all(item in parser_help for item in expected_help), parser_help
@@ -327,6 +327,15 @@ def main() -> None:
     assert benchmark_reproducibility_result["ok"], benchmark_reproducibility_result
     assert benchmark_reproducibility_result["payload"]["summary"]["reproducibility_ready"] is True, benchmark_reproducibility_result
     assert benchmark_reproducibility_result["payload"]["summary"]["world_class_ready"] is False, benchmark_reproducibility_result
+
+    evidence_consistency_result = run(
+        "evidence-consistency", str(ROOT),
+        "--output-json", str(tmp_root / "evidence_consistency.json"),
+        "--output-md", str(tmp_root / "evidence_consistency.md"),
+        "--generated-at", "2026-06-15",
+    )
+    assert evidence_consistency_result["ok"], evidence_consistency_result
+    assert evidence_consistency_result["payload"]["summary"]["decision"] == "consistent", evidence_consistency_result
 
     quickstart_result = run(
         "quickstart",
@@ -750,6 +759,7 @@ def main() -> None:
     assert "world_class_evidence_intake" in report_result["payload"]["artifacts"], report_result
     assert "world_class_claim_guard" in report_result["payload"]["artifacts"], report_result
     assert "benchmark_reproducibility" in report_result["payload"]["artifacts"], report_result
+    assert "evidence_consistency" in report_result["payload"]["artifacts"], report_result
     assert "skill_os2_coverage" in report_result["payload"]["artifacts"], report_result
     assert report_result["payload"]["artifacts"]["skill_overview"] == "reports/skill-overview.json", report_result
     assert report_result["payload"]["artifacts"]["skill_interpretation"] == "reports/skill-interpretation.json", report_result

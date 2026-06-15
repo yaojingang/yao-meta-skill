@@ -63,6 +63,7 @@ DEFAULT_TARGETS = [
     "world-class-runbook-check",
     "world-class-claim-guard-check",
     "benchmark-reproducibility-check",
+    "evidence-consistency-check",
     "feedback-check",
     "adaptation-safety-check",
     "adoption-drift-check",

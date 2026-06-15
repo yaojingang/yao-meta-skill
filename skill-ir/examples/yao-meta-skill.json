@@ -149,6 +149,7 @@
       "scripts/render_context_reports.py",
       "scripts/render_description_drift_history.py",
       "scripts/render_eval_dashboard.py",
+      "scripts/render_evidence_consistency.py",
       "scripts/render_intent_confidence.py",
       "scripts/render_intent_dialogue.py",
       "scripts/render_iteration_directions.py",
@@ -189,8 +190,7 @@
       "scripts/review_viewer_data.py",
       "scripts/run_conformance_suite.py",
       "scripts/run_description_optimization_suite.py",
-      "scripts/run_eval_suite.py",
-      "scripts/run_output_eval.py"
+      "scripts/run_eval_suite.py"
     ],
     "assets": [
       "templates/basic_skill.md.j2",

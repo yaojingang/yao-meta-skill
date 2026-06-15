@@ -16,7 +16,7 @@
   "trust_level": "local",
   "license": "MIT",
   "checksums": {
-    "package_sha256": "652c3a4a1f091d875bfacdd44da9a91bc02fec90af3fe76cf3a71a6dc80aba58",
+    "package_sha256": "278b4ff6c0c7e8406dfa62e5813013532af58e35d12b22f8bef25d59ac544713",
     "archive_sha256": "6852cf91a74d232c32d732b7c159c971827abf23af50153987193b084ad3b5cc"
   },
   "compatibility": {

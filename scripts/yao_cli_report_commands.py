@@ -124,6 +124,10 @@ def command_benchmark_reproducibility(args: argparse.Namespace) -> int:
     return render_skill_report_command(args, "render_benchmark_reproducibility.py", generated_at=True)
 
 
+def command_evidence_consistency(args: argparse.Namespace) -> int:
+    return render_skill_report_command(args, "render_evidence_consistency.py", generated_at=True)
+
+
 def command_reference_scan(args: argparse.Namespace) -> int:
     cmd = [resolved_skill_dir(args)]
     for reference in args.external_reference:

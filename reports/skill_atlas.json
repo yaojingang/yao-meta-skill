@@ -102,6 +102,7 @@
           "scripts/render_context_reports.py",
           "scripts/render_description_drift_history.py",
           "scripts/render_eval_dashboard.py",
+          "scripts/render_evidence_consistency.py",
           "scripts/render_intent_confidence.py",
           "scripts/render_intent_dialogue.py",
           "scripts/render_iteration_directions.py",

@@ -1,22 +1,22 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `193`
-- Scripts: `106`
+- Scanned files: `194`
+- Scripts: `107`
 - Internal script modules: `26`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
 - Network policy missing scripts: `0`
-- File-write scripts: `67`
+- File-write scripts: `68`
 - Permission approvals: `3 / 3`
 - Permission approval gaps: `0`
-- CLI help smoke checked: `80`
+- CLI help smoke checked: `81`
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `193`
-- Package SHA256: `652c3a4a1f091d875bfacdd44da9a91bc02fec90af3fe76cf3a71a6dc80aba58`
+- Package hash files: `194`
+- Package SHA256: `278b4ff6c0c7e8406dfa62e5813013532af58e35d12b22f8bef25d59ac544713`
 
 ## Failures
 
@@ -54,8 +54,8 @@
 
 - Enabled: `True`
 - Timeout seconds: `5.0`
-- Checked scripts: `80`
-- Passed scripts: `80`
+- Checked scripts: `81`
+- Passed scripts: `81`
 - Failed scripts: `none`
 
 ## Script Surface
@@ -100,6 +100,7 @@
 | scripts/render_context_reports.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/render_description_drift_history.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/render_eval_dashboard.py | cli | False | True | True | False | False | True | True | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
+| scripts/render_evidence_consistency.py | cli | True | True | True | False | False | True | False | Renders a cross-report evidence consistency gate for generated Skill OS reports. |
 | scripts/render_intent_confidence.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/render_intent_dialogue.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/render_iteration_directions.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |

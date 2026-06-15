@@ -17,6 +17,7 @@ from yao_cli_parser import build_parser as build_cli_parser
 from yao_cli_report_commands import (
     command_artifact_design_profile,
     command_benchmark_reproducibility,
+    command_evidence_consistency,
     command_github_benchmark_scan,
     command_intent_confidence,
     command_intent_dialogue,
@@ -186,6 +187,7 @@ def command_report(args: argparse.Namespace) -> int:
             run_script("render_benchmark_reproducibility.py", [str(ROOT)]),
             run_script("render_skill_overview.py", [str(ROOT)]),
             run_script("render_skill_interpretation.py", [str(ROOT)]),
+            run_script("render_evidence_consistency.py", [str(ROOT)]),
             run_script("render_review_viewer.py", [str(ROOT)]),
         ]
     )
@@ -228,6 +230,7 @@ def command_report(args: argparse.Namespace) -> int:
             "skill_overview": "reports/skill-overview.json",
             "skill_interpretation": "reports/skill-interpretation.json",
             "skill_interpretation_html": "reports/skill-interpretation.html",
+            "evidence_consistency": "reports/evidence_consistency.json",
             "review_viewer": "reports/review-viewer.json",
             "review_viewer_html": "reports/review-viewer.html",
         },

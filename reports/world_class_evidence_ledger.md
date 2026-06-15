@@ -1,6 +1,6 @@
 # World-Class Evidence Ledger
 
-Generated at: `2026-06-13`
+Generated at: `2026-06-15`
 
 ## Summary
 
@@ -8,8 +8,8 @@ Generated at: `2026-06-13`
 - ready to claim world-class: `false`
 - entries: `4`
 - source accepted: `0`
-- source checks: `7` pass / `13` total
-- source blocked: `6`
+- source checks: `6` pass / `13` total
+- source blocked: `7`
 - accepted: `0`
 - pending: `4`
 - human pending: `1`
@@ -29,7 +29,7 @@ This ledger records the current evidence state. It requires both passing source 
 | `provider-holdout` | `pending` | `missing` | `external` | model-executed 0; token-observed 0 | Run provider-backed holdout cases with real credentials and commit only aggregate evidence. |
 | `human-adjudication` | `pending` | `missing` | `human` | 0/5 decisions; pending 5 | Record real A/B choices in the decision template, then regenerate adjudication. |
 | `native-permission-enforcement` | `pending` | `missing` | `external` | native-enforced targets 0; installer-enforced targets 4 | Integrate a real target-client or external installer runtime guard before claiming native permission enforcement. |
-| `native-client-telemetry` | `pending` | `missing` | `external` | external source events 0; adoption samples 1 | Install a real client against the native host and import production metadata-only events. |
+| `native-client-telemetry` | `pending` | `missing` | `external` | external source events 0; adoption samples 0 | Install a real client against the native host and import production metadata-only events. |
 
 ## Provider Holdout
 
@@ -167,8 +167,8 @@ This ledger records the current evidence state. It requires both passing source 
 
 - objective: Import production metadata-only events from a real external client into the local drift loop.
 - source status: `external_required`
-- observed state: `{"external_source_events": 0, "adoption_sample_count": 1, "raw_content_allowed": false, "risk_band": "low", "accepted": false}`
-- source checks: `2` pass / `3` total
+- observed state: `{"external_source_events": 0, "adoption_sample_count": 0, "raw_content_allowed": false, "risk_band": "low", "accepted": false}`
+- source checks: `1` pass / `3` total
 - submission state: `{"status": "missing", "path": "evidence/world_class/submissions/native-client-telemetry.json", "artifact_ref_count": 0, "attested_real_evidence": false, "privacy_contract_satisfied": false, "ledger_counts_as_completion": false}`
 
 ### Provenance Requirements
@@ -192,7 +192,7 @@ This ledger records the current evidence state. It requires both passing source 
 | Check | Current | Expected | Status |
 | --- | --- | --- | --- |
 | External events | `0` | `>0` | `blocked` |
-| Adoption sample | `1` | `>0` | `pass` |
+| Adoption sample | `0` | `>0` | `blocked` |
 | Raw content blocked | `False` | `false` | `pass` |
 
 ### Completion Assertions

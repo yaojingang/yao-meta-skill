@@ -1,17 +1,17 @@
 # Architecture Maintainability
 
-Generated at: `2026-06-13`
+Generated at: `2026-06-15`
 
 ## Summary
 
 - decision: `pass`
-- python files: `168`
-- scripts: `106`
-- tests: `62`
+- python files: `170`
+- scripts: `107`
+- tests: `63`
 - internal modules: `29`
-- CLI scripts: `79`
+- CLI scripts: `80`
 - Yao CLI command handlers: `34`
-- largest file lines: `886`
+- largest file lines: `896`
 - hotspots: `0`
 - blockers: `0`
 
@@ -25,11 +25,11 @@ No file-size hotspots found.
 
 | File | Lines | Kind | Severity |
 | --- | ---: | --- | --- |
-| `scripts/yao.py` | `886` | `cli-script` | `pass` |
-| `tests/verify_yao_cli.py` | `886` | `test` | `pass` |
+| `tests/verify_yao_cli.py` | `896` | `test` | `pass` |
+| `scripts/yao.py` | `889` | `cli-script` | `pass` |
 | `scripts/skill_report_layout.py` | `808` | `internal-module` | `pass` |
 | `scripts/skill_report_model.py` | `801` | `internal-module` | `pass` |
-| `scripts/yao_cli_parser.py` | `774` | `internal-module` | `pass` |
+| `scripts/yao_cli_parser.py` | `784` | `internal-module` | `pass` |
 | `tests/verify_review_studio.py` | `751` | `test` | `pass` |
 | `scripts/compile_skill.py` | `734` | `cli-script` | `pass` |
 | `scripts/build_skill_atlas.py` | `730` | `cli-script` | `pass` |

@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-13",
+  "generated_at": "2026-06-15",
   "root": ".",
   "summary": {
     "target_python": "3.11",
-    "file_count": 171,
+    "file_count": 173,
     "issue_count": 0,
     "syntax_error_count": 0,
     "fstring_311_violation_count": 0,
@@ -264,6 +264,12 @@
     },
     {
       "path": "scripts/render_eval_dashboard.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "scripts/render_evidence_consistency.py",
       "ok": true,
       "issue_count": 0,
       "issues": []
@@ -732,6 +738,12 @@
     },
     {
       "path": "tests/verify_description_optimization.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "tests/verify_evidence_consistency.py",
       "ok": true,
       "issue_count": 0,
       "issues": []

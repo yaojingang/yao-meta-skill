@@ -22,6 +22,7 @@ RECOMMENDED_PR_LABELS = {
     "registry-package-format": "Registry Package Format",
     "review-studio-2": "Review Studio 2.0",
     "migration-v2-docs": "Migration V2 Docs",
+    "evidence-consistency": "Evidence Consistency",
 }
 
 
@@ -146,6 +147,7 @@ def build_coverage(skill_dir: Path, generated_at: str) -> dict[str, Any]:
     telemetry_hooks = load_json(reports / "telemetry_hook_recipes.json")
     benchmark = load_json(reports / "benchmark_reproducibility.json")
     world_class_ledger = load_json(reports / "world_class_evidence_ledger.json")
+    evidence_consistency = load_json(reports / "evidence_consistency.json")
 
     output_case_count = summary_value(output_quality, "case_count")
     output_delta = summary_value(output_quality, "delta", "n/a")
@@ -283,6 +285,7 @@ def build_coverage(skill_dir: Path, generated_at: str) -> dict[str, Any]:
         ("registry-package-format", "registry/package.schema.json", "reports/registry_audit.json", "tests/verify_registry_audit.py", registry.get("ok") is True, f"registry ok {registry.get('ok') is True}"),
         ("review-studio-2", "scripts/render_review_studio.py", "reports/review-studio.html", "tests/verify_review_studio.py", review_studio.get("ok") is True and studio_gates >= 14, f"{studio_gates} review gates"),
         ("migration-v2-docs", "docs/migration-v2.md", "reports/skill-os-2-review.md", "README.md", (skill_dir / "docs" / "migration-v2.md").exists(), "migration guide present"),
+        ("evidence-consistency", "scripts/render_evidence_consistency.py", "reports/evidence_consistency.json", "tests/verify_evidence_consistency.py", evidence_consistency.get("ok") is True and summary_value(evidence_consistency, "fail_count") == 0, f"{summary_value(evidence_consistency, 'check_count')} consistency checks"),
     ]
     pr_items = [
         build_item(
@@ -432,7 +435,7 @@ def build_coverage(skill_dir: Path, generated_at: str) -> dict[str, Any]:
         "source_blueprint": {
             "title": "Skill Overview / Skill OS 2.0 upgrade plan",
             "core_module_count": 8,
-            "recommended_pr_count": 12,
+            "recommended_pr_count": 13,
             "reference_extension_count": len(extension_tracks),
             "reference_extensions": [
                 "Skill interpretation report",

@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-13",
+  "generated_at": "2026-06-15",
   "skill_dir": ".",
   "summary": {
     "ledger_ready_to_claim_world_class": false,
     "ledger_pending_count": 4,
-    "claim_surface_count": 76,
+    "claim_surface_count": 77,
     "violation_count": 0,
     "overclaim_guard_active": true,
     "decision": "claim-guard-pass-evidence-pending"
@@ -121,6 +121,10 @@
     },
     {
       "path": "reports/description_optimization_suite.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/evidence_consistency.md",
       "violation_count": 0
     },
     {
