@@ -92,6 +92,10 @@ def main() -> None:
     assert payload["schema_version"] == "1.0", payload
     assert payload["ok"] is True, payload
     summary = payload["summary"]
+    assert payload["report_contract"]["contract"] == "world-class-submission-review", payload
+    assert payload["report_contract"]["top_level_mirrors_summary"] is True, payload
+    for field in payload["report_contract"]["summary_fields"]:
+        assert payload[field] == summary[field], (field, payload[field], summary[field])
     assert summary["decision"] == "awaiting-submissions", summary
     assert summary["review_item_count"] == 4, summary
     assert summary["awaiting_submission_count"] == 4, summary
@@ -101,6 +105,10 @@ def main() -> None:
     assert summary["source_pass_count"] + summary["source_blocked_count"] == summary["source_check_count"], summary
     assert summary["source_blocked_count"] >= 6, summary
     assert summary["review_counts_submission_as_completion"] is False, summary
+    assert payload["ready_to_claim_world_class"] is False, payload
+    assert payload["review_item_count"] == 4, payload
+    assert payload["awaiting_submission_count"] == 4, payload
+    assert payload["source_blocked_count"] == summary["source_blocked_count"], payload
     provider_item = {item["evidence_key"]: item for item in payload["items"]}["provider-holdout"]
     assert provider_item["review_state"] == "awaiting-submission", provider_item
     assert provider_item["submission_status"] == "missing", provider_item

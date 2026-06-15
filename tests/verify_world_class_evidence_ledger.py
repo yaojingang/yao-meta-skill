@@ -90,6 +90,10 @@ def main() -> None:
     assert payload["schema_version"] == "1.0", payload
     assert payload["ok"] is True, payload
     summary = payload["summary"]
+    assert payload["report_contract"]["contract"] == "world-class-evidence-ledger", payload
+    assert payload["report_contract"]["top_level_mirrors_summary"] is True, payload
+    for field in payload["report_contract"]["summary_fields"]:
+        assert payload[field] == summary[field], (field, payload[field], summary[field])
     assert summary["ledger_entry_count"] == 4, summary
     assert summary["accepted_count"] == 0, summary
     assert summary["pending_count"] == 4, summary
@@ -104,6 +108,10 @@ def main() -> None:
     assert summary["submitted_but_pending_count"] == 0, summary
     assert summary["overclaim_guard_active"] is True, summary
     assert summary["ready_to_claim_world_class"] is False, summary
+    assert payload["ready_to_claim_world_class"] is False, payload
+    assert payload["pending_count"] == 4, payload
+    assert payload["accepted_count"] == 0, payload
+    assert payload["source_blocked_count"] == summary["source_blocked_count"], payload
     assert payload["artifacts"]["intake"] == "reports/world_class_evidence_intake.md", payload
     entries = {entry["key"]: entry for entry in payload["entries"]}
     assert set(entries) == {

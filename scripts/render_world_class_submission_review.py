@@ -14,6 +14,23 @@ ROOT = Path(__file__).resolve().parent.parent
 SCRIPT_INTERFACE = "cli"
 SCRIPT_INTERFACE_REASON = "Renders a read-only review queue for world-class evidence submissions before ledger acceptance."
 
+TOP_LEVEL_SUMMARY_FIELDS = [
+    "decision",
+    "ready_to_claim_world_class",
+    "review_item_count",
+    "accepted_count",
+    "awaiting_submission_count",
+    "valid_packet_source_incomplete_count",
+    "ready_for_ledger_review_count",
+    "fix_submission_count",
+    "unmatched_submission_count",
+    "invalid_submission_count",
+    "source_check_count",
+    "source_pass_count",
+    "source_blocked_count",
+    "review_counts_submission_as_completion",
+]
+
 
 def rel_path(path: Path, root: Path) -> str:
     try:
@@ -29,6 +46,10 @@ def by_key(items: list[dict[str, Any]], key_name: str = "evidence_key") -> dict[
         if key and key not in result:
             result[key] = item
     return result
+
+
+def top_level_summary_mirrors(summary: dict[str, Any]) -> dict[str, Any]:
+    return {key: summary[key] for key in TOP_LEVEL_SUMMARY_FIELDS if key in summary}
 
 
 def review_state(entry: dict[str, Any], intake_result: dict[str, Any] | None) -> tuple[str, str]:
@@ -113,24 +134,33 @@ def build_submission_review(skill_dir: Path, generated_at: str, submissions_dir:
         decision = "source-evidence-incomplete"
     else:
         decision = "awaiting-submissions"
+    summary = {
+        "review_item_count": len(items),
+        "accepted_count": accepted_count,
+        "awaiting_submission_count": awaiting_count,
+        "valid_packet_source_incomplete_count": source_incomplete_count,
+        "ready_for_ledger_review_count": ready_count,
+        "fix_submission_count": counts.get("fix-submission", 0),
+        "unmatched_submission_count": len(unmatched),
+        "invalid_submission_count": invalid_count,
+        **source_summary,
+        "ready_to_claim_world_class": ledger.get("summary", {}).get("ready_to_claim_world_class") is True,
+        "review_counts_submission_as_completion": False,
+        "decision": decision,
+    }
     return {
         "schema_version": "1.0",
         "ok": invalid_count == 0,
         "generated_at": generated_at,
         "skill_dir": rel_path(skill_dir, ROOT),
-        "summary": {
-            "review_item_count": len(items),
-            "accepted_count": accepted_count,
-            "awaiting_submission_count": awaiting_count,
-            "valid_packet_source_incomplete_count": source_incomplete_count,
-            "ready_for_ledger_review_count": ready_count,
-            "fix_submission_count": counts.get("fix-submission", 0),
-            "unmatched_submission_count": len(unmatched),
-            "invalid_submission_count": invalid_count,
-            **source_summary,
-            "ready_to_claim_world_class": ledger.get("summary", {}).get("ready_to_claim_world_class") is True,
-            "review_counts_submission_as_completion": False,
-            "decision": decision,
+        **top_level_summary_mirrors(summary),
+        "summary": summary,
+        "report_contract": {
+            "schema_version": "1.0",
+            "contract": "world-class-submission-review",
+            "top_level_mirrors_summary": True,
+            "summary_fields": TOP_LEVEL_SUMMARY_FIELDS,
+            "source_of_truth": "summary",
         },
         "submissions": {
             "directory": rel_path(submissions_dir, skill_dir),

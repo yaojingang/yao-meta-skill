@@ -233,10 +233,11 @@ def main() -> None:
         "2026-06-13",
     )
     assert world_class_ledger_result["ok"], world_class_ledger_result
-    assert world_class_ledger_result["payload"]["summary"]["pending_count"] == 4, world_class_ledger_result
-    assert world_class_ledger_result["payload"]["summary"]["missing_submission_count"] == 4, world_class_ledger_result
-    assert world_class_ledger_result["payload"]["summary"]["submitted_entry_count"] == 0, world_class_ledger_result
-
+    ledger_payload = world_class_ledger_result["payload"]
+    assert ledger_payload["report_contract"]["top_level_mirrors_summary"] is True, world_class_ledger_result
+    assert ledger_payload["pending_count"] == ledger_payload["summary"]["pending_count"] == 4, world_class_ledger_result
+    assert ledger_payload["summary"]["missing_submission_count"] == 4, world_class_ledger_result
+    assert ledger_payload["summary"]["submitted_entry_count"] == 0, world_class_ledger_result
     world_class_intake_result = run(
         "world-class-intake",
         str(ROOT),
@@ -280,7 +281,6 @@ def main() -> None:
     assert (tmp_root / "world_class_submission_kit" / "provider-holdout.json").exists(), world_class_submission_kit_result
     assert (tmp_root / "world_class_submission_kit" / "submission_manifest.json").exists(), world_class_submission_kit_result
     assert (tmp_root / "world_class_submission_kit.html").exists(), world_class_submission_kit_result
-
     world_class_submission_review_result = run(
         "world-class-submission-review",
         str(ROOT),
@@ -295,9 +295,11 @@ def main() -> None:
     )
     assert not world_class_submission_review_result["ok"], world_class_submission_review_result
     assert world_class_submission_review_result["returncode"] == 2, world_class_submission_review_result
-    assert world_class_submission_review_result["payload"]["summary"]["decision"] == "fix-submissions", world_class_submission_review_result
-    assert world_class_submission_review_result["payload"]["summary"]["invalid_submission_count"] == 1, world_class_submission_review_result
-    assert world_class_submission_review_result["payload"]["items"][0]["review_state"] == "fix-submission", world_class_submission_review_result
+    review_payload = world_class_submission_review_result["payload"]
+    assert review_payload["report_contract"]["top_level_mirrors_summary"] is True, world_class_submission_review_result
+    assert review_payload["summary"]["decision"] == "fix-submissions", world_class_submission_review_result
+    assert review_payload["invalid_submission_count"] == review_payload["summary"]["invalid_submission_count"] == 1, world_class_submission_review_result
+    assert review_payload["items"][0]["review_state"] == "fix-submission", world_class_submission_review_result
     assert (tmp_root / "world_class_submission_review.md").exists(), world_class_submission_review_result
 
     world_class_claim_guard_result = run(

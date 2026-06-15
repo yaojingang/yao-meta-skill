@@ -92,6 +92,30 @@ PROVENANCE_REQUIREMENTS = {
     "native-client-telemetry": ["real external client source", "metadata-only event", "local-first import path"],
 }
 
+TOP_LEVEL_SUMMARY_FIELDS = [
+    "decision",
+    "ready_to_claim_world_class",
+    "ledger_entry_count",
+    "source_accepted_count",
+    "accepted_count",
+    "pending_count",
+    "human_pending_count",
+    "external_pending_count",
+    "submitted_entry_count",
+    "missing_submission_count",
+    "invalid_submission_count",
+    "source_check_count",
+    "source_pass_count",
+    "source_blocked_count",
+    "submitted_but_pending_count",
+    "source_accepted_without_valid_submission_count",
+    "overclaim_guard_active",
+]
+
+
+def top_level_summary_mirrors(summary: dict[str, Any]) -> dict[str, Any]:
+    return {key: summary[key] for key in TOP_LEVEL_SUMMARY_FIELDS if key in summary}
+
 
 def submission_state(skill_dir: Path, task: dict[str, Any], submissions_dir: Path) -> dict[str, Any]:
     key = str(task.get("key", ""))
@@ -187,27 +211,36 @@ def build_ledger(skill_dir: Path, generated_at: str, submissions_dir: Path | Non
         if entry.get("source_accepted") is True and entry["submission_state"]["status"] != "submitted"
     )
     ready = bool(entries) and pending_count == 0 and plan["summary"].get("world_class_ready") is True
+    summary = {
+        "ledger_entry_count": len(entries),
+        "source_accepted_count": source_accepted_count,
+        "accepted_count": accepted_count,
+        "pending_count": pending_count,
+        "human_pending_count": human_pending_count,
+        "external_pending_count": external_pending_count,
+        "submitted_entry_count": submitted_entry_count,
+        "missing_submission_count": missing_submission_count,
+        "invalid_submission_count": invalid_submission_count,
+        **source_summary,
+        "submitted_but_pending_count": submitted_but_pending_count,
+        "source_accepted_without_valid_submission_count": source_accepted_without_valid_submission_count,
+        "overclaim_guard_active": True,
+        "ready_to_claim_world_class": ready,
+        "decision": "ready-for-completion-audit" if ready else "evidence-pending",
+    }
     return {
         "schema_version": "1.0",
         "ok": True,
         "generated_at": generated_at,
         "skill_dir": rel_path(skill_dir, ROOT),
-        "summary": {
-            "ledger_entry_count": len(entries),
-            "source_accepted_count": source_accepted_count,
-            "accepted_count": accepted_count,
-            "pending_count": pending_count,
-            "human_pending_count": human_pending_count,
-            "external_pending_count": external_pending_count,
-            "submitted_entry_count": submitted_entry_count,
-            "missing_submission_count": missing_submission_count,
-            "invalid_submission_count": invalid_submission_count,
-            **source_summary,
-            "submitted_but_pending_count": submitted_but_pending_count,
-            "source_accepted_without_valid_submission_count": source_accepted_without_valid_submission_count,
-            "overclaim_guard_active": True,
-            "ready_to_claim_world_class": ready,
-            "decision": "ready-for-completion-audit" if ready else "evidence-pending",
+        **top_level_summary_mirrors(summary),
+        "summary": summary,
+        "report_contract": {
+            "schema_version": "1.0",
+            "contract": "world-class-evidence-ledger",
+            "top_level_mirrors_summary": True,
+            "summary_fields": TOP_LEVEL_SUMMARY_FIELDS,
+            "source_of_truth": "summary",
         },
         "entries": entries,
         "source_plan": {
