@@ -4,6 +4,18 @@
   "generated_at": "2026-06-15T00:00:00Z",
   "skill_dir": ".",
   "source_patterns": "reports/user_patterns.json",
+  "pattern_count": 5,
+  "proposal_count": 5,
+  "apply_supported": true,
+  "failure_count": 0,
+  "proposal_only": true,
+  "approval_required": true,
+  "writes_repository_files": false,
+  "allowlisted_targets_required": true,
+  "target_file_sha256_required_for_apply": true,
+  "approval_draft_supported": true,
+  "rollback_required_for_apply": true,
+  "apply_command_available": true,
   "summary": {
     "pattern_count": 5,
     "proposal_count": 5,
@@ -19,6 +31,32 @@
     "approval_draft_supported": true,
     "rollback_required_for_apply": true,
     "apply_command_available": true
+  },
+  "report_contract": {
+    "schema_version": "1.0",
+    "contract": "adaptation-proposals",
+    "top_level_mirrors_summary": true,
+    "top_level_mirrors_proposal_contract": true,
+    "summary_fields": [
+      "pattern_count",
+      "proposal_count",
+      "apply_supported",
+      "failure_count"
+    ],
+    "proposal_contract_fields": [
+      "proposal_only",
+      "approval_required",
+      "writes_repository_files",
+      "allowlisted_targets_required",
+      "target_file_sha256_required_for_apply",
+      "approval_draft_supported",
+      "rollback_required_for_apply",
+      "apply_command_available"
+    ],
+    "source_of_truth": [
+      "summary",
+      "proposal_contract"
+    ]
   },
   "proposals": [
     {

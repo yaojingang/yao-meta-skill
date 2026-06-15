@@ -6,6 +6,7 @@
   "summary": {
     "apply_supported": true,
     "attempt_count": 0,
+    "approval_draft_count": 0,
     "applied_count": 0,
     "dry_run_count": 0,
     "rollback_count": 0,
@@ -30,5 +31,57 @@
   "artifacts": {
     "json": "reports/adaptation_regression_report.json",
     "approval_ledger": "reports/adaptation_approval_ledger.json"
+  },
+  "apply_supported": true,
+  "attempt_count": 0,
+  "approval_draft_count": 0,
+  "applied_count": 0,
+  "dry_run_count": 0,
+  "rollback_count": 0,
+  "regression_run_count": 0,
+  "regression_pass_count": 0,
+  "failure_count": 0,
+  "approval_required": true,
+  "patch_sha256_required": true,
+  "allowlisted_targets_required": true,
+  "target_file_sha256_required": true,
+  "approval_draft_supported": true,
+  "dry_run_default": true,
+  "writes_repository_files_only_with_apply": true,
+  "rollback_required": true,
+  "safe_regression_commands_only": true,
+  "rollback_on_failure_default": true,
+  "report_contract": {
+    "schema_version": "1.0",
+    "contract": "adaptation-regression-report",
+    "top_level_mirrors_summary": true,
+    "top_level_mirrors_apply_contract": true,
+    "summary_fields": [
+      "apply_supported",
+      "attempt_count",
+      "approval_draft_count",
+      "applied_count",
+      "dry_run_count",
+      "rollback_count",
+      "regression_run_count",
+      "regression_pass_count",
+      "failure_count"
+    ],
+    "apply_contract_fields": [
+      "approval_required",
+      "patch_sha256_required",
+      "allowlisted_targets_required",
+      "target_file_sha256_required",
+      "approval_draft_supported",
+      "dry_run_default",
+      "writes_repository_files_only_with_apply",
+      "rollback_required",
+      "safe_regression_commands_only",
+      "rollback_on_failure_default"
+    ],
+    "source_of_truth": [
+      "summary",
+      "apply_contract"
+    ]
   }
 }

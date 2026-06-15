@@ -28,6 +28,16 @@ def sha256_text(value: str) -> str:
     return hashlib.sha256(value.encode("utf-8")).hexdigest()
 
 
+def assert_report_contract_mirrors(payload: dict, contract_key: str) -> None:
+    contract = payload["report_contract"]
+    assert contract["top_level_mirrors_summary"] is True, payload
+    assert contract[f"top_level_mirrors_{contract_key}"] is True, payload
+    for field in contract["summary_fields"]:
+        assert payload[field] == payload["summary"][field], (field, payload.get(field), payload["summary"].get(field))
+    for field in contract[f"{contract_key}_fields"]:
+        assert payload[field] == payload[contract_key][field], (field, payload.get(field), payload[contract_key].get(field))
+
+
 def main() -> None:
     shutil.rmtree(TMP, ignore_errors=True)
     skill_dir = TMP / "adaptive-demo-skill"
@@ -87,7 +97,10 @@ def main() -> None:
     assert propose_proc.returncode == 0, propose_proc.stderr
     proposal_payload = json.loads(propose_proc.stdout)
     assert proposal_payload["ok"], proposal_payload
+    assert_report_contract_mirrors(proposal_payload, "proposal_contract")
     assert proposal_payload["summary"]["apply_supported"] is True, proposal_payload
+    assert proposal_payload["proposal_count"] == proposal_payload["summary"]["proposal_count"], proposal_payload
+    assert proposal_payload["approval_draft_supported"] is True, proposal_payload
     assert proposal_payload["proposal_contract"]["proposal_only"] is True, proposal_payload
     assert proposal_payload["proposal_contract"]["writes_repository_files"] is False, proposal_payload
     assert proposal_payload["proposal_contract"]["apply_command_available"] is True, proposal_payload
@@ -107,12 +120,17 @@ def main() -> None:
     template_proc = run_script(str(APPLY_SCRIPT), str(skill_dir), "--write-template", "--generated-at", "2026-06-15T00:00:00Z")
     assert template_proc.returncode == 0, template_proc.stderr
     template_payload = json.loads(template_proc.stdout)
+    assert_report_contract_mirrors(template_payload, "apply_contract")
     assert template_payload["summary"]["apply_supported"] is True, template_payload
+    assert template_payload["apply_supported"] is True, template_payload
     assert template_payload["summary"]["attempt_count"] == 0, template_payload
     assert template_payload["apply_contract"]["target_file_sha256_required"] is True, template_payload
     assert template_payload["apply_contract"]["approval_draft_supported"] is True, template_payload
     assert (reports_dir / "adaptation_approval_ledger.json").exists(), reports_dir
     assert (reports_dir / "adaptation_regression_report.json").exists(), reports_dir
+    template_ledger = json.loads((reports_dir / "adaptation_approval_ledger.json").read_text(encoding="utf-8"))
+    assert_report_contract_mirrors(template_ledger, "approval_contract")
+    assert template_ledger["pending_review_count"] == 0, template_ledger
 
     missing_source_proc = run_script(str(SCAN_SCRIPT), str(skill_dir))
     assert missing_source_proc.returncode != 0, missing_source_proc
@@ -165,7 +183,9 @@ def main() -> None:
     )
     assert cli_propose.returncode == 0, cli_propose.stderr
     cli_proposal_payload = json.loads(cli_propose.stdout)
+    assert_report_contract_mirrors(cli_proposal_payload, "proposal_contract")
     assert cli_proposal_payload["summary"]["proposal_count"] >= 3, cli_proposal_payload
+    assert cli_proposal_payload["proposal_count"] == cli_proposal_payload["summary"]["proposal_count"], cli_proposal_payload
     assert cli_proposal_payload["summary"]["apply_supported"] is True, cli_proposal_payload
     assert cli_proposal_payload["proposal_contract"]["proposal_only"] is True, cli_proposal_payload
     assert cli_proposal_payload["proposal_contract"]["writes_repository_files"] is False, cli_proposal_payload
@@ -213,14 +233,18 @@ def main() -> None:
     )
     assert prepare_proc.returncode == 0, prepare_proc.stdout
     prepare_payload = json.loads(prepare_proc.stdout)
+    assert_report_contract_mirrors(prepare_payload, "apply_contract")
     assert prepare_payload["summary"]["approval_draft_count"] == 1, prepare_payload
+    assert prepare_payload["approval_draft_count"] == 1, prepare_payload
     assert prepare_payload["approval_draft"]["decision"] == "pending-review", prepare_payload
     assert prepare_payload["approval_draft"]["patch_sha256"] == sha256_text(patch_text), prepare_payload
     assert prepare_payload["approval_draft"]["target_file_sha256"] == {
         "references/user-memory-policy.md": sha256_text("old policy\n"),
     }, prepare_payload
     approval_ledger = json.loads(ledger_path.read_text(encoding="utf-8"))
+    assert_report_contract_mirrors(approval_ledger, "approval_contract")
     assert approval_ledger["summary"]["pending_review_count"] == 1, approval_ledger
+    assert approval_ledger["pending_review_count"] == 1, approval_ledger
     approval_ledger["entries"][0].update(
         {
             "decision": "approved",
@@ -271,10 +295,14 @@ def main() -> None:
     )
     assert dry_run.returncode == 0, dry_run.stderr
     dry_payload = json.loads(dry_run.stdout)
+    assert_report_contract_mirrors(dry_payload, "apply_contract")
     assert dry_payload["summary"]["dry_run_count"] == 1, dry_payload
+    assert dry_payload["dry_run_count"] == 1, dry_payload
     assert dry_payload["summary"]["applied_count"] == 0, dry_payload
     refreshed_ledger = json.loads(ledger_path.read_text(encoding="utf-8"))
+    assert_report_contract_mirrors(refreshed_ledger, "approval_contract")
     assert refreshed_ledger["summary"]["approval_count"] == 1, refreshed_ledger
+    assert refreshed_ledger["approval_count"] == 1, refreshed_ledger
     assert refreshed_ledger["summary"]["pending_review_count"] == 0, refreshed_ledger
     assert "approved adaptive note" not in policy_path.read_text(encoding="utf-8"), policy_path
 
@@ -295,7 +323,9 @@ def main() -> None:
     )
     assert apply_proc.returncode == 0, apply_proc.stderr
     apply_payload = json.loads(apply_proc.stdout)
+    assert_report_contract_mirrors(apply_payload, "apply_contract")
     assert apply_payload["summary"]["applied_count"] == 1, apply_payload
+    assert apply_payload["applied_count"] == 1, apply_payload
     assert apply_payload["summary"]["regression_run_count"] == 1, apply_payload
     assert apply_payload["summary"]["regression_pass_count"] == 1, apply_payload
     assert "approved adaptive note" in policy_path.read_text(encoding="utf-8"), policy_path
@@ -339,7 +369,9 @@ def main() -> None:
     )
     assert rollback_proc.returncode == 2, rollback_proc.stdout
     rollback_payload = json.loads(rollback_proc.stdout)
+    assert_report_contract_mirrors(rollback_payload, "apply_contract")
     assert rollback_payload["summary"]["applied_count"] == 0, rollback_payload
+    assert rollback_payload["rollback_count"] == 1, rollback_payload
     assert rollback_payload["summary"]["rollback_count"] == 1, rollback_payload
     assert rollback_payload["attempts"][0]["status"] == "failed-rolled-back", rollback_payload
     assert rollback_payload["attempts"][0]["rollback_result"]["ok"] is True, rollback_payload
@@ -375,6 +407,7 @@ def main() -> None:
     )
     assert unsafe_proc.returncode == 2, unsafe_proc.stdout
     unsafe_payload = json.loads(unsafe_proc.stdout)
+    assert_report_contract_mirrors(unsafe_payload, "apply_contract")
     assert any("outside approval target_files" in item for item in unsafe_payload["failures"]), unsafe_payload
 
     proposal_report_path = cli_skill_dir / "reports" / "adaptation_proposals.json"
@@ -415,6 +448,7 @@ def main() -> None:
     )
     assert new_file_prepare.returncode == 0, new_file_prepare.stdout
     new_file_payload = json.loads(new_file_prepare.stdout)
+    assert_report_contract_mirrors(new_file_payload, "apply_contract")
     assert new_file_payload["approval_draft"]["target_file_sha256"] == {
         "references/new-user-memory-policy.md": "__absent__",
     }, new_file_payload

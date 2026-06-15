@@ -8,8 +8,17 @@
     "ok",
     "generated_at",
     "skill_dir",
+    "pattern_count",
+    "proposal_count",
+    "apply_supported",
+    "failure_count",
+    "proposal_only",
+    "approval_required",
+    "writes_repository_files",
+    "approval_draft_supported",
     "summary",
     "proposal_contract",
+    "report_contract",
     "proposals",
     "artifacts"
   ],
@@ -25,6 +34,33 @@
     },
     "skill_dir": {
       "type": "string"
+    },
+    "pattern_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "proposal_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "apply_supported": {
+      "type": "boolean"
+    },
+    "failure_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "proposal_only": {
+      "const": true
+    },
+    "approval_required": {
+      "const": true
+    },
+    "writes_repository_files": {
+      "const": false
+    },
+    "approval_draft_supported": {
+      "const": true
     },
     "summary": {
       "type": "object",
@@ -80,6 +116,54 @@
         },
         "apply_command_available": {
           "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    },
+    "report_contract": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "contract",
+        "top_level_mirrors_summary",
+        "top_level_mirrors_proposal_contract",
+        "summary_fields",
+        "proposal_contract_fields",
+        "source_of_truth"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "1.0"
+        },
+        "contract": {
+          "const": "adaptation-proposals"
+        },
+        "top_level_mirrors_summary": {
+          "const": true
+        },
+        "top_level_mirrors_proposal_contract": {
+          "const": true
+        },
+        "summary_fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "proposal_contract_fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "source_of_truth": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "summary",
+              "proposal_contract"
+            ]
+          }
         }
       },
       "additionalProperties": true

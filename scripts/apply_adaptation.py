@@ -19,6 +19,104 @@ SCRIPT_INTERFACE_REASON = "Approval-gated adaptive patch application with dry-ru
 
 BLOCKED_PATH_PARTS = {".git", "__pycache__", ".pytest_cache", "dist"}
 ABSENT_FILE_SHA256 = "__absent__"
+APPROVAL_SUMMARY_FIELDS = [
+    "approval_count",
+    "active_approval_count",
+    "pending_review_count",
+    "applied_count",
+    "rollback_count",
+]
+APPROVAL_CONTRACT_FIELDS = [
+    "approval_required",
+    "patch_sha256_required",
+    "allowlisted_targets_required",
+    "target_file_sha256_required",
+    "approval_draft_supported",
+    "dry_run_default",
+    "writes_repository_files_only_with_apply",
+    "rollback_required",
+]
+REGRESSION_SUMMARY_FIELDS = [
+    "apply_supported",
+    "attempt_count",
+    "approval_draft_count",
+    "applied_count",
+    "dry_run_count",
+    "rollback_count",
+    "regression_run_count",
+    "regression_pass_count",
+    "failure_count",
+]
+APPLY_CONTRACT_FIELDS = [
+    *APPROVAL_CONTRACT_FIELDS,
+    "safe_regression_commands_only",
+    "rollback_on_failure_default",
+]
+APPROVAL_CONTRACT = {
+    "approval_required": True,
+    "patch_sha256_required": True,
+    "allowlisted_targets_required": True,
+    "target_file_sha256_required": True,
+    "approval_draft_supported": True,
+    "dry_run_default": True,
+    "writes_repository_files_only_with_apply": True,
+    "rollback_required": True,
+}
+APPLY_CONTRACT = {
+    **APPROVAL_CONTRACT,
+    "safe_regression_commands_only": True,
+    "rollback_on_failure_default": True,
+}
+
+
+def top_level_mirrors(summary: dict[str, Any], contract: dict[str, Any], summary_fields: list[str], contract_fields: list[str]) -> dict[str, Any]:
+    mirrored = {key: summary[key] for key in summary_fields if key in summary}
+    mirrored.update({key: contract[key] for key in contract_fields if key in contract})
+    return mirrored
+
+
+def report_contract(name: str, contract_key: str, summary_fields: list[str], contract_fields: list[str]) -> dict[str, Any]:
+    return {
+        "schema_version": "1.0",
+        "contract": name,
+        "top_level_mirrors_summary": True,
+        f"top_level_mirrors_{contract_key}": True,
+        "summary_fields": summary_fields,
+        f"{contract_key}_fields": contract_fields,
+        "source_of_truth": ["summary", contract_key],
+    }
+
+
+def decorate_approval_ledger(ledger: dict[str, Any]) -> dict[str, Any]:
+    summary = ledger.get("summary", {}) if isinstance(ledger.get("summary"), dict) else {}
+    approval_contract = (
+        ledger.get("approval_contract", {}) if isinstance(ledger.get("approval_contract"), dict) else {}
+    ) or dict(APPROVAL_CONTRACT)
+    ledger.update(top_level_mirrors(summary, approval_contract, APPROVAL_SUMMARY_FIELDS, APPROVAL_CONTRACT_FIELDS))
+    ledger["approval_contract"] = approval_contract
+    ledger["report_contract"] = report_contract(
+        "adaptation-approval-ledger",
+        "approval_contract",
+        APPROVAL_SUMMARY_FIELDS,
+        APPROVAL_CONTRACT_FIELDS,
+    )
+    return ledger
+
+
+def decorate_regression_report(report: dict[str, Any]) -> dict[str, Any]:
+    summary = report.get("summary", {}) if isinstance(report.get("summary"), dict) else {}
+    apply_contract = (
+        report.get("apply_contract", {}) if isinstance(report.get("apply_contract"), dict) else {}
+    ) or dict(APPLY_CONTRACT)
+    report.update(top_level_mirrors(summary, apply_contract, REGRESSION_SUMMARY_FIELDS, APPLY_CONTRACT_FIELDS))
+    report["apply_contract"] = apply_contract
+    report["report_contract"] = report_contract(
+        "adaptation-regression-report",
+        "apply_contract",
+        REGRESSION_SUMMARY_FIELDS,
+        APPLY_CONTRACT_FIELDS,
+    )
+    return report
 
 
 def utc_now() -> str:
@@ -118,6 +216,7 @@ def refresh_ledger_summary(ledger: dict[str, Any]) -> None:
         "applied_count": 0,
         "rollback_count": 0,
     }
+    decorate_approval_ledger(ledger)
 
 
 def upsert_ledger_entry(ledger: dict[str, Any], entry: dict[str, Any]) -> None:
@@ -239,7 +338,7 @@ def git_apply_reverse(skill_dir: Path, patch_file: Path) -> dict[str, Any]:
 
 
 def empty_approval_ledger(generated_at: str) -> dict[str, Any]:
-    return {
+    return decorate_approval_ledger({
         "schema_version": "1.0",
         "ok": True,
         "generated_at": generated_at,
@@ -250,22 +349,13 @@ def empty_approval_ledger(generated_at: str) -> dict[str, Any]:
             "applied_count": 0,
             "rollback_count": 0,
         },
-        "approval_contract": {
-            "approval_required": True,
-            "patch_sha256_required": True,
-            "allowlisted_targets_required": True,
-            "target_file_sha256_required": True,
-            "approval_draft_supported": True,
-            "dry_run_default": True,
-            "writes_repository_files_only_with_apply": True,
-            "rollback_required": True,
-        },
+        "approval_contract": dict(APPROVAL_CONTRACT),
         "entries": [],
-    }
+    })
 
 
 def empty_regression_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
-    return {
+    return decorate_regression_report({
         "schema_version": "1.0",
         "ok": True,
         "generated_at": generated_at,
@@ -273,6 +363,7 @@ def empty_regression_report(skill_dir: Path, generated_at: str) -> dict[str, Any
         "summary": {
             "apply_supported": True,
             "attempt_count": 0,
+            "approval_draft_count": 0,
             "applied_count": 0,
             "dry_run_count": 0,
             "rollback_count": 0,
@@ -280,25 +371,14 @@ def empty_regression_report(skill_dir: Path, generated_at: str) -> dict[str, Any
             "regression_pass_count": 0,
             "failure_count": 0,
         },
-        "apply_contract": {
-            "approval_required": True,
-            "patch_sha256_required": True,
-            "allowlisted_targets_required": True,
-            "target_file_sha256_required": True,
-            "approval_draft_supported": True,
-            "dry_run_default": True,
-            "writes_repository_files_only_with_apply": True,
-            "rollback_required": True,
-            "safe_regression_commands_only": True,
-            "rollback_on_failure_default": True,
-        },
+        "apply_contract": dict(APPLY_CONTRACT),
         "attempts": [],
         "failures": [],
         "artifacts": {
             "json": "reports/adaptation_regression_report.json",
             "approval_ledger": "reports/adaptation_approval_ledger.json",
         },
-    }
+    })
 
 
 def write_json(path: Path, payload: dict[str, Any]) -> None:
@@ -443,7 +523,7 @@ def build_report(args: argparse.Namespace) -> dict[str, Any]:
             }
             upsert_ledger_entry(ledger, draft)
             write_json(ledger_path, ledger)
-        report = {
+        report = decorate_regression_report({
             "schema_version": "1.0",
             "ok": not failures,
             "generated_at": generated_at,
@@ -459,18 +539,7 @@ def build_report(args: argparse.Namespace) -> dict[str, Any]:
                 "regression_pass_count": 0,
                 "failure_count": len(failures),
             },
-            "apply_contract": {
-                "approval_required": True,
-                "patch_sha256_required": True,
-                "allowlisted_targets_required": True,
-                "target_file_sha256_required": True,
-                "approval_draft_supported": True,
-                "dry_run_default": True,
-                "writes_repository_files_only_with_apply": True,
-                "rollback_required": True,
-                "safe_regression_commands_only": True,
-                "rollback_on_failure_default": True,
-            },
+            "apply_contract": dict(APPLY_CONTRACT),
             "approval_draft": draft,
             "attempts": [],
             "failures": failures,
@@ -479,7 +548,7 @@ def build_report(args: argparse.Namespace) -> dict[str, Any]:
                 "markdown": display_path(output_md, skill_dir),
                 "approval_ledger": display_path(ledger_path, skill_dir),
             },
-        }
+        })
         write_json(output_json, report)
         output_md.parent.mkdir(parents=True, exist_ok=True)
         output_md.write_text(render_markdown(report), encoding="utf-8")
@@ -569,7 +638,7 @@ def build_report(args: argparse.Namespace) -> dict[str, Any]:
             "command": f"git apply -R {display_path(patch_path, skill_dir)}" if args.patch_file else "",
         },
     }
-    report = {
+    report = decorate_regression_report({
         "schema_version": "1.0",
         "ok": not failures,
         "generated_at": generated_at,
@@ -577,6 +646,7 @@ def build_report(args: argparse.Namespace) -> dict[str, Any]:
         "summary": {
             "apply_supported": True,
             "attempt_count": 1,
+            "approval_draft_count": 0,
             "applied_count": 1 if applied and not rolled_back else 0,
             "dry_run_count": 0 if args.apply else 1,
             "rollback_count": 1 if rolled_back else 0,
@@ -584,18 +654,7 @@ def build_report(args: argparse.Namespace) -> dict[str, Any]:
             "regression_pass_count": sum(1 for item in regression_runs if item["ok"]),
             "failure_count": len(failures),
         },
-        "apply_contract": {
-            "approval_required": True,
-            "patch_sha256_required": True,
-            "allowlisted_targets_required": True,
-            "target_file_sha256_required": True,
-            "approval_draft_supported": True,
-            "dry_run_default": True,
-            "writes_repository_files_only_with_apply": True,
-            "rollback_required": True,
-            "safe_regression_commands_only": True,
-            "rollback_on_failure_default": True,
-        },
+        "apply_contract": dict(APPLY_CONTRACT),
         "attempts": [attempt],
         "failures": failures,
         "artifacts": {
@@ -603,7 +662,7 @@ def build_report(args: argparse.Namespace) -> dict[str, Any]:
             "markdown": display_path(output_md, skill_dir),
             "approval_ledger": display_path(ledger_path, skill_dir),
         },
-    }
+    })
     write_json(output_json, report)
     output_md.parent.mkdir(parents=True, exist_ok=True)
     output_md.write_text(render_markdown(report), encoding="utf-8")

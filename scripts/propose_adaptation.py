@@ -75,6 +75,41 @@ PROPOSAL_LIBRARY = {
     },
 }
 
+TOP_LEVEL_SUMMARY_FIELDS = [
+    "pattern_count",
+    "proposal_count",
+    "apply_supported",
+    "failure_count",
+]
+TOP_LEVEL_PROPOSAL_CONTRACT_FIELDS = [
+    "proposal_only",
+    "approval_required",
+    "writes_repository_files",
+    "allowlisted_targets_required",
+    "target_file_sha256_required_for_apply",
+    "approval_draft_supported",
+    "rollback_required_for_apply",
+    "apply_command_available",
+]
+
+
+def top_level_mirrors(summary: dict[str, Any], proposal_contract: dict[str, Any]) -> dict[str, Any]:
+    mirrored = {key: summary[key] for key in TOP_LEVEL_SUMMARY_FIELDS if key in summary}
+    mirrored.update({key: proposal_contract[key] for key in TOP_LEVEL_PROPOSAL_CONTRACT_FIELDS if key in proposal_contract})
+    return mirrored
+
+
+def report_contract() -> dict[str, Any]:
+    return {
+        "schema_version": "1.0",
+        "contract": "adaptation-proposals",
+        "top_level_mirrors_summary": True,
+        "top_level_mirrors_proposal_contract": True,
+        "summary_fields": TOP_LEVEL_SUMMARY_FIELDS,
+        "proposal_contract_fields": TOP_LEVEL_PROPOSAL_CONTRACT_FIELDS,
+        "source_of_truth": ["summary", "proposal_contract"],
+    }
+
 
 def utc_now() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
@@ -161,28 +196,32 @@ def build_report(skill_dir: Path, patterns_json: Path, generated_at: str) -> dic
         failures.append("Pattern report is not ok; fix scan failures before proposal generation.")
     patterns = patterns_payload.get("patterns", []) if isinstance(patterns_payload.get("patterns"), list) else []
     proposals = [proposal_from_pattern(pattern) for pattern in patterns if isinstance(pattern, dict)] if not failures else []
+    summary = {
+        "pattern_count": len(patterns),
+        "proposal_count": len(proposals),
+        "apply_supported": (ROOT / "scripts" / "apply_adaptation.py").exists(),
+        "failure_count": len(failures),
+    }
+    proposal_contract = {
+        "proposal_only": True,
+        "approval_required": True,
+        "writes_repository_files": False,
+        "allowlisted_targets_required": True,
+        "target_file_sha256_required_for_apply": True,
+        "approval_draft_supported": True,
+        "rollback_required_for_apply": True,
+        "apply_command_available": (ROOT / "scripts" / "apply_adaptation.py").exists(),
+    }
     return {
         "schema_version": "1.0",
         "ok": not failures,
         "generated_at": generated_at,
         "skill_dir": display_path(skill_dir, skill_dir),
         "source_patterns": display_path(patterns_json, skill_dir),
-        "summary": {
-            "pattern_count": len(patterns),
-            "proposal_count": len(proposals),
-            "apply_supported": (ROOT / "scripts" / "apply_adaptation.py").exists(),
-            "failure_count": len(failures),
-        },
-        "proposal_contract": {
-            "proposal_only": True,
-            "approval_required": True,
-            "writes_repository_files": False,
-            "allowlisted_targets_required": True,
-            "target_file_sha256_required_for_apply": True,
-            "approval_draft_supported": True,
-            "rollback_required_for_apply": True,
-            "apply_command_available": (ROOT / "scripts" / "apply_adaptation.py").exists(),
-        },
+        **top_level_mirrors(summary, proposal_contract),
+        "summary": summary,
+        "proposal_contract": proposal_contract,
+        "report_contract": report_contract(),
         "proposals": proposals,
         "failures": failures,
         "artifacts": {
