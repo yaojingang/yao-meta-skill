@@ -16,6 +16,10 @@ REQUIRED_REPORTS = {
     "interpretation": "reports/skill-interpretation.json",
     "adoption": "reports/adoption_drift_report.json",
     "world_class_ledger": "reports/world_class_evidence_ledger.json",
+    "world_class_plan": "reports/world_class_evidence_plan.json",
+    "world_class_intake": "reports/world_class_evidence_intake.json",
+    "world_class_submission_review": "reports/world_class_submission_review.json",
+    "world_class_operator_runbook": "reports/world_class_operator_runbook.json",
     "skill_os2_coverage": "reports/skill_os2_coverage.json",
     "review_studio": "reports/review-studio.json",
     "package_verification": "reports/package_verification.json",
@@ -145,6 +149,69 @@ def as_int(value: Any) -> int | None:
         return None
 
 
+def keyed_items(payload: dict[str, Any], collection_key: str) -> dict[str, dict[str, Any]]:
+    collection = payload.get(collection_key)
+    if not isinstance(collection, list):
+        return {}
+    keyed: dict[str, dict[str, Any]] = {}
+    for item in collection:
+        if not isinstance(item, dict):
+            continue
+        key = item.get("key") or item.get("evidence_key")
+        if isinstance(key, str):
+            keyed[key] = item
+    return keyed
+
+
+def command_key_set(item: dict[str, Any]) -> set[str]:
+    commands = item.get("commands")
+    if isinstance(commands, dict):
+        return {key for key, value in commands.items() if isinstance(key, str) and value}
+    if isinstance(commands, list):
+        keys: set[str] = set()
+        for command in commands:
+            if isinstance(command, dict) and isinstance(command.get("key"), str) and command.get("command"):
+                keys.add(command["key"])
+        return keys
+    return set()
+
+
+def world_class_review_action_steps(review_studio: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    actions = review_studio.get("review_actions")
+    if not isinstance(actions, list):
+        return {}
+    for action in actions:
+        if not isinstance(action, dict) or action.get("gate_key") != "world-class-evidence":
+            continue
+        steps = action.get("evidence_steps")
+        if not isinstance(steps, list):
+            return {}
+        keyed: dict[str, dict[str, Any]] = {}
+        for step in steps:
+            if isinstance(step, dict) and isinstance(step.get("key"), str):
+                keyed[step["key"]] = step
+        return keyed
+    return {}
+
+
+def command_groups_present(command_keys: set[str]) -> dict[str, bool]:
+    return {
+        "prepare_submission": "prepare_submission" in command_keys,
+        "validate_intake": "validate_intake" in command_keys,
+        "submission_review": bool({"submission_review", "review_queue"} & command_keys),
+        "refresh_ledger": "refresh_ledger" in command_keys,
+        "guard_claim": "guard_claim" in command_keys,
+    }
+
+
+def has_next_action(item: dict[str, Any]) -> bool:
+    for key in ["next_action", "audit_next_action"]:
+        value = item.get(key)
+        if isinstance(value, str) and value.strip():
+            return True
+    return False
+
+
 def add_check(
     checks: list[dict[str, Any]],
     *,
@@ -250,6 +317,10 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
     interpretation = reports["interpretation"]
     adoption = reports["adoption"]
     ledger = reports["world_class_ledger"]
+    world_class_plan = reports["world_class_plan"]
+    world_class_intake = reports["world_class_intake"]
+    world_class_submission_review = reports["world_class_submission_review"]
+    world_class_operator_runbook = reports["world_class_operator_runbook"]
     coverage = reports["skill_os2_coverage"]
     review_studio = reports["review_studio"]
     package_verification = reports["package_verification"]
@@ -261,6 +332,10 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
     benchmark_summary = nested(benchmark, ["summary"], {})
     adoption_summary = nested(adoption, ["summary"], {})
     ledger_summary = nested(ledger, ["summary"], {})
+    plan_summary = nested(world_class_plan, ["summary"], {})
+    intake_summary = nested(world_class_intake, ["summary"], {})
+    submission_review_summary = nested(world_class_submission_review, ["summary"], {})
+    operator_runbook_summary = nested(world_class_operator_runbook, ["summary"], {})
     coverage_summary = nested(coverage, ["summary"], {})
     studio_summary = nested(review_studio, ["summary"], {})
     package_summary = nested(package_verification, ["summary"], {})
@@ -509,6 +584,131 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             REQUIRED_REPORTS["world_class_ledger"],
         ],
         detail="The overclaim guard must scan package manifests, adapter metadata, security policy, and ledger surfaces before public readiness can be trusted.",
+    )
+    ledger_items = keyed_items(ledger, "entries")
+    plan_tasks = keyed_items(world_class_plan, "tasks")
+    intake_checklist = keyed_items(world_class_intake, "operator_checklist")
+    submission_review_items = keyed_items(world_class_submission_review, "items")
+    operator_runbook_items = keyed_items(world_class_operator_runbook, "items")
+    review_action_steps = world_class_review_action_steps(review_studio)
+    pending_world_class_keys = sorted(
+        key for key, item in ledger_items.items() if item.get("status") != "accepted"
+    )
+    expected_command_groups = {
+        key: {
+            "intake": {
+                "prepare_submission": True,
+                "validate_intake": True,
+                "submission_review": True,
+                "refresh_ledger": True,
+                "guard_claim": True,
+            },
+            "operator_runbook": {
+                "prepare_submission": True,
+                "validate_intake": True,
+                "submission_review": True,
+                "refresh_ledger": True,
+                "guard_claim": True,
+            },
+            "review_studio": {
+                "prepare_submission": True,
+                "validate_intake": True,
+                "submission_review": True,
+                "refresh_ledger": True,
+                "guard_claim": True,
+            },
+        }
+        for key in pending_world_class_keys
+    }
+    actual_command_groups = {
+        key: {
+            "intake": command_groups_present(command_key_set(intake_checklist.get(key, {}))),
+            "operator_runbook": command_groups_present(command_key_set(operator_runbook_items.get(key, {}))),
+            "review_studio": command_groups_present(command_key_set(review_action_steps.get(key, {}))),
+        }
+        for key in pending_world_class_keys
+    }
+    expected_world_class_workflow = {
+        "keys": pending_world_class_keys,
+        "pending_count": ledger_summary.get("pending_count") if isinstance(ledger_summary, dict) else None,
+        "human_pending_count": ledger_summary.get("human_pending_count") if isinstance(ledger_summary, dict) else None,
+        "external_pending_count": ledger_summary.get("external_pending_count") if isinstance(ledger_summary, dict) else None,
+        "source_check_count": ledger_summary.get("source_check_count") if isinstance(ledger_summary, dict) else None,
+        "source_pass_count": ledger_summary.get("source_pass_count") if isinstance(ledger_summary, dict) else None,
+        "source_blocked_count": ledger_summary.get("source_blocked_count") if isinstance(ledger_summary, dict) else None,
+        "plan_keys": pending_world_class_keys,
+        "intake_keys": pending_world_class_keys,
+        "submission_review_keys": pending_world_class_keys,
+        "operator_runbook_keys": pending_world_class_keys,
+        "review_studio_keys": pending_world_class_keys,
+        "intake_ready_to_claim_world_class": False,
+        "submission_review_ready_to_claim_world_class": False,
+        "submission_review_counts_as_completion": False,
+        "operator_runbook_ready_to_claim_world_class": False,
+        "operator_runbook_counts_as_completion": False,
+        "next_actions_present": {key: True for key in pending_world_class_keys},
+        "commands": expected_command_groups,
+    }
+    actual_world_class_workflow = {
+        "keys": pending_world_class_keys,
+        "pending_count": plan_summary.get("task_count") if isinstance(plan_summary, dict) else None,
+        "human_pending_count": plan_summary.get("human_task_count") if isinstance(plan_summary, dict) else None,
+        "external_pending_count": plan_summary.get("external_task_count") if isinstance(plan_summary, dict) else None,
+        "source_check_count": submission_review_summary.get("source_check_count")
+        if isinstance(submission_review_summary, dict)
+        else None,
+        "source_pass_count": submission_review_summary.get("source_pass_count")
+        if isinstance(submission_review_summary, dict)
+        else None,
+        "source_blocked_count": submission_review_summary.get("source_blocked_count")
+        if isinstance(submission_review_summary, dict)
+        else None,
+        "plan_keys": sorted(plan_tasks),
+        "intake_keys": sorted(intake_checklist),
+        "submission_review_keys": sorted(submission_review_items),
+        "operator_runbook_keys": sorted(operator_runbook_items),
+        "review_studio_keys": sorted(review_action_steps),
+        "intake_ready_to_claim_world_class": intake_summary.get("ready_to_claim_world_class")
+        if isinstance(intake_summary, dict)
+        else None,
+        "submission_review_ready_to_claim_world_class": submission_review_summary.get("ready_to_claim_world_class")
+        if isinstance(submission_review_summary, dict)
+        else None,
+        "submission_review_counts_as_completion": submission_review_summary.get(
+            "review_counts_submission_as_completion"
+        )
+        if isinstance(submission_review_summary, dict)
+        else None,
+        "operator_runbook_ready_to_claim_world_class": operator_runbook_summary.get("ready_to_claim_world_class")
+        if isinstance(operator_runbook_summary, dict)
+        else None,
+        "operator_runbook_counts_as_completion": operator_runbook_summary.get("runbook_counts_as_completion")
+        if isinstance(operator_runbook_summary, dict)
+        else None,
+        "next_actions_present": {
+            key: all(
+                has_next_action(collection.get(key, {}))
+                for collection in [plan_tasks, intake_checklist, submission_review_items, review_action_steps]
+            )
+            for key in pending_world_class_keys
+        },
+        "commands": actual_command_groups,
+    }
+    compare_values(
+        checks,
+        key="world-class-evidence-workflow-coverage",
+        label="World-class evidence workflows cover every pending ledger entry",
+        expected=expected_world_class_workflow,
+        actual=actual_world_class_workflow,
+        paths=[
+            REQUIRED_REPORTS["world_class_ledger"],
+            REQUIRED_REPORTS["world_class_plan"],
+            REQUIRED_REPORTS["world_class_intake"],
+            REQUIRED_REPORTS["world_class_submission_review"],
+            REQUIRED_REPORTS["world_class_operator_runbook"],
+            REQUIRED_REPORTS["review_studio"],
+        ],
+        detail="Every pending world-class evidence key must have matching plan, intake, submission review, operator runbook, and Review Studio actions without counting planned work as completion.",
     )
     skill_os2_review = text_reports.get("skill_os2_review", "")
     ci_target_count = ci_default_target_count(skill_dir / "scripts" / "ci_test.py")

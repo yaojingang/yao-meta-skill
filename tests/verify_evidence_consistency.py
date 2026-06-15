@@ -17,6 +17,10 @@ REPORT_FILES = [
     "reports/skill-interpretation.html",
     "reports/adoption_drift_report.json",
     "reports/world_class_evidence_ledger.json",
+    "reports/world_class_evidence_plan.json",
+    "reports/world_class_evidence_intake.json",
+    "reports/world_class_submission_review.json",
+    "reports/world_class_operator_runbook.json",
     "reports/skill_os2_coverage.json",
     "reports/review-studio.json",
     "reports/package_verification.json",
@@ -45,6 +49,11 @@ def refresh_embedded_reports() -> None:
     script_names = [
         "render_benchmark_reproducibility.py",
         "render_skill_os2_coverage.py",
+        "render_world_class_evidence_plan.py",
+        "render_world_class_evidence_ledger.py",
+        "render_world_class_evidence_intake.py",
+        "render_world_class_submission_review.py",
+        "render_world_class_operator_runbook.py",
         "render_world_class_claim_guard.py",
         "render_skill_overview.py",
         "render_skill_interpretation.py",
@@ -112,7 +121,7 @@ def main() -> None:
     assert payload["ok"] is True, payload
     assert payload["summary"]["decision"] == "consistent", payload
     assert payload["summary"]["fail_count"] == 0, payload
-    assert payload["summary"]["check_count"] >= 28, payload
+    assert payload["summary"]["check_count"] >= 29, payload
     checks = {item["key"]: item for item in payload["checks"]}
     assert checks["overview-benchmark-summary"]["status"] == "pass", checks["overview-benchmark-summary"]
     assert checks["interpretation-adoption-summary"]["status"] == "pass", checks["interpretation-adoption-summary"]
@@ -120,6 +129,9 @@ def main() -> None:
     assert checks["review-studio-no-overclaim"]["status"] == "pass", checks["review-studio-no-overclaim"]
     assert checks["claim-guard-package-runtime-surface"]["status"] == "pass", checks[
         "claim-guard-package-runtime-surface"
+    ]
+    assert checks["world-class-evidence-workflow-coverage"]["status"] == "pass", checks[
+        "world-class-evidence-workflow-coverage"
     ]
     assert checks["skill-os-2-review-current-evidence"]["status"] == "pass", checks[
         "skill-os-2-review-current-evidence"
@@ -183,6 +195,36 @@ def main() -> None:
     claim_guard_drift_checks = {item["key"]: item for item in claim_guard_drift_payload["checks"]}
     assert claim_guard_drift_checks["claim-guard-package-runtime-surface"]["status"] == "fail", (
         claim_guard_drift_checks["claim-guard-package-runtime-surface"]
+    )
+
+    workflow_drift_root = TMP / "workflow-drift-skill"
+    copy_reports(workflow_drift_root)
+    studio_path = workflow_drift_root / "reports" / "review-studio.json"
+    studio = json.loads(studio_path.read_text(encoding="utf-8"))
+    for action in studio["review_actions"]:
+        if action.get("gate_key") == "world-class-evidence":
+            action["evidence_steps"] = [
+                item for item in action["evidence_steps"] if item.get("key") != "native-client-telemetry"
+            ]
+    studio_path.write_text(json.dumps(studio, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    workflow_drift_proc = run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            str(workflow_drift_root),
+            "--output-json",
+            str(TMP / "workflow_drift.json"),
+            "--output-md",
+            str(TMP / "workflow_drift.md"),
+            "--generated-at",
+            "2026-06-15",
+        ]
+    )
+    assert workflow_drift_proc.returncode == 2, workflow_drift_proc.stdout
+    workflow_drift_payload = json.loads(workflow_drift_proc.stdout)
+    workflow_drift_checks = {item["key"]: item for item in workflow_drift_payload["checks"]}
+    assert workflow_drift_checks["world-class-evidence-workflow-coverage"]["status"] == "fail", (
+        workflow_drift_checks["world-class-evidence-workflow-coverage"]
     )
     print(json.dumps({"ok": True}, ensure_ascii=False, indent=2))
 

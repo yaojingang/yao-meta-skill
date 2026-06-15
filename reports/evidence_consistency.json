@@ -4,14 +4,14 @@
   "generated_at": "2026-06-16",
   "skill_dir": ".",
   "summary": {
-    "check_count": 28,
-    "pass_count": 28,
+    "check_count": 29,
+    "pass_count": 29,
     "warn_count": 0,
     "fail_count": 0,
     "decision": "consistent"
   },
   "status_counts": {
-    "pass": 28,
+    "pass": 29,
     "warn": 0,
     "fail": 0
   },
@@ -28,6 +28,10 @@
         "reports/skill-interpretation.json",
         "reports/adoption_drift_report.json",
         "reports/world_class_evidence_ledger.json",
+        "reports/world_class_evidence_plan.json",
+        "reports/world_class_evidence_intake.json",
+        "reports/world_class_submission_review.json",
+        "reports/world_class_operator_runbook.json",
         "reports/skill_os2_coverage.json",
         "reports/review-studio.json",
         "reports/package_verification.json",
@@ -43,8 +47,8 @@
       "key": "benchmark-release-lock-self-consistency",
       "label": "Benchmark release lock matches git dirty state",
       "status": "pass",
-      "expected": true,
-      "actual": true,
+      "expected": false,
+      "actual": false,
       "paths": [
         "reports/benchmark_reproducibility.json"
       ],
@@ -54,8 +58,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "0979c8753e01e9cbcfbcd9905b160b8f3b6f5372",
-      "actual": "0979c8753e01e9cbcfbcd9905b160b8f3b6f5372",
+      "expected": "c9a7842991900287ce259e1b624b7f36e3750265",
+      "actual": "c9a7842991900287ce259e1b624b7f36e3750265",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -67,30 +71,30 @@
       "label": "overview embeds benchmark summary fields",
       "status": "pass",
       "expected": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "caa815571f7c86fa95447cd7407875eb452cac255c45360db63b017699425921",
-        "archive_sha256": "6721f9af9fc9784b0491f8e73dd92db8a38b3629fc08170ddd3269f2a3c9b48f",
+        "source_contract_sha256": "f48a71e36bdbcaa353bd4e6bfc499bda41f047aeffe3d8eae2f99509ec693086",
+        "archive_sha256": "00151114ce7fee627882964137dd5259583f5521c75c6570789345e874454137",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4
+        "public_claim_blocker_count": 5
       },
       "actual": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "caa815571f7c86fa95447cd7407875eb452cac255c45360db63b017699425921",
-        "archive_sha256": "6721f9af9fc9784b0491f8e73dd92db8a38b3629fc08170ddd3269f2a3c9b48f",
+        "source_contract_sha256": "f48a71e36bdbcaa353bd4e6bfc499bda41f047aeffe3d8eae2f99509ec693086",
+        "archive_sha256": "00151114ce7fee627882964137dd5259583f5521c75c6570789345e874454137",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4
+        "public_claim_blocker_count": 5
       },
       "paths": [
         "reports/benchmark_reproducibility.json",
@@ -200,8 +204,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "0979c8753e01e9cbcfbcd9905b160b8f3b6f5372",
-      "actual": "0979c8753e01e9cbcfbcd9905b160b8f3b6f5372",
+      "expected": "c9a7842991900287ce259e1b624b7f36e3750265",
+      "actual": "c9a7842991900287ce259e1b624b7f36e3750265",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
@@ -213,30 +217,30 @@
       "label": "interpretation embeds benchmark summary fields",
       "status": "pass",
       "expected": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "caa815571f7c86fa95447cd7407875eb452cac255c45360db63b017699425921",
-        "archive_sha256": "6721f9af9fc9784b0491f8e73dd92db8a38b3629fc08170ddd3269f2a3c9b48f",
+        "source_contract_sha256": "f48a71e36bdbcaa353bd4e6bfc499bda41f047aeffe3d8eae2f99509ec693086",
+        "archive_sha256": "00151114ce7fee627882964137dd5259583f5521c75c6570789345e874454137",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4
+        "public_claim_blocker_count": 5
       },
       "actual": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "caa815571f7c86fa95447cd7407875eb452cac255c45360db63b017699425921",
-        "archive_sha256": "6721f9af9fc9784b0491f8e73dd92db8a38b3629fc08170ddd3269f2a3c9b48f",
+        "source_contract_sha256": "f48a71e36bdbcaa353bd4e6bfc499bda41f047aeffe3d8eae2f99509ec693086",
+        "archive_sha256": "00151114ce7fee627882964137dd5259583f5521c75c6570789345e874454137",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4
+        "public_claim_blocker_count": 5
       },
       "paths": [
         "reports/benchmark_reproducibility.json",
@@ -1703,6 +1707,318 @@
         "reports/world_class_evidence_ledger.json"
       ],
       "detail": "The overclaim guard must scan package manifests, adapter metadata, security policy, and ledger surfaces before public readiness can be trusted."
+    },
+    {
+      "key": "world-class-evidence-workflow-coverage",
+      "label": "World-class evidence workflows cover every pending ledger entry",
+      "status": "pass",
+      "expected": {
+        "keys": [
+          "human-adjudication",
+          "native-client-telemetry",
+          "native-permission-enforcement",
+          "provider-holdout"
+        ],
+        "pending_count": 4,
+        "human_pending_count": 1,
+        "external_pending_count": 3,
+        "source_check_count": 13,
+        "source_pass_count": 6,
+        "source_blocked_count": 7,
+        "plan_keys": [
+          "human-adjudication",
+          "native-client-telemetry",
+          "native-permission-enforcement",
+          "provider-holdout"
+        ],
+        "intake_keys": [
+          "human-adjudication",
+          "native-client-telemetry",
+          "native-permission-enforcement",
+          "provider-holdout"
+        ],
+        "submission_review_keys": [
+          "human-adjudication",
+          "native-client-telemetry",
+          "native-permission-enforcement",
+          "provider-holdout"
+        ],
+        "operator_runbook_keys": [
+          "human-adjudication",
+          "native-client-telemetry",
+          "native-permission-enforcement",
+          "provider-holdout"
+        ],
+        "review_studio_keys": [
+          "human-adjudication",
+          "native-client-telemetry",
+          "native-permission-enforcement",
+          "provider-holdout"
+        ],
+        "intake_ready_to_claim_world_class": false,
+        "submission_review_ready_to_claim_world_class": false,
+        "submission_review_counts_as_completion": false,
+        "operator_runbook_ready_to_claim_world_class": false,
+        "operator_runbook_counts_as_completion": false,
+        "next_actions_present": {
+          "human-adjudication": true,
+          "native-client-telemetry": true,
+          "native-permission-enforcement": true,
+          "provider-holdout": true
+        },
+        "commands": {
+          "human-adjudication": {
+            "intake": {
+              "prepare_submission": true,
+              "validate_intake": true,
+              "submission_review": true,
+              "refresh_ledger": true,
+              "guard_claim": true
+            },
+            "operator_runbook": {
+              "prepare_submission": true,
+              "validate_intake": true,
+              "submission_review": true,
+              "refresh_ledger": true,
+              "guard_claim": true
+            },
+            "review_studio": {
+              "prepare_submission": true,
+              "validate_intake": true,
+              "submission_review": true,
+              "refresh_ledger": true,
+              "guard_claim": true
+            }
+          },
+          "native-client-telemetry": {
+            "intake": {
+              "prepare_submission": true,
+              "validate_intake": true,
+              "submission_review": true,
+              "refresh_ledger": true,
+              "guard_claim": true
+            },
+            "operator_runbook": {
+              "prepare_submission": true,
+              "validate_intake": true,
+              "submission_review": true,
+              "refresh_ledger": true,
+              "guard_claim": true
+            },
+            "review_studio": {
+              "prepare_submission": true,
+              "validate_intake": true,
+              "submission_review": true,
+              "refresh_ledger": true,
+              "guard_claim": true
+            }
+          },
+          "native-permission-enforcement": {
+            "intake": {
+              "prepare_submission": true,
+              "validate_intake": true,
+              "submission_review": true,
+              "refresh_ledger": true,
+              "guard_claim": true
+            },
+            "operator_runbook": {
+              "prepare_submission": true,
+              "validate_intake": true,
+              "submission_review": true,
+              "refresh_ledger": true,
+              "guard_claim": true
+            },
+            "review_studio": {
+              "prepare_submission": true,
+              "validate_intake": true,
+              "submission_review": true,
+              "refresh_ledger": true,
+              "guard_claim": true
+            }
+          },
+          "provider-holdout": {
+            "intake": {
+              "prepare_submission": true,
+              "validate_intake": true,
+              "submission_review": true,
+              "refresh_ledger": true,
+              "guard_claim": true
+            },
+            "operator_runbook": {
+              "prepare_submission": true,
+              "validate_intake": true,
+              "submission_review": true,
+              "refresh_ledger": true,
+              "guard_claim": true
+            },
+            "review_studio": {
+              "prepare_submission": true,
+              "validate_intake": true,
+              "submission_review": true,
+              "refresh_ledger": true,
+              "guard_claim": true
+            }
+          }
+        }
+      },
+      "actual": {
+        "keys": [
+          "human-adjudication",
+          "native-client-telemetry",
+          "native-permission-enforcement",
+          "provider-holdout"
+        ],
+        "pending_count": 4,
+        "human_pending_count": 1,
+        "external_pending_count": 3,
+        "source_check_count": 13,
+        "source_pass_count": 6,
+        "source_blocked_count": 7,
+        "plan_keys": [
+          "human-adjudication",
+          "native-client-telemetry",
+          "native-permission-enforcement",
+          "provider-holdout"
+        ],
+        "intake_keys": [
+          "human-adjudication",
+          "native-client-telemetry",
+          "native-permission-enforcement",
+          "provider-holdout"
+        ],
+        "submission_review_keys": [
+          "human-adjudication",
+          "native-client-telemetry",
+          "native-permission-enforcement",
+          "provider-holdout"
+        ],
+        "operator_runbook_keys": [
+          "human-adjudication",
+          "native-client-telemetry",
+          "native-permission-enforcement",
+          "provider-holdout"
+        ],
+        "review_studio_keys": [
+          "human-adjudication",
+          "native-client-telemetry",
+          "native-permission-enforcement",
+          "provider-holdout"
+        ],
+        "intake_ready_to_claim_world_class": false,
+        "submission_review_ready_to_claim_world_class": false,
+        "submission_review_counts_as_completion": false,
+        "operator_runbook_ready_to_claim_world_class": false,
+        "operator_runbook_counts_as_completion": false,
+        "next_actions_present": {
+          "human-adjudication": true,
+          "native-client-telemetry": true,
+          "native-permission-enforcement": true,
+          "provider-holdout": true
+        },
+        "commands": {
+          "human-adjudication": {
+            "intake": {
+              "prepare_submission": true,
+              "validate_intake": true,
+              "submission_review": true,
+              "refresh_ledger": true,
+              "guard_claim": true
+            },
+            "operator_runbook": {
+              "prepare_submission": true,
+              "validate_intake": true,
+              "submission_review": true,
+              "refresh_ledger": true,
+              "guard_claim": true
+            },
+            "review_studio": {
+              "prepare_submission": true,
+              "validate_intake": true,
+              "submission_review": true,
+              "refresh_ledger": true,
+              "guard_claim": true
+            }
+          },
+          "native-client-telemetry": {
+            "intake": {
+              "prepare_submission": true,
+              "validate_intake": true,
+              "submission_review": true,
+              "refresh_ledger": true,
+              "guard_claim": true
+            },
+            "operator_runbook": {
+              "prepare_submission": true,
+              "validate_intake": true,
+              "submission_review": true,
+              "refresh_ledger": true,
+              "guard_claim": true
+            },
+            "review_studio": {
+              "prepare_submission": true,
+              "validate_intake": true,
+              "submission_review": true,
+              "refresh_ledger": true,
+              "guard_claim": true
+            }
+          },
+          "native-permission-enforcement": {
+            "intake": {
+              "prepare_submission": true,
+              "validate_intake": true,
+              "submission_review": true,
+              "refresh_ledger": true,
+              "guard_claim": true
+            },
+            "operator_runbook": {
+              "prepare_submission": true,
+              "validate_intake": true,
+              "submission_review": true,
+              "refresh_ledger": true,
+              "guard_claim": true
+            },
+            "review_studio": {
+              "prepare_submission": true,
+              "validate_intake": true,
+              "submission_review": true,
+              "refresh_ledger": true,
+              "guard_claim": true
+            }
+          },
+          "provider-holdout": {
+            "intake": {
+              "prepare_submission": true,
+              "validate_intake": true,
+              "submission_review": true,
+              "refresh_ledger": true,
+              "guard_claim": true
+            },
+            "operator_runbook": {
+              "prepare_submission": true,
+              "validate_intake": true,
+              "submission_review": true,
+              "refresh_ledger": true,
+              "guard_claim": true
+            },
+            "review_studio": {
+              "prepare_submission": true,
+              "validate_intake": true,
+              "submission_review": true,
+              "refresh_ledger": true,
+              "guard_claim": true
+            }
+          }
+        }
+      },
+      "paths": [
+        "reports/world_class_evidence_ledger.json",
+        "reports/world_class_evidence_plan.json",
+        "reports/world_class_evidence_intake.json",
+        "reports/world_class_submission_review.json",
+        "reports/world_class_operator_runbook.json",
+        "reports/review-studio.json"
+      ],
+      "detail": "Every pending world-class evidence key must have matching plan, intake, submission review, operator runbook, and Review Studio actions without counting planned work as completion."
     },
     {
       "key": "skill-os-2-review-current-evidence",
