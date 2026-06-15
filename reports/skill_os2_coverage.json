@@ -7,22 +7,22 @@
     "item_count": 21,
     "module_count": 8,
     "recommended_pr_count": 13,
-    "pass_count": 20,
-    "warn_count": 1,
+    "pass_count": 21,
+    "warn_count": 0,
     "missing_count": 0,
     "extension_track_count": 4,
     "extension_partial_count": 0,
     "extension_planned_count": 0,
     "extension_covered_count": 4,
     "adaptive_extension_ready": true,
-    "local_blueprint_ready": false,
+    "local_blueprint_ready": true,
     "public_world_class_ready": false,
     "world_class_evidence_pending_count": 4,
-    "decision": "continue-implementation"
+    "decision": "local-blueprint-covered-evidence-pending"
   },
   "status_counts": {
-    "pass": 20,
-    "warn": 1,
+    "pass": 21,
+    "warn": 0,
     "missing": 0
   },
   "extension_status_counts": {
@@ -611,7 +611,7 @@
       "key": "evidence-consistency",
       "category": "recommended-pr",
       "label": "Evidence Consistency",
-      "status": "warn",
+      "status": "pass",
       "objective": "Recommended Skill OS 2.0 implementation PR from the upgrade plan.",
       "current": "35 consistency checks",
       "command": "make ci-test",

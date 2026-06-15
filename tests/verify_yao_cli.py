@@ -729,7 +729,6 @@ def main() -> None:
     promote_result = run("promote-check")
     assert promote_result["ok"], promote_result
     assert promote_result["payload"]["summary"]["blocked"] == 0, promote_result
-
     review_result = run("review", "--target", "root")
     assert review_result["ok"], review_result
     assert review_result["payload"]["artifacts"]["review_md"].endswith("reports/iteration_bundles/yao-meta-skill/review.md")
@@ -762,7 +761,8 @@ def main() -> None:
     assert "world_class_claim_guard" in report_result["payload"]["artifacts"], report_result
     assert "benchmark_reproducibility" in report_result["payload"]["artifacts"], report_result
     assert "evidence_consistency" in report_result["payload"]["artifacts"], report_result
-    assert "skill_os2_coverage" in report_result["payload"]["artifacts"], report_result
+    assert all(key in report_result["payload"]["artifacts"] for key in ("skill_os2_audit", "skill_os2_coverage")), report_result
+    assert any(step["command"].startswith("render_skill_os2_audit.py ") and step["ok"] for step in report_result["payload"]["steps"]), report_result
     assert "weekly_curator" in report_result["payload"]["artifacts"], report_result
     assert report_result["payload"]["artifacts"]["skill_overview"] == "reports/skill-overview.json", report_result
     assert report_result["payload"]["artifacts"]["skill_interpretation"] == "reports/skill-interpretation.json", report_result
