@@ -1704,9 +1704,9 @@
           "public_claim_ready": false,
           "public_claim_blocker_count": 5,
           "working_tree_dirty": true,
-          "changed_file_count": 2
+          "changed_file_count": 1
         },
-        "commit": "cf4da354992c8876ccd73940f1b03e47c437d5a9",
+        "commit": "cd4c8036a978ae90e57ba303ddcdb2059acd8389",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -5301,14 +5301,13 @@
       "ok": true,
       "generated_at": "2026-06-16",
       "skill_dir": ".",
-      "commit": "cf4da354992c8876ccd73940f1b03e47c437d5a9",
+      "commit": "cd4c8036a978ae90e57ba303ddcdb2059acd8389",
       "git_status": {
         "available": true,
         "dirty": true,
-        "changed_file_count": 2,
+        "changed_file_count": 1,
         "sample": [
-          " M reports/context_budget.json",
-          " M reports/context_budget_summary.json"
+          " M reports/context_budget.json"
         ],
         "scope": "generation-time status before this report is written"
       },
@@ -5340,7 +5339,7 @@
         "public_claim_ready": false,
         "public_claim_blocker_count": 5,
         "working_tree_dirty": true,
-        "changed_file_count": 2
+        "changed_file_count": 1
       },
       "public_claim": {
         "ready": false,
@@ -5356,7 +5355,7 @@
       },
       "release_lock": {
         "ready": false,
-        "commit": "cf4da354992c8876ccd73940f1b03e47c437d5a9",
+        "commit": "cd4c8036a978ae90e57ba303ddcdb2059acd8389",
         "status_scope": "generation-time status before this report is written",
         "reason": "working tree was dirty at generation time"
       },
@@ -15809,9 +15808,9 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 767,
-        "other_text_tokens": 1001289,
+        "other_text_tokens": 1001284,
         "estimated_initial_load_tokens": 960,
-        "estimated_total_text_tokens": 1002056,
+        "estimated_total_text_tokens": 1002051,
         "deferred_resource_tokens": 461032,
         "deferred_resource_warn_threshold": 120000,
         "deferred_resource_dirs": [
