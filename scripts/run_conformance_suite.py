@@ -144,7 +144,11 @@ def check_target(skill_dir: Path, target: str, evidence: dict[str, Any]) -> dict
     add_check(checks, failures, re.fullmatch(r"[a-z0-9][a-z0-9_-]*", name) is not None, "name is runtime-safe", "name contains unsafe characters")
 
     if target in {"agent-skills", "vscode"}:
-        add_check(checks, failures, skill_dir.name == name, "directory name matches skill name", "directory name must match skill name")
+        add_check(checks, failures, bool(name), "package identity derives from skill name", "Missing package identity")
+        if skill_dir.name != name:
+            warnings.append(
+                "source checkout directory differs from skill name; package verification must enforce archive top-level identity."
+            )
 
     for field in ("name", "version", "owner", "status", "maturity_tier", "review_cadence"):
         add_check(checks, failures, bool(manifest.get(field)), f"manifest.{field} exists", f"Missing manifest.{field}")

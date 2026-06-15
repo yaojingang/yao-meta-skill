@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 import json
+import shutil
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 
@@ -51,6 +53,34 @@ def main() -> None:
     assert output_json.exists(), output_json
     assert output_md.exists(), output_md
     assert "Runtime Conformance Matrix" in output_md.read_text(encoding="utf-8")
+
+    with tempfile.TemporaryDirectory(prefix="renamed-conformance-root-") as temp_root:
+        renamed_root = Path(temp_root) / "checkout-alias"
+        shutil.copytree(
+            ROOT,
+            renamed_root,
+            ignore=shutil.ignore_patterns(".git", ".previews", "dist", "__pycache__", ".pytest_cache", "tmp*"),
+        )
+        renamed_proc = subprocess.run(
+            [
+                sys.executable,
+                str(SCRIPT),
+                str(renamed_root),
+                "--output-json",
+                str(tmp_root / "renamed_conformance_matrix.json"),
+                "--output-md",
+                str(tmp_root / "renamed_conformance_matrix.md"),
+            ],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        renamed_payload = json.loads(renamed_proc.stdout)
+        assert renamed_payload["ok"], renamed_payload
+        assert renamed_payload["summary"]["pass_count"] == 5, renamed_payload
+        warnings = [warning for target in renamed_payload["targets"] for warning in target["warnings"]]
+        assert any("source checkout directory differs" in warning for warning in warnings), renamed_payload
 
     broken = tmp_root / "broken-skill"
     (broken / "agents").mkdir(parents=True, exist_ok=True)
