@@ -129,13 +129,21 @@ def render_markdown(report: dict) -> str:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Render a portability score from neutral metadata, contracts, and snapshots.")
+    parser.add_argument("skill_dir", nargs="?", default=str(ROOT), help="Skill directory to inspect. Defaults to this repo root.")
     parser.add_argument("--output-json", default="reports/portability_score.json")
     parser.add_argument("--output-md", default="reports/portability_score.md")
     args = parser.parse_args()
 
-    report = build_report(ROOT)
-    output_json = ROOT / args.output_json
-    output_md = ROOT / args.output_md
+    skill_root = Path(args.skill_dir).resolve()
+    report = build_report(skill_root)
+    output_json = Path(args.output_json)
+    output_md = Path(args.output_md)
+    if not output_json.is_absolute():
+        output_json = skill_root / output_json
+    if not output_md.is_absolute():
+        output_md = skill_root / output_md
+    output_json.parent.mkdir(parents=True, exist_ok=True)
+    output_md.parent.mkdir(parents=True, exist_ok=True)
     output_json.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     output_md.write_text(render_markdown(report), encoding="utf-8")
     print(json.dumps(report, ensure_ascii=False, indent=2))

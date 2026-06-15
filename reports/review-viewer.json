@@ -525,10 +525,10 @@
           "path": "reports",
           "label": "Generated evidence and overview artifacts",
           "kind": "folder",
-          "file_count": 132
+          "file_count": 215
         }
       ],
-      "file_count": 306,
+      "file_count": 389,
       "folder_count": 4,
       "distribution": [
         {
@@ -561,7 +561,7 @@
         },
         {
           "label": "reports",
-          "value": 132
+          "value": 215
         }
       ]
     },
@@ -695,7 +695,7 @@
         "path": "reports",
         "label": "Generated evidence and overview artifacts",
         "kind": "folder",
-        "file_count": 132
+        "file_count": 215
       }
     ],
     "strengths": [
@@ -996,11 +996,11 @@
       "ok": true,
       "summary": {
         "reproducibility_ready": true,
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "methodology_complete": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "c3a7eae59138523528287cb2670c2c153ec3c2e27d14d09ab01d5a671cb98f49",
+        "evidence_bundle_sha256": "1a11230c3274b89fc877d2e243970b3c15508fa913d7efc8f26d53949395c4a2",
         "source_contract_sha256": "278b4ff6c0c7e8406dfa62e5813013532af58e35d12b22f8bef25d59ac544713",
         "archive_sha256": "6852cf91a74d232c32d732b7c159c971827abf23af50153987193b084ad3b5cc",
         "output_case_count": 5,
@@ -1020,11 +1020,11 @@
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4,
-        "working_tree_dirty": false,
-        "changed_file_count": 0
+        "public_claim_blocker_count": 5,
+        "working_tree_dirty": true,
+        "changed_file_count": 16
       },
-      "commit": "a5dab4779d48b51ea8ace316527d38dd559e6b01",
+      "commit": "84b761abce9f0a361ddea7d446d0454666de0885",
       "missing_artifacts": [],
       "limitations": [
         "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",

@@ -10,18 +10,26 @@ SCRIPT = ROOT / "scripts" / "render_portability_report.py"
 
 
 def main() -> None:
-    proc = subprocess.run(
-        [sys.executable, str(SCRIPT)],
-        cwd=ROOT,
-        capture_output=True,
-        text=True,
-    )
-    if proc.returncode != 0:
-        print(proc.stdout)
-        print(proc.stderr)
-        raise SystemExit(proc.returncode)
+    payload = None
+    for args in ([], [str(ROOT)]):
+        proc = subprocess.run(
+            [sys.executable, str(SCRIPT), *args],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+        )
+        if proc.returncode != 0:
+            print(proc.stdout)
+            print(proc.stderr)
+            raise SystemExit(proc.returncode)
+        current_payload = json.loads(proc.stdout)
+        if payload is None:
+            payload = current_payload
+        elif current_payload != payload:
+            print(json.dumps({"default": payload, "explicit": current_payload}, ensure_ascii=False, indent=2))
+            raise SystemExit(2)
 
-    payload = json.loads(proc.stdout)
+    assert payload is not None
     failures = []
     if payload.get("score", 0) < 95:
         failures.append(f"portability score too low: {payload.get('score')}")

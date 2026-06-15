@@ -37,8 +37,8 @@
       "key": "benchmark-release-lock-self-consistency",
       "label": "Benchmark release lock matches git dirty state",
       "status": "pass",
-      "expected": true,
-      "actual": true,
+      "expected": false,
+      "actual": false,
       "paths": [
         "reports/benchmark_reproducibility.json"
       ],
@@ -48,8 +48,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "a5dab4779d48b51ea8ace316527d38dd559e6b01",
-      "actual": "a5dab4779d48b51ea8ace316527d38dd559e6b01",
+      "expected": "84b761abce9f0a361ddea7d446d0454666de0885",
+      "actual": "84b761abce9f0a361ddea7d446d0454666de0885",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -61,7 +61,7 @@
       "label": "overview embeds benchmark summary fields",
       "status": "pass",
       "expected": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
         "source_contract_sha256": "278b4ff6c0c7e8406dfa62e5813013532af58e35d12b22f8bef25d59ac544713",
@@ -71,10 +71,10 @@
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4
+        "public_claim_blocker_count": 5
       },
       "actual": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
         "source_contract_sha256": "278b4ff6c0c7e8406dfa62e5813013532af58e35d12b22f8bef25d59ac544713",
@@ -84,7 +84,7 @@
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4
+        "public_claim_blocker_count": 5
       },
       "paths": [
         "reports/benchmark_reproducibility.json",
@@ -194,8 +194,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "a5dab4779d48b51ea8ace316527d38dd559e6b01",
-      "actual": "a5dab4779d48b51ea8ace316527d38dd559e6b01",
+      "expected": "84b761abce9f0a361ddea7d446d0454666de0885",
+      "actual": "84b761abce9f0a361ddea7d446d0454666de0885",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
@@ -207,7 +207,7 @@
       "label": "interpretation embeds benchmark summary fields",
       "status": "pass",
       "expected": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
         "source_contract_sha256": "278b4ff6c0c7e8406dfa62e5813013532af58e35d12b22f8bef25d59ac544713",
@@ -217,10 +217,10 @@
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4
+        "public_claim_blocker_count": 5
       },
       "actual": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
         "source_contract_sha256": "278b4ff6c0c7e8406dfa62e5813013532af58e35d12b22f8bef25d59ac544713",
@@ -230,7 +230,7 @@
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4
+        "public_claim_blocker_count": 5
       },
       "paths": [
         "reports/benchmark_reproducibility.json",
@@ -1324,10 +1324,10 @@
             "path": "reports",
             "label": "Generated evidence and overview artifacts",
             "kind": "folder",
-            "file_count": 132
+            "file_count": 215
           }
         ],
-        "file_count": 306,
+        "file_count": 389,
         "folder_count": 4,
         "distribution": [
           {
@@ -1360,7 +1360,7 @@
           },
           {
             "label": "reports",
-            "value": 132
+            "value": 215
           }
         ]
       },
@@ -1412,10 +1412,10 @@
             "path": "reports",
             "label": "Generated evidence and overview artifacts",
             "kind": "folder",
-            "file_count": 132
+            "file_count": 215
           }
         ],
-        "file_count": 306,
+        "file_count": 389,
         "folder_count": 4,
         "distribution": [
           {
@@ -1448,7 +1448,7 @@
           },
           {
             "label": "reports",
-            "value": 132
+            "value": 215
           }
         ]
       },
