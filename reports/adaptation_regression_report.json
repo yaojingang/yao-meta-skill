@@ -18,6 +18,7 @@
     "patch_sha256_required": true,
     "allowlisted_targets_required": true,
     "target_file_sha256_required": true,
+    "approval_draft_supported": true,
     "dry_run_default": true,
     "writes_repository_files_only_with_apply": true,
     "rollback_required": true,

@@ -55,6 +55,14 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def target_file_sha256(skill_dir: Path, target_files: list[str]) -> dict[str, str]:
+    observed: dict[str, str] = {}
+    for target in target_files:
+        path = skill_dir / target
+        observed[target] = sha256_file(path) if path.exists() else ABSENT_FILE_SHA256
+    return observed
+
+
 def normalize_patch_path(raw: str) -> str | None:
     token = raw.strip().split("\t", 1)[0].split(" ", 1)[0]
     if token == "/dev/null":
@@ -97,6 +105,27 @@ def find_approval(ledger: dict[str, Any], proposal_id: str) -> dict[str, Any]:
         if item.get("proposal_id") == proposal_id and item.get("decision") == "approved":
             return item
     return {}
+
+
+def refresh_ledger_summary(ledger: dict[str, Any]) -> None:
+    entries = approved_entries(ledger)
+    approved = [item for item in entries if item.get("decision") == "approved"]
+    pending = [item for item in entries if item.get("decision") == "pending-review"]
+    ledger["summary"] = {
+        "approval_count": len(approved),
+        "active_approval_count": len(approved),
+        "pending_review_count": len(pending),
+        "applied_count": 0,
+        "rollback_count": 0,
+    }
+
+
+def upsert_ledger_entry(ledger: dict[str, Any], entry: dict[str, Any]) -> None:
+    entries = approved_entries(ledger)
+    proposal_id = entry.get("proposal_id")
+    kept = [item for item in entries if item.get("proposal_id") != proposal_id]
+    ledger["entries"] = [*kept, entry]
+    refresh_ledger_summary(ledger)
 
 
 def parse_date(value: str) -> date | None:
@@ -217,6 +246,7 @@ def empty_approval_ledger(generated_at: str) -> dict[str, Any]:
         "summary": {
             "approval_count": 0,
             "active_approval_count": 0,
+            "pending_review_count": 0,
             "applied_count": 0,
             "rollback_count": 0,
         },
@@ -225,6 +255,7 @@ def empty_approval_ledger(generated_at: str) -> dict[str, Any]:
             "patch_sha256_required": True,
             "allowlisted_targets_required": True,
             "target_file_sha256_required": True,
+            "approval_draft_supported": True,
             "dry_run_default": True,
             "writes_repository_files_only_with_apply": True,
             "rollback_required": True,
@@ -254,6 +285,7 @@ def empty_regression_report(skill_dir: Path, generated_at: str) -> dict[str, Any
             "patch_sha256_required": True,
             "allowlisted_targets_required": True,
             "target_file_sha256_required": True,
+            "approval_draft_supported": True,
             "dry_run_default": True,
             "writes_repository_files_only_with_apply": True,
             "rollback_required": True,
@@ -310,6 +342,21 @@ def render_markdown(report: dict[str, Any]) -> str:
     if report.get("failures"):
         lines.extend(["## Failures", ""])
         lines.extend(f"- {failure}" for failure in report["failures"])
+    draft = report.get("approval_draft")
+    if isinstance(draft, dict):
+        lines.extend(
+            [
+                "",
+                "## Approval Draft",
+                "",
+                f"- proposal: `{draft.get('proposal_id', '')}`",
+                f"- decision: `{draft.get('decision', '')}`",
+                f"- patch sha256: `{draft.get('patch_sha256', '')}`",
+                f"- targets: `{', '.join(draft.get('target_files', []))}`",
+                "",
+                "A human reviewer must set `decision` to `approved` and fill reviewer, reason, and approval date before apply.",
+            ]
+        )
     return "\n".join(lines).rstrip() + "\n"
 
 
@@ -335,8 +382,12 @@ def build_report(args: argparse.Namespace) -> dict[str, Any]:
     ledger = load_json(ledger_path)
     if not proposals:
         failures.append(f"Proposal report missing or invalid: {display_path(proposals_path, skill_dir)}")
-    if not ledger:
+    if args.prepare_approval and not ledger and not ledger_path.exists():
+        ledger = empty_approval_ledger(generated_at)
+    if not args.prepare_approval and not ledger:
         failures.append(f"Approval ledger missing or invalid: {display_path(ledger_path, skill_dir)}")
+    if args.prepare_approval and ledger_path.exists() and not ledger:
+        failures.append(f"Approval ledger exists but is invalid: {display_path(ledger_path, skill_dir)}")
     if not args.proposal_id:
         failures.append("--proposal-id is required unless --write-template is used.")
     if not args.patch_file or not patch_path.exists():
@@ -347,13 +398,8 @@ def build_report(args: argparse.Namespace) -> dict[str, Any]:
         failures.append("--today must be an ISO date when provided.")
 
     proposal = find_proposal(proposals, args.proposal_id) if not failures else {}
-    approval = find_approval(ledger, args.proposal_id) if not failures else {}
     if not failures and not proposal:
         failures.append(f"Proposal id is not present in proposal report: {args.proposal_id}")
-    if not failures and not approval:
-        failures.append(f"Proposal id is not approved in the ledger: {args.proposal_id}")
-    if approval:
-        failures.extend(validate_approval(approval, today or date.today()))
 
     patch_sha = sha256_file(patch_path) if patch_path.exists() else ""
     target_files: list[str] = []
@@ -363,6 +409,90 @@ def build_report(args: argparse.Namespace) -> dict[str, Any]:
             target_files = patch_target_files(patch_path.read_text(encoding="utf-8", errors="replace"))
         except ValueError as exc:
             failures.append(str(exc))
+
+    if args.prepare_approval:
+        if not failures:
+            proposal_targets = set(str(item) for item in proposal.get("target_files", []))
+            patch_targets = set(target_files)
+            if not patch_targets:
+                failures.append("Patch does not declare any target files.")
+            if not patch_targets <= proposal_targets:
+                failures.append("Patch touches files outside proposal target_files.")
+        check = git_apply_check(skill_dir, patch_path) if not failures else {"ok": False, "returncode": None, "stdout": "", "stderr": ""}
+        if not failures and not check["ok"]:
+            failures.append(f"git apply --check failed: {check['stderr'].strip()}")
+        draft: dict[str, Any] = {}
+        if not failures:
+            observed_target_file_sha256 = target_file_sha256(skill_dir, target_files)
+            draft = {
+                "proposal_id": args.proposal_id,
+                "decision": "pending-review",
+                "reviewer": "",
+                "reason": "",
+                "approved_at": "",
+                "expires_at": "",
+                "created_at": generated_at,
+                "patch": display_path(patch_path, skill_dir),
+                "patch_sha256": patch_sha,
+                "target_files": target_files,
+                "target_file_sha256": observed_target_file_sha256,
+                "verification_commands": [
+                    str(command) for command in proposal.get("verification_commands", []) if command
+                ],
+                "rollback_plan": proposal.get("rollback_plan", f"git apply -R {display_path(patch_path, skill_dir)}"),
+            }
+            upsert_ledger_entry(ledger, draft)
+            write_json(ledger_path, ledger)
+        report = {
+            "schema_version": "1.0",
+            "ok": not failures,
+            "generated_at": generated_at,
+            "skill_dir": display_path(skill_dir, skill_dir),
+            "summary": {
+                "apply_supported": True,
+                "attempt_count": 0,
+                "approval_draft_count": 1 if draft else 0,
+                "applied_count": 0,
+                "dry_run_count": 0,
+                "rollback_count": 0,
+                "regression_run_count": 0,
+                "regression_pass_count": 0,
+                "failure_count": len(failures),
+            },
+            "apply_contract": {
+                "approval_required": True,
+                "patch_sha256_required": True,
+                "allowlisted_targets_required": True,
+                "target_file_sha256_required": True,
+                "approval_draft_supported": True,
+                "dry_run_default": True,
+                "writes_repository_files_only_with_apply": True,
+                "rollback_required": True,
+                "safe_regression_commands_only": True,
+                "rollback_on_failure_default": True,
+            },
+            "approval_draft": draft,
+            "attempts": [],
+            "failures": failures,
+            "artifacts": {
+                "json": display_path(output_json, skill_dir),
+                "markdown": display_path(output_md, skill_dir),
+                "approval_ledger": display_path(ledger_path, skill_dir),
+            },
+        }
+        write_json(output_json, report)
+        output_md.parent.mkdir(parents=True, exist_ok=True)
+        output_md.write_text(render_markdown(report), encoding="utf-8")
+        return report
+
+    approval = find_approval(ledger, args.proposal_id) if not failures else {}
+    if not failures and not approval:
+        failures.append(f"Proposal id is not approved in the ledger: {args.proposal_id}")
+    if approval:
+        refresh_ledger_summary(ledger)
+        write_json(ledger_path, ledger)
+        failures.extend(validate_approval(approval, today or date.today()))
+
     if not failures:
         approved_targets = set(str(item) for item in approval.get("target_files", []))
         proposal_targets = set(str(item) for item in proposal.get("target_files", []))
@@ -459,6 +589,7 @@ def build_report(args: argparse.Namespace) -> dict[str, Any]:
             "patch_sha256_required": True,
             "allowlisted_targets_required": True,
             "target_file_sha256_required": True,
+            "approval_draft_supported": True,
             "dry_run_default": True,
             "writes_repository_files_only_with_apply": True,
             "rollback_required": True,
@@ -491,6 +622,11 @@ def main() -> None:
     parser.add_argument("--generated-at")
     parser.add_argument("--today")
     parser.add_argument("--write-template", action="store_true")
+    parser.add_argument(
+        "--prepare-approval",
+        action="store_true",
+        help="Create or update a pending approval ledger entry with patch and target baseline hashes.",
+    )
     parser.add_argument("--apply", action="store_true", help="Write the patch after every approval and allowlist check passes.")
     parser.add_argument("--run-verification", action="store_true")
     parser.add_argument(

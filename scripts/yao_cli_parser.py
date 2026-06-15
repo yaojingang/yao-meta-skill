@@ -430,6 +430,7 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     adapt_apply_cmd.add_argument("--generated-at")
     adapt_apply_cmd.add_argument("--today")
     adapt_apply_cmd.add_argument("--write-template", action="store_true")
+    adapt_apply_cmd.add_argument("--prepare-approval", action="store_true")
     adapt_apply_cmd.add_argument("--apply", action="store_true")
     adapt_apply_cmd.add_argument("--run-verification", action="store_true")
     adapt_apply_cmd.add_argument(

@@ -66,6 +66,8 @@ def command_adapt_apply(args: argparse.Namespace) -> int:
         cmd.extend(["--today", args.today])
     if args.write_template:
         cmd.append("--write-template")
+    if args.prepare_approval:
+        cmd.append("--prepare-approval")
     if args.apply:
         cmd.append("--apply")
     if args.run_verification:

@@ -179,6 +179,7 @@ def build_report(skill_dir: Path, patterns_json: Path, generated_at: str) -> dic
             "writes_repository_files": False,
             "allowlisted_targets_required": True,
             "target_file_sha256_required_for_apply": True,
+            "approval_draft_supported": True,
             "rollback_required_for_apply": True,
             "apply_command_available": (ROOT / "scripts" / "apply_adaptation.py").exists(),
         },
