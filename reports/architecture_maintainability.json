@@ -4,12 +4,12 @@
   "generated_at": "2026-06-15",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 172,
-    "script_file_count": 109,
+    "python_file_count": 173,
+    "script_file_count": 110,
     "test_file_count": 63,
     "internal_module_count": 31,
-    "cli_script_count": 80,
-    "command_handler_count": 63,
+    "cli_script_count": 81,
+    "command_handler_count": 64,
     "entrypoint_command_handler_count": 18,
     "command_module_count": 6,
     "warn_line_threshold": 900,
@@ -28,6 +28,13 @@
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
+      "path": "scripts/yao_cli_parser.py",
+      "lines": 809,
+      "kind": "internal-module",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
       "path": "scripts/skill_report_layout.py",
       "lines": 808,
       "kind": "internal-module",
@@ -37,13 +44,6 @@
     {
       "path": "scripts/skill_report_model.py",
       "lines": 801,
-      "kind": "internal-module",
-      "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
-      "path": "scripts/yao_cli_parser.py",
-      "lines": 784,
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."

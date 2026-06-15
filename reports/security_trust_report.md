@@ -1,22 +1,22 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `196`
-- Scripts: `109`
+- Scanned files: `197`
+- Scripts: `110`
 - Internal script modules: `28`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
 - Network policy missing scripts: `0`
-- File-write scripts: `68`
+- File-write scripts: `69`
 - Permission approvals: `3 / 3`
 - Permission approval gaps: `0`
-- CLI help smoke checked: `81`
+- CLI help smoke checked: `82`
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `196`
-- Package SHA256: `76edc3f9936da8966eff0e0f689568c7d6d787691a45773a3e86bb38be6b0cc4`
+- Package hash files: `197`
+- Package SHA256: `7334782000ae11f8ab7279a11d34953a2016f8955c96ba0d8a66c312498424ff`
 
 ## Failures
 
@@ -54,8 +54,8 @@
 
 - Enabled: `True`
 - Timeout seconds: `5.0`
-- Checked scripts: `81`
-- Passed scripts: `81`
+- Checked scripts: `82`
+- Passed scripts: `82`
 - Failed scripts: `none`
 
 ## Script Surface
@@ -63,6 +63,7 @@
 | Script | Interface | Declared | Argparse | Main Guard | Input | Network | File Write | Subprocess | Reason |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | scripts/adjudicate_output_review.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
+| scripts/apply_adaptation.py | cli | True | True | True | False | False | True | True | Approval-gated adaptive patch application with dry-run, allowlist, regression, and rollback evidence. |
 | scripts/build_confusion_matrix.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/build_skill_atlas.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/check_update.py | cli | False | True | True | False | True | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
@@ -162,7 +163,7 @@
 | scripts/world_class_evidence_contract.py | internal-module | True | False | False | False | False | False | False | Imported by world-class evidence reports to share intake validation and artifact integrity checks. |
 | scripts/world_class_source_checks.py | internal-module | True | False | False | False | False | False | False | Imported by world-class evidence reports to keep source-evidence readiness checks consistent. |
 | scripts/yao.py | cli | False | True | True | False | False | False | True | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
-| scripts/yao_cli_adaptation_commands.py | internal-module | True | True | False | False | False | False | False | Imported by yao.py to keep adaptive scan/proposal command handlers outside the thin CLI orchestrator. |
+| scripts/yao_cli_adaptation_commands.py | internal-module | True | True | False | False | False | False | False | Imported by yao.py to keep adaptive scan/proposal/apply command handlers outside the thin CLI orchestrator. |
 | scripts/yao_cli_config.py | internal-module | True | False | False | False | False | False | False | Imported by yao.py for CLI target maps and side-effect-free shaping helpers. |
 | scripts/yao_cli_create_commands.py | internal-module | True | True | False | False | False | False | False | Imported by yao.py to keep skill creation and quickstart command handlers out of the CLI orchestrator. |
 | scripts/yao_cli_distribution_commands.py | internal-module | True | True | False | False | False | False | False | Imported by yao.py to keep distribution and runtime gate handlers outside the thin CLI orchestrator. |

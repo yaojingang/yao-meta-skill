@@ -2,8 +2,8 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 196,
-    "script_count": 109,
+    "scanned_files": 197,
+    "script_count": 110,
     "internal_module_count": 28,
     "secret_findings": 0,
     "dependency_files": [
@@ -12,18 +12,18 @@
     "network_script_count": 3,
     "network_policy_covered_count": 3,
     "network_policy_missing_count": 0,
-    "file_write_script_count": 68,
+    "file_write_script_count": 69,
     "permission_required_count": 3,
     "permission_approved_count": 3,
     "permission_missing_count": 0,
     "permission_invalid_count": 0,
     "permission_expired_count": 0,
-    "help_smoke_checked_count": 81,
+    "help_smoke_checked_count": 82,
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 196,
-    "package_sha256": "76edc3f9936da8966eff0e0f689568c7d6d787691a45773a3e86bb38be6b0cc4"
+    "package_hash_file_count": 197,
+    "package_sha256": "7334782000ae11f8ab7279a11d34953a2016f8955c96ba0d8a66c312498424ff"
   },
   "failures": [],
   "warnings": [],
@@ -40,6 +40,20 @@
       "uses_network": false,
       "uses_file_write": true,
       "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
+      "path": "scripts/apply_adaptation.py",
+      "interface": "cli",
+      "interface_declared": true,
+      "interface_reason": "Approval-gated adaptive patch application with dry-run, allowlist, regression, and rollback evidence.",
+      "has_argparse": true,
+      "has_main_guard": true,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": true,
+      "uses_subprocess": true,
       "network_urls": [],
       "network_hosts": []
     },
@@ -1450,7 +1464,7 @@
       "path": "scripts/yao_cli_adaptation_commands.py",
       "interface": "internal-module",
       "interface_declared": true,
-      "interface_reason": "Imported by yao.py to keep adaptive scan/proposal command handlers outside the thin CLI orchestrator.",
+      "interface_reason": "Imported by yao.py to keep adaptive scan/proposal/apply command handlers outside the thin CLI orchestrator.",
       "has_argparse": true,
       "has_main_guard": false,
       "uses_input": false,
@@ -1603,9 +1617,9 @@
   "help_smoke": {
     "enabled": true,
     "timeout_seconds": 5.0,
-    "candidate_count": 81,
-    "checked_count": 81,
-    "passed_count": 81,
+    "candidate_count": 82,
+    "checked_count": 82,
+    "passed_count": 82,
     "failed_count": 0,
     "skipped_count": 28,
     "failed_scripts": [],
@@ -1618,6 +1632,16 @@
         "passed": true,
         "has_help_text": true,
         "stdout_excerpt": "usage: adjudicate_output_review.py [-h] [--blind-pack BLIND_PACK]\n                                   [--answer-key ANSWER_KEY]\n                                   [--decisions DECISIONS]\n                                   [--output-json OUTP",
+        "stderr_excerpt": ""
+      },
+      {
+        "path": "scripts/apply_adaptation.py",
+        "command": "python3 scripts/apply_adaptation.py --help",
+        "returncode": 0,
+        "timed_out": false,
+        "passed": true,
+        "has_help_text": true,
+        "stdout_excerpt": "usage: apply_adaptation.py [-h] [--proposal-id PROPOSAL_ID]\n                           [--patch-file PATCH_FILE]\n                           [--proposals-json PROPOSALS_JSON]\n                           [--approval-ledger APPROVAL_LEDGER]\n   ",
         "stderr_excerpt": ""
       },
       {
@@ -2589,6 +2613,7 @@
         "status": "approved",
         "scripts": [
           "scripts/adjudicate_output_review.py",
+          "scripts/apply_adaptation.py",
           "scripts/build_confusion_matrix.py",
           "scripts/build_skill_atlas.py",
           "scripts/check_update.py",
@@ -2678,6 +2703,7 @@
         "capability": "subprocess",
         "status": "approved",
         "scripts": [
+          "scripts/apply_adaptation.py",
           "scripts/ci_test.py",
           "scripts/render_benchmark_reproducibility.py",
           "scripts/render_eval_dashboard.py",
