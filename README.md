@@ -154,6 +154,8 @@ python3 scripts/yao.py world-class-evidence .
 SUBMISSIONS_DIR="${SUBMISSIONS_DIR:-evidence/world_class/submissions}"
 python3 scripts/yao.py world-class-preflight . --submissions-dir "$SUBMISSIONS_DIR"
 python3 scripts/yao.py world-class-submission-kit . --output-dir "$SUBMISSIONS_DIR"
+# Alternative: prefill artifact SHA-256 digests while keeping drafts template-only.
+python3 scripts/yao.py world-class-submission-kit . --output-dir "$SUBMISSIONS_DIR" --prefill-artifacts
 python3 scripts/yao.py world-class-intake . --submissions-dir "$SUBMISSIONS_DIR"
 python3 scripts/yao.py world-class-submission-review . --submissions-dir "$SUBMISSIONS_DIR"
 python3 scripts/yao.py world-class-ledger . --submissions-dir "$SUBMISSIONS_DIR"

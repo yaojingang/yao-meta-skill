@@ -499,6 +499,7 @@ def assert_documented_submission_commands() -> None:
         'SUBMISSIONS_DIR="${SUBMISSIONS_DIR:-evidence/world_class/submissions}"',
         'world-class-preflight . --submissions-dir "$SUBMISSIONS_DIR"',
         'world-class-submission-kit . --output-dir "$SUBMISSIONS_DIR"',
+        'world-class-submission-kit . --output-dir "$SUBMISSIONS_DIR" --prefill-artifacts',
         'world-class-intake . --submissions-dir "$SUBMISSIONS_DIR"',
         'world-class-submission-review . --submissions-dir "$SUBMISSIONS_DIR"',
         'world-class-ledger . --submissions-dir "$SUBMISSIONS_DIR"',
@@ -614,8 +615,11 @@ def main() -> None:
     kit_draft = json.loads((kit_dir / "provider-holdout.json").read_text(encoding="utf-8"))
     assert kit_draft["template_only"] is True, kit_draft
     assert kit_draft["attestation"]["real_external_or_human_evidence"] is False, kit_draft
+    assert "sha256" not in kit_draft["artifact_refs"][0], kit_draft
     kit_manifest = json.loads((kit_dir / "submission_manifest.json").read_text(encoding="utf-8"))
     assert kit_manifest["summary"]["ledger_counts_submission_as_completion"] is False, kit_manifest["summary"]
+    assert kit_manifest["summary"]["artifact_prefill_enabled"] is False, kit_manifest["summary"]
+    assert kit_manifest["summary"]["artifact_ref_prefill_count"] == 0, kit_manifest["summary"]
     assert kit_manifest["artifact_checklist"] == kit_payload["artifact_checklist"], kit_manifest["artifact_checklist"]
     assert kit_manifest["source_checklist"] == kit_payload["source_checklist"], kit_manifest["source_checklist"]
     assert kit_manifest["artifacts"]["html"].endswith("tests/tmp_world_class_evidence_intake/submission_kit/index.html"), kit_manifest["artifacts"]
@@ -641,6 +645,33 @@ def main() -> None:
     assert "Execution Runbook" in kit_html, kit_html
     assert "output-exec --provider-runner openai" in kit_html, kit_html
     assert "Do not include credentials, raw prompts, raw outputs, transcripts, notes, or private user content." in kit_html, kit_html
+
+    prefilled_kit_dir = TMP / "prefilled_submission_kit"
+    prefilled_proc = run_kit(
+        "--output-dir",
+        str(prefilled_kit_dir),
+        "--evidence-key",
+        "provider-holdout",
+        "--prefill-artifacts",
+    )
+    prefilled_payload = json.loads(prefilled_proc.stdout)
+    assert prefilled_payload["summary"]["artifact_prefill_enabled"] is True, prefilled_payload["summary"]
+    assert prefilled_payload["summary"]["artifact_ref_prefill_count"] == 1, prefilled_payload["summary"]
+    assert prefilled_payload["summary"]["artifact_ref_unfilled_count"] == 0, prefilled_payload["summary"]
+    assert prefilled_payload["summary"]["drafts_count_as_evidence"] is False, prefilled_payload["summary"]
+    assert prefilled_payload["safety"]["artifact_prefill_counts_as_evidence"] is False, prefilled_payload["safety"]
+    assert prefilled_payload["files"][0]["prefilled_artifact_ref_count"] == 1, prefilled_payload["files"]
+    prefilled_draft = json.loads((prefilled_kit_dir / "provider-holdout.json").read_text(encoding="utf-8"))
+    assert prefilled_draft["template_only"] is True, prefilled_draft
+    assert prefilled_draft["attestation"]["real_external_or_human_evidence"] is False, prefilled_draft
+    assert len(prefilled_draft["artifact_refs"][0]["sha256"]) == 64, prefilled_draft
+    assert prefilled_draft["artifact_refs"][0]["contains_raw_content"] is False, prefilled_draft
+    prefilled_readme = (prefilled_kit_dir / "README.md").read_text(encoding="utf-8")
+    assert "Optional artifact prefill only inserts SHA-256 digests" in prefilled_readme, prefilled_readme
+    assert "does not mark a draft as real evidence" in prefilled_readme, prefilled_readme
+    prefilled_html = (prefilled_kit_dir / "index.html").read_text(encoding="utf-8")
+    assert "artifact prefill only inserts local SHA-256 digests" in prefilled_html, prefilled_html
+    assert "<dt>Prefill</dt><dd>1 artifact refs</dd>" in prefilled_html, prefilled_html
 
     native_kit_dir = TMP / "native_permission_kit"
     native_kit_proc = run_kit("--output-dir", str(native_kit_dir), "--evidence-key", "native-permission-enforcement")

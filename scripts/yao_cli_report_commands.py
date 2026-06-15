@@ -196,6 +196,8 @@ def command_world_class_submission_kit(args: argparse.Namespace) -> int:
         cmd.extend(["--evidence-key", key])
     if args.overwrite:
         cmd.append("--overwrite")
+    if args.prefill_artifacts:
+        cmd.append("--prefill-artifacts")
     if args.generated_at:
         cmd.extend(["--generated-at", args.generated_at])
     if args.output_html:

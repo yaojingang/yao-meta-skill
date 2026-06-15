@@ -3,7 +3,6 @@ import argparse
 import hashlib
 import json
 import shlex
-import shutil
 from datetime import date
 from pathlib import Path
 from typing import Any
@@ -59,12 +58,60 @@ def template_result_by_key(intake: dict[str, Any]) -> dict[str, dict[str, Any]]:
     return {str(item.get("evidence_key")): item for item in intake.get("templates", [])}
 
 
+def artifact_rows_by_key_and_path(rows: list[dict[str, Any]]) -> dict[tuple[str, str], dict[str, Any]]:
+    ready: dict[tuple[str, str], dict[str, Any]] = {}
+    for row in rows:
+        key = str(row.get("evidence_key", ""))
+        path = str(row.get("path", ""))
+        if key and path and row.get("artifact_ref_ready"):
+            ready[(key, path)] = row
+    return ready
+
+
+def load_template_payload(path: Path, errors: list[str]) -> dict[str, Any] | None:
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        errors.append("template file is not valid JSON")
+        return None
+    return payload if isinstance(payload, dict) else None
+
+
+def prefill_artifact_refs(
+    payload: dict[str, Any],
+    evidence_key: str,
+    ready_rows: dict[tuple[str, str], dict[str, Any]],
+) -> dict[str, int]:
+    refs = payload.get("artifact_refs", [])
+    stats = {
+        "prefilled_artifact_ref_count": 0,
+        "unfilled_artifact_ref_count": 0,
+    }
+    if not isinstance(refs, list):
+        return stats
+    for ref in refs:
+        if not isinstance(ref, dict):
+            stats["unfilled_artifact_ref_count"] += 1
+            continue
+        path = str(ref.get("path", "")).strip()
+        row = ready_rows.get((evidence_key, path))
+        if row and row.get("sha256"):
+            ref["sha256"] = row["sha256"]
+            ref["contains_raw_content"] = False
+            stats["prefilled_artifact_ref_count"] += 1
+        else:
+            stats["unfilled_artifact_ref_count"] += 1
+    return stats
+
+
 def copy_template(
     skill_dir: Path,
     output_dir: Path,
     item: dict[str, Any],
     template_results: dict[str, dict[str, Any]],
+    ready_rows: dict[tuple[str, str], dict[str, Any]],
     overwrite: bool,
+    prefill_artifacts: bool,
 ) -> dict[str, Any]:
     key = str(item.get("evidence_key", ""))
     template_result = template_results.get(key, {})
@@ -83,6 +130,8 @@ def copy_template(
             "status": "skipped",
             "template_path": rel_path(template_path, skill_dir),
             "output_path": rel_path(output_path, skill_dir),
+            "prefilled_artifact_ref_count": 0,
+            "unfilled_artifact_ref_count": 0,
             "errors": errors,
         }
 
@@ -92,16 +141,36 @@ def copy_template(
             "status": "exists",
             "template_path": rel_path(template_path, skill_dir),
             "output_path": rel_path(output_path, skill_dir),
+            "prefilled_artifact_ref_count": 0,
+            "unfilled_artifact_ref_count": 0,
             "errors": [],
         }
 
+    payload = load_template_payload(template_path, errors)
+    if errors or payload is None:
+        return {
+            "evidence_key": key,
+            "status": "skipped",
+            "template_path": rel_path(template_path, skill_dir),
+            "output_path": rel_path(output_path, skill_dir),
+            "prefilled_artifact_ref_count": 0,
+            "unfilled_artifact_ref_count": 0,
+            "errors": errors or ["template file is not a JSON object"],
+        }
+
+    prefill_stats = (
+        prefill_artifact_refs(payload, key, ready_rows)
+        if prefill_artifacts
+        else {"prefilled_artifact_ref_count": 0, "unfilled_artifact_ref_count": 0}
+    )
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copyfile(template_path, output_path)
+    write_json(output_path, payload)
     return {
         "evidence_key": key,
         "status": "written",
         "template_path": rel_path(template_path, skill_dir),
         "output_path": rel_path(output_path, skill_dir),
+        **prefill_stats,
         "errors": [],
     }
 
@@ -210,6 +279,7 @@ def render_readme(report: dict[str, Any]) -> str:
         "3. Set `template_only` to `false` only after real evidence exists.",
         "4. Set attestation booleans truthfully; do not include credentials, raw prompts, raw outputs, transcripts, notes, or private user content.",
         "5. Validate the packet before asking the ledger reviewer to accept it.",
+        "6. Optional artifact prefill only inserts SHA-256 digests for current local aggregate artifacts; it does not mark a draft as real evidence.",
         "",
         "## Commands",
         "",
@@ -219,11 +289,13 @@ def render_readme(report: dict[str, Any]) -> str:
         "",
         "## Drafts",
         "",
-        "| Evidence | Draft | Status |",
-        "| --- | --- | --- |",
+        "| Evidence | Draft | Status | Prefilled refs |",
+        "| --- | --- | --- | ---: |",
     ]
     for item in report["files"]:
-        lines.append(f"| `{item['evidence_key']}` | `{item['output_path']}` | `{item['status']}` |")
+        lines.append(
+            f"| `{item['evidence_key']}` | `{item['output_path']}` | `{item['status']}` | `{item.get('prefilled_artifact_ref_count', 0)}` |"
+        )
     lines.extend(["", "## Execution Runbook", ""])
     for item in report.get("evidence_items", []):
         must_collect = item.get("must_collect", {}) if isinstance(item.get("must_collect", {}), dict) else {}
@@ -304,6 +376,7 @@ def render_html_files(files: list[dict[str, Any]]) -> str:
           <dl>
             <dt>Template</dt><dd><code>{template}</code></dd>
             <dt>Draft</dt><dd><code>{output}</code></dd>
+            <dt>Prefill</dt><dd>{prefill} artifact refs</dd>
           </dl>
           {errors}
         </article>
@@ -312,6 +385,7 @@ def render_html_files(files: list[dict[str, Any]]) -> str:
             key=html_text(item.get("evidence_key", "")),
             template=html_text(item.get("template_path", "")),
             output=html_text(item.get("output_path", "")),
+            prefill=html_text(item.get("prefilled_artifact_ref_count", 0)),
             errors=(
                 "<ul class=\"errors\">"
                 + render_html_list(item.get("errors", []), "No errors.")
@@ -428,6 +502,7 @@ def render_html(report: dict[str, Any]) -> str:
         ("Existing", summary["existing_count"]),
         ("Skipped", summary["skipped_count"]),
         ("Artifacts", f"{artifact_ready}/{artifact_total}"),
+        ("Prefilled", summary.get("artifact_ref_prefill_count", 0)),
     ]
     stat_html = "".join(f"<article><span>{html_text(label)}</span><strong>{html_text(value)}</strong></article>" for label, value in stats)
     evidence_html = "".join(render_html_item(item) for item in report.get("evidence_items", []))
@@ -457,7 +532,7 @@ def render_html(report: dict[str, Any]) -> str:
     h3 {{ margin:4px 0 10px; font-size:22px; }}
     h4 {{ margin:0 0 8px; font-size:16px; }}
     .lede {{ max-width:800px; color:var(--muted); font-size:20px; }}
-    .stats {{ display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); gap:12px; margin:26px 0 0; }}
+    .stats {{ display:grid; grid-template-columns:repeat(6, minmax(0,1fr)); gap:12px; margin:26px 0 0; }}
     .stats article, .panel, .draft-card, .evidence-card {{ border:1px solid var(--line); border-radius:8px; background:#fff; }}
     .stats article {{ padding:16px; }}
     .stats span, .draft-card span, .evidence-card span, .muted {{ color:var(--muted); }}
@@ -495,11 +570,11 @@ def render_html(report: dict[str, Any]) -> str:
     <section class="hero">
       <span class="eyebrow">Evidence Intake</span>
       <h1>World-Class Evidence Submission Kit</h1>
-      <p class="lede">Use this cockpit to prepare human and external evidence packets. Drafts are not accepted evidence, and this page never changes the ledger result.</p>
+      <p class="lede">Use this cockpit to prepare human and external evidence packets. Drafts are not accepted evidence, artifact prefill only inserts local SHA-256 digests, and this page never changes the ledger result.</p>
       <div class="stats">{stat_html}</div>
     </section>
     <section class="section two-col" id="workflow">
-      <article class="panel"><h2>Workflow</h2><ol><li>Run the real provider, human review, native permission, or native client telemetry work first.</li><li>Edit the matching JSON draft with aggregate artifact references and provenance metadata.</li><li>Set template_only to false only after real evidence exists.</li><li>Validate intake, refresh the ledger, then guard public claims.</li></ol></article>
+      <article class="panel"><h2>Workflow</h2><ol><li>Run the real provider, human review, native permission, or native client telemetry work first.</li><li>Edit the matching JSON draft with aggregate artifact references and provenance metadata.</li><li>Set template_only to false only after real evidence exists.</li><li>Use prefilled SHA-256 values as convenience data, not evidence acceptance.</li><li>Validate intake, refresh the ledger, then guard public claims.</li></ol></article>
       <aside class="panel"><h2>Commands</h2><ul class="commands">{render_html_commands(report['commands'])}</ul></aside>
     </section>
     <section class="section" id="drafts"><h2>Drafts</h2><div class="draft-grid">{render_html_files(report['files'])}</div></section>
@@ -519,6 +594,7 @@ def build_submission_kit(
     generated_at: str,
     evidence_keys: list[str] | None = None,
     overwrite: bool = False,
+    prefill_artifacts: bool = False,
     output_html: Path | None = None,
 ) -> dict[str, Any]:
     intake = build_intake(skill_dir, generated_at, submissions_dir=output_dir)
@@ -526,8 +602,20 @@ def build_submission_kit(
     valid_keys = {str(item.get("evidence_key")) for item in intake.get("operator_checklist", [])}
     unknown_keys = sorted(set(evidence_keys or []) - valid_keys)
     template_results = template_result_by_key(intake)
-    files = [copy_template(skill_dir, output_dir, item, template_results, overwrite) for item in items]
     artifact_checklist = build_artifact_checklist(skill_dir, items)
+    ready_rows = artifact_rows_by_key_and_path(artifact_checklist)
+    files = [
+        copy_template(
+            skill_dir,
+            output_dir,
+            item,
+            template_results,
+            ready_rows,
+            overwrite,
+            prefill_artifacts,
+        )
+        for item in items
+    ]
     source_checklist = build_source_checklist(items)
     manifest_path = output_dir / "submission_manifest.json"
     readme_path = output_dir / "README.md"
@@ -535,6 +623,8 @@ def build_submission_kit(
     written_count = sum(1 for item in files if item["status"] == "written")
     existing_count = sum(1 for item in files if item["status"] == "exists")
     skipped_count = sum(1 for item in files if item["status"] == "skipped")
+    prefilled_artifact_ref_count = sum(item.get("prefilled_artifact_ref_count", 0) for item in files)
+    unfilled_artifact_ref_count = sum(item.get("unfilled_artifact_ref_count", 0) for item in files)
     artifact_ready_count = sum(1 for item in artifact_checklist if item.get("artifact_ref_ready"))
     artifact_missing_count = sum(1 for item in artifact_checklist if not item.get("artifact_ref_ready"))
     artifact_glob_count = sum(1 for item in artifact_checklist if item.get("concrete_reference_required"))
@@ -557,6 +647,9 @@ def build_submission_kit(
             "artifact_ready_count": artifact_ready_count,
             "artifact_missing_count": artifact_missing_count,
             "artifact_glob_expansion_count": artifact_glob_count,
+            "artifact_prefill_enabled": prefill_artifacts,
+            "artifact_ref_prefill_count": prefilled_artifact_ref_count,
+            "artifact_ref_unfilled_count": unfilled_artifact_ref_count,
             **source_summary,
             "drafts_count_as_evidence": False,
             "ledger_counts_submission_as_completion": False,
@@ -574,6 +667,7 @@ def build_submission_kit(
         },
         "safety": {
             "template_only_drafts": True,
+            "artifact_prefill_counts_as_evidence": False,
             "real_evidence_required_before_template_only_false": True,
             "raw_content_allowed": False,
             "credentials_allowed": False,
@@ -599,6 +693,11 @@ def main() -> None:
     parser.add_argument("--output-dir", default="evidence/world_class/submission-kit")
     parser.add_argument("--evidence-key", action="append", default=[])
     parser.add_argument("--overwrite", action="store_true")
+    parser.add_argument(
+        "--prefill-artifacts",
+        action="store_true",
+        help="Insert SHA-256 digests for currently available aggregate artifacts while keeping drafts template-only.",
+    )
     parser.add_argument("--generated-at", default=date.today().isoformat())
     parser.add_argument("--output-html")
     args = parser.parse_args()
@@ -613,6 +712,7 @@ def main() -> None:
         args.generated_at,
         evidence_keys=args.evidence_key,
         overwrite=args.overwrite,
+        prefill_artifacts=args.prefill_artifacts,
         output_html=Path(args.output_html).resolve() if args.output_html else None,
     )
     print(json.dumps(report, ensure_ascii=False, indent=2))
