@@ -29,7 +29,7 @@
     },
     {
       "path": "scripts/yao_cli_parser.py",
-      "lines": 809,
+      "lines": 810,
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
