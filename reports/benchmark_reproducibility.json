@@ -3,7 +3,7 @@
   "ok": true,
   "generated_at": "2026-06-16",
   "skill_dir": ".",
-  "commit": "0cc661195f0bff2d1365ddea52f69cb3a6d72b3b",
+  "commit": "6713b56d6b21158fac99e619fe45c580be72a703",
   "git_status": {
     "available": true,
     "dirty": false,
@@ -17,9 +17,9 @@
     "methodology_complete": true,
     "required_artifact_count": 24,
     "missing_artifact_count": 0,
-    "evidence_bundle_sha256": "4f7164b6f04d9079f0497d3e84cefe9e2495ab9ee6fecaa3a74194f288fb8fca",
-    "source_contract_sha256": "ce3d8c67706a5059ae162d937f51d7469aee3d0095a53889c686524f2b43d544",
-    "archive_sha256": "77d9bd77e4a9e3992b727da369e195d94753fd4195b33981abadd10e81ee9fdf",
+    "evidence_bundle_sha256": "25b549ca48ec334006fbf70ff184e76d56fca3192e72cb7ca2a37dafcdafdaa8",
+    "source_contract_sha256": "909d0f5bad8ede6cc24b6c733b614a36c178878447612aa97276ff05e5206ce1",
+    "archive_sha256": "5c411a7ea1891bf797cd9f7f2d7b02f6bde20055e383d17040725f7116e8583e",
     "output_case_count": 5,
     "failure_disclosure_count": 3,
     "command_count": 22,
@@ -54,7 +54,7 @@
   },
   "release_lock": {
     "ready": true,
-    "commit": "0cc661195f0bff2d1365ddea52f69cb3a6d72b3b",
+    "commit": "6713b56d6b21158fac99e619fe45c580be72a703",
     "status_scope": "generation-time status before this report is written",
     "reason": "clean generation-time HEAD"
   },
@@ -64,7 +64,7 @@
     "existing_count": 24,
     "missing_count": 0,
     "missing_paths": [],
-    "sha256": "4f7164b6f04d9079f0497d3e84cefe9e2495ab9ee6fecaa3a74194f288fb8fca"
+    "sha256": "25b549ca48ec334006fbf70ff184e76d56fca3192e72cb7ca2a37dafcdafdaa8"
   },
   "methodology": {
     "path": "reports/benchmark_methodology.md",
@@ -138,7 +138,7 @@
       "path": "reports/output_execution_runs.json",
       "exists": true,
       "bytes": 7967,
-      "sha256": "ce00448089a6b95f957d9c48fce6bd16efa9816d73c908ecc533b94dddf73af8"
+      "sha256": "00dbc38f651d9e4df728e1b4be1a7cba8a3913c997aab92f401841af4b72efb8"
     },
     {
       "label": "blind_review",
@@ -172,36 +172,36 @@
       "label": "trust_report",
       "path": "reports/security_trust_report.json",
       "exists": true,
-      "bytes": 110333,
-      "sha256": "010b3f3967c4badaaa5c4d7b36475acc9ef149a8cb935216831ae2ae7f2b7fe8"
+      "bytes": 111439,
+      "sha256": "950daf3e77ad7102abac6bdaadfc9df1b1e56f321d17092423fb9a94e7466fc1"
     },
     {
       "label": "python_compatibility",
       "path": "reports/python_compatibility.json",
       "exists": true,
-      "bytes": 23022,
-      "sha256": "c3a04d0b6b58425bc6446cd882413136b4c22916a0e345861443308d3724a5cc"
+      "bytes": 23413,
+      "sha256": "44e2c3c425798317d5b52b94915df2f56c541b5a62337f30b186494519bdf3a2"
     },
     {
       "label": "registry_audit",
       "path": "reports/registry_audit.json",
       "exists": true,
       "bytes": 3183,
-      "sha256": "9d666ba878bcd9b53ba9a768218d89f2883e8cb339bdbdfbb27ddc056612a5f8"
+      "sha256": "ca9ec2947a9fcbab4e253b2e1b86a33df95f9d56b90be78bcf92f38d752e2213"
     },
     {
       "label": "package_verification",
       "path": "reports/package_verification.json",
       "exists": true,
       "bytes": 19338,
-      "sha256": "7b58a0c7c756ce001190623ffca47c25c0abb0816f4c1ce32509309b31e2cd75"
+      "sha256": "f064d30b1de22d0e702cc3de0df04df84a11514f5790192a2e242e73b4569f5d"
     },
     {
       "label": "install_simulation",
       "path": "reports/install_simulation.json",
       "exists": true,
       "bytes": 8604,
-      "sha256": "42e985aecb03c60483fcf54bcda1db1270f8515dbe40e6ea7ec27d4f485b3117"
+      "sha256": "f0cad15cbdff0dca69b544a506a7ae4d3d9a24598c81ecda216be7f33aebe4dd"
     },
     {
       "label": "skill_os2_audit",
@@ -263,8 +263,8 @@
       "label": "world_class_claim_guard",
       "path": "reports/world_class_claim_guard.json",
       "exists": true,
-      "bytes": 17727,
-      "sha256": "0b31183a3f666895b343ee2b99c4dfd5f09d626213e29e8dc8051fab3219d2a5"
+      "bytes": 17927,
+      "sha256": "d8c41234cdabf679b6d56580a10647b7367844b81e38c7548f55ddefb3aaaa3c"
     }
   ],
   "missing_artifacts": [],

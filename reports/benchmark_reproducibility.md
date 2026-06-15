@@ -1,9 +1,9 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-16`
-Commit: `0cc661195f0bff2d1365ddea52f69cb3a6d72b3b`
+Commit: `6713b56d6b21158fac99e619fe45c580be72a703`
 Working tree dirty at generation: `false`
-Evidence bundle SHA256: `4f7164b6f04d9079f0497d3e84cefe9e2495ab9ee6fecaa3a74194f288fb8fca`
+Evidence bundle SHA256: `25b549ca48ec334006fbf70ff184e76d56fca3192e72cb7ca2a37dafcdafdaa8`
 
 ## Summary
 
@@ -12,8 +12,8 @@ Evidence bundle SHA256: `4f7164b6f04d9079f0497d3e84cefe9e2495ab9ee6fecaa3a74194f
 - methodology complete: `true`
 - required artifacts: `24`
 - missing artifacts: `0`
-- source contract sha256: `ce3d8c67706a`
-- archive sha256: `77d9bd77e4a9`
+- source contract sha256: `909d0f5bad8e`
+- archive sha256: `5c411a7ea189`
 - output cases: `5`
 - disclosed failure cases: `3`
 - reproduction commands: `22`
@@ -50,7 +50,7 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 - algorithm: `sha256(path,label,exists,artifact_sha256)`
 - artifacts: `24` / `24`
-- sha256: `4f7164b6f04d9079f0497d3e84cefe9e2495ab9ee6fecaa3a74194f288fb8fca`
+- sha256: `25b549ca48ec334006fbf70ff184e76d56fca3192e72cb7ca2a37dafcdafdaa8`
 
 ## Methodology Sections
 
@@ -72,16 +72,16 @@ This report proves local benchmark reproducibility only. It keeps external provi
 | output_cases | `evals/output/cases.jsonl` | present | `a6ae96857116` |
 | output_schema | `evals/output/schema.json` | present | `8ee340c95064` |
 | output_scorecard | `reports/output_quality_scorecard.json` | present | `0806258a8e08` |
-| output_execution | `reports/output_execution_runs.json` | present | `ce00448089a6` |
+| output_execution | `reports/output_execution_runs.json` | present | `00dbc38f651d` |
 | blind_review | `reports/output_blind_review_pack.json` | present | `bbe2db8ec277` |
 | review_adjudication | `reports/output_review_adjudication.json` | present | `240485a721af` |
 | trigger_scorecard | `reports/route_scorecard.json` | present | `c164e83e36d0` |
 | runtime_conformance | `reports/conformance_matrix.json` | present | `97f9ba949c23` |
-| trust_report | `reports/security_trust_report.json` | present | `010b3f3967c4` |
-| python_compatibility | `reports/python_compatibility.json` | present | `c3a04d0b6b58` |
-| registry_audit | `reports/registry_audit.json` | present | `9d666ba878bc` |
-| package_verification | `reports/package_verification.json` | present | `7b58a0c7c756` |
-| install_simulation | `reports/install_simulation.json` | present | `42e985aecb03` |
+| trust_report | `reports/security_trust_report.json` | present | `950daf3e77ad` |
+| python_compatibility | `reports/python_compatibility.json` | present | `44e2c3c42579` |
+| registry_audit | `reports/registry_audit.json` | present | `ca9ec2947a9f` |
+| package_verification | `reports/package_verification.json` | present | `f064d30b1de2` |
+| install_simulation | `reports/install_simulation.json` | present | `f0cad15cbdff` |
 | skill_os2_audit | `reports/skill_os2_audit.json` | present | `57536bc67370` |
 | world_class_evidence_plan | `reports/world_class_evidence_plan.json` | present | `76a3f8e2b12b` |
 | world_class_evidence_ledger | `reports/world_class_evidence_ledger.json` | present | `1cb74eaa978b` |
@@ -90,7 +90,7 @@ This report proves local benchmark reproducibility only. It keeps external provi
 | world_class_operator_runbook | `reports/world_class_operator_runbook.json` | present | `f5ca32d5ea8b` |
 | world_class_operator_runbook_markdown | `reports/world_class_operator_runbook.md` | present | `260d5e03c52e` |
 | world_class_operator_runbook_html | `reports/world_class_operator_runbook.html` | present | `04cc091b113f` |
-| world_class_claim_guard | `reports/world_class_claim_guard.json` | present | `0b31183a3f66` |
+| world_class_claim_guard | `reports/world_class_claim_guard.json` | present | `d8c41234cdab` |
 
 ## Reproduction Commands
 

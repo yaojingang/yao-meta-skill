@@ -4,14 +4,14 @@
   "generated_at": "2026-06-16",
   "skill_dir": ".",
   "summary": {
-    "check_count": 30,
-    "pass_count": 30,
+    "check_count": 31,
+    "pass_count": 31,
     "warn_count": 0,
     "fail_count": 0,
     "decision": "consistent"
   },
   "status_counts": {
-    "pass": 30,
+    "pass": 31,
     "warn": 0,
     "fail": 0
   },
@@ -30,6 +30,7 @@
         "reports/world_class_evidence_ledger.json",
         "reports/world_class_evidence_plan.json",
         "reports/world_class_evidence_intake.json",
+        "reports/world_class_evidence_preflight.json",
         "reports/world_class_submission_review.json",
         "reports/world_class_operator_runbook.json",
         "reports/skill_os2_coverage.json",
@@ -55,6 +56,7 @@
           "python3 scripts/render_skill_overview.py .": true,
           "python3 scripts/render_skill_interpretation.py .": true,
           "python3 scripts/render_review_viewer.py .": true,
+          "python3 scripts/render_world_class_preflight.py . --generated-at \"$GENERATED_AT\"": true,
           "python3 scripts/render_review_studio.py . --output-html reports/review-studio.html --output-json reports/review-studio.json": true,
           "python3 scripts/render_evidence_consistency.py . --generated-at \"$GENERATED_AT\"": true
         },
@@ -62,6 +64,7 @@
           "python3 scripts/render_skill_overview.py .": true,
           "python3 scripts/render_skill_interpretation.py .": true,
           "python3 scripts/render_review_viewer.py .": true,
+          "python3 scripts/render_world_class_preflight.py . --generated-at \"$GENERATED_AT\"": true,
           "python3 scripts/render_review_studio.py . --output-html reports/review-studio.html --output-json reports/review-studio.json": true,
           "python3 scripts/render_evidence_consistency.py . --generated-at \"$GENERATED_AT\"": true
         }
@@ -74,6 +77,7 @@
           "python3 scripts/render_skill_overview.py .": true,
           "python3 scripts/render_skill_interpretation.py .": true,
           "python3 scripts/render_review_viewer.py .": true,
+          "python3 scripts/render_world_class_preflight.py . --generated-at \"$GENERATED_AT\"": true,
           "python3 scripts/render_review_studio.py . --output-html reports/review-studio.html --output-json reports/review-studio.json": true,
           "python3 scripts/render_evidence_consistency.py . --generated-at \"$GENERATED_AT\"": true
         },
@@ -81,6 +85,7 @@
           "python3 scripts/render_skill_overview.py .": true,
           "python3 scripts/render_skill_interpretation.py .": true,
           "python3 scripts/render_review_viewer.py .": true,
+          "python3 scripts/render_world_class_preflight.py . --generated-at \"$GENERATED_AT\"": true,
           "python3 scripts/render_review_studio.py . --output-html reports/review-studio.html --output-json reports/review-studio.json": true,
           "python3 scripts/render_evidence_consistency.py . --generated-at \"$GENERATED_AT\"": true
         }
@@ -91,6 +96,7 @@
         "reports/skill-overview.json",
         "reports/skill-interpretation.json",
         "reports/review-viewer.json",
+        "reports/world_class_evidence_preflight.json",
         "reports/review-studio.json",
         "reports/evidence_consistency.json"
       ],
@@ -111,8 +117,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "0cc661195f0bff2d1365ddea52f69cb3a6d72b3b",
-      "actual": "0cc661195f0bff2d1365ddea52f69cb3a6d72b3b",
+      "expected": "6713b56d6b21158fac99e619fe45c580be72a703",
+      "actual": "6713b56d6b21158fac99e619fe45c580be72a703",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -127,8 +133,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "ce3d8c67706a5059ae162d937f51d7469aee3d0095a53889c686524f2b43d544",
-        "archive_sha256": "77d9bd77e4a9e3992b727da369e195d94753fd4195b33981abadd10e81ee9fdf",
+        "source_contract_sha256": "909d0f5bad8ede6cc24b6c733b614a36c178878447612aa97276ff05e5206ce1",
+        "archive_sha256": "5c411a7ea1891bf797cd9f7f2d7b02f6bde20055e383d17040725f7116e8583e",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -140,8 +146,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "ce3d8c67706a5059ae162d937f51d7469aee3d0095a53889c686524f2b43d544",
-        "archive_sha256": "77d9bd77e4a9e3992b727da369e195d94753fd4195b33981abadd10e81ee9fdf",
+        "source_contract_sha256": "909d0f5bad8ede6cc24b6c733b614a36c178878447612aa97276ff05e5206ce1",
+        "archive_sha256": "5c411a7ea1891bf797cd9f7f2d7b02f6bde20055e383d17040725f7116e8583e",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -257,8 +263,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "0cc661195f0bff2d1365ddea52f69cb3a6d72b3b",
-      "actual": "0cc661195f0bff2d1365ddea52f69cb3a6d72b3b",
+      "expected": "6713b56d6b21158fac99e619fe45c580be72a703",
+      "actual": "6713b56d6b21158fac99e619fe45c580be72a703",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
@@ -273,8 +279,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "ce3d8c67706a5059ae162d937f51d7469aee3d0095a53889c686524f2b43d544",
-        "archive_sha256": "77d9bd77e4a9e3992b727da369e195d94753fd4195b33981abadd10e81ee9fdf",
+        "source_contract_sha256": "909d0f5bad8ede6cc24b6c733b614a36c178878447612aa97276ff05e5206ce1",
+        "archive_sha256": "5c411a7ea1891bf797cd9f7f2d7b02f6bde20055e383d17040725f7116e8583e",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -286,8 +292,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "ce3d8c67706a5059ae162d937f51d7469aee3d0095a53889c686524f2b43d544",
-        "archive_sha256": "77d9bd77e4a9e3992b727da369e195d94753fd4195b33981abadd10e81ee9fdf",
+        "source_contract_sha256": "909d0f5bad8ede6cc24b6c733b614a36c178878447612aa97276ff05e5206ce1",
+        "archive_sha256": "5c411a7ea1891bf797cd9f7f2d7b02f6bde20055e383d17040725f7116e8583e",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -1375,7 +1381,7 @@
             "path": "scripts",
             "label": "Deterministic helpers or local tooling",
             "kind": "folder",
-            "file_count": 112
+            "file_count": 113
           },
           {
             "path": "evals",
@@ -1387,10 +1393,10 @@
             "path": "reports",
             "label": "Generated evidence and overview artifacts",
             "kind": "folder",
-            "file_count": 222
+            "file_count": 224
           }
         ],
-        "file_count": 401,
+        "file_count": 404,
         "folder_count": 4,
         "distribution": [
           {
@@ -1415,7 +1421,7 @@
           },
           {
             "label": "scripts",
-            "value": 112
+            "value": 113
           },
           {
             "label": "evals",
@@ -1423,7 +1429,7 @@
           },
           {
             "label": "reports",
-            "value": 222
+            "value": 224
           }
         ]
       },
@@ -1463,7 +1469,7 @@
             "path": "scripts",
             "label": "Deterministic helpers or local tooling",
             "kind": "folder",
-            "file_count": 112
+            "file_count": 113
           },
           {
             "path": "evals",
@@ -1475,10 +1481,10 @@
             "path": "reports",
             "label": "Generated evidence and overview artifacts",
             "kind": "folder",
-            "file_count": 222
+            "file_count": 224
           }
         ],
-        "file_count": 401,
+        "file_count": 404,
         "folder_count": 4,
         "distribution": [
           {
@@ -1503,7 +1509,7 @@
           },
           {
             "label": "scripts",
-            "value": 112
+            "value": 113
           },
           {
             "label": "evals",
@@ -1511,7 +1517,7 @@
           },
           {
             "label": "reports",
-            "value": 222
+            "value": 224
           }
         ]
       },
@@ -1690,6 +1696,34 @@
         "reports/benchmark_reproducibility.json"
       ],
       "detail": "Benchmark reproducibility must not overstate public claim readiness."
+    },
+    {
+      "key": "preflight-world-class-boundary",
+      "label": "Preflight mirrors ledger without accepting evidence",
+      "status": "pass",
+      "expected": {
+        "pending_count": 4,
+        "source_check_count": 13,
+        "source_pass_count": 6,
+        "source_blocked_count": 7,
+        "ready_to_claim_world_class": false,
+        "preflight_counts_as_evidence": false,
+        "credential_value_exposed": false
+      },
+      "actual": {
+        "pending_count": 4,
+        "source_check_count": 13,
+        "source_pass_count": 6,
+        "source_blocked_count": 7,
+        "ready_to_claim_world_class": false,
+        "preflight_counts_as_evidence": false,
+        "credential_value_exposed": false
+      },
+      "paths": [
+        "reports/world_class_evidence_ledger.json",
+        "reports/world_class_evidence_preflight.json"
+      ],
+      "detail": "Collection preflight may help operators gather evidence, but it must not print secrets or change world-class readiness."
     },
     {
       "key": "review-studio-no-overclaim",
@@ -2078,19 +2112,19 @@
       "label": "Skill OS 2.0 review summary mirrors current evidence",
       "status": "pass",
       "expected": [
-        "score `91`",
+        "score `89`",
         "`16` gates",
-        "`3` warnings",
+        "`4` warnings",
         "`30` declared internal modules",
-        "`82 / 82` CLI help smoke checks passing across `112` scripts",
-        "`619` zip entries",
-        "archive with `619` entries",
+        "`83 / 83` CLI help smoke checks passing across `113` scripts",
+        "`623` zip entries",
+        "archive with `623` entries",
         "`12` installer permission checks enforced",
         "`0` permission failures",
         "`24` required artifacts",
         "`22` reproduction commands",
         "initial load `960/1000`",
-        "target count is `76`"
+        "target count is `77`"
       ],
       "actual": "all present",
       "paths": [
