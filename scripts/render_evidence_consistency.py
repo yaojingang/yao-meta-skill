@@ -437,12 +437,17 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
         "SKILL.md",
         "manifest.json",
         "agents/interface.yaml",
-        "dist/manifest.json",
-        "dist/targets/openai/adapter.json",
         "evidence/world_class/README.md",
         "security/permission_policy.json",
         "reports/world_class_evidence_ledger.json",
     ]
+    optional_claim_surfaces = [
+        "dist/manifest.json",
+        "dist/targets/openai/adapter.json",
+    ]
+    required_claim_surfaces.extend(
+        path for path in optional_claim_surfaces if (skill_dir / path).exists()
+    )
     prohibited_claim_surface_prefixes = [
         "dist/install-simulation/",
         "evidence/world_class/submissions/",

@@ -43,8 +43,8 @@
       "key": "benchmark-release-lock-self-consistency",
       "label": "Benchmark release lock matches git dirty state",
       "status": "pass",
-      "expected": true,
-      "actual": true,
+      "expected": false,
+      "actual": false,
       "paths": [
         "reports/benchmark_reproducibility.json"
       ],
@@ -54,8 +54,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "b9b0ad18cf57af32f669bb1ffaaae8edf18553ad",
-      "actual": "b9b0ad18cf57af32f669bb1ffaaae8edf18553ad",
+      "expected": "bf1499d9b8ef137420dfc25b56d332005721da59",
+      "actual": "bf1499d9b8ef137420dfc25b56d332005721da59",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -67,30 +67,30 @@
       "label": "overview embeds benchmark summary fields",
       "status": "pass",
       "expected": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "002cb9e43ee22c7ba2a59422e4e123fb801242506a1a189b9a8bc8ad7d71f7f8",
-        "archive_sha256": "eddf1d422b1ad8d50dc0b49f0525c33010e4fe7db31a4c605dcd68c33adf56e8",
+        "source_contract_sha256": "caa815571f7c86fa95447cd7407875eb452cac255c45360db63b017699425921",
+        "archive_sha256": "6721f9af9fc9784b0491f8e73dd92db8a38b3629fc08170ddd3269f2a3c9b48f",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4
+        "public_claim_blocker_count": 5
       },
       "actual": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "002cb9e43ee22c7ba2a59422e4e123fb801242506a1a189b9a8bc8ad7d71f7f8",
-        "archive_sha256": "eddf1d422b1ad8d50dc0b49f0525c33010e4fe7db31a4c605dcd68c33adf56e8",
+        "source_contract_sha256": "caa815571f7c86fa95447cd7407875eb452cac255c45360db63b017699425921",
+        "archive_sha256": "6721f9af9fc9784b0491f8e73dd92db8a38b3629fc08170ddd3269f2a3c9b48f",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4
+        "public_claim_blocker_count": 5
       },
       "paths": [
         "reports/benchmark_reproducibility.json",
@@ -200,8 +200,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "b9b0ad18cf57af32f669bb1ffaaae8edf18553ad",
-      "actual": "b9b0ad18cf57af32f669bb1ffaaae8edf18553ad",
+      "expected": "bf1499d9b8ef137420dfc25b56d332005721da59",
+      "actual": "bf1499d9b8ef137420dfc25b56d332005721da59",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
@@ -213,30 +213,30 @@
       "label": "interpretation embeds benchmark summary fields",
       "status": "pass",
       "expected": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "002cb9e43ee22c7ba2a59422e4e123fb801242506a1a189b9a8bc8ad7d71f7f8",
-        "archive_sha256": "eddf1d422b1ad8d50dc0b49f0525c33010e4fe7db31a4c605dcd68c33adf56e8",
+        "source_contract_sha256": "caa815571f7c86fa95447cd7407875eb452cac255c45360db63b017699425921",
+        "archive_sha256": "6721f9af9fc9784b0491f8e73dd92db8a38b3629fc08170ddd3269f2a3c9b48f",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4
+        "public_claim_blocker_count": 5
       },
       "actual": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "002cb9e43ee22c7ba2a59422e4e123fb801242506a1a189b9a8bc8ad7d71f7f8",
-        "archive_sha256": "eddf1d422b1ad8d50dc0b49f0525c33010e4fe7db31a4c605dcd68c33adf56e8",
+        "source_contract_sha256": "caa815571f7c86fa95447cd7407875eb452cac255c45360db63b017699425921",
+        "archive_sha256": "6721f9af9fc9784b0491f8e73dd92db8a38b3629fc08170ddd3269f2a3c9b48f",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4
+        "public_claim_blocker_count": 5
       },
       "paths": [
         "reports/benchmark_reproducibility.json",
@@ -1663,11 +1663,11 @@
           "SKILL.md": true,
           "manifest.json": true,
           "agents/interface.yaml": true,
-          "dist/manifest.json": true,
-          "dist/targets/openai/adapter.json": true,
           "evidence/world_class/README.md": true,
           "security/permission_policy.json": true,
-          "reports/world_class_evidence_ledger.json": true
+          "reports/world_class_evidence_ledger.json": true,
+          "dist/manifest.json": true,
+          "dist/targets/openai/adapter.json": true
         },
         "prohibited_surfaces": []
       },
@@ -1684,11 +1684,11 @@
           "SKILL.md": true,
           "manifest.json": true,
           "agents/interface.yaml": true,
-          "dist/manifest.json": true,
-          "dist/targets/openai/adapter.json": true,
           "evidence/world_class/README.md": true,
           "security/permission_policy.json": true,
-          "reports/world_class_evidence_ledger.json": true
+          "reports/world_class_evidence_ledger.json": true,
+          "dist/manifest.json": true,
+          "dist/targets/openai/adapter.json": true
         },
         "prohibited_surfaces": []
       },
