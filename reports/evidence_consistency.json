@@ -75,6 +75,7 @@
           "python3 scripts/render_world_class_operator_runbook.py . --generated-at \"$GENERATED_AT\"": true,
           "python3 scripts/render_world_class_claim_guard.py . --generated-at \"$GENERATED_AT\"": true,
           "python3 scripts/render_daily_skillops_report.py . --generated-at \"$GENERATED_AT\"": true,
+          "python3 scripts/render_weekly_curator_report.py . --generated-at \"$GENERATED_AT\"": true,
           "python3 scripts/render_skill_os2_audit.py . --generated-at \"$GENERATED_AT\"": true,
           "python3 scripts/render_skill_os2_coverage.py . --generated-at \"$GENERATED_AT\"": true,
           "python3 scripts/render_context_reports.py --generated-at \"$GENERATED_AT\"": true,
@@ -90,6 +91,7 @@
           "python3 scripts/render_context_reports.py --generated-at \"$GENERATED_AT\"": true,
           "python3 scripts/render_benchmark_reproducibility.py . --generated-at \"$GENERATED_AT\"": true,
           "python3 scripts/render_daily_skillops_report.py . --generated-at \"$GENERATED_AT\"": true,
+          "python3 scripts/render_weekly_curator_report.py . --generated-at \"$GENERATED_AT\"": true,
           "python3 scripts/render_skill_overview.py .": true,
           "python3 scripts/render_skill_interpretation.py .": true,
           "python3 scripts/render_review_viewer.py .": true,
@@ -125,6 +127,7 @@
           "python3 scripts/render_world_class_operator_runbook.py . --generated-at \"$GENERATED_AT\"": true,
           "python3 scripts/render_world_class_claim_guard.py . --generated-at \"$GENERATED_AT\"": true,
           "python3 scripts/render_daily_skillops_report.py . --generated-at \"$GENERATED_AT\"": true,
+          "python3 scripts/render_weekly_curator_report.py . --generated-at \"$GENERATED_AT\"": true,
           "python3 scripts/render_skill_os2_audit.py . --generated-at \"$GENERATED_AT\"": true,
           "python3 scripts/render_skill_os2_coverage.py . --generated-at \"$GENERATED_AT\"": true,
           "python3 scripts/render_context_reports.py --generated-at \"$GENERATED_AT\"": true,
@@ -140,6 +143,7 @@
           "python3 scripts/render_context_reports.py --generated-at \"$GENERATED_AT\"": true,
           "python3 scripts/render_benchmark_reproducibility.py . --generated-at \"$GENERATED_AT\"": true,
           "python3 scripts/render_daily_skillops_report.py . --generated-at \"$GENERATED_AT\"": true,
+          "python3 scripts/render_weekly_curator_report.py . --generated-at \"$GENERATED_AT\"": true,
           "python3 scripts/render_skill_overview.py .": true,
           "python3 scripts/render_skill_interpretation.py .": true,
           "python3 scripts/render_review_viewer.py .": true,
@@ -173,6 +177,7 @@
         "reports/review-viewer.json",
         "reports/world_class_evidence_preflight.json",
         "reports/skillops/daily",
+        "reports/skillops/weekly",
         "reports/review-studio.json",
         "reports/evidence_consistency.json"
       ],
@@ -184,12 +189,12 @@
       "status": "pass",
       "expected": {
         "status": "pass",
-        "detail": "initial load 990/1000; deferred 464021/120000; top deferred scripts 414241; resource governance governed; quality density 131.3",
+        "detail": "initial load 990/1000; deferred 469340/120000; top deferred scripts 419560; resource governance governed; quality density 131.3",
         "evidence": "reports/context_budget.json"
       },
       "actual": {
         "status": "pass",
-        "detail": "initial load 990/1000; deferred 464021/120000; top deferred scripts 414241; resource governance governed; quality density 131.3",
+        "detail": "initial load 990/1000; deferred 469340/120000; top deferred scripts 419560; resource governance governed; quality density 131.3",
         "evidence": "reports/context_budget.json"
       },
       "paths": [
@@ -243,8 +248,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "904969b91f6ce1407ea5d973f359b73d5f80ca7a",
-      "actual": "904969b91f6ce1407ea5d973f359b73d5f80ca7a",
+      "expected": "aee549103223c157e934d31f9c4dc5b5effb0050",
+      "actual": "aee549103223c157e934d31f9c4dc5b5effb0050",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -259,8 +264,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "7de584946cac8f2ed241aa331ba4c0c2d69fa1c4eae2c06b92882b8af6ad07d7",
-        "archive_sha256": "1d4626e5f8a27d7c708bb0e13f6f1aab44db25f9c5154b548fc5e70a52042a35",
+        "source_contract_sha256": "c29e7a583ec56e9ab8ec665f9a4e152e4135f0babb4806b4564e6aface56dada",
+        "archive_sha256": "ff4e46e4a22fee8a7bcd7c155b00df4ad4df7d9a85c939d657027fa6dea59d6d",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -272,8 +277,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "7de584946cac8f2ed241aa331ba4c0c2d69fa1c4eae2c06b92882b8af6ad07d7",
-        "archive_sha256": "1d4626e5f8a27d7c708bb0e13f6f1aab44db25f9c5154b548fc5e70a52042a35",
+        "source_contract_sha256": "c29e7a583ec56e9ab8ec665f9a4e152e4135f0babb4806b4564e6aface56dada",
+        "archive_sha256": "ff4e46e4a22fee8a7bcd7c155b00df4ad4df7d9a85c939d657027fa6dea59d6d",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -389,8 +394,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "904969b91f6ce1407ea5d973f359b73d5f80ca7a",
-      "actual": "904969b91f6ce1407ea5d973f359b73d5f80ca7a",
+      "expected": "aee549103223c157e934d31f9c4dc5b5effb0050",
+      "actual": "aee549103223c157e934d31f9c4dc5b5effb0050",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
@@ -405,8 +410,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "7de584946cac8f2ed241aa331ba4c0c2d69fa1c4eae2c06b92882b8af6ad07d7",
-        "archive_sha256": "1d4626e5f8a27d7c708bb0e13f6f1aab44db25f9c5154b548fc5e70a52042a35",
+        "source_contract_sha256": "c29e7a583ec56e9ab8ec665f9a4e152e4135f0babb4806b4564e6aface56dada",
+        "archive_sha256": "ff4e46e4a22fee8a7bcd7c155b00df4ad4df7d9a85c939d657027fa6dea59d6d",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -418,8 +423,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "7de584946cac8f2ed241aa331ba4c0c2d69fa1c4eae2c06b92882b8af6ad07d7",
-        "archive_sha256": "1d4626e5f8a27d7c708bb0e13f6f1aab44db25f9c5154b548fc5e70a52042a35",
+        "source_contract_sha256": "c29e7a583ec56e9ab8ec665f9a4e152e4135f0babb4806b4564e6aface56dada",
+        "archive_sha256": "ff4e46e4a22fee8a7bcd7c155b00df4ad4df7d9a85c939d657027fa6dea59d6d",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -1507,7 +1512,7 @@
             "path": "scripts",
             "label": "Deterministic helpers or local tooling",
             "kind": "folder",
-            "file_count": 116
+            "file_count": 117
           },
           {
             "path": "evals",
@@ -1519,10 +1524,10 @@
             "path": "reports",
             "label": "Generated evidence and overview artifacts",
             "kind": "folder",
-            "file_count": 227
+            "file_count": 229
           }
         ],
-        "file_count": 411,
+        "file_count": 414,
         "folder_count": 4,
         "distribution": [
           {
@@ -1547,7 +1552,7 @@
           },
           {
             "label": "scripts",
-            "value": 116
+            "value": 117
           },
           {
             "label": "evals",
@@ -1555,7 +1560,7 @@
           },
           {
             "label": "reports",
-            "value": 227
+            "value": 229
           }
         ]
       },
@@ -1595,7 +1600,7 @@
             "path": "scripts",
             "label": "Deterministic helpers or local tooling",
             "kind": "folder",
-            "file_count": 116
+            "file_count": 117
           },
           {
             "path": "evals",
@@ -1607,10 +1612,10 @@
             "path": "reports",
             "label": "Generated evidence and overview artifacts",
             "kind": "folder",
-            "file_count": 227
+            "file_count": 229
           }
         ],
-        "file_count": 411,
+        "file_count": 414,
         "folder_count": 4,
         "distribution": [
           {
@@ -1635,7 +1640,7 @@
           },
           {
             "label": "scripts",
-            "value": 116
+            "value": 117
           },
           {
             "label": "evals",
@@ -1643,7 +1648,7 @@
           },
           {
             "label": "reports",
-            "value": 227
+            "value": 229
           }
         ]
       },
@@ -2280,15 +2285,15 @@
         "`16` gates",
         "`3` warnings",
         "`32` declared internal modules",
-        "`84 / 84` CLI help smoke checks passing across `116` scripts",
-        "`634` zip entries",
-        "archive with `634` entries",
+        "`85 / 85` CLI help smoke checks passing across `117` scripts",
+        "`639` zip entries",
+        "archive with `639` entries",
         "`12` installer permission checks enforced",
         "`0` permission failures",
         "`25` required artifacts",
         "`23` reproduction commands",
         "initial load `990/1000`",
-        "target count is `79`"
+        "target count is `80`"
       ],
       "actual": "all present",
       "paths": [
