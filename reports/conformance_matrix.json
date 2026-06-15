@@ -32,6 +32,7 @@
         "Skill IR description matches frontmatter",
         "references resource resolves: references/artifact-design-doctrine.md",
         "references resource resolves: references/authoring-discipline.md",
+        "references resource resolves: references/autonomous-adaptation.md",
         "references resource resolves: references/distribution-registry-method.md",
         "references resource resolves: references/eval-playbook.md",
         "references resource resolves: references/gate-selection.md",
@@ -40,8 +41,7 @@
         "references resource resolves: references/intent-dialogue.md",
         "references resource resolves: references/iteration-philosophy.md",
         "references resource resolves: references/non-skill-decision-tree.md",
-        "references resource resolves: references/operating-modes.md",
-        "references resource resolves: references/output-eval-method.md"
+        "references resource resolves: references/operating-modes.md"
       ],
       "failures": [],
       "warnings": []
@@ -76,6 +76,7 @@
         "Skill IR description matches frontmatter",
         "references resource resolves: references/artifact-design-doctrine.md",
         "references resource resolves: references/authoring-discipline.md",
+        "references resource resolves: references/autonomous-adaptation.md",
         "references resource resolves: references/distribution-registry-method.md",
         "references resource resolves: references/eval-playbook.md",
         "references resource resolves: references/gate-selection.md",
@@ -84,8 +85,7 @@
         "references resource resolves: references/intent-dialogue.md",
         "references resource resolves: references/iteration-philosophy.md",
         "references resource resolves: references/non-skill-decision-tree.md",
-        "references resource resolves: references/operating-modes.md",
-        "references resource resolves: references/output-eval-method.md"
+        "references resource resolves: references/operating-modes.md"
       ],
       "failures": [],
       "warnings": []
@@ -99,7 +99,7 @@
         "frontmatter description exists",
         "description length <= 1024",
         "name is runtime-safe",
-        "directory name matches skill name",
+        "package identity derives from skill name",
         "manifest.name exists",
         "manifest.version exists",
         "manifest.owner exists",
@@ -120,6 +120,7 @@
         "Skill IR description matches frontmatter",
         "references resource resolves: references/artifact-design-doctrine.md",
         "references resource resolves: references/authoring-discipline.md",
+        "references resource resolves: references/autonomous-adaptation.md",
         "references resource resolves: references/distribution-registry-method.md",
         "references resource resolves: references/eval-playbook.md",
         "references resource resolves: references/gate-selection.md",
@@ -128,8 +129,7 @@
         "references resource resolves: references/intent-dialogue.md",
         "references resource resolves: references/iteration-philosophy.md",
         "references resource resolves: references/non-skill-decision-tree.md",
-        "references resource resolves: references/operating-modes.md",
-        "references resource resolves: references/output-eval-method.md"
+        "references resource resolves: references/operating-modes.md"
       ],
       "failures": [],
       "warnings": [
@@ -145,7 +145,7 @@
         "frontmatter description exists",
         "description length <= 1024",
         "name is runtime-safe",
-        "directory name matches skill name",
+        "package identity derives from skill name",
         "manifest.name exists",
         "manifest.version exists",
         "manifest.owner exists",
@@ -166,6 +166,7 @@
         "Skill IR description matches frontmatter",
         "references resource resolves: references/artifact-design-doctrine.md",
         "references resource resolves: references/authoring-discipline.md",
+        "references resource resolves: references/autonomous-adaptation.md",
         "references resource resolves: references/distribution-registry-method.md",
         "references resource resolves: references/eval-playbook.md",
         "references resource resolves: references/gate-selection.md",
@@ -174,8 +175,7 @@
         "references resource resolves: references/intent-dialogue.md",
         "references resource resolves: references/iteration-philosophy.md",
         "references resource resolves: references/non-skill-decision-tree.md",
-        "references resource resolves: references/operating-modes.md",
-        "references resource resolves: references/output-eval-method.md"
+        "references resource resolves: references/operating-modes.md"
       ],
       "failures": [],
       "warnings": [
@@ -212,6 +212,7 @@
         "Skill IR description matches frontmatter",
         "references resource resolves: references/artifact-design-doctrine.md",
         "references resource resolves: references/authoring-discipline.md",
+        "references resource resolves: references/autonomous-adaptation.md",
         "references resource resolves: references/distribution-registry-method.md",
         "references resource resolves: references/eval-playbook.md",
         "references resource resolves: references/gate-selection.md",
@@ -220,8 +221,7 @@
         "references resource resolves: references/intent-dialogue.md",
         "references resource resolves: references/iteration-philosophy.md",
         "references resource resolves: references/non-skill-decision-tree.md",
-        "references resource resolves: references/operating-modes.md",
-        "references resource resolves: references/output-eval-method.md"
+        "references resource resolves: references/operating-modes.md"
       ],
       "failures": [],
       "warnings": []

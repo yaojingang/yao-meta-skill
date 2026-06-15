@@ -5,13 +5,15 @@ Generated at: `2026-06-15`
 ## Summary
 
 - decision: `pass`
-- python files: `170`
-- scripts: `107`
+- python files: `172`
+- scripts: `109`
 - tests: `63`
-- internal modules: `29`
+- internal modules: `31`
 - CLI scripts: `80`
-- Yao CLI command handlers: `34`
-- largest file lines: `896`
+- Yao CLI command handlers: `63`
+- entrypoint command handlers: `18`
+- command modules: `6`
+- largest file lines: `897`
 - hotspots: `0`
 - blockers: `0`
 
@@ -25,8 +27,7 @@ No file-size hotspots found.
 
 | File | Lines | Kind | Severity |
 | --- | ---: | --- | --- |
-| `tests/verify_yao_cli.py` | `896` | `test` | `pass` |
-| `scripts/yao.py` | `889` | `cli-script` | `pass` |
+| `tests/verify_yao_cli.py` | `897` | `test` | `pass` |
 | `scripts/skill_report_layout.py` | `808` | `internal-module` | `pass` |
 | `scripts/skill_report_model.py` | `801` | `internal-module` | `pass` |
 | `scripts/yao_cli_parser.py` | `784` | `internal-module` | `pass` |
@@ -37,6 +38,7 @@ No file-size hotspots found.
 | `scripts/trust_check.py` | `714` | `internal-module` | `pass` |
 | `scripts/review_studio_layout.py` | `694` | `internal-module` | `pass` |
 | `scripts/render_review_viewer.py` | `685` | `cli-script` | `pass` |
+| `scripts/cross_packager.py` | `650` | `cli-script` | `pass` |
 
 ## Release Rule
 

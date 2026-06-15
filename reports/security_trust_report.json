@@ -2,9 +2,9 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 194,
-    "script_count": 107,
-    "internal_module_count": 26,
+    "scanned_files": 196,
+    "script_count": 109,
+    "internal_module_count": 28,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 194,
-    "package_sha256": "4660a11db94947ab603dca42eddc447698785d08f0df2972bf2ca43454683306"
+    "package_hash_file_count": 196,
+    "package_sha256": "76edc3f9936da8966eff0e0f689568c7d6d787691a45773a3e86bb38be6b0cc4"
   },
   "failures": [],
   "warnings": [],
@@ -1489,6 +1489,34 @@
       "network_hosts": []
     },
     {
+      "path": "scripts/yao_cli_distribution_commands.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Imported by yao.py to keep distribution and runtime gate handlers outside the thin CLI orchestrator.",
+      "has_argparse": true,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
+      "path": "scripts/yao_cli_output_commands.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Imported by yao.py to keep output evaluation and review handlers outside the thin CLI orchestrator.",
+      "has_argparse": true,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
       "path": "scripts/yao_cli_parser.py",
       "interface": "internal-module",
       "interface_declared": true,
@@ -1579,7 +1607,7 @@
     "checked_count": 81,
     "passed_count": 81,
     "failed_count": 0,
-    "skipped_count": 26,
+    "skipped_count": 28,
     "failed_scripts": [],
     "results": [
       {
@@ -2480,6 +2508,14 @@
       },
       {
         "path": "scripts/yao_cli_create_commands.py",
+        "reason": "internal module"
+      },
+      {
+        "path": "scripts/yao_cli_distribution_commands.py",
+        "reason": "internal module"
+      },
+      {
+        "path": "scripts/yao_cli_output_commands.py",
         "reason": "internal module"
       },
       {

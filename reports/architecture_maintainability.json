@@ -4,15 +4,17 @@
   "generated_at": "2026-06-15",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 170,
-    "script_file_count": 107,
+    "python_file_count": 172,
+    "script_file_count": 109,
     "test_file_count": 63,
-    "internal_module_count": 29,
+    "internal_module_count": 31,
     "cli_script_count": 80,
-    "command_handler_count": 34,
+    "command_handler_count": 63,
+    "entrypoint_command_handler_count": 18,
+    "command_module_count": 6,
     "warn_line_threshold": 900,
     "block_line_threshold": 1500,
-    "largest_file_lines": 896,
+    "largest_file_lines": 897,
     "hotspot_count": 0,
     "blocker_count": 0,
     "decision": "pass"
@@ -20,17 +22,10 @@
   "largest_files": [
     {
       "path": "tests/verify_yao_cli.py",
-      "lines": 896,
+      "lines": 897,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
-    },
-    {
-      "path": "scripts/yao.py",
-      "lines": 889,
-      "kind": "cli-script",
-      "severity": "pass",
-      "recommendation": "Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator."
     },
     {
       "path": "scripts/skill_report_layout.py",
@@ -101,6 +96,13 @@
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Split viewer data assembly from HTML section rendering."
+    },
+    {
+      "path": "scripts/cross_packager.py",
+      "lines": 650,
+      "kind": "cli-script",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     }
   ],
   "hotspots": [],
