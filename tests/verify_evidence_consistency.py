@@ -23,6 +23,7 @@ REPORT_FILES = [
     "reports/install_simulation.json",
     "reports/security_trust_report.json",
     "reports/context_budget.json",
+    "reports/world_class_claim_guard.json",
     "reports/skill-os-2-review.md",
     "scripts/ci_test.py",
 ]
@@ -44,6 +45,7 @@ def refresh_embedded_reports() -> None:
     script_names = [
         "render_benchmark_reproducibility.py",
         "render_skill_os2_coverage.py",
+        "render_world_class_claim_guard.py",
         "render_skill_overview.py",
         "render_skill_interpretation.py",
     ]
@@ -110,12 +112,15 @@ def main() -> None:
     assert payload["ok"] is True, payload
     assert payload["summary"]["decision"] == "consistent", payload
     assert payload["summary"]["fail_count"] == 0, payload
-    assert payload["summary"]["check_count"] >= 26, payload
+    assert payload["summary"]["check_count"] >= 28, payload
     checks = {item["key"]: item for item in payload["checks"]}
     assert checks["overview-benchmark-summary"]["status"] == "pass", checks["overview-benchmark-summary"]
     assert checks["interpretation-adoption-summary"]["status"] == "pass", checks["interpretation-adoption-summary"]
     assert checks["coverage-world-class-boundary"]["status"] == "pass", checks["coverage-world-class-boundary"]
     assert checks["review-studio-no-overclaim"]["status"] == "pass", checks["review-studio-no-overclaim"]
+    assert checks["claim-guard-package-runtime-surface"]["status"] == "pass", checks[
+        "claim-guard-package-runtime-surface"
+    ]
     assert checks["skill-os-2-review-current-evidence"]["status"] == "pass", checks[
         "skill-os-2-review-current-evidence"
     ]
@@ -150,6 +155,35 @@ def main() -> None:
     assert drift_payload["summary"]["decision"] == "evidence-drift-detected", drift_payload
     assert drift_checks["overview-adoption-summary"]["status"] == "fail", drift_checks["overview-adoption-summary"]
     assert drift_checks["interpretation-adoption-summary"]["status"] == "pass", drift_checks["interpretation-adoption-summary"]
+
+    claim_guard_drift_root = TMP / "claim-guard-drift-skill"
+    copy_reports(claim_guard_drift_root)
+    claim_guard_path = claim_guard_drift_root / "reports" / "world_class_claim_guard.json"
+    claim_guard = json.loads(claim_guard_path.read_text(encoding="utf-8"))
+    claim_guard["summary"]["package_claim_surface_count"] = 0
+    claim_guard["scanned_surfaces"] = [
+        item for item in claim_guard["scanned_surfaces"] if item.get("path") != "dist/manifest.json"
+    ]
+    claim_guard_path.write_text(json.dumps(claim_guard, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    claim_guard_drift_proc = run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            str(claim_guard_drift_root),
+            "--output-json",
+            str(TMP / "claim_guard_drift.json"),
+            "--output-md",
+            str(TMP / "claim_guard_drift.md"),
+            "--generated-at",
+            "2026-06-15",
+        ]
+    )
+    assert claim_guard_drift_proc.returncode == 2, claim_guard_drift_proc.stdout
+    claim_guard_drift_payload = json.loads(claim_guard_drift_proc.stdout)
+    claim_guard_drift_checks = {item["key"]: item for item in claim_guard_drift_payload["checks"]}
+    assert claim_guard_drift_checks["claim-guard-package-runtime-surface"]["status"] == "fail", (
+        claim_guard_drift_checks["claim-guard-package-runtime-surface"]
+    )
     print(json.dumps({"ok": True}, ensure_ascii=False, indent=2))
 
 

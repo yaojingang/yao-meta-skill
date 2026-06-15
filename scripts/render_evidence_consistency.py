@@ -22,6 +22,7 @@ REQUIRED_REPORTS = {
     "install_simulation": "reports/install_simulation.json",
     "trust": "reports/security_trust_report.json",
     "context_budget": "reports/context_budget.json",
+    "world_class_claim_guard": "reports/world_class_claim_guard.json",
 }
 REQUIRED_TEXT_REPORTS = {
     "skill_os2_review": "reports/skill-os-2-review.md",
@@ -120,6 +121,28 @@ def nested(payload: dict[str, Any], path: list[str], default: Any = None) -> Any
             return default
         current = current[key]
     return current
+
+
+def scanned_surface_paths(payload: dict[str, Any]) -> set[str]:
+    surfaces = payload.get("scanned_surfaces")
+    if not isinstance(surfaces, list):
+        return set()
+    paths: set[str] = set()
+    for item in surfaces:
+        if isinstance(item, dict) and isinstance(item.get("path"), str):
+            paths.add(item["path"])
+        elif isinstance(item, str):
+            paths.add(item)
+    return paths
+
+
+def as_int(value: Any) -> int | None:
+    if isinstance(value, bool):
+        return None
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return None
 
 
 def add_check(
@@ -233,6 +256,7 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
     install_simulation = reports["install_simulation"]
     trust = reports["trust"]
     context_budget = reports["context_budget"]
+    claim_guard = reports["world_class_claim_guard"]
 
     benchmark_summary = nested(benchmark, ["summary"], {})
     adoption_summary = nested(adoption, ["summary"], {})
@@ -243,6 +267,7 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
     install_summary = nested(install_simulation, ["summary"], {})
     trust_summary = nested(trust, ["summary"], {})
     context_stats = nested(context_budget, ["stats"], {})
+    claim_guard_summary = nested(claim_guard, ["summary"], {})
     if isinstance(benchmark_summary, dict):
         compare_values(
             checks,
@@ -405,6 +430,80 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
         else None,
         paths=[REQUIRED_REPORTS["world_class_ledger"], REQUIRED_REPORTS["review_studio"]],
         detail="When world-class evidence is pending, Review Studio must stay in a review or warning posture.",
+    )
+    claim_surface_paths = scanned_surface_paths(claim_guard)
+    required_claim_surfaces = [
+        "README.md",
+        "SKILL.md",
+        "manifest.json",
+        "agents/interface.yaml",
+        "dist/manifest.json",
+        "dist/targets/openai/adapter.json",
+        "evidence/world_class/README.md",
+        "security/permission_policy.json",
+        "reports/world_class_evidence_ledger.json",
+    ]
+    prohibited_claim_surface_prefixes = [
+        "dist/install-simulation/",
+        "evidence/world_class/submissions/",
+    ]
+    json_claim_surface_count = as_int(claim_guard_summary.get("json_claim_surface_count"))
+    metadata_claim_surface_count = as_int(claim_guard_summary.get("metadata_claim_surface_count"))
+    package_claim_surface_count = as_int(claim_guard_summary.get("package_claim_surface_count"))
+    claim_surface_count = as_int(claim_guard_summary.get("claim_surface_count"))
+    expected_claim_guard_surface = {
+        "overclaim_guard_active": True,
+        "violation_count": 0,
+        "ledger_ready_to_claim_world_class": ledger_summary.get("ready_to_claim_world_class")
+        if isinstance(ledger_summary, dict)
+        else None,
+        "ledger_pending_count": ledger_summary.get("pending_count") if isinstance(ledger_summary, dict) else None,
+        "metadata_covers_json": True,
+        "package_surface_minimum": True,
+        "claim_surface_covers_package": True,
+        "required_surfaces": {path: True for path in required_claim_surfaces},
+        "prohibited_surfaces": [],
+    }
+    actual_claim_guard_surface = {
+        "overclaim_guard_active": claim_guard_summary.get("overclaim_guard_active"),
+        "violation_count": claim_guard_summary.get("violation_count"),
+        "ledger_ready_to_claim_world_class": claim_guard_summary.get("ledger_ready_to_claim_world_class"),
+        "ledger_pending_count": claim_guard_summary.get("ledger_pending_count"),
+        "metadata_covers_json": (
+            metadata_claim_surface_count is not None
+            and json_claim_surface_count is not None
+            and metadata_claim_surface_count >= json_claim_surface_count
+        ),
+        "package_surface_minimum": package_claim_surface_count is not None and package_claim_surface_count >= 5,
+        "claim_surface_covers_package": (
+            claim_surface_count is not None
+            and package_claim_surface_count is not None
+            and claim_surface_count >= package_claim_surface_count
+        ),
+        "required_surfaces": {path: path in claim_surface_paths for path in required_claim_surfaces},
+        "prohibited_surfaces": sorted(
+            path
+            for path in claim_surface_paths
+            if any(path.startswith(prefix) for prefix in prohibited_claim_surface_prefixes)
+        ),
+    }
+    compare_values(
+        checks,
+        key="claim-guard-package-runtime-surface",
+        label="Claim guard covers package and runtime claim surfaces",
+        expected=expected_claim_guard_surface,
+        actual=actual_claim_guard_surface,
+        paths=[
+            REQUIRED_REPORTS["world_class_claim_guard"],
+            "manifest.json",
+            "agents/interface.yaml",
+            "dist/manifest.json",
+            "dist/targets/openai/adapter.json",
+            "evidence/world_class/README.md",
+            "security/permission_policy.json",
+            REQUIRED_REPORTS["world_class_ledger"],
+        ],
+        detail="The overclaim guard must scan package manifests, adapter metadata, security policy, and ledger surfaces before public readiness can be trusted.",
     )
     skill_os2_review = text_reports.get("skill_os2_review", "")
     ci_target_count = ci_default_target_count(skill_dir / "scripts" / "ci_test.py")

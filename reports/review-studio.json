@@ -1676,7 +1676,7 @@
         "ok": true,
         "summary": {
           "reproducibility_ready": true,
-          "release_lock_ready": true,
+          "release_lock_ready": false,
           "methodology_complete": true,
           "required_artifact_count": 24,
           "missing_artifact_count": 0,
@@ -1700,11 +1700,11 @@
           "world_class_source_pass_count": 6,
           "world_class_source_blocked_count": 7,
           "public_claim_ready": false,
-          "public_claim_blocker_count": 4,
-          "working_tree_dirty": false,
-          "changed_file_count": 0
+          "public_claim_blocker_count": 5,
+          "working_tree_dirty": true,
+          "changed_file_count": 2
         },
-        "commit": "ae5ce88ea7f4d002670ce9d3cb2bb339017902d7",
+        "commit": "cd933046c840affafa98edff697a2d0f68afd71e",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -1809,7 +1809,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 197,
-        "package_sha256": "30502ca01a3d74140f6ad23d9d5fd499a8c80dcd4b8428ad1c9a812d2e3f9b5e"
+        "package_sha256": "002cb9e43ee22c7ba2a59422e4e123fb801242506a1a189b9a8bc8ad7d71f7f8"
       },
       "skill_atlas": {
         "skill_count": 12,
@@ -1847,8 +1847,8 @@
           "trust_level": "local",
           "license": "MIT",
           "checksums": {
-            "package_sha256": "30502ca01a3d74140f6ad23d9d5fd499a8c80dcd4b8428ad1c9a812d2e3f9b5e",
-            "archive_sha256": "f1c499c597e88a4e1121d3464f5bcedfff2530128edf7a81f95602dda53e1874"
+            "package_sha256": "002cb9e43ee22c7ba2a59422e4e123fb801242506a1a189b9a8bc8ad7d71f7f8",
+            "archive_sha256": "eddf1d422b1ad8d50dc0b49f0525c33010e4fe7db31a4c605dcd68c33adf56e8"
           },
           "compatibility": {
             "openai": "pass",
@@ -1879,7 +1879,7 @@
           },
           "distribution": {
             "archive_verified": true,
-            "archive_sha256": "f1c499c597e88a4e1121d3464f5bcedfff2530128edf7a81f95602dda53e1874",
+            "archive_sha256": "eddf1d422b1ad8d50dc0b49f0525c33010e4fe7db31a4c605dcd68c33adf56e8",
             "package_verification": "reports/package_verification.json",
             "install_simulated": true,
             "install_simulation": "reports/install_simulation.json"
@@ -1895,7 +1895,7 @@
           "target_count": 4,
           "adapter_count": 4,
           "archive_present": true,
-          "archive_sha256": "f1c499c597e88a4e1121d3464f5bcedfff2530128edf7a81f95602dda53e1874",
+          "archive_sha256": "eddf1d422b1ad8d50dc0b49f0525c33010e4fe7db31a4c605dcd68c33adf56e8",
           "archive_entry_count": 617,
           "failure_count": 0,
           "warning_count": 0
@@ -1974,12 +1974,12 @@
             {
               "field": "archive_sha256",
               "from": "",
-              "to": "f1c499c597e88a4e1121d3464f5bcedfff2530128edf7a81f95602dda53e1874"
+              "to": "eddf1d422b1ad8d50dc0b49f0525c33010e4fe7db31a4c605dcd68c33adf56e8"
             },
             {
               "field": "package_sha256",
               "from": "0000000000000000000000000000000000000000000000000000000000000000",
-              "to": "30502ca01a3d74140f6ad23d9d5fd499a8c80dcd4b8428ad1c9a812d2e3f9b5e"
+              "to": "002cb9e43ee22c7ba2a59422e4e123fb801242506a1a189b9a8bc8ad7d71f7f8"
             }
           ]
         },
@@ -4346,7 +4346,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 27.58,
+          "duration_ms": 27.02,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4374,7 +4374,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.04,
+          "duration_ms": 25.98,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4397,7 +4397,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.21,
+          "duration_ms": 25.78,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4425,7 +4425,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 29.32,
+          "duration_ms": 29.05,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4448,7 +4448,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 29.89,
+          "duration_ms": 29.11,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4476,7 +4476,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 27.45,
+          "duration_ms": 27.39,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4499,7 +4499,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.34,
+          "duration_ms": 26.01,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4526,7 +4526,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.11,
+          "duration_ms": 26.1,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4549,7 +4549,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.19,
+          "duration_ms": 26.37,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4578,7 +4578,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.05,
+          "duration_ms": 26.29,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -5299,17 +5299,20 @@
       "ok": true,
       "generated_at": "2026-06-16",
       "skill_dir": ".",
-      "commit": "ae5ce88ea7f4d002670ce9d3cb2bb339017902d7",
+      "commit": "cd933046c840affafa98edff697a2d0f68afd71e",
       "git_status": {
         "available": true,
-        "dirty": false,
-        "changed_file_count": 0,
-        "sample": [],
+        "dirty": true,
+        "changed_file_count": 2,
+        "sample": [
+          " M scripts/render_evidence_consistency.py",
+          " M tests/verify_evidence_consistency.py"
+        ],
         "scope": "generation-time status before this report is written"
       },
       "summary": {
         "reproducibility_ready": true,
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "methodology_complete": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
@@ -5333,14 +5336,15 @@
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4,
-        "working_tree_dirty": false,
-        "changed_file_count": 0
+        "public_claim_blocker_count": 5,
+        "working_tree_dirty": true,
+        "changed_file_count": 2
       },
       "public_claim": {
         "ready": false,
         "scope": "public benchmark or world-class readiness claim",
         "blockers": [
+          "release lock is not clean or commit is unavailable",
           "provider-backed model holdout evidence is incomplete",
           "human blind-review adjudication is incomplete",
           "world-class evidence is not accepted yet (4 open gaps, 4 ledger pending)",
@@ -5349,10 +5353,10 @@
         "policy": "Local reproducibility can pass before public claims; public claims require provider evidence, human adjudication, clean release lock, accepted world-class evidence, and complete source checks."
       },
       "release_lock": {
-        "ready": true,
-        "commit": "ae5ce88ea7f4d002670ce9d3cb2bb339017902d7",
+        "ready": false,
+        "commit": "cd933046c840affafa98edff697a2d0f68afd71e",
         "status_scope": "generation-time status before this report is written",
-        "reason": "clean generation-time HEAD"
+        "reason": "working tree was dirty at generation time"
       },
       "evidence_bundle": {
         "algorithm": "sha256(path,label,exists,artifact_sha256)",
@@ -11412,7 +11416,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 197,
-        "package_sha256": "30502ca01a3d74140f6ad23d9d5fd499a8c80dcd4b8428ad1c9a812d2e3f9b5e"
+        "package_sha256": "002cb9e43ee22c7ba2a59422e4e123fb801242506a1a189b9a8bc8ad7d71f7f8"
       },
       "failures": [],
       "warnings": [],
@@ -20438,8 +20442,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "30502ca01a3d74140f6ad23d9d5fd499a8c80dcd4b8428ad1c9a812d2e3f9b5e",
-          "archive_sha256": "f1c499c597e88a4e1121d3464f5bcedfff2530128edf7a81f95602dda53e1874"
+          "package_sha256": "002cb9e43ee22c7ba2a59422e4e123fb801242506a1a189b9a8bc8ad7d71f7f8",
+          "archive_sha256": "eddf1d422b1ad8d50dc0b49f0525c33010e4fe7db31a4c605dcd68c33adf56e8"
         },
         "compatibility": {
           "openai": "pass",
@@ -20470,7 +20474,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "f1c499c597e88a4e1121d3464f5bcedfff2530128edf7a81f95602dda53e1874",
+          "archive_sha256": "eddf1d422b1ad8d50dc0b49f0525c33010e4fe7db31a4c605dcd68c33adf56e8",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -20495,7 +20499,7 @@
               "vscode"
             ],
             "package_metadata": "registry/packages/yao-meta-skill.json",
-            "package_sha256": "30502ca01a3d74140f6ad23d9d5fd499a8c80dcd4b8428ad1c9a812d2e3f9b5e"
+            "package_sha256": "002cb9e43ee22c7ba2a59422e4e123fb801242506a1a189b9a8bc8ad7d71f7f8"
           }
         ]
       },
@@ -20518,7 +20522,7 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "f1c499c597e88a4e1121d3464f5bcedfff2530128edf7a81f95602dda53e1874",
+        "archive_sha256": "eddf1d422b1ad8d50dc0b49f0525c33010e4fe7db31a4c605dcd68c33adf56e8",
         "archive_entry_count": 617,
         "failure_count": 0,
         "warning_count": 0
@@ -21526,12 +21530,12 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "f1c499c597e88a4e1121d3464f5bcedfff2530128edf7a81f95602dda53e1874"
+            "to": "eddf1d422b1ad8d50dc0b49f0525c33010e4fe7db31a4c605dcd68c33adf56e8"
           },
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "30502ca01a3d74140f6ad23d9d5fd499a8c80dcd4b8428ad1c9a812d2e3f9b5e"
+            "to": "002cb9e43ee22c7ba2a59422e4e123fb801242506a1a189b9a8bc8ad7d71f7f8"
           }
         ]
       },

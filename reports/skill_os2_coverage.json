@@ -613,7 +613,7 @@
       "label": "Evidence Consistency",
       "status": "pass",
       "objective": "Recommended Skill OS 2.0 implementation PR from the upgrade plan.",
-      "current": "27 consistency checks",
+      "current": "28 consistency checks",
       "command": "make ci-test",
       "test": "tests/verify_evidence_consistency.py",
       "evidence": [
