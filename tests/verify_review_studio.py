@@ -478,12 +478,33 @@ def main() -> None:
         "evidence/world_class/intake.schema.json",
         "evidence/world_class/templates/provider-holdout.intake.json",
         "evidence/world_class/templates/human-adjudication.intake.json",
+        "evidence/world_class/templates/native-permission-enforcement.intake.json",
+        "evidence/world_class/templates/native-client-telemetry.intake.json",
         "reports/skill_os2_audit.md",
     }, world_class_action
     assert all(item["exists"] for item in world_class_action["source_refs"]), world_class_action
     assert "world-class-runbook" in world_class_action["verification_command"], world_class_action
     assert "--submissions-dir evidence/world_class/submissions" in world_class_action["verification_command"], world_class_action
     assert "reports/world_class_operator_runbook.html" in world_class_action["source_fix"], world_class_action
+    assert {item["key"] for item in world_class_action["evidence_steps"]} == {
+        "provider-holdout",
+        "human-adjudication",
+        "native-permission-enforcement",
+        "native-client-telemetry",
+    }, world_class_action
+    provider_action_step = next(item for item in world_class_action["evidence_steps"] if item["key"] == "provider-holdout")
+    assert provider_action_step["status"] == "pending", provider_action_step
+    assert provider_action_step["readiness"] == "awaiting-submission", provider_action_step
+    assert provider_action_step["submission_path"] == "evidence/world_class/submissions/provider-holdout.json", provider_action_step
+    assert provider_action_step["template_path"] == "evidence/world_class/templates/provider-holdout.intake.json", provider_action_step
+    assert provider_action_step["source_blocked_count"] == 2, provider_action_step
+    assert {item["label"] for item in provider_action_step["blocked_checks"]} == {
+        "Provider model run",
+        "Token usage observed",
+    }, provider_action_step
+    assert any("world-class-intake" in item["command"] for item in provider_action_step["commands"]), provider_action_step
+    assert any("world-class-ledger" in item["command"] for item in provider_action_step["commands"]), provider_action_step
+    assert any("output-exec --provider-runner openai" in item for item in provider_action_step["runbook"]), provider_action_step
     assert full_payload["data"]["world_class_evidence_ledger"]["summary"]["pending_count"] == 4, full_payload["data"]["world_class_evidence_ledger"]
     assert full_payload["data"]["world_class_evidence_intake"]["summary"]["decision"] == "awaiting-submissions", full_payload["data"]["world_class_evidence_intake"]
     assert full_payload["data"]["world_class_submission_review"]["summary"]["decision"] == "awaiting-submissions", full_payload["data"]["world_class_submission_review"]
@@ -575,6 +596,13 @@ def main() -> None:
     assert "python3 scripts/adjudicate_output_review.py --write-template" in html, html[:9000]
     assert "对保留的 warning 写入 reviewer、理由、范围和到期时间，或修掉 warning。" in html, html[:9000]
     assert "补齐 provider、真人盲评、原生权限执行和真实客户端遥测证据" in html, html
+    assert "action-card warn with-evidence" in html, html
+    assert "action-evidence-panel" in html, html
+    assert "证据采集" in html, html
+    assert "action-evidence-grid" in html, html
+    assert "action-evidence-checks" in html, html
+    assert "action-command-list" in html, html
+    assert "action-runbook-list" in html, html
     assert "世界证据" in html, html
     assert "证据台账" in html, html
     assert "证据入口" in html, html
@@ -587,7 +615,11 @@ def main() -> None:
     assert "收集要求" in html, html
     assert "通过条件" in html, html
     assert "evidence/world_class/submissions/provider-holdout.json" in html, html
+    assert "evidence/world_class/templates/provider-holdout.intake.json" in html, html
+    assert "Native Client Telemetry" in html, html
+    assert "native-client-telemetry.json" in html, html
     assert "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions" in html, html
+    assert "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions" in html, html
     assert "intake 只校验证据包格式、来源、隐私和反过度声明" in html, html
     assert "reports/world_class_evidence_intake.md" in html, html
     assert "reports/world_class_operator_runbook.html" in html, html

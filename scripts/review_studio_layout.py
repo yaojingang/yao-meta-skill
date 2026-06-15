@@ -191,6 +191,130 @@ def review_studio_css() -> str:
     }
     .action-card.warn { border-left: 4px solid var(--warn); }
     .action-card.block { border-left: 4px solid var(--block); }
+    .action-card.with-evidence {
+      grid-column: 1 / -1;
+    }
+    .action-evidence-panel {
+      display: grid;
+      gap: 12px;
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+      margin-top: 2px;
+    }
+    .action-evidence-panel h4 {
+      margin: 0;
+      color: var(--ink);
+      font-size: 16px;
+      font-weight: 500;
+    }
+    .action-evidence-panel p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .action-evidence-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .action-evidence-item {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+      min-width: 0;
+      background: var(--soft);
+    }
+    .action-evidence-item.pending { border-left: 4px solid var(--warn); }
+    .action-evidence-item.accepted { border-left: 4px solid var(--pass); }
+    .action-evidence-item h4,
+    .action-evidence-item h5 {
+      margin: 0;
+      color: var(--ink);
+      font-weight: 500;
+    }
+    .action-evidence-item h4 { font-size: 16px; }
+    .action-evidence-item h5 { font-size: 14px; }
+    .action-evidence-item section {
+      border-top: 1px solid var(--line);
+      padding-top: 10px;
+      display: grid;
+      gap: 8px;
+    }
+    .action-command-details,
+    .action-runbook-details {
+      border-top: 1px solid var(--line);
+      padding-top: 10px;
+      display: grid;
+      gap: 8px;
+    }
+    .action-command-details summary,
+    .action-runbook-details summary {
+      cursor: pointer;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .action-command-details[open] summary,
+    .action-runbook-details[open] summary {
+      margin-bottom: 8px;
+    }
+    .action-evidence-item dl {
+      display: grid;
+      grid-template-columns: 76px minmax(0, 1fr);
+      gap: 6px 10px;
+      margin: 0;
+    }
+    .action-evidence-item dt {
+      color: var(--ink);
+      font-size: 14px;
+    }
+    .action-evidence-item dd {
+      margin: 0;
+      min-width: 0;
+    }
+    .action-evidence-checks,
+    .action-command-list,
+    .action-runbook-list {
+      margin: 0;
+      display: grid;
+      gap: 8px;
+    }
+    .action-evidence-checks,
+    .action-command-list {
+      padding: 0;
+      list-style: none;
+    }
+    .action-runbook-list {
+      padding-left: 20px;
+    }
+    .action-evidence-check,
+    .action-command-list li {
+      display: grid;
+      gap: 3px;
+      min-width: 0;
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+    }
+    .action-evidence-check.blocked { border-left: 3px solid var(--warn); padding-left: 8px; }
+    .action-evidence-check.pass { border-left: 3px solid var(--pass); padding-left: 8px; }
+    .action-evidence-check span,
+    .action-command-list span {
+      color: var(--ink);
+      font-size: 13px;
+    }
+    .action-evidence-check code,
+    .action-evidence-check small,
+    .action-command-list code,
+    .action-runbook-list li {
+      color: var(--muted);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+    .action-command-list code {
+      display: block;
+      white-space: normal;
+    }
     .annotation-card {
       border: 1px solid var(--line);
       border-radius: 8px;
@@ -562,7 +686,7 @@ def review_studio_css() -> str:
       font-size: 13px;
     }
     @media (max-width: 980px) {
-      .metrics, .gates, .twocol, .actions-grid, .annotations-grid, .output-review-grid, .output-review-steps, .world-evidence-grid, .world-evidence-columns, .world-source-check, .world-intake-grid, .world-intake-steps, .waiver-candidate-grid, .waiver-card dl, .kv-grid { grid-template-columns: 1fr; }
+      .metrics, .gates, .twocol, .actions-grid, .annotations-grid, .action-evidence-grid, .action-evidence-item dl, .output-review-grid, .output-review-steps, .world-evidence-grid, .world-evidence-columns, .world-source-check, .world-intake-grid, .world-intake-steps, .waiver-candidate-grid, .waiver-card dl, .kv-grid { grid-template-columns: 1fr; }
       main { padding: 32px 18px 60px; }
       nav { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; }
       nav a { flex: 0 0 auto; }

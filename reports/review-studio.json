@@ -232,7 +232,8 @@
       ],
       "evidence": "reports/output_quality_scorecard.json",
       "evidence_link": "output_quality_scorecard.md",
-      "verification_command": "python3 scripts/adjudicate_output_review.py --write-template && python3 scripts/yao.py output-review"
+      "verification_command": "python3 scripts/adjudicate_output_review.py --write-template && python3 scripts/yao.py output-review",
+      "evidence_steps": []
     },
     {
       "gate_key": "review-waivers",
@@ -262,7 +263,8 @@
       ],
       "evidence": "reports/review_waivers.json",
       "evidence_link": "review_waivers.md",
-      "verification_command": "python3 scripts/render_review_waivers.py ."
+      "verification_command": "python3 scripts/render_review_waivers.py .",
+      "evidence_steps": []
     },
     {
       "gate_key": "world-class-evidence",
@@ -338,6 +340,22 @@
           "link": "../evidence/world_class/templates/human-adjudication.intake.json"
         },
         {
+          "path": "evidence/world_class/templates/native-permission-enforcement.intake.json",
+          "label": "permission intake template",
+          "kind": "template",
+          "line": 3,
+          "exists": true,
+          "link": "../evidence/world_class/templates/native-permission-enforcement.intake.json"
+        },
+        {
+          "path": "evidence/world_class/templates/native-client-telemetry.intake.json",
+          "label": "telemetry intake template",
+          "kind": "template",
+          "line": 3,
+          "exists": true,
+          "link": "../evidence/world_class/templates/native-client-telemetry.intake.json"
+        },
+        {
           "path": "reports/skill_os2_audit.md",
           "label": "Skill OS 2.0 audit",
           "kind": "report",
@@ -372,7 +390,253 @@
       ],
       "evidence": "reports/world_class_evidence_ledger.json",
       "evidence_link": "world_class_evidence_ledger.md",
-      "verification_command": "python3 scripts/yao.py world-class-runbook . --submissions-dir evidence/world_class/submissions && python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions && python3 scripts/yao.py review-studio ."
+      "verification_command": "python3 scripts/yao.py world-class-runbook . --submissions-dir evidence/world_class/submissions && python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions && python3 scripts/yao.py review-studio .",
+      "evidence_steps": [
+        {
+          "key": "provider-holdout",
+          "label": "Provider Holdout",
+          "category": "external",
+          "status": "pending",
+          "readiness": "awaiting-submission",
+          "current": "model-executed 0; token-observed 0",
+          "next_action": "Run provider-backed holdout cases with real credentials and commit only aggregate evidence.",
+          "submission_path": "evidence/world_class/submissions/provider-holdout.json",
+          "template_path": "evidence/world_class/templates/provider-holdout.intake.json",
+          "source_pass_count": 1,
+          "source_blocked_count": 2,
+          "blocked_checks": [
+            {
+              "label": "Provider model run",
+              "field": "model_executed_count",
+              "actual": 0,
+              "expected": ">0",
+              "status": "blocked",
+              "next_action": "Run provider-backed output-exec with real credentials."
+            },
+            {
+              "label": "Token usage observed",
+              "field": "token_observed_count",
+              "actual": 0,
+              "expected": ">0",
+              "status": "blocked",
+              "next_action": "Provider execution should return non-estimated token usage."
+            }
+          ],
+          "commands": [
+            {
+              "key": "prepare_submission",
+              "label": "准备提交",
+              "command": "python3 scripts/yao.py world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions"
+            },
+            {
+              "key": "validate_intake",
+              "label": "校验入口",
+              "command": "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
+            },
+            {
+              "key": "submission_review",
+              "label": "审查提交",
+              "command": "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions"
+            },
+            {
+              "key": "refresh_ledger",
+              "label": "刷新台账",
+              "command": "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions"
+            },
+            {
+              "key": "guard_claim",
+              "label": "声明守卫",
+              "command": "python3 scripts/yao.py world-class-claim-guard ."
+            }
+          ],
+          "runbook": [
+            "YAO_OUTPUT_EVAL_MODEL=gpt-4.1-mini OPENAI_API_KEY=<redacted> python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60",
+            "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
+            "Copy evidence/world_class/templates/provider-holdout.intake.json to evidence/world_class/submissions/provider-holdout.json and fill only real evidence fields."
+          ]
+        },
+        {
+          "key": "human-adjudication",
+          "label": "Human Adjudication",
+          "category": "human",
+          "status": "pending",
+          "readiness": "awaiting-submission",
+          "current": "0/5 decisions; pending 5",
+          "next_action": "Record real A/B choices in the decision template, then regenerate adjudication.",
+          "submission_path": "evidence/world_class/submissions/human-adjudication.json",
+          "template_path": "evidence/world_class/templates/human-adjudication.intake.json",
+          "source_pass_count": 2,
+          "source_blocked_count": 2,
+          "blocked_checks": [
+            {
+              "label": "No pending decisions",
+              "field": "pending_count",
+              "actual": 5,
+              "expected": "==0",
+              "status": "blocked",
+              "next_action": "Record a reviewer choice for every pair."
+            },
+            {
+              "label": "Judgments complete",
+              "field": "judgment_count",
+              "actual": 0,
+              "expected": "==pair_count",
+              "status": "blocked",
+              "next_action": "Every pair needs one valid human judgment."
+            }
+          ],
+          "commands": [
+            {
+              "key": "prepare_submission",
+              "label": "准备提交",
+              "command": "python3 scripts/yao.py world-class-submission-kit . --evidence-key human-adjudication --output-dir evidence/world_class/submissions"
+            },
+            {
+              "key": "validate_intake",
+              "label": "校验入口",
+              "command": "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
+            },
+            {
+              "key": "submission_review",
+              "label": "审查提交",
+              "command": "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions"
+            },
+            {
+              "key": "refresh_ledger",
+              "label": "刷新台账",
+              "command": "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions"
+            },
+            {
+              "key": "guard_claim",
+              "label": "声明守卫",
+              "command": "python3 scripts/yao.py world-class-claim-guard ."
+            }
+          ],
+          "runbook": [
+            "python3 scripts/yao.py output-review-kit --write-template",
+            "Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.",
+            "python3 scripts/adjudicate_output_review.py --write-template"
+          ]
+        },
+        {
+          "key": "native-permission-enforcement",
+          "label": "Native Permission Enforcement",
+          "category": "external",
+          "status": "pending",
+          "readiness": "awaiting-submission",
+          "current": "native-enforced targets 0; installer-enforced targets 4",
+          "next_action": "Integrate a real target-client or external installer runtime guard before claiming native permission enforcement.",
+          "submission_path": "evidence/world_class/submissions/native-permission-enforcement.json",
+          "template_path": "evidence/world_class/templates/native-permission-enforcement.intake.json",
+          "source_pass_count": 2,
+          "source_blocked_count": 1,
+          "blocked_checks": [
+            {
+              "label": "Native enforcement",
+              "field": "native_enforcement_count",
+              "actual": 0,
+              "expected": ">0",
+              "status": "blocked",
+              "next_action": "Collect real target-client or external runtime guard proof."
+            }
+          ],
+          "commands": [
+            {
+              "key": "prepare_submission",
+              "label": "准备提交",
+              "command": "python3 scripts/yao.py world-class-submission-kit . --evidence-key native-permission-enforcement --output-dir evidence/world_class/submissions"
+            },
+            {
+              "key": "validate_intake",
+              "label": "校验入口",
+              "command": "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
+            },
+            {
+              "key": "submission_review",
+              "label": "审查提交",
+              "command": "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions"
+            },
+            {
+              "key": "refresh_ledger",
+              "label": "刷新台账",
+              "command": "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions"
+            },
+            {
+              "key": "guard_claim",
+              "label": "声明守卫",
+              "command": "python3 scripts/yao.py world-class-claim-guard ."
+            }
+          ],
+          "runbook": [
+            "Implement or connect a real target client or external installer runtime guard that blocks undeclared network, file_write, or subprocess capabilities.",
+            "Update the generated target adapter only when the guard is actually enforced by that target.",
+            "python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip"
+          ]
+        },
+        {
+          "key": "native-client-telemetry",
+          "label": "Native Client Telemetry",
+          "category": "external",
+          "status": "pending",
+          "readiness": "awaiting-submission",
+          "current": "external source events 0; adoption samples 0",
+          "next_action": "Install a real client against the native host and import production metadata-only events.",
+          "submission_path": "evidence/world_class/submissions/native-client-telemetry.json",
+          "template_path": "evidence/world_class/templates/native-client-telemetry.intake.json",
+          "source_pass_count": 1,
+          "source_blocked_count": 2,
+          "blocked_checks": [
+            {
+              "label": "External events",
+              "field": "external_source_events",
+              "actual": 0,
+              "expected": ">0",
+              "status": "blocked",
+              "next_action": "Import at least one metadata-only event from a real client."
+            },
+            {
+              "label": "Adoption sample",
+              "field": "adoption_sample_count",
+              "actual": 0,
+              "expected": ">0",
+              "status": "blocked",
+              "next_action": "Telemetry must include adoption outcome evidence."
+            }
+          ],
+          "commands": [
+            {
+              "key": "prepare_submission",
+              "label": "准备提交",
+              "command": "python3 scripts/yao.py world-class-submission-kit . --evidence-key native-client-telemetry --output-dir evidence/world_class/submissions"
+            },
+            {
+              "key": "validate_intake",
+              "label": "校验入口",
+              "command": "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
+            },
+            {
+              "key": "submission_review",
+              "label": "审查提交",
+              "command": "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions"
+            },
+            {
+              "key": "refresh_ledger",
+              "label": "刷新台账",
+              "command": "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions"
+            },
+            {
+              "key": "guard_claim",
+              "label": "声明守卫",
+              "command": "python3 scripts/yao.py world-class-claim-guard ."
+            }
+          ],
+          "runbook": [
+            "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
+            "Install the generated native messaging manifest for the real client and send at least one accepted skill_activation or skill_output event.",
+            "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl"
+          ]
+        }
+      ]
     }
   ],
   "evidence_paths": {

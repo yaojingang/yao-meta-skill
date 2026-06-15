@@ -158,6 +158,130 @@
     }
     .action-card.warn { border-left: 4px solid var(--warn); }
     .action-card.block { border-left: 4px solid var(--block); }
+    .action-card.with-evidence {
+      grid-column: 1 / -1;
+    }
+    .action-evidence-panel {
+      display: grid;
+      gap: 12px;
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+      margin-top: 2px;
+    }
+    .action-evidence-panel h4 {
+      margin: 0;
+      color: var(--ink);
+      font-size: 16px;
+      font-weight: 500;
+    }
+    .action-evidence-panel p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .action-evidence-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .action-evidence-item {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+      min-width: 0;
+      background: var(--soft);
+    }
+    .action-evidence-item.pending { border-left: 4px solid var(--warn); }
+    .action-evidence-item.accepted { border-left: 4px solid var(--pass); }
+    .action-evidence-item h4,
+    .action-evidence-item h5 {
+      margin: 0;
+      color: var(--ink);
+      font-weight: 500;
+    }
+    .action-evidence-item h4 { font-size: 16px; }
+    .action-evidence-item h5 { font-size: 14px; }
+    .action-evidence-item section {
+      border-top: 1px solid var(--line);
+      padding-top: 10px;
+      display: grid;
+      gap: 8px;
+    }
+    .action-command-details,
+    .action-runbook-details {
+      border-top: 1px solid var(--line);
+      padding-top: 10px;
+      display: grid;
+      gap: 8px;
+    }
+    .action-command-details summary,
+    .action-runbook-details summary {
+      cursor: pointer;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .action-command-details[open] summary,
+    .action-runbook-details[open] summary {
+      margin-bottom: 8px;
+    }
+    .action-evidence-item dl {
+      display: grid;
+      grid-template-columns: 76px minmax(0, 1fr);
+      gap: 6px 10px;
+      margin: 0;
+    }
+    .action-evidence-item dt {
+      color: var(--ink);
+      font-size: 14px;
+    }
+    .action-evidence-item dd {
+      margin: 0;
+      min-width: 0;
+    }
+    .action-evidence-checks,
+    .action-command-list,
+    .action-runbook-list {
+      margin: 0;
+      display: grid;
+      gap: 8px;
+    }
+    .action-evidence-checks,
+    .action-command-list {
+      padding: 0;
+      list-style: none;
+    }
+    .action-runbook-list {
+      padding-left: 20px;
+    }
+    .action-evidence-check,
+    .action-command-list li {
+      display: grid;
+      gap: 3px;
+      min-width: 0;
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+    }
+    .action-evidence-check.blocked { border-left: 3px solid var(--warn); padding-left: 8px; }
+    .action-evidence-check.pass { border-left: 3px solid var(--pass); padding-left: 8px; }
+    .action-evidence-check span,
+    .action-command-list span {
+      color: var(--ink);
+      font-size: 13px;
+    }
+    .action-evidence-check code,
+    .action-evidence-check small,
+    .action-command-list code,
+    .action-runbook-list li {
+      color: var(--muted);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+    .action-command-list code {
+      display: block;
+      white-space: normal;
+    }
     .annotation-card {
       border: 1px solid var(--line);
       border-radius: 8px;
@@ -529,7 +653,7 @@
       font-size: 13px;
     }
     @media (max-width: 980px) {
-      .metrics, .gates, .twocol, .actions-grid, .annotations-grid, .output-review-grid, .output-review-steps, .world-evidence-grid, .world-evidence-columns, .world-source-check, .world-intake-grid, .world-intake-steps, .waiver-candidate-grid, .waiver-card dl, .kv-grid { grid-template-columns: 1fr; }
+      .metrics, .gates, .twocol, .actions-grid, .annotations-grid, .action-evidence-grid, .action-evidence-item dl, .output-review-grid, .output-review-steps, .world-evidence-grid, .world-evidence-columns, .world-source-check, .world-intake-grid, .world-intake-steps, .waiver-candidate-grid, .waiver-card dl, .kv-grid { grid-template-columns: 1fr; }
       main { padding: 32px 18px 60px; }
       nav { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; }
       nav a { flex: 0 0 auto; }
@@ -567,7 +691,7 @@
 
     <section id="actions">
       <h2>修复动作</h2>
-      <div class="actions-grid"><article class='action-card warn'><div><span>关注</span><h3>输出实验</h3></div><p>补足 output eval 覆盖、execution evidence、blind A/B 和 reviewer adjudication。</p><small>没有输出质量和人工盲评证据时，Skill 只能证明会触发，不能证明输出真的更好且经得起审查。</small><dl><dt>修复位置</dt><dd>evals/output/cases.jsonl + reports/output_quality_scorecard.md + reports/output_review_kit.html + reports/output_review_adjudication.md</dd><dt>验证命令</dt><dd><code>python3 scripts/adjudicate_output_review.py --write-template &amp;&amp; python3 scripts/yao.py output-review</code></dd></dl><ul class='source-ref-list'><li><a href='../evals/output/cases.jsonl'>evals/output/cases.jsonl:1</a><small>output eval cases · eval</small></li><li><a href='output_quality_scorecard.md'>reports/output_quality_scorecard.md:1</a><small>output scorecard · report</small></li><li><a href='output_execution_runs.md'>reports/output_execution_runs.md:1</a><small>output execution runs · report</small></li><li><a href='output_blind_review_pack.md'>reports/output_blind_review_pack.md:1</a><small>blind A/B review pack · report</small></li><li><a href='output_review_kit.html'>reports/output_review_kit.html:6</a><small>reviewer cockpit · report</small></li><li><a href='output_review_adjudication.md'>reports/output_review_adjudication.md:1</a><small>review adjudication · report</small></li></ul><footer>reports/output_quality_scorecard.json <a href='output_quality_scorecard.md'>打开证据</a></footer></article><article class='action-card warn'><div><span>关注</span><h3>人工批准</h3></div><p>对保留的 warning 写入 reviewer、理由、范围和到期时间，或修掉 warning。</p><small>warning 可以被接受，但必须可审计、会过期，并且不能掩盖 blocker。</small><dl><dt>修复位置</dt><dd>reports/review_waivers.md</dd><dt>验证命令</dt><dd><code>python3 scripts/render_review_waivers.py .</code></dd></dl><ul class='source-ref-list'><li><a href='review_waivers.md'>reports/review_waivers.md:1</a><small>waiver ledger · report</small></li><li><a href='../references/review-waiver-method.md'>references/review-waiver-method.md:1</a><small>waiver method · method</small></li></ul><footer>reports/review_waivers.json <a href='review_waivers.md'>打开证据</a></footer></article><article class='action-card warn'><div><span>关注</span><h3>世界证据</h3></div><p>补齐 provider、真人盲评、原生权限执行和真实客户端遥测证据，或明确本次发布不声明 world-class 完成。</p><small>世界级结论必须来自已接受的外部/人工证据；计划、metadata fallback、待评审和本地命令都不能替代完成证据。</small><dl><dt>修复位置</dt><dd>reports/world_class_operator_runbook.html + reports/world_class_evidence_ledger.md + reports/world_class_evidence_intake.md + reports/world_class_submission_review.md</dd><dt>验证命令</dt><dd><code>python3 scripts/yao.py world-class-runbook . --submissions-dir evidence/world_class/submissions &amp;&amp; python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions &amp;&amp; python3 scripts/yao.py review-studio .</code></dd></dl><ul class='source-ref-list'><li><a href='world_class_evidence_ledger.md'>reports/world_class_evidence_ledger.md:1</a><small>world-class evidence ledger · report</small></li><li><a href='world_class_evidence_plan.md'>reports/world_class_evidence_plan.md:1</a><small>world-class evidence plan · report</small></li><li><a href='world_class_evidence_intake.md'>reports/world_class_evidence_intake.md:1</a><small>world-class evidence intake · report</small></li><li><a href='world_class_submission_review.md'>reports/world_class_submission_review.md:1</a><small>world-class submission review · report</small></li><li><a href='world_class_claim_guard.md'>reports/world_class_claim_guard.md:1</a><small>world-class claim guard · report</small></li><li><a href='../evidence/world_class/intake.schema.json'>evidence/world_class/intake.schema.json:4</a><small>evidence intake schema · schema</small></li><li><a href='../evidence/world_class/templates/provider-holdout.intake.json'>evidence/world_class/templates/provider-holdout.intake.json:3</a><small>provider intake template · template</small></li><li><a href='../evidence/world_class/templates/human-adjudication.intake.json'>evidence/world_class/templates/human-adjudication.intake.json:3</a><small>human intake template · template</small></li><li><a href='skill_os2_audit.md'>reports/skill_os2_audit.md:1</a><small>Skill OS 2.0 audit · report</small></li><li><a href='output_review_decisions.json'>reports/output_review_decisions.json:6</a><small>human review decisions · report</small></li><li><a href='runtime_permission_probes.md'>reports/runtime_permission_probes.md:1</a><small>runtime permission probes · report</small></li><li><a href='adoption_drift_report.md'>reports/adoption_drift_report.md:1</a><small>adoption drift · report</small></li></ul><footer>reports/world_class_evidence_ledger.json <a href='world_class_evidence_ledger.md'>打开证据</a></footer></article></div>
+      <div class="actions-grid"><article class='action-card warn'><div><span>关注</span><h3>输出实验</h3></div><p>补足 output eval 覆盖、execution evidence、blind A/B 和 reviewer adjudication。</p><small>没有输出质量和人工盲评证据时，Skill 只能证明会触发，不能证明输出真的更好且经得起审查。</small><dl><dt>修复位置</dt><dd>evals/output/cases.jsonl + reports/output_quality_scorecard.md + reports/output_review_kit.html + reports/output_review_adjudication.md</dd><dt>验证命令</dt><dd><code>python3 scripts/adjudicate_output_review.py --write-template &amp;&amp; python3 scripts/yao.py output-review</code></dd></dl><ul class='source-ref-list'><li><a href='../evals/output/cases.jsonl'>evals/output/cases.jsonl:1</a><small>output eval cases · eval</small></li><li><a href='output_quality_scorecard.md'>reports/output_quality_scorecard.md:1</a><small>output scorecard · report</small></li><li><a href='output_execution_runs.md'>reports/output_execution_runs.md:1</a><small>output execution runs · report</small></li><li><a href='output_blind_review_pack.md'>reports/output_blind_review_pack.md:1</a><small>blind A/B review pack · report</small></li><li><a href='output_review_kit.html'>reports/output_review_kit.html:6</a><small>reviewer cockpit · report</small></li><li><a href='output_review_adjudication.md'>reports/output_review_adjudication.md:1</a><small>review adjudication · report</small></li></ul><footer>reports/output_quality_scorecard.json <a href='output_quality_scorecard.md'>打开证据</a></footer></article><article class='action-card warn'><div><span>关注</span><h3>人工批准</h3></div><p>对保留的 warning 写入 reviewer、理由、范围和到期时间，或修掉 warning。</p><small>warning 可以被接受，但必须可审计、会过期，并且不能掩盖 blocker。</small><dl><dt>修复位置</dt><dd>reports/review_waivers.md</dd><dt>验证命令</dt><dd><code>python3 scripts/render_review_waivers.py .</code></dd></dl><ul class='source-ref-list'><li><a href='review_waivers.md'>reports/review_waivers.md:1</a><small>waiver ledger · report</small></li><li><a href='../references/review-waiver-method.md'>references/review-waiver-method.md:1</a><small>waiver method · method</small></li></ul><footer>reports/review_waivers.json <a href='review_waivers.md'>打开证据</a></footer></article><article class='action-card warn with-evidence'><div><span>关注</span><h3>世界证据</h3></div><p>补齐 provider、真人盲评、原生权限执行和真实客户端遥测证据，或明确本次发布不声明 world-class 完成。</p><small>世界级结论必须来自已接受的外部/人工证据；计划、metadata fallback、待评审和本地命令都不能替代完成证据。</small><dl><dt>修复位置</dt><dd>reports/world_class_operator_runbook.html + reports/world_class_evidence_ledger.md + reports/world_class_evidence_intake.md + reports/world_class_submission_review.md</dd><dt>验证命令</dt><dd><code>python3 scripts/yao.py world-class-runbook . --submissions-dir evidence/world_class/submissions &amp;&amp; python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions &amp;&amp; python3 scripts/yao.py review-studio .</code></dd></dl><section class='action-evidence-panel'><h4>证据采集</h4><p>以下条目仍需真实外部或人工证据；提交文件、校验命令和阻断检查必须同时闭环。</p><div class='action-evidence-grid'><article class='action-evidence-item pending'><div><span>pending · external</span><h4>Provider Holdout</h4></div><p>model-executed 0; token-observed 0</p><dl><dt>提交</dt><dd><code>evidence/world_class/submissions/provider-holdout.json</code></dd><dt>模板</dt><dd><code>evidence/world_class/templates/provider-holdout.intake.json</code></dd><dt>阻断</dt><dd>2 blocked / 1 pass</dd><dt>下一步</dt><dd>Run provider-backed holdout cases with real credentials and commit only aggregate evidence.</dd></dl><section><h5>阻断检查</h5><ul class='action-evidence-checks'><li class='action-evidence-check blocked'><span>Provider model run</span><code>model_executed_count: 0 / &gt;0</code><small>Run provider-backed output-exec with real credentials.</small></li><li class='action-evidence-check blocked'><span>Token usage observed</span><code>token_observed_count: 0 / &gt;0</code><small>Provider execution should return non-estimated token usage.</small></li></ul></section><details class='action-command-details'><summary>操作命令</summary><ul class='action-command-list'><li><span>准备提交</span><code>python3 scripts/yao.py world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions</code></li><li><span>校验入口</span><code>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</code></li><li><span>审查提交</span><code>python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions</code></li><li><span>刷新台账</span><code>python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions</code></li></ul></details><details class='action-runbook-details'><summary>首要步骤</summary><ol class='action-runbook-list'><li>YAO_OUTPUT_EVAL_MODEL=gpt-4.1-mini OPENAI_API_KEY=&lt;redacted&gt; python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60</li><li>python3 scripts/yao.py skill-os2-audit . --generated-at &lt;YYYY-MM-DD&gt;</li><li>Copy evidence/world_class/templates/provider-holdout.intake.json to evidence/world_class/submissions/provider-holdout.json and fill only real evidence fields.</li></ol></details></article><article class='action-evidence-item pending'><div><span>pending · human</span><h4>Human Adjudication</h4></div><p>0/5 decisions; pending 5</p><dl><dt>提交</dt><dd><code>evidence/world_class/submissions/human-adjudication.json</code></dd><dt>模板</dt><dd><code>evidence/world_class/templates/human-adjudication.intake.json</code></dd><dt>阻断</dt><dd>2 blocked / 2 pass</dd><dt>下一步</dt><dd>Record real A/B choices in the decision template, then regenerate adjudication.</dd></dl><section><h5>阻断检查</h5><ul class='action-evidence-checks'><li class='action-evidence-check blocked'><span>No pending decisions</span><code>pending_count: 5 / ==0</code><small>Record a reviewer choice for every pair.</small></li><li class='action-evidence-check blocked'><span>Judgments complete</span><code>judgment_count: 0 / ==pair_count</code><small>Every pair needs one valid human judgment.</small></li></ul></section><details class='action-command-details'><summary>操作命令</summary><ul class='action-command-list'><li><span>准备提交</span><code>python3 scripts/yao.py world-class-submission-kit . --evidence-key human-adjudication --output-dir evidence/world_class/submissions</code></li><li><span>校验入口</span><code>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</code></li><li><span>审查提交</span><code>python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions</code></li><li><span>刷新台账</span><code>python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions</code></li></ul></details><details class='action-runbook-details'><summary>首要步骤</summary><ol class='action-runbook-list'><li>python3 scripts/yao.py output-review-kit --write-template</li><li>Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.</li><li>python3 scripts/adjudicate_output_review.py --write-template</li></ol></details></article><article class='action-evidence-item pending'><div><span>pending · external</span><h4>Native Permission Enforcement</h4></div><p>native-enforced targets 0; installer-enforced targets 4</p><dl><dt>提交</dt><dd><code>evidence/world_class/submissions/native-permission-enforcement.json</code></dd><dt>模板</dt><dd><code>evidence/world_class/templates/native-permission-enforcement.intake.json</code></dd><dt>阻断</dt><dd>1 blocked / 2 pass</dd><dt>下一步</dt><dd>Integrate a real target-client or external installer runtime guard before claiming native permission enforcement.</dd></dl><section><h5>阻断检查</h5><ul class='action-evidence-checks'><li class='action-evidence-check blocked'><span>Native enforcement</span><code>native_enforcement_count: 0 / &gt;0</code><small>Collect real target-client or external runtime guard proof.</small></li></ul></section><details class='action-command-details'><summary>操作命令</summary><ul class='action-command-list'><li><span>准备提交</span><code>python3 scripts/yao.py world-class-submission-kit . --evidence-key native-permission-enforcement --output-dir evidence/world_class/submissions</code></li><li><span>校验入口</span><code>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</code></li><li><span>审查提交</span><code>python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions</code></li><li><span>刷新台账</span><code>python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions</code></li></ul></details><details class='action-runbook-details'><summary>首要步骤</summary><ol class='action-runbook-list'><li>Implement or connect a real target client or external installer runtime guard that blocks undeclared network, file_write, or subprocess capabilities.</li><li>Update the generated target adapter only when the guard is actually enforced by that target.</li><li>python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip</li></ol></details></article><article class='action-evidence-item pending'><div><span>pending · external</span><h4>Native Client Telemetry</h4></div><p>external source events 0; adoption samples 0</p><dl><dt>提交</dt><dd><code>evidence/world_class/submissions/native-client-telemetry.json</code></dd><dt>模板</dt><dd><code>evidence/world_class/templates/native-client-telemetry.intake.json</code></dd><dt>阻断</dt><dd>2 blocked / 1 pass</dd><dt>下一步</dt><dd>Install a real client against the native host and import production metadata-only events.</dd></dl><section><h5>阻断检查</h5><ul class='action-evidence-checks'><li class='action-evidence-check blocked'><span>External events</span><code>external_source_events: 0 / &gt;0</code><small>Import at least one metadata-only event from a real client.</small></li><li class='action-evidence-check blocked'><span>Adoption sample</span><code>adoption_sample_count: 0 / &gt;0</code><small>Telemetry must include adoption outcome evidence.</small></li></ul></section><details class='action-command-details'><summary>操作命令</summary><ul class='action-command-list'><li><span>准备提交</span><code>python3 scripts/yao.py world-class-submission-kit . --evidence-key native-client-telemetry --output-dir evidence/world_class/submissions</code></li><li><span>校验入口</span><code>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</code></li><li><span>审查提交</span><code>python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions</code></li><li><span>刷新台账</span><code>python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions</code></li></ul></details><details class='action-runbook-details'><summary>首要步骤</summary><ol class='action-runbook-list'><li>python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://&lt;extension-id&gt;/</li><li>Install the generated native messaging manifest for the real client and send at least one accepted skill_activation or skill_output event.</li><li>python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl</li></ol></details></article></div></section><ul class='source-ref-list'><li><a href='world_class_evidence_ledger.md'>reports/world_class_evidence_ledger.md:1</a><small>world-class evidence ledger · report</small></li><li><a href='world_class_evidence_plan.md'>reports/world_class_evidence_plan.md:1</a><small>world-class evidence plan · report</small></li><li><a href='world_class_evidence_intake.md'>reports/world_class_evidence_intake.md:1</a><small>world-class evidence intake · report</small></li><li><a href='world_class_submission_review.md'>reports/world_class_submission_review.md:1</a><small>world-class submission review · report</small></li><li><a href='world_class_claim_guard.md'>reports/world_class_claim_guard.md:1</a><small>world-class claim guard · report</small></li><li><a href='../evidence/world_class/intake.schema.json'>evidence/world_class/intake.schema.json:4</a><small>evidence intake schema · schema</small></li><li><a href='../evidence/world_class/templates/provider-holdout.intake.json'>evidence/world_class/templates/provider-holdout.intake.json:3</a><small>provider intake template · template</small></li><li><a href='../evidence/world_class/templates/human-adjudication.intake.json'>evidence/world_class/templates/human-adjudication.intake.json:3</a><small>human intake template · template</small></li><li><a href='../evidence/world_class/templates/native-permission-enforcement.intake.json'>evidence/world_class/templates/native-permission-enforcement.intake.json:3</a><small>permission intake template · template</small></li><li><a href='../evidence/world_class/templates/native-client-telemetry.intake.json'>evidence/world_class/templates/native-client-telemetry.intake.json:3</a><small>telemetry intake template · template</small></li><li><a href='skill_os2_audit.md'>reports/skill_os2_audit.md:1</a><small>Skill OS 2.0 audit · report</small></li><li><a href='output_review_decisions.json'>reports/output_review_decisions.json:6</a><small>human review decisions · report</small></li><li><a href='runtime_permission_probes.md'>reports/runtime_permission_probes.md:1</a><small>runtime permission probes · report</small></li><li><a href='adoption_drift_report.md'>reports/adoption_drift_report.md:1</a><small>adoption drift · report</small></li></ul><footer>reports/world_class_evidence_ledger.json <a href='world_class_evidence_ledger.md'>打开证据</a></footer></article></div>
     </section>
 
     <section id="annotations">

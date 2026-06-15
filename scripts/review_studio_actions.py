@@ -3,6 +3,7 @@ import os
 from pathlib import Path
 from typing import Any
 
+from review_studio_action_evidence import render_action_evidence_steps, world_class_action_steps
 from review_studio_gates import status_label
 
 
@@ -215,6 +216,8 @@ ACTION_GUIDANCE: dict[str, dict[str, Any]] = {
             {"path": "evidence/world_class/intake.schema.json", "label": "evidence intake schema", "kind": "schema", "patterns": ["Yao World-Class Evidence Intake"]},
             {"path": "evidence/world_class/templates/provider-holdout.intake.json", "label": "provider intake template", "kind": "template", "patterns": ["provider-holdout"]},
             {"path": "evidence/world_class/templates/human-adjudication.intake.json", "label": "human intake template", "kind": "template", "patterns": ["human-adjudication"]},
+            {"path": "evidence/world_class/templates/native-permission-enforcement.intake.json", "label": "permission intake template", "kind": "template", "patterns": ["native-permission-enforcement"]},
+            {"path": "evidence/world_class/templates/native-client-telemetry.intake.json", "label": "telemetry intake template", "kind": "template", "patterns": ["native-client-telemetry"]},
             {"path": "reports/skill_os2_audit.md", "label": "Skill OS 2.0 audit", "kind": "report", "patterns": ["# Skill OS"]},
             {"path": "reports/output_review_decisions.json", "label": "human review decisions", "kind": "report", "patterns": ["winner_variant"]},
             {"path": "reports/runtime_permission_probes.md", "label": "runtime permission probes", "kind": "report", "patterns": ["# Runtime"]},
@@ -251,7 +254,12 @@ ACTION_GUIDANCE: dict[str, dict[str, Any]] = {
 }
 
 
-def build_review_actions(gates: list[dict[str, str]], skill_dir: Path, output_html: Path) -> list[dict[str, Any]]:
+def build_review_actions(
+    gates: list[dict[str, str]],
+    skill_dir: Path,
+    output_html: Path,
+    data: dict[str, Any] | None = None,
+) -> list[dict[str, Any]]:
     actions: list[dict[str, Any]] = []
     for gate_item in gates:
         if gate_item["status"] == "pass":
@@ -280,6 +288,9 @@ def build_review_actions(gates: list[dict[str, str]], skill_dir: Path, output_ht
                 "evidence": gate_item.get("evidence", ""),
                 "evidence_link": gate_item.get("link", ""),
                 "verification_command": guidance["verification"],
+                "evidence_steps": world_class_action_steps(data or {})
+                if gate_item["key"] == "world-class-evidence"
+                else [],
             }
         )
     return actions
@@ -312,15 +323,18 @@ def render_review_actions(actions: list[dict[str, Any]]) -> str:
     for item in actions:
         link_html = f"<a href='{html.escape(item['evidence_link'])}'>打开证据</a>" if item.get("evidence_link") else ""
         source_refs_html = render_action_source_refs(item.get("source_refs", []))
+        evidence_steps_html = render_action_evidence_steps(item.get("evidence_steps", []))
+        card_class = "action-card " + html.escape(item["status"])
+        if item.get("evidence_steps"):
+            card_class += " with-evidence"
         cards.append(
-            "<article class='action-card "
-            + html.escape(item["status"])
-            + "'>"
+            "<article class='" + card_class + "'>"
             f"<div><span>{html.escape(status_label(item['status']))}</span><h3>{html.escape(item['label'])}</h3></div>"
             f"<p>{html.escape(item['summary'])}</p>"
             f"<small>{html.escape(item['why'])}</small>"
             f"<dl><dt>修复位置</dt><dd>{html.escape(item['source_fix'])}</dd>"
             f"<dt>验证命令</dt><dd><code>{html.escape(item['verification_command'])}</code></dd></dl>"
+            f"{evidence_steps_html}"
             f"{source_refs_html}"
             f"<footer>{html.escape(item['evidence'])} {link_html}</footer>"
             "</article>"
