@@ -7,22 +7,22 @@
     "item_count": 21,
     "module_count": 8,
     "recommended_pr_count": 13,
-    "pass_count": 21,
-    "warn_count": 0,
+    "pass_count": 20,
+    "warn_count": 1,
     "missing_count": 0,
     "extension_track_count": 4,
     "extension_partial_count": 0,
     "extension_planned_count": 0,
     "extension_covered_count": 4,
     "adaptive_extension_ready": true,
-    "local_blueprint_ready": true,
+    "local_blueprint_ready": false,
     "public_world_class_ready": false,
     "world_class_evidence_pending_count": 4,
-    "decision": "local-blueprint-covered-evidence-pending"
+    "decision": "continue-implementation"
   },
   "status_counts": {
-    "pass": 21,
-    "warn": 0,
+    "pass": 20,
+    "warn": 1,
     "missing": 0
   },
   "extension_status_counts": {
@@ -130,7 +130,7 @@
       "label": "Trust Security",
       "status": "pass",
       "objective": "Scripts, dependencies, permissions, secrets, and package hash are reviewable for team distribution.",
-      "current": "121 scripts; secrets 0; help failures 0",
+      "current": "122 scripts; secrets 0; help failures 0",
       "command": "python3 scripts/yao.py trust .",
       "test": "python3 tests/verify_trust_check.py",
       "evidence": [
@@ -204,7 +204,7 @@
       "label": "Registry Distribution",
       "status": "pass",
       "objective": "Skill packages are installable, versioned, checksumed, and upgrade-reviewable.",
-      "current": "archive entries 646; install failures 0",
+      "current": "archive entries 647; install failures 0",
       "command": "python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip && python3 scripts/yao.py registry-audit .",
       "test": "python3 tests/verify_registry_audit.py",
       "evidence": [
@@ -611,9 +611,9 @@
       "key": "evidence-consistency",
       "category": "recommended-pr",
       "label": "Evidence Consistency",
-      "status": "pass",
+      "status": "warn",
       "objective": "Recommended Skill OS 2.0 implementation PR from the upgrade plan.",
-      "current": "34 consistency checks",
+      "current": "35 consistency checks",
       "command": "make ci-test",
       "test": "tests/verify_evidence_consistency.py",
       "evidence": [

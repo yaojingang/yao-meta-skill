@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-16",
+  "generated_at": "2026-06-13",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 190,
-    "script_file_count": 121,
+    "python_file_count": 191,
+    "script_file_count": 122,
     "test_file_count": 69,
-    "internal_module_count": 38,
+    "internal_module_count": 39,
     "cli_script_count": 85,
     "command_handler_count": 68,
     "entrypoint_command_handler_count": 18,
@@ -30,13 +30,6 @@
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
-      "path": "scripts/render_evidence_consistency.py",
-      "lines": 896,
-      "kind": "cli-script",
-      "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
       "path": "scripts/yao_cli_parser.py",
       "lines": 870,
       "kind": "internal-module",
@@ -52,7 +45,7 @@
     },
     {
       "path": "tests/verify_review_studio.py",
-      "lines": 816,
+      "lines": 834,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
@@ -60,6 +53,13 @@
     {
       "path": "scripts/render_world_class_preflight.py",
       "lines": 814,
+      "kind": "cli-script",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/render_evidence_consistency.py",
+      "lines": 808,
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
@@ -116,13 +116,6 @@
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
-      "path": "scripts/render_evidence_consistency.py",
-      "lines": 896,
-      "kind": "cli-script",
-      "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
       "path": "scripts/yao_cli_parser.py",
       "lines": 870,
       "kind": "internal-module",
@@ -138,7 +131,7 @@
     },
     {
       "path": "tests/verify_review_studio.py",
-      "lines": 816,
+      "lines": 834,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
@@ -146,6 +139,13 @@
     {
       "path": "scripts/render_world_class_preflight.py",
       "lines": 814,
+      "kind": "cli-script",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/render_evidence_consistency.py",
+      "lines": 808,
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."

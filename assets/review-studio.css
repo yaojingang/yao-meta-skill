@@ -245,6 +245,35 @@
       font-size: 13px;
       overflow-wrap: anywhere;
     }
+    .action-artifact-roles {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+    .action-artifact-roles li {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      padding: 10px;
+      display: grid;
+      gap: 4px;
+      min-width: 0;
+    }
+    .action-artifact-roles strong {
+      color: var(--ink);
+      font-weight: 500;
+      overflow-wrap: anywhere;
+    }
+    .action-artifact-roles span,
+    .action-artifact-roles code,
+    .action-artifact-roles small {
+      color: var(--muted);
+      font-size: 12px;
+      overflow-wrap: anywhere;
+      white-space: normal;
+    }
     .action-evidence-item dl {
       display: grid;
       grid-template-columns: 76px minmax(0, 1fr);

@@ -6,6 +6,7 @@ from datetime import date
 from pathlib import Path
 from typing import Any
 
+from evidence_consistency_artifact_roles import build_preflight_artifact_role_handoff_checks
 from evidence_consistency_release import build_release_evidence_flow_check
 from evidence_consistency_world_class import build_world_class_workflow_check
 from skill_ir_paths import find_skill_ir_path
@@ -547,102 +548,13 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             paths=[REQUIRED_REPORTS["world_class_ledger"], REQUIRED_REPORTS["world_class_preflight"]],
             detail="Collection preflight may help operators gather evidence, but it must not print secrets or change world-class readiness.",
         )
-        preflight_submissions = (
-            world_class_preflight.get("submissions", {})
-            if isinstance(world_class_preflight.get("submissions", {}), dict)
-            else {}
-        )
-        preflight_commands = (
-            preflight_submissions.get("commands", {})
-            if isinstance(preflight_submissions.get("commands", {}), dict)
-            else {}
-        )
-        preflight_role_contract = (
-            preflight_submissions.get("artifact_role_contract", {})
-            if isinstance(preflight_submissions.get("artifact_role_contract", {}), dict)
-            else {}
-        )
-        preflight_roles = {
-            str(item.get("role", "")): item
-            for item in preflight_role_contract.get("roles", [])
-            if isinstance(item, dict)
-        }
-        default_submissions_dir = "evidence/world_class/submissions"
-        expected_preflight_handoff = {
-            "directory": default_submissions_dir,
-            "drafts_count_as_evidence": False,
-            "preflight_counts_submission_as_completion": False,
-            "html_report": "reports/world_class_evidence_preflight.html",
-            "html_exists": True,
-            "prepare_submission": f"python3 scripts/yao.py world-class-submission-kit . --output-dir {default_submissions_dir}",
-            "prepare_prefilled_submission": (
-                f"python3 scripts/yao.py world-class-submission-kit . --output-dir {default_submissions_dir} "
-                "--prefill-artifacts"
-            ),
-            "validate_intake": f"python3 scripts/yao.py world-class-intake . --submissions-dir {default_submissions_dir}",
-            "submission_review": f"python3 scripts/yao.py world-class-submission-review . --submissions-dir {default_submissions_dir}",
-            "refresh_ledger": f"python3 scripts/yao.py world-class-ledger . --submissions-dir {default_submissions_dir}",
-            "guard_claim": "python3 scripts/yao.py world-class-claim-guard .",
-            "artifact_prefill_counts_as_evidence": False,
-            "artifact_role_source": "world-class-submission-kit",
-            "artifact_role_counts_as_evidence": False,
-            "artifact_role_prefill_counts_as_evidence": False,
-            "submission_ref_role_present": True,
-            "supporting_evidence_role_present": True,
-            "submission_ref_copy_to_artifact_refs": True,
-            "supporting_evidence_copy_to_artifact_refs": False,
-            "submission_ref_total_present": True,
-            "supporting_evidence_total_present": True,
-        }
-        actual_preflight_handoff = {
-            "directory": preflight_submissions.get("directory"),
-            "drafts_count_as_evidence": preflight_submissions.get("drafts_count_as_evidence"),
-            "preflight_counts_submission_as_completion": preflight_submissions.get(
-                "preflight_counts_submission_as_completion"
-            ),
-            "html_report": world_class_preflight.get("artifacts", {}).get("html")
-            if isinstance(world_class_preflight.get("artifacts", {}), dict)
-            else None,
-            "html_exists": (skill_dir / "reports" / "world_class_evidence_preflight.html").exists(),
-            "prepare_submission": preflight_commands.get("prepare_submission"),
-            "prepare_prefilled_submission": preflight_commands.get("prepare_prefilled_submission"),
-            "validate_intake": preflight_commands.get("validate_intake"),
-            "submission_review": preflight_commands.get("submission_review"),
-            "refresh_ledger": preflight_commands.get("refresh_ledger"),
-            "guard_claim": preflight_commands.get("guard_claim"),
-            "artifact_prefill_counts_as_evidence": preflight_submissions.get(
-                "artifact_prefill_counts_as_evidence"
-            ),
-            "artifact_role_source": preflight_role_contract.get("role_source"),
-            "artifact_role_counts_as_evidence": preflight_role_contract.get("counts_as_evidence"),
-            "artifact_role_prefill_counts_as_evidence": preflight_role_contract.get(
-                "artifact_prefill_counts_as_evidence"
-            ),
-            "submission_ref_role_present": "submission-ref" in preflight_roles,
-            "supporting_evidence_role_present": "supporting-evidence" in preflight_roles,
-            "submission_ref_copy_to_artifact_refs": preflight_roles.get("submission-ref", {}).get(
-                "copy_to_artifact_refs"
-            ),
-            "supporting_evidence_copy_to_artifact_refs": preflight_roles.get("supporting-evidence", {}).get(
-                "copy_to_artifact_refs"
-            ),
-            "submission_ref_total_present": int(preflight_role_contract.get("submission_ref_total_count", 0)) > 0,
-            "supporting_evidence_total_present": int(
-                preflight_role_contract.get("supporting_evidence_total_count", 0)
+        checks.extend(
+            build_preflight_artifact_role_handoff_checks(
+                skill_dir=skill_dir,
+                world_class_preflight=world_class_preflight,
+                review_studio=review_studio,
+                report_paths=REQUIRED_REPORTS,
             )
-            > 0,
-        }
-        compare_values(
-            checks,
-            key="preflight-submission-kit-handoff",
-            label="Preflight exposes a safe submission-kit handoff",
-            expected=expected_preflight_handoff,
-            actual=actual_preflight_handoff,
-            paths=[REQUIRED_REPORTS["world_class_preflight"], "reports/world_class_evidence_preflight.html"],
-            detail=(
-                "Preflight must give operators the exact draft, SHA-prefill, intake, review, ledger, "
-                "and claim-guard commands without letting drafts, prefill, or submissions count as accepted evidence."
-            ),
         )
 
     public_ready = bool(ledger_summary.get("ready_to_claim_world_class")) if isinstance(ledger_summary, dict) else False

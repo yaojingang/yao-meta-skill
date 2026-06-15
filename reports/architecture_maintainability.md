@@ -1,14 +1,14 @@
 # Architecture Maintainability
 
-Generated at: `2026-06-16`
+Generated at: `2026-06-13`
 
 ## Summary
 
 - decision: `pass`
-- python files: `190`
-- scripts: `121`
+- python files: `191`
+- scripts: `122`
 - tests: `69`
-- internal modules: `38`
+- internal modules: `39`
 - CLI scripts: `85`
 - Yao CLI command handlers: `68`
 - entrypoint command handlers: `18`
@@ -30,11 +30,11 @@ No file-size hotspots found.
 | File | Lines | Kind | Recommended next split |
 | --- | ---: | --- | --- |
 | `tests/verify_yao_cli.py` | `899` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
-| `scripts/render_evidence_consistency.py` | `896` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/yao_cli_parser.py` | `870` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `tests/verify_world_class_evidence_intake.py` | `867` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
-| `tests/verify_review_studio.py` | `816` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
+| `tests/verify_review_studio.py` | `834` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
 | `scripts/render_world_class_preflight.py` | `814` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
+| `scripts/render_evidence_consistency.py` | `808` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/skill_report_model.py` | `800` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/build_skill_atlas.py` | `730` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/compile_skill.py` | `723` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
@@ -45,11 +45,11 @@ No file-size hotspots found.
 | File | Lines | Kind | Severity |
 | --- | ---: | --- | --- |
 | `tests/verify_yao_cli.py` | `899` | `test` | `pass` |
-| `scripts/render_evidence_consistency.py` | `896` | `cli-script` | `pass` |
 | `scripts/yao_cli_parser.py` | `870` | `internal-module` | `pass` |
 | `tests/verify_world_class_evidence_intake.py` | `867` | `test` | `pass` |
-| `tests/verify_review_studio.py` | `816` | `test` | `pass` |
+| `tests/verify_review_studio.py` | `834` | `test` | `pass` |
 | `scripts/render_world_class_preflight.py` | `814` | `cli-script` | `pass` |
+| `scripts/render_evidence_consistency.py` | `808` | `cli-script` | `pass` |
 | `scripts/skill_report_model.py` | `800` | `internal-module` | `pass` |
 | `scripts/build_skill_atlas.py` | `730` | `cli-script` | `pass` |
 | `scripts/compile_skill.py` | `723` | `cli-script` | `pass` |

@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `212`
-- Scripts: `121`
-- Internal script modules: `35`
+- Scanned files: `213`
+- Scripts: `122`
+- Internal script modules: `36`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `212`
-- Package SHA256: `4ee62717cf47c3cb8d92bde382eb227efe8fb3421e7b1271984217c4213bb322`
+- Package hash files: `213`
+- Package SHA256: `314e6eea327e8c956e53bd664a47f0951e784b52c6a342a57c4f576374569156`
 
 ## Failures
 
@@ -75,6 +75,7 @@
 | scripts/cross_packager.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/diff_eval.py | cli | False | True | True | False | False | False | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/emit_telemetry_event.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
+| scripts/evidence_consistency_artifact_roles.py | internal-module | True | False | False | False | False | False | False | Imported by render_evidence_consistency.py to compare preflight and Review Studio artifact-role contracts. |
 | scripts/evidence_consistency_release.py | internal-module | True | False | False | False | False | False | False | Imported by render_evidence_consistency.py to verify release evidence refresh instructions. |
 | scripts/evidence_consistency_world_class.py | internal-module | True | False | False | False | False | False | False | Imported by render_evidence_consistency.py to isolate world-class evidence workflow consistency checks. |
 | scripts/export_skill_ir.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |

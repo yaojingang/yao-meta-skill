@@ -179,6 +179,14 @@ def main() -> None:
     assert preflight_handoff["supporting_evidence_role_present"] is True, preflight_handoff
     assert preflight_handoff["submission_ref_copy_to_artifact_refs"] is True, preflight_handoff
     assert preflight_handoff["supporting_evidence_copy_to_artifact_refs"] is False, preflight_handoff
+    assert checks["review-studio-preflight-artifact-role-handoff"]["status"] == "pass", checks[
+        "review-studio-preflight-artifact-role-handoff"
+    ]
+    role_handoff = checks["review-studio-preflight-artifact-role-handoff"]["actual"]
+    assert role_handoff["provider-holdout"]["role_source"] == "world-class-submission-kit", role_handoff
+    assert role_handoff["provider-holdout"]["submission_ref_total_count"] == 1, role_handoff
+    assert role_handoff["provider-holdout"]["submission_ref_copy_to_artifact_refs"] is True, role_handoff
+    assert role_handoff["provider-holdout"]["supporting_evidence_copy_to_artifact_refs"] is False, role_handoff
     assert checks["review-studio-no-overclaim"]["status"] == "pass", checks["review-studio-no-overclaim"]
     assert checks["claim-guard-package-runtime-surface"]["status"] == "pass", checks[
         "claim-guard-package-runtime-surface"

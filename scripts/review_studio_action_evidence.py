@@ -29,6 +29,50 @@ def first_text_items(*values: Any, limit: int = 4) -> list[str]:
     return []
 
 
+def artifact_role_rows(contract: dict[str, Any]) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    roles = contract.get("roles", []) if isinstance(contract.get("roles", []), list) else []
+    for role in roles:
+        if not isinstance(role, dict):
+            continue
+        role_name = str(role.get("role", "")).strip()
+        if role_name == "submission-ref":
+            ready_count = int(contract.get("submission_ref_ready_count", 0) or 0)
+            total_count = int(contract.get("submission_ref_total_count", 0) or 0)
+        elif role_name == "supporting-evidence":
+            ready_count = int(contract.get("supporting_evidence_ready_count", 0) or 0)
+            total_count = int(contract.get("supporting_evidence_total_count", 0) or 0)
+        else:
+            ready_count = 0
+            total_count = 0
+        rows.append(
+            {
+                "role": role_name,
+                "label": str(role.get("label", role_name)),
+                "ready_count": ready_count,
+                "total_count": total_count,
+                "copy_to_artifact_refs": role.get("copy_to_artifact_refs") is True,
+                "description": str(role.get("description", "")),
+            }
+        )
+    return rows
+
+
+def compact_artifact_role_contract(contract: dict[str, Any]) -> dict[str, Any]:
+    if not isinstance(contract, dict) or not contract:
+        return {}
+    return {
+        "role_source": str(contract.get("role_source", "")),
+        "counts_as_evidence": contract.get("counts_as_evidence") is True,
+        "artifact_prefill_counts_as_evidence": contract.get("artifact_prefill_counts_as_evidence") is True,
+        "submission_ref_ready_count": int(contract.get("submission_ref_ready_count", 0) or 0),
+        "submission_ref_total_count": int(contract.get("submission_ref_total_count", 0) or 0),
+        "supporting_evidence_ready_count": int(contract.get("supporting_evidence_ready_count", 0) or 0),
+        "supporting_evidence_total_count": int(contract.get("supporting_evidence_total_count", 0) or 0),
+        "roles": artifact_role_rows(contract),
+    }
+
+
 def world_class_action_steps(data: dict[str, Any]) -> list[dict[str, Any]]:
     ledger = data.get("world_class_evidence_ledger", {}) if isinstance(data, dict) else {}
     entries = ledger.get("entries", []) if isinstance(ledger, dict) else []
@@ -37,6 +81,13 @@ def world_class_action_steps(data: dict[str, Any]) -> list[dict[str, Any]]:
     intake_by_key = {
         str(item.get("evidence_key", "")): item
         for item in intake_items
+        if isinstance(item, dict) and str(item.get("evidence_key", "")).strip()
+    }
+    preflight = data.get("world_class_evidence_preflight", {}) if isinstance(data, dict) else {}
+    preflight_items = preflight.get("items", []) if isinstance(preflight, dict) else []
+    preflight_by_key = {
+        str(item.get("evidence_key", "")): item
+        for item in preflight_items
         if isinstance(item, dict) and str(item.get("evidence_key", "")).strip()
     }
     steps = []
@@ -66,6 +117,12 @@ def world_class_action_steps(data: dict[str, Any]) -> list[dict[str, Any]]:
         if not runbook and isinstance(checklist.get("must_collect", {}), dict):
             runbook = checklist["must_collect"].get("runbook", [])
         must_collect = checklist.get("must_collect", {}) if isinstance(checklist.get("must_collect", {}), dict) else {}
+        preflight_item = preflight_by_key.get(key, {})
+        submission_kit = (
+            preflight_item.get("submission_kit", {})
+            if isinstance(preflight_item.get("submission_kit", {}), dict)
+            else {}
+        )
         steps.append(
             {
                 "key": key,
@@ -93,6 +150,11 @@ def world_class_action_steps(data: dict[str, Any]) -> list[dict[str, Any]]:
                     entry.get("evidence_artifacts"),
                     limit=5,
                 ),
+                "artifact_role_contract": compact_artifact_role_contract(
+                    submission_kit.get("artifact_role_contract", {})
+                    if isinstance(submission_kit.get("artifact_role_contract", {}), dict)
+                    else {}
+                ),
                 "privacy_contract": first_text_items(must_collect.get("privacy_contract"), entry.get("privacy_contract"), limit=3),
             }
         )
@@ -105,6 +167,32 @@ def render_small_list(items: list[Any], empty: str, ordered: bool = False) -> st
     tag = "ol" if ordered else "ul"
     rows = "".join(f"<li>{html.escape(str(item))}</li>" for item in items)
     return f"<{tag}>{rows}</{tag}>"
+
+
+def render_artifact_role_contract(contract: dict[str, Any]) -> str:
+    roles = contract.get("roles", []) if isinstance(contract, dict) else []
+    if not roles:
+        return "<p class='muted'>暂无资产角色。</p>"
+    rows = []
+    for role in roles:
+        rows.append(
+            "<li>"
+            f"<strong>{html.escape(str(role.get('role', '')))}</strong>"
+            f"<span>{html.escape(str(role.get('ready_count', 0)))} / {html.escape(str(role.get('total_count', 0)))} ready</span>"
+            f"<code>artifact_refs: {html.escape(str(role.get('copy_to_artifact_refs') is True).lower())}</code>"
+            f"<small>{html.escape(str(role.get('description', '')))}</small>"
+            "</li>"
+        )
+    source = html.escape(str(contract.get("role_source", "")))
+    counts = html.escape(str(contract.get("counts_as_evidence") is True).lower())
+    prefill = html.escape(str(contract.get("artifact_prefill_counts_as_evidence") is True).lower())
+    return (
+        f"<p class='muted'>source: <code>{source}</code>; counts as evidence: <code>{counts}</code>; "
+        f"prefill counts as evidence: <code>{prefill}</code></p>"
+        "<ul class='action-artifact-roles'>"
+        + "".join(rows)
+        + "</ul>"
+    )
 
 
 def render_action_evidence_steps(steps: list[dict[str, Any]]) -> str:
@@ -174,6 +262,9 @@ def render_action_evidence_steps(steps: list[dict[str, Any]]) -> str:
             + "</section>"
             "<section><h5>证据资产</h5>"
             + render_small_list(step.get("evidence_artifacts", []), "暂无证据资产。")
+            + "</section>"
+            "<section><h5>资产角色</h5>"
+            + render_artifact_role_contract(step.get("artifact_role_contract", {}))
             + "</section>"
             "<section><h5>隐私边界</h5>"
             + render_small_list(step.get("privacy_contract", []), "暂无隐私边界。")

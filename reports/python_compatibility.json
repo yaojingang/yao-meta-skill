@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-16",
+  "generated_at": "2026-06-13",
   "root": ".",
   "summary": {
     "target_python": "3.11",
-    "file_count": 193,
+    "file_count": 194,
     "issue_count": 0,
     "syntax_error_count": 0,
     "fstring_311_violation_count": 0,
@@ -114,6 +114,12 @@
     },
     {
       "path": "scripts/emit_telemetry_event.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "scripts/evidence_consistency_artifact_roles.py",
       "ok": true,
       "issue_count": 0,
       "issues": []

@@ -5,8 +5,8 @@ Generated at: `2026-06-16`
 ## Summary
 
 - decision: `consistent`
-- checks: `34`
-- pass: `34`
+- checks: `35`
+- pass: `35`
 - warn: `0`
 - fail: `0`
 
@@ -46,6 +46,7 @@ This gate compares generated evidence reports against each other. It does not cr
 | Benchmark report mirrors world-class evidence boundary | `pass` | Benchmark reproducibility must not overstate public claim readiness. | `reports/world_class_evidence_ledger.json`, `reports/benchmark_reproducibility.json` |
 | Preflight mirrors ledger without accepting evidence | `pass` | Collection preflight may help operators gather evidence, but it must not print secrets or change world-class readiness. | `reports/world_class_evidence_ledger.json`, `reports/world_class_evidence_preflight.json` |
 | Preflight exposes a safe submission-kit handoff | `pass` | Preflight must give operators the exact draft, SHA-prefill, intake, review, ledger, and claim-guard commands without letting drafts, prefill, or submissions count as accepted evidence. | `reports/world_class_evidence_preflight.json`, `reports/world_class_evidence_preflight.html` |
+| Review Studio mirrors preflight artifact roles | `pass` | The Review Studio world-class action card must carry the same submission-ref versus supporting-evidence contract as the preflight handoff. | `reports/world_class_evidence_preflight.json`, `reports/review-studio.json` |
 | Review Studio does not overclaim pending world-class evidence | `pass` | When world-class evidence is pending, Review Studio must stay in a review or warning posture. | `reports/world_class_evidence_ledger.json`, `reports/review-studio.json` |
 | Claim guard covers package and runtime claim surfaces | `pass` | The overclaim guard must scan package manifests, adapter metadata, security policy, and ledger surfaces before public readiness can be trusted. | `reports/world_class_claim_guard.json`, `manifest.json`, `agents/interface.yaml`, `dist/manifest.json`, `dist/targets/openai/adapter.json`, `evidence/world_class/README.md`, `security/permission_policy.json`, `reports/world_class_evidence_ledger.json` |
 | World-class evidence workflows cover every pending ledger entry | `pass` | Every pending world-class evidence key must have matching plan, intake, submission review, operator runbook, and Review Studio actions without counting planned work as completion. | `reports/world_class_evidence_ledger.json`, `reports/world_class_evidence_plan.json`, `reports/world_class_evidence_intake.json`, `reports/world_class_submission_review.json`, `reports/world_class_operator_runbook.json`, `reports/review-studio.json` |

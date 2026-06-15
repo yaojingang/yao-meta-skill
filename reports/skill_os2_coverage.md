@@ -4,12 +4,12 @@ Generated at: `2026-06-16`
 
 ## Summary
 
-- decision: `local-blueprint-covered-evidence-pending`
-- local blueprint ready: `true`
+- decision: `continue-implementation`
+- local blueprint ready: `false`
 - public world-class ready: `false`
-- pass: `21` / `21`
+- pass: `20` / `21`
 - missing: `0`
-- warn: `0`
+- warn: `1`
 - reference extensions: `4`
 - extension covered: `4`
 - extension partial: `0`
@@ -26,9 +26,9 @@ This report maps the Skill OS 2.0 upgrade blueprint to concrete local artifacts,
 | Skill IR | `pass` | schema 2.0.0; targets 5 | `python3 scripts/yao.py skill-ir .` | `python3 tests/verify_skill_ir.py` |
 | Output Eval Lab | `pass` | 5 cases; delta 100.0; execution 10 | `python3 scripts/yao.py output-exec . && python3 scripts/yao.py output-review .` | `python3 tests/verify_output_eval_lab.py` |
 | Runtime Conformance | `pass` | 5/5 targets pass | `python3 scripts/yao.py conformance .` | `python3 tests/verify_conformance_suite.py` |
-| Trust Security | `pass` | 121 scripts; secrets 0; help failures 0 | `python3 scripts/yao.py trust .` | `python3 tests/verify_trust_check.py` |
+| Trust Security | `pass` | 122 scripts; secrets 0; help failures 0 | `python3 scripts/yao.py trust .` | `python3 tests/verify_trust_check.py` |
 | Skill Atlas | `pass` | 12 scanned skills; actionable collisions 0 | `python3 scripts/yao.py skill-atlas --workspace-root .` | `python3 tests/verify_skill_atlas.py` |
-| Registry Distribution | `pass` | archive entries 646; install failures 0 | `python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip && python3 scripts/yao.py registry-audit .` | `python3 tests/verify_registry_audit.py` |
+| Registry Distribution | `pass` | archive entries 647; install failures 0 | `python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip && python3 scripts/yao.py registry-audit .` | `python3 tests/verify_registry_audit.py` |
 | Review Studio | `pass` | 16 gates; decision review; warnings 3 | `python3 scripts/yao.py review-studio .` | `python3 tests/verify_review_studio.py` |
 | Telemetry Drift | `pass` | events 1; recipes 5; risk low | `python3 scripts/yao.py telemetry-hooks . && python3 scripts/yao.py adoption-drift .` | `python3 tests/verify_telemetry_hooks.py` |
 
@@ -48,7 +48,7 @@ This report maps the Skill OS 2.0 upgrade blueprint to concrete local artifacts,
 | Registry Package Format | `pass` | registry ok True | `make ci-test` | `tests/verify_registry_audit.py` |
 | Review Studio 2.0 | `pass` | 16 review gates | `make ci-test` | `tests/verify_review_studio.py` |
 | Migration V2 Docs | `pass` | migration guide present | `make ci-test` | `docs review` |
-| Evidence Consistency | `pass` | 34 consistency checks | `make ci-test` | `tests/verify_evidence_consistency.py` |
+| Evidence Consistency | `warn` | 35 consistency checks | `make ci-test` | `tests/verify_evidence_consistency.py` |
 
 ## Reference Extension Tracks
 
@@ -213,7 +213,7 @@ These extension tracks come from the user-supplied 2.0 reference plan. They are 
 ### Evidence Consistency
 
 - objective: Recommended Skill OS 2.0 implementation PR from the upgrade plan.
-- status: `pass`
+- status: `warn`
 - existing evidence: `scripts/render_evidence_consistency.py`, `reports/evidence_consistency.json`, `tests/verify_evidence_consistency.py`
 - next action: Keep this item covered as the implementation evolves.
 

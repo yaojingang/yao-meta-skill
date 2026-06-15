@@ -259,6 +259,7 @@ def main() -> None:
         "render_world_class_evidence_plan.py",
         "render_world_class_evidence_ledger.py",
         "render_world_class_evidence_intake.py",
+        "render_world_class_preflight.py",
         "render_world_class_submission_review.py",
         "render_world_class_operator_runbook.py",
         "render_world_class_claim_guard.py",
@@ -424,6 +425,10 @@ def main() -> None:
         assert full_payload["evidence_paths"]["world_class_evidence_ledger"] == "reports/world_class_evidence_ledger.md", full_payload["evidence_paths"]
     if (ROOT / "reports" / "world_class_evidence_intake.md").exists():
         assert full_payload["evidence_paths"]["world_class_evidence_intake"] == "reports/world_class_evidence_intake.md", full_payload["evidence_paths"]
+    if (ROOT / "reports" / "world_class_evidence_preflight.md").exists():
+        assert full_payload["evidence_paths"]["world_class_evidence_preflight"] == "reports/world_class_evidence_preflight.md", full_payload["evidence_paths"]
+    if (ROOT / "reports" / "world_class_evidence_preflight.html").exists():
+        assert full_payload["evidence_paths"]["world_class_evidence_preflight_html"] == "reports/world_class_evidence_preflight.html", full_payload["evidence_paths"]
     if (ROOT / "reports" / "world_class_submission_review.md").exists():
         assert full_payload["evidence_paths"]["world_class_submission_review"] == "reports/world_class_submission_review.md", full_payload["evidence_paths"]
     if (ROOT / "reports" / "world_class_operator_runbook.md").exists():
@@ -543,6 +548,15 @@ def main() -> None:
     assert "provider-backed model run" in provider_action_step["provenance_requirements"], provider_action_step
     assert "reports/output_execution_runs.json summary.model_executed_count > 0" in provider_action_step["success_checks"], provider_action_step
     assert "reports/output_execution_runs.json" in provider_action_step["evidence_artifacts"], provider_action_step
+    provider_role_contract = provider_action_step["artifact_role_contract"]
+    assert provider_role_contract["role_source"] == "world-class-submission-kit", provider_role_contract
+    assert provider_role_contract["counts_as_evidence"] is False, provider_role_contract
+    assert provider_role_contract["artifact_prefill_counts_as_evidence"] is False, provider_role_contract
+    assert provider_role_contract["submission_ref_total_count"] == 1, provider_role_contract
+    assert provider_role_contract["submission_ref_ready_count"] == 1, provider_role_contract
+    provider_role_rows = {item["role"]: item for item in provider_role_contract["roles"]}
+    assert provider_role_rows["submission-ref"]["copy_to_artifact_refs"] is True, provider_role_rows
+    assert provider_role_rows["supporting-evidence"]["copy_to_artifact_refs"] is False, provider_role_rows
     assert any("provider credentials" in item for item in provider_action_step["privacy_contract"]), provider_action_step
     assert full_payload["data"]["world_class_evidence_ledger"]["summary"]["pending_count"] == 4, full_payload["data"]["world_class_evidence_ledger"]
     assert full_payload["data"]["world_class_evidence_intake"]["summary"]["decision"] == "awaiting-submissions", full_payload["data"]["world_class_evidence_intake"]
@@ -689,6 +703,10 @@ def main() -> None:
     assert "native-client-telemetry.json" in html, html
     assert "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions" in html, html
     assert "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions" in html, html
+    assert "资产角色" in html, html
+    assert "submission-ref" in html, html
+    assert "supporting-evidence" in html, html
+    assert "artifact_refs: true" in html, html
     assert "intake 只校验证据包格式、来源、隐私和反过度声明" in html, html
     assert "reports/world_class_evidence_intake.md" in html, html
     assert "reports/world_class_operator_runbook.html" in html, html
