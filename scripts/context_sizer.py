@@ -27,6 +27,8 @@ PACKAGE_PATHS = (
     "outputs",
 )
 IGNORED_FILE_PATTERNS = {
+    "reports/context_budget*.json",
+    "reports/context_budget*.md",
     "reports/*pattern-analysis*.md",
     "reports/*research-plan*.md",
 }

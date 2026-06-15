@@ -124,6 +124,65 @@ def verify_private_report_ignored() -> dict:
     }
 
 
+def verify_context_budget_reports_ignored() -> dict:
+    with TemporaryDirectory(prefix="yao-context-budget-ignore-") as temp_dir:
+        skill_dir = Path(temp_dir) / "skill"
+        (skill_dir / "reports").mkdir(parents=True)
+        (skill_dir / "SKILL.md").write_text(
+            "---\n"
+            "name: context-budget-ignore-fixture\n"
+            "description: Test fixture for self-generated context reports.\n"
+            "---\n"
+            "Use this fixture to validate context report idempotency.\n",
+            encoding="utf-8",
+        )
+        (skill_dir / "reports" / "kept.md").write_text("stable evidence\n", encoding="utf-8")
+        baseline = run(
+            "context_budget_ignore_baseline",
+            [sys.executable, "scripts/context_sizer.py", str(skill_dir), "--json"],
+        )
+        (skill_dir / "reports" / "context_budget.json").write_text(
+            json.dumps({"large": "self report\n" * 2000}, ensure_ascii=False),
+            encoding="utf-8",
+        )
+        (skill_dir / "reports" / "context_budget_summary.json").write_text(
+            json.dumps({"large": "summary report\n" * 2000}, ensure_ascii=False),
+            encoding="utf-8",
+        )
+        (skill_dir / "reports" / "context_budget.md").write_text(
+            "self report markdown\n" * 2000,
+            encoding="utf-8",
+        )
+        context_case = run(
+            "context_budget_ignore_context_sizer",
+            [sys.executable, "scripts/context_sizer.py", str(skill_dir), "--json"],
+        )
+        boundary_case = run(
+            "context_budget_ignore_resource_boundary",
+            [sys.executable, "scripts/resource_boundary_check.py", str(skill_dir), "--max-initial-tokens", "5000"],
+        )
+
+    baseline_total = baseline.get("payload", {}).get("estimated_total_text_tokens")
+    context_total = context_case.get("payload", {}).get("estimated_total_text_tokens")
+    boundary_files = boundary_case.get("payload", {}).get("stats", {}).get("relevant_file_count")
+    passed = (
+        baseline["passed"]
+        and context_case["passed"]
+        and boundary_case["passed"]
+        and baseline_total == context_total
+        and boundary_files == 2
+    )
+    return {
+        "name": "context_budget_reports_ignored",
+        "passed": passed,
+        "baseline_total_tokens": baseline_total,
+        "observed_total_tokens": context_total,
+        "resource_relevant_file_count": boundary_files,
+        "context_stdout": context_case["stdout"],
+        "boundary_stdout": boundary_case["stdout"],
+    }
+
+
 def main() -> None:
     python = sys.executable
     cases = []
@@ -188,6 +247,7 @@ def main() -> None:
     cases.insert(4, governed_example)
     cases.insert(5, governed_resource)
     cases.append(verify_private_report_ignored())
+    cases.append(verify_context_budget_reports_ignored())
 
     report = {"ok": all(case["passed"] for case in cases), "cases": cases}
     print(json.dumps(report, ensure_ascii=False, indent=2))
