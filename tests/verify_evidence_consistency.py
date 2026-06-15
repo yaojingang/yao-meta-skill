@@ -7,6 +7,9 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "scripts"))
+from evidence_consistency_release import CLEAN_LOCK_REPORT_COMMANDS, SOURCE_REFRESH_REPORT_COMMANDS
+
 SCRIPT = ROOT / "scripts" / "render_evidence_consistency.py"
 TMP = ROOT / "tests" / "tmp_evidence_consistency"
 REPORT_FILES = [
@@ -108,18 +111,15 @@ def assert_release_evidence_instructions_cover_first_class_reports() -> None:
     agents_text = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
     source_refresh_header = "After source changes that affect scripts"
     clean_lock_header = "For final release evidence"
-    benchmark_command = 'python3 scripts/render_benchmark_reproducibility.py . --generated-at "$GENERATED_AT"'
     assert source_refresh_header in agents_text, agents_text
     assert clean_lock_header in agents_text, agents_text
 
     source_refresh = agents_text.split(source_refresh_header, 1)[1].split(clean_lock_header, 1)[0]
     clean_lock = agents_text.split(clean_lock_header, 1)[1].split("If `reports/benchmark_reproducibility.json`", 1)[0]
-    for block in [source_refresh, clean_lock]:
-        assert "python3 scripts/render_context_reports.py --generated-at \"$GENERATED_AT\"" in block, block
-        assert benchmark_command in block, block
-        assert "python3 scripts/render_skill_interpretation.py ." in block, block
-        assert "python3 scripts/render_world_class_preflight.py . --generated-at \"$GENERATED_AT\"" in block, block
-        assert "python3 scripts/render_evidence_consistency.py . --generated-at \"$GENERATED_AT\"" in block, block
+    for command in SOURCE_REFRESH_REPORT_COMMANDS:
+        assert command in source_refresh, command
+    for command in CLEAN_LOCK_REPORT_COMMANDS:
+        assert command in clean_lock, command
 
 
 def main() -> None:
