@@ -102,7 +102,7 @@
         "label": "上下文成本",
         "score": 42,
         "reasons": [
-          "入口约 356 个词/字，references 约 16273 个词/字。",
+          "入口约 356 个词/字，references 约 16316 个词/字。",
           "分数越高代表上下文成本越低。",
           "上下文成本偏高，建议压缩入口或拆分 references。"
         ]
@@ -206,7 +206,7 @@
         "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
       ],
       "gaps": [
-        "上下文成本需要补强：入口约 356 个词/字，references 约 16273 个词/字。"
+        "上下文成本需要补强：入口约 356 个词/字，references 约 16316 个词/字。"
       ],
       "recommendations": [
         "先改触发边界，再扩展工作流。",
@@ -1000,9 +1000,9 @@
         "methodology_complete": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "336d2c39f255d97b64d380259f5b7709ba544a0d1537b28e392254cc49ab4f95",
-        "source_contract_sha256": "7334782000ae11f8ab7279a11d34953a2016f8955c96ba0d8a66c312498424ff",
-        "archive_sha256": "2b1cee2d9a5ac643a10d7ed1fe88f8614c161b48b70df714d999b5471e7a2fa9",
+        "evidence_bundle_sha256": "1893e1fd1af68f6de2533b92e15d96a34c58acc63e39d9a5a1a351e32ffc8d5a",
+        "source_contract_sha256": "14b4c185bf672aa498365077882090370f28b6deef51ecc1dc0f3b32bd0eb7bc",
+        "archive_sha256": "756c7446af442f1e7497c2e8b20a5e6d71d32c1801ca42da2be651c0d9ca9145",
         "output_case_count": 5,
         "failure_disclosure_count": 3,
         "command_count": 22,
@@ -1024,7 +1024,7 @@
         "working_tree_dirty": false,
         "changed_file_count": 0
       },
-      "commit": "afdd5332710bf8b6dd673f034fc78aed36096fcb",
+      "commit": "a0e7b5197ddee66acb3bf2b4e680ec512c7dc27a",
       "missing_artifacts": [],
       "limitations": [
         "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -1129,7 +1129,7 @@
       "interactive_script_count": 0,
       "package_hash_scope": "source-contract-without-generated-reports",
       "package_hash_file_count": 197,
-      "package_sha256": "7334782000ae11f8ab7279a11d34953a2016f8955c96ba0d8a66c312498424ff"
+      "package_sha256": "14b4c185bf672aa498365077882090370f28b6deef51ecc1dc0f3b32bd0eb7bc"
     },
     "skill_atlas": {
       "skill_count": 12,
@@ -1167,8 +1167,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "7334782000ae11f8ab7279a11d34953a2016f8955c96ba0d8a66c312498424ff",
-          "archive_sha256": "2b1cee2d9a5ac643a10d7ed1fe88f8614c161b48b70df714d999b5471e7a2fa9"
+          "package_sha256": "14b4c185bf672aa498365077882090370f28b6deef51ecc1dc0f3b32bd0eb7bc",
+          "archive_sha256": "756c7446af442f1e7497c2e8b20a5e6d71d32c1801ca42da2be651c0d9ca9145"
         },
         "compatibility": {
           "openai": "pass",
@@ -1199,7 +1199,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "2b1cee2d9a5ac643a10d7ed1fe88f8614c161b48b70df714d999b5471e7a2fa9",
+          "archive_sha256": "756c7446af442f1e7497c2e8b20a5e6d71d32c1801ca42da2be651c0d9ca9145",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -1215,7 +1215,7 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "2b1cee2d9a5ac643a10d7ed1fe88f8614c161b48b70df714d999b5471e7a2fa9",
+        "archive_sha256": "756c7446af442f1e7497c2e8b20a5e6d71d32c1801ca42da2be651c0d9ca9145",
         "archive_entry_count": 613,
         "failure_count": 0,
         "warning_count": 0
