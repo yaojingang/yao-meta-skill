@@ -416,6 +416,31 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     adapt_propose_cmd.add_argument("--generated-at")
     adapt_propose_cmd.set_defaults(func=_handler(command_handlers, "command_adapt_propose"))
 
+    adapt_apply_cmd = subparsers.add_parser(
+        "adapt-apply",
+        help="Dry-run or apply an approved adaptation patch with allowlist, regression, and rollback evidence.",
+    )
+    adapt_apply_cmd.add_argument("skill_dir", nargs="?", default=".")
+    adapt_apply_cmd.add_argument("--proposal-id")
+    adapt_apply_cmd.add_argument("--patch-file")
+    adapt_apply_cmd.add_argument("--proposals-json")
+    adapt_apply_cmd.add_argument("--approval-ledger")
+    adapt_apply_cmd.add_argument("--output-json")
+    adapt_apply_cmd.add_argument("--output-md")
+    adapt_apply_cmd.add_argument("--generated-at")
+    adapt_apply_cmd.add_argument("--today")
+    adapt_apply_cmd.add_argument("--write-template", action="store_true")
+    adapt_apply_cmd.add_argument("--apply", action="store_true")
+    adapt_apply_cmd.add_argument("--run-verification", action="store_true")
+    adapt_apply_cmd.add_argument(
+        "--no-rollback-on-failure",
+        dest="rollback_on_failure",
+        action="store_false",
+        help="Leave an applied patch in place if verification fails. Default is to reverse the patch.",
+    )
+    adapt_apply_cmd.set_defaults(rollback_on_failure=True)
+    adapt_apply_cmd.set_defaults(func=_handler(command_handlers, "command_adapt_apply"))
+
     adoption_drift_cmd = subparsers.add_parser(
         "adoption-drift",
         help="Render local-first metadata-only adoption and drift telemetry for a skill package.",

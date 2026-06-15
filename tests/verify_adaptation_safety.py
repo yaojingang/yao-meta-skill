@@ -3,6 +3,7 @@ import json
 import shutil
 import subprocess
 import sys
+import hashlib
 from pathlib import Path
 
 
@@ -10,6 +11,7 @@ ROOT = Path(__file__).resolve().parent.parent
 CLI = ROOT / "scripts" / "yao.py"
 SCAN_SCRIPT = ROOT / "scripts" / "summarize_user_signals.py"
 PROPOSE_SCRIPT = ROOT / "scripts" / "propose_adaptation.py"
+APPLY_SCRIPT = ROOT / "scripts" / "apply_adaptation.py"
 TMP = ROOT / "tests" / "tmp_adaptation_safety"
 
 
@@ -20,6 +22,10 @@ def run_script(*args: str) -> subprocess.CompletedProcess[str]:
         capture_output=True,
         text=True,
     )
+
+
+def sha256_text(value: str) -> str:
+    return hashlib.sha256(value.encode("utf-8")).hexdigest()
 
 
 def main() -> None:
@@ -81,9 +87,10 @@ def main() -> None:
     assert propose_proc.returncode == 0, propose_proc.stderr
     proposal_payload = json.loads(propose_proc.stdout)
     assert proposal_payload["ok"], proposal_payload
-    assert proposal_payload["summary"]["apply_supported"] is False, proposal_payload
+    assert proposal_payload["summary"]["apply_supported"] is True, proposal_payload
     assert proposal_payload["proposal_contract"]["proposal_only"] is True, proposal_payload
     assert proposal_payload["proposal_contract"]["writes_repository_files"] is False, proposal_payload
+    assert proposal_payload["proposal_contract"]["apply_command_available"] is True, proposal_payload
     assert proposal_payload["summary"]["proposal_count"] >= 3, proposal_payload
     assert all(item["status"] == "proposal-only" for item in proposal_payload["proposals"]), proposal_payload
     assert all(item["requires_approval"] is True for item in proposal_payload["proposals"]), proposal_payload
@@ -92,9 +99,16 @@ def main() -> None:
         any("tests/verify_adaptation_safety.py" in command for command in item["verification_commands"])
         for item in proposal_payload["proposals"]
     ), proposal_payload
-    assert not (skill_dir / "scripts" / "apply_adaptation.py").exists(), skill_dir
     assert (reports_dir / "adaptation_proposals.json").exists(), reports_dir
     assert (reports_dir / "adaptation_proposals.md").exists(), reports_dir
+
+    template_proc = run_script(str(APPLY_SCRIPT), str(skill_dir), "--write-template", "--generated-at", "2026-06-15T00:00:00Z")
+    assert template_proc.returncode == 0, template_proc.stderr
+    template_payload = json.loads(template_proc.stdout)
+    assert template_payload["summary"]["apply_supported"] is True, template_payload
+    assert template_payload["summary"]["attempt_count"] == 0, template_payload
+    assert (reports_dir / "adaptation_approval_ledger.json").exists(), reports_dir
+    assert (reports_dir / "adaptation_regression_report.json").exists(), reports_dir
 
     missing_source_proc = run_script(str(SCAN_SCRIPT), str(skill_dir))
     assert missing_source_proc.returncode != 0, missing_source_proc
@@ -148,8 +162,180 @@ def main() -> None:
     assert cli_propose.returncode == 0, cli_propose.stderr
     cli_proposal_payload = json.loads(cli_propose.stdout)
     assert cli_proposal_payload["summary"]["proposal_count"] >= 3, cli_proposal_payload
+    assert cli_proposal_payload["summary"]["apply_supported"] is True, cli_proposal_payload
     assert cli_proposal_payload["proposal_contract"]["proposal_only"] is True, cli_proposal_payload
     assert cli_proposal_payload["proposal_contract"]["writes_repository_files"] is False, cli_proposal_payload
+    assert cli_proposal_payload["proposal_contract"]["apply_command_available"] is True, cli_proposal_payload
+
+    policy_path = cli_skill_dir / "references" / "user-memory-policy.md"
+    policy_path.parent.mkdir(parents=True, exist_ok=True)
+    policy_path.write_text("old policy\n", encoding="utf-8")
+    verifier = cli_skill_dir / "tests" / "check_policy.py"
+    verifier.parent.mkdir(parents=True, exist_ok=True)
+    verifier.write_text(
+        "from pathlib import Path\n"
+        "assert 'approved adaptive note' in Path('references/user-memory-policy.md').read_text(encoding='utf-8')\n",
+        encoding="utf-8",
+    )
+    approval_proposal = next(
+        item for item in cli_proposal_payload["proposals"] if item["pattern_id"] == "approval_safety"
+    )
+    patch_text = (
+        "diff --git a/references/user-memory-policy.md b/references/user-memory-policy.md\n"
+        "--- a/references/user-memory-policy.md\n"
+        "+++ b/references/user-memory-policy.md\n"
+        "@@ -1 +1,2 @@\n"
+        " old policy\n"
+        "+approved adaptive note\n"
+    )
+    patch_path = TMP / "approved-adaptation.patch"
+    patch_path.write_text(patch_text, encoding="utf-8")
+    approval_ledger = {
+        "schema_version": "1.0",
+        "ok": True,
+        "generated_at": "2026-06-15T00:00:00Z",
+        "approval_contract": {
+            "approval_required": True,
+            "patch_sha256_required": True,
+            "allowlisted_targets_required": True,
+            "dry_run_default": True,
+            "writes_repository_files_only_with_apply": True,
+            "rollback_required": True,
+        },
+        "entries": [
+            {
+                "proposal_id": approval_proposal["proposal_id"],
+                "decision": "approved",
+                "reviewer": "qa-reviewer",
+                "reason": "Fixture validates approval-gated adaptive apply.",
+                "approved_at": "2026-06-15",
+                "expires_at": "2026-12-31",
+                "patch_sha256": sha256_text(patch_text),
+                "target_files": ["references/user-memory-policy.md"],
+                "verification_commands": ["python3 tests/check_policy.py"],
+                "rollback_plan": "git apply -R approved-adaptation.patch",
+            }
+        ],
+    }
+    ledger_path = cli_skill_dir / "reports" / "adaptation_approval_ledger.json"
+    ledger_path.write_text(json.dumps(approval_ledger, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    dry_run = run_script(
+        str(CLI),
+        "adapt-apply",
+        str(cli_skill_dir),
+        "--proposal-id",
+        approval_proposal["proposal_id"],
+        "--patch-file",
+        str(patch_path),
+        "--generated-at",
+        "2026-06-15T00:00:00Z",
+        "--today",
+        "2026-06-15",
+    )
+    assert dry_run.returncode == 0, dry_run.stderr
+    dry_payload = json.loads(dry_run.stdout)
+    assert dry_payload["summary"]["dry_run_count"] == 1, dry_payload
+    assert dry_payload["summary"]["applied_count"] == 0, dry_payload
+    assert "approved adaptive note" not in policy_path.read_text(encoding="utf-8"), policy_path
+
+    apply_proc = run_script(
+        str(CLI),
+        "adapt-apply",
+        str(cli_skill_dir),
+        "--proposal-id",
+        approval_proposal["proposal_id"],
+        "--patch-file",
+        str(patch_path),
+        "--generated-at",
+        "2026-06-15T00:00:00Z",
+        "--today",
+        "2026-06-15",
+        "--apply",
+        "--run-verification",
+    )
+    assert apply_proc.returncode == 0, apply_proc.stderr
+    apply_payload = json.loads(apply_proc.stdout)
+    assert apply_payload["summary"]["applied_count"] == 1, apply_payload
+    assert apply_payload["summary"]["regression_run_count"] == 1, apply_payload
+    assert apply_payload["summary"]["regression_pass_count"] == 1, apply_payload
+    assert "approved adaptive note" in policy_path.read_text(encoding="utf-8"), policy_path
+
+    policy_path.write_text("old policy\n", encoding="utf-8")
+    failing_verifier = cli_skill_dir / "tests" / "failing_policy.py"
+    failing_verifier.write_text(
+        "from pathlib import Path\n"
+        "assert 'impossible verifier token' in Path('references/user-memory-policy.md').read_text(encoding='utf-8')\n",
+        encoding="utf-8",
+    )
+    rollback_patch = (
+        "diff --git a/references/user-memory-policy.md b/references/user-memory-policy.md\n"
+        "--- a/references/user-memory-policy.md\n"
+        "+++ b/references/user-memory-policy.md\n"
+        "@@ -1 +1,2 @@\n"
+        " old policy\n"
+        "+rolled back adaptive note\n"
+    )
+    rollback_patch_path = TMP / "rollback-adaptation.patch"
+    rollback_patch_path.write_text(rollback_patch, encoding="utf-8")
+    approval_ledger["entries"][0]["patch_sha256"] = sha256_text(rollback_patch)
+    approval_ledger["entries"][0]["verification_commands"] = ["python3 tests/failing_policy.py"]
+    ledger_path.write_text(json.dumps(approval_ledger, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    rollback_proc = run_script(
+        str(CLI),
+        "adapt-apply",
+        str(cli_skill_dir),
+        "--proposal-id",
+        approval_proposal["proposal_id"],
+        "--patch-file",
+        str(rollback_patch_path),
+        "--output-json",
+        str(cli_skill_dir / "reports" / "rollback_adaptation_regression.json"),
+        "--output-md",
+        str(cli_skill_dir / "reports" / "rollback_adaptation_regression.md"),
+        "--today",
+        "2026-06-15",
+        "--apply",
+        "--run-verification",
+    )
+    assert rollback_proc.returncode == 2, rollback_proc.stdout
+    rollback_payload = json.loads(rollback_proc.stdout)
+    assert rollback_payload["summary"]["applied_count"] == 0, rollback_payload
+    assert rollback_payload["summary"]["rollback_count"] == 1, rollback_payload
+    assert rollback_payload["attempts"][0]["status"] == "failed-rolled-back", rollback_payload
+    assert rollback_payload["attempts"][0]["rollback_result"]["ok"] is True, rollback_payload
+    assert "rolled back adaptive note" not in policy_path.read_text(encoding="utf-8"), policy_path
+    assert policy_path.read_text(encoding="utf-8") == "old policy\n", policy_path
+
+    unsafe_patch = (
+        "diff --git a/README.md b/README.md\n"
+        "--- a/README.md\n"
+        "+++ b/README.md\n"
+        "@@ -1 +1,2 @@\n"
+        " old\n"
+        "+unsafe\n"
+    )
+    unsafe_patch_path = TMP / "unsafe-adaptation.patch"
+    unsafe_patch_path.write_text(unsafe_patch, encoding="utf-8")
+    approval_ledger["entries"][0]["patch_sha256"] = sha256_text(unsafe_patch)
+    ledger_path.write_text(json.dumps(approval_ledger, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    unsafe_proc = run_script(
+        str(CLI),
+        "adapt-apply",
+        str(cli_skill_dir),
+        "--proposal-id",
+        approval_proposal["proposal_id"],
+        "--patch-file",
+        str(unsafe_patch_path),
+        "--output-json",
+        str(cli_skill_dir / "reports" / "unsafe_adaptation_regression.json"),
+        "--output-md",
+        str(cli_skill_dir / "reports" / "unsafe_adaptation_regression.md"),
+        "--today",
+        "2026-06-15",
+    )
+    assert unsafe_proc.returncode == 2, unsafe_proc.stdout
+    unsafe_payload = json.loads(unsafe_proc.stdout)
+    assert any("outside approval target_files" in item for item in unsafe_payload["failures"]), unsafe_payload
     print(json.dumps({"ok": True}, ensure_ascii=False, indent=2))
 
 

@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "ok": true,
+  "generated_at": "2026-06-15T00:00:00Z",
+  "skill_dir": ".",
+  "summary": {
+    "apply_supported": true,
+    "attempt_count": 0,
+    "applied_count": 0,
+    "dry_run_count": 0,
+    "rollback_count": 0,
+    "regression_run_count": 0,
+    "regression_pass_count": 0,
+    "failure_count": 0
+  },
+  "apply_contract": {
+    "approval_required": true,
+    "patch_sha256_required": true,
+    "allowlisted_targets_required": true,
+    "dry_run_default": true,
+    "writes_repository_files_only_with_apply": true,
+    "rollback_required": true,
+    "safe_regression_commands_only": true,
+    "rollback_on_failure_default": true
+  },
+  "attempts": [],
+  "failures": [],
+  "artifacts": {
+    "json": "reports/adaptation_regression_report.json",
+    "approval_ledger": "reports/adaptation_approval_ledger.json"
+  }
+}

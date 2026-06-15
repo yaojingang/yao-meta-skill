@@ -170,7 +170,7 @@ def build_report(skill_dir: Path, patterns_json: Path, generated_at: str) -> dic
         "summary": {
             "pattern_count": len(patterns),
             "proposal_count": len(proposals),
-            "apply_supported": False,
+            "apply_supported": (ROOT / "scripts" / "apply_adaptation.py").exists(),
             "failure_count": len(failures),
         },
         "proposal_contract": {
@@ -179,7 +179,7 @@ def build_report(skill_dir: Path, patterns_json: Path, generated_at: str) -> dic
             "writes_repository_files": False,
             "allowlisted_targets_required": True,
             "rollback_required_for_apply": True,
-            "apply_command_available": False,
+            "apply_command_available": (ROOT / "scripts" / "apply_adaptation.py").exists(),
         },
         "proposals": proposals,
         "failures": failures,

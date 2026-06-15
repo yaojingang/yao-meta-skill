@@ -39,7 +39,7 @@
           "minimum": 0
         },
         "apply_supported": {
-          "const": false
+          "type": "boolean"
         }
       },
       "additionalProperties": true
@@ -51,7 +51,8 @@
         "approval_required",
         "writes_repository_files",
         "allowlisted_targets_required",
-        "rollback_required_for_apply"
+        "rollback_required_for_apply",
+        "apply_command_available"
       ],
       "properties": {
         "proposal_only": {
@@ -68,6 +69,9 @@
         },
         "rollback_required_for_apply": {
           "const": true
+        },
+        "apply_command_available": {
+          "type": "boolean"
         }
       },
       "additionalProperties": true

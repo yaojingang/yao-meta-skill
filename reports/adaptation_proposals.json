@@ -7,7 +7,7 @@
   "summary": {
     "pattern_count": 5,
     "proposal_count": 5,
-    "apply_supported": false,
+    "apply_supported": true,
     "failure_count": 0
   },
   "proposal_contract": {
@@ -16,7 +16,7 @@
     "writes_repository_files": false,
     "allowlisted_targets_required": true,
     "rollback_required_for_apply": true,
-    "apply_command_available": false
+    "apply_command_available": true
   },
   "proposals": [
     {

@@ -1,4 +1,4 @@
-"""Adaptive proposal command handlers for the Yao CLI."""
+"""Adaptive scan, proposal, and apply command handlers for the Yao CLI."""
 
 import argparse
 import json
@@ -8,7 +8,7 @@ from yao_cli_runtime import run_script
 
 
 SCRIPT_INTERFACE = "internal-module"
-SCRIPT_INTERFACE_REASON = "Imported by yao.py to keep adaptive scan/proposal command handlers outside the thin CLI orchestrator."
+SCRIPT_INTERFACE_REASON = "Imported by yao.py to keep adaptive scan/proposal/apply command handlers outside the thin CLI orchestrator."
 
 
 def command_adapt_scan(args: argparse.Namespace) -> int:
@@ -41,5 +41,37 @@ def command_adapt_propose(args: argparse.Namespace) -> int:
     if args.generated_at:
         cmd.extend(["--generated-at", args.generated_at])
     result = run_script("propose_adaptation.py", cmd)
+    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
+    return 0 if result["ok"] else 2
+
+
+def command_adapt_apply(args: argparse.Namespace) -> int:
+    skill_dir = str(Path(args.skill_dir).resolve())
+    cmd = [skill_dir]
+    if args.proposal_id:
+        cmd.extend(["--proposal-id", args.proposal_id])
+    if args.patch_file:
+        cmd.extend(["--patch-file", args.patch_file])
+    if args.proposals_json:
+        cmd.extend(["--proposals-json", args.proposals_json])
+    if args.approval_ledger:
+        cmd.extend(["--approval-ledger", args.approval_ledger])
+    if args.output_json:
+        cmd.extend(["--output-json", args.output_json])
+    if args.output_md:
+        cmd.extend(["--output-md", args.output_md])
+    if args.generated_at:
+        cmd.extend(["--generated-at", args.generated_at])
+    if args.today:
+        cmd.extend(["--today", args.today])
+    if args.write_template:
+        cmd.append("--write-template")
+    if args.apply:
+        cmd.append("--apply")
+    if args.run_verification:
+        cmd.append("--run-verification")
+    if not args.rollback_on_failure:
+        cmd.append("--no-rollback-on-failure")
+    result = run_script("apply_adaptation.py", cmd)
     print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
     return 0 if result["ok"] else 2

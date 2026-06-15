@@ -4,18 +4,24 @@ This reference defines the safe foundation for adaptive self-iteration.
 
 ## Scope
 
-Adaptive iteration is a proposal-only loop until a human explicitly approves a patch application workflow. The current implementation may:
+Adaptive iteration is proposal-only until a human explicitly approves a patch application workflow. The current implementation may:
 
 - read one user-provided local source file;
 - redact sensitive text before storing evidence excerpts;
 - summarize repeated preferences and operational signals;
 - produce adaptation proposals with target files, risks, tests, and rollback plans.
+- dry-run an approved patch through `adapt-apply`, after patch hash, approval, and target allowlist checks pass.
+- apply a patch only when the operator passes `--apply` and the approval ledger names the reviewer, reason, patch hash, target files, verification commands, and rollback plan.
+- automatically reverse an applied patch when `--run-verification` fails, unless the operator explicitly passes `--no-rollback-on-failure`.
 
 It must not:
 
 - scan shell history, browser history, chat logs, mail, or private folders by default;
 - infer permanent user memory from a single comment;
 - write source files as part of scan or proposal generation;
+- write source files through `adapt-apply` without explicit `--apply`;
+- apply a patch whose target files are outside both the proposal and approval allowlists;
+- leave a failed verified apply in place by default;
 - count proposals as completed implementation evidence.
 
 ## Flow
@@ -23,7 +29,10 @@ It must not:
 1. `adapt-scan` reads an explicit source path and writes `reports/user_patterns.json` plus `reports/user_patterns.md`.
 2. `adapt-propose` reads the pattern report and writes `reports/adaptation_proposals.json` plus `reports/adaptation_proposals.md`.
 3. A reviewer decides whether any proposal is worth implementing.
-4. Future `adapt-apply` work must require approval evidence, allowlisted targets, regression commands, and rollback metadata before writing files.
+4. `adapt-apply --write-template` creates `reports/adaptation_approval_ledger.json` and `reports/adaptation_regression_report.json` so the review surface exists before any patch is applied.
+5. `adapt-apply --proposal-id <id> --patch-file <patch>` defaults to a dry-run and records patch, target, approval, regression, and rollback evidence.
+6. `adapt-apply --apply --run-verification` may write files only after approval, patch hash, allowlist, `git apply --check`, and safe regression command checks pass.
+7. If a verification command fails after a patch is applied, `adapt-apply` runs `git apply -R <patch>` by default and records `failed-rolled-back` plus rollback evidence in `reports/adaptation_regression_report.json`.
 
 ## Evidence Standard
 
@@ -37,6 +46,15 @@ Each proposal should include:
 - rollback plan;
 - a clear `proposal-only` status.
 
+Each approved application should include:
+
+- reviewer, reason, approval date, and optional expiry;
+- exact patch SHA-256;
+- target file allowlist;
+- regression commands restricted to local `make` targets or local Python verifier scripts;
+- rollback command or plan.
+- rollback result if regression failed after an apply attempt.
+
 ## Review Boundary
 
-The adaptive loop improves iteration quality, but it does not replace normal review. Any proposal touching trigger behavior, reports, packaging, telemetry, privacy, or governance must still pass the same tests and release gates as a manually designed change.
+The adaptive loop improves iteration quality, but it does not replace normal review. Any proposal touching trigger behavior, reports, packaging, telemetry, privacy, or governance must still pass the same tests and release gates as a manually designed change. `adapt-apply` evidence proves that an approved patch path was checked or applied; it does not make world-class external or human evidence complete.

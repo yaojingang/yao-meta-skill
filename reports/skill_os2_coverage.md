@@ -11,10 +11,10 @@ Generated at: `2026-06-15`
 - missing: `0`
 - warn: `0`
 - reference extensions: `2`
-- extension covered: `1`
-- extension partial: `1`
+- extension covered: `2`
+- extension partial: `0`
 - extension planned: `0`
-- adaptive extension ready: `false`
+- adaptive extension ready: `true`
 - world-class evidence pending: `4`
 
 This report maps the Skill OS 2.0 upgrade blueprint to concrete local artifacts, commands, and tests. It does not count pending human review, provider runs, metadata fallbacks, or planned work as public world-class evidence.
@@ -55,7 +55,7 @@ This report maps the Skill OS 2.0 upgrade blueprint to concrete local artifacts,
 | Track | Status | Current | Target | Next action |
 | --- | --- | --- | --- | --- |
 | Skill Interpretation Report | `covered` | Skill Overview v2 is canonical and mirrored as first-class skill-interpretation HTML/JSON with schema and tests. | Either keep skill-overview as the canonical interpretation report with an explicit contract, or split a dedicated reports/skill-interpretation.* renderer and tests. | Keep overview and interpretation contracts in lockstep when report sections, metrics, or layout semantics change. |
-| Adaptive Self-Iteration | `partial` | Proposal-only adapt-scan/adapt-propose foundation exists with policy, schema, and safety tests; approval-gated patch application is not implemented yet. | Proposal-only adaptation with explicit input source, redaction, allowlisted write targets, approval ledger, regression report, and rollback plan. | Add adapt-apply only after approval ledger, allowlisted targets, dry-run diffs, regression reports, and rollback artifacts are designed. |
+| Adaptive Self-Iteration | `covered` | Full adaptive loop includes proposal, approval, patch application, regression evidence, and rollback metadata. | Proposal-only adaptation with explicit input source, redaction, allowlisted write targets, approval ledger, regression report, and rollback plan. | Start with policy and read-only scan tests; do not read shell history or private logs unless the user provides an explicit source path. |
 
 These extension tracks come from the user-supplied 2.0 reference plan. They are tracked separately from the formal Skill OS blueprint so the report can distinguish landed local architecture from planned explainer/adaptor evolution.
 
@@ -225,7 +225,6 @@ These extension tracks come from the user-supplied 2.0 reference plan. They are 
 ### Adaptive Self-Iteration
 
 - objective: Local-first preference memory, repeated-signal extraction, adaptation proposals, approval, patch application, regression evidence, and rollback.
-- status: `partial`
-- existing evidence: `references/autonomous-adaptation.md`, `references/user-memory-policy.md`, `schemas/adaptation-proposal.schema.json`, `scripts/summarize_user_signals.py`, `scripts/propose_adaptation.py`, `tests/verify_adaptation_safety.py`, `reports/user_patterns.json`, `reports/adaptation_proposals.json`, `reports/iteration-directions.md`, `reports/adoption_drift_report.md`
-- missing evidence: `scripts/apply_adaptation.py`, `reports/adaptation_approval_ledger.json`, `reports/adaptation_regression_report.json`
-- next action: Add adapt-apply only after approval ledger, allowlisted targets, dry-run diffs, regression reports, and rollback artifacts are designed.
+- status: `covered`
+- existing evidence: `references/autonomous-adaptation.md`, `references/user-memory-policy.md`, `schemas/adaptation-proposal.schema.json`, `scripts/summarize_user_signals.py`, `scripts/propose_adaptation.py`, `tests/verify_adaptation_safety.py`, `scripts/apply_adaptation.py`, `reports/adaptation_approval_ledger.json`, `reports/adaptation_regression_report.json`, `reports/user_patterns.json`, `reports/adaptation_proposals.json`, `reports/iteration-directions.md`, `reports/adoption_drift_report.md`
+- next action: Start with policy and read-only scan tests; do not read shell history or private logs unless the user provides an explicit source path.

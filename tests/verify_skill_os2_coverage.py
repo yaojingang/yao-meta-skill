@@ -45,10 +45,10 @@ def main() -> None:
     assert summary["warn_count"] == 0, summary
     assert summary["missing_count"] == 0, summary
     assert summary["extension_track_count"] == 2, summary
-    assert summary["extension_partial_count"] == 1, summary
+    assert summary["extension_partial_count"] == 0, summary
     assert summary["extension_planned_count"] == 0, summary
-    assert summary["extension_covered_count"] == 1, summary
-    assert summary["adaptive_extension_ready"] is False, summary
+    assert summary["extension_covered_count"] == 2, summary
+    assert summary["adaptive_extension_ready"] is True, summary
     assert summary["local_blueprint_ready"] is True, summary
     assert summary["public_world_class_ready"] is False, summary
     assert summary["world_class_evidence_pending_count"] == 4, summary
@@ -91,7 +91,7 @@ def main() -> None:
     assert payload["source_blueprint"]["reference_extension_count"] == 2, payload
     extension_tracks = {item["key"]: item for item in payload["reference_extension_tracks"]}
     assert extension_tracks["skill-interpretation-report"]["status"] == "covered", extension_tracks
-    assert extension_tracks["adaptive-self-iteration"]["status"] == "partial", extension_tracks
+    assert extension_tracks["adaptive-self-iteration"]["status"] == "covered", extension_tracks
     assert any(
         entry["path"] == "reports/skill-overview.html" and entry["exists"]
         for entry in extension_tracks["skill-interpretation-report"]["evidence"]
@@ -109,7 +109,15 @@ def main() -> None:
         for entry in extension_tracks["adaptive-self-iteration"]["evidence"]
     ), extension_tracks["adaptive-self-iteration"]
     assert any(
-        entry["path"] == "scripts/apply_adaptation.py" and not entry["exists"]
+        entry["path"] == "scripts/apply_adaptation.py" and entry["exists"]
+        for entry in extension_tracks["adaptive-self-iteration"]["evidence"]
+    ), extension_tracks["adaptive-self-iteration"]
+    assert any(
+        entry["path"] == "reports/adaptation_approval_ledger.json" and entry["exists"]
+        for entry in extension_tracks["adaptive-self-iteration"]["evidence"]
+    ), extension_tracks["adaptive-self-iteration"]
+    assert any(
+        entry["path"] == "reports/adaptation_regression_report.json" and entry["exists"]
         for entry in extension_tracks["adaptive-self-iteration"]["evidence"]
     ), extension_tracks["adaptive-self-iteration"]
     assert "Close the four world-class evidence ledger entries" in payload["next_highest_leverage"][0], payload
@@ -119,8 +127,8 @@ def main() -> None:
     assert "Skill OS 2.0 Blueprint Coverage" in markdown, markdown
     assert "local blueprint ready: `true`" in markdown, markdown
     assert "public world-class ready: `false`" in markdown, markdown
-    assert "extension covered: `1`" in markdown, markdown
-    assert "extension partial: `1`" in markdown, markdown
+    assert "extension covered: `2`" in markdown, markdown
+    assert "extension partial: `0`" in markdown, markdown
     assert "## Core Modules" in markdown, markdown
     assert "## Recommended PR Coverage" in markdown, markdown
     assert "Evidence Consistency" in markdown, markdown

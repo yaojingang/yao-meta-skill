@@ -82,7 +82,7 @@ def main() -> None:
         "quickstart skill-interpretation review-studio python-compat architecture-audit skill-os2-audit skill-os2-coverage "
         "world-class-evidence world-class-ledger world-class-intake world-class-submission-kit "
         "world-class-submission-review world-class-runbook world-class-claim-guard "
-        "benchmark-reproducibility evidence-consistency output-review-kit adapt-scan adapt-propose "
+        "benchmark-reproducibility evidence-consistency output-review-kit adapt-scan adapt-propose adapt-apply "
         "telemetry-import telemetry-emit telemetry-hooks --record-cli-telemetry"
     ).split()
     assert all(item in parser_help for item in expected_help), parser_help
