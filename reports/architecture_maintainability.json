@@ -31,8 +31,15 @@
     },
     {
       "path": "scripts/yao_cli_parser.py",
-      "lines": 821,
+      "lines": 822,
       "kind": "internal-module",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/render_evidence_consistency.py",
+      "lines": 810,
+      "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
@@ -40,13 +47,6 @@
       "path": "scripts/skill_report_layout.py",
       "lines": 808,
       "kind": "internal-module",
-      "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
-      "path": "scripts/render_evidence_consistency.py",
-      "lines": 804,
-      "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
@@ -117,8 +117,15 @@
     },
     {
       "path": "scripts/yao_cli_parser.py",
-      "lines": 821,
+      "lines": 822,
       "kind": "internal-module",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/render_evidence_consistency.py",
+      "lines": 810,
+      "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
@@ -126,13 +133,6 @@
       "path": "scripts/skill_report_layout.py",
       "lines": 808,
       "kind": "internal-module",
-      "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
-      "path": "scripts/render_evidence_consistency.py",
-      "lines": 804,
-      "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },

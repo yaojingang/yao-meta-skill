@@ -225,6 +225,7 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     world_class_preflight_cmd.add_argument("--submissions-dir")
     world_class_preflight_cmd.add_argument("--output-json")
     world_class_preflight_cmd.add_argument("--output-md")
+    world_class_preflight_cmd.add_argument("--output-html")
     world_class_preflight_cmd.add_argument("--generated-at")
     world_class_preflight_cmd.set_defaults(func=_handler(command_handlers, "command_world_class_preflight"))
 

@@ -30,9 +30,9 @@ No file-size hotspots found.
 | File | Lines | Kind | Recommended next split |
 | --- | ---: | --- | --- |
 | `tests/verify_yao_cli.py` | `899` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
-| `scripts/yao_cli_parser.py` | `821` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
+| `scripts/yao_cli_parser.py` | `822` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
+| `scripts/render_evidence_consistency.py` | `810` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/skill_report_layout.py` | `808` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
-| `scripts/render_evidence_consistency.py` | `804` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/skill_report_model.py` | `801` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `tests/verify_review_studio.py` | `763` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
 | `scripts/compile_skill.py` | `734` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
@@ -44,9 +44,9 @@ No file-size hotspots found.
 | File | Lines | Kind | Severity |
 | --- | ---: | --- | --- |
 | `tests/verify_yao_cli.py` | `899` | `test` | `pass` |
-| `scripts/yao_cli_parser.py` | `821` | `internal-module` | `pass` |
+| `scripts/yao_cli_parser.py` | `822` | `internal-module` | `pass` |
+| `scripts/render_evidence_consistency.py` | `810` | `cli-script` | `pass` |
 | `scripts/skill_report_layout.py` | `808` | `internal-module` | `pass` |
-| `scripts/render_evidence_consistency.py` | `804` | `cli-script` | `pass` |
 | `scripts/skill_report_model.py` | `801` | `internal-module` | `pass` |
 | `tests/verify_review_studio.py` | `763` | `test` | `pass` |
 | `scripts/compile_skill.py` | `734` | `cli-script` | `pass` |

@@ -60,7 +60,8 @@ def main() -> None:
 
     output_json = TMP / "world_class_evidence_preflight.json"
     output_md = TMP / "world_class_evidence_preflight.md"
-    proc = run_preflight(None, "--output-json", str(output_json), "--output-md", str(output_md))
+    output_html = TMP / "world_class_evidence_preflight.html"
+    proc = run_preflight(None, "--output-json", str(output_json), "--output-md", str(output_md), "--output-html", str(output_html))
     payload = json.loads(proc.stdout)
     assert payload["schema_version"] == "1.0", payload
     assert payload["ok"] is True, payload
@@ -84,6 +85,7 @@ def main() -> None:
         "python3 scripts/yao.py world-class-submission-kit . "
         "--output-dir evidence/world_class/submissions"
     ), payload["submissions"]
+    assert payload["artifacts"]["html"] == "reports/world_class_evidence_preflight.html", payload["artifacts"]
     submission_commands = payload["submissions"]["commands"]
     assert submission_commands["prepare_submission"] == (
         "python3 scripts/yao.py world-class-submission-kit . "
@@ -138,6 +140,16 @@ def main() -> None:
     assert "world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions" in markdown, markdown
     assert "drafts count as evidence: `false`" in markdown, markdown
     assert "values are never printed" in markdown, markdown
+    html = output_html.read_text(encoding="utf-8")
+    assert "<title>World-Class Evidence Preflight</title>" in html, html
+    assert "World-Class Evidence Preflight" in html, html
+    assert "Evidence Queue" in html, html
+    assert "Submission Kit" in html, html
+    assert "world-class-submission-kit . --output-dir evidence/world_class/submissions" in html, html
+    assert "provider-holdout" in html, html
+    assert "Source Checks" in html, html
+    assert "ready_to_claim_world_class" in html, html
+    assert "Environment variables are displayed only as set or not-set" in html, html
 
     env_json = TMP / "preflight_with_env.json"
     env_proc = run_preflight(
@@ -146,6 +158,8 @@ def main() -> None:
         str(env_json),
         "--output-md",
         str(TMP / "preflight_with_env.md"),
+        "--output-html",
+        str(TMP / "preflight_with_env.html"),
     )
     env_payload = json.loads(env_proc.stdout)
     env_provider = by_key(env_payload["items"], "provider-holdout")
@@ -154,6 +168,7 @@ def main() -> None:
     assert env_provider_checks["openai-api-key"]["actual"] == "set", env_provider_checks
     assert env_provider_checks["provider-model"]["status"] == "pass", env_provider_checks
     assert "sk-test-secret" not in env_proc.stdout, env_proc.stdout
+    assert "sk-test-secret" not in (TMP / "preflight_with_env.html").read_text(encoding="utf-8"), env_payload
     assert env_payload["summary"]["credential_value_exposed"] is False, env_payload
     assert env_payload["summary"]["ready_to_claim_world_class"] is False, env_payload
 
@@ -166,6 +181,8 @@ def main() -> None:
         str(TMP / "preflight_spaced.json"),
         "--output-md",
         str(TMP / "preflight_spaced.md"),
+        "--output-html",
+        str(TMP / "preflight_spaced.html"),
     )
     spaced_payload = json.loads(spaced_proc.stdout)
     quoted_spaced = "'tests/tmp_world_class_preflight/submission kit spaced'"
@@ -177,6 +194,8 @@ def main() -> None:
         str(TMP / "cli_preflight.json"),
         "--output-md",
         str(TMP / "cli_preflight.md"),
+        "--output-html",
+        str(TMP / "cli_preflight.html"),
         "--generated-at",
         "2026-06-16",
     )
@@ -184,6 +203,7 @@ def main() -> None:
     assert cli_payload["summary"]["decision"] == "collection-preflight-blocked", cli_payload
     assert cli_payload["summary"]["preflight_counts_as_evidence"] is False, cli_payload
     assert (TMP / "cli_preflight.md").exists(), cli_payload
+    assert (TMP / "cli_preflight.html").exists(), cli_payload
 
     print(json.dumps({"ok": True}, ensure_ascii=False, indent=2))
 

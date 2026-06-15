@@ -31,6 +31,7 @@ IGNORED_FILE_PATTERNS = {
     "reports/skill-overview*.json",
     "reports/world_class_evidence_preflight*.json",
     "reports/world_class_evidence_preflight*.md",
+    "reports/world_class_evidence_preflight*.html",
     "reports/*pattern-analysis*.md",
     "reports/*research-plan*.md",
 }

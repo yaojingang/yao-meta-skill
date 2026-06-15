@@ -522,6 +522,8 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             "directory": default_submissions_dir,
             "drafts_count_as_evidence": False,
             "preflight_counts_submission_as_completion": False,
+            "html_report": "reports/world_class_evidence_preflight.html",
+            "html_exists": True,
             "prepare_submission": f"python3 scripts/yao.py world-class-submission-kit . --output-dir {default_submissions_dir}",
             "validate_intake": f"python3 scripts/yao.py world-class-intake . --submissions-dir {default_submissions_dir}",
             "submission_review": f"python3 scripts/yao.py world-class-submission-review . --submissions-dir {default_submissions_dir}",
@@ -534,6 +536,10 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             "preflight_counts_submission_as_completion": preflight_submissions.get(
                 "preflight_counts_submission_as_completion"
             ),
+            "html_report": world_class_preflight.get("artifacts", {}).get("html")
+            if isinstance(world_class_preflight.get("artifacts", {}), dict)
+            else None,
+            "html_exists": (skill_dir / "reports" / "world_class_evidence_preflight.html").exists(),
             "prepare_submission": preflight_commands.get("prepare_submission"),
             "validate_intake": preflight_commands.get("validate_intake"),
             "submission_review": preflight_commands.get("submission_review"),
@@ -546,7 +552,7 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             label="Preflight exposes a safe submission-kit handoff",
             expected=expected_preflight_handoff,
             actual=actual_preflight_handoff,
-            paths=[REQUIRED_REPORTS["world_class_preflight"]],
+            paths=[REQUIRED_REPORTS["world_class_preflight"], "reports/world_class_evidence_preflight.html"],
             detail=(
                 "Preflight must give operators the exact draft, intake, review, ledger, and claim-guard commands "
                 "without letting drafts or submissions count as accepted evidence."

@@ -793,6 +793,7 @@
   },
   "artifacts": {
     "json": "reports/world_class_evidence_preflight.json",
-    "markdown": "reports/world_class_evidence_preflight.md"
+    "markdown": "reports/world_class_evidence_preflight.md",
+    "html": "reports/world_class_evidence_preflight.html"
   }
 }

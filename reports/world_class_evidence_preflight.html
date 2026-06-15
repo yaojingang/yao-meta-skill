@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>World-Class Evidence Preflight</title>
+  <style>
+    :root { --ink:#1B365D; --text:#202124; --muted:#6f6a63; --line:#e8e1d8; --soft:#f8f6f2; --warn:#9b4d0f; --pass:#1f6f43; --block:#8a1f11; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:#fff; color:var(--text); font:16px/1.55 Georgia, "Times New Roman", serif; }
+    .topbar { position:sticky; top:0; z-index:10; background:rgba(255,255,255,.96); border-bottom:1px solid var(--line); }
+    .topbar-inner { max-width:1180px; margin:0 auto; padding:12px 24px; display:flex; justify-content:space-between; gap:16px; align-items:center; }
+    .brand, a, h1, h2, h3, h4 { color:var(--ink); }
+    .links { display:flex; gap:14px; flex-wrap:wrap; }
+    .links a { text-decoration:none; }
+    .shell { max-width:1180px; margin:0 auto; padding:36px 24px 72px; }
+    .hero { border-bottom:1px solid var(--line); padding:32px 0 28px; }
+    .eyebrow { color:var(--ink); font-size:12px; text-transform:uppercase; font-weight:700; letter-spacing:0; }
+    h1 { margin:8px 0 12px; font-size:56px; line-height:1.04; letter-spacing:0; }
+    h2 { margin:0 0 14px; font-size:30px; letter-spacing:0; }
+    h3 { margin:4px 0 10px; font-size:22px; letter-spacing:0; }
+    h4 { margin:0 0 8px; font-size:16px; letter-spacing:0; }
+    .lede { max-width:820px; color:var(--muted); font-size:20px; }
+    .stats { display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); gap:12px; margin:26px 0 0; }
+    .stats article, .panel, .evidence-card, .check-row { border:1px solid var(--line); border-radius:8px; background:#fff; }
+    .stats article { padding:16px; }
+    .stats span, .muted, .evidence-card header span, .check-row span { color:var(--muted); }
+    .stats strong { display:block; color:var(--ink); font-size:28px; line-height:1.15; overflow-wrap:anywhere; }
+    .section { padding:32px 0; border-bottom:1px solid var(--line); }
+    .two-col { display:grid; grid-template-columns:minmax(0,.45fr) minmax(0,1fr); gap:18px; align-items:start; }
+    .panel { padding:20px; min-width:0; }
+    .commands { list-style:none; padding:0; margin:0; display:grid; gap:10px; }
+    .commands li { padding:12px; background:var(--soft); border-radius:8px; }
+    .commands span { display:block; color:var(--ink); font-weight:700; margin-bottom:4px; }
+    .evidence-grid { display:grid; gap:18px; }
+    .evidence-card { padding:20px; min-width:0; }
+    .evidence-card.blocked { border-left:4px solid var(--block); }
+    .evidence-card.ready-for-human-review, .evidence-card.ready-to-collect, .check-row.human-required, .check-row.external-required, .check-row.missing, .check-row.blocked { border-left:4px solid var(--warn); }
+    .evidence-card.ready-for-submission, .check-row.pass { border-left:4px solid var(--pass); }
+    .meta, .check-row dl { display:grid; grid-template-columns:96px minmax(0,1fr); gap:8px 12px; }
+    dt { color:var(--ink); }
+    dd { margin:0; min-width:0; overflow-wrap:anywhere; }
+    code { font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:13px; overflow-wrap:anywhere; }
+    .next-action, .runbook { background:var(--soft); border-radius:8px; padding:14px; margin:14px 0; }
+    .next-action p { margin-top:0; }
+    .check-grid { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px; }
+    .check-row { padding:14px; min-width:0; }
+    .check-section { margin-top:16px; }
+    .notice { background:var(--soft); border-left:4px solid var(--ink); padding:16px; border-radius:8px; }
+    li { overflow-wrap:anywhere; }
+    @media (max-width:820px) { .stats, .two-col, .check-grid { grid-template-columns:1fr; } h1 { font-size:38px; } .topbar-inner { align-items:flex-start; flex-direction:column; } }
+  </style>
+</head>
+<body>
+  <nav class="topbar"><div class="topbar-inner"><span class="brand">World-Class Preflight</span><div class="links"><a href="#handoff">Handoff</a><a href="#queue">Queue</a><a href="#boundary">Boundary</a></div></div></nav>
+  <main class="shell">
+    <section class="hero">
+      <span class="eyebrow">Evidence Collection</span>
+      <h1>World-Class Evidence Preflight</h1>
+      <p class="lede">This operator view shows which external and human evidence is still blocked, which commands prepare editable submission drafts, and why preflight never counts as accepted evidence.</p>
+      <div class="stats"><article><span>Decision</span><strong>collection-preflight-blocked</strong></article><article><span>Pending</span><strong>4</strong></article><article><span>Ready</span><strong>1</strong></article><article><span>Blocked</span><strong>3</strong></article><article><span>Source</span><strong>6/13</strong></article></div>
+    </section>
+    <section class="section two-col" id="handoff">
+      <article class="panel">
+        <h2>Submission Kit</h2>
+        <p class="muted">Generate drafts only after real provider, human-review, native-permission, or native-client work exists. Drafts remain non-evidence until valid aggregate artifact refs and SHA-256 digests are supplied.</p>
+        <ul>
+          <li>submissions directory: <code>evidence/world_class/submissions</code></li>
+          <li>drafts count as evidence: <code>false</code></li>
+          <li>preflight accepts evidence: <code>false</code></li>
+        </ul>
+      </article>
+      <aside class="panel"><h2>Commands</h2><ul class="commands"><li><span>prepare submission</span><code>python3 scripts/yao.py world-class-submission-kit . --output-dir evidence/world_class/submissions</code></li><li><span>validate intake</span><code>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</code></li><li><span>submission review</span><code>python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions</code></li><li><span>refresh ledger</span><code>python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions</code></li><li><span>guard claim</span><code>python3 scripts/yao.py world-class-claim-guard .</code></li></ul></aside>
+    </section>
+    <section class="section" id="queue"><h2>Evidence Queue</h2><div class="evidence-grid">
+      <article class="evidence-card blocked">
+        <header>
+          <span>external · blocked</span>
+          <h3>Provider Holdout</h3>
+        </header>
+        <dl class="meta">
+          <dt>Evidence</dt><dd><code>provider-holdout</code></dd>
+          <dt>Ledger</dt><dd>pending</dd>
+          <dt>Intake</dt><dd>awaiting-submission</dd>
+          <dt>Review</dt><dd>awaiting-submission</dd>
+          <dt>Draft</dt><dd><code>evidence/world_class/submissions/provider-holdout.json</code></dd>
+        </dl>
+        <section class="next-action">
+          <h4>Next Action</h4>
+          <p>Set OPENAI_API_KEY in the operator shell; never commit or print the value.</p>
+          <code>python3 scripts/yao.py world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions</code>
+        </section>
+        <section class="check-section">
+          <h4>Prechecks</h4>
+          <div class="check-grid">
+        <article class="check-row pass">
+          <div>
+            <span>file</span>
+            <strong>Output eval cases</strong>
+          </div>
+          <dl>
+            <dt>Current</dt><dd><code>present</code></dd>
+            <dt>Status</dt><dd>pass</dd>
+            <dt>Action</dt><dd>Keep output holdout cases available before provider execution.</dd>
+          </dl>
+        </article>
+        
+        <article class="check-row pass">
+          <div>
+            <span>file</span>
+            <strong>Provider runner</strong>
+          </div>
+          <dl>
+            <dt>Current</dt><dd><code>present</code></dd>
+            <dt>Status</dt><dd>pass</dd>
+            <dt>Action</dt><dd>Use the provider runner instead of the local command runner for model-backed evidence.</dd>
+          </dl>
+        </article>
+        
+        <article class="check-row missing">
+          <div>
+            <span>env</span>
+            <strong>Provider credential</strong>
+          </div>
+          <dl>
+            <dt>Current</dt><dd><code>not-set</code></dd>
+            <dt>Status</dt><dd>missing</dd>
+            <dt>Action</dt><dd>Set OPENAI_API_KEY in the operator shell; never commit or print the value.</dd>
+          </dl>
+        </article>
+        
+        <article class="check-row optional">
+          <div>
+            <span>env</span>
+            <strong>Provider model</strong>
+          </div>
+          <dl>
+            <dt>Current</dt><dd><code>not-set</code></dd>
+            <dt>Status</dt><dd>optional</dd>
+            <dt>Action</dt><dd>Optionally set YAO_OUTPUT_EVAL_MODEL; the runbook defaults to gpt-4.1-mini.</dd>
+          </dl>
+        </article>
+        </div>
+        </section>
+        <section class="check-section">
+          <h4>Source Checks</h4>
+          <div class="check-grid">
+        <article class="check-row blocked">
+          <div>
+            <span>model_executed_count</span>
+            <strong>Provider model run</strong>
+          </div>
+          <dl>
+            <dt>Current</dt><dd><code>0</code></dd>
+            <dt>Expected</dt><dd><code>&gt;0</code></dd>
+            <dt>Status</dt><dd>blocked</dd>
+            <dt>Action</dt><dd>Run provider-backed output-exec with real credentials.</dd>
+          </dl>
+        </article>
+        
+        <article class="check-row pass">
+          <div>
+            <span>timing_observed_count</span>
+            <strong>Timing observed</strong>
+          </div>
+          <dl>
+            <dt>Current</dt><dd><code>10</code></dd>
+            <dt>Expected</dt><dd><code>&gt;0</code></dd>
+            <dt>Status</dt><dd>pass</dd>
+            <dt>Action</dt><dd>Provider execution should record timing metadata.</dd>
+          </dl>
+        </article>
+        
+        <article class="check-row blocked">
+          <div>
+            <span>token_observed_count</span>
+            <strong>Token usage observed</strong>
+          </div>
+          <dl>
+            <dt>Current</dt><dd><code>0</code></dd>
+            <dt>Expected</dt><dd><code>&gt;0</code></dd>
+            <dt>Status</dt><dd>blocked</dd>
+            <dt>Action</dt><dd>Provider execution should return non-estimated token usage.</dd>
+          </dl>
+        </article>
+        </div>
+        </section>
+        <section class="runbook">
+          <h4>Runbook</h4>
+          <ul><li>YAO_OUTPUT_EVAL_MODEL=gpt-4.1-mini OPENAI_API_KEY=&lt;redacted&gt; python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60</li><li>python3 scripts/yao.py skill-os2-audit . --generated-at &lt;YYYY-MM-DD&gt;</li><li>Copy evidence/world_class/templates/provider-holdout.intake.json to evidence/world_class/submissions/provider-holdout.json and fill only real evidence fields.</li><li>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</li></ul>
+        </section>
+      </article>
+    
+      <article class="evidence-card ready-for-human-review">
+        <header>
+          <span>human · ready-for-human-review</span>
+          <h3>Human Adjudication</h3>
+        </header>
+        <dl class="meta">
+          <dt>Evidence</dt><dd><code>human-adjudication</code></dd>
+          <dt>Ledger</dt><dd>pending</dd>
+          <dt>Intake</dt><dd>awaiting-submission</dd>
+          <dt>Review</dt><dd>awaiting-submission</dd>
+          <dt>Draft</dt><dd><code>evidence/world_class/submissions/human-adjudication.json</code></dd>
+        </dl>
+        <section class="next-action">
+          <h4>Next Action</h4>
+          <p>Assign a real reviewer identity before claiming human adjudication.</p>
+          <code>python3 scripts/yao.py world-class-submission-kit . --evidence-key human-adjudication --output-dir evidence/world_class/submissions</code>
+        </section>
+        <section class="check-section">
+          <h4>Prechecks</h4>
+          <div class="check-grid">
+        <article class="check-row pass">
+          <div>
+            <span>file</span>
+            <strong>Blind review kit</strong>
+          </div>
+          <dl>
+            <dt>Current</dt><dd><code>present</code></dd>
+            <dt>Status</dt><dd>pass</dd>
+            <dt>Action</dt><dd>Open the blind review kit and record real reviewer choices.</dd>
+          </dl>
+        </article>
+        
+        <article class="check-row pass">
+          <div>
+            <span>file</span>
+            <strong>Decision template</strong>
+          </div>
+          <dl>
+            <dt>Current</dt><dd><code>present</code></dd>
+            <dt>Status</dt><dd>pass</dd>
+            <dt>Action</dt><dd>Fill winner_variant values with real A/B decisions.</dd>
+          </dl>
+        </article>
+        
+        <article class="check-row human-required">
+          <div>
+            <span>human</span>
+            <strong>Human reviewer</strong>
+          </div>
+          <dl>
+            <dt>Current</dt><dd><code>external-human-action</code></dd>
+            <dt>Status</dt><dd>human-required</dd>
+            <dt>Action</dt><dd>Assign a real reviewer identity before claiming human adjudication.</dd>
+          </dl>
+        </article>
+        </div>
+        </section>
+        <section class="check-section">
+          <h4>Source Checks</h4>
+          <div class="check-grid">
+        <article class="check-row pass">
+          <div>
+            <span>pair_count</span>
+            <strong>Review pairs exist</strong>
+          </div>
+          <dl>
+            <dt>Current</dt><dd><code>5</code></dd>
+            <dt>Expected</dt><dd><code>&gt;0</code></dd>
+            <dt>Status</dt><dd>pass</dd>
+            <dt>Action</dt><dd>Generate the blind A/B review pack.</dd>
+          </dl>
+        </article>
+        
+        <article class="check-row blocked">
+          <div>
+            <span>pending_count</span>
+            <strong>No pending decisions</strong>
+          </div>
+          <dl>
+            <dt>Current</dt><dd><code>5</code></dd>
+            <dt>Expected</dt><dd><code>==0</code></dd>
+            <dt>Status</dt><dd>blocked</dd>
+            <dt>Action</dt><dd>Record a reviewer choice for every pair.</dd>
+          </dl>
+        </article>
+        
+        <article class="check-row blocked">
+          <div>
+            <span>judgment_count</span>
+            <strong>Judgments complete</strong>
+          </div>
+          <dl>
+            <dt>Current</dt><dd><code>0</code></dd>
+            <dt>Expected</dt><dd><code>==pair_count</code></dd>
+            <dt>Status</dt><dd>blocked</dd>
+            <dt>Action</dt><dd>Every pair needs one valid human judgment.</dd>
+          </dl>
+        </article>
+        
+        <article class="check-row pass">
+          <div>
+            <span>invalid_decision_count</span>
+            <strong>No invalid decisions</strong>
+          </div>
+          <dl>
+            <dt>Current</dt><dd><code>0</code></dd>
+            <dt>Expected</dt><dd><code>==0</code></dd>
+            <dt>Status</dt><dd>pass</dd>
+            <dt>Action</dt><dd>Fix malformed winner/confidence entries.</dd>
+          </dl>
+        </article>
+        </div>
+        </section>
+        <section class="runbook">
+          <h4>Runbook</h4>
+          <ul><li>python3 scripts/yao.py output-review-kit --write-template</li><li>Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.</li><li>python3 scripts/adjudicate_output_review.py --write-template</li><li>Edit reports/output_review_decisions.json with winner_variant values and reviewer metadata.</li><li>python3 scripts/yao.py output-review</li><li>python3 scripts/yao.py skill-os2-audit . --generated-at &lt;YYYY-MM-DD&gt;</li><li>Copy evidence/world_class/templates/human-adjudication.intake.json to evidence/world_class/submissions/human-adjudication.json and fill only real evidence fields.</li><li>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</li></ul>
+        </section>
+      </article>
+    
+      <article class="evidence-card blocked">
+        <header>
+          <span>external · blocked</span>
+          <h3>Native Permission Enforcement</h3>
+        </header>
+        <dl class="meta">
+          <dt>Evidence</dt><dd><code>native-permission-enforcement</code></dd>
+          <dt>Ledger</dt><dd>pending</dd>
+          <dt>Intake</dt><dd>awaiting-submission</dd>
+          <dt>Review</dt><dd>awaiting-submission</dd>
+          <dt>Draft</dt><dd><code>evidence/world_class/submissions/native-permission-enforcement.json</code></dd>
+        </dl>
+        <section class="next-action">
+          <h4>Next Action</h4>
+          <p>Attach a real target-client or external installer runtime guard; metadata fallback is not enough.</p>
+          <code>python3 scripts/yao.py world-class-submission-kit . --evidence-key native-permission-enforcement --output-dir evidence/world_class/submissions</code>
+        </section>
+        <section class="check-section">
+          <h4>Prechecks</h4>
+          <div class="check-grid">
+        <article class="check-row pass">
+          <div>
+            <span>file</span>
+            <strong>Permission policy</strong>
+          </div>
+          <dl>
+            <dt>Current</dt><dd><code>present</code></dd>
+            <dt>Status</dt><dd>pass</dd>
+            <dt>Action</dt><dd>Keep approved high-permission capabilities explicit.</dd>
+          </dl>
+        </article>
+        
+        <article class="check-row pass">
+          <div>
+            <span>file</span>
+            <strong>Runtime probes</strong>
+          </div>
+          <dl>
+            <dt>Current</dt><dd><code>present</code></dd>
+            <dt>Status</dt><dd>pass</dd>
+            <dt>Action</dt><dd>Refresh runtime permission probes after packaging changes.</dd>
+          </dl>
+        </article>
+        
+        <article class="check-row external-required">
+          <div>
+            <span>external</span>
+            <strong>Native guard</strong>
+          </div>
+          <dl>
+            <dt>Current</dt><dd><code>external-integration-required</code></dd>
+            <dt>Status</dt><dd>external-required</dd>
+            <dt>Action</dt><dd>Attach a real target-client or external installer runtime guard; metadata fallback is not enough.</dd>
+          </dl>
+        </article>
+        </div>
+        </section>
+        <section class="check-section">
+          <h4>Source Checks</h4>
+          <div class="check-grid">
+        <article class="check-row blocked">
+          <div>
+            <span>native_enforcement_count</span>
+            <strong>Native enforcement</strong>
+          </div>
+          <dl>
+            <dt>Current</dt><dd><code>0</code></dd>
+            <dt>Expected</dt><dd><code>&gt;0</code></dd>
+            <dt>Status</dt><dd>blocked</dd>
+            <dt>Action</dt><dd>Collect real target-client or external runtime guard proof.</dd>
+          </dl>
+        </article>
+        
+        <article class="check-row pass">
+          <div>
+            <span>failure_count</span>
+            <strong>Probe failures</strong>
+          </div>
+          <dl>
+            <dt>Current</dt><dd><code>0</code></dd>
+            <dt>Expected</dt><dd><code>==0</code></dd>
+            <dt>Status</dt><dd>pass</dd>
+            <dt>Action</dt><dd>Runtime permission probes must stay clean.</dd>
+          </dl>
+        </article>
+        
+        <article class="check-row pass">
+          <div>
+            <span>installer_enforcement_ready</span>
+            <strong>Installer support</strong>
+          </div>
+          <dl>
+            <dt>Current</dt><dd><code>True</code></dd>
+            <dt>Expected</dt><dd><code>true</code></dd>
+            <dt>Status</dt><dd>pass</dd>
+            <dt>Action</dt><dd>Installer enforcement is supporting evidence, not native proof.</dd>
+          </dl>
+        </article>
+        </div>
+        </section>
+        <section class="runbook">
+          <h4>Runbook</h4>
+          <ul><li>Implement or connect a real target client or external installer runtime guard that blocks undeclared network, file_write, or subprocess capabilities.</li><li>Update the generated target adapter only when the guard is actually enforced by that target.</li><li>python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip</li><li>python3 scripts/yao.py install-simulate . --package-dir dist --install-root dist/install-simulation</li><li>python3 scripts/yao.py runtime-permissions . --package-dir dist</li><li>python3 scripts/yao.py skill-os2-audit . --generated-at &lt;YYYY-MM-DD&gt;</li><li>Copy evidence/world_class/templates/native-permission-enforcement.intake.json to evidence/world_class/submissions/native-permission-enforcement.json and fill only real evidence fields.</li><li>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</li></ul>
+        </section>
+      </article>
+    
+      <article class="evidence-card blocked">
+        <header>
+          <span>external · blocked</span>
+          <h3>Native Client Telemetry</h3>
+        </header>
+        <dl class="meta">
+          <dt>Evidence</dt><dd><code>native-client-telemetry</code></dd>
+          <dt>Ledger</dt><dd>pending</dd>
+          <dt>Intake</dt><dd>awaiting-submission</dd>
+          <dt>Review</dt><dd>awaiting-submission</dd>
+          <dt>Draft</dt><dd><code>evidence/world_class/submissions/native-client-telemetry.json</code></dd>
+        </dl>
+        <section class="next-action">
+          <h4>Next Action</h4>
+          <p>Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events.</p>
+          <code>python3 scripts/yao.py world-class-submission-kit . --evidence-key native-client-telemetry --output-dir evidence/world_class/submissions</code>
+        </section>
+        <section class="check-section">
+          <h4>Prechecks</h4>
+          <div class="check-grid">
+        <article class="check-row pass">
+          <div>
+            <span>file</span>
+            <strong>Native telemetry host</strong>
+          </div>
+          <dl>
+            <dt>Current</dt><dd><code>present</code></dd>
+            <dt>Status</dt><dd>pass</dd>
+            <dt>Action</dt><dd>Use the native host to receive metadata-only client events.</dd>
+          </dl>
+        </article>
+        
+        <article class="check-row pass">
+          <div>
+            <span>file</span>
+            <strong>Hook recipes</strong>
+          </div>
+          <dl>
+            <dt>Current</dt><dd><code>present</code></dd>
+            <dt>Status</dt><dd>pass</dd>
+            <dt>Action</dt><dd>Refresh telemetry hook recipes before external client installation.</dd>
+          </dl>
+        </article>
+        
+        <article class="check-row external-required">
+          <div>
+            <span>external</span>
+            <strong>External client</strong>
+          </div>
+          <dl>
+            <dt>Current</dt><dd><code>external-integration-required</code></dd>
+            <dt>Status</dt><dd>external-required</dd>
+            <dt>Action</dt><dd>Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events.</dd>
+          </dl>
+        </article>
+        </div>
+        </section>
+        <section class="check-section">
+          <h4>Source Checks</h4>
+          <div class="check-grid">
+        <article class="check-row blocked">
+          <div>
+            <span>external_source_events</span>
+            <strong>External events</strong>
+          </div>
+          <dl>
+            <dt>Current</dt><dd><code>0</code></dd>
+            <dt>Expected</dt><dd><code>&gt;0</code></dd>
+            <dt>Status</dt><dd>blocked</dd>
+            <dt>Action</dt><dd>Import at least one metadata-only event from a real client.</dd>
+          </dl>
+        </article>
+        
+        <article class="check-row blocked">
+          <div>
+            <span>adoption_sample_count</span>
+            <strong>Adoption sample</strong>
+          </div>
+          <dl>
+            <dt>Current</dt><dd><code>0</code></dd>
+            <dt>Expected</dt><dd><code>&gt;0</code></dd>
+            <dt>Status</dt><dd>blocked</dd>
+            <dt>Action</dt><dd>Telemetry must include adoption outcome evidence.</dd>
+          </dl>
+        </article>
+        
+        <article class="check-row pass">
+          <div>
+            <span>raw_content_allowed</span>
+            <strong>Raw content blocked</strong>
+          </div>
+          <dl>
+            <dt>Current</dt><dd><code>False</code></dd>
+            <dt>Expected</dt><dd><code>false</code></dd>
+            <dt>Status</dt><dd>pass</dd>
+            <dt>Action</dt><dd>Telemetry must stay metadata-only.</dd>
+          </dl>
+        </article>
+        </div>
+        </section>
+        <section class="runbook">
+          <h4>Runbook</h4>
+          <ul><li>python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://&lt;extension-id&gt;/</li><li>Install the generated native messaging manifest for the real client and send at least one accepted skill_activation or skill_output event.</li><li>python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl</li><li>python3 scripts/yao.py skill-atlas --workspace-root .</li><li>python3 scripts/yao.py skill-os2-audit . --generated-at &lt;YYYY-MM-DD&gt;</li><li>Copy evidence/world_class/templates/native-client-telemetry.intake.json to evidence/world_class/submissions/native-client-telemetry.json and fill only real evidence fields.</li><li>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</li></ul>
+        </section>
+      </article>
+    </div></section>
+    <section class="section" id="boundary">
+      <h2>Safety Boundary</h2>
+      <div class="notice"><ul><li>Environment variables are displayed only as set or not-set; secret values are never printed.</li><li>Human-required and external-required states are operator work, not accepted evidence.</li><li>The world-class ledger remains the only source of truth for ready_to_claim_world_class.</li></ul></div>
+    </section>
+  </main>
+</body>
+</html>

@@ -119,14 +119,14 @@ Next move: add real client or installer permission enforcement integration.
 | Runtime Permission Probes | `4 / 4` target adapters probed, `0` native-enforcement adapters, `4` explicit metadata fallbacks, `4` residual risks retained for reviewer visibility |
 | Skill Atlas | `12` scanned skills, `1` actionable root skill, `1` telemetry report, `0` actionable route collisions, `0` actionable owner gaps, `0` actionable stale skills, `0` actionable drift signals, `24` scoped non-actionable issue signals retained for visibility |
 | Registry Audit | package metadata generated with version, owner, license, source checksum, archive checksum, Skill IR provenance, and compatibility matrix |
-| Package Verification | `4 / 4` target adapters present, archive verified, `623` zip entries, `0` failures, `0` warnings |
-| Install Simulation | archive with `623` entries extracted into a local verification root, entrypoint/manifest/interface loaded, reports present, `4` adapters readable, `12` installer permission checks enforced, `0` permission failures, `0` failures, `0` warnings |
+| Package Verification | `4 / 4` target adapters present, archive verified, `624` zip entries, `0` failures, `0` warnings |
+| Install Simulation | archive with `624` entries extracted into a local verification root, entrypoint/manifest/interface loaded, reports present, `4` adapters readable, `12` installer permission checks enforced, `0` permission failures, `0` failures, `0` warnings |
 | Local Install Sync Preflight | `make sync-local-install` and `make sync-active-install` rebuild the package first, then sync only after install simulation passes with `12` enforced installer permission checks and `0` permission failures |
 | Upgrade Check | current package declares `minor` over the 1.0.0 baseline, recommended bump is `minor`, and release notes include added targets plus checksum changes |
 | Adoption Drift | `1` metadata-only review event, `0` adoption samples, adoption `0`, risk band `low`; optional `yao.py` CLI capture, external client `telemetry-emit`, `5` `telemetry-hooks` recipes, Browser/Chrome native messaging host, and validated external JSONL import are available but off by default for reproducible release evidence; raw `reports/telemetry_events.jsonl` is gitignored and blocked from zip packages |
 | Review Waivers | ledger generated; current release has `1` warning gate that still needs reviewer decision or a time-bounded waiver; blockers remain non-waivable in v0, and world-class evidence gaps must be closed with accepted evidence rather than waived as completed |
 | Review Annotations | ledger generated; current release has `0` reviewer annotations and `0` open annotation blockers |
-| Review Studio | decision `review`, world-class score `89`, `16` gates, `0` blockers, `4` warnings, `3` review actions, `0` open annotation blockers |
+| Review Studio | decision `review`, world-class score `91`, `16` gates, `0` blockers, `3` warnings, `3` review actions, `0` open annotation blockers |
 | Skill OS 2.0 Audit | `15` audited areas, with local foundation evidence separated from human-required and external-required gaps |
 | World-Class Evidence Plan | `4` remaining evidence tasks: `1` human-required and `3` external-required, all with runbooks, success checks, and privacy contracts |
 | World-Class Evidence Ledger | `4` evidence entries remain pending: `1` human-required and `3` external-required; anti-overclaim guards block planned work, metadata fallbacks, pending review, and local command runners from counting as completion |

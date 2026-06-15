@@ -24,6 +24,7 @@ REPORT_FILES = [
     "reports/world_class_evidence_plan.json",
     "reports/world_class_evidence_intake.json",
     "reports/world_class_evidence_preflight.json",
+    "reports/world_class_evidence_preflight.html",
     "reports/world_class_submission_review.json",
     "reports/world_class_operator_runbook.json",
     "reports/skill_os2_coverage.json",

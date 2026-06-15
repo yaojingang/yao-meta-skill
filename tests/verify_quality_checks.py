@@ -159,6 +159,7 @@ def verify_volatile_report_outputs_ignored() -> dict:
             "skill-overview.json",
             "world_class_evidence_preflight.json",
             "world_class_evidence_preflight.md",
+            "world_class_evidence_preflight.html",
         ]
         for report_name in volatile_reports:
             report_path = skill_dir / "reports" / report_name
