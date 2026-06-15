@@ -6,7 +6,7 @@
   "summary": {
     "ledger_ready_to_claim_world_class": false,
     "ledger_pending_count": 4,
-    "claim_surface_count": 77,
+    "claim_surface_count": 78,
     "violation_count": 0,
     "overclaim_guard_active": true,
     "decision": "claim-guard-pass-evidence-pending"
@@ -69,6 +69,10 @@
     },
     {
       "path": "reports/adaptation_proposals.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/adaptation_regression_report.md",
       "violation_count": 0
     },
     {
