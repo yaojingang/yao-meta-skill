@@ -151,6 +151,9 @@ def main() -> None:
     assert checks["interpretation-adoption-summary"]["status"] == "pass", checks["interpretation-adoption-summary"]
     assert checks["coverage-world-class-boundary"]["status"] == "pass", checks["coverage-world-class-boundary"]
     assert checks["preflight-world-class-boundary"]["status"] == "pass", checks["preflight-world-class-boundary"]
+    assert checks["preflight-submission-kit-handoff"]["status"] == "pass", checks[
+        "preflight-submission-kit-handoff"
+    ]
     assert checks["review-studio-no-overclaim"]["status"] == "pass", checks["review-studio-no-overclaim"]
     assert checks["claim-guard-package-runtime-surface"]["status"] == "pass", checks[
         "claim-guard-package-runtime-surface"
@@ -246,6 +249,33 @@ def main() -> None:
     preflight_drift_checks = {item["key"]: item for item in preflight_drift_payload["checks"]}
     assert preflight_drift_checks["preflight-world-class-boundary"]["status"] == "fail", (
         preflight_drift_checks["preflight-world-class-boundary"]
+    )
+
+    preflight_handoff_drift_root = TMP / "preflight-handoff-drift-skill"
+    copy_reports(preflight_handoff_drift_root)
+    preflight_handoff_path = preflight_handoff_drift_root / "reports" / "world_class_evidence_preflight.json"
+    preflight_handoff = json.loads(preflight_handoff_path.read_text(encoding="utf-8"))
+    preflight_handoff["submissions"]["drafts_count_as_evidence"] = True
+    preflight_handoff["submissions"]["commands"].pop("prepare_submission", None)
+    preflight_handoff_path.write_text(json.dumps(preflight_handoff, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    preflight_handoff_drift_proc = run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            str(preflight_handoff_drift_root),
+            "--output-json",
+            str(TMP / "preflight_handoff_drift.json"),
+            "--output-md",
+            str(TMP / "preflight_handoff_drift.md"),
+            "--generated-at",
+            "2026-06-15",
+        ]
+    )
+    assert preflight_handoff_drift_proc.returncode == 2, preflight_handoff_drift_proc.stdout
+    preflight_handoff_drift_payload = json.loads(preflight_handoff_drift_proc.stdout)
+    preflight_handoff_drift_checks = {item["key"]: item for item in preflight_handoff_drift_payload["checks"]}
+    assert preflight_handoff_drift_checks["preflight-submission-kit-handoff"]["status"] == "fail", (
+        preflight_handoff_drift_checks["preflight-submission-kit-handoff"]
     )
 
     release_flow_drift_root = TMP / "release-flow-drift-skill"

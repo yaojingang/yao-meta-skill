@@ -14,6 +14,18 @@ Generated at: `2026-06-16`
 
 This preflight report checks whether an operator can start collecting the remaining external or human evidence. It never accepts evidence, prints secret values, or changes the world-class ledger.
 
+## Submission Kit Handoff
+
+- submissions directory: `evidence/world_class/submissions`
+- prepare drafts: `python3 scripts/yao.py world-class-submission-kit . --output-dir evidence/world_class/submissions`
+- validate intake: `python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions`
+- review queue: `python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions`
+- refresh ledger: `python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions`
+- guard claims: `python3 scripts/yao.py world-class-claim-guard .`
+- drafts count as evidence: `false`
+
+Generate the submission kit after the real provider, human, native-permission, or native-client work exists. The generated JSON drafts remain `template_only: true` until an operator edits them with real aggregate artifact references and matching SHA-256 digests.
+
 ## Evidence Items
 
 | Evidence | Status | Intake | Review | Next action |
@@ -28,6 +40,7 @@ This preflight report checks whether an operator can start collecting the remain
 - status: `blocked`
 - ledger: `pending`
 - submission: `evidence/world_class/submissions/provider-holdout.json`
+- prepare draft: `python3 scripts/yao.py world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions`
 
 ### Prechecks
 
@@ -51,6 +64,7 @@ This preflight report checks whether an operator can start collecting the remain
 - status: `ready-for-human-review`
 - ledger: `pending`
 - submission: `evidence/world_class/submissions/human-adjudication.json`
+- prepare draft: `python3 scripts/yao.py world-class-submission-kit . --evidence-key human-adjudication --output-dir evidence/world_class/submissions`
 
 ### Prechecks
 
@@ -74,6 +88,7 @@ This preflight report checks whether an operator can start collecting the remain
 - status: `blocked`
 - ledger: `pending`
 - submission: `evidence/world_class/submissions/native-permission-enforcement.json`
+- prepare draft: `python3 scripts/yao.py world-class-submission-kit . --evidence-key native-permission-enforcement --output-dir evidence/world_class/submissions`
 
 ### Prechecks
 
@@ -96,6 +111,7 @@ This preflight report checks whether an operator can start collecting the remain
 - status: `blocked`
 - ledger: `pending`
 - submission: `evidence/world_class/submissions/native-client-telemetry.json`
+- prepare draft: `python3 scripts/yao.py world-class-submission-kit . --evidence-key native-client-telemetry --output-dir evidence/world_class/submissions`
 
 ### Prechecks
 

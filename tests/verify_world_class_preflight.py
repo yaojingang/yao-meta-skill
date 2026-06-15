@@ -79,9 +79,36 @@ def main() -> None:
     assert summary["source_pass_count"] + summary["source_blocked_count"] == summary["source_check_count"], summary
     assert summary["source_blocked_count"] >= 6, summary
     assert payload["submissions"]["preflight_counts_submission_as_completion"] is False, payload
+    assert payload["submissions"]["drafts_count_as_evidence"] is False, payload
+    assert payload["submissions"]["submission_kit_command"] == (
+        "python3 scripts/yao.py world-class-submission-kit . "
+        "--output-dir evidence/world_class/submissions"
+    ), payload["submissions"]
+    submission_commands = payload["submissions"]["commands"]
+    assert submission_commands["prepare_submission"] == (
+        "python3 scripts/yao.py world-class-submission-kit . "
+        "--output-dir evidence/world_class/submissions"
+    ), submission_commands
+    assert submission_commands["validate_intake"] == (
+        "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
+    ), submission_commands
+    assert submission_commands["submission_review"] == (
+        "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions"
+    ), submission_commands
+    assert submission_commands["refresh_ledger"] == (
+        "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions"
+    ), submission_commands
+    assert submission_commands["guard_claim"] == "python3 scripts/yao.py world-class-claim-guard .", submission_commands
 
     provider = by_key(payload["items"], "provider-holdout")
     assert provider["status"] == "blocked", provider
+    assert provider["commands"]["prepare_submission"] == (
+        "python3 scripts/yao.py world-class-submission-kit . "
+        "--evidence-key provider-holdout --output-dir evidence/world_class/submissions"
+    ), provider
+    assert provider["submission_kit"]["drafts_count_as_evidence"] is False, provider
+    assert provider["submission_kit"]["output_dir"] == "evidence/world_class/submissions", provider
+    assert provider["submission_kit"]["draft_path"] == "evidence/world_class/submissions/provider-holdout.json", provider
     provider_checks = {item["key"]: item for item in provider["prechecks"]}
     assert provider_checks["openai-api-key"]["status"] == "missing", provider_checks
     assert provider_checks["openai-api-key"]["actual"] == "not-set", provider_checks
@@ -106,6 +133,10 @@ def main() -> None:
     assert "ready to claim world-class: `false`" in markdown, markdown
     assert "preflight counts as evidence: `false`" in markdown, markdown
     assert "credential value exposed: `false`" in markdown, markdown
+    assert "Submission Kit Handoff" in markdown, markdown
+    assert "world-class-submission-kit . --output-dir evidence/world_class/submissions" in markdown, markdown
+    assert "world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions" in markdown, markdown
+    assert "drafts count as evidence: `false`" in markdown, markdown
     assert "values are never printed" in markdown, markdown
 
     env_json = TMP / "preflight_with_env.json"
@@ -125,6 +156,21 @@ def main() -> None:
     assert "sk-test-secret" not in env_proc.stdout, env_proc.stdout
     assert env_payload["summary"]["credential_value_exposed"] is False, env_payload
     assert env_payload["summary"]["ready_to_claim_world_class"] is False, env_payload
+
+    spaced_dir = TMP / "submission kit spaced"
+    spaced_proc = run_preflight(
+        None,
+        "--submissions-dir",
+        str(spaced_dir),
+        "--output-json",
+        str(TMP / "preflight_spaced.json"),
+        "--output-md",
+        str(TMP / "preflight_spaced.md"),
+    )
+    spaced_payload = json.loads(spaced_proc.stdout)
+    quoted_spaced = "'tests/tmp_world_class_preflight/submission kit spaced'"
+    assert quoted_spaced in spaced_payload["submissions"]["commands"]["prepare_submission"], spaced_payload["submissions"]
+    assert quoted_spaced in by_key(spaced_payload["items"], "provider-holdout")["commands"]["prepare_submission"], spaced_payload["items"]
 
     cli_proc = run_cli(
         "--output-json",

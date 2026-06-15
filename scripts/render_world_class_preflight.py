@@ -2,6 +2,7 @@
 import argparse
 import json
 import os
+import shlex
 from datetime import date
 from pathlib import Path
 from typing import Any
@@ -137,6 +138,24 @@ def env_present(name: str) -> bool:
     return bool(os.environ.get(name))
 
 
+def shell_path(path: Path, root: Path) -> str:
+    return shlex.quote(rel_path(path, root))
+
+
+def build_submission_commands(skill_dir: Path, submissions_dir: Path, evidence_key: str | None = None) -> dict[str, str]:
+    output_dir = shell_path(submissions_dir, skill_dir)
+    prepare = f"python3 scripts/yao.py world-class-submission-kit . --output-dir {output_dir}"
+    if evidence_key:
+        prepare = f"python3 scripts/yao.py world-class-submission-kit . --evidence-key {evidence_key} --output-dir {output_dir}"
+    return {
+        "prepare_submission": prepare,
+        "validate_intake": f"python3 scripts/yao.py world-class-intake . --submissions-dir {output_dir}",
+        "submission_review": f"python3 scripts/yao.py world-class-submission-review . --submissions-dir {output_dir}",
+        "refresh_ledger": f"python3 scripts/yao.py world-class-ledger . --submissions-dir {output_dir}",
+        "guard_claim": "python3 scripts/yao.py world-class-claim-guard .",
+    }
+
+
 def build_precheck(skill_dir: Path, evidence_key: str, spec: dict[str, Any]) -> dict[str, Any]:
     kind = str(spec.get("kind", ""))
     required = spec.get("required") is True
@@ -236,6 +255,7 @@ def build_preflight(skill_dir: Path, generated_at: str, submissions_dir: Path | 
         item_source_rows = review_item.get("source_checklist", entry.get("source_checklist", []))
         item_source_rows = item_source_rows if isinstance(item_source_rows, list) else []
         status = item_status(entry, prechecks, item_source_rows)
+        item_commands = build_submission_commands(skill_dir, submissions_dir, key)
         item = {
             "evidence_key": key,
             "label": entry.get("label", key),
@@ -251,6 +271,14 @@ def build_preflight(skill_dir: Path, generated_at: str, submissions_dir: Path | 
             "next_action": first_next_action(prechecks, item_source_rows),
             "submission_path": intake_by_key.get(key, {}).get("submission_path", ""),
             "template_path": intake_by_key.get(key, {}).get("template_path", ""),
+            "commands": item_commands,
+            "submission_kit": {
+                "prepare_command": item_commands["prepare_submission"],
+                "output_dir": rel_path(submissions_dir, skill_dir),
+                "draft_path": intake_by_key.get(key, {}).get("submission_path", ""),
+                "template_path": intake_by_key.get(key, {}).get("template_path", ""),
+                "drafts_count_as_evidence": False,
+            },
             "runbook": entry.get("runbook", []),
         }
         items.append(item)
@@ -294,7 +322,10 @@ def build_preflight(skill_dir: Path, generated_at: str, submissions_dir: Path | 
         "source_checklist": source_rows,
         "submissions": {
             "directory": rel_path(submissions_dir, skill_dir),
+            "commands": build_submission_commands(skill_dir, submissions_dir),
+            "submission_kit_command": build_submission_commands(skill_dir, submissions_dir)["prepare_submission"],
             "preflight_counts_submission_as_completion": False,
+            "drafts_count_as_evidence": False,
         },
         "source_reports": {
             "ledger": "reports/world_class_evidence_ledger.json",
@@ -328,6 +359,18 @@ def render_markdown(report: dict[str, Any]) -> str:
         "",
         "This preflight report checks whether an operator can start collecting the remaining external or human evidence. It never accepts evidence, prints secret values, or changes the world-class ledger.",
         "",
+        "## Submission Kit Handoff",
+        "",
+        f"- submissions directory: `{report['submissions']['directory']}`",
+        f"- prepare drafts: `{report['submissions']['commands']['prepare_submission']}`",
+        f"- validate intake: `{report['submissions']['commands']['validate_intake']}`",
+        f"- review queue: `{report['submissions']['commands']['submission_review']}`",
+        f"- refresh ledger: `{report['submissions']['commands']['refresh_ledger']}`",
+        f"- guard claims: `{report['submissions']['commands']['guard_claim']}`",
+        f"- drafts count as evidence: `{str(report['submissions']['drafts_count_as_evidence']).lower()}`",
+        "",
+        "Generate the submission kit after the real provider, human, native-permission, or native-client work exists. The generated JSON drafts remain `template_only: true` until an operator edits them with real aggregate artifact references and matching SHA-256 digests.",
+        "",
         "## Evidence Items",
         "",
         "| Evidence | Status | Intake | Review | Next action |",
@@ -347,6 +390,7 @@ def render_markdown(report: dict[str, Any]) -> str:
                 f"- status: `{item['status']}`",
                 f"- ledger: `{item['ledger_status']}`",
                 f"- submission: `{item.get('submission_path') or 'missing'}`",
+                f"- prepare draft: `{item['commands']['prepare_submission']}`",
                 "",
                 "### Prechecks",
                 "",

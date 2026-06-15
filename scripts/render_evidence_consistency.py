@@ -455,6 +455,51 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             paths=[REQUIRED_REPORTS["world_class_ledger"], REQUIRED_REPORTS["world_class_preflight"]],
             detail="Collection preflight may help operators gather evidence, but it must not print secrets or change world-class readiness.",
         )
+        preflight_submissions = (
+            world_class_preflight.get("submissions", {})
+            if isinstance(world_class_preflight.get("submissions", {}), dict)
+            else {}
+        )
+        preflight_commands = (
+            preflight_submissions.get("commands", {})
+            if isinstance(preflight_submissions.get("commands", {}), dict)
+            else {}
+        )
+        default_submissions_dir = "evidence/world_class/submissions"
+        expected_preflight_handoff = {
+            "directory": default_submissions_dir,
+            "drafts_count_as_evidence": False,
+            "preflight_counts_submission_as_completion": False,
+            "prepare_submission": f"python3 scripts/yao.py world-class-submission-kit . --output-dir {default_submissions_dir}",
+            "validate_intake": f"python3 scripts/yao.py world-class-intake . --submissions-dir {default_submissions_dir}",
+            "submission_review": f"python3 scripts/yao.py world-class-submission-review . --submissions-dir {default_submissions_dir}",
+            "refresh_ledger": f"python3 scripts/yao.py world-class-ledger . --submissions-dir {default_submissions_dir}",
+            "guard_claim": "python3 scripts/yao.py world-class-claim-guard .",
+        }
+        actual_preflight_handoff = {
+            "directory": preflight_submissions.get("directory"),
+            "drafts_count_as_evidence": preflight_submissions.get("drafts_count_as_evidence"),
+            "preflight_counts_submission_as_completion": preflight_submissions.get(
+                "preflight_counts_submission_as_completion"
+            ),
+            "prepare_submission": preflight_commands.get("prepare_submission"),
+            "validate_intake": preflight_commands.get("validate_intake"),
+            "submission_review": preflight_commands.get("submission_review"),
+            "refresh_ledger": preflight_commands.get("refresh_ledger"),
+            "guard_claim": preflight_commands.get("guard_claim"),
+        }
+        compare_values(
+            checks,
+            key="preflight-submission-kit-handoff",
+            label="Preflight exposes a safe submission-kit handoff",
+            expected=expected_preflight_handoff,
+            actual=actual_preflight_handoff,
+            paths=[REQUIRED_REPORTS["world_class_preflight"]],
+            detail=(
+                "Preflight must give operators the exact draft, intake, review, ledger, and claim-guard commands "
+                "without letting drafts or submissions count as accepted evidence."
+            ),
+        )
 
     public_ready = bool(ledger_summary.get("ready_to_claim_world_class")) if isinstance(ledger_summary, dict) else False
     compare_values(
