@@ -11,6 +11,7 @@ from review_studio_formatting import registry_package_summary, render_kv_grid
 from review_studio_gates import add_blockers_from_gate, build_gates, status_label, weighted_score
 from review_studio_layout import render_review_nav, review_studio_css
 from review_studio_output_review import render_output_review_section
+from review_studio_skillops import render_skillops_section
 from review_studio_waivers import render_waiver_candidates_panel
 from review_studio_world_class import render_world_class_evidence_entries, render_world_class_intake_checklist
 
@@ -142,8 +143,6 @@ def render_html(report: dict[str, Any]) -> str:
     runtime_permissions_summary = report["data"]["runtime_permissions"].get("summary", {})
     atlas_summary = report["data"]["atlas"].get("summary", {})
     adoption_summary = report["data"]["adoption_drift"].get("summary", {})
-    daily_skillops_summary = report["data"]["daily_skillops"].get("summary", {})
-    weekly_curator_summary = report["data"]["weekly_curator"].get("summary", {})
     waiver_summary = report["data"]["review_waivers"].get("summary", {})
     world_class_ledger = report["data"].get("world_class_evidence_ledger", {})
     world_class_summary = world_class_ledger.get("summary", {})
@@ -293,36 +292,7 @@ def render_html(report: dict[str, Any]) -> str:
         ["event_count", "adoption_rate", "missed_trigger_count", "bad_output_count", "risk_band"],
         "no adoption drift summary",
     )
-    daily_skillops_panel = render_kv_grid(
-        daily_skillops_summary,
-        [
-            "decision",
-            "proposal_count",
-            "approval_count",
-            "pending_review_count",
-            "release_lock_ready",
-            "public_world_class_ready",
-            "writes_source_files",
-            "auto_patch_enabled",
-        ],
-        "no daily SkillOps summary",
-    )
-    weekly_curator_panel = render_kv_grid(
-        weekly_curator_summary,
-        [
-            "decision",
-            "week_id",
-            "daily_report_count",
-            "unique_opportunity_count",
-            "ready_for_approval_review_count",
-            "proposal_review_count",
-            "top_score",
-            "release_lock_ready",
-            "writes_source_files",
-            "auto_patch_enabled",
-        ],
-        "no weekly curator summary",
-    )
+    skillops_section_html = render_skillops_section(report["data"])
     waiver_panel = render_kv_grid(
         waiver_summary,
         ["waiver_count", "active_count", "expired_count", "invalid_count", "covered_gate_count"],
@@ -536,10 +506,7 @@ def render_html(report: dict[str, Any]) -> str:
       <div class="panel"><h2>漂移信号</h2>{adoption_panel}</div>
     </section>
 
-    <section class="twocol">
-      <div class="panel"><h2>日常运维</h2>{daily_skillops_panel}</div>
-      <div class="panel"><h2>周度队列</h2>{weekly_curator_panel}</div>
-    </section>
+    {skillops_section_html}
 
     <section id="waivers">
       <h2>人工批准</h2>

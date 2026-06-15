@@ -4,10 +4,10 @@
   "generated_at": "2026-06-16",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 186,
-    "script_file_count": 117,
+    "python_file_count": 187,
+    "script_file_count": 118,
     "test_file_count": 69,
-    "internal_module_count": 35,
+    "internal_module_count": 36,
     "cli_script_count": 84,
     "command_handler_count": 67,
     "entrypoint_command_handler_count": 18,

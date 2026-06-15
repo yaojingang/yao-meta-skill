@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `205`
-- Scripts: `117`
-- Internal script modules: `32`
+- Scanned files: `206`
+- Scripts: `118`
+- Internal script modules: `33`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `205`
-- Package SHA256: `eccfa7712df8fbf24eaf9f678b9a611da305f5c98e0f7d12738469377853d6aa`
+- Package hash files: `206`
+- Package SHA256: `dc875f356573a393c274e3dbee59dc85c78687add384e1e4a193957a57233183`
 
 ## Failures
 
@@ -142,6 +142,7 @@
 | scripts/review_studio_gates.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to keep Review Studio gate evaluation separate from HTML rendering. |
 | scripts/review_studio_layout.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to keep Review Studio layout and CSS out of gate logic. |
 | scripts/review_studio_output_review.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to render output review checklist cards. |
+| scripts/review_studio_skillops.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to keep SkillOps summary panels out of the main HTML renderer. |
 | scripts/review_studio_waivers.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to keep waiver candidate layout out of the main renderer. |
 | scripts/review_studio_world_class.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to render world-class evidence cards. |
 | scripts/review_viewer_data.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_viewer.py to assemble Review Viewer data before HTML rendering. |

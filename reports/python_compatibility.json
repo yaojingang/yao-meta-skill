@@ -5,7 +5,7 @@
   "root": ".",
   "summary": {
     "target_python": "3.11",
-    "file_count": 189,
+    "file_count": 190,
     "issue_count": 0,
     "syntax_error_count": 0,
     "fstring_311_violation_count": 0,
@@ -516,6 +516,12 @@
     },
     {
       "path": "scripts/review_studio_output_review.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "scripts/review_studio_skillops.py",
       "ok": true,
       "issue_count": 0,
       "issues": []

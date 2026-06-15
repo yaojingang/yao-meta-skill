@@ -21,8 +21,8 @@
     "trust_level": "local",
     "license": "MIT",
     "checksums": {
-      "package_sha256": "eccfa7712df8fbf24eaf9f678b9a611da305f5c98e0f7d12738469377853d6aa",
-      "archive_sha256": "97caaa2c79ef6128500d2b5026f5d93fa96dab0c83e6d6594ad10b9f7d602af7"
+      "package_sha256": "dc875f356573a393c274e3dbee59dc85c78687add384e1e4a193957a57233183",
+      "archive_sha256": "7d597e2b1385e312d344995cb934549731a7378d0f146d77a93f08d68101b9e4"
     },
     "compatibility": {
       "openai": "pass",
@@ -53,7 +53,7 @@
     },
     "distribution": {
       "archive_verified": true,
-      "archive_sha256": "97caaa2c79ef6128500d2b5026f5d93fa96dab0c83e6d6594ad10b9f7d602af7",
+      "archive_sha256": "7d597e2b1385e312d344995cb934549731a7378d0f146d77a93f08d68101b9e4",
       "package_verification": "reports/package_verification.json",
       "install_simulated": true,
       "install_simulation": "reports/install_simulation.json"
@@ -78,7 +78,7 @@
           "vscode"
         ],
         "package_metadata": "registry/packages/yao-meta-skill.json",
-        "package_sha256": "eccfa7712df8fbf24eaf9f678b9a611da305f5c98e0f7d12738469377853d6aa"
+        "package_sha256": "dc875f356573a393c274e3dbee59dc85c78687add384e1e4a193957a57233183"
       }
     ]
   },
