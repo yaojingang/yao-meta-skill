@@ -43,7 +43,7 @@
       "key": "context-budget",
       "label": "上下文",
       "status": "pass",
-      "detail": "initial load 960/1000; deferred 449953/120000; top deferred scripts 400742; resource governance governed; quality density 135.4",
+      "detail": "initial load 960/1000; deferred 451359/120000; top deferred scripts 402148; resource governance governed; quality density 135.4",
       "evidence": "reports/context_budget.json",
       "link": "context_budget.md"
     },
@@ -1682,9 +1682,9 @@
           "methodology_complete": true,
           "required_artifact_count": 25,
           "missing_artifact_count": 0,
-          "evidence_bundle_sha256": "6df38c9fce7895f5feeec08583d1d9e1ccdf16937b9dc9f680da4ad8219e61bf",
-          "source_contract_sha256": "836b5ebaf4a608a1a89fa84306ab9b4bb7e0555c74b6ca8e572ffb1833cc0f8c",
-          "archive_sha256": "ed1bc47c56c8d247bf5dd351bf29201e60471b4785a86e16ae1ede5e71d1582f",
+          "evidence_bundle_sha256": "5f8d6cea6eefddce28e4d833d5f2f40010dec6d72265472072c82aad02a6f670",
+          "source_contract_sha256": "f088abea9460cfb91e969de1397dd16e9e1a5ba18ad96db4c2a7acad0d34dcbf",
+          "archive_sha256": "56ae3ef2ba798437b7253add936fc87ca34da09890359f6f53b7d6e775093d69",
           "output_case_count": 5,
           "failure_disclosure_count": 3,
           "command_count": 23,
@@ -1706,7 +1706,7 @@
           "working_tree_dirty": false,
           "changed_file_count": 0
         },
-        "commit": "290134b4d1d5c2f5c9760434127080d1f2e47ddb",
+        "commit": "3323880da296220d6a33221c113a006654d1d787",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -1811,7 +1811,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 201,
-        "package_sha256": "836b5ebaf4a608a1a89fa84306ab9b4bb7e0555c74b6ca8e572ffb1833cc0f8c"
+        "package_sha256": "f088abea9460cfb91e969de1397dd16e9e1a5ba18ad96db4c2a7acad0d34dcbf"
       },
       "skill_atlas": {
         "skill_count": 12,
@@ -1849,8 +1849,8 @@
           "trust_level": "local",
           "license": "MIT",
           "checksums": {
-            "package_sha256": "836b5ebaf4a608a1a89fa84306ab9b4bb7e0555c74b6ca8e572ffb1833cc0f8c",
-            "archive_sha256": "ed1bc47c56c8d247bf5dd351bf29201e60471b4785a86e16ae1ede5e71d1582f"
+            "package_sha256": "f088abea9460cfb91e969de1397dd16e9e1a5ba18ad96db4c2a7acad0d34dcbf",
+            "archive_sha256": "56ae3ef2ba798437b7253add936fc87ca34da09890359f6f53b7d6e775093d69"
           },
           "compatibility": {
             "openai": "pass",
@@ -1881,7 +1881,7 @@
           },
           "distribution": {
             "archive_verified": true,
-            "archive_sha256": "ed1bc47c56c8d247bf5dd351bf29201e60471b4785a86e16ae1ede5e71d1582f",
+            "archive_sha256": "56ae3ef2ba798437b7253add936fc87ca34da09890359f6f53b7d6e775093d69",
             "package_verification": "reports/package_verification.json",
             "install_simulated": true,
             "install_simulation": "reports/install_simulation.json"
@@ -1897,7 +1897,7 @@
           "target_count": 4,
           "adapter_count": 4,
           "archive_present": true,
-          "archive_sha256": "ed1bc47c56c8d247bf5dd351bf29201e60471b4785a86e16ae1ede5e71d1582f",
+          "archive_sha256": "56ae3ef2ba798437b7253add936fc87ca34da09890359f6f53b7d6e775093d69",
           "archive_entry_count": 626,
           "failure_count": 0,
           "warning_count": 0
@@ -1976,12 +1976,12 @@
             {
               "field": "archive_sha256",
               "from": "",
-              "to": "ed1bc47c56c8d247bf5dd351bf29201e60471b4785a86e16ae1ede5e71d1582f"
+              "to": "56ae3ef2ba798437b7253add936fc87ca34da09890359f6f53b7d6e775093d69"
             },
             {
               "field": "package_sha256",
               "from": "0000000000000000000000000000000000000000000000000000000000000000",
-              "to": "836b5ebaf4a608a1a89fa84306ab9b4bb7e0555c74b6ca8e572ffb1833cc0f8c"
+              "to": "f088abea9460cfb91e969de1397dd16e9e1a5ba18ad96db4c2a7acad0d34dcbf"
             }
           ]
         },
@@ -4348,7 +4348,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 27.19,
+          "duration_ms": 27.59,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4376,7 +4376,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.21,
+          "duration_ms": 26.56,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4399,7 +4399,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 29.21,
+          "duration_ms": 27.04,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4427,7 +4427,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 31.35,
+          "duration_ms": 29.17,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4450,7 +4450,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.03,
+          "duration_ms": 29.81,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4478,7 +4478,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.51,
+          "duration_ms": 27.82,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4501,7 +4501,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.42,
+          "duration_ms": 26.57,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4528,7 +4528,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.03,
+          "duration_ms": 26.29,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4551,7 +4551,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.05,
+          "duration_ms": 26.04,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4580,7 +4580,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.28,
+          "duration_ms": 26.13,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -5301,7 +5301,7 @@
       "ok": true,
       "generated_at": "2026-06-16",
       "skill_dir": ".",
-      "commit": "290134b4d1d5c2f5c9760434127080d1f2e47ddb",
+      "commit": "3323880da296220d6a33221c113a006654d1d787",
       "git_status": {
         "available": true,
         "dirty": false,
@@ -5315,9 +5315,9 @@
         "methodology_complete": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "6df38c9fce7895f5feeec08583d1d9e1ccdf16937b9dc9f680da4ad8219e61bf",
-        "source_contract_sha256": "836b5ebaf4a608a1a89fa84306ab9b4bb7e0555c74b6ca8e572ffb1833cc0f8c",
-        "archive_sha256": "ed1bc47c56c8d247bf5dd351bf29201e60471b4785a86e16ae1ede5e71d1582f",
+        "evidence_bundle_sha256": "5f8d6cea6eefddce28e4d833d5f2f40010dec6d72265472072c82aad02a6f670",
+        "source_contract_sha256": "f088abea9460cfb91e969de1397dd16e9e1a5ba18ad96db4c2a7acad0d34dcbf",
+        "archive_sha256": "56ae3ef2ba798437b7253add936fc87ca34da09890359f6f53b7d6e775093d69",
         "output_case_count": 5,
         "failure_disclosure_count": 3,
         "command_count": 23,
@@ -5352,7 +5352,7 @@
       },
       "release_lock": {
         "ready": true,
-        "commit": "290134b4d1d5c2f5c9760434127080d1f2e47ddb",
+        "commit": "3323880da296220d6a33221c113a006654d1d787",
         "status_scope": "generation-time status before this report is written",
         "reason": "clean generation-time HEAD"
       },
@@ -5362,7 +5362,7 @@
         "existing_count": 25,
         "missing_count": 0,
         "missing_paths": [],
-        "sha256": "6df38c9fce7895f5feeec08583d1d9e1ccdf16937b9dc9f680da4ad8219e61bf"
+        "sha256": "5f8d6cea6eefddce28e4d833d5f2f40010dec6d72265472072c82aad02a6f670"
       },
       "methodology": {
         "path": "reports/benchmark_methodology.md",
@@ -5436,7 +5436,7 @@
           "path": "reports/output_execution_runs.json",
           "exists": true,
           "bytes": 7967,
-          "sha256": "a2b4d5eb758212e7d96e3b424d2659545d52cad354f51f13d756d4092dd8be7a"
+          "sha256": "777b10e2b9ea7318eac404f7a2b02c1d7034ea1af93fca56564487e9155bdedb"
         },
         {
           "label": "blind_review",
@@ -5471,7 +5471,7 @@
           "path": "reports/security_trust_report.json",
           "exists": true,
           "bytes": 112030,
-          "sha256": "390d4965096fcefda5e8896bf182b5f3db621ce0f0373f13ba7bad2cfd427896"
+          "sha256": "c67f8f7d8e2782151b5486b85484c733fe880b796f18b8d7beee3a067cf233d6"
         },
         {
           "label": "python_compatibility",
@@ -5485,14 +5485,14 @@
           "path": "reports/registry_audit.json",
           "exists": true,
           "bytes": 3183,
-          "sha256": "3fb51c3ac73055e39a06fb532848214695b80c0efafc8fa40c67d23b4c4f7d9f"
+          "sha256": "08a4befd5f68e777e0ff523e7645e9226d244667341b1d15e8f662575d109e8e"
         },
         {
           "label": "package_verification",
           "path": "reports/package_verification.json",
           "exists": true,
           "bytes": 19338,
-          "sha256": "6c0b0eeb8be148202c4c1e89a37d8c8524ff50def5f11233123960fa177756f0"
+          "sha256": "67ce6096c74e464c459c7369e889f30cbba813734b9f4d894394c2ea1665702b"
         },
         {
           "label": "install_simulation",
@@ -11606,7 +11606,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 201,
-        "package_sha256": "836b5ebaf4a608a1a89fa84306ab9b4bb7e0555c74b6ca8e572ffb1833cc0f8c"
+        "package_sha256": "f088abea9460cfb91e969de1397dd16e9e1a5ba18ad96db4c2a7acad0d34dcbf"
       },
       "failures": [],
       "warnings": [],
@@ -15716,15 +15716,15 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 767,
-        "other_text_tokens": 977523,
+        "other_text_tokens": 980610,
         "estimated_initial_load_tokens": 960,
-        "estimated_total_text_tokens": 978290,
-        "deferred_resource_tokens": 449953,
+        "estimated_total_text_tokens": 981377,
+        "deferred_resource_tokens": 451359,
         "deferred_resource_warn_threshold": 120000,
         "deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 400742,
+            "estimated_tokens": 402148,
             "file_count": 114
           },
           {
@@ -15741,7 +15741,7 @@
         "large_deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 400742,
+            "estimated_tokens": 402148,
             "file_count": 114
           }
         ],
@@ -15764,7 +15764,7 @@
               ],
               "missing": [],
               "path": "scripts",
-              "estimated_tokens": 400742,
+              "estimated_tokens": 402148,
               "file_count": 114,
               "rationale": "Script resources are deterministic deferred tools, not initial-load prompt context."
             }
@@ -20773,8 +20773,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "836b5ebaf4a608a1a89fa84306ab9b4bb7e0555c74b6ca8e572ffb1833cc0f8c",
-          "archive_sha256": "ed1bc47c56c8d247bf5dd351bf29201e60471b4785a86e16ae1ede5e71d1582f"
+          "package_sha256": "f088abea9460cfb91e969de1397dd16e9e1a5ba18ad96db4c2a7acad0d34dcbf",
+          "archive_sha256": "56ae3ef2ba798437b7253add936fc87ca34da09890359f6f53b7d6e775093d69"
         },
         "compatibility": {
           "openai": "pass",
@@ -20805,7 +20805,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "ed1bc47c56c8d247bf5dd351bf29201e60471b4785a86e16ae1ede5e71d1582f",
+          "archive_sha256": "56ae3ef2ba798437b7253add936fc87ca34da09890359f6f53b7d6e775093d69",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -20830,7 +20830,7 @@
               "vscode"
             ],
             "package_metadata": "registry/packages/yao-meta-skill.json",
-            "package_sha256": "836b5ebaf4a608a1a89fa84306ab9b4bb7e0555c74b6ca8e572ffb1833cc0f8c"
+            "package_sha256": "f088abea9460cfb91e969de1397dd16e9e1a5ba18ad96db4c2a7acad0d34dcbf"
           }
         ]
       },
@@ -20853,7 +20853,7 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "ed1bc47c56c8d247bf5dd351bf29201e60471b4785a86e16ae1ede5e71d1582f",
+        "archive_sha256": "56ae3ef2ba798437b7253add936fc87ca34da09890359f6f53b7d6e775093d69",
         "archive_entry_count": 626,
         "failure_count": 0,
         "warning_count": 0
@@ -21861,12 +21861,12 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "ed1bc47c56c8d247bf5dd351bf29201e60471b4785a86e16ae1ede5e71d1582f"
+            "to": "56ae3ef2ba798437b7253add936fc87ca34da09890359f6f53b7d6e775093d69"
           },
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "836b5ebaf4a608a1a89fa84306ab9b4bb7e0555c74b6ca8e572ffb1833cc0f8c"
+            "to": "f088abea9460cfb91e969de1397dd16e9e1a5ba18ad96db4c2a7acad0d34dcbf"
           }
         ]
       },
