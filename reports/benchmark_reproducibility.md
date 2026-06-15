@@ -1,14 +1,14 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-15`
-Commit: `84b761abce9f0a361ddea7d446d0454666de0885`
-Working tree dirty at generation: `true`
+Commit: `ad40ed8693324c51dec88d3b1f60d804f18b0462`
+Working tree dirty at generation: `false`
 Evidence bundle SHA256: `27da0809c59bcea3757a4f60fd43b515a8f51b11ab9ef805ba423b13a22f19e4`
 
 ## Summary
 
 - reproducibility ready: `true`
-- release lock ready: `false`
+- release lock ready: `true`
 - methodology complete: `true`
 - required artifacts: `24`
 - missing artifacts: `0`
@@ -22,8 +22,8 @@ Evidence bundle SHA256: `27da0809c59bcea3757a4f60fd43b515a8f51b11ab9ef805ba423b1
 - world-class ready: `false`
 - world-class source checks: `7` pass / `13` total; `6` blocked
 - public claim ready: `false`
-- public claim blockers: `5`
-- changed files at generation: `47`
+- public claim blockers: `4`
+- changed files at generation: `0`
 
 This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete. The git commit is generation-time context; the evidence bundle SHA is the durable anchor for the artifacts listed below.
 
@@ -35,7 +35,6 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 | Blocker |
 | --- |
-| release lock is not clean or commit is unavailable |
 | provider-backed model holdout evidence is incomplete |
 | human blind-review adjudication is incomplete |
 | world-class evidence is not accepted yet (4 open gaps, 4 ledger pending) |
@@ -43,8 +42,8 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 ## Release Lock
 
-- ready: `false`
-- reason: working tree was dirty at generation time
+- ready: `true`
+- reason: clean generation-time HEAD
 - status scope: generation-time status before this report is written
 
 ## Evidence Bundle
