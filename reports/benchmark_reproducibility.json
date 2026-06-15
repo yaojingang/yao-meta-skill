@@ -3,7 +3,7 @@
   "ok": true,
   "generated_at": "2026-06-15",
   "skill_dir": ".",
-  "commit": "30a787a5e602560ea5f596ced6e871a9ba97a323",
+  "commit": "5f187cdb46510a6881a8353c0c1744b90e0b05bd",
   "git_status": {
     "available": true,
     "dirty": false,
@@ -17,9 +17,9 @@
     "methodology_complete": true,
     "required_artifact_count": 24,
     "missing_artifact_count": 0,
-    "evidence_bundle_sha256": "1515d82d87e65ed2461b49c5f805a687cac629e0c20e80556e61f19773773a04",
-    "source_contract_sha256": "026ad61bd6b06edd733e3ddd951bfcadaf41106a6f6d6a622c307d39b4a63a71",
-    "archive_sha256": "aa18ef86cc9442ce2c4bb3b89e1371c75e6f076db7e1ffc8f336616349122b34",
+    "evidence_bundle_sha256": "dccce4bcf5fee2f76a6c3fcdfceafada3bdadf67371edaafebcd69208194e021",
+    "source_contract_sha256": "0a4768c86c9af215719c0b76036499fc1b2324a0045914d54f3df1e2860fb822",
+    "archive_sha256": "6852cf91a74d232c32d732b7c159c971827abf23af50153987193b084ad3b5cc",
     "output_case_count": 5,
     "failure_disclosure_count": 3,
     "command_count": 21,
@@ -54,7 +54,7 @@
   },
   "release_lock": {
     "ready": true,
-    "commit": "30a787a5e602560ea5f596ced6e871a9ba97a323",
+    "commit": "5f187cdb46510a6881a8353c0c1744b90e0b05bd",
     "status_scope": "generation-time status before this report is written",
     "reason": "clean generation-time HEAD"
   },
@@ -64,7 +64,7 @@
     "existing_count": 24,
     "missing_count": 0,
     "missing_paths": [],
-    "sha256": "1515d82d87e65ed2461b49c5f805a687cac629e0c20e80556e61f19773773a04"
+    "sha256": "dccce4bcf5fee2f76a6c3fcdfceafada3bdadf67371edaafebcd69208194e021"
   },
   "methodology": {
     "path": "reports/benchmark_methodology.md",
@@ -137,8 +137,8 @@
       "label": "output_execution",
       "path": "reports/output_execution_runs.json",
       "exists": true,
-      "bytes": 7966,
-      "sha256": "9fc2ebab1669f5783fb490da39ecfec5395b301d0ce1badd0d6f72d3112ce604"
+      "bytes": 7964,
+      "sha256": "ebef496866a9d52e5a4cef5a855a997915b820612d87c777b85e3ed1f0458efc"
     },
     {
       "label": "blind_review",
@@ -172,43 +172,43 @@
       "label": "trust_report",
       "path": "reports/security_trust_report.json",
       "exists": true,
-      "bytes": 100003,
-      "sha256": "d1b1501fb5c10110c058573a9c7cbcfabc700c2f98c3212d94ef0a7f742b660a"
+      "bytes": 101852,
+      "sha256": "abe52fcdab2d2345783e353644acd66913995cc9048b3f3e0c758c5fca43672f"
     },
     {
       "label": "python_compatibility",
       "path": "reports/python_compatibility.json",
       "exists": true,
-      "bytes": 21114,
-      "sha256": "293ad17a317463460b81ec176bff3b9a47bb1dde668e26f6393470022d4ca61e"
+      "bytes": 21493,
+      "sha256": "5be76147f3cb9952f8c5f524c8195eb94ea44e5172ab4b34b1b9208f6d8c198a"
     },
     {
       "label": "registry_audit",
       "path": "reports/registry_audit.json",
       "exists": true,
       "bytes": 3183,
-      "sha256": "976765a6e09bd0de36b69a9eb897e408cea407f310d5648f4f9f7d42da6b274b"
+      "sha256": "e97001fe6bf7553dfc3f748d67146284d5e363336954bec7991dd0d6add240cb"
     },
     {
       "label": "package_verification",
       "path": "reports/package_verification.json",
       "exists": true,
       "bytes": 19338,
-      "sha256": "21e6e3d6990c4ae025f876cc4cf8264f2f10821c7bb72c5447360c79ee2b1870"
+      "sha256": "2476ae8ec9c491a3f7f31ec3f0c6c78cceead8e80700dcb696838eec226c675b"
     },
     {
       "label": "install_simulation",
       "path": "reports/install_simulation.json",
       "exists": true,
       "bytes": 8604,
-      "sha256": "1b62a575243b341408c9155c37af1eaa20108d29a22068b06ac185dbd7b50be8"
+      "sha256": "d6972a9ab9966a8eff922b175f885b953c6300afd55bd4dc08b5baf20a518c20"
     },
     {
       "label": "skill_os2_audit",
       "path": "reports/skill_os2_audit.json",
       "exists": true,
-      "bytes": 14309,
-      "sha256": "8f3581f58d38bfd663491f27a6ee8c60541a458eb743279e53b8ac6bf7143826"
+      "bytes": 14310,
+      "sha256": "cbce716b87a924ea08161d75851d14acb4ce76099f63ae4bc4f7bdf967f9f2fa"
     },
     {
       "label": "world_class_evidence_plan",
