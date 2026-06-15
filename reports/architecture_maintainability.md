@@ -5,17 +5,17 @@ Generated at: `2026-06-16`
 ## Summary
 
 - decision: `pass`
-- python files: `173`
-- scripts: `110`
+- python files: `174`
+- scripts: `111`
 - tests: `63`
-- internal modules: `31`
+- internal modules: `32`
 - CLI scripts: `81`
 - Yao CLI command handlers: `64`
 - entrypoint command handlers: `18`
 - command modules: `6`
 - largest file lines: `899`
 - watch threshold lines: `720`
-- watchlist: `9`
+- watchlist: `8`
 - hotspots: `0`
 - blockers: `0`
 
@@ -30,7 +30,6 @@ No file-size hotspots found.
 | File | Lines | Kind | Recommended next split |
 | --- | ---: | --- | --- |
 | `tests/verify_yao_cli.py` | `899` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
-| `scripts/render_evidence_consistency.py` | `859` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/yao_cli_parser.py` | `810` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/skill_report_layout.py` | `808` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/skill_report_model.py` | `801` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
@@ -44,7 +43,6 @@ No file-size hotspots found.
 | File | Lines | Kind | Severity |
 | --- | ---: | --- | --- |
 | `tests/verify_yao_cli.py` | `899` | `test` | `pass` |
-| `scripts/render_evidence_consistency.py` | `859` | `cli-script` | `pass` |
 | `scripts/yao_cli_parser.py` | `810` | `internal-module` | `pass` |
 | `scripts/skill_report_layout.py` | `808` | `internal-module` | `pass` |
 | `scripts/skill_report_model.py` | `801` | `internal-module` | `pass` |
@@ -55,6 +53,7 @@ No file-size hotspots found.
 | `scripts/trust_check.py` | `714` | `internal-module` | `pass` |
 | `scripts/apply_adaptation.py` | `706` | `cli-script` | `pass` |
 | `scripts/review_studio_layout.py` | `694` | `internal-module` | `pass` |
+| `scripts/render_review_viewer.py` | `685` | `cli-script` | `pass` |
 
 ## Release Rule
 

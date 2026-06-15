@@ -47,8 +47,8 @@
       "key": "benchmark-release-lock-self-consistency",
       "label": "Benchmark release lock matches git dirty state",
       "status": "pass",
-      "expected": true,
-      "actual": true,
+      "expected": false,
+      "actual": false,
       "paths": [
         "reports/benchmark_reproducibility.json"
       ],
@@ -58,8 +58,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "09518a4d8637c430311d50a4249913187dbc5057",
-      "actual": "09518a4d8637c430311d50a4249913187dbc5057",
+      "expected": "391821240ba14f088d0fbe12dd5f1fdca7917a39",
+      "actual": "391821240ba14f088d0fbe12dd5f1fdca7917a39",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -71,30 +71,30 @@
       "label": "overview embeds benchmark summary fields",
       "status": "pass",
       "expected": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "f48a71e36bdbcaa353bd4e6bfc499bda41f047aeffe3d8eae2f99509ec693086",
-        "archive_sha256": "00151114ce7fee627882964137dd5259583f5521c75c6570789345e874454137",
+        "source_contract_sha256": "9fde13846a41c2d1442b6e80350313246dedebe02590ce1f2f07f2da1109c9ea",
+        "archive_sha256": "83ece575ef740a97b6a398f77ed4bc9f1869cde756257c64fdd90d8785c6f3a5",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4
+        "public_claim_blocker_count": 5
       },
       "actual": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "f48a71e36bdbcaa353bd4e6bfc499bda41f047aeffe3d8eae2f99509ec693086",
-        "archive_sha256": "00151114ce7fee627882964137dd5259583f5521c75c6570789345e874454137",
+        "source_contract_sha256": "9fde13846a41c2d1442b6e80350313246dedebe02590ce1f2f07f2da1109c9ea",
+        "archive_sha256": "83ece575ef740a97b6a398f77ed4bc9f1869cde756257c64fdd90d8785c6f3a5",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4
+        "public_claim_blocker_count": 5
       },
       "paths": [
         "reports/benchmark_reproducibility.json",
@@ -204,8 +204,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "09518a4d8637c430311d50a4249913187dbc5057",
-      "actual": "09518a4d8637c430311d50a4249913187dbc5057",
+      "expected": "391821240ba14f088d0fbe12dd5f1fdca7917a39",
+      "actual": "391821240ba14f088d0fbe12dd5f1fdca7917a39",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
@@ -217,30 +217,30 @@
       "label": "interpretation embeds benchmark summary fields",
       "status": "pass",
       "expected": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "f48a71e36bdbcaa353bd4e6bfc499bda41f047aeffe3d8eae2f99509ec693086",
-        "archive_sha256": "00151114ce7fee627882964137dd5259583f5521c75c6570789345e874454137",
+        "source_contract_sha256": "9fde13846a41c2d1442b6e80350313246dedebe02590ce1f2f07f2da1109c9ea",
+        "archive_sha256": "83ece575ef740a97b6a398f77ed4bc9f1869cde756257c64fdd90d8785c6f3a5",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4
+        "public_claim_blocker_count": 5
       },
       "actual": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "f48a71e36bdbcaa353bd4e6bfc499bda41f047aeffe3d8eae2f99509ec693086",
-        "archive_sha256": "00151114ce7fee627882964137dd5259583f5521c75c6570789345e874454137",
+        "source_contract_sha256": "9fde13846a41c2d1442b6e80350313246dedebe02590ce1f2f07f2da1109c9ea",
+        "archive_sha256": "83ece575ef740a97b6a398f77ed4bc9f1869cde756257c64fdd90d8785c6f3a5",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4
+        "public_claim_blocker_count": 5
       },
       "paths": [
         "reports/benchmark_reproducibility.json",
@@ -1322,7 +1322,7 @@
             "path": "scripts",
             "label": "Deterministic helpers or local tooling",
             "kind": "folder",
-            "file_count": 110
+            "file_count": 111
           },
           {
             "path": "evals",
@@ -1337,7 +1337,7 @@
             "file_count": 222
           }
         ],
-        "file_count": 399,
+        "file_count": 400,
         "folder_count": 4,
         "distribution": [
           {
@@ -1362,7 +1362,7 @@
           },
           {
             "label": "scripts",
-            "value": 110
+            "value": 111
           },
           {
             "label": "evals",
@@ -1410,7 +1410,7 @@
             "path": "scripts",
             "label": "Deterministic helpers or local tooling",
             "kind": "folder",
-            "file_count": 110
+            "file_count": 111
           },
           {
             "path": "evals",
@@ -1425,7 +1425,7 @@
             "file_count": 222
           }
         ],
-        "file_count": 399,
+        "file_count": 400,
         "folder_count": 4,
         "distribution": [
           {
@@ -1450,7 +1450,7 @@
           },
           {
             "label": "scripts",
-            "value": 110
+            "value": 111
           },
           {
             "label": "evals",
@@ -2025,13 +2025,13 @@
       "label": "Skill OS 2.0 review summary mirrors current evidence",
       "status": "pass",
       "expected": [
-        "score `91`",
+        "score `89`",
         "`16` gates",
-        "`3` warnings",
-        "`28` declared internal modules",
-        "`82 / 82` CLI help smoke checks passing across `110` scripts",
-        "`617` zip entries",
-        "archive with `617` entries",
+        "`4` warnings",
+        "`29` declared internal modules",
+        "`82 / 82` CLI help smoke checks passing across `111` scripts",
+        "`618` zip entries",
+        "archive with `618` entries",
         "`12` installer permission checks enforced",
         "`0` permission failures",
         "`24` required artifacts",

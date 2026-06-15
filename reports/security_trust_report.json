@@ -2,9 +2,9 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 197,
-    "script_count": 110,
-    "internal_module_count": 28,
+    "scanned_files": 198,
+    "script_count": 111,
+    "internal_module_count": 29,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 197,
-    "package_sha256": "f48a71e36bdbcaa353bd4e6bfc499bda41f047aeffe3d8eae2f99509ec693086"
+    "package_hash_file_count": 198,
+    "package_sha256": "9fde13846a41c2d1442b6e80350313246dedebe02590ce1f2f07f2da1109c9ea"
   },
   "failures": [],
   "warnings": [],
@@ -212,6 +212,20 @@
       "uses_input": false,
       "uses_network": false,
       "uses_file_write": true,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
+      "path": "scripts/evidence_consistency_world_class.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Imported by render_evidence_consistency.py to isolate world-class evidence workflow consistency checks.",
+      "has_argparse": false,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
       "uses_subprocess": false,
       "network_urls": [],
       "network_hosts": []
@@ -1621,7 +1635,7 @@
     "checked_count": 82,
     "passed_count": 82,
     "failed_count": 0,
-    "skipped_count": 28,
+    "skipped_count": 29,
     "failed_scripts": [],
     "results": [
       {
@@ -2446,6 +2460,10 @@
       }
     ],
     "skipped": [
+      {
+        "path": "scripts/evidence_consistency_world_class.py",
+        "reason": "internal module"
+      },
       {
         "path": "scripts/html_rendering.py",
         "reason": "internal module"
