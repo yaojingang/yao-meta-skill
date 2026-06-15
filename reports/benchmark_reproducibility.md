@@ -1,22 +1,22 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-16`
-Commit: `6713b56d6b21158fac99e619fe45c580be72a703`
+Commit: `d3fb78f4feb4ff6db70f4339159cc8b0019ab3b0`
 Working tree dirty at generation: `false`
-Evidence bundle SHA256: `25b549ca48ec334006fbf70ff184e76d56fca3192e72cb7ca2a37dafcdafdaa8`
+Evidence bundle SHA256: `2e0765bd7b1c3aca5e05b0c87b495f7454c17c020387c6b1f265897f38e97504`
 
 ## Summary
 
 - reproducibility ready: `true`
 - release lock ready: `true`
 - methodology complete: `true`
-- required artifacts: `24`
+- required artifacts: `25`
 - missing artifacts: `0`
-- source contract sha256: `909d0f5bad8e`
-- archive sha256: `5c411a7ea189`
+- source contract sha256: `c031eba962de`
+- archive sha256: `729d4a307944`
 - output cases: `5`
 - disclosed failure cases: `3`
-- reproduction commands: `22`
+- reproduction commands: `23`
 - provider evidence complete: `false`
 - human review complete: `false`
 - world-class ready: `false`
@@ -49,8 +49,8 @@ This report proves local benchmark reproducibility only. It keeps external provi
 ## Evidence Bundle
 
 - algorithm: `sha256(path,label,exists,artifact_sha256)`
-- artifacts: `24` / `24`
-- sha256: `25b549ca48ec334006fbf70ff184e76d56fca3192e72cb7ca2a37dafcdafdaa8`
+- artifacts: `25` / `25`
+- sha256: `2e0765bd7b1c3aca5e05b0c87b495f7454c17c020387c6b1f265897f38e97504`
 
 ## Methodology Sections
 
@@ -72,20 +72,21 @@ This report proves local benchmark reproducibility only. It keeps external provi
 | output_cases | `evals/output/cases.jsonl` | present | `a6ae96857116` |
 | output_schema | `evals/output/schema.json` | present | `8ee340c95064` |
 | output_scorecard | `reports/output_quality_scorecard.json` | present | `0806258a8e08` |
-| output_execution | `reports/output_execution_runs.json` | present | `00dbc38f651d` |
+| output_execution | `reports/output_execution_runs.json` | present | `f076e09900b4` |
 | blind_review | `reports/output_blind_review_pack.json` | present | `bbe2db8ec277` |
 | review_adjudication | `reports/output_review_adjudication.json` | present | `240485a721af` |
 | trigger_scorecard | `reports/route_scorecard.json` | present | `c164e83e36d0` |
 | runtime_conformance | `reports/conformance_matrix.json` | present | `97f9ba949c23` |
-| trust_report | `reports/security_trust_report.json` | present | `950daf3e77ad` |
+| trust_report | `reports/security_trust_report.json` | present | `a61a6ff31166` |
 | python_compatibility | `reports/python_compatibility.json` | present | `44e2c3c42579` |
-| registry_audit | `reports/registry_audit.json` | present | `ca9ec2947a9f` |
-| package_verification | `reports/package_verification.json` | present | `f064d30b1de2` |
+| registry_audit | `reports/registry_audit.json` | present | `41dfe1467cb4` |
+| package_verification | `reports/package_verification.json` | present | `b1dbf4798c7a` |
 | install_simulation | `reports/install_simulation.json` | present | `f0cad15cbdff` |
 | skill_os2_audit | `reports/skill_os2_audit.json` | present | `57536bc67370` |
 | world_class_evidence_plan | `reports/world_class_evidence_plan.json` | present | `76a3f8e2b12b` |
 | world_class_evidence_ledger | `reports/world_class_evidence_ledger.json` | present | `1cb74eaa978b` |
 | world_class_evidence_intake | `reports/world_class_evidence_intake.json` | present | `99a0ba234d59` |
+| world_class_evidence_preflight | `reports/world_class_evidence_preflight.json` | present | `b1c47f2a6309` |
 | world_class_submission_review | `reports/world_class_submission_review.json` | present | `b8317119e9cd` |
 | world_class_operator_runbook | `reports/world_class_operator_runbook.json` | present | `f5ca32d5ea8b` |
 | world_class_operator_runbook_markdown | `reports/world_class_operator_runbook.md` | present | `260d5e03c52e` |
@@ -128,6 +129,8 @@ This report proves local benchmark reproducibility only. It keeps external provi
   - evidence: `reports/world_class_evidence_ledger.json`
 - `python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions`
   - evidence: `reports/world_class_evidence_intake.json`
+- `python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions`
+  - evidence: `reports/world_class_evidence_preflight.json`
 - `python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions`
   - evidence: `reports/world_class_submission_review.json`
 - `python3 scripts/yao.py world-class-runbook . --submissions-dir evidence/world_class/submissions`
