@@ -1,9 +1,9 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-15`
-Commit: `b5c185deb58db8b85d14627073e995b60f5e6434`
+Commit: `51a946594a268066c1a4b696e5440b5bf2eba1c0`
 Working tree dirty at generation: `false`
-Evidence bundle SHA256: `fcd5a7b0786a3ac1bd1f11fd8224eb1edaa6c8889d1b32835aa03b258af80631`
+Evidence bundle SHA256: `0a70d0473f2ff5d7c55e0fee650a1986f8a0856798aba21886759fa887bbf345`
 
 ## Summary
 
@@ -12,8 +12,8 @@ Evidence bundle SHA256: `fcd5a7b0786a3ac1bd1f11fd8224eb1edaa6c8889d1b32835aa03b2
 - methodology complete: `true`
 - required artifacts: `24`
 - missing artifacts: `0`
-- source contract sha256: `139e01a5911f`
-- archive sha256: `17a4569c32e1`
+- source contract sha256: `773f9e54fead`
+- archive sha256: `2d7c5573ff95`
 - output cases: `5`
 - disclosed failure cases: `3`
 - reproduction commands: `22`
@@ -50,7 +50,7 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 - algorithm: `sha256(path,label,exists,artifact_sha256)`
 - artifacts: `24` / `24`
-- sha256: `fcd5a7b0786a3ac1bd1f11fd8224eb1edaa6c8889d1b32835aa03b258af80631`
+- sha256: `0a70d0473f2ff5d7c55e0fee650a1986f8a0856798aba21886759fa887bbf345`
 
 ## Methodology Sections
 
@@ -77,16 +77,16 @@ This report proves local benchmark reproducibility only. It keeps external provi
 | review_adjudication | `reports/output_review_adjudication.json` | present | `240485a721af` |
 | trigger_scorecard | `reports/route_scorecard.json` | present | `c164e83e36d0` |
 | runtime_conformance | `reports/conformance_matrix.json` | present | `97f9ba949c23` |
-| trust_report | `reports/security_trust_report.json` | present | `a52d5ae648a8` |
+| trust_report | `reports/security_trust_report.json` | present | `0dc3b8697ce8` |
 | python_compatibility | `reports/python_compatibility.json` | present | `471c481ff9f9` |
-| registry_audit | `reports/registry_audit.json` | present | `6ab90b893574` |
-| package_verification | `reports/package_verification.json` | present | `244e83b76d6c` |
+| registry_audit | `reports/registry_audit.json` | present | `f46a8ca240fd` |
+| package_verification | `reports/package_verification.json` | present | `d0435a912aca` |
 | install_simulation | `reports/install_simulation.json` | present | `fc4522d78fc4` |
 | skill_os2_audit | `reports/skill_os2_audit.json` | present | `57536bc67370` |
 | world_class_evidence_plan | `reports/world_class_evidence_plan.json` | present | `933cdb002181` |
-| world_class_evidence_ledger | `reports/world_class_evidence_ledger.json` | present | `5407409841eb` |
+| world_class_evidence_ledger | `reports/world_class_evidence_ledger.json` | present | `d2b106811b29` |
 | world_class_evidence_intake | `reports/world_class_evidence_intake.json` | present | `b10e1ce0a5a1` |
-| world_class_submission_review | `reports/world_class_submission_review.json` | present | `3bce5f072d03` |
+| world_class_submission_review | `reports/world_class_submission_review.json` | present | `98fc54e7f109` |
 | world_class_operator_runbook | `reports/world_class_operator_runbook.json` | present | `d377b8d99831` |
 | world_class_operator_runbook_markdown | `reports/world_class_operator_runbook.md` | present | `9f141f09bf48` |
 | world_class_operator_runbook_html | `reports/world_class_operator_runbook.html` | present | `04cc091b113f` |
