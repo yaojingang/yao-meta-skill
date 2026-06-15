@@ -1,0 +1,319 @@
+{
+  "schema_version": "1.0",
+  "ok": true,
+  "generated_at": "2026-06-16",
+  "skill_dir": ".",
+  "decision": "curator-review",
+  "week_id": "2026-W25",
+  "daily_report_count": 1,
+  "opportunity_count": 5,
+  "unique_opportunity_count": 5,
+  "ready_for_approval_review_count": 1,
+  "proposal_review_count": 4,
+  "observe_more_evidence_count": 0,
+  "report_only_count": 0,
+  "top_score": 88,
+  "skill_count": 12,
+  "actionable_portfolio_issue_count": 0,
+  "release_lock_ready": true,
+  "evidence_consistency_ok": true,
+  "public_world_class_ready": false,
+  "world_class_pending_count": 4,
+  "writes_source_files": false,
+  "auto_patch_enabled": false,
+  "failure_count": 0,
+  "summary": {
+    "decision": "curator-review",
+    "week_id": "2026-W25",
+    "daily_report_count": 1,
+    "opportunity_count": 5,
+    "unique_opportunity_count": 5,
+    "ready_for_approval_review_count": 1,
+    "proposal_review_count": 4,
+    "observe_more_evidence_count": 0,
+    "report_only_count": 0,
+    "top_score": 88,
+    "skill_count": 12,
+    "actionable_portfolio_issue_count": 0,
+    "release_lock_ready": true,
+    "evidence_consistency_ok": true,
+    "public_world_class_ready": false,
+    "world_class_pending_count": 4,
+    "writes_source_files": false,
+    "auto_patch_enabled": false,
+    "failure_count": 0
+  },
+  "curator_contract": {
+    "schema_version": "1.0",
+    "contract": "weekly-skillops-curator-report",
+    "cadence": "weekly",
+    "source_of_truth": [
+      "reports/skillops/daily/*.json",
+      "reports/skill_atlas.json",
+      "reports/benchmark_reproducibility.json",
+      "reports/evidence_consistency.json",
+      "reports/world_class_evidence_ledger.json"
+    ],
+    "raw_content_stored": false,
+    "redacted_or_generated_evidence_only": true,
+    "proposal_only": true,
+    "writes_source_files": false,
+    "auto_patch_enabled": false,
+    "approval_required_for_writes": true,
+    "counts_as_world_class_evidence": false
+  },
+  "report_contract": {
+    "schema_version": "1.0",
+    "contract": "weekly-skillops-curator-report",
+    "top_level_mirrors_summary": true,
+    "summary_fields": [
+      "decision",
+      "week_id",
+      "daily_report_count",
+      "opportunity_count",
+      "unique_opportunity_count",
+      "ready_for_approval_review_count",
+      "proposal_review_count",
+      "observe_more_evidence_count",
+      "report_only_count",
+      "top_score",
+      "skill_count",
+      "actionable_portfolio_issue_count",
+      "release_lock_ready",
+      "evidence_consistency_ok",
+      "public_world_class_ready",
+      "world_class_pending_count",
+      "writes_source_files",
+      "auto_patch_enabled",
+      "failure_count"
+    ]
+  },
+  "daily_reports": [
+    "reports/skillops/daily/2026-06-16.json"
+  ],
+  "opportunity_summary": {
+    "action_type_counts": {
+      "add_eval": 1,
+      "agents_update": 1,
+      "patch_existing_skill": 3
+    },
+    "decision_counts": {
+      "proposal_review": 4,
+      "ready_for_approval_review": 1
+    },
+    "risk_level_counts": {
+      "low": 3,
+      "medium": 2
+    }
+  },
+  "curator_queue": [
+    {
+      "opportunity_id": "skillops-4ad91c18dd",
+      "proposal_id": "adapt-fbfe921ba5",
+      "pattern_id": "report_ui",
+      "title": "Improve report layout, visual hierarchy, and chart readability",
+      "opportunity_type": "artifact-quality",
+      "action_type": "patch_existing_skill",
+      "decision": "ready_for_approval_review",
+      "priority": "medium",
+      "score": 88,
+      "score_reasons": [
+        "support_count=5",
+        "confidence=0.95",
+        "risk=medium",
+        "target_files_present",
+        "verification_present",
+        "approval_required"
+      ],
+      "policy_reason": "Repeated report layout feedback maps to existing renderer and design doctrine changes.",
+      "risk_level": "medium",
+      "requires_approval": true,
+      "write_allowed_without_approval": false,
+      "evidence_count": 5,
+      "target_files": [
+        "scripts/render_skill_overview.py",
+        "references/artifact-design-doctrine.md",
+        "tests/verify_skill_overview.py"
+      ],
+      "verification_commands": [
+        "python3 tests/verify_skill_overview.py",
+        "python3 tests/verify_skill_report_charts.py"
+      ],
+      "daily_report_date": "2026-06-16"
+    },
+    {
+      "opportunity_id": "skillops-531e13c1c6",
+      "proposal_id": "adapt-59d219a1fb",
+      "pattern_id": "approval_safety",
+      "title": "Keep adaptive iteration approval-gated",
+      "opportunity_type": "governance",
+      "action_type": "agents_update",
+      "decision": "proposal_review",
+      "priority": "medium",
+      "score": 82,
+      "score_reasons": [
+        "support_count=2",
+        "confidence=0.79",
+        "risk=low",
+        "target_files_present",
+        "verification_present",
+        "approval_required"
+      ],
+      "policy_reason": "Repeated privacy and approval signals should tighten durable operating guidance.",
+      "risk_level": "low",
+      "requires_approval": true,
+      "write_allowed_without_approval": false,
+      "evidence_count": 2,
+      "target_files": [
+        "references/user-memory-policy.md",
+        "references/autonomous-adaptation.md",
+        "schemas/adaptation-proposal.schema.json"
+      ],
+      "verification_commands": [
+        "python3 tests/verify_adaptation_safety.py"
+      ],
+      "daily_report_date": "2026-06-16"
+    },
+    {
+      "opportunity_id": "skillops-709ef884f3",
+      "proposal_id": "adapt-18c7517f3d",
+      "pattern_id": "language_default",
+      "title": "Keep reports Chinese-first with optional English",
+      "opportunity_type": "report-experience",
+      "action_type": "patch_existing_skill",
+      "decision": "proposal_review",
+      "priority": "medium",
+      "score": 82,
+      "score_reasons": [
+        "support_count=2",
+        "confidence=0.79",
+        "risk=low",
+        "target_files_present",
+        "verification_present",
+        "approval_required"
+      ],
+      "policy_reason": "Repeated language preferences can improve existing report templates after approval.",
+      "risk_level": "low",
+      "requires_approval": true,
+      "write_allowed_without_approval": false,
+      "evidence_count": 2,
+      "target_files": [
+        "scripts/render_skill_overview.py",
+        "references/artifact-design-doctrine.md"
+      ],
+      "verification_commands": [
+        "python3 tests/verify_skill_overview.py"
+      ],
+      "daily_report_date": "2026-06-16"
+    },
+    {
+      "opportunity_id": "skillops-f9e43237aa",
+      "proposal_id": "adapt-457baca160",
+      "pattern_id": "delivery_format",
+      "title": "Make generated artifact paths explicit in CLI output",
+      "opportunity_type": "artifact-discoverability",
+      "action_type": "patch_existing_skill",
+      "decision": "proposal_review",
+      "priority": "medium",
+      "score": 82,
+      "score_reasons": [
+        "support_count=2",
+        "confidence=0.79",
+        "risk=low",
+        "target_files_present",
+        "verification_present",
+        "approval_required"
+      ],
+      "policy_reason": "Repeated delivery-path requests can improve CLI and README artifact discoverability.",
+      "risk_level": "low",
+      "requires_approval": true,
+      "write_allowed_without_approval": false,
+      "evidence_count": 2,
+      "target_files": [
+        "scripts/yao.py",
+        "README.md"
+      ],
+      "verification_commands": [
+        "python3 tests/verify_yao_cli.py"
+      ],
+      "daily_report_date": "2026-06-16"
+    },
+    {
+      "opportunity_id": "skillops-0a3a2de7c3",
+      "proposal_id": "adapt-abfee25d3a",
+      "pattern_id": "evidence_testing",
+      "title": "Attach tests and evidence refresh to each upgrade",
+      "opportunity_type": "quality-gate",
+      "action_type": "add_eval",
+      "decision": "proposal_review",
+      "priority": "medium",
+      "score": 74,
+      "score_reasons": [
+        "support_count=2",
+        "confidence=0.79",
+        "risk=medium",
+        "target_files_present",
+        "verification_present",
+        "approval_required"
+      ],
+      "policy_reason": "Repeated verification and evidence requests should become focused checks.",
+      "risk_level": "medium",
+      "requires_approval": true,
+      "write_allowed_without_approval": false,
+      "evidence_count": 2,
+      "target_files": [
+        "tests/verify_adaptation_safety.py",
+        "scripts/render_skill_os2_coverage.py",
+        "reports/skill_os2_coverage.json"
+      ],
+      "verification_commands": [
+        "python3 tests/verify_adaptation_safety.py",
+        "python3 tests/verify_skill_os2_coverage.py"
+      ],
+      "daily_report_date": "2026-06-16"
+    }
+  ],
+  "portfolio": {
+    "skill_count": 12,
+    "actionable_issue_count": 0,
+    "route_collision_count": 5,
+    "actionable_route_collision_count": 0,
+    "owner_gap_count": 9,
+    "actionable_owner_gap_count": 0,
+    "stale_count": 10,
+    "actionable_stale_count": 0,
+    "drift_signal_count": 0,
+    "actionable_drift_signal_count": 0,
+    "no_route_opportunity_count": 0
+  },
+  "release_state": {
+    "release_lock_ready": true,
+    "evidence_consistency_ok": true,
+    "public_world_class_ready": false,
+    "world_class_pending_count": 4
+  },
+  "actions": [
+    {
+      "key": "review-ready-opportunities",
+      "priority": "high",
+      "action": "Review the top ready-for-approval SkillOps opportunities before preparing any approval ledger entry."
+    },
+    {
+      "key": "close-world-class-evidence",
+      "priority": "high",
+      "action": "Collect accepted external or human evidence for pending world-class ledger entries before public claims."
+    }
+  ],
+  "failures": [],
+  "source_reports": {
+    "daily_dir": "reports/skillops/daily",
+    "skill_atlas": "reports/skill_atlas.json",
+    "benchmark_reproducibility": "reports/benchmark_reproducibility.json",
+    "evidence_consistency": "reports/evidence_consistency.json",
+    "world_class_ledger": "reports/world_class_evidence_ledger.json"
+  },
+  "artifacts": {
+    "json": "reports/skillops/weekly/2026-W25.json",
+    "markdown": "reports/skillops/weekly/2026-W25.md"
+  }
+}
