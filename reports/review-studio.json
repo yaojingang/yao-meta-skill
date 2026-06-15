@@ -1680,9 +1680,9 @@
           "methodology_complete": true,
           "required_artifact_count": 24,
           "missing_artifact_count": 0,
-          "evidence_bundle_sha256": "7c1743a74403aa2571ba9aec85f3ae0ca6e50bd2e125dde70e22c6d9f82b0f41",
-          "source_contract_sha256": "9fde13846a41c2d1442b6e80350313246dedebe02590ce1f2f07f2da1109c9ea",
-          "archive_sha256": "2fd9a3f8c7c4aa72b0bd03e9cfbf0449a0fa9215f949459324895c72c9abf6b9",
+          "evidence_bundle_sha256": "4f7164b6f04d9079f0497d3e84cefe9e2495ab9ee6fecaa3a74194f288fb8fca",
+          "source_contract_sha256": "ce3d8c67706a5059ae162d937f51d7469aee3d0095a53889c686524f2b43d544",
+          "archive_sha256": "77d9bd77e4a9e3992b727da369e195d94753fd4195b33981abadd10e81ee9fdf",
           "output_case_count": 5,
           "failure_disclosure_count": 3,
           "command_count": 22,
@@ -1704,7 +1704,7 @@
           "working_tree_dirty": false,
           "changed_file_count": 0
         },
-        "commit": "ef36a74204623da7210e0bef56995e5a726224a3",
+        "commit": "0cc661195f0bff2d1365ddea52f69cb3a6d72b3b",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -5299,7 +5299,7 @@
       "ok": true,
       "generated_at": "2026-06-16",
       "skill_dir": ".",
-      "commit": "ef36a74204623da7210e0bef56995e5a726224a3",
+      "commit": "0cc661195f0bff2d1365ddea52f69cb3a6d72b3b",
       "git_status": {
         "available": true,
         "dirty": false,
@@ -5313,9 +5313,9 @@
         "methodology_complete": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "7c1743a74403aa2571ba9aec85f3ae0ca6e50bd2e125dde70e22c6d9f82b0f41",
-        "source_contract_sha256": "9fde13846a41c2d1442b6e80350313246dedebe02590ce1f2f07f2da1109c9ea",
-        "archive_sha256": "2fd9a3f8c7c4aa72b0bd03e9cfbf0449a0fa9215f949459324895c72c9abf6b9",
+        "evidence_bundle_sha256": "4f7164b6f04d9079f0497d3e84cefe9e2495ab9ee6fecaa3a74194f288fb8fca",
+        "source_contract_sha256": "ce3d8c67706a5059ae162d937f51d7469aee3d0095a53889c686524f2b43d544",
+        "archive_sha256": "77d9bd77e4a9e3992b727da369e195d94753fd4195b33981abadd10e81ee9fdf",
         "output_case_count": 5,
         "failure_disclosure_count": 3,
         "command_count": 22,
@@ -5350,7 +5350,7 @@
       },
       "release_lock": {
         "ready": true,
-        "commit": "ef36a74204623da7210e0bef56995e5a726224a3",
+        "commit": "0cc661195f0bff2d1365ddea52f69cb3a6d72b3b",
         "status_scope": "generation-time status before this report is written",
         "reason": "clean generation-time HEAD"
       },
@@ -5360,7 +5360,7 @@
         "existing_count": 24,
         "missing_count": 0,
         "missing_paths": [],
-        "sha256": "7c1743a74403aa2571ba9aec85f3ae0ca6e50bd2e125dde70e22c6d9f82b0f41"
+        "sha256": "4f7164b6f04d9079f0497d3e84cefe9e2495ab9ee6fecaa3a74194f288fb8fca"
       },
       "methodology": {
         "path": "reports/benchmark_methodology.md",
@@ -5433,8 +5433,8 @@
           "label": "output_execution",
           "path": "reports/output_execution_runs.json",
           "exists": true,
-          "bytes": 7966,
-          "sha256": "bdec10142028387b48df78668ee9b2d51a83f6582f82640ad74751c51f7866c5"
+          "bytes": 7967,
+          "sha256": "ce00448089a6b95f957d9c48fce6bd16efa9816d73c908ecc533b94dddf73af8"
         },
         {
           "label": "blind_review",
@@ -5468,8 +5468,8 @@
           "label": "trust_report",
           "path": "reports/security_trust_report.json",
           "exists": true,
-          "bytes": 109726,
-          "sha256": "a3a6d4e6809ea0b78b8012e37ad68903a54876a06100434efad38ea6bfe9b2bd"
+          "bytes": 110333,
+          "sha256": "010b3f3967c4badaaa5c4d7b36475acc9ef149a8cb935216831ae2ae7f2b7fe8"
         },
         {
           "label": "python_compatibility",
@@ -5483,21 +5483,21 @@
           "path": "reports/registry_audit.json",
           "exists": true,
           "bytes": 3183,
-          "sha256": "5d720a3d1a51c6ba512aa9504fb215b157b5e3132abc416e893aa2cda30b8a4c"
+          "sha256": "9d666ba878bcd9b53ba9a768218d89f2883e8cb339bdbdfbb27ddc056612a5f8"
         },
         {
           "label": "package_verification",
           "path": "reports/package_verification.json",
           "exists": true,
           "bytes": 19338,
-          "sha256": "cd65875d5b972e75a36d96c13f8f9ff7681c4a0f769add4d7802c609da73f08d"
+          "sha256": "7b58a0c7c756ce001190623ffca47c25c0abb0816f4c1ce32509309b31e2cd75"
         },
         {
           "label": "install_simulation",
           "path": "reports/install_simulation.json",
           "exists": true,
           "bytes": 8604,
-          "sha256": "3e27a6f7678efe9d94528f811a9d3acf20cf41d6328ad5b5fa0be5714c6396a0"
+          "sha256": "42e985aecb03c60483fcf54bcda1db1270f8515dbe40e6ea7ec27d4f485b3117"
         },
         {
           "label": "skill_os2_audit",

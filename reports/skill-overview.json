@@ -999,9 +999,9 @@
       "methodology_complete": true,
       "required_artifact_count": 24,
       "missing_artifact_count": 0,
-      "evidence_bundle_sha256": "7c1743a74403aa2571ba9aec85f3ae0ca6e50bd2e125dde70e22c6d9f82b0f41",
-      "source_contract_sha256": "9fde13846a41c2d1442b6e80350313246dedebe02590ce1f2f07f2da1109c9ea",
-      "archive_sha256": "2fd9a3f8c7c4aa72b0bd03e9cfbf0449a0fa9215f949459324895c72c9abf6b9",
+      "evidence_bundle_sha256": "4f7164b6f04d9079f0497d3e84cefe9e2495ab9ee6fecaa3a74194f288fb8fca",
+      "source_contract_sha256": "ce3d8c67706a5059ae162d937f51d7469aee3d0095a53889c686524f2b43d544",
+      "archive_sha256": "77d9bd77e4a9e3992b727da369e195d94753fd4195b33981abadd10e81ee9fdf",
       "output_case_count": 5,
       "failure_disclosure_count": 3,
       "command_count": 22,
@@ -1023,7 +1023,7 @@
       "working_tree_dirty": false,
       "changed_file_count": 0
     },
-    "commit": "ef36a74204623da7210e0bef56995e5a726224a3",
+    "commit": "0cc661195f0bff2d1365ddea52f69cb3a6d72b3b",
     "missing_artifacts": [],
     "limitations": [
       "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
