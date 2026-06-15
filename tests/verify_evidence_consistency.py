@@ -51,10 +51,38 @@ def refresh_embedded_reports() -> None:
         )
 
 
+def assert_world_class_roadmap_matches_ledger() -> None:
+    ledger = json.loads((ROOT / "reports" / "world_class_evidence_ledger.json").read_text(encoding="utf-8"))
+    summary = ledger["summary"]
+    pending_count = int(summary["pending_count"])
+    external_pending_count = int(summary["external_pending_count"])
+    human_pending_count = int(summary["human_pending_count"])
+    expected_total = f"{pending_count} 项待补证据"
+    expected_breakdown = f"外部 {external_pending_count} 项、人工 {human_pending_count} 项"
+
+    for report_name in ["skill-overview", "skill-interpretation"]:
+        report_path = ROOT / "reports" / f"{report_name}.json"
+        report = json.loads(report_path.read_text(encoding="utf-8"))
+        serialized = json.dumps(report, ensure_ascii=False)
+        assert "继续补齐剩余 2 项外部/人工证据" not in serialized, report_name
+        assert report["world_class_readiness"]["pending_count"] == pending_count, report["world_class_readiness"]
+        assert report["world_class_readiness"]["external_pending_count"] == external_pending_count, report[
+            "world_class_readiness"
+        ]
+        assert report["world_class_readiness"]["human_pending_count"] == human_pending_count, report[
+            "world_class_readiness"
+        ]
+        actions = "\n".join(report["iteration_roadmap"]["items"][0]["actions"])
+        if pending_count > 2:
+            assert expected_total in actions, actions
+            assert expected_breakdown in actions, actions
+
+
 def main() -> None:
     shutil.rmtree(TMP, ignore_errors=True)
     TMP.mkdir(parents=True, exist_ok=True)
     refresh_embedded_reports()
+    assert_world_class_roadmap_matches_ledger()
     output_json = TMP / "evidence_consistency.json"
     output_md = TMP / "evidence_consistency.md"
     proc = run(

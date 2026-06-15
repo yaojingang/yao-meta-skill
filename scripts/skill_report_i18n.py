@@ -301,6 +301,16 @@ def en_for(text: str) -> str:
     match = re.match(r"^继续补齐剩余\s+(\d+)\s+项外部/人工证据，并保持 claim guard 为 pending 状态。$", value)
     if match:
         return f"Close the remaining {match.group(1)} external or human evidence item(s) and keep the claim guard pending."
+    match = re.match(
+        r"^按 ledger 总量继续补齐\s+(\d+)\s+项待补证据（外部\s+(\d+)\s+项、人工\s+(\d+)\s+项；未展开\s+(\d+)\s+项），并保持 claim guard 为 pending 状态。$",
+        value,
+    )
+    if match:
+        return (
+            f"Close all {match.group(1)} pending evidence item(s) in the ledger "
+            f"(external {match.group(2)}, human {match.group(3)}; {match.group(4)} not shown here) "
+            "and keep the claim guard pending."
+        )
     match = re.match(r"^已生成\s+(\d+)\s+/\s+(\d+)\s+类报告证据。$", value)
     if match:
         return f"Generated {match.group(1)} / {match.group(2)} evidence report types."

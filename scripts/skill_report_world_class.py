@@ -102,6 +102,8 @@ def world_class_roadmap_item(readiness: dict) -> dict | None:
     pending_count = int(readiness.get("pending_count", 0) or 0)
     if readiness.get("ready") or pending_count <= 0:
         return None
+    external_pending_count = int(readiness.get("external_pending_count", 0) or 0)
+    human_pending_count = int(readiness.get("human_pending_count", 0) or 0)
     actions = []
     entries = [entry for entry in readiness.get("entries", []) if isinstance(entry, dict)]
     for entry in entries[:2]:
@@ -110,7 +112,11 @@ def world_class_roadmap_item(readiness: dict) -> dict | None:
         actions.append(f"补齐{label}证据：{summary}")
     remaining = pending_count - len(actions)
     if remaining > 0:
-        actions.append(f"继续补齐剩余 {remaining} 项外部/人工证据，并保持 claim guard 为 pending 状态。")
+        actions.append(
+            f"按 ledger 总量继续补齐 {pending_count} 项待补证据"
+            f"（外部 {external_pending_count} 项、人工 {human_pending_count} 项；"
+            f"未展开 {remaining} 项），并保持 claim guard 为 pending 状态。"
+        )
     else:
         actions.append("提交有效 intake packet，并让 ledger 通过 artifact SHA-256 校验。")
     return {
