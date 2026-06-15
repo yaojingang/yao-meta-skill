@@ -101,7 +101,7 @@
       "label": "上下文成本",
       "score": 42,
       "reasons": [
-        "入口约 356 个词/字，references 约 16045 个词/字。",
+        "入口约 356 个词/字，references 约 16273 个词/字。",
         "分数越高代表上下文成本越低。",
         "上下文成本偏高，建议压缩入口或拆分 references。"
       ]
@@ -205,7 +205,7 @@
       "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
     ],
     "gaps": [
-      "上下文成本需要补强：入口约 356 个词/字，references 约 16045 个词/字。"
+      "上下文成本需要补强：入口约 356 个词/字，references 约 16273 个词/字。"
     ],
     "recommendations": [
       "先改触发边界，再扩展工作流。",
@@ -512,7 +512,7 @@
         "path": "scripts",
         "label": "Deterministic helpers or local tooling",
         "kind": "folder",
-        "file_count": 109
+        "file_count": 110
       },
       {
         "path": "evals",
@@ -524,10 +524,10 @@
         "path": "reports",
         "label": "Generated evidence and overview artifacts",
         "kind": "folder",
-        "file_count": 215
+        "file_count": 218
       }
     ],
-    "file_count": 391,
+    "file_count": 395,
     "folder_count": 4,
     "distribution": [
       {
@@ -552,7 +552,7 @@
       },
       {
         "label": "scripts",
-        "value": 109
+        "value": 110
       },
       {
         "label": "evals",
@@ -560,7 +560,7 @@
       },
       {
         "label": "reports",
-        "value": 215
+        "value": 218
       }
     ]
   },
@@ -682,7 +682,7 @@
       "path": "scripts",
       "label": "Deterministic helpers or local tooling",
       "kind": "folder",
-      "file_count": 109
+      "file_count": 110
     },
     {
       "path": "evals",
@@ -694,7 +694,7 @@
       "path": "reports",
       "label": "Generated evidence and overview artifacts",
       "kind": "folder",
-      "file_count": 215
+      "file_count": 218
     }
   ],
   "strengths": [
@@ -999,9 +999,9 @@
       "methodology_complete": true,
       "required_artifact_count": 24,
       "missing_artifact_count": 0,
-      "evidence_bundle_sha256": "e815b16e4676ecb818148ea47c81bd62f51085419341d4c55c0c503169b33db2",
-      "source_contract_sha256": "76edc3f9936da8966eff0e0f689568c7d6d787691a45773a3e86bb38be6b0cc4",
-      "archive_sha256": "2db3aa6705be239ffef5e1a3d73118fc44f6395c3073d15def3ea587fef71e46",
+      "evidence_bundle_sha256": "f00f42607ce64b44f883be46d170e3b5b15b699ef5aeb7ac12e03fd08d6e0ef4",
+      "source_contract_sha256": "7334782000ae11f8ab7279a11d34953a2016f8955c96ba0d8a66c312498424ff",
+      "archive_sha256": "f1790c1dd3b98d473a3ae9a9f6ab9d33bda7300e6f74453c2d30d2a8d7ed667a",
       "output_case_count": 5,
       "failure_disclosure_count": 3,
       "command_count": 22,
@@ -1023,7 +1023,7 @@
       "working_tree_dirty": false,
       "changed_file_count": 0
     },
-    "commit": "adba42a7c73c7f5bde8096a5bc1cf75cb362c1e3",
+    "commit": "14ad95850f38ef1ae1dabe1fe47578360c0ed867",
     "missing_artifacts": [],
     "limitations": [
       "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -1107,8 +1107,8 @@
     "failures": []
   },
   "trust_security": {
-    "scanned_files": 196,
-    "script_count": 109,
+    "scanned_files": 197,
+    "script_count": 110,
     "internal_module_count": 28,
     "secret_findings": 0,
     "dependency_files": [
@@ -1117,18 +1117,18 @@
     "network_script_count": 3,
     "network_policy_covered_count": 3,
     "network_policy_missing_count": 0,
-    "file_write_script_count": 68,
+    "file_write_script_count": 69,
     "permission_required_count": 3,
     "permission_approved_count": 3,
     "permission_missing_count": 0,
     "permission_invalid_count": 0,
     "permission_expired_count": 0,
-    "help_smoke_checked_count": 81,
+    "help_smoke_checked_count": 82,
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 196,
-    "package_sha256": "76edc3f9936da8966eff0e0f689568c7d6d787691a45773a3e86bb38be6b0cc4"
+    "package_hash_file_count": 197,
+    "package_sha256": "7334782000ae11f8ab7279a11d34953a2016f8955c96ba0d8a66c312498424ff"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -1166,8 +1166,8 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "76edc3f9936da8966eff0e0f689568c7d6d787691a45773a3e86bb38be6b0cc4",
-        "archive_sha256": "798153ff8e1569408e8f658be5aea1f144ee44bfe4edf658c71d6a2f0275c1c8"
+        "package_sha256": "7334782000ae11f8ab7279a11d34953a2016f8955c96ba0d8a66c312498424ff",
+        "archive_sha256": "f1790c1dd3b98d473a3ae9a9f6ab9d33bda7300e6f74453c2d30d2a8d7ed667a"
       },
       "compatibility": {
         "openai": "pass",
@@ -1198,7 +1198,7 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "798153ff8e1569408e8f658be5aea1f144ee44bfe4edf658c71d6a2f0275c1c8",
+        "archive_sha256": "f1790c1dd3b98d473a3ae9a9f6ab9d33bda7300e6f74453c2d30d2a8d7ed667a",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
@@ -1214,8 +1214,8 @@
       "target_count": 4,
       "adapter_count": 4,
       "archive_present": true,
-      "archive_sha256": "2db3aa6705be239ffef5e1a3d73118fc44f6395c3073d15def3ea587fef71e46",
-      "archive_entry_count": 609,
+      "archive_sha256": "f1790c1dd3b98d473a3ae9a9f6ab9d33bda7300e6f74453c2d30d2a8d7ed667a",
+      "archive_entry_count": 613,
       "failure_count": 0,
       "warning_count": 0
     },
@@ -1226,7 +1226,7 @@
     "ok": true,
     "summary": {
       "archive_present": true,
-      "archive_entry_count": 609,
+      "archive_entry_count": 613,
       "archive_extracted": true,
       "entrypoint_loaded": true,
       "manifest_loaded": true,
