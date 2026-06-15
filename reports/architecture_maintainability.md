@@ -31,7 +31,7 @@ No file-size hotspots found.
 | `scripts/yao_cli_parser.py` | `810` | `internal-module` | `pass` |
 | `scripts/skill_report_layout.py` | `808` | `internal-module` | `pass` |
 | `scripts/skill_report_model.py` | `801` | `internal-module` | `pass` |
-| `tests/verify_review_studio.py` | `751` | `test` | `pass` |
+| `tests/verify_review_studio.py` | `760` | `test` | `pass` |
 | `scripts/compile_skill.py` | `734` | `cli-script` | `pass` |
 | `scripts/build_skill_atlas.py` | `730` | `cli-script` | `pass` |
 | `scripts/optimize_description.py` | `723` | `cli-script` | `pass` |

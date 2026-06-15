@@ -4,7 +4,7 @@
 - Package directory: `dist`
 - Targets: `4 / 4` adapters present
 - Archive present: `True`
-- Archive SHA256: `b542cea02ecd04f221c4123680df0d7e415823b7c23b128038baa9b44ff96489`
+- Archive SHA256: `f19e7330e1d7daaf649df480985eb0dfa07c1622aca7ac135c4aa763d6258eb4`
 - Failures: `0`
 - Warnings: `0`
 
