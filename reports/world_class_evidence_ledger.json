@@ -16,8 +16,8 @@
   "missing_submission_count": 4,
   "invalid_submission_count": 0,
   "source_check_count": 19,
-  "source_pass_count": 10,
-  "source_blocked_count": 9,
+  "source_pass_count": 9,
+  "source_blocked_count": 10,
   "submitted_but_pending_count": 0,
   "source_accepted_without_valid_submission_count": 0,
   "overclaim_guard_active": true,
@@ -33,8 +33,8 @@
     "missing_submission_count": 4,
     "invalid_submission_count": 0,
     "source_check_count": 19,
-    "source_pass_count": 10,
-    "source_blocked_count": 9,
+    "source_pass_count": 9,
+    "source_blocked_count": 10,
     "submitted_but_pending_count": 0,
     "source_accepted_without_valid_submission_count": 0,
     "overclaim_guard_active": true,
@@ -486,7 +486,7 @@
       "status": "pending",
       "source_status": "external_required",
       "source_accepted": false,
-      "current": "external source events 0; adoption samples 1",
+      "current": "external source events 0; adoption samples 0",
       "objective": "Import production metadata-only events from a real external client into the local drift loop.",
       "runbook": [
         "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
@@ -523,7 +523,7 @@
       ],
       "observed_state": {
         "external_source_events": 0,
-        "adoption_sample_count": 1,
+        "adoption_sample_count": 0,
         "raw_content_allowed": false,
         "risk_band": "low",
         "accepted": false
@@ -544,8 +544,8 @@
           "label": "Adoption sample",
           "field": "adoption_sample_count",
           "expected": ">0",
-          "actual": 1,
-          "status": "pass",
+          "actual": 0,
+          "status": "blocked",
           "source_accepted": false,
           "next_action": "Telemetry must include adoption outcome evidence."
         },
@@ -561,8 +561,8 @@
         }
       ],
       "source_check_count": 3,
-      "source_pass_count": 2,
-      "source_blocked_count": 1,
+      "source_pass_count": 1,
+      "source_blocked_count": 2,
       "submission_state": {
         "status": "missing",
         "path": "evidence/world_class/submissions/native-client-telemetry.json",
