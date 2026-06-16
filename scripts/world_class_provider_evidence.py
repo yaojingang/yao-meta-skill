@@ -2,6 +2,8 @@
 import re
 from typing import Any
 
+from output_review_privacy import forbidden_decision_field_paths
+
 
 SCRIPT_INTERFACE = "internal-module"
 SCRIPT_INTERFACE_REASON = "Imported by world_class_evidence_contract.py to validate provider-backed holdout execution evidence from run rows."
@@ -30,6 +32,16 @@ def normalized(value: Any) -> str:
 def run_rows(execution: dict[str, Any]) -> list[dict[str, Any]]:
     runs = execution.get("runs", [])
     return [item for item in runs if isinstance(item, dict)] if isinstance(runs, list) else []
+
+
+def validate_no_raw_fields(execution: dict[str, Any], errors: list[str]) -> None:
+    blocked = forbidden_decision_field_paths(execution, "output_execution_runs")
+    add_error(
+        errors,
+        not blocked,
+        "provider-holdout output execution report must not include raw content, credential, secret, token, prompt, output, transcript, message, or answer-key fields: "
+        + ", ".join(blocked[:8]),
+    )
 
 
 def positive_duration(value: Any) -> bool:
@@ -78,6 +90,7 @@ def validate_provider_execution_report(
 ) -> None:
     execution_summary = summary(execution)
     runs = run_rows(execution)
+    validate_no_raw_fields(execution, errors)
     add_error(errors, execution.get("ok") is True, "provider-holdout output execution report ok must be true")
     add_error(errors, bool(runs), "provider-holdout output execution report must include run rows")
 

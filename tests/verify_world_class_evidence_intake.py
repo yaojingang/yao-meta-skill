@@ -426,6 +426,28 @@ def assert_external_contract_artifact_validation() -> None:
     assert forged_provider["status"] == "fail", forged_provider
     assert any("matching provider, model, timing" in error for error in forged_provider["errors"]), forged_provider["errors"]
 
+    write_provider_artifact(skill_root, complete=True)
+    raw_execution = json.loads((skill_root / "reports" / "output_execution_runs.json").read_text(encoding="utf-8"))
+    raw_execution["runs"][0]["raw_provider_prompt"] = "verbatim provider prompt must not be accepted"
+    raw_execution["runs"][0]["output"] = "raw model output must not be accepted"
+    raw_execution["run_notes"] = [{"messages": ["raw transcript-like exchange"]}]
+    write_json(skill_root / "reports" / "output_execution_runs.json", raw_execution)
+    raw_provider = validate_payload(
+        provider_artifact_submission(skill_root),
+        provider_entry,
+        path=skill_root / "evidence" / "world_class" / "submissions" / "provider-holdout.json",
+        root=skill_root,
+        template_expected=False,
+    )
+    assert raw_provider["status"] == "fail", raw_provider
+    assert any("output_execution_runs.runs[0].raw_provider_prompt" in error for error in raw_provider["errors"]), (
+        raw_provider["errors"]
+    )
+    assert any("output_execution_runs.runs[0].output" in error for error in raw_provider["errors"]), raw_provider["errors"]
+    assert any("output_execution_runs.run_notes[0].messages" in error for error in raw_provider["errors"]), (
+        raw_provider["errors"]
+    )
+
     permission_entry = {"key": "native-permission-enforcement", "category": "external"}
     write_native_permission_artifacts(skill_root, complete=True)
     permission_valid = validate_payload(
@@ -453,6 +475,38 @@ def assert_external_contract_artifact_validation() -> None:
     assert any("native target rows must match summary.native_enforcement_count" in error for error in permission_forged["errors"]), (
         permission_forged["errors"]
     )
+    write_native_permission_artifacts(skill_root, complete=True)
+    raw_probe = json.loads((skill_root / "reports" / "runtime_permission_probes.json").read_text(encoding="utf-8"))
+    raw_probe["targets"][0]["messages"] = ["raw target client transcript must not be accepted"]
+    write_json(skill_root / "reports" / "runtime_permission_probes.json", raw_probe)
+    raw_permission_probe = validate_payload(
+        native_permission_submission(skill_root),
+        permission_entry,
+        path=skill_root / "evidence" / "world_class" / "submissions" / "native-permission-enforcement.json",
+        root=skill_root,
+        template_expected=False,
+    )
+    assert raw_permission_probe["status"] == "fail", raw_permission_probe
+    assert any("runtime_permission_probes.targets[0].messages" in error for error in raw_permission_probe["errors"]), (
+        raw_permission_probe["errors"]
+    )
+
+    write_native_permission_artifacts(skill_root, complete=True)
+    raw_install = json.loads((skill_root / "reports" / "install_simulation.json").read_text(encoding="utf-8"))
+    raw_install["checks"][0]["raw_prompt"] = "raw installer prompt must not be accepted"
+    write_json(skill_root / "reports" / "install_simulation.json", raw_install)
+    raw_permission_install = validate_payload(
+        native_permission_submission(skill_root),
+        permission_entry,
+        path=skill_root / "evidence" / "world_class" / "submissions" / "native-permission-enforcement.json",
+        root=skill_root,
+        template_expected=False,
+    )
+    assert raw_permission_install["status"] == "fail", raw_permission_install
+    assert any("install_simulation.checks[0].raw_prompt" in error for error in raw_permission_install["errors"]), (
+        raw_permission_install["errors"]
+    )
+
     write_native_permission_artifacts(skill_root, complete=False)
     permission_invalid = validate_payload(
         native_permission_submission(skill_root),

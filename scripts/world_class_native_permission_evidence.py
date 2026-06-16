@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 from typing import Any
 
+from output_review_privacy import forbidden_decision_field_paths
+
 
 SCRIPT_INTERFACE = "internal-module"
 SCRIPT_INTERFACE_REASON = "Imported by world_class_evidence_contract.py to validate runtime permission evidence from target-level probe rows."
@@ -21,6 +23,16 @@ def object_list(value: Any) -> list[dict[str, Any]]:
 
 def sorted_strings(value: Any) -> list[str]:
     return sorted(str(item) for item in value) if isinstance(value, list) else []
+
+
+def validate_no_raw_fields(payload: dict[str, Any], label: str, errors: list[str]) -> None:
+    blocked = forbidden_decision_field_paths(payload, label)
+    add_error(
+        errors,
+        not blocked,
+        f"native-permission-enforcement {label} must not include raw content, credential, secret, token, prompt, output, transcript, message, or answer-key fields: "
+        + ", ".join(blocked[:8]),
+    )
 
 
 def validate_target_rows(probes: dict[str, Any], summary: dict[str, Any], errors: list[str]) -> None:
@@ -95,6 +107,7 @@ def validate_target_rows(probes: dict[str, Any], summary: dict[str, Any], errors
 
 def validate_install_simulation_report(install: dict[str, Any], errors: list[str]) -> None:
     summary = install.get("summary", {}) if isinstance(install.get("summary", {}), dict) else {}
+    validate_no_raw_fields(install, "install_simulation", errors)
     add_error(errors, install.get("ok") is True, "native-permission-enforcement install simulation report ok must be true")
     add_error(
         errors,
@@ -122,6 +135,7 @@ def validate_install_simulation_report(install: dict[str, Any], errors: list[str
 
 def validate_native_permission_report(probes: dict[str, Any], install: dict[str, Any], errors: list[str]) -> None:
     summary = probes.get("summary", {}) if isinstance(probes.get("summary", {}), dict) else {}
+    validate_no_raw_fields(probes, "runtime_permission_probes", errors)
     add_error(errors, probes.get("ok") is True, "native-permission-enforcement runtime probe report ok must be true")
     add_error(
         errors,
