@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-16T07:28:36Z",
+  "generated_at": "2026-06-16",
   "skill_dir": ".",
   "decision": "curator-review",
   "week_id": "2026-W25",
@@ -15,7 +15,7 @@
   "top_score": 88,
   "skill_count": 12,
   "actionable_portfolio_issue_count": 0,
-  "release_lock_ready": false,
+  "release_lock_ready": true,
   "evidence_consistency_ok": true,
   "public_world_class_ready": false,
   "world_class_pending_count": 4,
@@ -35,7 +35,7 @@
     "top_score": 88,
     "skill_count": 12,
     "actionable_portfolio_issue_count": 0,
-    "release_lock_ready": false,
+    "release_lock_ready": true,
     "evidence_consistency_ok": true,
     "public_world_class_ready": false,
     "world_class_pending_count": 4,
@@ -287,7 +287,7 @@
     "no_route_opportunity_count": 0
   },
   "release_state": {
-    "release_lock_ready": false,
+    "release_lock_ready": true,
     "evidence_consistency_ok": true,
     "public_world_class_ready": false,
     "world_class_pending_count": 4
