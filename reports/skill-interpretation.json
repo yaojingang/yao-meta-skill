@@ -1004,7 +1004,7 @@
       "methodology_complete": true,
       "required_artifact_count": 25,
       "missing_artifact_count": 0,
-      "evidence_bundle_sha256": "500178f73e61df4d96d2347416ee904773b09d02bb3831d8b933fcbdeb89582f",
+      "evidence_bundle_sha256": "2aa812554a8f4c0a225de76cb391d3adc822b6792d8cf6fa028ed4426f19c372",
       "source_contract_sha256": "d085dd56b0bd6ec09d8e1ffbc596902107fb000822ae94877eff836ea246990f",
       "archive_sha256": "8789dec9d02f8cf016ed1bd9e42bd4abce52e32bdfda8ee909b48fcea4cdbba0",
       "output_case_count": 5,
@@ -1026,9 +1026,9 @@
       "public_claim_ready": false,
       "public_claim_blocker_count": 5,
       "working_tree_dirty": true,
-      "changed_file_count": 22
+      "changed_file_count": 2
     },
-    "commit": "cf173248896ad818d8e5ec0fe00d0ed403a33ae1",
+    "commit": "9172b6719cf7280d8b343c5aeaa44c29c26a44ca",
     "missing_artifacts": [],
     "limitations": [
       "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -1171,8 +1171,8 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "0932f0afc5893229405baf4b5a151c52c257830d258f3228c08cf26fd1fc05e7",
-        "archive_sha256": "72f9b9d57f498b5e574c6a857b1e7a4aa41d515545e3ad40cc46b26af20e8261"
+        "package_sha256": "d085dd56b0bd6ec09d8e1ffbc596902107fb000822ae94877eff836ea246990f",
+        "archive_sha256": "8789dec9d02f8cf016ed1bd9e42bd4abce52e32bdfda8ee909b48fcea4cdbba0"
       },
       "compatibility": {
         "openai": "pass",
@@ -1203,7 +1203,7 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "72f9b9d57f498b5e574c6a857b1e7a4aa41d515545e3ad40cc46b26af20e8261",
+        "archive_sha256": "8789dec9d02f8cf016ed1bd9e42bd4abce52e32bdfda8ee909b48fcea4cdbba0",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
@@ -1241,7 +1241,7 @@
       "installer_permission_failure_count": 0,
       "permission_target_count": 4,
       "permission_capability_count": 3,
-      "install_root_is_temp": true,
+      "install_root_is_temp": false,
       "failure_count": 0,
       "warning_count": 0
     },
@@ -1298,12 +1298,12 @@
         {
           "field": "archive_sha256",
           "from": "",
-          "to": "72f9b9d57f498b5e574c6a857b1e7a4aa41d515545e3ad40cc46b26af20e8261"
+          "to": "8789dec9d02f8cf016ed1bd9e42bd4abce52e32bdfda8ee909b48fcea4cdbba0"
         },
         {
           "field": "package_sha256",
           "from": "0000000000000000000000000000000000000000000000000000000000000000",
-          "to": "0932f0afc5893229405baf4b5a151c52c257830d258f3228c08cf26fd1fc05e7"
+          "to": "d085dd56b0bd6ec09d8e1ffbc596902107fb000822ae94877eff836ea246990f"
         }
       ]
     },
