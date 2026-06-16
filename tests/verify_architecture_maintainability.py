@@ -40,7 +40,7 @@ def main() -> None:
     assert payload["summary"]["decision"] == "pass", payload["summary"]
     assert payload["summary"]["early_watch_line_threshold"] == 600, payload["summary"]
     assert payload["summary"]["watch_line_threshold"] == 720, payload["summary"]
-    assert payload["summary"]["early_watchlist_count"] >= 8, payload["summary"]
+    assert payload["summary"]["early_watchlist_count"] >= 7, payload["summary"]
     assert payload["summary"]["watchlist_count"] == 0, payload["summary"]
     assert payload["summary"]["hotspot_count"] == 0, payload["summary"]
     assert payload["summary"]["blocker_count"] == 0, payload["summary"]
@@ -55,6 +55,7 @@ def main() -> None:
     early_watch_paths = {item["path"] for item in payload["early_watchlist"]}
     assert "scripts/render_review_viewer.py" not in early_watch_paths, payload["early_watchlist"]
     assert "scripts/render_skill_os2_coverage.py" not in early_watch_paths, payload["early_watchlist"]
+    assert "scripts/render_reference_synthesis.py" not in early_watch_paths, payload["early_watchlist"]
     renderer_lines = len((ROOT / "scripts" / "render_review_studio.py").read_text(encoding="utf-8").splitlines())
     action_module = (ROOT / "scripts" / "review_studio_actions.py").read_text(encoding="utf-8")
     action_lines = len(action_module.splitlines())
@@ -72,9 +73,10 @@ def main() -> None:
     assert "No file-size hotspots found." in markdown, markdown
     assert "No near-threshold files found." in markdown, markdown
     assert "## Early Watchlist" in markdown, markdown
-    assert "- early watchlist: `8`" in markdown, markdown
+    assert "- early watchlist: `7`" in markdown, markdown
     assert "scripts/render_review_viewer.py" not in markdown, markdown
     assert "scripts/render_skill_os2_coverage.py" not in markdown, markdown
+    assert "scripts/render_reference_synthesis.py" not in markdown, markdown
     assert "Do not split a file only for line count" in markdown, markdown
 
     blocker_proc = subprocess.run(

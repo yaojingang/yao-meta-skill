@@ -8,7 +8,7 @@
   "installed_skill_dir": "tests/tmp_review_studio/install-root/simulate-yao-meta-skill/yao-meta-skill",
   "summary": {
     "archive_present": true,
-    "archive_entry_count": 679,
+    "archive_entry_count": 680,
     "archive_extracted": true,
     "entrypoint_loaded": true,
     "manifest_loaded": true,

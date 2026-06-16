@@ -106,6 +106,7 @@
           "scripts/propose_adaptation.py",
           "scripts/provider_output_eval_runner.py",
           "scripts/python_compat_check.py",
+          "scripts/reference_synthesis_markdown.py",
           "scripts/registry_audit.py",
           "scripts/render_adoption_drift_report.py",
           "scripts/render_architecture_maintainability.py",

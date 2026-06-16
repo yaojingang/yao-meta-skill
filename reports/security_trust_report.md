@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `233`
-- Scripts: `141`
-- Internal script modules: `55`
+- Scanned files: `234`
+- Scripts: `142`
+- Internal script modules: `56`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `233`
-- Package SHA256: `d085dd56b0bd6ec09d8e1ffbc596902107fb000822ae94877eff836ea246990f`
+- Package hash files: `234`
+- Package SHA256: `72dafdb26b366b212c4cff7ec494938ebe03274bf5a3a5d6b04090d0443cfd91`
 
 ## Failures
 
@@ -104,6 +104,7 @@
 | scripts/propose_adaptation.py | cli | True | True | True | False | False | True | False | Turns redacted repeated preference patterns into proposal-only adaptation plans. |
 | scripts/provider_output_eval_runner.py | cli | False | True | True | False | True | False | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/python_compat_check.py | cli | True | True | True | False | False | True | False | Checks repository Python source for syntax that can pass locally but fail on the supported CI interpreter. |
+| scripts/reference_synthesis_markdown.py | internal-module | True | False | False | False | False | False | False | Imported by render_reference_synthesis.py to keep reference synthesis modeling separate from Markdown rendering. |
 | scripts/registry_audit.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/render_adoption_drift_report.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/render_architecture_maintainability.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |

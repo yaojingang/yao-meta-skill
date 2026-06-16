@@ -197,7 +197,7 @@
       "key": "trust-security",
       "label": "Trust Security",
       "status": "pass",
-      "current": "secrets 0; scripts 141; help failures 0",
+      "current": "secrets 0; scripts 142; help failures 0",
       "target": "Secrets, scripts, dependencies, permissions, and package hash are reviewable",
       "evidence": [
         {
@@ -285,7 +285,7 @@
       "key": "registry-distribution",
       "label": "Registry Distribution",
       "status": "pass",
-      "current": "zip entries 679; install failures 0; permission failures 0",
+      "current": "zip entries 680; install failures 0; permission failures 0",
       "target": "Package metadata, archive checksum, package verification, and install simulation pass",
       "evidence": [
         {
