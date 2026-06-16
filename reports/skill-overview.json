@@ -999,7 +999,7 @@
       "methodology_complete": true,
       "required_artifact_count": 25,
       "missing_artifact_count": 0,
-      "evidence_bundle_sha256": "de807e8589123f1db5c1a45bed9ff497060871008e7942fb8912e739085dac79",
+      "evidence_bundle_sha256": "e6cd7596a1a607513953670b24999725560dc93cc342f26eb8f125ade638c5e3",
       "source_contract_sha256": "712f00ca2202e81f1a88fc46adea462b248dcec996e09125f7c0fc97af5476fc",
       "archive_sha256": "69ad979695a4b08bfcb0dd44f7b8f6b6553465f416b950bb2f7d90e6c669427f",
       "output_case_count": 5,
@@ -1021,9 +1021,9 @@
       "public_claim_ready": false,
       "public_claim_blocker_count": 5,
       "working_tree_dirty": true,
-      "changed_file_count": 42
+      "changed_file_count": 2
     },
-    "commit": "2ca48b21ecda4e959a3940819f773f589c6aae82",
+    "commit": "bc74e896e0241c17d25d94e198f91a2e2e7136cf",
     "missing_artifacts": [],
     "limitations": [
       "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -1167,7 +1167,7 @@
       "license": "MIT",
       "checksums": {
         "package_sha256": "712f00ca2202e81f1a88fc46adea462b248dcec996e09125f7c0fc97af5476fc",
-        "archive_sha256": "9bbe58230777e9c17ef13349b74e75392fe87225d298aa3d5ed77577bbfff7a1"
+        "archive_sha256": "69ad979695a4b08bfcb0dd44f7b8f6b6553465f416b950bb2f7d90e6c669427f"
       },
       "compatibility": {
         "openai": "pass",
@@ -1198,12 +1198,12 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "9bbe58230777e9c17ef13349b74e75392fe87225d298aa3d5ed77577bbfff7a1",
+        "archive_sha256": "69ad979695a4b08bfcb0dd44f7b8f6b6553465f416b950bb2f7d90e6c669427f",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
       },
-      "generated_at": "2026-06-17"
+      "generated_at": "2026-06-13"
     },
     "failures": [],
     "warnings": []
@@ -1293,7 +1293,7 @@
         {
           "field": "archive_sha256",
           "from": "",
-          "to": "9bbe58230777e9c17ef13349b74e75392fe87225d298aa3d5ed77577bbfff7a1"
+          "to": "69ad979695a4b08bfcb0dd44f7b8f6b6553465f416b950bb2f7d90e6c669427f"
         },
         {
           "field": "package_sha256",
