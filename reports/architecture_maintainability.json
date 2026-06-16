@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-17",
+  "generated_at": "2026-06-13",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 219,
-    "script_file_count": 144,
+    "python_file_count": 220,
+    "script_file_count": 145,
     "test_file_count": 75,
-    "internal_module_count": 60,
+    "internal_module_count": 61,
     "cli_script_count": 86,
     "command_handler_count": 68,
     "entrypoint_command_handler_count": 18,
@@ -18,7 +18,7 @@
     "block_line_threshold": 1500,
     "largest_file_lines": 696,
     "watchlist_count": 0,
-    "early_watchlist_count": 5,
+    "early_watchlist_count": 4,
     "hotspot_count": 0,
     "blocker_count": 0,
     "decision": "pass"
@@ -31,14 +31,6 @@
       "severity": "pass",
       "early_watch": true,
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
-    },
-    {
-      "path": "scripts/render_review_studio.py",
-      "lines": 647,
-      "kind": "cli-script",
-      "severity": "pass",
-      "early_watch": true,
-      "recommendation": "Move data loading and large section renderers into focused review_studio_* modules."
     },
     {
       "path": "scripts/review_studio_gates.py",
@@ -119,6 +111,14 @@
       "severity": "pass",
       "early_watch": false,
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/render_review_studio.py",
+      "lines": 568,
+      "kind": "cli-script",
+      "severity": "pass",
+      "early_watch": false,
+      "recommendation": "Move data loading and large section renderers into focused review_studio_* modules."
     }
   ],
   "watchlist": [],
@@ -130,14 +130,6 @@
       "severity": "pass",
       "early_watch": true,
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
-    },
-    {
-      "path": "scripts/render_review_studio.py",
-      "lines": 647,
-      "kind": "cli-script",
-      "severity": "pass",
-      "early_watch": true,
-      "recommendation": "Move data loading and large section renderers into focused review_studio_* modules."
     },
     {
       "path": "scripts/review_studio_gates.py",

@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `236`
-- Scripts: `144`
-- Internal script modules: `58`
+- Scanned files: `237`
+- Scripts: `145`
+- Internal script modules: `59`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `236`
-- Package SHA256: `b28843624ffa9196da3d65e7f4c9e18d679c4ea41218ea2eeb7f8955b8f3c2de`
+- Package hash files: `237`
+- Package SHA256: `712f00ca2202e81f1a88fc46adea462b248dcec996e09125f7c0fc97af5476fc`
 
 ## Failures
 
@@ -155,6 +155,7 @@
 | scripts/review_studio_gates.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to keep Review Studio gate evaluation separate from HTML rendering. |
 | scripts/review_studio_layout.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to keep Review Studio layout and CSS out of gate logic. |
 | scripts/review_studio_output_review.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to render output review checklist cards. |
+| scripts/review_studio_panels.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to keep small Review Studio panel renderers out of the main page composer. |
 | scripts/review_studio_skillops.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to keep SkillOps summary panels out of the main HTML renderer. |
 | scripts/review_studio_waivers.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to keep waiver candidate layout out of the main renderer. |
 | scripts/review_studio_world_class.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to render world-class evidence cards. |

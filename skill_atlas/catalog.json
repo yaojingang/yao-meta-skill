@@ -1,6 +1,6 @@
 {
   "workspace_root": ".",
-  "generated_at": "2026-06-17",
+  "generated_at": "2026-06-13",
   "skills": [
     {
       "name": "yao-meta-skill",
@@ -113,6 +113,7 @@
         "scripts/review_studio_gates.py",
         "scripts/review_studio_layout.py",
         "scripts/review_studio_output_review.py",
+        "scripts/review_studio_panels.py",
         "scripts/review_studio_skillops.py",
         "scripts/review_studio_waivers.py",
         "scripts/review_studio_world_class.py",

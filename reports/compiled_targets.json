@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-17",
+  "generated_at": "2026-06-13",
   "skill_dir": ".",
   "summary": {
     "target_count": 5,
@@ -242,6 +242,7 @@
             "scripts/review_studio_gates.py",
             "scripts/review_studio_layout.py",
             "scripts/review_studio_output_review.py",
+            "scripts/review_studio_panels.py",
             "scripts/review_studio_skillops.py",
             "scripts/review_studio_waivers.py",
             "scripts/review_studio_world_class.py",
@@ -349,7 +350,7 @@
           ],
           "counts": {
             "references": 35,
-            "scripts": 144,
+            "scripts": 145,
             "assets": 6,
             "reports": 43
           }
@@ -621,7 +622,7 @@
             "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
             "counts": {
               "references": 35,
-              "scripts": 144,
+              "scripts": 145,
               "assets": 6,
               "reports": 43
             },
@@ -632,7 +633,7 @@
           },
           "scripts": {
             "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-            "script_count": 144,
+            "script_count": 145,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -876,7 +877,7 @@
           "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
           "counts": {
             "references": 35,
-            "scripts": 144,
+            "scripts": 145,
             "assets": 6,
             "reports": 43
           },
@@ -887,7 +888,7 @@
         },
         "scripts": {
           "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-          "script_count": 144,
+          "script_count": 145,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -1186,6 +1187,7 @@
             "scripts/review_studio_gates.py",
             "scripts/review_studio_layout.py",
             "scripts/review_studio_output_review.py",
+            "scripts/review_studio_panels.py",
             "scripts/review_studio_skillops.py",
             "scripts/review_studio_waivers.py",
             "scripts/review_studio_world_class.py",
@@ -1293,7 +1295,7 @@
           ],
           "counts": {
             "references": 35,
-            "scripts": 144,
+            "scripts": 145,
             "assets": 6,
             "reports": 43
           }
@@ -1565,7 +1567,7 @@
             "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
             "counts": {
               "references": 35,
-              "scripts": 144,
+              "scripts": 145,
               "assets": 6,
               "reports": 43
             },
@@ -1576,7 +1578,7 @@
           },
           "scripts": {
             "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-            "script_count": 144,
+            "script_count": 145,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -1820,7 +1822,7 @@
           "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
           "counts": {
             "references": 35,
-            "scripts": 144,
+            "scripts": 145,
             "assets": 6,
             "reports": 43
           },
@@ -1831,7 +1833,7 @@
         },
         "scripts": {
           "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-          "script_count": 144,
+          "script_count": 145,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -2130,6 +2132,7 @@
             "scripts/review_studio_gates.py",
             "scripts/review_studio_layout.py",
             "scripts/review_studio_output_review.py",
+            "scripts/review_studio_panels.py",
             "scripts/review_studio_skillops.py",
             "scripts/review_studio_waivers.py",
             "scripts/review_studio_world_class.py",
@@ -2237,7 +2240,7 @@
           ],
           "counts": {
             "references": 35,
-            "scripts": 144,
+            "scripts": 145,
             "assets": 6,
             "reports": 43
           }
@@ -2509,7 +2512,7 @@
             "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
             "counts": {
               "references": 35,
-              "scripts": 144,
+              "scripts": 145,
               "assets": 6,
               "reports": 43
             },
@@ -2519,7 +2522,7 @@
           },
           "scripts": {
             "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-            "script_count": 144,
+            "script_count": 145,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -2757,7 +2760,7 @@
           "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
           "counts": {
             "references": 35,
-            "scripts": 144,
+            "scripts": 145,
             "assets": 6,
             "reports": 43
           },
@@ -2767,7 +2770,7 @@
         },
         "scripts": {
           "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-          "script_count": 144,
+          "script_count": 145,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -3058,6 +3061,7 @@
             "scripts/review_studio_gates.py",
             "scripts/review_studio_layout.py",
             "scripts/review_studio_output_review.py",
+            "scripts/review_studio_panels.py",
             "scripts/review_studio_skillops.py",
             "scripts/review_studio_waivers.py",
             "scripts/review_studio_world_class.py",
@@ -3165,7 +3169,7 @@
           ],
           "counts": {
             "references": 35,
-            "scripts": 144,
+            "scripts": 145,
             "assets": 6,
             "reports": 43
           }
@@ -3437,7 +3441,7 @@
             "strategy": "Keep optional directories as relative resources next to SKILL.md.",
             "counts": {
               "references": 35,
-              "scripts": 144,
+              "scripts": 145,
               "assets": 6,
               "reports": 43
             },
@@ -3448,7 +3452,7 @@
           },
           "scripts": {
             "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-            "script_count": 144,
+            "script_count": 145,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -3685,7 +3689,7 @@
           "strategy": "Keep optional directories as relative resources next to SKILL.md.",
           "counts": {
             "references": 35,
-            "scripts": 144,
+            "scripts": 145,
             "assets": 6,
             "reports": 43
           },
@@ -3696,7 +3700,7 @@
         },
         "scripts": {
           "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-          "script_count": 144,
+          "script_count": 145,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -3986,6 +3990,7 @@
             "scripts/review_studio_gates.py",
             "scripts/review_studio_layout.py",
             "scripts/review_studio_output_review.py",
+            "scripts/review_studio_panels.py",
             "scripts/review_studio_skillops.py",
             "scripts/review_studio_waivers.py",
             "scripts/review_studio_world_class.py",
@@ -4093,7 +4098,7 @@
           ],
           "counts": {
             "references": 35,
-            "scripts": 144,
+            "scripts": 145,
             "assets": 6,
             "reports": 43
           }
@@ -4365,7 +4370,7 @@
             "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
             "counts": {
               "references": 35,
-              "scripts": 144,
+              "scripts": 145,
               "assets": 6,
               "reports": 43
             },
@@ -4376,7 +4381,7 @@
           },
           "scripts": {
             "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
-            "script_count": 144,
+            "script_count": 145,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -4617,7 +4622,7 @@
           "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
           "counts": {
             "references": 35,
-            "scripts": 144,
+            "scripts": 145,
             "assets": 6,
             "reports": 43
           },
@@ -4628,7 +4633,7 @@
         },
         "scripts": {
           "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
-          "script_count": 144,
+          "script_count": 145,
           "help_smoke_failed_count": 0
         },
         "permissions": {

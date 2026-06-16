@@ -236,7 +236,7 @@ def main() -> None:
     assert full_payload["data"]["python_compatibility"]["summary"]["issue_count"] == 0, full_payload["data"]["python_compatibility"]
     assert full_payload["data"]["architecture_maintainability"]["summary"]["hotspot_count"] == 0, full_payload["data"]["architecture_maintainability"]
     assert full_payload["data"]["architecture_maintainability"]["summary"]["watchlist_count"] == 0, full_payload["data"]["architecture_maintainability"]
-    assert full_payload["data"]["architecture_maintainability"]["summary"]["early_watchlist_count"] >= 5, full_payload["data"]["architecture_maintainability"]
+    assert full_payload["data"]["architecture_maintainability"]["summary"]["early_watchlist_count"] >= 4, full_payload["data"]["architecture_maintainability"]
     assert full_payload["data"]["architecture_maintainability"]["summary"]["blocker_count"] == 0, full_payload["data"]["architecture_maintainability"]
     action_keys = {item["gate_key"] for item in full_payload["review_actions"]}
     assert action_keys == {"output-lab", "review-waivers", "world-class-evidence"}, full_payload["review_actions"]

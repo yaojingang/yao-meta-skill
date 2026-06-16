@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-17",
+  "generated_at": "2026-06-13",
   "root": ".",
   "summary": {
     "target_python": "3.11",
-    "file_count": 222,
+    "file_count": 223,
     "issue_count": 0,
     "syntax_error_count": 0,
     "fstring_311_violation_count": 0,
@@ -594,6 +594,12 @@
     },
     {
       "path": "scripts/review_studio_output_review.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "scripts/review_studio_panels.py",
       "ok": true,
       "issue_count": 0,
       "issues": []

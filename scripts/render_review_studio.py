@@ -8,9 +8,10 @@ from typing import Any
 from review_studio_actions import build_review_actions, render_review_actions
 from review_studio_data import evidence_paths, insight_cards, load_review_data
 from review_studio_formatting import registry_package_summary, render_gate_contract_panel, render_kv_grid
-from review_studio_gates import add_blockers_from_gate, build_gates, gate_contract, status_label, weighted_score
+from review_studio_gates import add_blockers_from_gate, build_gates, gate_contract, weighted_score
 from review_studio_layout import render_review_nav, review_studio_css
 from review_studio_output_review import render_output_review_section
+from review_studio_panels import render_gate_list, render_insights, render_issue_list, render_review_annotations_panel
 from review_studio_skillops import render_skillops_section
 from review_studio_waivers import render_waiver_candidates_panel
 from review_studio_world_class import render_world_class_evidence_entries, render_world_class_intake_checklist
@@ -27,86 +28,6 @@ def display_path(skill_dir: Path, path: Path) -> str:
             return str(path.resolve().relative_to(ROOT.resolve()))
         except ValueError:
             return str(path.resolve())
-
-
-def render_gate_list(gates: list[dict[str, str]]) -> str:
-    items = []
-    for item in gates:
-        link_html = f"<a href='{html.escape(item['link'])}'>证据</a>" if item.get("link") else ""
-        items.append(
-            "<article class='gate "
-            + html.escape(item["status"])
-            + "'>"
-            f"<div><span>{html.escape(status_label(item['status']))}</span><h3>{html.escape(item['label'])}</h3></div>"
-            f"<p>{html.escape(item['detail'])}</p>"
-            f"<footer>{html.escape(item['evidence'])} {link_html}</footer>"
-            "</article>"
-        )
-    return "".join(items)
-
-
-def render_insights(cards: list[dict[str, str]]) -> str:
-    return "".join(
-        (
-            "<article class='metric'>"
-            f"<span>{html.escape(item['label'])}</span>"
-            f"<strong>{html.escape(item['value'])}</strong>"
-            f"<p>{html.escape(item['detail'])}</p>"
-            "</article>"
-        )
-        for item in cards
-    )
-
-
-def render_issue_list(title: str, items: list[dict[str, str]]) -> str:
-    if not items:
-        return f"<section><h2>{html.escape(title)}</h2><p class='muted'>无。</p></section>"
-    body = "".join(
-        (
-            "<li>"
-            f"<strong>{html.escape(item['label'])}</strong>"
-            f"<span>{html.escape(item['detail'])}</span>"
-            "</li>"
-        )
-        for item in items
-    )
-    return f"<section><h2>{html.escape(title)}</h2><ul class='issues'>{body}</ul></section>"
-
-
-def render_review_annotations_panel(annotations_report: dict[str, Any]) -> str:
-    annotations = annotations_report.get("annotations", []) if isinstance(annotations_report, dict) else []
-    if not annotations:
-        return "<p class='muted'>当前没有 reviewer 批注。</p>"
-    cards = []
-    for item in annotations:
-        line_suffix = f":{item['line']}" if item.get("line") else ""
-        target_label = f"{item.get('target_path', '')}{line_suffix}"
-        meta = " · ".join(
-            part
-            for part in [
-                str(item.get("gate_key", "")),
-                str(item.get("reviewer", "")),
-                str(item.get("created_at", "")),
-            ]
-            if part
-        )
-        cards.append(
-            "<article class='annotation-card "
-            + html.escape(str(item.get("severity", "note")))
-            + " "
-            + html.escape(str(item.get("status", "open")))
-            + "'>"
-            f"<div><span>{html.escape(str(item.get('severity', 'note')))} · {html.escape(str(item.get('status', 'open')))}</span>"
-            f"<h3>{html.escape(str(item.get('id', 'annotation')))}</h3></div>"
-            f"<p>{html.escape(str(item.get('body', '')))}</p>"
-            f"<dl><dt>位置</dt><dd><code>{html.escape(target_label)}</code></dd>"
-            f"<dt>Gate</dt><dd>{html.escape(str(item.get('gate_key', '')))}</dd>"
-            f"<dt>建议</dt><dd>{html.escape(str(item.get('suggested_action', '') or '无'))}</dd></dl>"
-            f"<small>{html.escape(meta)}</small>"
-            f"<footer>{html.escape(str(item.get('source_excerpt', '')))}</footer>"
-            "</article>"
-        )
-    return "".join(cards)
 
 
 def render_html(report: dict[str, Any]) -> str:

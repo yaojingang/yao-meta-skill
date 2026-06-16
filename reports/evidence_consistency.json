@@ -189,12 +189,12 @@
       "status": "pass",
       "expected": {
         "status": "pass",
-        "detail": "initial load 990/1000; deferred 496320/120000; top deferred scripts 435426; resource governance governed; quality density 131.3",
+        "detail": "initial load 990/1000; deferred 496411/120000; top deferred scripts 435517; resource governance governed; quality density 131.3",
         "evidence": "reports/context_budget.json"
       },
       "actual": {
         "status": "pass",
-        "detail": "initial load 990/1000; deferred 496320/120000; top deferred scripts 435426; resource governance governed; quality density 131.3",
+        "detail": "initial load 990/1000; deferred 496411/120000; top deferred scripts 435517; resource governance governed; quality density 131.3",
         "evidence": "reports/context_budget.json"
       },
       "paths": [
@@ -222,7 +222,7 @@
       "actual": {
         "available": true,
         "clean": false,
-        "changed_file_count": 11
+        "changed_file_count": 57
       },
       "paths": [
         "reports/benchmark_reproducibility.json"
@@ -1525,7 +1525,7 @@
             "path": "scripts",
             "label": "Deterministic helpers or local tooling",
             "kind": "folder",
-            "file_count": 144
+            "file_count": 145
           },
           {
             "path": "evals",
@@ -1540,7 +1540,7 @@
             "file_count": 235
           }
         ],
-        "file_count": 447,
+        "file_count": 448,
         "folder_count": 4,
         "distribution": [
           {
@@ -1565,7 +1565,7 @@
           },
           {
             "label": "scripts",
-            "value": 144
+            "value": 145
           },
           {
             "label": "evals",
@@ -1613,7 +1613,7 @@
             "path": "scripts",
             "label": "Deterministic helpers or local tooling",
             "kind": "folder",
-            "file_count": 144
+            "file_count": 145
           },
           {
             "path": "evals",
@@ -1628,7 +1628,7 @@
             "file_count": 235
           }
         ],
-        "file_count": 447,
+        "file_count": 448,
         "folder_count": 4,
         "distribution": [
           {
@@ -1653,7 +1653,7 @@
           },
           {
             "label": "scripts",
-            "value": 144
+            "value": 145
           },
           {
             "label": "evals",
@@ -2417,10 +2417,10 @@
         "score `91`",
         "`16` gates",
         "`3` warnings",
-        "`58` declared internal modules",
-        "`86 / 86` CLI help smoke checks passing across `144` scripts",
-        "`682` zip entries",
-        "archive with `682` entries",
+        "`59` declared internal modules",
+        "`86 / 86` CLI help smoke checks passing across `145` scripts",
+        "`683` zip entries",
+        "archive with `683` entries",
         "`12` installer permission checks enforced",
         "`0` permission failures",
         "`25` required artifacts",
