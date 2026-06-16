@@ -44,7 +44,7 @@
       "key": "context-budget",
       "label": "上下文",
       "status": "pass",
-      "detail": "initial load 990/1000; deferred 493019/120000; top deferred scripts 432921; resource governance governed; quality density 131.3",
+      "detail": "initial load 990/1000; deferred 494370/120000; top deferred scripts 434272; resource governance governed; quality density 131.3",
       "evidence": "reports/context_budget.json",
       "link": "context_budget.md"
     },
@@ -60,7 +60,7 @@
       "key": "trust-report",
       "label": "信任报告",
       "status": "pass",
-      "detail": "0 secrets; 137 scripts; 3 network-capable scripts; 0 help smoke failures",
+      "detail": "0 secrets; 138 scripts; 3 network-capable scripts; 0 help smoke failures",
       "evidence": "reports/security_trust_report.json",
       "link": "security_trust_report.md"
     },
@@ -68,7 +68,7 @@
       "key": "python-compat",
       "label": "Python 兼容",
       "status": "pass",
-      "detail": "Python 3.11; 214 files; 0 compatibility issues; 0 syntax; 0 f-string 3.11 hazards",
+      "detail": "Python 3.11; 215 files; 0 compatibility issues; 0 syntax; 0 f-string 3.11 hazards",
       "evidence": "reports/python_compatibility.json",
       "link": "python_compatibility.md"
     },
@@ -76,7 +76,7 @@
       "key": "architecture-maintainability",
       "label": "架构维护",
       "status": "pass",
-      "detail": "211 Python files; 0 hotspots; 0 watchlist files; 0 blockers; largest 696 lines; 68 CLI handlers; 18 in entrypoint",
+      "detail": "212 Python files; 0 hotspots; 0 watchlist files; 0 blockers; largest 696 lines; 68 CLI handlers; 18 in entrypoint",
       "evidence": "reports/architecture_maintainability.json",
       "link": "architecture_maintainability.md"
     },
@@ -1484,7 +1484,7 @@
             "path": "scripts",
             "label": "Deterministic helpers or local tooling",
             "kind": "folder",
-            "file_count": 137
+            "file_count": 138
           },
           {
             "path": "evals",
@@ -1499,7 +1499,7 @@
             "file_count": 229
           }
         ],
-        "file_count": 434,
+        "file_count": 435,
         "folder_count": 4,
         "distribution": [
           {
@@ -1524,7 +1524,7 @@
           },
           {
             "label": "scripts",
-            "value": 137
+            "value": 138
           },
           {
             "label": "evals",
@@ -1654,7 +1654,7 @@
           "path": "scripts",
           "label": "Deterministic helpers or local tooling",
           "kind": "folder",
-          "file_count": 137
+          "file_count": 138
         },
         {
           "path": "evals",
@@ -1972,8 +1972,8 @@
           "methodology_complete": true,
           "required_artifact_count": 25,
           "missing_artifact_count": 0,
-          "evidence_bundle_sha256": "dc4ff2cca858c2e3509a608dd0c6902309397e8212fdd878bc00e7157a538f4b",
-          "source_contract_sha256": "662e1fd1592dfdea9053d3e1e6458c81d71c45a2900dc7814a557fcd8e31f4e0",
+          "evidence_bundle_sha256": "a47a7306aa8842b784f5ffbd872386dec9215e0bcd79b0ff7a70e3d8211315d7",
+          "source_contract_sha256": "2bc5e8214814c344534e5155301cd3f86e4ceee351313fb3a538d6fd9d400b75",
           "archive_sha256": "5802e5f522558cf77666ae59390a28845cf3affd22fa1267b6629891ddeba76b",
           "output_case_count": 5,
           "failure_disclosure_count": 3,
@@ -1996,7 +1996,7 @@
           "working_tree_dirty": false,
           "changed_file_count": 0
         },
-        "commit": "9bf9b1ca20a9521590fc8385102898b8186663a5",
+        "commit": "1be80208f3e24e23fd49d62147fb1940e65b1493",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -2080,9 +2080,9 @@
         "failures": []
       },
       "trust_security": {
-        "scanned_files": 228,
-        "script_count": 137,
-        "internal_module_count": 51,
+        "scanned_files": 229,
+        "script_count": 138,
+        "internal_module_count": 52,
         "secret_findings": 0,
         "dependency_files": [
           "requirements-ci.txt"
@@ -2100,8 +2100,8 @@
         "help_smoke_failed_count": 0,
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
-        "package_hash_file_count": 228,
-        "package_sha256": "662e1fd1592dfdea9053d3e1e6458c81d71c45a2900dc7814a557fcd8e31f4e0"
+        "package_hash_file_count": 229,
+        "package_sha256": "2bc5e8214814c344534e5155301cd3f86e4ceee351313fb3a538d6fd9d400b75"
       },
       "skill_atlas": {
         "skill_count": 12,
@@ -5659,7 +5659,7 @@
       "ok": true,
       "generated_at": "2026-06-16",
       "skill_dir": ".",
-      "commit": "9bf9b1ca20a9521590fc8385102898b8186663a5",
+      "commit": "1be80208f3e24e23fd49d62147fb1940e65b1493",
       "git_status": {
         "available": true,
         "dirty": false,
@@ -5673,8 +5673,8 @@
         "methodology_complete": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "dc4ff2cca858c2e3509a608dd0c6902309397e8212fdd878bc00e7157a538f4b",
-        "source_contract_sha256": "662e1fd1592dfdea9053d3e1e6458c81d71c45a2900dc7814a557fcd8e31f4e0",
+        "evidence_bundle_sha256": "a47a7306aa8842b784f5ffbd872386dec9215e0bcd79b0ff7a70e3d8211315d7",
+        "source_contract_sha256": "2bc5e8214814c344534e5155301cd3f86e4ceee351313fb3a538d6fd9d400b75",
         "archive_sha256": "5802e5f522558cf77666ae59390a28845cf3affd22fa1267b6629891ddeba76b",
         "output_case_count": 5,
         "failure_disclosure_count": 3,
@@ -5710,7 +5710,7 @@
       },
       "release_lock": {
         "ready": true,
-        "commit": "9bf9b1ca20a9521590fc8385102898b8186663a5",
+        "commit": "1be80208f3e24e23fd49d62147fb1940e65b1493",
         "status_scope": "generation-time status before this report is written",
         "reason": "clean generation-time HEAD"
       },
@@ -5720,7 +5720,7 @@
         "existing_count": 25,
         "missing_count": 0,
         "missing_paths": [],
-        "sha256": "dc4ff2cca858c2e3509a608dd0c6902309397e8212fdd878bc00e7157a538f4b"
+        "sha256": "a47a7306aa8842b784f5ffbd872386dec9215e0bcd79b0ff7a70e3d8211315d7"
       },
       "methodology": {
         "path": "reports/benchmark_methodology.md",
@@ -5828,15 +5828,15 @@
           "label": "trust_report",
           "path": "reports/security_trust_report.json",
           "exists": true,
-          "bytes": 127560,
-          "sha256": "4db8ca8fc33273090a12a6223a250e799e45194d72f3e2a614efb8f5b3777329"
+          "bytes": 128210,
+          "sha256": "fc3c7de65382fa7fed4fff78d217b0c1d74fafe132b4d702562e40ad4185648f"
         },
         {
           "label": "python_compatibility",
           "path": "reports/python_compatibility.json",
           "exists": true,
-          "bytes": 27755,
-          "sha256": "f9abc4467f70f25ede587547326b6dcbe7fae3ace76ba16d8740c4882b2ca236"
+          "bytes": 27896,
+          "sha256": "7529617dfb315ebcc89cbcbc45a9d98c8f42f2369c6814303eeb0df8efa0336e"
         },
         {
           "label": "registry_audit",
@@ -5864,7 +5864,7 @@
           "path": "reports/skill_os2_audit.json",
           "exists": true,
           "bytes": 14310,
-          "sha256": "adbeaf74b4c824bc4c7880fc7ae959f1dcdf83ebb686e765b79c02dc6d779cd8"
+          "sha256": "f0c8727979ccd97e74e1196919b25bae8d717a6eccbad1d677874fb0cc590674"
         },
         {
           "label": "world_class_evidence_plan",
@@ -6196,7 +6196,7 @@
           "label": "Trust Security",
           "status": "pass",
           "objective": "Scripts, dependencies, permissions, secrets, and package hash are reviewable for team distribution.",
-          "current": "137 scripts; secrets 0; help failures 0",
+          "current": "138 scripts; secrets 0; help failures 0",
           "command": "python3 scripts/yao.py trust .",
           "test": "python3 tests/verify_trust_check.py",
           "evidence": [
@@ -12083,9 +12083,9 @@
       "ok": true,
       "skill_dir": ".",
       "summary": {
-        "scanned_files": 228,
-        "script_count": 137,
-        "internal_module_count": 51,
+        "scanned_files": 229,
+        "script_count": 138,
+        "internal_module_count": 52,
         "secret_findings": 0,
         "dependency_files": [
           "requirements-ci.txt"
@@ -12103,8 +12103,8 @@
         "help_smoke_failed_count": 0,
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
-        "package_hash_file_count": 228,
-        "package_sha256": "662e1fd1592dfdea9053d3e1e6458c81d71c45a2900dc7814a557fcd8e31f4e0"
+        "package_hash_file_count": 229,
+        "package_sha256": "2bc5e8214814c344534e5155301cd3f86e4ceee351313fb3a538d6fd9d400b75"
       },
       "failures": [],
       "warnings": [],
@@ -13808,6 +13808,20 @@
           "network_hosts": []
         },
         {
+          "path": "scripts/world_class_native_permission_evidence.py",
+          "interface": "internal-module",
+          "interface_declared": true,
+          "interface_reason": "Imported by world_class_evidence_contract.py to validate runtime permission evidence from target-level probe rows.",
+          "has_argparse": false,
+          "has_main_guard": false,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_file_write": false,
+          "uses_subprocess": false,
+          "network_urls": [],
+          "network_hosts": []
+        },
+        {
           "path": "scripts/world_class_preflight_layout.py",
           "interface": "internal-module",
           "interface_declared": true,
@@ -14080,7 +14094,7 @@
         "checked_count": 86,
         "passed_count": 86,
         "failed_count": 0,
-        "skipped_count": 51,
+        "skipped_count": 52,
         "failed_scripts": [],
         "results": [
           {
@@ -15086,6 +15100,10 @@
             "reason": "internal module"
           },
           {
+            "path": "scripts/world_class_native_permission_evidence.py",
+            "reason": "internal module"
+          },
+          {
             "path": "scripts/world_class_preflight_layout.py",
             "reason": "internal module"
           },
@@ -15344,7 +15362,7 @@
       "root": ".",
       "summary": {
         "target_python": "3.11",
-        "file_count": 214,
+        "file_count": 215,
         "issue_count": 0,
         "syntax_error_count": 0,
         "fstring_311_violation_count": 0,
@@ -16100,6 +16118,12 @@
           "issues": []
         },
         {
+          "path": "scripts/world_class_native_permission_evidence.py",
+          "ok": true,
+          "issue_count": 0,
+          "issues": []
+        },
+        {
           "path": "scripts/world_class_preflight_layout.py",
           "ok": true,
           "issue_count": 0,
@@ -16658,10 +16682,10 @@
       "generated_at": "2026-06-16",
       "skill_dir": ".",
       "summary": {
-        "python_file_count": 211,
-        "script_file_count": 137,
+        "python_file_count": 212,
+        "script_file_count": 138,
         "test_file_count": 74,
-        "internal_module_count": 53,
+        "internal_module_count": 54,
         "cli_script_count": 86,
         "command_handler_count": 68,
         "entrypoint_command_handler_count": 18,
@@ -16691,15 +16715,15 @@
           "recommendation": "Split viewer data assembly from HTML section rendering."
         },
         {
-          "path": "scripts/skill_report_model.py",
-          "lines": 665,
-          "kind": "internal-module",
+          "path": "tests/verify_world_class_evidence_intake.py",
+          "lines": 677,
+          "kind": "test",
           "severity": "pass",
-          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+          "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
         },
         {
-          "path": "scripts/world_class_evidence_contract.py",
-          "lines": 654,
+          "path": "scripts/skill_report_model.py",
+          "lines": 665,
           "kind": "internal-module",
           "severity": "pass",
           "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
@@ -16747,11 +16771,11 @@
           "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
         },
         {
-          "path": "tests/verify_world_class_evidence_intake.py",
-          "lines": 611,
-          "kind": "test",
+          "path": "scripts/world_class_evidence_contract.py",
+          "lines": 618,
+          "kind": "internal-module",
           "severity": "pass",
-          "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
         },
         {
           "path": "scripts/render_benchmark_reproducibility.py",
@@ -16777,16 +16801,16 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 797,
-        "other_text_tokens": 1064742,
+        "other_text_tokens": 1067291,
         "estimated_initial_load_tokens": 990,
-        "estimated_total_text_tokens": 1065539,
-        "deferred_resource_tokens": 493019,
+        "estimated_total_text_tokens": 1068088,
+        "deferred_resource_tokens": 494370,
         "deferred_resource_warn_threshold": 120000,
         "deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 432921,
-            "file_count": 137
+            "estimated_tokens": 434272,
+            "file_count": 138
           },
           {
             "path": "references",
@@ -16807,8 +16831,8 @@
         "large_deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 432921,
-            "file_count": 137
+            "estimated_tokens": 434272,
+            "file_count": 138
           }
         ],
         "deferred_resource_governance": {
@@ -16830,14 +16854,14 @@
               ],
               "missing": [],
               "path": "scripts",
-              "estimated_tokens": 432921,
-              "file_count": 137,
+              "estimated_tokens": 434272,
+              "file_count": 138,
               "rationale": "Script resources are deterministic deferred tools, not initial-load prompt context."
             }
           ],
           "summary": "Large deferred resources are indexed and backed by evidence."
         },
-        "relevant_file_count": 669,
+        "relevant_file_count": 671,
         "unused_resource_dirs": [],
         "quality_signal_points": 130,
         "quality_density": 131.3

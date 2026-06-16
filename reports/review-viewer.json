@@ -513,7 +513,7 @@
           "path": "scripts",
           "label": "Deterministic helpers or local tooling",
           "kind": "folder",
-          "file_count": 137
+          "file_count": 138
         },
         {
           "path": "evals",
@@ -528,7 +528,7 @@
           "file_count": 229
         }
       ],
-      "file_count": 434,
+      "file_count": 435,
       "folder_count": 4,
       "distribution": [
         {
@@ -553,7 +553,7 @@
         },
         {
           "label": "scripts",
-          "value": 137
+          "value": 138
         },
         {
           "label": "evals",
@@ -683,7 +683,7 @@
         "path": "scripts",
         "label": "Deterministic helpers or local tooling",
         "kind": "folder",
-        "file_count": 137
+        "file_count": 138
       },
       {
         "path": "evals",
@@ -1001,8 +1001,8 @@
         "methodology_complete": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "dc4ff2cca858c2e3509a608dd0c6902309397e8212fdd878bc00e7157a538f4b",
-        "source_contract_sha256": "662e1fd1592dfdea9053d3e1e6458c81d71c45a2900dc7814a557fcd8e31f4e0",
+        "evidence_bundle_sha256": "a47a7306aa8842b784f5ffbd872386dec9215e0bcd79b0ff7a70e3d8211315d7",
+        "source_contract_sha256": "2bc5e8214814c344534e5155301cd3f86e4ceee351313fb3a538d6fd9d400b75",
         "archive_sha256": "5802e5f522558cf77666ae59390a28845cf3affd22fa1267b6629891ddeba76b",
         "output_case_count": 5,
         "failure_disclosure_count": 3,
@@ -1025,7 +1025,7 @@
         "working_tree_dirty": false,
         "changed_file_count": 0
       },
-      "commit": "9bf9b1ca20a9521590fc8385102898b8186663a5",
+      "commit": "1be80208f3e24e23fd49d62147fb1940e65b1493",
       "missing_artifacts": [],
       "limitations": [
         "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -1109,9 +1109,9 @@
       "failures": []
     },
     "trust_security": {
-      "scanned_files": 228,
-      "script_count": 137,
-      "internal_module_count": 51,
+      "scanned_files": 229,
+      "script_count": 138,
+      "internal_module_count": 52,
       "secret_findings": 0,
       "dependency_files": [
         "requirements-ci.txt"
@@ -1129,8 +1129,8 @@
       "help_smoke_failed_count": 0,
       "interactive_script_count": 0,
       "package_hash_scope": "source-contract-without-generated-reports",
-      "package_hash_file_count": 228,
-      "package_sha256": "662e1fd1592dfdea9053d3e1e6458c81d71c45a2900dc7814a557fcd8e31f4e0"
+      "package_hash_file_count": 229,
+      "package_sha256": "2bc5e8214814c344534e5155301cd3f86e4ceee351313fb3a538d6fd9d400b75"
     },
     "skill_atlas": {
       "skill_count": 12,

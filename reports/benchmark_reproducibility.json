@@ -3,7 +3,7 @@
   "ok": true,
   "generated_at": "2026-06-16",
   "skill_dir": ".",
-  "commit": "9bf9b1ca20a9521590fc8385102898b8186663a5",
+  "commit": "1be80208f3e24e23fd49d62147fb1940e65b1493",
   "git_status": {
     "available": true,
     "dirty": false,
@@ -17,8 +17,8 @@
     "methodology_complete": true,
     "required_artifact_count": 25,
     "missing_artifact_count": 0,
-    "evidence_bundle_sha256": "dc4ff2cca858c2e3509a608dd0c6902309397e8212fdd878bc00e7157a538f4b",
-    "source_contract_sha256": "662e1fd1592dfdea9053d3e1e6458c81d71c45a2900dc7814a557fcd8e31f4e0",
+    "evidence_bundle_sha256": "a47a7306aa8842b784f5ffbd872386dec9215e0bcd79b0ff7a70e3d8211315d7",
+    "source_contract_sha256": "2bc5e8214814c344534e5155301cd3f86e4ceee351313fb3a538d6fd9d400b75",
     "archive_sha256": "5802e5f522558cf77666ae59390a28845cf3affd22fa1267b6629891ddeba76b",
     "output_case_count": 5,
     "failure_disclosure_count": 3,
@@ -54,7 +54,7 @@
   },
   "release_lock": {
     "ready": true,
-    "commit": "9bf9b1ca20a9521590fc8385102898b8186663a5",
+    "commit": "1be80208f3e24e23fd49d62147fb1940e65b1493",
     "status_scope": "generation-time status before this report is written",
     "reason": "clean generation-time HEAD"
   },
@@ -64,7 +64,7 @@
     "existing_count": 25,
     "missing_count": 0,
     "missing_paths": [],
-    "sha256": "dc4ff2cca858c2e3509a608dd0c6902309397e8212fdd878bc00e7157a538f4b"
+    "sha256": "a47a7306aa8842b784f5ffbd872386dec9215e0bcd79b0ff7a70e3d8211315d7"
   },
   "methodology": {
     "path": "reports/benchmark_methodology.md",
@@ -172,15 +172,15 @@
       "label": "trust_report",
       "path": "reports/security_trust_report.json",
       "exists": true,
-      "bytes": 127560,
-      "sha256": "4db8ca8fc33273090a12a6223a250e799e45194d72f3e2a614efb8f5b3777329"
+      "bytes": 128210,
+      "sha256": "fc3c7de65382fa7fed4fff78d217b0c1d74fafe132b4d702562e40ad4185648f"
     },
     {
       "label": "python_compatibility",
       "path": "reports/python_compatibility.json",
       "exists": true,
-      "bytes": 27755,
-      "sha256": "f9abc4467f70f25ede587547326b6dcbe7fae3ace76ba16d8740c4882b2ca236"
+      "bytes": 27896,
+      "sha256": "7529617dfb315ebcc89cbcbc45a9d98c8f42f2369c6814303eeb0df8efa0336e"
     },
     {
       "label": "registry_audit",
@@ -208,7 +208,7 @@
       "path": "reports/skill_os2_audit.json",
       "exists": true,
       "bytes": 14310,
-      "sha256": "adbeaf74b4c824bc4c7880fc7ae959f1dcdf83ebb686e765b79c02dc6d779cd8"
+      "sha256": "f0c8727979ccd97e74e1196919b25bae8d717a6eccbad1d677874fb0cc590674"
     },
     {
       "label": "world_class_evidence_plan",
