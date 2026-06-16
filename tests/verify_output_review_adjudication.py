@@ -324,7 +324,7 @@ def main() -> None:
                     {
                         "case_id": answer_key["answers"][0]["case_id"],
                         "winner_variant": "A",
-                        "metadata": {"raw_output": "nested raw output must not be imported"},
+                        "metadata": {"Raw_Output": "nested raw output must not be imported"},
                     }
                 ],
             },
@@ -349,8 +349,46 @@ def main() -> None:
     nested_private_payload = json.loads(nested_private_proc.stdout)
     assert nested_private_proc.returncode == 2, nested_private_payload
     assert nested_private_payload["ok"] is False, nested_private_payload
-    assert any("decision #1.metadata.raw_output" in failure for failure in nested_private_payload["failures"]), nested_private_payload
+    assert any("decision #1.metadata.Raw_Output" in failure for failure in nested_private_payload["failures"]), nested_private_payload
     assert not (tmp_root / "nested_private_decisions.json").exists(), nested_private_payload
+
+    credential_source = tmp_root / "credential_source.json"
+    credential_source.write_text(
+        json.dumps(
+            {
+                "reviewer": "Yao QA",
+                "reviewed_at": "2026-06-13",
+                "decisions": [
+                    {
+                        "case_id": answer_key["answers"][0]["case_id"],
+                        "winner_variant": "A",
+                        "metadata": {"API_KEY": "credential material must not be imported"},
+                    }
+                ],
+            },
+            ensure_ascii=False,
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    credential_proc = run(
+        [
+            str(IMPORTER),
+            "--input",
+            str(credential_source),
+            "--blind-pack",
+            str(blind_pack_json),
+            "--output-json",
+            str(tmp_root / "credential_decisions.json"),
+        ],
+        check=False,
+    )
+    credential_payload = json.loads(credential_proc.stdout)
+    assert credential_proc.returncode == 2, credential_payload
+    assert credential_payload["ok"] is False, credential_payload
+    assert any("decision #1.metadata.API_KEY" in failure for failure in credential_payload["failures"]), credential_payload
+    assert not (tmp_root / "credential_decisions.json").exists(), credential_payload
 
     unknown_case = tmp_root / "unknown_case.json"
     unknown_case.write_text(

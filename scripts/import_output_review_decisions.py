@@ -24,6 +24,7 @@ SCRIPT_INTERFACE = "cli"
 SCRIPT_INTERFACE_REASON = "Imports human blind A/B reviewer decisions into the canonical output-review decision file."
 
 RAW_CONTENT_FIELDS = {
+    "api_key",
     "prompt",
     "prompts",
     "input",
@@ -35,18 +36,28 @@ RAW_CONTENT_FIELDS = {
     "message",
     "messages",
     "user_message",
+    "user_messages",
     "assistant_message",
+    "assistant_messages",
     "model_output",
     "baseline_output",
     "with_skill_output",
     "raw_content",
     "raw_prompt",
+    "raw_provider_prompt",
+    "raw_user_content",
     "raw_output",
+    "credential",
+    "credentials",
+    "secret",
+    "secrets",
+    "token",
 }
 
 ANSWER_KEY_FIELDS = {
     "expected",
     "expected_winner",
+    "expected_winner_role",
     "expected_winner_variant",
     "answer_key",
     "label",
@@ -148,7 +159,8 @@ def forbidden_field_paths(value: Any, prefix: str) -> list[str]:
         for key, child in value.items():
             key_text = str(key).strip()
             child_path = f"{prefix}.{key_text}"
-            if key_text in RAW_CONTENT_FIELDS or key_text in ANSWER_KEY_FIELDS:
+            normalized_key = key_text.casefold()
+            if normalized_key in RAW_CONTENT_FIELDS or normalized_key in ANSWER_KEY_FIELDS:
                 found.append(child_path)
             found.extend(forbidden_field_paths(child, child_path))
     elif isinstance(value, list):
