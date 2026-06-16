@@ -1950,7 +1950,7 @@
           "working_tree_dirty": true,
           "changed_file_count": 1
         },
-        "commit": "7d72ea9a7529aa0568f30de69ace0a2e1efd8c64",
+        "commit": "e5580d2777105e83e66dca31a020bd9103b26872",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -5560,13 +5560,13 @@
       "ok": true,
       "generated_at": "2026-06-16",
       "skill_dir": ".",
-      "commit": "7d72ea9a7529aa0568f30de69ace0a2e1efd8c64",
+      "commit": "e5580d2777105e83e66dca31a020bd9103b26872",
       "git_status": {
         "available": true,
         "dirty": true,
         "changed_file_count": 1,
         "sample": [
-          " M reports/context_budget_summary.json"
+          " M reports/context_budget.json"
         ],
         "scope": "generation-time status before this report is written"
       },
@@ -5614,7 +5614,7 @@
       },
       "release_lock": {
         "ready": false,
-        "commit": "7d72ea9a7529aa0568f30de69ace0a2e1efd8c64",
+        "commit": "e5580d2777105e83e66dca31a020bd9103b26872",
         "status_scope": "generation-time status before this report is written",
         "reason": "working tree was dirty at generation time"
       },
@@ -16391,9 +16391,9 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 797,
-        "other_text_tokens": 1047016,
+        "other_text_tokens": 1047001,
         "estimated_initial_load_tokens": 990,
-        "estimated_total_text_tokens": 1047813,
+        "estimated_total_text_tokens": 1047798,
         "deferred_resource_tokens": 485013,
         "deferred_resource_warn_threshold": 120000,
         "deferred_resource_dirs": [
