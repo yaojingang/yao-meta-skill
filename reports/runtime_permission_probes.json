@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "ok": true,
   "skill_dir": ".",
-  "package_dir": "tests/tmp_review_studio/dist",
+  "package_dir": "dist",
   "expected_capabilities": [
     "file_write",
     "network",
@@ -42,7 +42,7 @@
     {
       "target": "openai",
       "status": "pass",
-      "adapter": "tests/tmp_review_studio/dist/targets/openai/adapter.json",
+      "adapter": "dist/targets/openai/adapter.json",
       "permission_model": "metadata-only",
       "native_enforcement": false,
       "metadata_fallback_explicit": true,
@@ -139,7 +139,7 @@
     {
       "target": "claude",
       "status": "pass",
-      "adapter": "tests/tmp_review_studio/dist/targets/claude/adapter.json",
+      "adapter": "dist/targets/claude/adapter.json",
       "permission_model": "neutral-source-plus-adapter",
       "native_enforcement": false,
       "metadata_fallback_explicit": true,
@@ -221,7 +221,7 @@
     {
       "target": "generic",
       "status": "pass",
-      "adapter": "tests/tmp_review_studio/dist/targets/generic/adapter.json",
+      "adapter": "dist/targets/generic/adapter.json",
       "permission_model": "agent-skills-compatible-metadata",
       "native_enforcement": false,
       "metadata_fallback_explicit": true,
@@ -303,7 +303,7 @@
     {
       "target": "vscode",
       "status": "pass",
-      "adapter": "tests/tmp_review_studio/dist/targets/vscode/adapter.json",
+      "adapter": "dist/targets/vscode/adapter.json",
       "permission_model": "vscode-workspace-trust-plus-metadata",
       "native_enforcement": false,
       "metadata_fallback_explicit": true,

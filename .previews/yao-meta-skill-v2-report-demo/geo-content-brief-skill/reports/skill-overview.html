@@ -307,8 +307,8 @@
     }
     .section-head {
       display: grid;
-      grid-template-columns: minmax(0, 246px) minmax(0, 1fr);
-      gap: 36px;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 22px;
       align-items: start;
     }
     h2 {
@@ -330,10 +330,10 @@
       line-height: 1.3;
       margin-bottom: 10px;
     }
-    .section-head p {
+    .section-head > div:first-child p {
       margin: 12px 0 0;
       color: var(--muted);
-      max-width: 43ch;
+      max-width: 68ch;
       text-wrap: pretty;
     }
     .section-body {
@@ -348,18 +348,14 @@
     .quality-panels {
       margin-top: 16px;
     }
-    .metrics-report {
-      display: grid;
-      gap: 22px;
-    }
     .metrics-flow {
       display: grid;
-      gap: 22px;
+      gap: 24px;
     }
     .metrics-primary {
       display: grid;
-      grid-template-columns: minmax(420px, 1fr) minmax(360px, 0.88fr);
-      gap: 22px;
+      grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+      gap: 18px;
       align-items: start;
     }
     .metrics-primary .chart-figure {
@@ -422,11 +418,8 @@
       color: var(--brand);
       font-size: 12px;
     }
-    .metric-grid {
-      margin-top: 2px;
-    }
     .metric-detail-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
       align-items: stretch;
     }
     .list, .compact-list, .step-list {
@@ -456,18 +449,20 @@
     }
     .metric-card {
       display: grid;
-      grid-template-columns: minmax(96px, 118px) minmax(0, 1fr);
-      gap: 18px;
+      grid-template-columns: 1fr;
+      gap: 14px;
       align-content: start;
       min-height: 0;
     }
     .metric-card-head {
-      display: grid;
-      align-content: start;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      justify-content: space-between;
     }
     .metric-card strong {
       display: block;
-      margin: 8px 0 10px;
+      margin: 0;
       color: var(--brand);
       font-family: var(--mono);
       font-size: 2rem;
@@ -478,6 +473,7 @@
     .metric-label {
       color: var(--muted);
       font-size: 13px;
+      line-height: 1.45;
     }
     .metric-card-body {
       min-width: 0;
@@ -550,9 +546,7 @@
       display: grid;
       gap: 16px;
     }
-    .section-head > .world-readiness {
-      grid-column: 2;
-    }
+    .section-head > .world-readiness { grid-column: 1; }
     .world-readiness-head {
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
@@ -694,9 +688,9 @@
       .section-head > .world-readiness { grid-column: auto; }
       .hero-grid { gap: 24px; }
       .score-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .metrics-primary, .two-col, .metric-grid, .chart-grid, .roadmap { grid-template-columns: 1fr; }
+      .metrics-primary, .metric-detail-grid, .two-col, .metric-grid, .chart-grid, .roadmap { grid-template-columns: 1fr; }
       .evidence-list { grid-template-columns: 1fr; }
-      .metric-card { grid-template-columns: 86px minmax(0, 1fr); }
+      .metric-card { grid-template-columns: 1fr; }
       h1 { font-size: 2.75rem; }
     }
     @media (max-width: 540px) {
@@ -773,7 +767,7 @@
         <div class="two-col">
           <article class="panel">
             <h3><span data-lang="zh-CN">作用定位</span><span data-lang="en">Role</span></h3>
-            <ul class="list"><li><span data-lang="zh-CN">将 GEO 内容访谈、关键词笔记、竞品线索和渠道约束整理成可执行的中文内容简报。用于团队复用、选题规划、内容生产交接和质量评审；不用于直接代写完整长文或替代品牌策略判断。</span><span data-lang="en">Skill-specific source text is authored in Chinese; switch to Simplified Chinese for the exact wording.</span></li><li><span data-lang="zh-CN">把一次性经验沉淀为可复用、可评估、可迁移的 Skill 包体。</span><span data-lang="en">Turn one-off experience into a reusable, evaluable, and portable skill package.</span></li><li><span data-lang="zh-CN">交付结果：SKILL.md, agents/interface.yaml, reports/skill-ir.json, reports/compiled_targets.md, reports/output_quality_scorecard.md, reports/conformance_matrix.md, reports/security_trust_report.md, reports/skill_atlas.html, reports/registry_audit.md, reports/package_verification.md, reports/install_simulation.md, reports/upgrade_check.md, reports/adoption_drift_report.md, reports/review_waivers.md, reports/review_annotations.md, reports/review-studio.html, reports/skill-overview.html</span><span data-lang="en">Deliverables: SKILL.md, agents/interface.yaml, reports/skill-ir.json, reports/compiled_targets.md, reports/output_quality_scorecard.md, reports/conformance_matrix.md, reports/security_trust_report.md, reports/skill_atlas.html, reports/registry_audit.md, reports/package_verification.md, reports/install_simulation.md, reports/upgrade_check.md, reports/adoption_drift_report.md, reports/review_waivers.md, reports/review_annotations.md, reports/review-studio.html, reports/skill-overview.html</span></li></ul>
+            <ul class="list"><li><span data-lang="zh-CN">将 GEO 内容访谈、关键词笔记、竞品线索和渠道约束整理成可执行的中文内容简报。用于团队复用、选题规划、内容生产交接和质量评审；不用于直接代写完整长文或替代品牌策略判断。</span><span data-lang="en">Skill-specific source text is authored in Chinese; switch to Simplified Chinese for the exact wording.</span></li><li><span data-lang="zh-CN">把一次性经验沉淀为可复用、可评估、可迁移的 Skill 包体。</span><span data-lang="en">Turn one-off experience into a reusable, evaluable, and portable skill package.</span></li><li><span data-lang="zh-CN">交付结果：SKILL.md, agents/interface.yaml, reports/skill-ir.json, reports/compiled_targets.md, reports/output_quality_scorecard.md, reports/conformance_matrix.md, reports/security_trust_report.md, reports/skill_atlas.html, reports/registry_audit.md, reports/package_verification.md, reports/install_simulation.md, reports/upgrade_check.md, reports/adoption_drift_report.md, reports/review_waivers.md, reports/review_annotations.md, reports/review-studio.html, reports/skill-interpretation.html, reports/skill-overview.html</span><span data-lang="en">Deliverables: SKILL.md, agents/interface.yaml, reports/skill-ir.json, reports/compiled_targets.md, reports/output_quality_scorecard.md, reports/conformance_matrix.md, reports/security_trust_report.md, reports/skill_atlas.html, reports/registry_audit.md, reports/package_verification.md, reports/install_simulation.md, reports/upgrade_check.md, reports/adoption_drift_report.md, reports/review_waivers.md, reports/review_annotations.md, reports/review-studio.html, reports/skill-interpretation.html, reports/skill-overview.html</span></li></ul>
           </article>
           <figure class="chart-figure" data-chart="flow"><svg viewBox="0 0 620 170" role="img" aria-label="交付流程"><text data-lang="zh-CN" x="20" y="28" class="chart-title">交付流程</text><text data-lang="en" x="20" y="28" class="chart-title">Delivery Flow</text><path d="M188 93 H248 M398 93 H458" class="chart-line"/><g><rect x="38" y="56" width="150" height="74" rx="8" fill="#F6F8FB" stroke="#e8e6dc"/><text data-lang="zh-CN" x="113" y="99" text-anchor="middle">输入材料</text><text data-lang="en" x="113" y="99" text-anchor="middle">Input material</text></g><g><rect x="248" y="56" width="150" height="74" rx="8" fill="#F6F8FB" stroke="#e8e6dc"/><text data-lang="zh-CN" x="323" y="99" text-anchor="middle">Skill 包体</text><text data-lang="en" x="323" y="99" text-anchor="middle">Skill package</text></g><g><rect x="458" y="56" width="150" height="74" rx="8" fill="#F6F8FB" stroke="#e8e6dc"/><text data-lang="zh-CN" x="533" y="99" text-anchor="middle">可复用能力</text><text data-lang="en" x="533" y="99" text-anchor="middle">Reusable capability</text></g></svg><figcaption><span data-lang="zh-CN">交付流程把用户输入、生成的包体和可复用能力放在一条线上。</span><span data-lang="en">The delivery flow places user input, generated package, and reusable capability on one path.</span></figcaption></figure>
         </div>
@@ -800,7 +794,7 @@
               <ol class='metric-summary-list'><li><span class='metric-status'><span data-lang="zh-CN">稳定</span><span data-lang="en">Stable</span></span><b><span data-lang="zh-CN">完整度</span><span data-lang="en">Completeness</span></b><em>92</em><small><span data-lang="zh-CN">SKILL.md 已存在，是 Skill 的入口。</span><span data-lang="en">SKILL.md exists and acts as the skill entrypoint.</span></small></li><li><span class='metric-status'><span data-lang="zh-CN">稳定</span><span data-lang="en">Stable</span></span><b><span data-lang="zh-CN">触发清晰</span><span data-lang="en">Trigger clarity</span></b><em>100</em><small><span data-lang="zh-CN">frontmatter description 已存在，具备基础路由面。</span><span data-lang="en">The frontmatter description exists, giving the skill a basic routing surface.</span></small></li><li><span class='metric-status'><span data-lang="zh-CN">关注</span><span data-lang="en">Watch</span></span><b><span data-lang="zh-CN">证据充分</span><span data-lang="en">Evidence depth</span></b><em>60</em><small><span data-lang="zh-CN">已生成 12 / 20 类报告证据。</span><span data-lang="en">Generated 12 / 20 evidence report types.</span></small></li><li><span class='metric-status'><span data-lang="zh-CN">稳定</span><span data-lang="en">Stable</span></span><b><span data-lang="zh-CN">可维护性</span><span data-lang="en">Maintainability</span></b><em>85</em><small><span data-lang="zh-CN">SKILL.md 约 864 个词/字。</span><span data-lang="en">SKILL.md is about 864 words/characters.</span></small></li><li><span class='metric-status'><span data-lang="zh-CN">稳定</span><span data-lang="en">Stable</span></span><b><span data-lang="zh-CN">可迁移性</span><span data-lang="en">Portability</span></b><em>100</em><small><span data-lang="zh-CN">agents/interface.yaml 已存在。</span><span data-lang="en">agents/interface.yaml exists.</span></small></li><li><span class='metric-status'><span data-lang="zh-CN">可用</span><span data-lang="en">Usable</span></span><b><span data-lang="zh-CN">上下文成本</span><span data-lang="en">Context cost</span></b><em>78</em><small><span data-lang="zh-CN">入口约 864 个词/字，references 约 565 个词/字。</span><span data-lang="en">Entrypoint is about 864 words/characters; references are about 565.</span></small></li></ol>
             </article>
           </div>
-          <div class="metric-grid metric-detail-grid"><article class='metric-card'><div class='metric-card-head'><span class='metric-label'><span data-lang="zh-CN">完整度</span><span data-lang="en">Completeness</span></span><strong>92</strong></div><div class='metric-card-body'><ul class="compact-list"><li><span data-lang="zh-CN">SKILL.md 已存在，是 Skill 的入口。</span><span data-lang="en">SKILL.md exists and acts as the skill entrypoint.</span></li><li><span data-lang="zh-CN">README.md 已存在，便于人工阅读。</span><span data-lang="en">README.md exists for human-readable usage.</span></li><li><span data-lang="zh-CN">agents/interface.yaml 已存在，便于跨平台适配。</span><span data-lang="en">agents/interface.yaml exists for cross-platform adaptation.</span></li></ul></div></article><article class='metric-card'><div class='metric-card-head'><span class='metric-label'><span data-lang="zh-CN">触发清晰</span><span data-lang="en">Trigger clarity</span></span><strong>100</strong></div><div class='metric-card-body'><ul class="compact-list"><li><span data-lang="zh-CN">frontmatter description 已存在，具备基础路由面。</span><span data-lang="en">The frontmatter description exists, giving the skill a basic routing surface.</span></li><li><span data-lang="zh-CN">description 有足够长度说明任务边界。</span><span data-lang="en">The description is long enough to explain the task boundary.</span></li><li><span data-lang="zh-CN">description 已包含使用场景或排除边界信号。</span><span data-lang="en">The description includes usage-scenario or exclusion-boundary signals.</span></li></ul></div></article><article class='metric-card'><div class='metric-card-head'><span class='metric-label'><span data-lang="zh-CN">证据充分</span><span data-lang="en">Evidence depth</span></span><strong>60</strong></div><div class='metric-card-body'><ul class="compact-list"><li><span data-lang="zh-CN">已生成 12 / 20 类报告证据。</span><span data-lang="en">Generated 12 / 20 evidence report types.</span></li><li><span data-lang="zh-CN">skill-ir.json 已存在。</span><span data-lang="en">Skill-specific source text is authored in Chinese; switch to Simplified Chinese for the exact wording.</span></li><li><span data-lang="zh-CN">compiled_targets.json 已存在。</span><span data-lang="en">Skill-specific source text is authored in Chinese; switch to Simplified Chinese for the exact wording.</span></li></ul></div></article><article class='metric-card'><div class='metric-card-head'><span class='metric-label'><span data-lang="zh-CN">可维护性</span><span data-lang="en">Maintainability</span></span><strong>85</strong></div><div class='metric-card-body'><ul class="compact-list"><li><span data-lang="zh-CN">SKILL.md 约 864 个词/字。</span><span data-lang="en">SKILL.md is about 864 words/characters.</span></li><li><span data-lang="zh-CN">入口文件保持克制，可维护性较好。</span><span data-lang="en">The entrypoint stays restrained, which supports maintainability.</span></li><li><span data-lang="zh-CN">references/ 已承载扩展指导。</span><span data-lang="en">references/ carries extended guidance.</span></li></ul></div></article><article class='metric-card'><div class='metric-card-head'><span class='metric-label'><span data-lang="zh-CN">可迁移性</span><span data-lang="en">Portability</span></span><strong>100</strong></div><div class='metric-card-body'><ul class="compact-list"><li><span data-lang="zh-CN">agents/interface.yaml 已存在。</span><span data-lang="en">agents/interface.yaml exists.</span></li><li><span data-lang="zh-CN">manifest.json 已存在。</span><span data-lang="en">manifest.json exists.</span></li><li><span data-lang="zh-CN">目标平台或 adapter target 已声明。</span><span data-lang="en">Target platforms or adapter targets are declared.</span></li></ul></div></article><article class='metric-card'><div class='metric-card-head'><span class='metric-label'><span data-lang="zh-CN">上下文成本</span><span data-lang="en">Context cost</span></span><strong>78</strong></div><div class='metric-card-body'><ul class="compact-list"><li><span data-lang="zh-CN">入口约 864 个词/字，references 约 565 个词/字。</span><span data-lang="en">Entrypoint is about 864 words/characters; references are about 565.</span></li><li><span data-lang="zh-CN">分数越高代表上下文成本越低。</span><span data-lang="en">A higher score means lower context cost.</span></li><li><span data-lang="zh-CN">上下文成本处于可控区间。</span><span data-lang="en">Context cost is within a controlled range.</span></li></ul></div></article></div>
+          <div class="metric-grid metric-detail-grid"><article class='metric-card'><div class='metric-card-head'><span class='metric-label'><span data-lang="zh-CN">完整度</span><span data-lang="en">Completeness</span></span><strong>92</strong></div><div class='metric-card-body'><ul class="compact-list"><li><span data-lang="zh-CN">SKILL.md 已存在，是 Skill 的入口。</span><span data-lang="en">SKILL.md exists and acts as the skill entrypoint.</span></li><li><span data-lang="zh-CN">README.md 已存在，便于人工阅读。</span><span data-lang="en">README.md exists for human-readable usage.</span></li><li><span data-lang="zh-CN">agents/interface.yaml 已存在，便于跨平台适配。</span><span data-lang="en">agents/interface.yaml exists for cross-platform adaptation.</span></li></ul></div></article><article class='metric-card'><div class='metric-card-head'><span class='metric-label'><span data-lang="zh-CN">触发清晰</span><span data-lang="en">Trigger clarity</span></span><strong>100</strong></div><div class='metric-card-body'><ul class="compact-list"><li><span data-lang="zh-CN">frontmatter description 已存在，具备基础路由面。</span><span data-lang="en">The frontmatter description exists, giving the skill a basic routing surface.</span></li><li><span data-lang="zh-CN">description 有足够长度说明任务边界。</span><span data-lang="en">The description is long enough to explain the task boundary.</span></li><li><span data-lang="zh-CN">description 已包含使用场景或排除边界信号。</span><span data-lang="en">The description includes usage-scenario or exclusion-boundary signals.</span></li></ul></div></article><article class='metric-card'><div class='metric-card-head'><span class='metric-label'><span data-lang="zh-CN">证据充分</span><span data-lang="en">Evidence depth</span></span><strong>60</strong></div><div class='metric-card-body'><ul class="compact-list"><li><span data-lang="zh-CN">已生成 12 / 20 类报告证据。</span><span data-lang="en">Generated 12 / 20 evidence report types.</span></li><li><span data-lang="zh-CN">skill-ir.json 已存在。</span><span data-lang="en">skill-ir.json exists.</span></li><li><span data-lang="zh-CN">compiled_targets.json 已存在。</span><span data-lang="en">compiled_targets.json exists.</span></li></ul></div></article><article class='metric-card'><div class='metric-card-head'><span class='metric-label'><span data-lang="zh-CN">可维护性</span><span data-lang="en">Maintainability</span></span><strong>85</strong></div><div class='metric-card-body'><ul class="compact-list"><li><span data-lang="zh-CN">SKILL.md 约 864 个词/字。</span><span data-lang="en">SKILL.md is about 864 words/characters.</span></li><li><span data-lang="zh-CN">入口文件保持克制，可维护性较好。</span><span data-lang="en">The entrypoint stays restrained, which supports maintainability.</span></li><li><span data-lang="zh-CN">references/ 已承载扩展指导。</span><span data-lang="en">references/ carries extended guidance.</span></li></ul></div></article><article class='metric-card'><div class='metric-card-head'><span class='metric-label'><span data-lang="zh-CN">可迁移性</span><span data-lang="en">Portability</span></span><strong>100</strong></div><div class='metric-card-body'><ul class="compact-list"><li><span data-lang="zh-CN">agents/interface.yaml 已存在。</span><span data-lang="en">agents/interface.yaml exists.</span></li><li><span data-lang="zh-CN">manifest.json 已存在。</span><span data-lang="en">manifest.json exists.</span></li><li><span data-lang="zh-CN">目标平台或 adapter target 已声明。</span><span data-lang="en">Target platforms or adapter targets are declared.</span></li></ul></div></article><article class='metric-card'><div class='metric-card-head'><span class='metric-label'><span data-lang="zh-CN">上下文成本</span><span data-lang="en">Context cost</span></span><strong>78</strong></div><div class='metric-card-body'><ul class="compact-list"><li><span data-lang="zh-CN">入口约 864 个词/字，references 约 565 个词/字。</span><span data-lang="en">Entrypoint is about 864 words/characters; references are about 565.</span></li><li><span data-lang="zh-CN">分数越高代表上下文成本越低。</span><span data-lang="en">A higher score means lower context cost.</span></li><li><span data-lang="zh-CN">上下文成本处于可控区间。</span><span data-lang="en">Context cost is within a controlled range.</span></li></ul></div></article></div>
         </div>
       </div>
     </section>
@@ -854,11 +848,11 @@
             <h3><span data-lang="zh-CN">触发描述</span><span data-lang="en">Trigger</span></h3>
             <p><span data-lang="zh-CN">将 GEO 内容访谈、关键词笔记、竞品线索和渠道约束整理成可执行的中文内容简报。用于团队复用、选题规划、内容生产交接和质量评审；不用于直接代写完整长文或替代品牌策略判断。</span><span data-lang="en">Skill-specific source text is authored in Chinese; switch to Simplified Chinese for the exact wording.</span></p>
             <h3><span data-lang="zh-CN">输入材料</span><span data-lang="en">Inputs</span></h3>
-            <ul class="list"><li><span data-lang="zh-CN">用户提供的工作流、提示词、文档、记录或散乱笔记</span><span data-lang="en">Skill-specific source text is authored in Chinese; switch to Simplified Chinese for the exact wording.</span></li><li><span data-lang="zh-CN">期望沉淀的复用场景、排除项、约束和质量标准</span><span data-lang="en">Skill-specific source text is authored in Chinese; switch to Simplified Chinese for the exact wording.</span></li></ul>
+            <ul class="list"><li><span data-lang="zh-CN">用户提供的工作流、提示词、文档、记录或散乱笔记</span><span data-lang="en">User-provided workflows, prompts, documents, records, or rough notes.</span></li><li><span data-lang="zh-CN">期望沉淀的复用场景、排除项、约束和质量标准</span><span data-lang="en">The reusable scenario, exclusions, constraints, and quality standards to capture.</span></li></ul>
           </article>
           <article class="panel">
             <h3><span data-lang="zh-CN">输出结果</span><span data-lang="en">Outputs</span></h3>
-            <ul class="list"><li><span data-lang="zh-CN">可路由的 SKILL.md</span><span data-lang="en">Skill-specific source text is authored in Chinese; switch to Simplified Chinese for the exact wording.</span></li><li><span data-lang="zh-CN">agents/interface.yaml 元数据</span><span data-lang="en">Skill-specific source text is authored in Chinese; switch to Simplified Chinese for the exact wording.</span></li><li><span data-lang="zh-CN">必要的 references、scripts、evals、reports 证据</span><span data-lang="en">Skill-specific source text is authored in Chinese; switch to Simplified Chinese for the exact wording.</span></li><li><span data-lang="zh-CN">结构化 Skill 目录，共 8 类关键资产。</span><span data-lang="en">Structured skill directory with 8 key asset groups.</span></li></ul>
+            <ul class="list"><li><span data-lang="zh-CN">可路由的 SKILL.md</span><span data-lang="en">A routeable SKILL.md.</span></li><li><span data-lang="zh-CN">agents/interface.yaml 元数据</span><span data-lang="en">agents/interface.yaml metadata.</span></li><li><span data-lang="zh-CN">必要的 references、scripts、evals、reports 证据</span><span data-lang="en">Necessary references, scripts, evals, and reports evidence.</span></li><li><span data-lang="zh-CN">结构化 Skill 目录，共 8 类关键资产。</span><span data-lang="en">Structured skill directory with 8 key asset groups.</span></li></ul>
             <h3><span data-lang="zh-CN">不应触发</span><span data-lang="en">Should Not Trigger</span></h3>
             <ul class="list"><li><span data-lang="zh-CN">只需要一次性回答、没有复用价值的临时请求。</span><span data-lang="en">One-off requests that do not need reusable skill behavior.</span></li><li><span data-lang="zh-CN">要求直接执行相邻任务，而不是沉淀或使用这个 Skill。</span><span data-lang="en">Requests to perform an adjacent task directly rather than create or use this skill.</span></li><li><span data-lang="zh-CN">缺少必要事实且用户不允许澄清的场景。</span><span data-lang="en">Cases that lack required facts and do not allow clarification.</span></li></ul>
           </article>

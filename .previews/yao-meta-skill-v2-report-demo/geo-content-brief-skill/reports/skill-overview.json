@@ -25,6 +25,7 @@
       "reports/review_waivers.md",
       "reports/review_annotations.md",
       "reports/review-studio.html",
+      "reports/skill-interpretation.html",
       "reports/skill-overview.html"
     ],
     "flow": [
@@ -729,6 +730,7 @@
   "benchmark_highlights": [],
   "skill_ir": {
     "schema_version": "2.0.0",
+    "source_path": "reports/skill-ir.json",
     "target_count": 5,
     "trigger_samples": 1,
     "output_eval_cases": 0

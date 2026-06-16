@@ -8,7 +8,7 @@
       "budget_limit": 1000,
       "initial_tokens": 990,
       "skill_body_tokens": 797,
-      "deferred_resource_tokens": 486939,
+      "deferred_resource_tokens": 486920,
       "large_deferred_resource_dirs": [
         {
           "path": "scripts",
