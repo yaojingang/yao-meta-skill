@@ -6,9 +6,9 @@
     "context_budget_tier": "production",
     "context_budget_limit": 1000,
     "skill_body_tokens": 797,
-    "other_text_tokens": 1081719,
+    "other_text_tokens": 1081721,
     "estimated_initial_load_tokens": 990,
-    "estimated_total_text_tokens": 1082516,
+    "estimated_total_text_tokens": 1082518,
     "deferred_resource_tokens": 496024,
     "deferred_resource_warn_threshold": 120000,
     "deferred_resource_dirs": [

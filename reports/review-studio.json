@@ -1963,7 +1963,7 @@
           "methodology_complete": true,
           "required_artifact_count": 25,
           "missing_artifact_count": 0,
-          "evidence_bundle_sha256": "2aa812554a8f4c0a225de76cb391d3adc822b6792d8cf6fa028ed4426f19c372",
+          "evidence_bundle_sha256": "7c06a90ef22863af93b97f65065a2324ccc5eaa38688a1ee8bdf9fd258a3c6ca",
           "source_contract_sha256": "d085dd56b0bd6ec09d8e1ffbc596902107fb000822ae94877eff836ea246990f",
           "archive_sha256": "8789dec9d02f8cf016ed1bd9e42bd4abce52e32bdfda8ee909b48fcea4cdbba0",
           "output_case_count": 5,
@@ -1985,9 +1985,9 @@
           "public_claim_ready": false,
           "public_claim_blocker_count": 5,
           "working_tree_dirty": true,
-          "changed_file_count": 2
+          "changed_file_count": 1
         },
-        "commit": "9172b6719cf7280d8b343c5aeaa44c29c26a44ca",
+        "commit": "3281a40960f6086df7db369e39af5c006a5eb92e",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -5650,14 +5650,13 @@
       "ok": true,
       "generated_at": "2026-06-17",
       "skill_dir": ".",
-      "commit": "9172b6719cf7280d8b343c5aeaa44c29c26a44ca",
+      "commit": "3281a40960f6086df7db369e39af5c006a5eb92e",
       "git_status": {
         "available": true,
         "dirty": true,
-        "changed_file_count": 2,
+        "changed_file_count": 1,
         "sample": [
-          " M reports/context_budget.json",
-          " M reports/context_budget_summary.json"
+          " M reports/context_budget.json"
         ],
         "scope": "generation-time status before this report is written"
       },
@@ -5667,7 +5666,7 @@
         "methodology_complete": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "2aa812554a8f4c0a225de76cb391d3adc822b6792d8cf6fa028ed4426f19c372",
+        "evidence_bundle_sha256": "7c06a90ef22863af93b97f65065a2324ccc5eaa38688a1ee8bdf9fd258a3c6ca",
         "source_contract_sha256": "d085dd56b0bd6ec09d8e1ffbc596902107fb000822ae94877eff836ea246990f",
         "archive_sha256": "8789dec9d02f8cf016ed1bd9e42bd4abce52e32bdfda8ee909b48fcea4cdbba0",
         "output_case_count": 5,
@@ -5689,7 +5688,7 @@
         "public_claim_ready": false,
         "public_claim_blocker_count": 5,
         "working_tree_dirty": true,
-        "changed_file_count": 2
+        "changed_file_count": 1
       },
       "public_claim": {
         "ready": false,
@@ -5705,7 +5704,7 @@
       },
       "release_lock": {
         "ready": false,
-        "commit": "9172b6719cf7280d8b343c5aeaa44c29c26a44ca",
+        "commit": "3281a40960f6086df7db369e39af5c006a5eb92e",
         "status_scope": "generation-time status before this report is written",
         "reason": "working tree was dirty at generation time"
       },
@@ -5715,7 +5714,7 @@
         "existing_count": 25,
         "missing_count": 0,
         "missing_paths": [],
-        "sha256": "2aa812554a8f4c0a225de76cb391d3adc822b6792d8cf6fa028ed4426f19c372"
+        "sha256": "7c06a90ef22863af93b97f65065a2324ccc5eaa38688a1ee8bdf9fd258a3c6ca"
       },
       "methodology": {
         "path": "reports/benchmark_methodology.md",
@@ -5887,7 +5886,7 @@
           "path": "reports/world_class_evidence_preflight.json",
           "exists": true,
           "bytes": 41202,
-          "sha256": "97924dd4be88bedd734bb0530765ce5ea6e10a92d2a17807c14b2aae5b66f960"
+          "sha256": "b7fd72d7e75486612f65a9bb73b1ab59106103ebf3ad10dd446cd80903088454"
         },
         {
           "label": "world_class_submission_review",
@@ -17070,9 +17069,9 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 797,
-        "other_text_tokens": 1081719,
+        "other_text_tokens": 1081721,
         "estimated_initial_load_tokens": 990,
-        "estimated_total_text_tokens": 1082516,
+        "estimated_total_text_tokens": 1082518,
         "deferred_resource_tokens": 496024,
         "deferred_resource_warn_threshold": 120000,
         "deferred_resource_dirs": [
