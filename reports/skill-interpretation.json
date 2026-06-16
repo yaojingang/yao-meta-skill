@@ -1001,7 +1001,7 @@
     "ok": true,
     "summary": {
       "reproducibility_ready": true,
-      "release_lock_ready": false,
+      "release_lock_ready": true,
       "methodology_complete": true,
       "required_artifact_count": 25,
       "missing_artifact_count": 0,
@@ -1025,11 +1025,11 @@
       "world_class_source_pass_count": 6,
       "world_class_source_blocked_count": 7,
       "public_claim_ready": false,
-      "public_claim_blocker_count": 5,
-      "working_tree_dirty": true,
-      "changed_file_count": 32
+      "public_claim_blocker_count": 4,
+      "working_tree_dirty": false,
+      "changed_file_count": 0
     },
-    "commit": "5b858a903da563ac5e5ccf4d2ac1dd200ece0d1f",
+    "commit": "be399c8b60c7734bde87b479d1bbacb43757f64b",
     "missing_artifacts": [],
     "limitations": [
       "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
