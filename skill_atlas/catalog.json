@@ -1,6 +1,6 @@
 {
   "workspace_root": ".",
-  "generated_at": "2026-06-13",
+  "generated_at": "2026-06-17",
   "skills": [
     {
       "name": "yao-meta-skill",
@@ -27,6 +27,7 @@
         "scripts/build_confusion_matrix.py",
         "scripts/build_skill_atlas.py",
         "scripts/build_skill_atlas_layout.py",
+        "scripts/build_skill_atlas_opportunities.py",
         "scripts/check_update.py",
         "scripts/ci_test.py",
         "scripts/collect_feedback.py",

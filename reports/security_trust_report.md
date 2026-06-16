@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `234`
-- Scripts: `142`
-- Internal script modules: `56`
+- Scanned files: `235`
+- Scripts: `143`
+- Internal script modules: `57`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `234`
-- Package SHA256: `72dafdb26b366b212c4cff7ec494938ebe03274bf5a3a5d6b04090d0443cfd91`
+- Package hash files: `235`
+- Package SHA256: `a868eb139efe4af97300ab1e124721d5573c3ac4bfd25f278c4e7f1e349f48a6`
 
 ## Failures
 
@@ -69,6 +69,7 @@
 | scripts/build_confusion_matrix.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/build_skill_atlas.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/build_skill_atlas_layout.py | internal-module | True | False | False | False | False | False | False | Imported by build_skill_atlas.py to render the static Skill Atlas HTML report. |
+| scripts/build_skill_atlas_opportunities.py | internal-module | True | False | False | False | False | False | False | Imported by build_skill_atlas.py to keep no-route opportunity detection out of the atlas CLI. |
 | scripts/check_update.py | cli | False | True | True | False | True | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/ci_test.py | cli | False | True | True | False | False | True | True | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/collect_feedback.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |

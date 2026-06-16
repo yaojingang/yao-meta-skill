@@ -9,6 +9,7 @@ from io import StringIO
 from pathlib import Path
 from typing import Any
 
+from build_skill_atlas_opportunities import no_route_opportunities
 from build_skill_atlas_layout import render_html
 
 try:
@@ -452,63 +453,6 @@ def owner_review_gaps(skills: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return gaps
 
 
-def failure_case_no_route_opportunities(workspace_root: Path) -> list[dict[str, Any]]:
-    opportunities = []
-    for path in sorted(workspace_root.rglob("failure-cases.md")):
-        if should_skip(path, workspace_root):
-            continue
-        text = path.read_text(encoding="utf-8", errors="replace")
-        for line in text.splitlines():
-            stripped = line.strip()
-            if not stripped.startswith("-"):
-                continue
-            lowered = stripped.casefold()
-            if "no_route" in lowered or "no route" in lowered or "missed" in lowered or "under-trigger" in lowered:
-                opportunities.append(
-                    {
-                        "source_type": "failure-case",
-                        "source": safe_rel(workspace_root, path),
-                        "note": stripped.lstrip("- ").strip(),
-                        "actionable": True,
-                        "privacy_contract": "source note only; raw prompts are not required",
-                    }
-                )
-    return opportunities[:50]
-
-
-def telemetry_no_route_opportunities(drift_signals: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    opportunities = []
-    for signal in drift_signals:
-        signal_types = {str(item) for item in signal.get("signal_types", [])}
-        if not {"missed trigger", "under trigger"} & signal_types:
-            continue
-        summary = signal.get("summary", {}) if isinstance(signal.get("summary"), dict) else {}
-        opportunities.append(
-            {
-                "source_type": "telemetry",
-                "source": str(signal.get("source", "")),
-                "skill": str(signal.get("name", "")),
-                "path": str(signal.get("path", "")),
-                "signal": "missed trigger",
-                "missed_trigger_count": int(summary.get("missed_trigger_count") or 0),
-                "recommendation": str(
-                    signal.get("recommendation")
-                    or "Add missed prompts to trigger eval and evaluate whether a new skill route is needed."
-                ),
-                "actionable": bool(signal.get("actionable")),
-                "scope": str(signal.get("scope", "")),
-                "privacy_contract": "metadata-only telemetry; no raw prompt, output, transcript, or note is stored",
-            }
-        )
-    return opportunities
-
-
-def no_route_opportunities(workspace_root: Path, drift_signals: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    opportunities = failure_case_no_route_opportunities(workspace_root)
-    opportunities.extend(telemetry_no_route_opportunities(drift_signals))
-    return opportunities[:80]
-
-
 def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     fields = ["skill_a", "skill_b", "path_a", "path_b", "score", "status", "actionable", "scope_a", "scope_b"]
@@ -538,7 +482,12 @@ def build_atlas(workspace_root: Path, output_dir: Path, report_html: Path, repor
     graph = dependency_graph(skills)
     stale = stale_skills(skills, today)
     owner_gaps = owner_review_gaps(skills)
-    opportunities = no_route_opportunities(workspace_root, drift_signals)
+    opportunities = no_route_opportunities(
+        workspace_root,
+        drift_signals,
+        should_skip=should_skip,
+        safe_rel=safe_rel,
+    )
     actionable_skills = [skill for skill in skills if skill.get("actionable")]
     actionable_collisions = [item for item in collisions if item.get("actionable")]
     actionable_stale = [item for item in stale if item.get("actionable")]

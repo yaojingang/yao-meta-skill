@@ -1,21 +1,21 @@
 # Architecture Maintainability
 
-Generated at: `2026-06-13`
+Generated at: `2026-06-17`
 
 ## Summary
 
 - decision: `pass`
-- python files: `217`
-- scripts: `142`
+- python files: `218`
+- scripts: `143`
 - tests: `75`
-- internal modules: `58`
+- internal modules: `59`
 - CLI scripts: `86`
 - Yao CLI command handlers: `68`
 - entrypoint command handlers: `18`
 - command modules: `6`
 - largest file lines: `696`
 - early watch threshold lines: `600`
-- early watchlist: `7`
+- early watchlist: `6`
 - watch threshold lines: `720`
 - watchlist: `0`
 - hotspots: `0`
@@ -40,7 +40,6 @@ No near-threshold files found.
 | `scripts/render_review_studio.py` | `647` | `cli-script` | Move data loading and large section renderers into focused review_studio_* modules. |
 | `scripts/review_studio_gates.py` | `646` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/cross_packager.py` | `638` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
-| `scripts/build_skill_atlas.py` | `637` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `tests/verify_world_class_evidence_intake.py` | `628` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
 
 ## Largest Files
@@ -52,9 +51,9 @@ No near-threshold files found.
 | `scripts/render_review_studio.py` | `647` | `cli-script` | `pass` |
 | `scripts/review_studio_gates.py` | `646` | `internal-module` | `pass` |
 | `scripts/cross_packager.py` | `638` | `cli-script` | `pass` |
-| `scripts/build_skill_atlas.py` | `637` | `cli-script` | `pass` |
 | `tests/verify_world_class_evidence_intake.py` | `628` | `test` | `pass` |
 | `scripts/render_benchmark_reproducibility.py` | `595` | `cli-script` | `pass` |
+| `scripts/build_skill_atlas.py` | `586` | `cli-script` | `pass` |
 | `scripts/optimize_description.py` | `585` | `cli-script` | `pass` |
 | `scripts/render_skill_overview.py` | `584` | `cli-script` | `pass` |
 | `scripts/trust_check.py` | `582` | `cli-script` | `pass` |

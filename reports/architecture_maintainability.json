@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-13",
+  "generated_at": "2026-06-17",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 217,
-    "script_file_count": 142,
+    "python_file_count": 218,
+    "script_file_count": 143,
     "test_file_count": 75,
-    "internal_module_count": 58,
+    "internal_module_count": 59,
     "cli_script_count": 86,
     "command_handler_count": 68,
     "entrypoint_command_handler_count": 18,
@@ -18,7 +18,7 @@
     "block_line_threshold": 1500,
     "largest_file_lines": 696,
     "watchlist_count": 0,
-    "early_watchlist_count": 7,
+    "early_watchlist_count": 6,
     "hotspot_count": 0,
     "blocker_count": 0,
     "decision": "pass"
@@ -65,14 +65,6 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
-      "path": "scripts/build_skill_atlas.py",
-      "lines": 637,
-      "kind": "cli-script",
-      "severity": "pass",
-      "early_watch": true,
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
       "path": "tests/verify_world_class_evidence_intake.py",
       "lines": 628,
       "kind": "test",
@@ -83,6 +75,14 @@
     {
       "path": "scripts/render_benchmark_reproducibility.py",
       "lines": 595,
+      "kind": "cli-script",
+      "severity": "pass",
+      "early_watch": false,
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/build_skill_atlas.py",
+      "lines": 586,
       "kind": "cli-script",
       "severity": "pass",
       "early_watch": false,
@@ -158,14 +158,6 @@
     {
       "path": "scripts/cross_packager.py",
       "lines": 638,
-      "kind": "cli-script",
-      "severity": "pass",
-      "early_watch": true,
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
-      "path": "scripts/build_skill_atlas.py",
-      "lines": 637,
       "kind": "cli-script",
       "severity": "pass",
       "early_watch": true,

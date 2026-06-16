@@ -44,7 +44,7 @@
   },
   "catalog": {
     "workspace_root": ".",
-    "generated_at": "2026-06-13",
+    "generated_at": "2026-06-17",
     "skills": [
       {
         "name": "yao-meta-skill",
@@ -71,6 +71,7 @@
           "scripts/build_confusion_matrix.py",
           "scripts/build_skill_atlas.py",
           "scripts/build_skill_atlas_layout.py",
+          "scripts/build_skill_atlas_opportunities.py",
           "scripts/check_update.py",
           "scripts/ci_test.py",
           "scripts/collect_feedback.py",
@@ -940,7 +941,7 @@
       "name": "incident-command-governor",
       "path": "examples/governed-incident-command/generated-skill",
       "reason": "review overdue by cadence monthly",
-      "age_days": 74,
+      "age_days": 78,
       "allowed_days": 31,
       "actionable": false,
       "scope": "example"
