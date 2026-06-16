@@ -222,7 +222,7 @@
       "actual": {
         "available": true,
         "clean": false,
-        "changed_file_count": 7
+        "changed_file_count": 20
       },
       "paths": [
         "reports/benchmark_reproducibility.json"
@@ -2417,10 +2417,10 @@
         "score `91`",
         "`16` gates",
         "`3` warnings",
-        "`54` declared internal modules",
-        "`86 / 86` CLI help smoke checks passing across `140` scripts",
-        "`678` zip entries",
-        "archive with `678` entries",
+        "`55` declared internal modules",
+        "`86 / 86` CLI help smoke checks passing across `141` scripts",
+        "`679` zip entries",
+        "archive with `679` entries",
         "`12` installer permission checks enforced",
         "`0` permission failures",
         "`25` required artifacts",

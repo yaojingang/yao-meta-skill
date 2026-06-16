@@ -4,10 +4,10 @@
   "generated_at": "2026-06-13",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 215,
-    "script_file_count": 140,
+    "python_file_count": 216,
+    "script_file_count": 141,
     "test_file_count": 75,
-    "internal_module_count": 56,
+    "internal_module_count": 57,
     "cli_script_count": 86,
     "command_handler_count": 68,
     "entrypoint_command_handler_count": 18,
@@ -18,7 +18,7 @@
     "block_line_threshold": 1500,
     "largest_file_lines": 696,
     "watchlist_count": 0,
-    "early_watchlist_count": 9,
+    "early_watchlist_count": 8,
     "hotspot_count": 0,
     "blocker_count": 0,
     "decision": "pass"
@@ -36,14 +36,6 @@
       "path": "scripts/skill_report_model.py",
       "lines": 665,
       "kind": "internal-module",
-      "severity": "pass",
-      "early_watch": true,
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
-      "path": "scripts/render_skill_os2_coverage.py",
-      "lines": 649,
-      "kind": "cli-script",
       "severity": "pass",
       "early_watch": true,
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
@@ -119,6 +111,14 @@
       "severity": "pass",
       "early_watch": false,
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/trust_check.py",
+      "lines": 582,
+      "kind": "cli-script",
+      "severity": "pass",
+      "early_watch": false,
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     }
   ],
   "watchlist": [],
@@ -135,14 +135,6 @@
       "path": "scripts/skill_report_model.py",
       "lines": 665,
       "kind": "internal-module",
-      "severity": "pass",
-      "early_watch": true,
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
-      "path": "scripts/render_skill_os2_coverage.py",
-      "lines": 649,
-      "kind": "cli-script",
       "severity": "pass",
       "early_watch": true,
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."

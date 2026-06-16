@@ -5,7 +5,7 @@
   "root": ".",
   "summary": {
     "target_python": "3.11",
-    "file_count": 218,
+    "file_count": 219,
     "issue_count": 0,
     "syntax_error_count": 0,
     "fstring_311_violation_count": 0,
@@ -648,6 +648,12 @@
     },
     {
       "path": "scripts/skill_ir_paths.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "scripts/skill_os2_coverage_markdown.py",
       "ok": true,
       "issue_count": 0,
       "issues": []

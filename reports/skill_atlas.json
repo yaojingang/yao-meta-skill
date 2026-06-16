@@ -166,6 +166,7 @@
           "scripts/run_output_execution.py",
           "scripts/simulate_install.py",
           "scripts/skill_ir_paths.py",
+          "scripts/skill_os2_coverage_markdown.py",
           "scripts/skill_report_charts.py",
           "scripts/skill_report_i18n.py",
           "scripts/skill_report_layout.py",

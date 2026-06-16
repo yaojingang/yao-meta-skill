@@ -251,6 +251,7 @@
             "scripts/run_output_execution.py",
             "scripts/simulate_install.py",
             "scripts/skill_ir_paths.py",
+            "scripts/skill_os2_coverage_markdown.py",
             "scripts/skill_report_charts.py",
             "scripts/skill_report_i18n.py",
             "scripts/skill_report_layout.py",
@@ -292,6 +293,7 @@
           ],
           "assets": [
             "assets/review-studio.css",
+            "assets/review-viewer.css",
             "assets/skill-overview.css",
             "assets/skill-overview.js",
             "templates/basic_skill.md.j2",
@@ -344,8 +346,8 @@
           ],
           "counts": {
             "references": 35,
-            "scripts": 140,
-            "assets": 5,
+            "scripts": 141,
+            "assets": 6,
             "reports": 43
           }
         },
@@ -616,8 +618,8 @@
             "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
             "counts": {
               "references": 35,
-              "scripts": 140,
-              "assets": 5,
+              "scripts": 141,
+              "assets": 6,
               "reports": 43
             },
             "generated_files": [
@@ -627,7 +629,7 @@
           },
           "scripts": {
             "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-            "script_count": 140,
+            "script_count": 141,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -871,8 +873,8 @@
           "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
           "counts": {
             "references": 35,
-            "scripts": 140,
-            "assets": 5,
+            "scripts": 141,
+            "assets": 6,
             "reports": 43
           },
           "generated_files": [
@@ -882,7 +884,7 @@
         },
         "scripts": {
           "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-          "script_count": 140,
+          "script_count": 141,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -1190,6 +1192,7 @@
             "scripts/run_output_execution.py",
             "scripts/simulate_install.py",
             "scripts/skill_ir_paths.py",
+            "scripts/skill_os2_coverage_markdown.py",
             "scripts/skill_report_charts.py",
             "scripts/skill_report_i18n.py",
             "scripts/skill_report_layout.py",
@@ -1231,6 +1234,7 @@
           ],
           "assets": [
             "assets/review-studio.css",
+            "assets/review-viewer.css",
             "assets/skill-overview.css",
             "assets/skill-overview.js",
             "templates/basic_skill.md.j2",
@@ -1283,8 +1287,8 @@
           ],
           "counts": {
             "references": 35,
-            "scripts": 140,
-            "assets": 5,
+            "scripts": 141,
+            "assets": 6,
             "reports": 43
           }
         },
@@ -1555,8 +1559,8 @@
             "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
             "counts": {
               "references": 35,
-              "scripts": 140,
-              "assets": 5,
+              "scripts": 141,
+              "assets": 6,
               "reports": 43
             },
             "generated_files": [
@@ -1566,7 +1570,7 @@
           },
           "scripts": {
             "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-            "script_count": 140,
+            "script_count": 141,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -1810,8 +1814,8 @@
           "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
           "counts": {
             "references": 35,
-            "scripts": 140,
-            "assets": 5,
+            "scripts": 141,
+            "assets": 6,
             "reports": 43
           },
           "generated_files": [
@@ -1821,7 +1825,7 @@
         },
         "scripts": {
           "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-          "script_count": 140,
+          "script_count": 141,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -2129,6 +2133,7 @@
             "scripts/run_output_execution.py",
             "scripts/simulate_install.py",
             "scripts/skill_ir_paths.py",
+            "scripts/skill_os2_coverage_markdown.py",
             "scripts/skill_report_charts.py",
             "scripts/skill_report_i18n.py",
             "scripts/skill_report_layout.py",
@@ -2170,6 +2175,7 @@
           ],
           "assets": [
             "assets/review-studio.css",
+            "assets/review-viewer.css",
             "assets/skill-overview.css",
             "assets/skill-overview.js",
             "templates/basic_skill.md.j2",
@@ -2222,8 +2228,8 @@
           ],
           "counts": {
             "references": 35,
-            "scripts": 140,
-            "assets": 5,
+            "scripts": 141,
+            "assets": 6,
             "reports": 43
           }
         },
@@ -2494,8 +2500,8 @@
             "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
             "counts": {
               "references": 35,
-              "scripts": 140,
-              "assets": 5,
+              "scripts": 141,
+              "assets": 6,
               "reports": 43
             },
             "generated_files": [
@@ -2504,7 +2510,7 @@
           },
           "scripts": {
             "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-            "script_count": 140,
+            "script_count": 141,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -2742,8 +2748,8 @@
           "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
           "counts": {
             "references": 35,
-            "scripts": 140,
-            "assets": 5,
+            "scripts": 141,
+            "assets": 6,
             "reports": 43
           },
           "generated_files": [
@@ -2752,7 +2758,7 @@
         },
         "scripts": {
           "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-          "script_count": 140,
+          "script_count": 141,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -3052,6 +3058,7 @@
             "scripts/run_output_execution.py",
             "scripts/simulate_install.py",
             "scripts/skill_ir_paths.py",
+            "scripts/skill_os2_coverage_markdown.py",
             "scripts/skill_report_charts.py",
             "scripts/skill_report_i18n.py",
             "scripts/skill_report_layout.py",
@@ -3093,6 +3100,7 @@
           ],
           "assets": [
             "assets/review-studio.css",
+            "assets/review-viewer.css",
             "assets/skill-overview.css",
             "assets/skill-overview.js",
             "templates/basic_skill.md.j2",
@@ -3145,8 +3153,8 @@
           ],
           "counts": {
             "references": 35,
-            "scripts": 140,
-            "assets": 5,
+            "scripts": 141,
+            "assets": 6,
             "reports": 43
           }
         },
@@ -3417,8 +3425,8 @@
             "strategy": "Keep optional directories as relative resources next to SKILL.md.",
             "counts": {
               "references": 35,
-              "scripts": 140,
-              "assets": 5,
+              "scripts": 141,
+              "assets": 6,
               "reports": 43
             },
             "generated_files": [
@@ -3428,7 +3436,7 @@
           },
           "scripts": {
             "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-            "script_count": 140,
+            "script_count": 141,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -3665,8 +3673,8 @@
           "strategy": "Keep optional directories as relative resources next to SKILL.md.",
           "counts": {
             "references": 35,
-            "scripts": 140,
-            "assets": 5,
+            "scripts": 141,
+            "assets": 6,
             "reports": 43
           },
           "generated_files": [
@@ -3676,7 +3684,7 @@
         },
         "scripts": {
           "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-          "script_count": 140,
+          "script_count": 141,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -3975,6 +3983,7 @@
             "scripts/run_output_execution.py",
             "scripts/simulate_install.py",
             "scripts/skill_ir_paths.py",
+            "scripts/skill_os2_coverage_markdown.py",
             "scripts/skill_report_charts.py",
             "scripts/skill_report_i18n.py",
             "scripts/skill_report_layout.py",
@@ -4016,6 +4025,7 @@
           ],
           "assets": [
             "assets/review-studio.css",
+            "assets/review-viewer.css",
             "assets/skill-overview.css",
             "assets/skill-overview.js",
             "templates/basic_skill.md.j2",
@@ -4068,8 +4078,8 @@
           ],
           "counts": {
             "references": 35,
-            "scripts": 140,
-            "assets": 5,
+            "scripts": 141,
+            "assets": 6,
             "reports": 43
           }
         },
@@ -4340,8 +4350,8 @@
             "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
             "counts": {
               "references": 35,
-              "scripts": 140,
-              "assets": 5,
+              "scripts": 141,
+              "assets": 6,
               "reports": 43
             },
             "generated_files": [
@@ -4351,7 +4361,7 @@
           },
           "scripts": {
             "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
-            "script_count": 140,
+            "script_count": 141,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -4592,8 +4602,8 @@
           "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
           "counts": {
             "references": 35,
-            "scripts": 140,
-            "assets": 5,
+            "scripts": 141,
+            "assets": 6,
             "reports": 43
           },
           "generated_files": [
@@ -4603,7 +4613,7 @@
         },
         "scripts": {
           "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
-          "script_count": 140,
+          "script_count": 141,
           "help_smoke_failed_count": 0
         },
         "permissions": {

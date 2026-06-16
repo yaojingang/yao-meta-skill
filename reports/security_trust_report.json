@@ -2,9 +2,9 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 232,
-    "script_count": 140,
-    "internal_module_count": 54,
+    "scanned_files": 233,
+    "script_count": 141,
+    "internal_module_count": 55,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 232,
-    "package_sha256": "0932f0afc5893229405baf4b5a151c52c257830d258f3228c08cf26fd1fc05e7"
+    "package_hash_file_count": 233,
+    "package_sha256": "d085dd56b0bd6ec09d8e1ffbc596902107fb000822ae94877eff836ea246990f"
   },
   "failures": [],
   "warnings": [],
@@ -1475,6 +1475,20 @@
       "network_hosts": []
     },
     {
+      "path": "scripts/skill_os2_coverage_markdown.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Imported by render_skill_os2_coverage.py to keep coverage data assembly separate from Markdown rendering.",
+      "has_argparse": false,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
       "path": "scripts/skill_report_charts.py",
       "interface": "internal-module",
       "interface_declared": true,
@@ -2041,7 +2055,7 @@
     "checked_count": 86,
     "passed_count": 86,
     "failed_count": 0,
-    "skipped_count": 54,
+    "skipped_count": 55,
     "failed_scripts": [],
     "results": [
       {
@@ -3004,6 +3018,10 @@
       },
       {
         "path": "scripts/skill_ir_paths.py",
+        "reason": "internal module"
+      },
+      {
+        "path": "scripts/skill_os2_coverage_markdown.py",
         "reason": "internal module"
       },
       {

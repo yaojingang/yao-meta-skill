@@ -512,7 +512,7 @@
           "path": "scripts",
           "label": "Deterministic helpers or local tooling",
           "kind": "folder",
-          "file_count": 140
+          "file_count": 141
         },
         {
           "path": "evals",
@@ -527,7 +527,7 @@
           "file_count": 235
         }
       ],
-      "file_count": 443,
+      "file_count": 444,
       "folder_count": 4,
       "distribution": [
         {
@@ -552,7 +552,7 @@
         },
         {
           "label": "scripts",
-          "value": 140
+          "value": 141
         },
         {
           "label": "evals",
@@ -682,7 +682,7 @@
         "path": "scripts",
         "label": "Deterministic helpers or local tooling",
         "kind": "folder",
-        "file_count": 140
+        "file_count": 141
       },
       {
         "path": "evals",
@@ -996,13 +996,13 @@
       "ok": true,
       "summary": {
         "reproducibility_ready": true,
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "methodology_complete": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "26ba31c85f4ff70f819d1cd1f1cc44f0fdadd51fd6f0a94867c2eb6d1c9672ac",
-        "source_contract_sha256": "0932f0afc5893229405baf4b5a151c52c257830d258f3228c08cf26fd1fc05e7",
-        "archive_sha256": "72f9b9d57f498b5e574c6a857b1e7a4aa41d515545e3ad40cc46b26af20e8261",
+        "evidence_bundle_sha256": "500178f73e61df4d96d2347416ee904773b09d02bb3831d8b933fcbdeb89582f",
+        "source_contract_sha256": "d085dd56b0bd6ec09d8e1ffbc596902107fb000822ae94877eff836ea246990f",
+        "archive_sha256": "8789dec9d02f8cf016ed1bd9e42bd4abce52e32bdfda8ee909b48fcea4cdbba0",
         "output_case_count": 5,
         "failure_disclosure_count": 3,
         "command_count": 23,
@@ -1020,11 +1020,11 @@
         "world_class_source_pass_count": 7,
         "world_class_source_blocked_count": 6,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4,
-        "working_tree_dirty": false,
-        "changed_file_count": 0
+        "public_claim_blocker_count": 5,
+        "working_tree_dirty": true,
+        "changed_file_count": 22
       },
-      "commit": "de1a50f0ceca0bf4fcd565833a360065cc655f42",
+      "commit": "cf173248896ad818d8e5ec0fe00d0ed403a33ae1",
       "missing_artifacts": [],
       "limitations": [
         "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -1108,9 +1108,9 @@
       "failures": []
     },
     "trust_security": {
-      "scanned_files": 232,
-      "script_count": 140,
-      "internal_module_count": 54,
+      "scanned_files": 233,
+      "script_count": 141,
+      "internal_module_count": 55,
       "secret_findings": 0,
       "dependency_files": [
         "requirements-ci.txt"
@@ -1128,8 +1128,8 @@
       "help_smoke_failed_count": 0,
       "interactive_script_count": 0,
       "package_hash_scope": "source-contract-without-generated-reports",
-      "package_hash_file_count": 232,
-      "package_sha256": "0932f0afc5893229405baf4b5a151c52c257830d258f3228c08cf26fd1fc05e7"
+      "package_hash_file_count": 233,
+      "package_sha256": "d085dd56b0bd6ec09d8e1ffbc596902107fb000822ae94877eff836ea246990f"
     },
     "skill_atlas": {
       "skill_count": 12,
@@ -1215,8 +1215,8 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "72f9b9d57f498b5e574c6a857b1e7a4aa41d515545e3ad40cc46b26af20e8261",
-        "archive_entry_count": 678,
+        "archive_sha256": "8789dec9d02f8cf016ed1bd9e42bd4abce52e32bdfda8ee909b48fcea4cdbba0",
+        "archive_entry_count": 679,
         "failure_count": 0,
         "warning_count": 0
       },
@@ -1227,7 +1227,7 @@
       "ok": true,
       "summary": {
         "archive_present": true,
-        "archive_entry_count": 678,
+        "archive_entry_count": 679,
         "archive_extracted": true,
         "entrypoint_loaded": true,
         "manifest_loaded": true,
@@ -1237,7 +1237,7 @@
         "installer_permission_failure_count": 0,
         "permission_target_count": 4,
         "permission_capability_count": 3,
-        "install_root_is_temp": false,
+        "install_root_is_temp": true,
         "failure_count": 0,
         "warning_count": 0
       },
