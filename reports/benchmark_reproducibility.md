@@ -1,9 +1,9 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-16`
-Commit: `46716b5330ce6f614e192fc0c8d3b576740e54b8`
+Commit: `c7d04459c1b62208943217d7d8b2ab5e06561485`
 Working tree dirty at generation: `false`
-Evidence bundle SHA256: `5d043ed0bed71e060e6153381f91dda6d5e6aec888ae7042adde1e6882956824`
+Evidence bundle SHA256: `04c59801a47b464dcefeb008a1ddc05f350345733a2623277c24c4669079daee`
 
 ## Summary
 
@@ -12,7 +12,7 @@ Evidence bundle SHA256: `5d043ed0bed71e060e6153381f91dda6d5e6aec888ae7042adde1e6
 - methodology complete: `true`
 - required artifacts: `25`
 - missing artifacts: `0`
-- source contract sha256: `01c09d5fa7c9`
+- source contract sha256: `c2ad60de7b1e`
 - archive sha256: `5802e5f52255`
 - output cases: `5`
 - disclosed failure cases: `3`
@@ -50,7 +50,7 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 - algorithm: `sha256(path,label,exists,artifact_sha256)`
 - artifacts: `25` / `25`
-- sha256: `5d043ed0bed71e060e6153381f91dda6d5e6aec888ae7042adde1e6882956824`
+- sha256: `04c59801a47b464dcefeb008a1ddc05f350345733a2623277c24c4669079daee`
 
 ## Methodology Sections
 
@@ -77,12 +77,12 @@ This report proves local benchmark reproducibility only. It keeps external provi
 | review_adjudication | `reports/output_review_adjudication.json` | present | `bb8c72a9291e` |
 | trigger_scorecard | `reports/route_scorecard.json` | present | `c164e83e36d0` |
 | runtime_conformance | `reports/conformance_matrix.json` | present | `97f9ba949c23` |
-| trust_report | `reports/security_trust_report.json` | present | `d4e11b70d41a` |
-| python_compatibility | `reports/python_compatibility.json` | present | `e43cdd6eca68` |
+| trust_report | `reports/security_trust_report.json` | present | `97993710ff9f` |
+| python_compatibility | `reports/python_compatibility.json` | present | `f9abc4467f70` |
 | registry_audit | `reports/registry_audit.json` | present | `e75a341d15e4` |
 | package_verification | `reports/package_verification.json` | present | `a27941fdb865` |
 | install_simulation | `reports/install_simulation.json` | present | `e29ae26bc97c` |
-| skill_os2_audit | `reports/skill_os2_audit.json` | present | `41e3e3df4580` |
+| skill_os2_audit | `reports/skill_os2_audit.json` | present | `adbeaf74b4c8` |
 | world_class_evidence_plan | `reports/world_class_evidence_plan.json` | present | `130161495dc4` |
 | world_class_evidence_ledger | `reports/world_class_evidence_ledger.json` | present | `75569fdccc5b` |
 | world_class_evidence_intake | `reports/world_class_evidence_intake.json` | present | `7f502f722ff1` |
