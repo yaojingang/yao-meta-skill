@@ -8,9 +8,12 @@ SCRIPT_INTERFACE_REASON = "Imported by world_class_evidence_contract.py to valid
 
 REVIEWED_AT_RE = re.compile(r"^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}:\d{2}Z)?$")
 RAW_CONTENT_FIELDS = {
+    "api_key",
     "assistant_message",
     "assistant_messages",
     "baseline_output",
+    "credential",
+    "credentials",
     "input",
     "inputs",
     "message",
@@ -23,6 +26,11 @@ RAW_CONTENT_FIELDS = {
     "raw_content",
     "raw_output",
     "raw_prompt",
+    "raw_provider_prompt",
+    "raw_user_content",
+    "secret",
+    "secrets",
+    "token",
     "transcript",
     "transcripts",
     "user_message",
@@ -79,7 +87,8 @@ def forbidden_decision_field_paths(value: Any, prefix: str) -> list[str]:
         for key, child in value.items():
             key_text = str(key).strip()
             child_path = f"{prefix}.{key_text}"
-            if key_text.lower() in RAW_CONTENT_FIELDS or key_text.lower() in ANSWER_KEY_FIELDS:
+            normalized_key = key_text.casefold()
+            if normalized_key in RAW_CONTENT_FIELDS or normalized_key in ANSWER_KEY_FIELDS:
                 found.append(child_path)
             found.extend(forbidden_decision_field_paths(child, child_path))
     elif isinstance(value, list):

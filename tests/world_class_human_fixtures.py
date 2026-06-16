@@ -249,3 +249,9 @@ def assert_human_contract_artifact_validation() -> None:
     forged_decisions["decisions"][0]["metadata"] = {"raw_output": "verbatim model answer must not ship"}
     write_json(skill_root / "reports" / "output_review_decisions.json", forged_decisions)
     assert_human_submission_error(skill_root, entry, "decisions[1].metadata.raw_output")
+
+    write_human_artifacts(skill_root, complete=True, reviewer="Yao QA")
+    forged_decisions = json.loads((skill_root / "reports" / "output_review_decisions.json").read_text(encoding="utf-8"))
+    forged_decisions["decisions"][0]["metadata"] = {"API_KEY": "credential material must not ship"}
+    write_json(skill_root / "reports" / "output_review_decisions.json", forged_decisions)
+    assert_human_submission_error(skill_root, entry, "decisions[1].metadata.API_KEY")
