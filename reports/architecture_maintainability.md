@@ -15,7 +15,7 @@ Generated at: `2026-06-13`
 - command modules: `6`
 - largest file lines: `696`
 - early watch threshold lines: `600`
-- early watchlist: `10`
+- early watchlist: `9`
 - watch threshold lines: `720`
 - watchlist: `0`
 - hotspots: `0`
@@ -36,7 +36,6 @@ No near-threshold files found.
 | File | Lines | Kind | Recommended next split |
 | --- | ---: | --- | --- |
 | `tests/verify_yao_cli.py` | `696` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
-| `scripts/render_review_viewer.py` | `685` | `cli-script` | Split viewer data assembly from HTML section rendering. |
 | `scripts/skill_report_model.py` | `665` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/render_skill_os2_coverage.py` | `649` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/render_review_studio.py` | `647` | `cli-script` | Move data loading and large section renderers into focused review_studio_* modules. |
@@ -51,7 +50,6 @@ No near-threshold files found.
 | File | Lines | Kind | Severity |
 | --- | ---: | --- | --- |
 | `tests/verify_yao_cli.py` | `696` | `test` | `pass` |
-| `scripts/render_review_viewer.py` | `685` | `cli-script` | `pass` |
 | `scripts/skill_report_model.py` | `665` | `internal-module` | `pass` |
 | `scripts/render_skill_os2_coverage.py` | `649` | `cli-script` | `pass` |
 | `scripts/render_review_studio.py` | `647` | `cli-script` | `pass` |
@@ -62,6 +60,7 @@ No near-threshold files found.
 | `tests/verify_world_class_evidence_intake.py` | `628` | `test` | `pass` |
 | `scripts/render_benchmark_reproducibility.py` | `595` | `cli-script` | `pass` |
 | `scripts/optimize_description.py` | `585` | `cli-script` | `pass` |
+| `scripts/render_skill_overview.py` | `584` | `cli-script` | `pass` |
 
 ## Release Rule
 

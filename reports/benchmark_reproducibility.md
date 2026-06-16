@@ -1,19 +1,19 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-17`
-Commit: `070a89afc246517bbb3b8a4145bf3a11d00181d0`
-Working tree dirty at generation: `false`
-Evidence bundle SHA256: `3b83a9a68d31b3b25287c3d5f2f53049cac5e1f481bce3433c69ae2aaad8417a`
+Commit: `548e225c3e97517524801a3875f38d882b77ecde`
+Working tree dirty at generation: `true`
+Evidence bundle SHA256: `26ba31c85f4ff70f819d1cd1f1cc44f0fdadd51fd6f0a94867c2eb6d1c9672ac`
 
 ## Summary
 
 - reproducibility ready: `true`
-- release lock ready: `true`
+- release lock ready: `false`
 - methodology complete: `true`
 - required artifacts: `25`
 - missing artifacts: `0`
-- source contract sha256: `2b5b9780754a`
-- archive sha256: `44623ee91ba4`
+- source contract sha256: `0932f0afc589`
+- archive sha256: `72f9b9d57f49`
 - output cases: `5`
 - disclosed failure cases: `3`
 - reproduction commands: `23`
@@ -22,8 +22,8 @@ Evidence bundle SHA256: `3b83a9a68d31b3b25287c3d5f2f53049cac5e1f481bce3433c69ae2
 - world-class ready: `false`
 - world-class source checks: `7` pass / `13` total; `6` blocked
 - public claim ready: `false`
-- public claim blockers: `4`
-- changed files at generation: `0`
+- public claim blockers: `5`
+- changed files at generation: `42`
 
 This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete. The git commit is generation-time context; the evidence bundle SHA is the durable anchor for the artifacts listed below.
 
@@ -35,6 +35,7 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 | Blocker |
 | --- |
+| release lock is not clean or commit is unavailable |
 | provider-backed model holdout evidence is incomplete |
 | human blind-review adjudication is incomplete |
 | world-class evidence is not accepted yet (4 open gaps, 4 ledger pending) |
@@ -42,15 +43,15 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 ## Release Lock
 
-- ready: `true`
-- reason: clean generation-time HEAD
+- ready: `false`
+- reason: working tree was dirty at generation time
 - status scope: generation-time status before this report is written
 
 ## Evidence Bundle
 
 - algorithm: `sha256(path,label,exists,artifact_sha256)`
 - artifacts: `25` / `25`
-- sha256: `3b83a9a68d31b3b25287c3d5f2f53049cac5e1f481bce3433c69ae2aaad8417a`
+- sha256: `26ba31c85f4ff70f819d1cd1f1cc44f0fdadd51fd6f0a94867c2eb6d1c9672ac`
 
 ## Methodology Sections
 
@@ -72,17 +73,17 @@ This report proves local benchmark reproducibility only. It keeps external provi
 | output_cases | `evals/output/cases.jsonl` | present | `a6ae96857116` |
 | output_schema | `evals/output/schema.json` | present | `8ee340c95064` |
 | output_scorecard | `reports/output_quality_scorecard.json` | present | `0806258a8e08` |
-| output_execution | `reports/output_execution_runs.json` | present | `04e12cc43c4e` |
+| output_execution | `reports/output_execution_runs.json` | present | `a4bf0d578aac` |
 | blind_review | `reports/output_blind_review_pack.json` | present | `bbe2db8ec277` |
 | review_adjudication | `reports/output_review_adjudication.json` | present | `bb8c72a9291e` |
 | trigger_scorecard | `reports/route_scorecard.json` | present | `c164e83e36d0` |
 | runtime_conformance | `reports/conformance_matrix.json` | present | `97f9ba949c23` |
-| trust_report | `reports/security_trust_report.json` | present | `e9b4ba8d960a` |
+| trust_report | `reports/security_trust_report.json` | present | `72d20099da91` |
 | python_compatibility | `reports/python_compatibility.json` | present | `b223212ec521` |
-| registry_audit | `reports/registry_audit.json` | present | `50a90637eac5` |
-| package_verification | `reports/package_verification.json` | present | `9322d882dfa7` |
-| install_simulation | `reports/install_simulation.json` | present | `5269d6e6364a` |
-| skill_os2_audit | `reports/skill_os2_audit.json` | present | `49d334ad2b67` |
+| registry_audit | `reports/registry_audit.json` | present | `cd509aec32b4` |
+| package_verification | `reports/package_verification.json` | present | `4550569cc296` |
+| install_simulation | `reports/install_simulation.json` | present | `21cbda516982` |
+| skill_os2_audit | `reports/skill_os2_audit.json` | present | `51108b590a6f` |
 | world_class_evidence_plan | `reports/world_class_evidence_plan.json` | present | `9b74155fb9bf` |
 | world_class_evidence_ledger | `reports/world_class_evidence_ledger.json` | present | `f6e1a69b0359` |
 | world_class_evidence_intake | `reports/world_class_evidence_intake.json` | present | `46f801051ec0` |

@@ -67,6 +67,7 @@ def main() -> None:
     assert "assets/skill-overview.css" in scanned_paths, scanned_paths
     assert "assets/skill-overview.js" in scanned_paths, scanned_paths
     assert "assets/review-studio.css" in scanned_paths, scanned_paths
+    assert "assets/review-viewer.css" in scanned_paths, scanned_paths
     assert payload["summary"]["internal_module_count"] >= 3, payload
     assert payload["summary"]["network_script_count"] == 3, payload
     assert payload["summary"]["network_policy_covered_count"] == payload["summary"]["network_script_count"], payload

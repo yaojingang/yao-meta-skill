@@ -18,7 +18,7 @@
     "block_line_threshold": 1500,
     "largest_file_lines": 696,
     "watchlist_count": 0,
-    "early_watchlist_count": 10,
+    "early_watchlist_count": 9,
     "hotspot_count": 0,
     "blocker_count": 0,
     "decision": "pass"
@@ -31,14 +31,6 @@
       "severity": "pass",
       "early_watch": true,
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
-    },
-    {
-      "path": "scripts/render_review_viewer.py",
-      "lines": 685,
-      "kind": "cli-script",
-      "severity": "pass",
-      "early_watch": true,
-      "recommendation": "Split viewer data assembly from HTML section rendering."
     },
     {
       "path": "scripts/skill_report_model.py",
@@ -119,6 +111,14 @@
       "severity": "pass",
       "early_watch": false,
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/render_skill_overview.py",
+      "lines": 584,
+      "kind": "cli-script",
+      "severity": "pass",
+      "early_watch": false,
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     }
   ],
   "watchlist": [],
@@ -130,14 +130,6 @@
       "severity": "pass",
       "early_watch": true,
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
-    },
-    {
-      "path": "scripts/render_review_viewer.py",
-      "lines": 685,
-      "kind": "cli-script",
-      "severity": "pass",
-      "early_watch": true,
-      "recommendation": "Split viewer data assembly from HTML section rendering."
     },
     {
       "path": "scripts/skill_report_model.py",

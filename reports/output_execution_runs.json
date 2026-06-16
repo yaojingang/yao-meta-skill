@@ -34,7 +34,7 @@
       "execution_mode": "command",
       "model_executed": false,
       "command_executed": true,
-      "duration_ms": 29.23,
+      "duration_ms": 26.72,
       "provider": "local-output-eval-runner",
       "model": "",
       "usage": {
@@ -62,7 +62,7 @@
       "execution_mode": "command",
       "model_executed": false,
       "command_executed": true,
-      "duration_ms": 29.17,
+      "duration_ms": 26.18,
       "provider": "local-output-eval-runner",
       "model": "",
       "usage": {
@@ -85,7 +85,7 @@
       "execution_mode": "command",
       "model_executed": false,
       "command_executed": true,
-      "duration_ms": 28.9,
+      "duration_ms": 25.78,
       "provider": "local-output-eval-runner",
       "model": "",
       "usage": {
@@ -113,7 +113,7 @@
       "execution_mode": "command",
       "model_executed": false,
       "command_executed": true,
-      "duration_ms": 28.2,
+      "duration_ms": 26.09,
       "provider": "local-output-eval-runner",
       "model": "",
       "usage": {
@@ -136,7 +136,7 @@
       "execution_mode": "command",
       "model_executed": false,
       "command_executed": true,
-      "duration_ms": 28.19,
+      "duration_ms": 27.18,
       "provider": "local-output-eval-runner",
       "model": "",
       "usage": {
@@ -164,7 +164,7 @@
       "execution_mode": "command",
       "model_executed": false,
       "command_executed": true,
-      "duration_ms": 29.41,
+      "duration_ms": 29.11,
       "provider": "local-output-eval-runner",
       "model": "",
       "usage": {
@@ -187,7 +187,7 @@
       "execution_mode": "command",
       "model_executed": false,
       "command_executed": true,
-      "duration_ms": 27.9,
+      "duration_ms": 28.29,
       "provider": "local-output-eval-runner",
       "model": "",
       "usage": {
@@ -214,7 +214,7 @@
       "execution_mode": "command",
       "model_executed": false,
       "command_executed": true,
-      "duration_ms": 27.61,
+      "duration_ms": 28.38,
       "provider": "local-output-eval-runner",
       "model": "",
       "usage": {
@@ -237,7 +237,7 @@
       "execution_mode": "command",
       "model_executed": false,
       "command_executed": true,
-      "duration_ms": 28.23,
+      "duration_ms": 28.14,
       "provider": "local-output-eval-runner",
       "model": "",
       "usage": {
@@ -266,7 +266,7 @@
       "execution_mode": "command",
       "model_executed": false,
       "command_executed": true,
-      "duration_ms": 28.2,
+      "duration_ms": 28.09,
       "provider": "local-output-eval-runner",
       "model": "",
       "usage": {

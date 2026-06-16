@@ -196,6 +196,7 @@
         "references/trust-security-method.md",
         "references/user-memory-policy.md",
         "assets/review-studio.css",
+        "assets/review-viewer.css",
         "assets/skill-overview.css",
         "assets/skill-overview.js",
         "templates/basic_skill.md.j2",

@@ -54,6 +54,7 @@ def main() -> None:
     assert "assets/skill-overview.css" in payload["resources"]["assets"], payload["resources"]["assets"]
     assert "assets/skill-overview.js" in payload["resources"]["assets"], payload["resources"]["assets"]
     assert "assets/review-studio.css" in payload["resources"]["assets"], payload["resources"]["assets"]
+    assert "assets/review-viewer.css" in payload["resources"]["assets"], payload["resources"]["assets"]
     assert payload["resources"]["reports"], payload
     assert "evals/trigger_cases.json" in payload["eval_plan"]["trigger"], payload["eval_plan"]
     assert payload["risk"]["trust_boundary"] == "external", payload

@@ -62,6 +62,9 @@ def main() -> None:
     assert html_path.exists(), html_path
     assert json_path.exists(), json_path
     html_text = html_path.read_text(encoding="utf-8")
+    css_contract = (ROOT / "assets" / "review-viewer.css").read_text(encoding="utf-8").strip()
+    assert css_contract in html_text, html_text[:500]
+    assert 'rel="stylesheet"' not in html_text, html_text[:500]
     assert "Architecture at a glance" in html_text, html_text[:500]
     assert "Compare view" in html_text, html_text[:500]
     assert "Variant diff studio" in html_text, html_text[:900]

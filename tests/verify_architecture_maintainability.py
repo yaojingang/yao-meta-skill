@@ -52,7 +52,8 @@ def main() -> None:
     assert payload["watchlist"] == [], payload["watchlist"]
     assert payload["early_watchlist"], payload["early_watchlist"]
     assert all(item["early_watch"] is True for item in payload["early_watchlist"]), payload["early_watchlist"]
-    assert "scripts/render_review_viewer.py" in {item["path"] for item in payload["early_watchlist"]}, payload["early_watchlist"]
+    early_watch_paths = {item["path"] for item in payload["early_watchlist"]}
+    assert "scripts/render_review_viewer.py" not in early_watch_paths, payload["early_watchlist"]
     renderer_lines = len((ROOT / "scripts" / "render_review_studio.py").read_text(encoding="utf-8").splitlines())
     action_module = (ROOT / "scripts" / "review_studio_actions.py").read_text(encoding="utf-8")
     action_lines = len(action_module.splitlines())
@@ -70,7 +71,8 @@ def main() -> None:
     assert "No file-size hotspots found." in markdown, markdown
     assert "No near-threshold files found." in markdown, markdown
     assert "## Early Watchlist" in markdown, markdown
-    assert "scripts/render_review_viewer.py" in markdown, markdown
+    assert "- early watchlist: `9`" in markdown, markdown
+    assert "scripts/render_review_viewer.py" not in markdown, markdown
     assert "Do not split a file only for line count" in markdown, markdown
 
     blocker_proc = subprocess.run(
