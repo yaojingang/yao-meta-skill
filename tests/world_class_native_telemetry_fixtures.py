@@ -172,6 +172,42 @@ def assert_native_telemetry_contract_artifact_validation() -> None:
         forged["errors"]
     )
 
+    write_native_telemetry_artifacts(skill_root, complete=True)
+    raw_adoption = json.loads((skill_root / "reports" / "adoption_drift_report.json").read_text(encoding="utf-8"))
+    raw_adoption["recent_events"][0]["raw_prompt"] = "verbatim user prompt must not be accepted"
+    raw_adoption["recent_events"][0]["messages"] = ["raw transcript-like event payload"]
+    write_json(skill_root / "reports" / "adoption_drift_report.json", raw_adoption)
+    raw_adoption_result = validate_payload(
+        native_telemetry_submission(skill_root),
+        entry,
+        path=skill_root / "evidence" / "world_class" / "submissions" / "native-client-telemetry.json",
+        root=skill_root,
+        template_expected=False,
+    )
+    assert raw_adoption_result["status"] == "fail", raw_adoption_result
+    assert any("adoption_drift_report.recent_events[0].raw_prompt" in error for error in raw_adoption_result["errors"]), (
+        raw_adoption_result["errors"]
+    )
+    assert any("adoption_drift_report.recent_events[0].messages" in error for error in raw_adoption_result["errors"]), (
+        raw_adoption_result["errors"]
+    )
+
+    write_native_telemetry_artifacts(skill_root, complete=True)
+    raw_recipe = json.loads((skill_root / "reports" / "telemetry_hook_recipes.json").read_text(encoding="utf-8"))
+    raw_recipe["recipes"][0]["message"] = "raw client message must not be accepted"
+    write_json(skill_root / "reports" / "telemetry_hook_recipes.json", raw_recipe)
+    raw_recipe_result = validate_payload(
+        native_telemetry_submission(skill_root),
+        entry,
+        path=skill_root / "evidence" / "world_class" / "submissions" / "native-client-telemetry.json",
+        root=skill_root,
+        template_expected=False,
+    )
+    assert raw_recipe_result["status"] == "fail", raw_recipe_result
+    assert any("telemetry_hook_recipes.recipes[0].message" in error for error in raw_recipe_result["errors"]), (
+        raw_recipe_result["errors"]
+    )
+
     write_native_telemetry_artifacts(skill_root, complete=False)
     invalid = validate_payload(
         native_telemetry_submission(skill_root),

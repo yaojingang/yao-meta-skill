@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 from typing import Any
 
+from output_review_privacy import forbidden_decision_field_paths
+
 
 SCRIPT_INTERFACE = "internal-module"
 SCRIPT_INTERFACE_REASON = "Imported by world_class_evidence_contract.py to validate native client telemetry evidence from metadata event rows."
@@ -21,6 +23,16 @@ def object_list(value: Any) -> list[dict[str, Any]]:
     return [item for item in value if isinstance(item, dict)] if isinstance(value, list) else []
 
 
+def validate_no_raw_fields(payload: dict[str, Any], label: str, errors: list[str]) -> None:
+    blocked = forbidden_decision_field_paths(payload, label)
+    add_error(
+        errors,
+        not blocked,
+        f"native-client-telemetry {label} must not include raw content, credential, secret, token, prompt, output, transcript, message, or answer-key fields: "
+        + ", ".join(blocked[:8]),
+    )
+
+
 def source_types(payload: dict[str, Any]) -> dict[str, Any]:
     summary = payload.get("summary", {}) if isinstance(payload.get("summary"), dict) else {}
     value = summary.get("source_types", {})
@@ -35,6 +47,7 @@ def validate_adoption_report(adoption: dict[str, Any], errors: list[str]) -> Non
     external_summary_count = real_int(source_types(adoption).get("external"))
     adoption_sample_count = real_int(summary.get("adoption_sample_count"))
 
+    validate_no_raw_fields(adoption, "adoption_drift_report", errors)
     add_error(errors, adoption.get("ok") is True, "native-client-telemetry adoption drift report ok must be true")
     add_error(
         errors,
@@ -91,6 +104,7 @@ def validate_recipe_report(recipes: dict[str, Any], errors: list[str]) -> None:
     recipe_count = real_int(summary.get("recipe_count"))
     metadata_count = real_int(summary.get("metadata_only_recipe_count"))
 
+    validate_no_raw_fields(recipes, "telemetry_hook_recipes", errors)
     add_error(errors, recipes.get("ok") is True, "native-client-telemetry hook recipes report ok must be true")
     add_error(
         errors,
