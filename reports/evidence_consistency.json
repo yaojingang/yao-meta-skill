@@ -189,12 +189,12 @@
       "status": "pass",
       "expected": {
         "status": "pass",
-        "detail": "initial load 990/1000; deferred 498644/120000; top deferred scripts 437614; resource governance governed; quality density 131.3",
+        "detail": "initial load 990/1000; deferred 498646/120000; top deferred scripts 437616; resource governance governed; quality density 131.3",
         "evidence": "reports/context_budget.json"
       },
       "actual": {
         "status": "pass",
-        "detail": "initial load 990/1000; deferred 498644/120000; top deferred scripts 437614; resource governance governed; quality density 131.3",
+        "detail": "initial load 990/1000; deferred 498646/120000; top deferred scripts 437616; resource governance governed; quality density 131.3",
         "evidence": "reports/context_budget.json"
       },
       "paths": [
@@ -222,7 +222,7 @@
       "actual": {
         "available": true,
         "clean": false,
-        "changed_file_count": 9
+        "changed_file_count": 7
       },
       "paths": [
         "reports/benchmark_reproducibility.json"
@@ -263,8 +263,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "d709f043a2c286646a5c72d7345faaed932200de",
-      "actual": "d709f043a2c286646a5c72d7345faaed932200de",
+      "expected": "360f05503df3d7543d74417bcaf3f6a749a23477",
+      "actual": "360f05503df3d7543d74417bcaf3f6a749a23477",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -409,8 +409,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "d709f043a2c286646a5c72d7345faaed932200de",
-      "actual": "d709f043a2c286646a5c72d7345faaed932200de",
+      "expected": "360f05503df3d7543d74417bcaf3f6a749a23477",
+      "actual": "360f05503df3d7543d74417bcaf3f6a749a23477",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"

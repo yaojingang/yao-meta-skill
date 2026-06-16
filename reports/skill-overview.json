@@ -999,12 +999,12 @@
     "ok": true,
     "summary": {
       "reproducibility_ready": true,
-      "release_lock_ready": false,
+      "release_lock_ready": true,
       "methodology_complete": true,
       "required_artifact_count": 25,
       "missing_artifact_count": 0,
-      "evidence_bundle_sha256": "16f2d277d5d15e9c1c1605610f163e7060e52bf80f6d5bca4f8ccc94595ab1ec",
-      "source_contract_sha256": "83ea6e60852fae9271eb72658d8b3c0268e6adb21d80b2fd0fd9438805481ca7",
+      "evidence_bundle_sha256": "89447ea6d6ec41f79db4ce33978d0d0d426138b0ace0746153dc2a7daba4baa9",
+      "source_contract_sha256": "e9d5b26e20c81f565271a1ecd793981ee1e56826313b160aebe776d2f89ca995",
       "archive_sha256": "563d37a1085a9b598bca7b132da6c50c1233864855591085b260d4d4bb312a3e",
       "output_case_count": 5,
       "failure_disclosure_count": 3,
@@ -1023,11 +1023,11 @@
       "world_class_source_pass_count": 9,
       "world_class_source_blocked_count": 8,
       "public_claim_ready": false,
-      "public_claim_blocker_count": 5,
-      "working_tree_dirty": true,
-      "changed_file_count": 32
+      "public_claim_blocker_count": 4,
+      "working_tree_dirty": false,
+      "changed_file_count": 0
     },
-    "commit": "d709f043a2c286646a5c72d7345faaed932200de",
+    "commit": "360f05503df3d7543d74417bcaf3f6a749a23477",
     "missing_artifacts": [],
     "limitations": [
       "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -1132,7 +1132,7 @@
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
     "package_hash_file_count": 239,
-    "package_sha256": "83ea6e60852fae9271eb72658d8b3c0268e6adb21d80b2fd0fd9438805481ca7"
+    "package_sha256": "e9d5b26e20c81f565271a1ecd793981ee1e56826313b160aebe776d2f89ca995"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -1207,7 +1207,7 @@
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
       },
-      "generated_at": "2026-06-13"
+      "generated_at": "2026-06-17"
     },
     "failures": [],
     "warnings": []
