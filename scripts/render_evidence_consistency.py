@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import json
+import subprocess
 from datetime import date
 from pathlib import Path
 from typing import Any
@@ -35,6 +36,22 @@ from skill_ir_paths import find_skill_ir_path
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPT_INTERFACE = "cli"
 SCRIPT_INTERFACE_REASON = "Renders a cross-report evidence consistency gate for generated Skill OS reports."
+
+
+def git_worktree_status(skill_dir: Path) -> dict[str, Any]:
+    try:
+        proc = subprocess.run(
+            ["git", "-C", str(skill_dir), "status", "--porcelain=v1", "-uall"],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+    except OSError:
+        return {"available": False, "clean": None, "changed_file_count": None}
+    if proc.returncode != 0:
+        return {"available": False, "clean": None, "changed_file_count": None}
+    changes = [line for line in proc.stdout.splitlines() if line.strip()]
+    return {"available": True, "clean": not changes, "changed_file_count": len(changes)}
 
 
 def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
@@ -145,6 +162,32 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             paths=[REQUIRED_REPORTS["benchmark"]],
             detail="The benchmark release lock must reflect the generation-time git dirty flag.",
         )
+        current_git_status = git_worktree_status(skill_dir)
+        if current_git_status.get("available") and current_git_status.get("clean") is True:
+            compare_values(
+                checks,
+                key="benchmark-clean-worktree-release-lock",
+                label="Clean worktree keeps a clean benchmark release lock",
+                expected=True,
+                actual=benchmark_summary.get("release_lock_ready"),
+                paths=[REQUIRED_REPORTS["benchmark"]],
+                detail=(
+                    "If the current worktree is clean, the committed benchmark report must not still carry a dirty release lock from an earlier generation."
+                ),
+            )
+        else:
+            add_check(
+                checks,
+                key="benchmark-clean-worktree-release-lock",
+                label="Clean worktree keeps a clean benchmark release lock",
+                status="pass",
+                expected="checked only when git is available and the current worktree is clean",
+                actual=current_git_status,
+                paths=[REQUIRED_REPORTS["benchmark"]],
+                detail=(
+                    "Dirty or non-git worktrees cannot prove final release-lock freshness, so this check is advisory until the final clean-lock pass."
+                ),
+            )
     skill_name = str(overview.get("name") or nested(review_studio, ["data", "frontmatter", "name"]) or skill_dir.name)
     expected_skill_ir_path = find_skill_ir_path(skill_dir, skill_name, require_schema=True)
     expected_skill_ir = {

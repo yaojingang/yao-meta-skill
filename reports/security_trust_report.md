@@ -16,7 +16,7 @@
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
 - Package hash files: `231`
-- Package SHA256: `d50f6ac9714b62b985f9f9edb181f87bb57246be1e4249cb92e7e4a87ae5aa69`
+- Package SHA256: `9cb9a19e774540e721b143a240baf41b41c32b9f10df532eb4a7d1cf7a2fe67b`
 
 ## Failures
 
@@ -114,7 +114,7 @@
 | scripts/render_daily_skillops_report.py | cli | True | True | True | False | False | True | False | Renders a Daily SkillOps report that summarizes explicit-source patterns, proposals, approval state, and release evidence without scanning private logs or applying patches. |
 | scripts/render_description_drift_history.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/render_eval_dashboard.py | cli | False | True | True | False | False | True | True | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
-| scripts/render_evidence_consistency.py | cli | True | True | True | False | False | True | False | Renders a cross-report evidence consistency gate for generated Skill OS reports. |
+| scripts/render_evidence_consistency.py | cli | True | True | True | False | False | True | True | Renders a cross-report evidence consistency gate for generated Skill OS reports. |
 | scripts/render_intent_confidence.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/render_intent_dialogue.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/render_iteration_directions.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |

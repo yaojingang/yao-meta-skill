@@ -423,6 +423,57 @@ def main() -> None:
         benchmark_flow_drift_checks["release-evidence-flow-covers-first-class-reports"]
     )
 
+    stale_clean_lock_root = TMP / "stale-clean-lock-skill"
+    copy_reports(stale_clean_lock_root)
+    benchmark_path = stale_clean_lock_root / "reports" / "benchmark_reproducibility.json"
+    benchmark = json.loads(benchmark_path.read_text(encoding="utf-8"))
+    benchmark["git_status"]["dirty"] = True
+    benchmark["git_status"]["changed_file_count"] = 3
+    benchmark["summary"]["release_lock_ready"] = False
+    benchmark["summary"]["working_tree_dirty"] = True
+    benchmark["summary"]["changed_file_count"] = 3
+    benchmark["release_lock"]["ready"] = False
+    benchmark["release_lock"]["reason"] = "working tree was dirty at generation time"
+    benchmark_path.write_text(json.dumps(benchmark, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    for report_name in ["skill-overview", "skill-interpretation"]:
+        report_path = stale_clean_lock_root / "reports" / f"{report_name}.json"
+        report = json.loads(report_path.read_text(encoding="utf-8"))
+        report["benchmark_reproducibility"]["summary"]["release_lock_ready"] = False
+        report["benchmark_reproducibility"]["summary"]["working_tree_dirty"] = True
+        report["benchmark_reproducibility"]["summary"]["changed_file_count"] = 3
+        report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    subprocess.run(["git", "init"], cwd=stale_clean_lock_root, capture_output=True, text=True, check=True)
+    subprocess.run(["git", "add", "."], cwd=stale_clean_lock_root, capture_output=True, text=True, check=True)
+    subprocess.run(
+        ["git", "-c", "user.name=Yao Test", "-c", "user.email=yao-test@example.com", "commit", "-m", "seed"],
+        cwd=stale_clean_lock_root,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    stale_clean_lock_proc = run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            str(stale_clean_lock_root),
+            "--output-json",
+            str(TMP / "stale_clean_lock.json"),
+            "--output-md",
+            str(TMP / "stale_clean_lock.md"),
+            "--generated-at",
+            "2026-06-15",
+        ]
+    )
+    assert stale_clean_lock_proc.returncode == 2, stale_clean_lock_proc.stdout
+    stale_clean_lock_payload = json.loads(stale_clean_lock_proc.stdout)
+    stale_clean_lock_checks = {item["key"]: item for item in stale_clean_lock_payload["checks"]}
+    assert stale_clean_lock_checks["benchmark-release-lock-self-consistency"]["status"] == "pass", (
+        stale_clean_lock_checks["benchmark-release-lock-self-consistency"]
+    )
+    assert stale_clean_lock_checks["benchmark-clean-worktree-release-lock"]["status"] == "fail", (
+        stale_clean_lock_checks["benchmark-clean-worktree-release-lock"]
+    )
+
     workflow_drift_root = TMP / "workflow-drift-skill"
     copy_reports(workflow_drift_root)
     studio_path = workflow_drift_root / "reports" / "review-studio.json"
