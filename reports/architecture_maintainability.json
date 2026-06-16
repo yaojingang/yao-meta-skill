@@ -31,7 +31,7 @@
     },
     {
       "path": "scripts/world_class_evidence_contract.py",
-      "lines": 686,
+      "lines": 687,
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
@@ -52,7 +52,7 @@
     },
     {
       "path": "tests/verify_world_class_evidence_intake.py",
-      "lines": 660,
+      "lines": 663,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."

@@ -150,7 +150,8 @@
         "real_external_or_human_evidence",
         "reviewer_or_operator_identity_present",
         "artifact_refs_reviewed",
-        "privacy_contract_satisfied"
+        "privacy_contract_satisfied",
+        "ledger_reviewer_approved"
       ],
       "properties": {
         "real_external_or_human_evidence": {
@@ -163,6 +164,9 @@
           "type": "boolean"
         },
         "privacy_contract_satisfied": {
+          "type": "boolean"
+        },
+        "ledger_reviewer_approved": {
           "type": "boolean"
         },
         "notes": {

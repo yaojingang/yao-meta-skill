@@ -42,6 +42,7 @@
     "reviewer_or_operator_identity_present": false,
     "artifact_refs_reviewed": false,
     "privacy_contract_satisfied": false,
+    "ledger_reviewer_approved": false,
     "notes": "Copy this template into submissions/ and set all booleans truthfully after the real provider run."
   }
 }

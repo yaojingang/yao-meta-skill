@@ -58,6 +58,7 @@ def provider_submission() -> dict:
             "reviewer_or_operator_identity_present": True,
             "artifact_refs_reviewed": True,
             "privacy_contract_satisfied": True,
+            "ledger_reviewer_approved": True,
         },
     }
 

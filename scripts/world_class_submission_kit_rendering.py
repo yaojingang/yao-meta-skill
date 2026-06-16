@@ -25,7 +25,7 @@ def render_readme(report: dict[str, Any]) -> str:
         "2. Edit the matching JSON draft with only aggregate artifact references and provenance metadata.",
         "3. Set `template_only` to `false` only after real evidence exists.",
         "4. Set attestation booleans truthfully; do not include credentials, raw prompts, raw outputs, transcripts, notes, or private user content.",
-        "5. Validate the packet before asking the ledger reviewer to accept it.",
+        "5. Validate the packet before asking the ledger reviewer to set `attestation.ledger_reviewer_approved` truthfully.",
         "6. Optional artifact prefill only inserts SHA-256 digests for current local aggregate artifacts; it does not mark a draft as real evidence.",
         "",
         "## Commands",
@@ -438,7 +438,7 @@ def render_html(report: dict[str, Any]) -> str:
       <div class="stats">{stat_html}</div>
     </section>
     <section class="section two-col" id="workflow">
-      <article class="panel"><h2>Workflow</h2><ol><li>Run the real provider, human review, native permission, or native client telemetry work first.</li><li>Edit the matching JSON draft with aggregate artifact references and provenance metadata.</li><li>Set template_only to false only after real evidence exists.</li><li>Use prefilled SHA-256 values as convenience data, not evidence acceptance.</li><li>Validate intake, refresh the ledger, then guard public claims.</li></ol></article>
+      <article class="panel"><h2>Workflow</h2><ol><li>Run the real provider, human review, native permission, or native client telemetry work first.</li><li>Edit the matching JSON draft with aggregate artifact references and provenance metadata.</li><li>Set template_only to false only after real evidence exists.</li><li>Use prefilled SHA-256 values as convenience data, not evidence acceptance.</li><li>Validate intake, ask the ledger reviewer to approve explicitly, refresh the ledger, then guard public claims.</li></ol></article>
       <aside class="panel"><h2>Commands</h2><ul class="commands">{render_html_commands(report['commands'])}</ul></aside>
     </section>
     <section class="section" id="handoff"><h2>Operator Handoff</h2><p class="muted">These ordered steps make the operator-to-reviewer handoff auditable. They are procedural guardrails and never count as world-class evidence.</p><div class="handoff-grid">{handoff_html}</div></section>

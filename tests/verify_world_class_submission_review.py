@@ -60,6 +60,7 @@ def provider_submission(*, valid: bool = True) -> dict:
             "reviewer_or_operator_identity_present": valid,
             "artifact_refs_reviewed": valid,
             "privacy_contract_satisfied": valid,
+            "ledger_reviewer_approved": valid,
         },
     }
 

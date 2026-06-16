@@ -60,6 +60,7 @@ def provider_submission(artifact_root: Path = ROOT, artifact_path: str = "report
             "reviewer_or_operator_identity_present": True,
             "artifact_refs_reviewed": True,
             "privacy_contract_satisfied": True,
+            "ledger_reviewer_approved": True,
         },
     }
 
@@ -340,6 +341,51 @@ def main() -> None:
         for error in placeholder_accepted_provider["submission_state"]["errors"]
     ), placeholder_accepted_provider
 
+    unapproved_submissions = TMP / "unapproved_submissions"
+    unapproved_submissions.mkdir()
+    unapproved_submission = provider_submission(accepted_source_skill)
+    unapproved_submission["attestation"]["ledger_reviewer_approved"] = False
+    (unapproved_submissions / "provider-holdout.json").write_text(
+        json.dumps(unapproved_submission, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    unapproved_proc = subprocess.run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            str(accepted_source_skill),
+            "--output-json",
+            str(TMP / "unapproved_provider_ledger.json"),
+            "--output-md",
+            str(TMP / "unapproved_provider_ledger.md"),
+            "--submissions-dir",
+            str(unapproved_submissions),
+            "--generated-at",
+            "2026-06-13",
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    unapproved_payload = json.loads(unapproved_proc.stdout)
+    unapproved_summary = unapproved_payload["summary"]
+    assert unapproved_summary["source_accepted_count"] == 1, unapproved_summary
+    assert unapproved_summary["submitted_entry_count"] == 0, unapproved_summary
+    assert unapproved_summary["reviewer_approved_submission_count"] == 0, unapproved_summary
+    assert unapproved_summary["accepted_count"] == 0, unapproved_summary
+    unapproved_provider = {
+        entry["key"]: entry for entry in unapproved_payload["entries"]
+    }["provider-holdout"]
+    assert unapproved_provider["source_accepted"] is True, unapproved_provider
+    assert unapproved_provider["status"] == "pending", unapproved_provider
+    assert unapproved_provider["submission_state"]["status"] == "invalid-contract", unapproved_provider
+    assert unapproved_provider["submission_state"]["ledger_reviewer_approved"] is False, unapproved_provider
+    assert any(
+        "attestation.ledger_reviewer_approved must be true" in error
+        for error in unapproved_provider["submission_state"]["errors"]
+    ), unapproved_provider
+
     accepted_submissions = TMP / "accepted_submissions"
     accepted_submissions.mkdir()
     (accepted_submissions / "provider-holdout.json").write_text(
@@ -369,6 +415,7 @@ def main() -> None:
     accepted_summary = accepted_payload["summary"]
     assert accepted_summary["source_accepted_count"] == 1, accepted_summary
     assert accepted_summary["accepted_count"] == 1, accepted_summary
+    assert accepted_summary["reviewer_approved_submission_count"] == 1, accepted_summary
     assert accepted_summary["pending_count"] == 3, accepted_summary
     assert accepted_summary["source_accepted_without_valid_submission_count"] == 0, accepted_summary
     accepted_provider = {entry["key"]: entry for entry in accepted_payload["entries"]}["provider-holdout"]

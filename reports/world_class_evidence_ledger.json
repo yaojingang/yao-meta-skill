@@ -12,6 +12,7 @@
   "human_pending_count": 1,
   "external_pending_count": 3,
   "submitted_entry_count": 0,
+  "reviewer_approved_submission_count": 0,
   "missing_submission_count": 4,
   "invalid_submission_count": 0,
   "source_check_count": 13,
@@ -28,6 +29,7 @@
     "human_pending_count": 1,
     "external_pending_count": 3,
     "submitted_entry_count": 0,
+    "reviewer_approved_submission_count": 0,
     "missing_submission_count": 4,
     "invalid_submission_count": 0,
     "source_check_count": 13,
@@ -53,6 +55,7 @@
       "human_pending_count",
       "external_pending_count",
       "submitted_entry_count",
+      "reviewer_approved_submission_count",
       "missing_submission_count",
       "invalid_submission_count",
       "source_check_count",
@@ -154,6 +157,7 @@
         "artifact_ref_count": 0,
         "attested_real_evidence": false,
         "privacy_contract_satisfied": false,
+        "ledger_reviewer_approved": false,
         "ledger_counts_as_completion": false
       },
       "anti_overclaim": {
@@ -272,6 +276,7 @@
         "artifact_ref_count": 0,
         "attested_real_evidence": false,
         "privacy_contract_satisfied": false,
+        "ledger_reviewer_approved": false,
         "ledger_counts_as_completion": false
       },
       "anti_overclaim": {
@@ -380,6 +385,7 @@
         "artifact_ref_count": 0,
         "attested_real_evidence": false,
         "privacy_contract_satisfied": false,
+        "ledger_reviewer_approved": false,
         "ledger_counts_as_completion": false
       },
       "anti_overclaim": {
@@ -481,6 +487,7 @@
         "artifact_ref_count": 0,
         "attested_real_evidence": false,
         "privacy_contract_satisfied": false,
+        "ledger_reviewer_approved": false,
         "ledger_counts_as_completion": false
       },
       "anti_overclaim": {

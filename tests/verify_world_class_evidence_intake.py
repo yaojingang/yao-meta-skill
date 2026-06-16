@@ -86,6 +86,7 @@ def provider_submission(*, valid: bool, artifact_path: str = "reports/output_exe
             "reviewer_or_operator_identity_present": valid,
             "artifact_refs_reviewed": valid,
             "privacy_contract_satisfied": valid,
+            "ledger_reviewer_approved": valid,
         },
     }
 
@@ -136,6 +137,7 @@ def external_submission(
             "reviewer_or_operator_identity_present": True,
             "artifact_refs_reviewed": True,
             "privacy_contract_satisfied": True,
+            "ledger_reviewer_approved": True,
         },
     }
 
@@ -369,6 +371,7 @@ def human_submission(skill_root: Path, *, reviewer: str = "Yao QA") -> dict:
             "reviewer_or_operator_identity_present": True,
             "artifact_refs_reviewed": True,
             "privacy_contract_satisfied": True,
+            "ledger_reviewer_approved": True,
         },
     }
 

@@ -102,6 +102,7 @@ TOP_LEVEL_SUMMARY_FIELDS = [
     "human_pending_count",
     "external_pending_count",
     "submitted_entry_count",
+    "reviewer_approved_submission_count",
     "missing_submission_count",
     "invalid_submission_count",
     "source_check_count",
@@ -125,10 +126,11 @@ def submission_state(skill_dir: Path, task: dict[str, Any], submissions_dir: Pat
         return {
             "status": load_status,
             "path": rel_path(path, skill_dir),
-            "artifact_ref_count": 0,
-            "attested_real_evidence": False,
-            "privacy_contract_satisfied": False,
-            "ledger_counts_as_completion": False,
+        "artifact_ref_count": 0,
+        "attested_real_evidence": False,
+        "privacy_contract_satisfied": False,
+        "ledger_reviewer_approved": False,
+        "ledger_counts_as_completion": False,
         }
     validation = validate_payload(payload, task, path=path, root=skill_dir, template_expected=False)
     refs = payload.get("artifact_refs", [])
@@ -146,6 +148,7 @@ def submission_state(skill_dir: Path, task: dict[str, Any], submissions_dir: Pat
         "attested_real_evidence": attestation.get("real_external_or_human_evidence") is True,
         "reviewer_or_operator_identity_present": attestation.get("reviewer_or_operator_identity_present") is True,
         "privacy_contract_satisfied": attestation.get("privacy_contract_satisfied") is True,
+        "ledger_reviewer_approved": attestation.get("ledger_reviewer_approved") is True,
         "errors": validation.get("errors", []),
         "ledger_counts_as_completion": False,
     }
@@ -157,7 +160,7 @@ def build_entry(skill_dir: Path, task: dict[str, Any], submissions_dir: Path) ->
     source_checklist = build_source_checklist([{"key": task["key"], "observed_state": state}])
     source_summary = summarize_source_checklist(source_checklist)
     source_accepted = bool(source_checklist) and source_summary["source_blocked_count"] == 0
-    accepted = source_accepted and submission.get("status") == "submitted"
+    accepted = source_accepted and submission.get("status") == "submitted" and submission.get("ledger_reviewer_approved") is True
     return {
         "key": task["key"],
         "label": task["label"],
@@ -200,6 +203,9 @@ def build_ledger(skill_dir: Path, generated_at: str, submissions_dir: Path | Non
     human_pending_count = sum(1 for entry in entries if entry["category"] == "human" and entry["status"] == "pending")
     external_pending_count = sum(1 for entry in entries if entry["category"] == "external" and entry["status"] == "pending")
     submitted_entry_count = sum(1 for entry in entries if entry["submission_state"]["status"] == "submitted")
+    reviewer_approved_submission_count = sum(
+        1 for entry in entries if entry["submission_state"].get("ledger_reviewer_approved") is True
+    )
     missing_submission_count = sum(1 for entry in entries if entry["submission_state"]["status"] == "missing")
     invalid_submission_count = sum(1 for entry in entries if entry["submission_state"]["status"] in {"invalid-json", "invalid-contract"})
     submitted_but_pending_count = sum(
@@ -219,6 +225,7 @@ def build_ledger(skill_dir: Path, generated_at: str, submissions_dir: Path | Non
         "human_pending_count": human_pending_count,
         "external_pending_count": external_pending_count,
         "submitted_entry_count": submitted_entry_count,
+        "reviewer_approved_submission_count": reviewer_approved_submission_count,
         "missing_submission_count": missing_submission_count,
         "invalid_submission_count": invalid_submission_count,
         **source_summary,
@@ -282,6 +289,7 @@ def render_markdown(ledger: dict[str, Any]) -> str:
         f"- human pending: `{summary['human_pending_count']}`",
         f"- external pending: `{summary['external_pending_count']}`",
         f"- submitted entries: `{summary['submitted_entry_count']}`",
+        f"- reviewer approved submissions: `{summary.get('reviewer_approved_submission_count', 0)}`",
         f"- submitted but pending: `{summary['submitted_but_pending_count']}`",
         f"- source accepted without valid submission: `{summary.get('source_accepted_without_valid_submission_count', 0)}`",
         f"- invalid submissions: `{summary['invalid_submission_count']}`",

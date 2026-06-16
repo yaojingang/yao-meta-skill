@@ -34,10 +34,10 @@ No near-threshold files found.
 | File | Lines | Kind | Severity |
 | --- | ---: | --- | --- |
 | `tests/verify_yao_cli.py` | `696` | `test` | `pass` |
-| `scripts/world_class_evidence_contract.py` | `686` | `internal-module` | `pass` |
+| `scripts/world_class_evidence_contract.py` | `687` | `internal-module` | `pass` |
 | `scripts/render_review_viewer.py` | `685` | `cli-script` | `pass` |
 | `scripts/skill_report_model.py` | `665` | `internal-module` | `pass` |
-| `tests/verify_world_class_evidence_intake.py` | `660` | `test` | `pass` |
+| `tests/verify_world_class_evidence_intake.py` | `663` | `test` | `pass` |
 | `scripts/render_skill_os2_coverage.py` | `649` | `cli-script` | `pass` |
 | `scripts/render_review_studio.py` | `647` | `cli-script` | `pass` |
 | `scripts/render_reference_synthesis.py` | `644` | `cli-script` | `pass` |

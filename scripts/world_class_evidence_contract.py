@@ -41,6 +41,7 @@ REQUIRED_ATTESTATION_TRUE = [
     "reviewer_or_operator_identity_present",
     "artifact_refs_reviewed",
     "privacy_contract_satisfied",
+    "ledger_reviewer_approved",
 ]
 EXPECTED_SOURCE_TYPES = {
     "provider-holdout": "provider-output-eval",
