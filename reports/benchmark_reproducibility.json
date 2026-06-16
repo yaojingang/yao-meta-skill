@@ -3,52 +3,43 @@
   "ok": true,
   "generated_at": "2026-06-17",
   "skill_dir": ".",
-  "commit": "ca23db4296e0216acca9ede65f9b00c3380c1180",
+  "commit": "0f97b66ed83c74eb82198744292b8da166612d78",
   "git_status": {
     "available": true,
     "dirty": true,
-    "changed_file_count": 68,
+    "changed_file_count": 17,
     "generated_dirty": true,
-    "generated_changed_file_count": 60,
-    "source_dirty": true,
-    "source_changed_file_count": 8,
+    "generated_changed_file_count": 17,
+    "source_dirty": false,
+    "source_changed_file_count": 0,
     "sample": [
-      " M assets/review-studio.css",
-      " M registry/index.json",
-      " M registry/packages/yao-meta-skill.json",
       " M reports/adaptation_proposals.json",
       " M reports/adaptation_proposals.md",
-      " M reports/adoption_drift_report.json",
-      " M reports/architecture_maintainability.json",
-      " M reports/architecture_maintainability.md",
       " M reports/benchmark_reproducibility.json",
       " M reports/benchmark_reproducibility.md",
-      " M reports/compiled_targets.json",
-      " M reports/context_budget.json"
-    ],
-    "source_sample": [
-      " M assets/review-studio.css",
-      " M scripts/render_world_class_preflight.py",
-      " M scripts/review_studio_action_evidence.py",
-      " M scripts/world_class_preflight_layout.py",
-      " M tests/review_studio_world_class_assertions.py",
-      " M tests/verify_review_studio.py",
-      " M tests/verify_world_class_preflight.py",
-      "?? scripts/world_class_preflight_markdown.py"
-    ],
-    "generated_sample": [
-      " M registry/index.json",
-      " M registry/packages/yao-meta-skill.json",
-      " M reports/adaptation_proposals.json",
-      " M reports/adaptation_proposals.md",
-      " M reports/adoption_drift_report.json",
-      " M reports/architecture_maintainability.json",
-      " M reports/architecture_maintainability.md",
-      " M reports/benchmark_reproducibility.json",
-      " M reports/benchmark_reproducibility.md",
-      " M reports/compiled_targets.json",
       " M reports/context_budget.json",
-      " M reports/context_budget.md"
+      " M reports/evidence_consistency.json",
+      " M reports/output_execution_runs.json",
+      " M reports/output_execution_runs.md",
+      " M reports/review-studio.html",
+      " M reports/review-studio.json",
+      " M reports/review-viewer.json",
+      " M reports/skill-interpretation.json"
+    ],
+    "source_sample": [],
+    "generated_sample": [
+      " M reports/adaptation_proposals.json",
+      " M reports/adaptation_proposals.md",
+      " M reports/benchmark_reproducibility.json",
+      " M reports/benchmark_reproducibility.md",
+      " M reports/context_budget.json",
+      " M reports/evidence_consistency.json",
+      " M reports/output_execution_runs.json",
+      " M reports/output_execution_runs.md",
+      " M reports/review-studio.html",
+      " M reports/review-studio.json",
+      " M reports/review-viewer.json",
+      " M reports/skill-interpretation.json"
     ],
     "generated_dirty_prefixes": [
       "dist/",
@@ -62,11 +53,11 @@
   },
   "summary": {
     "reproducibility_ready": true,
-    "release_lock_ready": false,
+    "release_lock_ready": true,
     "methodology_complete": true,
     "required_artifact_count": 25,
     "missing_artifact_count": 0,
-    "evidence_bundle_sha256": "3ccbc3258857a4494e846fe9e517e1af1b1db24e5e531dfab1eea80411e791ed",
+    "evidence_bundle_sha256": "70140015193af060a6a111a5f18e5b069a16e8b2a47de84776c564d640830f93",
     "source_contract_sha256": "453ca3f4c54651bc0edc917049ea0fa28064edca66083769bf11b13f01acb4fc",
     "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2",
     "output_case_count": 5,
@@ -86,19 +77,18 @@
     "world_class_source_pass_count": 10,
     "world_class_source_blocked_count": 9,
     "public_claim_ready": false,
-    "public_claim_blocker_count": 5,
+    "public_claim_blocker_count": 4,
     "working_tree_dirty": true,
-    "changed_file_count": 68,
-    "source_tree_dirty": true,
-    "source_changed_file_count": 8,
+    "changed_file_count": 17,
+    "source_tree_dirty": false,
+    "source_changed_file_count": 0,
     "generated_tree_dirty": true,
-    "generated_changed_file_count": 60
+    "generated_changed_file_count": 17
   },
   "public_claim": {
     "ready": false,
     "scope": "public benchmark or world-class readiness claim",
     "blockers": [
-      "release lock is not clean or commit is unavailable",
       "provider-backed model holdout evidence is incomplete",
       "human blind-review adjudication is incomplete",
       "world-class evidence is not accepted yet (4 open gaps, 4 ledger pending)",
@@ -107,12 +97,12 @@
     "policy": "Local reproducibility can pass before public claims; public claims require provider evidence, human adjudication, clean release lock, accepted world-class evidence, and complete source checks."
   },
   "release_lock": {
-    "ready": false,
-    "commit": "ca23db4296e0216acca9ede65f9b00c3380c1180",
+    "ready": true,
+    "commit": "0f97b66ed83c74eb82198744292b8da166612d78",
     "status_scope": "generation-time status before this report is written",
-    "source_changed_file_count": 8,
-    "generated_changed_file_count": 60,
-    "reason": "source files were dirty at generation time"
+    "source_changed_file_count": 0,
+    "generated_changed_file_count": 17,
+    "reason": "only generated evidence artifacts were dirty at generation time"
   },
   "evidence_bundle": {
     "algorithm": "sha256(path,label,exists,artifact_sha256)",
@@ -120,7 +110,7 @@
     "existing_count": 25,
     "missing_count": 0,
     "missing_paths": [],
-    "sha256": "3ccbc3258857a4494e846fe9e517e1af1b1db24e5e531dfab1eea80411e791ed"
+    "sha256": "70140015193af060a6a111a5f18e5b069a16e8b2a47de84776c564d640830f93"
   },
   "methodology": {
     "path": "reports/benchmark_methodology.md",
@@ -194,7 +184,7 @@
       "path": "reports/output_execution_runs.json",
       "exists": true,
       "bytes": 7965,
-      "sha256": "ecdad5b8794e10f995f17a718aba409a5a9be36e31e975ada0aa08de0cac56fa"
+      "sha256": "428b1ecabe160d6185bb8eaece93563d9f4aa6091b484fb7e3552f51c29166af"
     },
     {
       "label": "blind_review",
