@@ -4,31 +4,24 @@
   "generated_at": "2026-06-16",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 204,
-    "script_file_count": 131,
+    "python_file_count": 205,
+    "script_file_count": 132,
     "test_file_count": 73,
     "internal_module_count": 48,
-    "cli_script_count": 85,
+    "cli_script_count": 86,
     "command_handler_count": 68,
     "entrypoint_command_handler_count": 18,
     "command_module_count": 6,
     "warn_line_threshold": 900,
     "watch_line_threshold": 720,
     "block_line_threshold": 1500,
-    "largest_file_lines": 714,
+    "largest_file_lines": 707,
     "watchlist_count": 0,
     "hotspot_count": 0,
     "blocker_count": 0,
     "decision": "pass"
   },
   "largest_files": [
-    {
-      "path": "scripts/trust_check.py",
-      "lines": 714,
-      "kind": "internal-module",
-      "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
     {
       "path": "scripts/review_studio_gates.py",
       "lines": 707,
@@ -102,6 +95,13 @@
     {
       "path": "scripts/cross_packager.py",
       "lines": 638,
+      "kind": "cli-script",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/build_skill_atlas.py",
+      "lines": 637,
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."

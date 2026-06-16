@@ -2,9 +2,9 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 222,
-    "script_count": 131,
-    "internal_module_count": 45,
+    "scanned_files": 223,
+    "script_count": 132,
+    "internal_module_count": 46,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 222,
-    "package_sha256": "a163b6e288c5342e683875b47fdfe62989d3f09241c0c8fd86ae615c6d5da7ad"
+    "package_hash_file_count": 223,
+    "package_sha256": "9b29a4cc28ab3fb1df2434b22e26b9e92ee04c096f35da350705c4c92307260e"
   },
   "failures": [],
   "warnings": [],
@@ -1601,6 +1601,20 @@
       "network_hosts": []
     },
     {
+      "path": "scripts/trust_check_scripts.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Static script inventory helpers imported by trust_check.py.",
+      "has_argparse": true,
+      "has_main_guard": true,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
       "path": "scripts/upgrade_check.py",
       "interface": "cli",
       "interface_declared": false,
@@ -1915,7 +1929,7 @@
     "checked_count": 86,
     "passed_count": 86,
     "failed_count": 0,
-    "skipped_count": 45,
+    "skipped_count": 46,
     "failed_scripts": [],
     "results": [
       {
@@ -2894,6 +2908,10 @@
       },
       {
         "path": "scripts/skillops_opportunity.py",
+        "reason": "internal module"
+      },
+      {
+        "path": "scripts/trust_check_scripts.py",
         "reason": "internal module"
       },
       {

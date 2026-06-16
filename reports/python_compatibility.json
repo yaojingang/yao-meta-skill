@@ -5,7 +5,7 @@
   "root": ".",
   "summary": {
     "target_python": "3.11",
-    "file_count": 207,
+    "file_count": 208,
     "issue_count": 0,
     "syntax_error_count": 0,
     "fstring_311_violation_count": 0,
@@ -702,6 +702,12 @@
     },
     {
       "path": "scripts/trust_check.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "scripts/trust_check_scripts.py",
       "ok": true,
       "issue_count": 0,
       "issues": []

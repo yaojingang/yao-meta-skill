@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `222`
-- Scripts: `131`
-- Internal script modules: `45`
+- Scanned files: `223`
+- Scripts: `132`
+- Internal script modules: `46`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `222`
-- Package SHA256: `a163b6e288c5342e683875b47fdfe62989d3f09241c0c8fd86ae615c6d5da7ad`
+- Package hash files: `223`
+- Package SHA256: `9b29a4cc28ab3fb1df2434b22e26b9e92ee04c096f35da350705c4c92307260e`
 
 ## Failures
 
@@ -173,6 +173,7 @@
 | scripts/telemetry_native_host.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/trigger_eval.py | cli | False | True | True | False | False | False | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/trust_check.py | cli | False | True | True | False | False | True | True | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
+| scripts/trust_check_scripts.py | internal-module | True | True | True | False | False | False | False | Static script inventory helpers imported by trust_check.py. |
 | scripts/upgrade_check.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/validate_skill.py | cli | False | True | True | False | False | False | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/verify_package.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
