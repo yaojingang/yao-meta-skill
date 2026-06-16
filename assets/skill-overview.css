@@ -343,12 +343,12 @@
     }
     .metrics-flow {
       display: grid;
-      gap: 24px;
+      gap: 30px;
     }
     .metrics-primary {
       display: grid;
-      grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
-      gap: 18px;
+      grid-template-columns: minmax(360px, 0.92fr) minmax(0, 1.08fr);
+      gap: 22px;
       align-items: start;
     }
     .metrics-primary .chart-figure {
@@ -362,7 +362,7 @@
     .metrics-note {
       display: grid;
       align-content: start;
-      gap: 16px;
+      gap: 14px;
     }
     .metrics-note p {
       margin: 0;
@@ -401,6 +401,21 @@
       line-height: 1.5;
       overflow-wrap: break-word;
     }
+    .metric-detail-section {
+      display: grid;
+      gap: 14px;
+    }
+    .detail-section-kicker {
+      display: inline-flex;
+      width: fit-content;
+      min-height: 28px;
+      align-items: center;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: var(--brand-soft);
+      color: var(--brand);
+      font-size: 12px;
+    }
     .metric-status {
       display: inline-flex;
       align-items: center;
@@ -412,7 +427,7 @@
       font-size: 12px;
     }
     .metric-detail-grid {
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+      grid-template-columns: repeat(2, minmax(min(100%, 420px), 1fr));
       align-items: stretch;
     }
     .list, .compact-list, .step-list {
@@ -442,16 +457,15 @@
     }
     .metric-card {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 14px;
+      grid-template-columns: minmax(112px, 0.28fr) minmax(0, 1fr);
+      gap: 18px;
       align-content: start;
       min-height: 0;
     }
     .metric-card-head {
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-      justify-content: space-between;
+      display: grid;
+      gap: 10px;
+      align-content: start;
     }
     .metric-card strong {
       display: block;
@@ -467,13 +481,14 @@
       color: var(--muted);
       font-size: 13px;
       line-height: 1.45;
+      overflow-wrap: break-word;
     }
     .metric-card-body {
       min-width: 0;
     }
     .metric-card-body .compact-list {
       gap: 7px;
-      max-width: 62ch;
+      max-width: 76ch;
     }
     .metric-card-body .compact-list li {
       overflow-wrap: break-word;

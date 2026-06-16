@@ -378,14 +378,18 @@ def render_html(summary: dict) -> str:
       </div>
       <div class="section-body metrics-report">
         <div class="metrics-flow">
-          <div class="metrics-primary">
+          <div class="metrics-primary" aria-label="指标图表与成熟度摘要">
             {charts["radar"]}
             <article class="panel metrics-note metrics-summary-panel">
               <h3>{bi_span("成熟度条", "Maturity Bar")}</h3>
+              <p>{bi_span("这里把每个指标压缩为状态、分数和第一条证据，先给出整体判断，再进入下方明细。", "This compresses each metric into status, score, and the first evidence item before the detailed cards below.")}</p>
               {render_metric_summary(scorecard)}
             </article>
           </div>
-          <div class="metric-grid metric-detail-grid">{render_metric_cards(scorecard)}</div>
+          <div class="metric-detail-section">
+            <div class="detail-section-kicker">{bi_span("指标明细", "Metric Details")}</div>
+            <div class="metric-grid metric-detail-grid">{render_metric_cards(scorecard)}</div>
+          </div>
         </div>
       </div>
     </section>
