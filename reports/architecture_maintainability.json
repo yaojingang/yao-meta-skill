@@ -4,10 +4,10 @@
   "generated_at": "2026-06-16",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 211,
-    "script_file_count": 137,
+    "python_file_count": 212,
+    "script_file_count": 138,
     "test_file_count": 74,
-    "internal_module_count": 53,
+    "internal_module_count": 54,
     "cli_script_count": 86,
     "command_handler_count": 68,
     "entrypoint_command_handler_count": 18,
@@ -37,15 +37,15 @@
       "recommendation": "Split viewer data assembly from HTML section rendering."
     },
     {
-      "path": "scripts/skill_report_model.py",
-      "lines": 665,
-      "kind": "internal-module",
+      "path": "tests/verify_world_class_evidence_intake.py",
+      "lines": 677,
+      "kind": "test",
       "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
-      "path": "scripts/world_class_evidence_contract.py",
-      "lines": 654,
+      "path": "scripts/skill_report_model.py",
+      "lines": 665,
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
@@ -93,11 +93,11 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
-      "path": "tests/verify_world_class_evidence_intake.py",
-      "lines": 611,
-      "kind": "test",
+      "path": "scripts/world_class_evidence_contract.py",
+      "lines": 618,
+      "kind": "internal-module",
       "severity": "pass",
-      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
       "path": "scripts/render_benchmark_reproducibility.py",

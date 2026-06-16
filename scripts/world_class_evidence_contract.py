@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from world_class_human_evidence import validate_human_adjudication_report
+from world_class_native_permission_evidence import validate_native_permission_report
 from world_class_provider_evidence import validate_provider_execution_report
 
 
@@ -411,44 +412,7 @@ def validate_native_permission_artifacts(payload: dict[str, Any], errors: list[s
     probes = load_json(paths.get("reports/runtime_permission_probes.json", root / "__missing__"))
     install = load_json(paths.get("reports/install_simulation.json", root / "__missing__"))
     if probes:
-        probe_summary = summary(probes)
-        add_error(errors, probes.get("ok") is True, "native-permission-enforcement runtime probe report ok must be true")
-        add_error(
-            errors,
-            bool(real_int(probe_summary.get("native_enforcement_count")) and probe_summary["native_enforcement_count"] > 0),
-            "native-permission-enforcement runtime probe summary.native_enforcement_count must be >0",
-        )
-        add_error(
-            errors,
-            probe_summary.get("failure_count") == 0,
-            "native-permission-enforcement runtime probe summary.failure_count must be 0",
-        )
-        add_error(
-            errors,
-            probe_summary.get("installer_enforcement_ready") is True,
-            "native-permission-enforcement runtime probe summary.installer_enforcement_ready must be true",
-        )
-    if install:
-        install_summary = summary(install)
-        add_error(errors, install.get("ok") is True, "native-permission-enforcement install simulation report ok must be true")
-        add_error(
-            errors,
-            bool(
-                real_int(install_summary.get("installer_permission_enforced_count"))
-                and install_summary["installer_permission_enforced_count"] > 0
-            ),
-            "native-permission-enforcement install simulation summary.installer_permission_enforced_count must be >0",
-        )
-        add_error(
-            errors,
-            install_summary.get("installer_permission_failure_count") == 0,
-            "native-permission-enforcement install simulation summary.installer_permission_failure_count must be 0",
-        )
-        add_error(
-            errors,
-            install_summary.get("failure_count") == 0,
-            "native-permission-enforcement install simulation summary.failure_count must be 0",
-        )
+        validate_native_permission_report(probes, install, errors)
 
 
 def validate_native_client_telemetry_artifacts(payload: dict[str, Any], errors: list[str], root: Path) -> None:

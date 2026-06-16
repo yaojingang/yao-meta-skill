@@ -201,16 +201,47 @@ def provider_artifact_submission(skill_root: Path) -> dict:
 
 
 def write_native_permission_artifacts(skill_root: Path, *, complete: bool) -> None:
+    capabilities = ["file_write", "network", "subprocess"]
+    target = {
+        "target": "vscode",
+        "status": "pass",
+        "adapter": "dist/targets/vscode/adapter.json",
+        "permission_model": "native-client",
+        "native_enforcement": complete,
+        "metadata_fallback_explicit": not complete,
+        "installer_enforcement": {
+            "target": "vscode",
+            "source_status": "present",
+            "enforced": True,
+            "enforced_capabilities": capabilities,
+            "missing_capabilities": [],
+            "failure_details": [],
+        },
+        "assurance": "native-enforced" if complete else "metadata-fallback-explicit",
+        "declared_capabilities": capabilities,
+        "checks": [
+            {"key": "adapter-present", "passed": True, "detail": "vscode adapter.json is readable"},
+            {"key": "native-enforcement-boolean", "passed": True, "detail": "native flag is boolean"},
+        ],
+        "failures": [],
+        "residual_risks": [] if complete else ["Client-native permission enforcement is not provided by this target."],
+    }
     write_json(
         skill_root / "reports" / "runtime_permission_probes.json",
         {
             "schema_version": "1.0",
             "ok": True,
+            "expected_capabilities": capabilities,
             "summary": {
+                "target_count": 1,
+                "pass_count": 1,
+                "fail_count": 0,
                 "native_enforcement_count": 1 if complete else 0,
+                "metadata_fallback_count": 0 if complete else 1,
                 "failure_count": 0,
                 "installer_enforcement_ready": True,
             },
+            "targets": [target],
         },
     )
     write_json(
@@ -221,8 +252,26 @@ def write_native_permission_artifacts(skill_root: Path, *, complete: bool) -> No
             "summary": {
                 "installer_permission_enforced_count": 12,
                 "installer_permission_failure_count": 0,
+                "permission_target_count": 1,
+                "permission_capability_count": 3,
                 "failure_count": 0,
             },
+            "checks": [
+                {"id": "permission-vscode-file_write-approved", "status": "pass", "detail": "file write approved"},
+                {
+                    "id": "permission-vscode-file_write-target-enforcement",
+                    "status": "pass",
+                    "detail": "file write enforced",
+                },
+                {"id": "permission-vscode-network-approved", "status": "pass", "detail": "network approved"},
+                {"id": "permission-vscode-network-target-enforcement", "status": "pass", "detail": "network enforced"},
+                {"id": "permission-vscode-subprocess-approved", "status": "pass", "detail": "subprocess approved"},
+                {
+                    "id": "permission-vscode-subprocess-target-enforcement",
+                    "status": "pass",
+                    "detail": "subprocess enforced",
+                },
+            ],
         },
     )
 
@@ -415,6 +464,23 @@ def assert_external_contract_artifact_validation() -> None:
         template_expected=False,
     )
     assert permission_valid["status"] == "pass", permission_valid
+    forged_probe = json.loads((skill_root / "reports" / "runtime_permission_probes.json").read_text(encoding="utf-8"))
+    forged_probe["targets"][0]["native_enforcement"] = False
+    forged_probe["targets"][0]["assurance"] = "metadata-fallback-explicit"
+    forged_probe["targets"][0]["metadata_fallback_explicit"] = True
+    forged_probe["targets"][0]["residual_risks"] = ["Fallback still requires operator enforcement."]
+    write_json(skill_root / "reports" / "runtime_permission_probes.json", forged_probe)
+    permission_forged = validate_payload(
+        native_permission_submission(skill_root),
+        permission_entry,
+        path=skill_root / "evidence" / "world_class" / "submissions" / "native-permission-enforcement.json",
+        root=skill_root,
+        template_expected=False,
+    )
+    assert permission_forged["status"] == "fail", permission_forged
+    assert any("native target rows must match summary.native_enforcement_count" in error for error in permission_forged["errors"]), (
+        permission_forged["errors"]
+    )
     write_native_permission_artifacts(skill_root, complete=False)
     permission_invalid = validate_payload(
         native_permission_submission(skill_root),

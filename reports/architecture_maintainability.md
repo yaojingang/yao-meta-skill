@@ -5,10 +5,10 @@ Generated at: `2026-06-16`
 ## Summary
 
 - decision: `pass`
-- python files: `211`
-- scripts: `137`
+- python files: `212`
+- scripts: `138`
 - tests: `74`
-- internal modules: `53`
+- internal modules: `54`
 - CLI scripts: `86`
 - Yao CLI command handlers: `68`
 - entrypoint command handlers: `18`
@@ -35,15 +35,15 @@ No near-threshold files found.
 | --- | ---: | --- | --- |
 | `tests/verify_yao_cli.py` | `696` | `test` | `pass` |
 | `scripts/render_review_viewer.py` | `685` | `cli-script` | `pass` |
+| `tests/verify_world_class_evidence_intake.py` | `677` | `test` | `pass` |
 | `scripts/skill_report_model.py` | `665` | `internal-module` | `pass` |
-| `scripts/world_class_evidence_contract.py` | `654` | `internal-module` | `pass` |
 | `scripts/render_skill_os2_coverage.py` | `649` | `cli-script` | `pass` |
 | `scripts/render_review_studio.py` | `647` | `cli-script` | `pass` |
 | `scripts/render_reference_synthesis.py` | `644` | `cli-script` | `pass` |
 | `scripts/review_studio_gates.py` | `643` | `internal-module` | `pass` |
 | `scripts/cross_packager.py` | `638` | `cli-script` | `pass` |
 | `scripts/build_skill_atlas.py` | `637` | `cli-script` | `pass` |
-| `tests/verify_world_class_evidence_intake.py` | `611` | `test` | `pass` |
+| `scripts/world_class_evidence_contract.py` | `618` | `internal-module` | `pass` |
 | `scripts/render_benchmark_reproducibility.py` | `595` | `cli-script` | `pass` |
 
 ## Release Rule

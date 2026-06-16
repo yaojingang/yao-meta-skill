@@ -5,7 +5,7 @@
   "root": ".",
   "summary": {
     "target_python": "3.11",
-    "file_count": 214,
+    "file_count": 215,
     "issue_count": 0,
     "syntax_error_count": 0,
     "fstring_311_violation_count": 0,
@@ -756,6 +756,12 @@
     },
     {
       "path": "scripts/world_class_human_evidence.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "scripts/world_class_native_permission_evidence.py",
       "ok": true,
       "issue_count": 0,
       "issues": []
