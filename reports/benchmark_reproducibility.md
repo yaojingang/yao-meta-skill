@@ -1,9 +1,9 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-16`
-Commit: `46b9f7a2606f529d501db0772a7da43ea6336a23`
+Commit: `13baae414ad351a07308321af0bb1b87b5516bd7`
 Working tree dirty at generation: `false`
-Evidence bundle SHA256: `a3b7e76bf37cbf3a9cc983ff7df3b6780fd0212b5e941386b008d86ed2438339`
+Evidence bundle SHA256: `b063876a67219a0310df27f253faa7f4e8c500791690436ce65d335b758350a0`
 
 ## Summary
 
@@ -12,7 +12,7 @@ Evidence bundle SHA256: `a3b7e76bf37cbf3a9cc983ff7df3b6780fd0212b5e941386b008d86
 - methodology complete: `true`
 - required artifacts: `25`
 - missing artifacts: `0`
-- source contract sha256: `a163b6e288c5`
+- source contract sha256: `9b29a4cc28ab`
 - archive sha256: `5802e5f52255`
 - output cases: `5`
 - disclosed failure cases: `3`
@@ -50,7 +50,7 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 - algorithm: `sha256(path,label,exists,artifact_sha256)`
 - artifacts: `25` / `25`
-- sha256: `a3b7e76bf37cbf3a9cc983ff7df3b6780fd0212b5e941386b008d86ed2438339`
+- sha256: `b063876a67219a0310df27f253faa7f4e8c500791690436ce65d335b758350a0`
 
 ## Methodology Sections
 
@@ -77,8 +77,8 @@ This report proves local benchmark reproducibility only. It keeps external provi
 | review_adjudication | `reports/output_review_adjudication.json` | present | `bb8c72a9291e` |
 | trigger_scorecard | `reports/route_scorecard.json` | present | `c164e83e36d0` |
 | runtime_conformance | `reports/conformance_matrix.json` | present | `97f9ba949c23` |
-| trust_report | `reports/security_trust_report.json` | present | `0f9e8bdbc6d9` |
-| python_compatibility | `reports/python_compatibility.json` | present | `cccb55ba19b2` |
+| trust_report | `reports/security_trust_report.json` | present | `9121a51e5030` |
+| python_compatibility | `reports/python_compatibility.json` | present | `31891baf8798` |
 | registry_audit | `reports/registry_audit.json` | present | `e75a341d15e4` |
 | package_verification | `reports/package_verification.json` | present | `a27941fdb865` |
 | install_simulation | `reports/install_simulation.json` | present | `e29ae26bc97c` |
