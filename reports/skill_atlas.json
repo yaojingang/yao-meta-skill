@@ -195,6 +195,7 @@
           "scripts/world_class_human_evidence.py",
           "scripts/world_class_native_permission_evidence.py",
           "scripts/world_class_native_telemetry_evidence.py",
+          "scripts/world_class_phase_queue.py",
           "scripts/world_class_preflight_layout.py",
           "scripts/world_class_provider_evidence.py",
           "scripts/world_class_repair_checklist.py",

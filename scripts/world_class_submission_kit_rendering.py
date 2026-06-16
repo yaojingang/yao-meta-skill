@@ -50,6 +50,27 @@ def render_readme(report: dict[str, Any]) -> str:
     lines.extend(
         [
             "",
+            "## Phase Queue",
+            "",
+            "This queue groups repair rows by execution phase so operators can clear access, artifact, and source blockers in order. Queue rows are procedural guidance only.",
+            "",
+            "| Phase | Status | Rows | Owners | Next action | Verify |",
+            "| --- | --- | ---: | --- | --- | --- |",
+        ]
+    )
+    phase_queue = report.get("phase_queue", [])
+    if phase_queue:
+        for item in phase_queue:
+            owners = ", ".join(str(owner) for owner in item.get("owners", [])) or "n/a"
+            lines.append(
+                f"| `{item['phase']}` | `{item['status']}` | `{item['row_count']}` | {owners} | "
+                f"{item['next_action']} | `{item['verification_command']}` |"
+            )
+    else:
+        lines.append("| `all` | `ready` | `0` | n/a | No phase blockers were generated. | `n/a` |")
+    lines.extend(
+        [
+            "",
         "## Drafts",
         "",
         "| Evidence | Draft | Status | Prefilled refs |",
@@ -333,6 +354,42 @@ def render_html_repair_checklist(items: list[dict[str, Any]]) -> str:
 	    )
 
 
+def render_html_phase_queue(items: list[dict[str, Any]]) -> str:
+    if not items:
+        return '<p class="muted">No phase queue rows were generated.</p>'
+    return "".join(
+        """
+        <article class="queue-card {status}">
+          <header>
+            <span>#{priority} · {status}</span>
+            <h3>{label}</h3>
+          </header>
+          <dl>
+            <dt>Phase</dt><dd><code>{phase}</code></dd>
+            <dt>Rows</dt><dd>{blocked}/{total} blocked</dd>
+            <dt>Owners</dt><dd>{owners}</dd>
+            <dt>Evidence</dt><dd>{evidence}</dd>
+            <dt>Next</dt><dd>{action}</dd>
+            <dt>Verify</dt><dd><code>{verify}</code></dd>
+            <dt>Counts</dt><dd>does not count as completion</dd>
+          </dl>
+        </article>
+        """.format(
+            status=html_text(item.get("status", "")),
+            priority=html_text(item.get("priority", "")),
+            label=html_text(item.get("label", "")),
+            phase=html_text(item.get("phase", "")),
+            blocked=html_text(item.get("blocked_count", 0)),
+            total=html_text(item.get("row_count", 0)),
+            owners=html_text(", ".join(str(owner) for owner in item.get("owners", [])) or "n/a"),
+            evidence=html_text(", ".join(str(key) for key in item.get("evidence_keys", [])) or "n/a"),
+            action=html_text(item.get("next_action", "")),
+            verify=html_text(item.get("verification_command", "")),
+        )
+        for item in items
+    )
+
+
 def render_html_handoff(items: list[dict[str, Any]]) -> str:
     if not items:
         return '<p class="muted">No operator handoff steps were generated.</p>'
@@ -423,6 +480,7 @@ def render_html(report: dict[str, Any]) -> str:
     evidence_html = "".join(render_html_item(item) for item in report.get("evidence_items", []))
     matrix_html = render_html_matrix(report.get("evidence_matrix", []))
     repair_html = render_html_repair_checklist(report.get("repair_checklist", []))
+    phase_queue_html = render_html_phase_queue(report.get("phase_queue", []))
     handoff_html = render_html_handoff(report.get("operator_handoff", []))
     artifact_html = render_html_artifact_checklist(report.get("artifact_checklist", []))
     source_html = render_html_source_checklist(report.get("source_checklist", []))
@@ -458,14 +516,16 @@ def render_html(report: dict[str, Any]) -> str:
     .section {{ padding:32px 0; border-bottom:1px solid var(--line); }}
     .panel {{ padding:20px; }}
     .two-col {{ display:grid; grid-template-columns:minmax(0, .45fr) minmax(0, 1fr); gap:18px; align-items:start; }}
-    .draft-grid, .evidence-grid, .artifact-grid, .source-grid, .matrix-grid, .repair-grid, .handoff-grid {{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px; }}
-    .draft-card, .evidence-card, .artifact-card, .source-card, .matrix-card, .repair-card, .handoff-card {{ padding:18px; min-width:0; border:1px solid var(--line); border-radius:8px; background:#fff; }}
+    .draft-grid, .evidence-grid, .artifact-grid, .source-grid, .matrix-grid, .repair-grid, .handoff-grid, .queue-grid {{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px; }}
+    .draft-card, .evidence-card, .artifact-card, .source-card, .matrix-card, .repair-card, .handoff-card, .queue-card {{ padding:18px; min-width:0; border:1px solid var(--line); border-radius:8px; background:#fff; }}
     .draft-card.written, .draft-card.exists {{ border-left:4px solid var(--pass); }}
     .draft-card.skipped {{ border-left:4px solid var(--warn); }}
     .matrix-card.collect-source, .matrix-card.prepare-draft, .matrix-card.fix-artifacts, .matrix-card.fix-draft {{ border-left:4px solid var(--warn); }}
     .matrix-card.validate-packet {{ border-left:4px solid var(--pass); }}
     .repair-card.blocked {{ border-left:4px solid var(--warn); }}
     .repair-card.ready {{ border-left:4px solid var(--pass); }}
+    .queue-card.blocked {{ border-left:4px solid var(--warn); }}
+    .queue-card.ready {{ border-left:4px solid var(--pass); }}
     .handoff-card.blocked, .handoff-card.fix-required {{ border-left:4px solid var(--warn); }}
     .handoff-card.ready {{ border-left:4px solid var(--pass); }}
     .evidence-card.awaiting-submission, .evidence-card.fix-submission, .evidence-card.fix-template, .artifact-card.missing, .artifact-card.glob-no-match, .artifact-card.unsafe-path, .artifact-card.raw-content-disallowed {{ border-left:4px solid var(--warn); }}
@@ -485,11 +545,11 @@ def render_html(report: dict[str, Any]) -> str:
     .mini-grid li, .runbook-panel li, .notice li {{ overflow-wrap:anywhere; }}
     .notice {{ background:var(--soft); border-left:4px solid var(--ink); padding:16px; border-radius:8px; }}
     .errors {{ color:var(--warn); }}
-    @media (max-width:820px) {{ .stats, .two-col, .draft-grid, .evidence-grid, .artifact-grid, .source-grid, .matrix-grid, .repair-grid, .handoff-grid, .mini-grid {{ grid-template-columns:1fr; }} h1 {{ font-size:38px; }} .topbar-inner {{ align-items:flex-start; flex-direction:column; }} }}
+    @media (max-width:820px) {{ .stats, .two-col, .draft-grid, .evidence-grid, .artifact-grid, .source-grid, .matrix-grid, .repair-grid, .handoff-grid, .queue-grid, .mini-grid {{ grid-template-columns:1fr; }} h1 {{ font-size:38px; }} .topbar-inner {{ align-items:flex-start; flex-direction:column; }} }}
   </style>
 </head>
 <body>
-  <nav class="topbar"><div class="topbar-inner"><span class="brand">World-Class Kit</span><div class="links"><a href="#workflow">Workflow</a><a href="#handoff">Handoff</a><a href="#matrix">Matrix</a><a href="#repair">Repair</a><a href="#drafts">Drafts</a><a href="#artifacts">Artifacts</a><a href="#source">Source</a><a href="#evidence">Evidence</a><a href="#safety">Safety</a></div></div></nav>
+  <nav class="topbar"><div class="topbar-inner"><span class="brand">World-Class Kit</span><div class="links"><a href="#workflow">Workflow</a><a href="#handoff">Handoff</a><a href="#queue">Queue</a><a href="#matrix">Matrix</a><a href="#repair">Repair</a><a href="#drafts">Drafts</a><a href="#artifacts">Artifacts</a><a href="#source">Source</a><a href="#evidence">Evidence</a><a href="#safety">Safety</a></div></div></nav>
   <main class="shell">
     <section class="hero">
       <span class="eyebrow">Evidence Intake</span>
@@ -502,6 +562,7 @@ def render_html(report: dict[str, Any]) -> str:
       <aside class="panel"><h2>Commands</h2><ul class="commands">{render_html_commands(report['commands'])}</ul></aside>
     </section>
     <section class="section" id="handoff"><h2>Operator Handoff</h2><p class="muted">These ordered steps make the operator-to-reviewer handoff auditable. They are procedural guardrails and never count as world-class evidence.</p><div class="handoff-grid">{handoff_html}</div></section>
+    <section class="section" id="queue"><h2>Phase Queue</h2><p class="muted">Repair rows are grouped into execution phases so operators can clear the first blocker before moving to later evidence work. Queue rows remain procedural and never count as accepted evidence.</p><div class="queue-grid">{phase_queue_html}</div></section>
     <section class="section" id="matrix"><h2>Evidence Matrix</h2><p class="muted">The matrix separates submission artifact_refs from supporting assets, then combines draft status, source checks, and the next operator action. It is guidance only and never counts as accepted evidence.</p><div class="matrix-grid">{matrix_html}</div></section>
     <section class="section" id="repair"><h2>Repair Checklist</h2><p class="muted">Each row names one concrete blocker and the next action required before ledger review. This checklist does not count as completion evidence.</p><div class="repair-grid">{repair_html}</div></section>
     <section class="section" id="drafts"><h2>Drafts</h2><div class="draft-grid">{render_html_files(report['files'])}</div></section>

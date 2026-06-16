@@ -411,7 +411,7 @@
     "external_pending_count": 3,
     "human_pending_count": 1,
     "source_check_count": 19,
-    "source_pass_count": 10,
+    "source_pass_count": 9,
     "conclusion_zh": "世界级证据尚未完成：4 项待补，0 项已接受。",
     "conclusion_en": "World-class evidence is not complete: 4 pending, 0 accepted.",
     "entries": [
@@ -471,7 +471,8 @@
         "summary_zh": "真实外部客户端 metadata-only 事件仍未导入。",
         "summary_en": "Real external-client metadata-only events have not been imported yet.",
         "blocked_checks": [
-          "External events"
+          "External events",
+          "Adoption sample"
         ]
       }
     ]
@@ -512,7 +513,7 @@
         "path": "scripts",
         "label": "Deterministic helpers or local tooling",
         "kind": "folder",
-        "file_count": 149
+        "file_count": 150
       },
       {
         "path": "evals",
@@ -527,7 +528,7 @@
         "file_count": 235
       }
     ],
-    "file_count": 452,
+    "file_count": 453,
     "folder_count": 4,
     "distribution": [
       {
@@ -552,7 +553,7 @@
       },
       {
         "label": "scripts",
-        "value": 149
+        "value": 150
       },
       {
         "label": "evals",
@@ -682,7 +683,7 @@
       "path": "scripts",
       "label": "Deterministic helpers or local tooling",
       "kind": "folder",
-      "file_count": 149
+      "file_count": 150
     },
     {
       "path": "evals",
@@ -1004,13 +1005,13 @@
     "ok": true,
     "summary": {
       "reproducibility_ready": true,
-      "release_lock_ready": true,
+      "release_lock_ready": false,
       "methodology_complete": true,
       "required_artifact_count": 25,
       "missing_artifact_count": 0,
-      "evidence_bundle_sha256": "38a010bc2913be5c7aadd809095c436abf8e566c8c53b8b4a63a821fea6acc98",
-      "source_contract_sha256": "6fbdbed9dfdc8d272caa0a6596312fa524796132dfb3c9e9e1a9cbc801729f59",
-      "archive_sha256": "0db54f7880460ee162ea2779554315c225ad912737660379c0c503f068c636e8",
+      "evidence_bundle_sha256": "7fbfcb3c47283921ca6bb163600b18448da389c077939157387d8075e9c3867a",
+      "source_contract_sha256": "7fa19df8aebad9a73567ce9519f2d391d3c8f8b9b5a248ee9bc75d5066e219e4",
+      "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2",
       "output_case_count": 5,
       "failure_disclosure_count": 3,
       "command_count": 23,
@@ -1025,18 +1026,18 @@
       "world_class_task_count": 4,
       "world_class_ledger_pending_count": 4,
       "world_class_source_check_count": 19,
-      "world_class_source_pass_count": 10,
-      "world_class_source_blocked_count": 9,
+      "world_class_source_pass_count": 9,
+      "world_class_source_blocked_count": 10,
       "public_claim_ready": false,
-      "public_claim_blocker_count": 4,
+      "public_claim_blocker_count": 5,
       "working_tree_dirty": true,
-      "changed_file_count": 19,
-      "source_tree_dirty": false,
-      "source_changed_file_count": 0,
+      "changed_file_count": 65,
+      "source_tree_dirty": true,
+      "source_changed_file_count": 4,
       "generated_tree_dirty": true,
-      "generated_changed_file_count": 19
+      "generated_changed_file_count": 61
     },
-    "commit": "ed6960f65dbba0a36c335835f2ac6e8133435ea7",
+    "commit": "2efe6413f04c9626ba52c554b4dc87baabd0b05b",
     "missing_artifacts": [],
     "limitations": [
       "The git commit and dirty flags are generation-time context; release lock is blocked by source changes, while generated evidence artifacts are tracked separately.",
@@ -1120,9 +1121,9 @@
     "failures": []
   },
   "trust_security": {
-    "scanned_files": 241,
-    "script_count": 149,
-    "internal_module_count": 63,
+    "scanned_files": 242,
+    "script_count": 150,
+    "internal_module_count": 64,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -1140,8 +1141,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 241,
-    "package_sha256": "6fbdbed9dfdc8d272caa0a6596312fa524796132dfb3c9e9e1a9cbc801729f59"
+    "package_hash_file_count": 242,
+    "package_sha256": "7fa19df8aebad9a73567ce9519f2d391d3c8f8b9b5a248ee9bc75d5066e219e4"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -1179,8 +1180,8 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "6fbdbed9dfdc8d272caa0a6596312fa524796132dfb3c9e9e1a9cbc801729f59",
-        "archive_sha256": "0db54f7880460ee162ea2779554315c225ad912737660379c0c503f068c636e8"
+        "package_sha256": "7fa19df8aebad9a73567ce9519f2d391d3c8f8b9b5a248ee9bc75d5066e219e4",
+        "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2"
       },
       "compatibility": {
         "openai": "pass",
@@ -1211,12 +1212,12 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "0db54f7880460ee162ea2779554315c225ad912737660379c0c503f068c636e8",
+        "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
       },
-      "generated_at": "2026-06-13"
+      "generated_at": "2026-06-17"
     },
     "failures": [],
     "warnings": []
@@ -1227,8 +1228,8 @@
       "target_count": 4,
       "adapter_count": 4,
       "archive_present": true,
-      "archive_sha256": "0db54f7880460ee162ea2779554315c225ad912737660379c0c503f068c636e8",
-      "archive_entry_count": 688,
+      "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2",
+      "archive_entry_count": 689,
       "failure_count": 0,
       "warning_count": 0
     },
@@ -1239,7 +1240,7 @@
     "ok": true,
     "summary": {
       "archive_present": true,
-      "archive_entry_count": 688,
+      "archive_entry_count": 689,
       "archive_extracted": true,
       "entrypoint_loaded": true,
       "manifest_loaded": true,
@@ -1306,12 +1307,12 @@
         {
           "field": "archive_sha256",
           "from": "",
-          "to": "0db54f7880460ee162ea2779554315c225ad912737660379c0c503f068c636e8"
+          "to": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2"
         },
         {
           "field": "package_sha256",
           "from": "0000000000000000000000000000000000000000000000000000000000000000",
-          "to": "6fbdbed9dfdc8d272caa0a6596312fa524796132dfb3c9e9e1a9cbc801729f59"
+          "to": "7fa19df8aebad9a73567ce9519f2d391d3c8f8b9b5a248ee9bc75d5066e219e4"
         }
       ]
     },
@@ -1328,14 +1329,14 @@
     "ok": true,
     "summary": {
       "event_count": 1,
-      "adoption_sample_count": 1,
-      "activation_count": 1,
-      "accepted_count": 1,
+      "adoption_sample_count": 0,
+      "activation_count": 0,
+      "accepted_count": 0,
       "edited_count": 0,
       "rejected_count": 0,
       "missed_count": 0,
       "failed_count": 0,
-      "adoption_rate": 100.0,
+      "adoption_rate": 0,
       "missed_trigger_count": 0,
       "wrong_trigger_count": 0,
       "bad_output_count": 0,
@@ -1344,7 +1345,7 @@
       "review_overdue_count": 0,
       "risk_band": "low",
       "event_types": {
-        "skill_activation": 1
+        "review_event": 1
       },
       "failure_types": {},
       "source_types": {
@@ -1619,7 +1620,7 @@
         "status": "external_required",
         "category": "external",
         "owner": "Browser/Chrome/IDE/provider client integrator",
-        "current": "external source events 0; adoption samples 1",
+        "current": "external source events 0; adoption samples 0",
         "objective": "Import production metadata-only events from a real external client into the local drift loop.",
         "runbook": [
           "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
@@ -1672,8 +1673,8 @@
       "missing_submission_count": 4,
       "invalid_submission_count": 0,
       "source_check_count": 19,
-      "source_pass_count": 10,
-      "source_blocked_count": 9,
+      "source_pass_count": 9,
+      "source_blocked_count": 10,
       "submitted_but_pending_count": 0,
       "source_accepted_without_valid_submission_count": 0,
       "overclaim_guard_active": true,
@@ -2099,7 +2100,7 @@
         "status": "pending",
         "source_status": "external_required",
         "source_accepted": false,
-        "current": "external source events 0; adoption samples 1",
+        "current": "external source events 0; adoption samples 0",
         "objective": "Import production metadata-only events from a real external client into the local drift loop.",
         "runbook": [
           "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
@@ -2136,7 +2137,7 @@
         ],
         "observed_state": {
           "external_source_events": 0,
-          "adoption_sample_count": 1,
+          "adoption_sample_count": 0,
           "raw_content_allowed": false,
           "risk_band": "low",
           "accepted": false
@@ -2157,8 +2158,8 @@
             "label": "Adoption sample",
             "field": "adoption_sample_count",
             "expected": ">0",
-            "actual": 1,
-            "status": "pass",
+            "actual": 0,
+            "status": "blocked",
             "source_accepted": false,
             "next_action": "Telemetry must include adoption outcome evidence."
           },
@@ -2174,8 +2175,8 @@
           }
         ],
         "source_check_count": 3,
-        "source_pass_count": 2,
-        "source_blocked_count": 1,
+        "source_pass_count": 1,
+        "source_blocked_count": 2,
         "submission_state": {
           "status": "missing",
           "path": "evidence/world_class/submissions/native-client-telemetry.json",

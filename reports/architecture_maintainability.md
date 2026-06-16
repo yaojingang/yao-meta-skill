@@ -5,10 +5,10 @@ Generated at: `2026-06-13`
 ## Summary
 
 - decision: `pass`
-- python files: `225`
-- scripts: `149`
+- python files: `226`
+- scripts: `150`
 - tests: `76`
-- internal modules: `65`
+- internal modules: `66`
 - CLI scripts: `86`
 - Yao CLI command handlers: `68`
 - entrypoint command handlers: `18`
@@ -51,9 +51,9 @@ No near-threshold files found.
 | `scripts/optimize_description.py` | `585` | `cli-script` | `pass` |
 | `scripts/trust_check.py` | `582` | `cli-script` | `pass` |
 | `tests/verify_world_class_evidence_ledger.py` | `579` | `test` | `pass` |
+| `scripts/world_class_submission_kit_rendering.py` | `576` | `internal-module` | `pass` |
 | `scripts/render_evidence_consistency.py` | `571` | `cli-script` | `pass` |
 | `scripts/render_review_studio.py` | `568` | `cli-script` | `pass` |
-| `scripts/adjudicate_output_review.py` | `566` | `cli-script` | `pass` |
 
 ## Release Rule
 

@@ -101,6 +101,13 @@ def main() -> None:
     assert kit_payload["summary"]["repair_blocked_count"] == 2, kit_payload["summary"]
     assert kit_payload["summary"]["repair_ready_count"] == 0, kit_payload["summary"]
     assert kit_payload["summary"]["repair_phase_counts"] == {"collect-source": 2}, kit_payload["summary"]
+    assert kit_payload["summary"]["phase_queue_count"] == 1, kit_payload["summary"]
+    assert kit_payload["summary"]["phase_queue_blocked_count"] == 1, kit_payload["summary"]
+    assert kit_payload["summary"]["phase_queue_row_count"] == 2, kit_payload["summary"]
+    assert kit_payload["summary"]["phase_queue_next_phase"] == "collect-source", kit_payload["summary"]
+    assert kit_payload["summary"]["phase_queue_next_action_id"] == "provider-holdout-source-check-model_executed_count", kit_payload["summary"]
+    assert "output-exec --provider-runner openai" in kit_payload["summary"]["phase_queue_next_command"], kit_payload["summary"]
+    assert kit_payload["summary"]["phase_queue_counts_as_completion"] is False, kit_payload["summary"]
     assert kit_payload["summary"]["next_repair_action_id"] == "provider-holdout-source-check-model_executed_count", kit_payload["summary"]
     assert kit_payload["summary"]["next_repair_phase"] == "collect-source", kit_payload["summary"]
     assert kit_payload["summary"]["next_repair_owner"] == "operator with provider credentials", kit_payload["summary"]
@@ -150,6 +157,17 @@ def main() -> None:
     assert repair_rows["model_executed_count"]["counts_as_completion"] is False, repair_rows
     assert "real credentials" in repair_rows["model_executed_count"]["next_action"], repair_rows
     assert "does not satisfy" in repair_rows["token_observed_count"]["blocking_reason"], repair_rows
+
+    assert len(kit_payload["phase_queue"]) == 1, kit_payload["phase_queue"]
+    queue_row = kit_payload["phase_queue"][0]
+    assert queue_row["phase"] == "collect-source", queue_row
+    assert queue_row["status"] == "blocked", queue_row
+    assert queue_row["row_count"] == 2, queue_row
+    assert queue_row["blocked_count"] == 2, queue_row
+    assert queue_row["owners"] == ["operator with provider credentials"], queue_row
+    assert queue_row["evidence_keys"] == ["provider-holdout"], queue_row
+    assert queue_row["counts_as_completion"] is False, queue_row
+    assert queue_row["rows"] == kit_payload["repair_checklist"], queue_row
 
     handoff_steps = {item["step_id"]: item for item in kit_payload["operator_handoff"]}
     assert list(handoff_steps) == [
@@ -204,6 +222,7 @@ def main() -> None:
     assert kit_manifest["artifact_checklist"] == kit_payload["artifact_checklist"], kit_manifest["artifact_checklist"]
     assert kit_manifest["source_checklist"] == kit_payload["source_checklist"], kit_manifest["source_checklist"]
     assert kit_manifest["repair_checklist"] == kit_payload["repair_checklist"], kit_manifest["repair_checklist"]
+    assert kit_manifest["phase_queue"] == kit_payload["phase_queue"], kit_manifest["phase_queue"]
     assert kit_manifest["artifacts"]["html"].endswith(
         f"tests/{TMP.name}/submission_kit/index.html"
     ), kit_manifest["artifacts"]
@@ -216,6 +235,8 @@ def main() -> None:
     assert "validate intake" in kit_readme, kit_readme
     assert "Artifact Checklist" in kit_readme, kit_readme
     assert "Evidence Matrix" in kit_readme, kit_readme
+    assert "Phase Queue" in kit_readme, kit_readme
+    assert "This queue groups repair rows by execution phase" in kit_readme, kit_readme
     assert "Repair Checklist" in kit_readme, kit_readme
     assert "Operator Handoff" in kit_readme, kit_readme
     assert "Handoff rows are procedural" in kit_readme, kit_readme
@@ -226,6 +247,7 @@ def main() -> None:
     assert "`submission-ref`" in kit_readme, kit_readme
     assert "`supporting-evidence`" in kit_readme, kit_readme
     assert "`collect-source`" in kit_readme, kit_readme
+    assert "Queue rows are procedural guidance only" in kit_readme, kit_readme
     assert "Matrix rows are guidance only" in kit_readme, kit_readme
     assert "Repair rows are procedural guidance and do not count as completion evidence." in kit_readme, kit_readme
     assert "Source Evidence Snapshot" in kit_readme, kit_readme
@@ -239,6 +261,10 @@ def main() -> None:
     assert "provider-holdout" in kit_html, kit_html
     assert "Artifact Checklist" in kit_html, kit_html
     assert "Evidence Matrix" in kit_html, kit_html
+    assert "Phase Queue" in kit_html, kit_html
+    assert "queue-card blocked" in kit_html, kit_html
+    assert "<dt>Phase</dt><dd><code>collect-source</code></dd>" in kit_html, kit_html
+    assert "<dt>Rows</dt><dd>2/2 blocked</dd>" in kit_html, kit_html
     assert "Repair Checklist" in kit_html, kit_html
     assert "<dt>Priority</dt>" in kit_html, kit_html
     assert "<dt>Phase</dt>" in kit_html, kit_html

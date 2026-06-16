@@ -4,10 +4,10 @@
   "generated_at": "2026-06-13",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 225,
-    "script_file_count": 149,
+    "python_file_count": 226,
+    "script_file_count": 150,
     "test_file_count": 76,
-    "internal_module_count": 65,
+    "internal_module_count": 66,
     "cli_script_count": 86,
     "command_handler_count": 68,
     "entrypoint_command_handler_count": 18,
@@ -97,6 +97,14 @@
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
+      "path": "scripts/world_class_submission_kit_rendering.py",
+      "lines": 576,
+      "kind": "internal-module",
+      "severity": "pass",
+      "early_watch": false,
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
       "path": "scripts/render_evidence_consistency.py",
       "lines": 571,
       "kind": "cli-script",
@@ -111,14 +119,6 @@
       "severity": "pass",
       "early_watch": false,
       "recommendation": "Move data loading and large section renderers into focused review_studio_* modules."
-    },
-    {
-      "path": "scripts/adjudicate_output_review.py",
-      "lines": 566,
-      "kind": "cli-script",
-      "severity": "pass",
-      "early_watch": false,
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     }
   ],
   "watchlist": [],

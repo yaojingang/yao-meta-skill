@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `241`
-- Scripts: `149`
-- Internal script modules: `63`
+- Scanned files: `242`
+- Scripts: `150`
+- Internal script modules: `64`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `241`
-- Package SHA256: `6fbdbed9dfdc8d272caa0a6596312fa524796132dfb3c9e9e1a9cbc801729f59`
+- Package hash files: `242`
+- Package SHA256: `7fa19df8aebad9a73567ce9519f2d391d3c8f8b9b5a248ee9bc75d5066e219e4`
 
 ## Failures
 
@@ -193,6 +193,7 @@
 | scripts/world_class_human_evidence.py | internal-module | True | False | False | False | False | False | False | Imported by world_class_evidence_contract.py to validate blind A/B human adjudication evidence from decision rows. |
 | scripts/world_class_native_permission_evidence.py | internal-module | True | False | False | False | False | False | False | Imported by world_class_evidence_contract.py to validate runtime permission evidence from target-level probe rows. |
 | scripts/world_class_native_telemetry_evidence.py | internal-module | True | False | False | False | False | False | False | Imported by world_class_evidence_contract.py to validate native client telemetry evidence from metadata event rows. |
+| scripts/world_class_phase_queue.py | internal-module | True | False | False | False | False | False | False | Imported by prepare_world_class_submission_kit.py to group repair rows into an operator execution queue. |
 | scripts/world_class_preflight_layout.py | internal-module | True | False | False | False | False | False | False | Imported by render_world_class_preflight.py to keep preflight HTML layout out of data assembly. |
 | scripts/world_class_provider_evidence.py | internal-module | True | False | False | False | False | False | False | Imported by world_class_evidence_contract.py to validate provider-backed holdout execution evidence from run rows. |
 | scripts/world_class_repair_checklist.py | internal-module | True | False | False | False | False | False | False | Shared by submission kit generation to turn readiness blockers into actionable repair rows. |
