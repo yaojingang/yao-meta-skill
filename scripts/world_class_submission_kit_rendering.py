@@ -78,6 +78,26 @@ def render_readme(report: dict[str, Any]) -> str:
             f"`{item.get('supporting_artifact_ready_count', 0)}/{item.get('supporting_artifact_total_count', 0)}` | "
             f"`{item['source_pass_count']}/{item['source_check_count']}` | {item['next_action']} |"
         )
+    lines.extend(
+        [
+            "",
+            "## Repair Checklist",
+            "",
+            "This checklist turns every draft, artifact, and source blocker into a concrete repair row. Repair rows are procedural guidance and do not count as completion evidence.",
+            "",
+            "| Evidence | Type | Target | Status | Next action |",
+            "| --- | --- | --- | --- | --- |",
+        ]
+    )
+    repair_rows = report.get("repair_checklist", [])
+    if repair_rows:
+        for item in repair_rows:
+            lines.append(
+                f"| `{item['evidence_key']}` | `{item['repair_type']}` | `{item['target']}` | "
+                f"`{item['status']}` | {item['next_action']} |"
+            )
+    else:
+        lines.append("| `all` | `none` | `n/a` | `ready` | No repair rows were generated. |")
     lines.extend(["", "## Execution Runbook", ""])
     for item in report.get("evidence_items", []):
         must_collect = item.get("must_collect", {}) if isinstance(item.get("must_collect", {}), dict) else {}
@@ -276,6 +296,35 @@ def render_html_matrix(items: list[dict[str, Any]]) -> str:
     )
 
 
+def render_html_repair_checklist(items: list[dict[str, Any]]) -> str:
+    if not items:
+        return '<p class="muted">No repair rows were generated.</p>'
+    return "".join(
+        """
+        <article class="repair-card {status}">
+          <header>
+            <span>{key} · {repair_type}</span>
+            <h3>{target}</h3>
+          </header>
+          <dl>
+            <dt>Status</dt><dd>{status}</dd>
+            <dt>Reason</dt><dd>{reason}</dd>
+            <dt>Action</dt><dd>{action}</dd>
+            <dt>Evidence</dt><dd>does not count as completion</dd>
+          </dl>
+        </article>
+        """.format(
+            status=html_text(item.get("status", "")),
+            key=html_text(item.get("evidence_key", "")),
+            repair_type=html_text(item.get("repair_type", "")),
+            target=html_text(item.get("target", "")),
+            reason=html_text(item.get("blocking_reason", "")),
+            action=html_text(item.get("next_action", "")),
+        )
+        for item in items
+    )
+
+
 def render_html_handoff(items: list[dict[str, Any]]) -> str:
     if not items:
         return '<p class="muted">No operator handoff steps were generated.</p>'
@@ -365,6 +414,7 @@ def render_html(report: dict[str, Any]) -> str:
     )
     evidence_html = "".join(render_html_item(item) for item in report.get("evidence_items", []))
     matrix_html = render_html_matrix(report.get("evidence_matrix", []))
+    repair_html = render_html_repair_checklist(report.get("repair_checklist", []))
     handoff_html = render_html_handoff(report.get("operator_handoff", []))
     artifact_html = render_html_artifact_checklist(report.get("artifact_checklist", []))
     source_html = render_html_source_checklist(report.get("source_checklist", []))
@@ -400,12 +450,14 @@ def render_html(report: dict[str, Any]) -> str:
     .section {{ padding:32px 0; border-bottom:1px solid var(--line); }}
     .panel {{ padding:20px; }}
     .two-col {{ display:grid; grid-template-columns:minmax(0, .45fr) minmax(0, 1fr); gap:18px; align-items:start; }}
-    .draft-grid, .evidence-grid, .artifact-grid, .source-grid, .matrix-grid, .handoff-grid {{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px; }}
-    .draft-card, .evidence-card, .artifact-card, .source-card, .matrix-card, .handoff-card {{ padding:18px; min-width:0; border:1px solid var(--line); border-radius:8px; background:#fff; }}
+    .draft-grid, .evidence-grid, .artifact-grid, .source-grid, .matrix-grid, .repair-grid, .handoff-grid {{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px; }}
+    .draft-card, .evidence-card, .artifact-card, .source-card, .matrix-card, .repair-card, .handoff-card {{ padding:18px; min-width:0; border:1px solid var(--line); border-radius:8px; background:#fff; }}
     .draft-card.written, .draft-card.exists {{ border-left:4px solid var(--pass); }}
     .draft-card.skipped {{ border-left:4px solid var(--warn); }}
     .matrix-card.collect-source, .matrix-card.prepare-draft, .matrix-card.fix-artifacts, .matrix-card.fix-draft {{ border-left:4px solid var(--warn); }}
     .matrix-card.validate-packet {{ border-left:4px solid var(--pass); }}
+    .repair-card.blocked {{ border-left:4px solid var(--warn); }}
+    .repair-card.ready {{ border-left:4px solid var(--pass); }}
     .handoff-card.blocked, .handoff-card.fix-required {{ border-left:4px solid var(--warn); }}
     .handoff-card.ready {{ border-left:4px solid var(--pass); }}
     .evidence-card.awaiting-submission, .evidence-card.fix-submission, .evidence-card.fix-template, .artifact-card.missing, .artifact-card.glob-no-match, .artifact-card.unsafe-path, .artifact-card.raw-content-disallowed {{ border-left:4px solid var(--warn); }}
@@ -425,11 +477,11 @@ def render_html(report: dict[str, Any]) -> str:
     .mini-grid li, .runbook-panel li, .notice li {{ overflow-wrap:anywhere; }}
     .notice {{ background:var(--soft); border-left:4px solid var(--ink); padding:16px; border-radius:8px; }}
     .errors {{ color:var(--warn); }}
-    @media (max-width:820px) {{ .stats, .two-col, .draft-grid, .evidence-grid, .artifact-grid, .source-grid, .matrix-grid, .handoff-grid, .mini-grid {{ grid-template-columns:1fr; }} h1 {{ font-size:38px; }} .topbar-inner {{ align-items:flex-start; flex-direction:column; }} }}
+    @media (max-width:820px) {{ .stats, .two-col, .draft-grid, .evidence-grid, .artifact-grid, .source-grid, .matrix-grid, .repair-grid, .handoff-grid, .mini-grid {{ grid-template-columns:1fr; }} h1 {{ font-size:38px; }} .topbar-inner {{ align-items:flex-start; flex-direction:column; }} }}
   </style>
 </head>
 <body>
-  <nav class="topbar"><div class="topbar-inner"><span class="brand">World-Class Kit</span><div class="links"><a href="#workflow">Workflow</a><a href="#handoff">Handoff</a><a href="#matrix">Matrix</a><a href="#drafts">Drafts</a><a href="#artifacts">Artifacts</a><a href="#source">Source</a><a href="#evidence">Evidence</a><a href="#safety">Safety</a></div></div></nav>
+  <nav class="topbar"><div class="topbar-inner"><span class="brand">World-Class Kit</span><div class="links"><a href="#workflow">Workflow</a><a href="#handoff">Handoff</a><a href="#matrix">Matrix</a><a href="#repair">Repair</a><a href="#drafts">Drafts</a><a href="#artifacts">Artifacts</a><a href="#source">Source</a><a href="#evidence">Evidence</a><a href="#safety">Safety</a></div></div></nav>
   <main class="shell">
     <section class="hero">
       <span class="eyebrow">Evidence Intake</span>
@@ -443,6 +495,7 @@ def render_html(report: dict[str, Any]) -> str:
     </section>
     <section class="section" id="handoff"><h2>Operator Handoff</h2><p class="muted">These ordered steps make the operator-to-reviewer handoff auditable. They are procedural guardrails and never count as world-class evidence.</p><div class="handoff-grid">{handoff_html}</div></section>
     <section class="section" id="matrix"><h2>Evidence Matrix</h2><p class="muted">The matrix separates submission artifact_refs from supporting assets, then combines draft status, source checks, and the next operator action. It is guidance only and never counts as accepted evidence.</p><div class="matrix-grid">{matrix_html}</div></section>
+    <section class="section" id="repair"><h2>Repair Checklist</h2><p class="muted">Each row names one concrete blocker and the next action required before ledger review. This checklist does not count as completion evidence.</p><div class="repair-grid">{repair_html}</div></section>
     <section class="section" id="drafts"><h2>Drafts</h2><div class="draft-grid">{render_html_files(report['files'])}</div></section>
     <section class="section" id="artifacts"><h2>Artifact Checklist</h2><p class="muted">Rows marked submission-ref are the paths expected in artifact_refs. Supporting-evidence rows help reviewers audit the packet but do not all need to be copied into the submission. Glob patterns are expanded for operator convenience only.</p><div class="artifact-grid">{artifact_html}</div></section>
     <section class="section" id="source"><h2>Source Evidence Snapshot</h2><p class="muted">This section shows current aggregate source checks. It explains remaining blockers without changing the ledger.</p><div class="source-grid">{source_html}</div></section>

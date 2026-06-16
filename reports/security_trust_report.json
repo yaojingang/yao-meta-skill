@@ -2,9 +2,9 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 239,
-    "script_count": 147,
-    "internal_module_count": 61,
+    "scanned_files": 240,
+    "script_count": 148,
+    "internal_module_count": 62,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 239,
-    "package_sha256": "275f46e4ef0c891b835b3d54dc5579f0abe9597877bd253b3b71b8608dd1f0b8"
+    "package_hash_file_count": 240,
+    "package_sha256": "6beb1e623996dc21a8b040d894e12a81fc4c70cc82641887f71c19933e34617e"
   },
   "failures": [],
   "warnings": [],
@@ -1895,6 +1895,20 @@
       "network_hosts": []
     },
     {
+      "path": "scripts/world_class_repair_checklist.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Shared by submission kit generation to turn readiness blockers into actionable repair rows.",
+      "has_argparse": false,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
       "path": "scripts/world_class_source_checks.py",
       "interface": "internal-module",
       "interface_declared": true,
@@ -2139,7 +2153,7 @@
     "checked_count": 86,
     "passed_count": 86,
     "failed_count": 0,
-    "skipped_count": 61,
+    "skipped_count": 62,
     "failed_scripts": [],
     "results": [
       {
@@ -3190,6 +3204,10 @@
       },
       {
         "path": "scripts/world_class_provider_evidence.py",
+        "reason": "internal module"
+      },
+      {
+        "path": "scripts/world_class_repair_checklist.py",
         "reason": "internal module"
       },
       {

@@ -111,6 +111,12 @@ def main() -> None:
     assert kit_payload["summary"]["decision"] == "submission-kit-ready", world_class_submission_kit_result
     assert kit_payload["summary"]["written_count"] == 1, world_class_submission_kit_result
     assert kit_payload["summary"]["drafts_count_as_evidence"] is False, world_class_submission_kit_result
+    assert kit_payload["summary"]["repair_checklist_count"] == 2, world_class_submission_kit_result
+    assert kit_payload["summary"]["repair_counts_as_completion"] is False, world_class_submission_kit_result
+    assert {item["target"] for item in kit_payload["repair_checklist"]} == {
+        "model_executed_count",
+        "token_observed_count",
+    }, world_class_submission_kit_result
     assert kit_payload["artifacts"]["html"].endswith("tests/tmp_yao_cli_world_class/world_class_submission_kit.html"), world_class_submission_kit_result
     assert (TMP / "world_class_submission_kit" / "provider-holdout.json").exists(), world_class_submission_kit_result
     assert (TMP / "world_class_submission_kit" / "submission_manifest.json").exists(), world_class_submission_kit_result

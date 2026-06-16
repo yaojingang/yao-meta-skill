@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `239`
-- Scripts: `147`
-- Internal script modules: `61`
+- Scanned files: `240`
+- Scripts: `148`
+- Internal script modules: `62`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `239`
-- Package SHA256: `275f46e4ef0c891b835b3d54dc5579f0abe9597877bd253b3b71b8608dd1f0b8`
+- Package hash files: `240`
+- Package SHA256: `6beb1e623996dc21a8b040d894e12a81fc4c70cc82641887f71c19933e34617e`
 
 ## Failures
 
@@ -194,6 +194,7 @@
 | scripts/world_class_native_telemetry_evidence.py | internal-module | True | False | False | False | False | False | False | Imported by world_class_evidence_contract.py to validate native client telemetry evidence from metadata event rows. |
 | scripts/world_class_preflight_layout.py | internal-module | True | False | False | False | False | False | False | Imported by render_world_class_preflight.py to keep preflight HTML layout out of data assembly. |
 | scripts/world_class_provider_evidence.py | internal-module | True | False | False | False | False | False | False | Imported by world_class_evidence_contract.py to validate provider-backed holdout execution evidence from run rows. |
+| scripts/world_class_repair_checklist.py | internal-module | True | False | False | False | False | False | False | Shared by submission kit generation to turn readiness blockers into actionable repair rows. |
 | scripts/world_class_source_checks.py | internal-module | True | False | False | False | False | False | False | Imported by world-class evidence reports to keep source-evidence readiness checks consistent. |
 | scripts/world_class_submission_kit_rendering.py | internal-module | True | False | False | False | False | False | False | Shared renderer for world-class submission kit Markdown and HTML artifacts. |
 | scripts/world_class_submission_matrix.py | internal-module | True | False | False | False | False | False | False | Shared by submission kit rendering to summarize draft, artifact, and source-check readiness. |

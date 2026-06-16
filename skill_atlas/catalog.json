@@ -1,6 +1,6 @@
 {
   "workspace_root": ".",
-  "generated_at": "2026-06-13",
+  "generated_at": "2026-06-17",
   "skills": [
     {
       "name": "yao-meta-skill",
@@ -152,6 +152,7 @@
         "scripts/world_class_native_telemetry_evidence.py",
         "scripts/world_class_preflight_layout.py",
         "scripts/world_class_provider_evidence.py",
+        "scripts/world_class_repair_checklist.py",
         "scripts/world_class_source_checks.py",
         "scripts/world_class_submission_kit_rendering.py",
         "scripts/world_class_submission_matrix.py",
@@ -237,8 +238,8 @@
         "report": "reports/adoption_drift_report.json",
         "risk_band": "low",
         "event_count": 1,
-        "adoption_sample_count": 1,
-        "adoption_rate": 100.0,
+        "adoption_sample_count": 0,
+        "adoption_rate": 0,
         "candidate_count": 0
       }
     },

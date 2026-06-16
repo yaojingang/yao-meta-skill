@@ -97,6 +97,10 @@ def main() -> None:
     assert kit_payload["summary"]["evidence_matrix_supporting_artifact_count"] >= 1, kit_payload["summary"]
     assert kit_payload["summary"]["evidence_matrix_supporting_artifact_ready_count"] >= 1, kit_payload["summary"]
     assert kit_payload["summary"]["evidence_matrix_counts_as_completion"] == 0, kit_payload["summary"]
+    assert kit_payload["summary"]["repair_checklist_count"] == 2, kit_payload["summary"]
+    assert kit_payload["summary"]["repair_blocked_count"] == 2, kit_payload["summary"]
+    assert kit_payload["summary"]["repair_ready_count"] == 0, kit_payload["summary"]
+    assert kit_payload["summary"]["repair_counts_as_completion"] is False, kit_payload["summary"]
     assert kit_payload["summary"]["handoff_step_count"] == 7, kit_payload["summary"]
     assert kit_payload["summary"]["handoff_blocked_count"] == 1, kit_payload["summary"]
     assert kit_payload["summary"]["handoff_fix_required_count"] == 0, kit_payload["summary"]
@@ -126,6 +130,14 @@ def main() -> None:
     assert matrix_row["source_blocked_count"] == 2, matrix_row
     assert matrix_row["counts_as_completion"] is False, matrix_row
     assert "real credentials" in matrix_row["next_action"], matrix_row
+
+    repair_rows = {item["target"]: item for item in kit_payload["repair_checklist"]}
+    assert set(repair_rows) == {"model_executed_count", "token_observed_count"}, repair_rows
+    assert repair_rows["model_executed_count"]["repair_type"] == "source-check", repair_rows
+    assert repair_rows["model_executed_count"]["status"] == "blocked", repair_rows
+    assert repair_rows["model_executed_count"]["counts_as_completion"] is False, repair_rows
+    assert "real credentials" in repair_rows["model_executed_count"]["next_action"], repair_rows
+    assert "does not satisfy" in repair_rows["token_observed_count"]["blocking_reason"], repair_rows
 
     handoff_steps = {item["step_id"]: item for item in kit_payload["operator_handoff"]}
     assert list(handoff_steps) == [
@@ -179,6 +191,7 @@ def main() -> None:
     assert kit_manifest["summary"]["artifact_ref_prefill_count"] == 0, kit_manifest["summary"]
     assert kit_manifest["artifact_checklist"] == kit_payload["artifact_checklist"], kit_manifest["artifact_checklist"]
     assert kit_manifest["source_checklist"] == kit_payload["source_checklist"], kit_manifest["source_checklist"]
+    assert kit_manifest["repair_checklist"] == kit_payload["repair_checklist"], kit_manifest["repair_checklist"]
     assert kit_manifest["artifacts"]["html"].endswith(
         f"tests/{TMP.name}/submission_kit/index.html"
     ), kit_manifest["artifacts"]
@@ -191,6 +204,7 @@ def main() -> None:
     assert "validate intake" in kit_readme, kit_readme
     assert "Artifact Checklist" in kit_readme, kit_readme
     assert "Evidence Matrix" in kit_readme, kit_readme
+    assert "Repair Checklist" in kit_readme, kit_readme
     assert "Operator Handoff" in kit_readme, kit_readme
     assert "Handoff rows are procedural" in kit_readme, kit_readme
     assert "ledger_reviewed_at" in kit_readme, kit_readme
@@ -201,7 +215,9 @@ def main() -> None:
     assert "`supporting-evidence`" in kit_readme, kit_readme
     assert "`collect-source`" in kit_readme, kit_readme
     assert "Matrix rows are guidance only" in kit_readme, kit_readme
+    assert "Repair rows are procedural guidance and do not count as completion evidence." in kit_readme, kit_readme
     assert "Source Evidence Snapshot" in kit_readme, kit_readme
+    assert "model_executed_count" in kit_readme, kit_readme
     assert "reports/output_execution_runs.json" in kit_readme, kit_readme
     assert "Provider model run" in kit_readme, kit_readme
 
@@ -211,10 +227,12 @@ def main() -> None:
     assert "provider-holdout" in kit_html, kit_html
     assert "Artifact Checklist" in kit_html, kit_html
     assert "Evidence Matrix" in kit_html, kit_html
+    assert "Repair Checklist" in kit_html, kit_html
     assert "Operator Handoff" in kit_html, kit_html
     assert "handoff-card blocked" in kit_html, kit_html
     assert "does not count as completion" in kit_html, kit_html
     assert "matrix-card collect-source" in kit_html, kit_html
+    assert "repair-card blocked" in kit_html, kit_html
     assert (
         f"<dt>Submission refs</dt><dd>{matrix_row['submission_ref_ready_count']}/{matrix_row['submission_ref_total_count']} ready</dd>"
         in kit_html
@@ -226,6 +244,7 @@ def main() -> None:
     assert "<dt>Source</dt><dd>1/3 pass</dd>" in kit_html, kit_html
     assert "Source Evidence Snapshot" in kit_html, kit_html
     assert "<dt>Field</dt><dd><code>model_executed_count</code></dd>" in kit_html, kit_html
+    assert "<h3>model_executed_count</h3>" in kit_html, kit_html
     assert "<dt>Current</dt><dd><code>0</code></dd>" in kit_html, kit_html
     assert "<dt>Expected</dt><dd><code>&gt;0</code></dd>" in kit_html, kit_html
     assert "World-Class Evidence Submission Kit" in kit_html, kit_html

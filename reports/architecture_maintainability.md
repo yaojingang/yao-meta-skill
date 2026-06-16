@@ -5,10 +5,10 @@ Generated at: `2026-06-17`
 ## Summary
 
 - decision: `pass`
-- python files: `222`
-- scripts: `147`
+- python files: `223`
+- scripts: `148`
 - tests: `75`
-- internal modules: `63`
+- internal modules: `64`
 - CLI scripts: `86`
 - Yao CLI command handlers: `68`
 - entrypoint command handlers: `18`

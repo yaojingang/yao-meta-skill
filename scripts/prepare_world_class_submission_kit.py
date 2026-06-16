@@ -9,6 +9,7 @@ from typing import Any
 
 from render_world_class_evidence_intake import build_intake
 from world_class_evidence_contract import DISALLOWED_REAL_ARTIFACTS
+from world_class_repair_checklist import build_repair_checklist, summarize_repair_checklist
 from world_class_source_checks import build_source_checklist, summarize_source_checklist
 from world_class_submission_matrix import build_evidence_matrix, summarize_evidence_matrix
 from world_class_submission_kit_rendering import render_html, render_readme
@@ -408,6 +409,7 @@ def build_submission_kit(
     ]
     source_checklist = build_source_checklist(items)
     evidence_matrix = build_evidence_matrix(items, files, artifact_checklist, source_checklist)
+    repair_checklist = build_repair_checklist(items, files, artifact_checklist, source_checklist, unknown_keys)
     manifest_path = output_dir / "submission_manifest.json"
     readme_path = output_dir / "README.md"
     output_html = output_html or (output_dir / "index.html")
@@ -425,6 +427,7 @@ def build_submission_kit(
     supporting_artifact_ready_count = sum(1 for item in supporting_rows if item.get("artifact_ref_ready"))
     source_summary = summarize_source_checklist(source_checklist)
     matrix_summary = summarize_evidence_matrix(evidence_matrix)
+    repair_summary = summarize_repair_checklist(repair_checklist)
     ok = not unknown_keys and skipped_count == 0
     output_dir_arg = shell_path(output_dir, skill_dir)
     requested_key_args = " ".join(f"--evidence-key {shlex.quote(key)}" for key in (evidence_keys or []))
@@ -474,6 +477,7 @@ def build_submission_kit(
             "artifact_ref_unfilled_count": unfilled_artifact_ref_count,
             **source_summary,
             **matrix_summary,
+            **repair_summary,
             "handoff_step_count": len(handoff_steps),
             "handoff_blocked_count": sum(1 for item in handoff_steps if item["status"] == "blocked"),
             "handoff_fix_required_count": sum(1 for item in handoff_steps if item["status"] == "fix-required"),
@@ -487,6 +491,7 @@ def build_submission_kit(
         "artifact_checklist": artifact_checklist,
         "source_checklist": source_checklist,
         "evidence_matrix": evidence_matrix,
+        "repair_checklist": repair_checklist,
         "operator_handoff": handoff_steps,
         "evidence_items": items,
         "commands": commands,
