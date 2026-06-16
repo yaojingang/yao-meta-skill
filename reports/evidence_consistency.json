@@ -189,12 +189,12 @@
       "status": "pass",
       "expected": {
         "status": "pass",
-        "detail": "initial load 990/1000; deferred 489964/120000; top deferred scripts 429866; resource governance governed; quality density 131.3",
+        "detail": "initial load 990/1000; deferred 490155/120000; top deferred scripts 430057; resource governance governed; quality density 131.3",
         "evidence": "reports/context_budget.json"
       },
       "actual": {
         "status": "pass",
-        "detail": "initial load 990/1000; deferred 489964/120000; top deferred scripts 429866; resource governance governed; quality density 131.3",
+        "detail": "initial load 990/1000; deferred 490155/120000; top deferred scripts 430057; resource governance governed; quality density 131.3",
         "evidence": "reports/context_budget.json"
       },
       "paths": [
@@ -248,8 +248,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "4f3d9af19f2eb5be2564f5ef88272e1e82c17096",
-      "actual": "4f3d9af19f2eb5be2564f5ef88272e1e82c17096",
+      "expected": "768f61ee47360823d2b166d8c614e7f18d05a549",
+      "actual": "768f61ee47360823d2b166d8c614e7f18d05a549",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -264,7 +264,7 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "a19c34849f99fe3f9166f7ba13c54d9ca709e1cec205ad3a1e82e8f1eb30d895",
+        "source_contract_sha256": "6149b95fa5fb9a93108ed5099f3f53e629fa6ac673e03206371d5837a31bae97",
         "archive_sha256": "5802e5f522558cf77666ae59390a28845cf3affd22fa1267b6629891ddeba76b",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
@@ -277,7 +277,7 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "a19c34849f99fe3f9166f7ba13c54d9ca709e1cec205ad3a1e82e8f1eb30d895",
+        "source_contract_sha256": "6149b95fa5fb9a93108ed5099f3f53e629fa6ac673e03206371d5837a31bae97",
         "archive_sha256": "5802e5f522558cf77666ae59390a28845cf3affd22fa1267b6629891ddeba76b",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
@@ -394,8 +394,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "4f3d9af19f2eb5be2564f5ef88272e1e82c17096",
-      "actual": "4f3d9af19f2eb5be2564f5ef88272e1e82c17096",
+      "expected": "768f61ee47360823d2b166d8c614e7f18d05a549",
+      "actual": "768f61ee47360823d2b166d8c614e7f18d05a549",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
@@ -410,7 +410,7 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "a19c34849f99fe3f9166f7ba13c54d9ca709e1cec205ad3a1e82e8f1eb30d895",
+        "source_contract_sha256": "6149b95fa5fb9a93108ed5099f3f53e629fa6ac673e03206371d5837a31bae97",
         "archive_sha256": "5802e5f522558cf77666ae59390a28845cf3affd22fa1267b6629891ddeba76b",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
@@ -423,7 +423,7 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "a19c34849f99fe3f9166f7ba13c54d9ca709e1cec205ad3a1e82e8f1eb30d895",
+        "source_contract_sha256": "6149b95fa5fb9a93108ed5099f3f53e629fa6ac673e03206371d5837a31bae97",
         "archive_sha256": "5802e5f522558cf77666ae59390a28845cf3affd22fa1267b6629891ddeba76b",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
