@@ -11,10 +11,10 @@
   "pending_review_count": 0,
   "applied_count": 0,
   "rollback_count": 0,
-  "local_blueprint_ready": false,
+  "local_blueprint_ready": true,
   "public_world_class_ready": false,
   "world_class_pending_count": 4,
-  "release_lock_ready": true,
+  "release_lock_ready": false,
   "evidence_consistency_ok": true,
   "writes_source_files": false,
   "auto_patch_enabled": false,
@@ -28,10 +28,10 @@
     "pending_review_count": 0,
     "applied_count": 0,
     "rollback_count": 0,
-    "local_blueprint_ready": false,
+    "local_blueprint_ready": true,
     "public_world_class_ready": false,
     "world_class_pending_count": 4,
-    "release_lock_ready": true,
+    "release_lock_ready": false,
     "evidence_consistency_ok": true,
     "writes_source_files": false,
     "auto_patch_enabled": false,
@@ -477,10 +477,10 @@
     "rollback_count": 0
   },
   "release_state": {
-    "local_blueprint_ready": false,
+    "local_blueprint_ready": true,
     "public_world_class_ready": false,
     "world_class_pending_count": 4,
-    "release_lock_ready": true,
+    "release_lock_ready": false,
     "evidence_consistency_ok": true
   },
   "actions": [
