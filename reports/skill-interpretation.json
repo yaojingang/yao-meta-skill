@@ -1005,8 +1005,8 @@
       "methodology_complete": true,
       "required_artifact_count": 25,
       "missing_artifact_count": 0,
-      "evidence_bundle_sha256": "696a1e270a307ba3089f77ff3f7bae595afe33ab83d569b6d2b988a59ae60ee7",
-      "source_contract_sha256": "c65410d8e0bb1ea55fc52ea0b2c557f9590b232722b51e77e059595f64bf668f",
+      "evidence_bundle_sha256": "e3146f35d98391ddc8fbfad3eb08c8ce03ca6c3c055b507cd0e2c756430ff41b",
+      "source_contract_sha256": "95b883a7258f8b201a7f94b47a35fa3f665ac65160def6d41764f20e2cdb5e4d",
       "archive_sha256": "5802e5f522558cf77666ae59390a28845cf3affd22fa1267b6629891ddeba76b",
       "output_case_count": 5,
       "failure_disclosure_count": 3,
@@ -1029,7 +1029,7 @@
       "working_tree_dirty": false,
       "changed_file_count": 0
     },
-    "commit": "63eb98df757757426824621daff81d3c2b3bcddc",
+    "commit": "a5bdd57ea1005419464b6b84d7674fccee923e5a",
     "missing_artifacts": [],
     "limitations": [
       "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -1134,7 +1134,7 @@
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
     "package_hash_file_count": 226,
-    "package_sha256": "c65410d8e0bb1ea55fc52ea0b2c557f9590b232722b51e77e059595f64bf668f"
+    "package_sha256": "95b883a7258f8b201a7f94b47a35fa3f665ac65160def6d41764f20e2cdb5e4d"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -1653,6 +1653,7 @@
       "human_pending_count": 1,
       "external_pending_count": 3,
       "submitted_entry_count": 0,
+      "reviewer_approved_submission_count": 0,
       "missing_submission_count": 4,
       "invalid_submission_count": 0,
       "source_check_count": 13,
@@ -1754,6 +1755,7 @@
           "artifact_ref_count": 0,
           "attested_real_evidence": false,
           "privacy_contract_satisfied": false,
+          "ledger_reviewer_approved": false,
           "ledger_counts_as_completion": false
         },
         "anti_overclaim": {
@@ -1872,6 +1874,7 @@
           "artifact_ref_count": 0,
           "attested_real_evidence": false,
           "privacy_contract_satisfied": false,
+          "ledger_reviewer_approved": false,
           "ledger_counts_as_completion": false
         },
         "anti_overclaim": {
@@ -1980,6 +1983,7 @@
           "artifact_ref_count": 0,
           "attested_real_evidence": false,
           "privacy_contract_satisfied": false,
+          "ledger_reviewer_approved": false,
           "ledger_counts_as_completion": false
         },
         "anti_overclaim": {
@@ -2081,6 +2085,7 @@
           "artifact_ref_count": 0,
           "attested_real_evidence": false,
           "privacy_contract_satisfied": false,
+          "ledger_reviewer_approved": false,
           "ledger_counts_as_completion": false
         },
         "anti_overclaim": {
