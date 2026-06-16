@@ -13,7 +13,7 @@ Generated at: `2026-06-16`
 - Yao CLI command handlers: `68`
 - entrypoint command handlers: `18`
 - command modules: `6`
-- largest file lines: `700`
+- largest file lines: `717`
 - watch threshold lines: `720`
 - watchlist: `0`
 - hotspots: `0`
@@ -33,7 +33,7 @@ No near-threshold files found.
 
 | File | Lines | Kind | Severity |
 | --- | ---: | --- | --- |
-| `scripts/world_class_evidence_contract.py` | `700` | `internal-module` | `pass` |
+| `scripts/world_class_evidence_contract.py` | `717` | `internal-module` | `pass` |
 | `tests/verify_yao_cli.py` | `696` | `test` | `pass` |
 | `scripts/render_review_viewer.py` | `685` | `cli-script` | `pass` |
 | `tests/verify_world_class_evidence_intake.py` | `669` | `test` | `pass` |

@@ -2,6 +2,7 @@
 import hashlib
 import json
 import re
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -157,6 +158,15 @@ def require_real_text(errors: list[str], value: Any, field: str) -> None:
     text = str(value or "").strip()
     add_error(errors, bool(text), f"{field} is required")
     add_error(errors, not has_placeholder_text(text), f"{field} must not use template placeholder text")
+
+
+def parse_audit_timestamp(value: Any) -> datetime | None:
+    text = str(value or "").strip()
+    if not SUBMITTED_AT_RE.match(text):
+        return None
+    if "T" in text:
+        return datetime.fromisoformat(text.replace("Z", "+00:00")).astimezone(timezone.utc)
+    return datetime.fromisoformat(text).replace(tzinfo=timezone.utc)
 
 
 def forbidden_submission_field_paths(value: Any, prefix: str = "$") -> list[str]:
@@ -688,6 +698,13 @@ def validate_payload(
             errors,
             bool(ledger_reviewer and submitted_by and ledger_reviewer.casefold() != submitted_by.casefold()),
             "attestation.ledger_reviewer must be different from submitted_by",
+        )
+        submitted_at = parse_audit_timestamp(payload.get("submitted_at"))
+        ledger_reviewed_at = parse_audit_timestamp(attestation.get("ledger_reviewed_at"))
+        add_error(
+            errors,
+            bool(submitted_at and ledger_reviewed_at and ledger_reviewed_at >= submitted_at),
+            "attestation.ledger_reviewed_at must be at or after submitted_at",
         )
     validate_real_artifact_payloads(payload, errors, root, template_expected)
     return {

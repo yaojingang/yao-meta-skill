@@ -464,6 +464,46 @@ def main() -> None:
         for error in self_approved_provider["submission_state"]["errors"]
     ), self_approved_provider
 
+    early_review_submissions = TMP / "early_review_submissions"
+    early_review_submissions.mkdir()
+    early_review_submission = provider_submission(accepted_source_skill)
+    early_review_submission["submitted_at"] = "2026-06-13"
+    early_review_submission["attestation"]["ledger_reviewed_at"] = "2026-06-12"
+    (early_review_submissions / "provider-holdout.json").write_text(
+        json.dumps(early_review_submission, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    early_review_proc = subprocess.run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            str(accepted_source_skill),
+            "--output-json",
+            str(TMP / "early_review_provider_ledger.json"),
+            "--output-md",
+            str(TMP / "early_review_provider_ledger.md"),
+            "--submissions-dir",
+            str(early_review_submissions),
+            "--generated-at",
+            "2026-06-13",
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    early_review_payload = json.loads(early_review_proc.stdout)
+    early_review_provider = {
+        entry["key"]: entry for entry in early_review_payload["entries"]
+    }["provider-holdout"]
+    assert early_review_provider["source_accepted"] is True, early_review_provider
+    assert early_review_provider["status"] == "pending", early_review_provider
+    assert early_review_provider["submission_state"]["status"] == "invalid-contract", early_review_provider
+    assert any(
+        "attestation.ledger_reviewed_at must be at or after submitted_at" in error
+        for error in early_review_provider["submission_state"]["errors"]
+    ), early_review_provider
+
     accepted_submissions = TMP / "accepted_submissions"
     accepted_submissions.mkdir()
     (accepted_submissions / "provider-holdout.json").write_text(

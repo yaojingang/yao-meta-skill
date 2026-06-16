@@ -15,7 +15,7 @@
     "warn_line_threshold": 900,
     "watch_line_threshold": 720,
     "block_line_threshold": 1500,
-    "largest_file_lines": 700,
+    "largest_file_lines": 717,
     "watchlist_count": 0,
     "hotspot_count": 0,
     "blocker_count": 0,
@@ -24,7 +24,7 @@
   "largest_files": [
     {
       "path": "scripts/world_class_evidence_contract.py",
-      "lines": 700,
+      "lines": 717,
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
