@@ -1,9 +1,9 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-16`
-Commit: `abe4ecf3bf654f71a523b5659ec021e0d73a11c2`
+Commit: `de51f71ec378d820f0f25d247223dbcd82160b73`
 Working tree dirty at generation: `false`
-Evidence bundle SHA256: `a7dabf174eba9fb3643089604948677be94b56c0894ccd70cc9f031de2c5c13c`
+Evidence bundle SHA256: `a3b7e76bf37cbf3a9cc983ff7df3b6780fd0212b5e941386b008d86ed2438339`
 
 ## Summary
 
@@ -50,7 +50,7 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 - algorithm: `sha256(path,label,exists,artifact_sha256)`
 - artifacts: `25` / `25`
-- sha256: `a7dabf174eba9fb3643089604948677be94b56c0894ccd70cc9f031de2c5c13c`
+- sha256: `a3b7e76bf37cbf3a9cc983ff7df3b6780fd0212b5e941386b008d86ed2438339`
 
 ## Methodology Sections
 
@@ -78,7 +78,7 @@ This report proves local benchmark reproducibility only. It keeps external provi
 | trigger_scorecard | `reports/route_scorecard.json` | present | `c164e83e36d0` |
 | runtime_conformance | `reports/conformance_matrix.json` | present | `97f9ba949c23` |
 | trust_report | `reports/security_trust_report.json` | present | `0f9e8bdbc6d9` |
-| python_compatibility | `reports/python_compatibility.json` | present | `e81866a26985` |
+| python_compatibility | `reports/python_compatibility.json` | present | `cccb55ba19b2` |
 | registry_audit | `reports/registry_audit.json` | present | `e75a341d15e4` |
 | package_verification | `reports/package_verification.json` | present | `a27941fdb865` |
 | install_simulation | `reports/install_simulation.json` | present | `e29ae26bc97c` |

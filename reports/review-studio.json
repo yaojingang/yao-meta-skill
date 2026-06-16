@@ -68,7 +68,7 @@
       "key": "python-compat",
       "label": "Python 兼容",
       "status": "pass",
-      "detail": "Python 3.11; 206 files; 0 compatibility issues; 0 syntax; 0 f-string 3.11 hazards",
+      "detail": "Python 3.11; 207 files; 0 compatibility issues; 0 syntax; 0 f-string 3.11 hazards",
       "evidence": "reports/python_compatibility.json",
       "link": "python_compatibility.md"
     },
@@ -76,7 +76,7 @@
       "key": "architecture-maintainability",
       "label": "架构维护",
       "status": "pass",
-      "detail": "203 Python files; 0 hotspots; 1 watchlist file; 0 blockers; largest 852 lines; 68 CLI handlers; 18 in entrypoint",
+      "detail": "204 Python files; 0 hotspots; 0 watchlist files; 0 blockers; largest 714 lines; 68 CLI handlers; 18 in entrypoint",
       "evidence": "reports/architecture_maintainability.json",
       "link": "architecture_maintainability.md"
     },
@@ -1972,7 +1972,7 @@
           "methodology_complete": true,
           "required_artifact_count": 25,
           "missing_artifact_count": 0,
-          "evidence_bundle_sha256": "a7dabf174eba9fb3643089604948677be94b56c0894ccd70cc9f031de2c5c13c",
+          "evidence_bundle_sha256": "a3b7e76bf37cbf3a9cc983ff7df3b6780fd0212b5e941386b008d86ed2438339",
           "source_contract_sha256": "a163b6e288c5342e683875b47fdfe62989d3f09241c0c8fd86ae615c6d5da7ad",
           "archive_sha256": "5802e5f522558cf77666ae59390a28845cf3affd22fa1267b6629891ddeba76b",
           "output_case_count": 5,
@@ -1996,7 +1996,7 @@
           "working_tree_dirty": false,
           "changed_file_count": 0
         },
-        "commit": "abe4ecf3bf654f71a523b5659ec021e0d73a11c2",
+        "commit": "de51f71ec378d820f0f25d247223dbcd82160b73",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -5646,7 +5646,7 @@
       "ok": true,
       "generated_at": "2026-06-16",
       "skill_dir": ".",
-      "commit": "abe4ecf3bf654f71a523b5659ec021e0d73a11c2",
+      "commit": "de51f71ec378d820f0f25d247223dbcd82160b73",
       "git_status": {
         "available": true,
         "dirty": false,
@@ -5660,7 +5660,7 @@
         "methodology_complete": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "a7dabf174eba9fb3643089604948677be94b56c0894ccd70cc9f031de2c5c13c",
+        "evidence_bundle_sha256": "a3b7e76bf37cbf3a9cc983ff7df3b6780fd0212b5e941386b008d86ed2438339",
         "source_contract_sha256": "a163b6e288c5342e683875b47fdfe62989d3f09241c0c8fd86ae615c6d5da7ad",
         "archive_sha256": "5802e5f522558cf77666ae59390a28845cf3affd22fa1267b6629891ddeba76b",
         "output_case_count": 5,
@@ -5697,7 +5697,7 @@
       },
       "release_lock": {
         "ready": true,
-        "commit": "abe4ecf3bf654f71a523b5659ec021e0d73a11c2",
+        "commit": "de51f71ec378d820f0f25d247223dbcd82160b73",
         "status_scope": "generation-time status before this report is written",
         "reason": "clean generation-time HEAD"
       },
@@ -5707,7 +5707,7 @@
         "existing_count": 25,
         "missing_count": 0,
         "missing_paths": [],
-        "sha256": "a7dabf174eba9fb3643089604948677be94b56c0894ccd70cc9f031de2c5c13c"
+        "sha256": "a3b7e76bf37cbf3a9cc983ff7df3b6780fd0212b5e941386b008d86ed2438339"
       },
       "methodology": {
         "path": "reports/benchmark_methodology.md",
@@ -5822,8 +5822,8 @@
           "label": "python_compatibility",
           "path": "reports/python_compatibility.json",
           "exists": true,
-          "bytes": 26737,
-          "sha256": "e81866a26985f05ba5b783a308be2f994871824f0c9abb60a8b04df7ea445d04"
+          "bytes": 26859,
+          "sha256": "cccb55ba19b23012f45fc0452eb1c57c0b66ef68cfd20c67c8c44c00372ee056"
         },
         {
           "label": "registry_audit",
@@ -15223,7 +15223,7 @@
       "root": ".",
       "summary": {
         "target_python": "3.11",
-        "file_count": 206,
+        "file_count": 207,
         "issue_count": 0,
         "syntax_error_count": 0,
         "fstring_311_violation_count": 0,
@@ -16045,6 +16045,12 @@
           "issues": []
         },
         {
+          "path": "tests/review_studio_helpers.py",
+          "ok": true,
+          "issue_count": 0,
+          "issues": []
+        },
+        {
           "path": "tests/verify_adaptation_safety.py",
           "ok": true,
           "issue_count": 0,
@@ -16489,9 +16495,9 @@
       "generated_at": "2026-06-16",
       "skill_dir": ".",
       "summary": {
-        "python_file_count": 203,
+        "python_file_count": 204,
         "script_file_count": 131,
-        "test_file_count": 72,
+        "test_file_count": 73,
         "internal_module_count": 48,
         "cli_script_count": 85,
         "command_handler_count": 68,
@@ -16500,20 +16506,13 @@
         "warn_line_threshold": 900,
         "watch_line_threshold": 720,
         "block_line_threshold": 1500,
-        "largest_file_lines": 852,
-        "watchlist_count": 1,
+        "largest_file_lines": 714,
+        "watchlist_count": 0,
         "hotspot_count": 0,
         "blocker_count": 0,
         "decision": "pass"
       },
       "largest_files": [
-        {
-          "path": "tests/verify_review_studio.py",
-          "lines": 852,
-          "kind": "test",
-          "severity": "pass",
-          "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
-        },
         {
           "path": "scripts/trust_check.py",
           "lines": 714,
@@ -16590,17 +16589,16 @@
           "kind": "cli-script",
           "severity": "pass",
           "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-        }
-      ],
-      "watchlist": [
+        },
         {
-          "path": "tests/verify_review_studio.py",
-          "lines": 852,
-          "kind": "test",
+          "path": "scripts/cross_packager.py",
+          "lines": 638,
+          "kind": "cli-script",
           "severity": "pass",
-          "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
         }
       ],
+      "watchlist": [],
       "hotspots": [],
       "actions": [],
       "artifacts": {
@@ -16616,9 +16614,9 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 797,
-        "other_text_tokens": 1052732,
+        "other_text_tokens": 1051797,
         "estimated_initial_load_tokens": 990,
-        "estimated_total_text_tokens": 1053529,
+        "estimated_total_text_tokens": 1052594,
         "deferred_resource_tokens": 487270,
         "deferred_resource_warn_threshold": 120000,
         "deferred_resource_dirs": [
@@ -16676,7 +16674,7 @@
           ],
           "summary": "Large deferred resources are indexed and backed by evidence."
         },
-        "relevant_file_count": 652,
+        "relevant_file_count": 654,
         "unused_resource_dirs": [],
         "quality_signal_points": 130,
         "quality_density": 131.3
