@@ -87,7 +87,7 @@
     },
     {
       "path": "scripts/world_class_evidence_contract.py",
-      "lines": 620,
+      "lines": 627,
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."

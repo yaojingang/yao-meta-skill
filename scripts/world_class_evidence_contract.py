@@ -258,6 +258,7 @@ def validate_artifact_refs(
     add_error(errors, isinstance(refs, list) and len(refs) > 0, "artifact_refs must contain at least one reference")
     required_paths = REQUIRED_REAL_ARTIFACT_PATHS.get(str(payload.get("evidence_key", "")), set())
     observed_paths: set[str] = set()
+    seen_artifact_paths: set[str] = set()
     stats = {
         "artifact_ref_count": len(refs) if isinstance(refs, list) else 0,
         "artifact_existing_count": 0,
@@ -287,6 +288,12 @@ def validate_artifact_refs(
             errors.append(f"artifact_refs[{index}].path {path_error}")
             continue
         rel = rel_path(resolved, root)
+        add_error(
+            errors,
+            rel not in seen_artifact_paths,
+            f"artifact_refs[{index}].path must not duplicate another artifact reference",
+        )
+        seen_artifact_paths.add(rel)
         if rel in DISALLOWED_REAL_ARTIFACTS:
             errors.append(f"artifact_refs[{index}].path must not reference raw local telemetry logs")
         if not resolved.exists() or not resolved.is_file():

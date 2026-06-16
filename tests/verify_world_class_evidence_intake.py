@@ -301,6 +301,19 @@ def assert_external_contract_artifact_validation() -> None:
         template_expected=False,
     )
     assert provider_valid["status"] == "pass", provider_valid
+    provider_duplicate_ref = provider_artifact_submission(skill_root)
+    provider_duplicate_ref["artifact_refs"].append(dict(provider_duplicate_ref["artifact_refs"][0]))
+    provider_duplicate_result = validate_payload(
+        provider_duplicate_ref,
+        provider_entry,
+        path=skill_root / "evidence" / "world_class" / "submissions" / "provider-holdout.json",
+        root=skill_root,
+        template_expected=False,
+    )
+    assert provider_duplicate_result["status"] == "fail", provider_duplicate_result
+    assert any("must not duplicate another artifact reference" in error for error in provider_duplicate_result["errors"]), (
+        provider_duplicate_result["errors"]
+    )
     provider_wrong_filename = validate_payload(
         provider_artifact_submission(skill_root),
         provider_entry,
