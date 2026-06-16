@@ -1,6 +1,6 @@
 # Skill OS 2.0 Audit
 
-Generated at: `2026-06-17`
+Generated at: `2026-06-13`
 
 ## Summary
 
@@ -30,7 +30,7 @@ Generated at: `2026-06-17`
 | Registry Distribution | pass | zip entries 677; install failures 0; permission failures 0 | Package metadata, archive checksum, package verification, and install simulation pass | Regenerate registry after package verification so checksums stay aligned. |
 | Review Studio | pass | decision review; warnings 3; score 91 | One page shows gates, evidence paths, blockers, warnings, actions, waivers, and annotations | Resolve human/external warning gates before claiming full release readiness. |
 | Telemetry Drift | pass | events 1; risk low; recipes 5 | Local-first metadata-only event contract, aggregate drift report, hook recipes, and import path | Keep raw JSONL out of distributed packages and use aggregate reports for Atlas. |
-| Native Client Telemetry | external-required | external source events 0; adoption samples 0 | A real Browser/Chrome/provider client sends production metadata events | Install a real client against the native host and import production metadata-only events. |
+| Native Client Telemetry | external-required | external source events 0; adoption samples 1 | A real Browser/Chrome/provider client sends production metadata events | Install a real client against the native host and import production metadata-only events. |
 
 ## Open Highest-Leverage Gaps
 
