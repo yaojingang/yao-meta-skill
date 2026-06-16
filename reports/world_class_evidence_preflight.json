@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-13",
+  "generated_at": "2026-06-16",
   "skill_dir": ".",
   "summary": {
     "evidence_item_count": 4,
@@ -14,8 +14,8 @@
     "collection_ready_count": 1,
     "collection_blocked_count": 3,
     "source_check_count": 13,
-    "source_pass_count": 7,
-    "source_blocked_count": 6,
+    "source_pass_count": 6,
+    "source_blocked_count": 7,
     "pending_count": 4,
     "ready_to_claim_world_class": false,
     "credential_value_exposed": false,
@@ -535,8 +535,8 @@
           "label": "Adoption sample",
           "field": "adoption_sample_count",
           "expected": ">0",
-          "actual": 1,
-          "status": "pass",
+          "actual": 0,
+          "status": "blocked",
           "source_accepted": false,
           "next_action": "Telemetry must include adoption outcome evidence."
         },
@@ -891,8 +891,8 @@
       "label": "Adoption sample",
       "field": "adoption_sample_count",
       "expected": ">0",
-      "actual": 1,
-      "status": "pass",
+      "actual": 0,
+      "status": "blocked",
       "source_accepted": false,
       "next_action": "Telemetry must include adoption outcome evidence."
     },

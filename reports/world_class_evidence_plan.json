@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-13",
+  "generated_at": "2026-06-16",
   "skill_dir": ".",
   "summary": {
     "audit_decision": "continue-iteration",
@@ -146,7 +146,7 @@
       "status": "external_required",
       "category": "external",
       "owner": "Browser/Chrome/IDE/provider client integrator",
-      "current": "external source events 0; adoption samples 1",
+      "current": "external source events 0; adoption samples 0",
       "objective": "Import production metadata-only events from a real external client into the local drift loop.",
       "runbook": [
         "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
@@ -309,7 +309,7 @@
       "status": "external_required",
       "category": "external",
       "owner": "Browser/Chrome/IDE/provider client integrator",
-      "current": "external source events 0; adoption samples 1",
+      "current": "external source events 0; adoption samples 0",
       "objective": "Import production metadata-only events from a real external client into the local drift loop.",
       "runbook": [
         "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",

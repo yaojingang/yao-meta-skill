@@ -33,6 +33,7 @@ DEFAULT_TARGETS = [
     "python-compat-check",
     "architecture-maintainability-check",
     "yao-cli-check",
+    "yao-cli-world-class-check",
     "skill-overview-check",
     "skill-interpretation-check",
     "skill-report-metrics-check",

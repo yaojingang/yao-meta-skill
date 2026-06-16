@@ -1,14 +1,14 @@
 {
   "ok": true,
   "schema_version": "2.0",
-  "generated_at": "2026-06-13",
+  "generated_at": "2026-06-16",
   "skill_dir": ".",
-  "package_dir": "tests/tmp_review_studio/dist",
-  "install_root": "tests/tmp_review_studio/install-root/simulate-yao-meta-skill",
-  "installed_skill_dir": "tests/tmp_review_studio/install-root/simulate-yao-meta-skill/yao-meta-skill",
+  "package_dir": "dist",
+  "install_root": "dist/install-simulation/simulate-yao-meta-skill",
+  "installed_skill_dir": "dist/install-simulation/simulate-yao-meta-skill/yao-meta-skill",
   "summary": {
     "archive_present": true,
-    "archive_entry_count": 648,
+    "archive_entry_count": 649,
     "archive_extracted": true,
     "entrypoint_loaded": true,
     "manifest_loaded": true,
@@ -26,7 +26,7 @@
     {
       "id": "archive-present",
       "status": "pass",
-      "detail": "Package archive exists: tests/tmp_review_studio/dist/yao-meta-skill.zip"
+      "detail": "Package archive exists: dist/yao-meta-skill.zip"
     },
     {
       "id": "archive-safe-paths",
@@ -272,9 +272,9 @@
   "failures": [],
   "warnings": [],
   "artifacts": {
-    "archive": "tests/tmp_review_studio/dist/yao-meta-skill.zip",
-    "package_manifest": "tests/tmp_review_studio/dist/manifest.json",
-    "json": "tests/tmp_review_studio/install_simulation.json",
-    "markdown": "tests/tmp_review_studio/install_simulation.md"
+    "archive": "dist/yao-meta-skill.zip",
+    "package_manifest": "dist/manifest.json",
+    "json": "reports/install_simulation.json",
+    "markdown": "reports/install_simulation.md"
   }
 }

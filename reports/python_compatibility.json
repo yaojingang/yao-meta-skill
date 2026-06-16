@@ -5,7 +5,7 @@
   "root": ".",
   "summary": {
     "target_python": "3.11",
-    "file_count": 195,
+    "file_count": 196,
     "issue_count": 0,
     "syntax_error_count": 0,
     "fstring_311_violation_count": 0,
@@ -1182,6 +1182,12 @@
     },
     {
       "path": "tests/verify_yao_cli.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "tests/verify_yao_cli_world_class.py",
       "ok": true,
       "issue_count": 0,
       "issues": []

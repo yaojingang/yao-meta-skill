@@ -412,7 +412,7 @@
     "external_pending_count": 3,
     "human_pending_count": 1,
     "source_check_count": 13,
-    "source_pass_count": 7,
+    "source_pass_count": 6,
     "conclusion_zh": "世界级证据尚未完成：4 项待补，0 项已接受。",
     "conclusion_en": "World-class evidence is not complete: 4 pending, 0 accepted.",
     "entries": [
@@ -471,7 +471,8 @@
         "summary_zh": "真实外部客户端 metadata-only 事件仍未导入。",
         "summary_en": "Real external-client metadata-only events have not been imported yet.",
         "blocked_checks": [
-          "External events"
+          "External events",
+          "Adoption sample"
         ]
       }
     ]
@@ -1000,13 +1001,13 @@
     "ok": true,
     "summary": {
       "reproducibility_ready": true,
-      "release_lock_ready": true,
+      "release_lock_ready": false,
       "methodology_complete": true,
       "required_artifact_count": 25,
       "missing_artifact_count": 0,
-      "evidence_bundle_sha256": "43bae9752e569245de933309ac71c73e19ad91b3d857b4b1eeea6b26639c0ab2",
-      "source_contract_sha256": "5599cd15154d9fa948e9907f5ada8e22486166be102739eed26e0a1fdad3a326",
-      "archive_sha256": "996e36863203c30d3c518e0d635be054177dc5b774c9cd3d8311f77d69013a81",
+      "evidence_bundle_sha256": "e29fb9204676313a6abe14b1a33dfe8c40f88659227570762fff51396ff99a3a",
+      "source_contract_sha256": "1e5b2ced62c29f6d23ad88f576df6f278bfc0582382c11f834f56b64a686ed80",
+      "archive_sha256": "b85524699fe22f4a27e81b75d2e4a8e2faa03e1a397a518e6cd501c553a98e7a",
       "output_case_count": 5,
       "failure_disclosure_count": 3,
       "command_count": 23,
@@ -1021,14 +1022,14 @@
       "world_class_task_count": 4,
       "world_class_ledger_pending_count": 4,
       "world_class_source_check_count": 13,
-      "world_class_source_pass_count": 7,
-      "world_class_source_blocked_count": 6,
+      "world_class_source_pass_count": 6,
+      "world_class_source_blocked_count": 7,
       "public_claim_ready": false,
-      "public_claim_blocker_count": 4,
-      "working_tree_dirty": false,
-      "changed_file_count": 0
+      "public_claim_blocker_count": 5,
+      "working_tree_dirty": true,
+      "changed_file_count": 71
     },
-    "commit": "7c44c9af88f0e89fa5be795db91db170f826bf3e",
+    "commit": "7f8942327ab5572f808c8b0319e4a6400367c925",
     "missing_artifacts": [],
     "limitations": [
       "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -1133,7 +1134,7 @@
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
     "package_hash_file_count": 213,
-    "package_sha256": "5599cd15154d9fa948e9907f5ada8e22486166be102739eed26e0a1fdad3a326"
+    "package_sha256": "1e5b2ced62c29f6d23ad88f576df6f278bfc0582382c11f834f56b64a686ed80"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -1171,8 +1172,8 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "a5f307ba8e89acb55d03b1bcee3e0ea50471af388511f2e53c73aff6d96ffb7f",
-        "archive_sha256": "996e36863203c30d3c518e0d635be054177dc5b774c9cd3d8311f77d69013a81"
+        "package_sha256": "1e5b2ced62c29f6d23ad88f576df6f278bfc0582382c11f834f56b64a686ed80",
+        "archive_sha256": "b85524699fe22f4a27e81b75d2e4a8e2faa03e1a397a518e6cd501c553a98e7a"
       },
       "compatibility": {
         "openai": "pass",
@@ -1203,12 +1204,12 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "996e36863203c30d3c518e0d635be054177dc5b774c9cd3d8311f77d69013a81",
+        "archive_sha256": "b85524699fe22f4a27e81b75d2e4a8e2faa03e1a397a518e6cd501c553a98e7a",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
       },
-      "generated_at": "2026-06-13"
+      "generated_at": "2026-06-16"
     },
     "failures": [],
     "warnings": []
@@ -1219,8 +1220,8 @@
       "target_count": 4,
       "adapter_count": 4,
       "archive_present": true,
-      "archive_sha256": "996e36863203c30d3c518e0d635be054177dc5b774c9cd3d8311f77d69013a81",
-      "archive_entry_count": 647,
+      "archive_sha256": "b85524699fe22f4a27e81b75d2e4a8e2faa03e1a397a518e6cd501c553a98e7a",
+      "archive_entry_count": 649,
       "failure_count": 0,
       "warning_count": 0
     },
@@ -1231,7 +1232,7 @@
     "ok": true,
     "summary": {
       "archive_present": true,
-      "archive_entry_count": 648,
+      "archive_entry_count": 649,
       "archive_extracted": true,
       "entrypoint_loaded": true,
       "manifest_loaded": true,
@@ -1298,12 +1299,12 @@
         {
           "field": "archive_sha256",
           "from": "",
-          "to": "996e36863203c30d3c518e0d635be054177dc5b774c9cd3d8311f77d69013a81"
+          "to": "b85524699fe22f4a27e81b75d2e4a8e2faa03e1a397a518e6cd501c553a98e7a"
         },
         {
           "field": "package_sha256",
           "from": "0000000000000000000000000000000000000000000000000000000000000000",
-          "to": "a5f307ba8e89acb55d03b1bcee3e0ea50471af388511f2e53c73aff6d96ffb7f"
+          "to": "1e5b2ced62c29f6d23ad88f576df6f278bfc0582382c11f834f56b64a686ed80"
         }
       ]
     },
@@ -1320,14 +1321,14 @@
     "ok": true,
     "summary": {
       "event_count": 1,
-      "adoption_sample_count": 1,
-      "activation_count": 1,
-      "accepted_count": 1,
+      "adoption_sample_count": 0,
+      "activation_count": 0,
+      "accepted_count": 0,
       "edited_count": 0,
       "rejected_count": 0,
       "missed_count": 0,
       "failed_count": 0,
-      "adoption_rate": 100.0,
+      "adoption_rate": 0,
       "missed_trigger_count": 0,
       "wrong_trigger_count": 0,
       "bad_output_count": 0,
@@ -1336,7 +1337,7 @@
       "review_overdue_count": 0,
       "risk_band": "low",
       "event_types": {
-        "skill_activation": 1
+        "review_event": 1
       },
       "failure_types": {},
       "source_types": {
@@ -1563,7 +1564,7 @@
         "status": "external_required",
         "category": "external",
         "owner": "Browser/Chrome/IDE/provider client integrator",
-        "current": "external source events 0; adoption samples 1",
+        "current": "external source events 0; adoption samples 0",
         "objective": "Import production metadata-only events from a real external client into the local drift loop.",
         "runbook": [
           "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
@@ -1615,8 +1616,8 @@
       "missing_submission_count": 4,
       "invalid_submission_count": 0,
       "source_check_count": 13,
-      "source_pass_count": 7,
-      "source_blocked_count": 6,
+      "source_pass_count": 6,
+      "source_blocked_count": 7,
       "submitted_but_pending_count": 0,
       "source_accepted_without_valid_submission_count": 0,
       "overclaim_guard_active": true,
@@ -1957,7 +1958,7 @@
         "status": "pending",
         "source_status": "external_required",
         "source_accepted": false,
-        "current": "external source events 0; adoption samples 1",
+        "current": "external source events 0; adoption samples 0",
         "objective": "Import production metadata-only events from a real external client into the local drift loop.",
         "runbook": [
           "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
@@ -1994,7 +1995,7 @@
         ],
         "observed_state": {
           "external_source_events": 0,
-          "adoption_sample_count": 1,
+          "adoption_sample_count": 0,
           "raw_content_allowed": false,
           "risk_band": "low",
           "accepted": false
@@ -2015,8 +2016,8 @@
             "label": "Adoption sample",
             "field": "adoption_sample_count",
             "expected": ">0",
-            "actual": 1,
-            "status": "pass",
+            "actual": 0,
+            "status": "blocked",
             "source_accepted": false,
             "next_action": "Telemetry must include adoption outcome evidence."
           },
@@ -2032,8 +2033,8 @@
           }
         ],
         "source_check_count": 3,
-        "source_pass_count": 2,
-        "source_blocked_count": 1,
+        "source_pass_count": 1,
+        "source_blocked_count": 2,
         "submission_state": {
           "status": "missing",
           "path": "evidence/world_class/submissions/native-client-telemetry.json",

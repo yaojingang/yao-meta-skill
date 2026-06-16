@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-13",
+  "generated_at": "2026-06-16",
   "skill_dir": ".",
   "summary": {
     "schema_present": true,
@@ -312,7 +312,7 @@
       "source_accepted": false,
       "observed_state": {
         "external_source_events": 0,
-        "adoption_sample_count": 1,
+        "adoption_sample_count": 0,
         "raw_content_allowed": false,
         "risk_band": "low",
         "accepted": false
