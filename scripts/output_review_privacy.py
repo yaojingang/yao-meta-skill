@@ -64,3 +64,18 @@ def forbidden_decision_field_paths(value: Any, prefix: str) -> list[str]:
         for index, child in enumerate(value):
             found.extend(forbidden_decision_field_paths(child, f"{prefix}[{index}]"))
     return found
+
+
+def forbidden_raw_content_field_paths(value: Any, prefix: str) -> list[str]:
+    found: list[str] = []
+    if isinstance(value, dict):
+        for key, child in value.items():
+            key_text = str(key).strip()
+            child_path = f"{prefix}.{key_text}"
+            if key_text.casefold() in RAW_CONTENT_FIELDS:
+                found.append(child_path)
+            found.extend(forbidden_raw_content_field_paths(child, child_path))
+    elif isinstance(value, list):
+        for index, child in enumerate(value):
+            found.extend(forbidden_raw_content_field_paths(child, f"{prefix}[{index}]"))
+    return found

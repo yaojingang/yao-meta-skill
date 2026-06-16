@@ -125,9 +125,11 @@ def main() -> None:
     assert pending_payload["summary"]["reason_required"] is True, pending_payload
     assert pending_payload["summary"]["ready_for_human_evidence"] is False, pending_payload
     assert all(not item["expected_winner_variant"] and not item["expected_revealed"] for item in pending_payload["pairs"]), pending_payload
+    assert all("prompt" not in item and len(item["prompt_sha256"]) == 64 for item in pending_payload["pairs"]), pending_payload
     checklist = {item["case_id"]: item for item in pending_payload["reviewer_checklist"]}
     assert checklist["skill-package-contract"]["readiness"] == "awaiting-decision", checklist["skill-package-contract"]
     assert checklist["skill-package-contract"]["answer_key_visible"] is False, checklist["skill-package-contract"]
+    assert "prompt" not in checklist["skill-package-contract"] and len(checklist["skill-package-contract"]["prompt_sha256"]) == 64, checklist["skill-package-contract"]
     assert checklist["skill-package-contract"]["decisions_path"].endswith("tests/tmp_output_review_adjudication/missing_decisions.json"), checklist["skill-package-contract"]
     assert checklist["skill-package-contract"]["commands"]["write_template"] == "python3 scripts/adjudicate_output_review.py --write-template", checklist["skill-package-contract"]
     assert checklist["skill-package-contract"]["commands"]["import_decisions"].startswith("python3 scripts/yao.py output-review-import"), checklist["skill-package-contract"]
@@ -214,8 +216,9 @@ def main() -> None:
     assert filled_payload["summary"]["ready_for_human_evidence"] is True, filled_payload
     assert all(item["status"] == "match" for item in filled_payload["pairs"]), filled_payload
     assert all(item["expected_winner_variant"] in {"A", "B"} and item["expected_revealed"] for item in filled_payload["pairs"]), filled_payload
+    assert all("prompt" not in item and len(item["prompt_sha256"]) == 64 for item in filled_payload["pairs"]), filled_payload
     filled_checklist = {item["case_id"]: item for item in filled_payload["reviewer_checklist"]}
-    assert all(item["readiness"] == "adjudicated" and item["answer_key_visible"] for item in filled_checklist.values()), filled_checklist
+    assert all(item["readiness"] == "adjudicated" and item["answer_key_visible"] and "prompt" not in item and len(item["prompt_sha256"]) == 64 for item in filled_checklist.values()), filled_checklist
 
     import_source = tmp_root / "reviewer_source.json"
     import_source.write_text(json.dumps(decisions, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

@@ -40,7 +40,7 @@
       "reviewer_winner_variant": "",
       "confidence": null,
       "reason": "",
-      "prompt": "Turn this repeated workflow into a reusable team skill package."
+      "prompt_sha256": "95405d805bd516d0998b69d31ece2c1a465b0aa99f04d603628a3939028133b5"
     },
     {
       "case_id": "output-eval-expectation",
@@ -50,7 +50,7 @@
       "reviewer_winner_variant": "",
       "confidence": null,
       "reason": "",
-      "prompt": "Upgrade this production skill so we know whether the generated output is better than baseline."
+      "prompt_sha256": "3829e97814ca269ad8e400ec984c56ddcd54b79448d3846c15e7f5ff44c2edc4"
     },
     {
       "case_id": "ir-before-packaging",
@@ -60,7 +60,7 @@
       "reviewer_winner_variant": "",
       "confidence": null,
       "reason": "",
-      "prompt": "Package this skill for OpenAI, Claude, Agent Skills, and generic targets."
+      "prompt_sha256": "d00333fa41f2e28dc7505f25f259aefb82e65b2df1abda2822686c9a6f07bb80"
     },
     {
       "case_id": "near-neighbor-boundary",
@@ -70,7 +70,7 @@
       "reviewer_winner_variant": "",
       "confidence": null,
       "reason": "",
-      "prompt": "I only need a one-off summary of these notes, not a reusable process."
+      "prompt_sha256": "2d0585e9fa6d03e28786f5e8f0c090781eb209afd344d25e2f91203c49a656d0"
     },
     {
       "case_id": "file-backed-governed-package",
@@ -80,7 +80,7 @@
       "reviewer_winner_variant": "",
       "confidence": null,
       "reason": "",
-      "prompt": "Turn the attached release brief source into a governed skill package."
+      "prompt_sha256": "c79a554b573517682da48879c1ef54399841d9ebf570088a2174dc38de39cc7d"
     }
   ],
   "reviewer_checklist": [
@@ -91,7 +91,7 @@
       "status": "pending",
       "reviewer_winner_variant": "",
       "answer_key_visible": false,
-      "prompt": "Turn this repeated workflow into a reusable team skill package.",
+      "prompt_sha256": "95405d805bd516d0998b69d31ece2c1a465b0aa99f04d603628a3939028133b5",
       "blind_pack_path": "reports/output_blind_review_pack.json",
       "decisions_path": "reports/output_review_decisions.json",
       "commands": {
@@ -121,7 +121,7 @@
       "status": "pending",
       "reviewer_winner_variant": "",
       "answer_key_visible": false,
-      "prompt": "Upgrade this production skill so we know whether the generated output is better than baseline.",
+      "prompt_sha256": "3829e97814ca269ad8e400ec984c56ddcd54b79448d3846c15e7f5ff44c2edc4",
       "blind_pack_path": "reports/output_blind_review_pack.json",
       "decisions_path": "reports/output_review_decisions.json",
       "commands": {
@@ -151,7 +151,7 @@
       "status": "pending",
       "reviewer_winner_variant": "",
       "answer_key_visible": false,
-      "prompt": "Package this skill for OpenAI, Claude, Agent Skills, and generic targets.",
+      "prompt_sha256": "d00333fa41f2e28dc7505f25f259aefb82e65b2df1abda2822686c9a6f07bb80",
       "blind_pack_path": "reports/output_blind_review_pack.json",
       "decisions_path": "reports/output_review_decisions.json",
       "commands": {
@@ -181,7 +181,7 @@
       "status": "pending",
       "reviewer_winner_variant": "",
       "answer_key_visible": false,
-      "prompt": "I only need a one-off summary of these notes, not a reusable process.",
+      "prompt_sha256": "2d0585e9fa6d03e28786f5e8f0c090781eb209afd344d25e2f91203c49a656d0",
       "blind_pack_path": "reports/output_blind_review_pack.json",
       "decisions_path": "reports/output_review_decisions.json",
       "commands": {
@@ -211,7 +211,7 @@
       "status": "pending",
       "reviewer_winner_variant": "",
       "answer_key_visible": false,
-      "prompt": "Turn the attached release brief source into a governed skill package.",
+      "prompt_sha256": "c79a554b573517682da48879c1ef54399841d9ebf570088a2174dc38de39cc7d",
       "blind_pack_path": "reports/output_blind_review_pack.json",
       "decisions_path": "reports/output_review_decisions.json",
       "commands": {

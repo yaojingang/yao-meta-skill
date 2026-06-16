@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import argparse
+import hashlib
 import json
 from pathlib import Path
 from typing import Any
@@ -57,6 +58,10 @@ def confidence_value(value: Any) -> tuple[float | None, str | None]:
     if parsed < 0 or parsed > 1:
         return None, f"confidence must be between 0 and 1, got {parsed}"
     return round(parsed, 3), None
+
+
+def prompt_sha256(pair: dict[str, Any]) -> str:
+    return hashlib.sha256(str(pair.get("prompt", "")).encode("utf-8")).hexdigest()
 
 
 def answer_index(answer_key: dict[str, Any]) -> dict[str, dict[str, Any]]:
@@ -143,7 +148,7 @@ def adjudicate_pair(
                 "reviewer_winner_variant": "",
                 "confidence": None,
                 "reason": "",
-                "prompt": str(pair.get("prompt", "")),
+                "prompt_sha256": prompt_sha256(pair),
             },
             failures,
         )
@@ -163,7 +168,7 @@ def adjudicate_pair(
                 "reviewer_winner_variant": "",
                 "confidence": confidence,
                 "reason": reason,
-                "prompt": str(pair.get("prompt", "")),
+                "prompt_sha256": prompt_sha256(pair),
             },
             failures,
         )
@@ -193,7 +198,7 @@ def adjudicate_pair(
             "reviewer_winner_variant": reviewer,
             "confidence": confidence,
             "reason": reason,
-            "prompt": str(pair.get("prompt", "")),
+            "prompt_sha256": prompt_sha256(pair),
         },
         failures,
     )
@@ -256,7 +261,7 @@ def build_reviewer_checklist(
                 "status": pair.get("status", "pending"),
                 "reviewer_winner_variant": pair.get("reviewer_winner_variant", ""),
                 "answer_key_visible": bool(pair.get("expected_revealed")),
-                "prompt": pair.get("prompt", ""),
+                "prompt_sha256": pair.get("prompt_sha256", ""),
                 "blind_pack_path": display_path(blind_pack_path),
                 "decisions_path": display_path(decisions_path),
                 "commands": {

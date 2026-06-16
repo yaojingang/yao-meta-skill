@@ -57,7 +57,7 @@ def render_output_review_checklist(adjudication: dict[str, Any]) -> str:
             f"<p>{html.escape(str(item.get('blocking_reason', '')))}</p>"
             f"<dl><dt>盲评包</dt><dd><code>{html.escape(str(item.get('blind_pack_path', '')))}</code></dd>"
             f"<dt>决策表</dt><dd><code>{html.escape(str(item.get('decisions_path', '')))}</code></dd>"
-            f"<dt>提示词</dt><dd>{html.escape(str(item.get('prompt', '')))}</dd></dl>"
+            f"<dt>提示哈希</dt><dd><code>{html.escape(str(item.get('prompt_sha256', '')))}</code></dd></dl>"
             "<div class='output-review-steps'>"
             "<div><h4>操作命令</h4>"
             + render_command_list(item.get("commands", {}) if isinstance(item.get("commands", {}), dict) else {})

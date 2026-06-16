@@ -2,7 +2,7 @@
 import re
 from typing import Any
 
-from output_review_privacy import forbidden_decision_field_paths
+from output_review_privacy import forbidden_decision_field_paths, forbidden_raw_content_field_paths
 
 
 SCRIPT_INTERFACE = "internal-module"
@@ -52,6 +52,16 @@ def confidence_valid(value: Any) -> bool:
     except (TypeError, ValueError):
         return False
     return 0 <= parsed <= 1
+
+
+def validate_adjudication_raw_content(adjudication: dict[str, Any], errors: list[str]) -> None:
+    blocked = forbidden_raw_content_field_paths(adjudication, "output_review_adjudication")
+    add_error(
+        errors,
+        not blocked,
+        "human-adjudication adjudication report must not include raw content, credential, secret, token, prompt, output, transcript, or message fields: "
+        + ", ".join(blocked[:8]),
+    )
 
 
 def validate_decision_rows(
@@ -129,6 +139,7 @@ def validate_human_adjudication_report(
     checklist_ready_count = real_int(summary.get("reviewer_checklist_ready_count"))
     checklist_count = real_int(summary.get("reviewer_checklist_count"))
 
+    validate_adjudication_raw_content(adjudication, errors)
     add_error(errors, adjudication.get("ok") is True, "human-adjudication adjudication report ok must be true")
     add_error(errors, bool(pair_count and pair_count > 0), "human-adjudication adjudication summary.pair_count must be >0")
     add_error(

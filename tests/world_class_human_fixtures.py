@@ -284,6 +284,14 @@ def assert_human_contract_artifact_validation() -> None:
     assert_human_submission_error(skill_root, entry, "summary.reason_required must be true")
 
     write_human_artifacts(skill_root, complete=True, reviewer="Yao QA")
+    raw_adjudication = json.loads((skill_root / "reports" / "output_review_adjudication.json").read_text(encoding="utf-8"))
+    raw_adjudication["pairs"][0]["prompt"] = "verbatim blind review prompt must not be accepted"
+    raw_adjudication["pairs"][0]["messages"] = ["raw reviewer transcript must not be accepted"]
+    write_json(skill_root / "reports" / "output_review_adjudication.json", raw_adjudication)
+    assert_human_submission_error(skill_root, entry, "output_review_adjudication.pairs[0].prompt")
+    assert_human_submission_error(skill_root, entry, "output_review_adjudication.pairs[0].messages")
+
+    write_human_artifacts(skill_root, complete=True, reviewer="Yao QA")
     forged_decisions = json.loads((skill_root / "reports" / "output_review_decisions.json").read_text(encoding="utf-8"))
     forged_decisions["decisions"][1]["case_id"] = "unknown-case"
     write_json(skill_root / "reports" / "output_review_decisions.json", forged_decisions)
