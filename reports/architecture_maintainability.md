@@ -5,17 +5,17 @@ Generated at: `2026-06-16`
 ## Summary
 
 - decision: `pass`
-- python files: `194`
-- scripts: `123`
+- python files: `195`
+- scripts: `124`
 - tests: `71`
-- internal modules: `40`
+- internal modules: `41`
 - CLI scripts: `85`
 - Yao CLI command handlers: `68`
 - entrypoint command handlers: `18`
 - command modules: `6`
 - largest file lines: `836`
 - watch threshold lines: `720`
-- watchlist: `9`
+- watchlist: `8`
 - hotspots: `0`
 - blockers: `0`
 
@@ -30,7 +30,6 @@ No file-size hotspots found.
 | File | Lines | Kind | Recommended next split |
 | --- | ---: | --- | --- |
 | `tests/verify_review_studio.py` | `836` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
-| `scripts/render_world_class_preflight.py` | `814` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/render_evidence_consistency.py` | `808` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/skill_report_model.py` | `800` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `tests/verify_yao_cli.py` | `785` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
@@ -44,7 +43,6 @@ No file-size hotspots found.
 | File | Lines | Kind | Severity |
 | --- | ---: | --- | --- |
 | `tests/verify_review_studio.py` | `836` | `test` | `pass` |
-| `scripts/render_world_class_preflight.py` | `814` | `cli-script` | `pass` |
 | `scripts/render_evidence_consistency.py` | `808` | `cli-script` | `pass` |
 | `scripts/skill_report_model.py` | `800` | `internal-module` | `pass` |
 | `tests/verify_yao_cli.py` | `785` | `test` | `pass` |
@@ -55,6 +53,7 @@ No file-size hotspots found.
 | `scripts/trust_check.py` | `714` | `internal-module` | `pass` |
 | `scripts/apply_adaptation.py` | `706` | `cli-script` | `pass` |
 | `scripts/world_class_evidence_contract.py` | `686` | `internal-module` | `pass` |
+| `scripts/render_review_viewer.py` | `685` | `cli-script` | `pass` |
 
 ## Release Rule
 

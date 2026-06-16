@@ -173,6 +173,7 @@
           "scripts/validate_skill.py",
           "scripts/verify_package.py",
           "scripts/world_class_evidence_contract.py",
+          "scripts/world_class_preflight_layout.py",
           "scripts/world_class_source_checks.py",
           "scripts/world_class_submission_kit_rendering.py",
           "scripts/world_class_submission_matrix.py",

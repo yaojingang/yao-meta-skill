@@ -2,9 +2,9 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 214,
-    "script_count": 123,
-    "internal_module_count": 37,
+    "scanned_files": 215,
+    "script_count": 124,
+    "internal_module_count": 38,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 214,
-    "package_sha256": "fff0128c207f049457233ff2aaf20ce640e1c43beed6925cbbd4bf4900bbb05e"
+    "package_hash_file_count": 215,
+    "package_sha256": "cd5b790b3cfa42cd4238d63e2fb428cd148184ee871c92b7f6b0eb603be2335f"
   },
   "failures": [],
   "warnings": [],
@@ -1573,6 +1573,20 @@
       "network_hosts": []
     },
     {
+      "path": "scripts/world_class_preflight_layout.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Imported by render_world_class_preflight.py to keep preflight HTML layout out of data assembly.",
+      "has_argparse": false,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
       "path": "scripts/world_class_source_checks.py",
       "interface": "internal-module",
       "interface_declared": true,
@@ -1803,7 +1817,7 @@
     "checked_count": 86,
     "passed_count": 86,
     "failed_count": 0,
-    "skipped_count": 37,
+    "skipped_count": 38,
     "failed_scripts": [],
     "results": [
       {
@@ -2762,6 +2776,10 @@
       },
       {
         "path": "scripts/world_class_evidence_contract.py",
+        "reason": "internal module"
+      },
+      {
+        "path": "scripts/world_class_preflight_layout.py",
         "reason": "internal module"
       },
       {

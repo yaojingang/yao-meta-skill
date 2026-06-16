@@ -107,6 +107,7 @@ def main() -> None:
         "scripts/skill_report_metrics.py",
         "scripts/skill_report_model.py",
         "scripts/skill_report_world_class.py",
+        "scripts/world_class_preflight_layout.py",
         "scripts/world_class_evidence_contract.py",
         "scripts/world_class_source_checks.py",
         "scripts/yao_cli_adaptation_commands.py",
@@ -133,6 +134,7 @@ def main() -> None:
     assert "skill_report_metrics.py" not in warning_text, payload["warnings"]
     assert "skill_report_model.py" not in warning_text, payload["warnings"]
     assert "skill_report_world_class.py" not in warning_text, payload["warnings"]
+    assert "world_class_preflight_layout.py" not in warning_text, payload["warnings"]
     assert "world_class_evidence_contract.py" not in warning_text, payload["warnings"]
     assert "world_class_source_checks.py" not in warning_text, payload["warnings"]
     assert "yao_cli_adaptation_commands.py" not in warning_text, payload["warnings"]

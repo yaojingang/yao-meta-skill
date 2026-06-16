@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `214`
-- Scripts: `123`
-- Internal script modules: `37`
+- Scanned files: `215`
+- Scripts: `124`
+- Internal script modules: `38`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `214`
-- Package SHA256: `fff0128c207f049457233ff2aaf20ce640e1c43beed6925cbbd4bf4900bbb05e`
+- Package hash files: `215`
+- Package SHA256: `cd5b790b3cfa42cd4238d63e2fb428cd148184ee871c92b7f6b0eb603be2335f`
 
 ## Failures
 
@@ -171,6 +171,7 @@
 | scripts/validate_skill.py | cli | False | True | True | False | False | False | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/verify_package.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/world_class_evidence_contract.py | internal-module | True | False | False | False | False | False | False | Imported by world-class evidence reports to share intake validation and artifact integrity checks. |
+| scripts/world_class_preflight_layout.py | internal-module | True | False | False | False | False | False | False | Imported by render_world_class_preflight.py to keep preflight HTML layout out of data assembly. |
 | scripts/world_class_source_checks.py | internal-module | True | False | False | False | False | False | False | Imported by world-class evidence reports to keep source-evidence readiness checks consistent. |
 | scripts/world_class_submission_kit_rendering.py | internal-module | True | False | False | False | False | False | False | Shared renderer for world-class submission kit Markdown and HTML artifacts. |
 | scripts/world_class_submission_matrix.py | internal-module | True | False | False | False | False | False | False | Shared by submission kit rendering to summarize draft, artifact, and source-check readiness. |

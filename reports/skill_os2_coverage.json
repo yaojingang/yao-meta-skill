@@ -130,7 +130,7 @@
       "label": "Trust Security",
       "status": "pass",
       "objective": "Scripts, dependencies, permissions, secrets, and package hash are reviewable for team distribution.",
-      "current": "123 scripts; secrets 0; help failures 0",
+      "current": "124 scripts; secrets 0; help failures 0",
       "command": "python3 scripts/yao.py trust .",
       "test": "python3 tests/verify_trust_check.py",
       "evidence": [
@@ -204,7 +204,7 @@
       "label": "Registry Distribution",
       "status": "pass",
       "objective": "Skill packages are installable, versioned, checksumed, and upgrade-reviewable.",
-      "current": "archive entries 650; install failures 0",
+      "current": "archive entries 651; install failures 0",
       "command": "python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip && python3 scripts/yao.py registry-audit .",
       "test": "python3 tests/verify_registry_audit.py",
       "evidence": [
