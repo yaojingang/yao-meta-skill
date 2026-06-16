@@ -218,16 +218,12 @@
       "key": "benchmark-clean-worktree-release-lock",
       "label": "Clean worktree keeps a clean benchmark release lock",
       "status": "pass",
-      "expected": "checked only when git is available and the current worktree is clean",
-      "actual": {
-        "available": true,
-        "clean": false,
-        "changed_file_count": 7
-      },
+      "expected": true,
+      "actual": true,
       "paths": [
         "reports/benchmark_reproducibility.json"
       ],
-      "detail": "Dirty or non-git worktrees cannot prove final release-lock freshness, so this check is advisory until the final clean-lock pass."
+      "detail": "If the current worktree is clean, the committed benchmark report must not still carry a dirty release lock from an earlier generation."
     },
     {
       "key": "skill-ir-evidence-path-contract",
