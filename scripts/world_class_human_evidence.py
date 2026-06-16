@@ -73,9 +73,19 @@ def duplicate_case_ids(ids: list[str]) -> list[str]:
     return duplicates
 
 
-def forbidden_decision_fields(item: dict[str, Any]) -> list[str]:
-    keys = {str(key).strip().lower() for key in item}
-    return sorted((keys & RAW_CONTENT_FIELDS) | (keys & ANSWER_KEY_FIELDS))
+def forbidden_decision_field_paths(value: Any, prefix: str) -> list[str]:
+    found: list[str] = []
+    if isinstance(value, dict):
+        for key, child in value.items():
+            key_text = str(key).strip()
+            child_path = f"{prefix}.{key_text}"
+            if key_text.lower() in RAW_CONTENT_FIELDS or key_text.lower() in ANSWER_KEY_FIELDS:
+                found.append(child_path)
+            found.extend(forbidden_decision_field_paths(child, child_path))
+    elif isinstance(value, list):
+        for index, child in enumerate(value):
+            found.extend(forbidden_decision_field_paths(child, f"{prefix}[{index}]"))
+    return found
 
 
 def confidence_valid(value: Any) -> bool:
@@ -105,11 +115,12 @@ def validate_decision_rows(
         "human-adjudication decisions case_id set must match adjudication pairs",
     )
     for index, item in enumerate(decisions, start=1):
-        blocked = forbidden_decision_fields(item)
+        blocked = forbidden_decision_field_paths(item, f"decisions[{index}]")
         add_error(
             errors,
             not blocked,
-            f"human-adjudication decisions[{index}] must not include raw content or answer-key fields",
+            "human-adjudication decisions must not include raw content or answer-key fields: "
+            + ", ".join(blocked[:8]),
         )
         winner = str(item.get("winner_variant", "")).strip().upper()
         add_error(errors, winner in {"A", "B"}, "human-adjudication decisions must include A/B winner_variant for every case")
