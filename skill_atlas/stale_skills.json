@@ -24,7 +24,7 @@
     "name": "incident-command-governor",
     "path": "examples/governed-incident-command/generated-skill",
     "reason": "review overdue by cadence monthly",
-    "age_days": 77,
+    "age_days": 78,
     "allowed_days": 31,
     "actionable": false,
     "scope": "example"

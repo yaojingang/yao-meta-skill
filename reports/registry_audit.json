@@ -58,11 +58,11 @@
       "install_simulated": true,
       "install_simulation": "reports/install_simulation.json"
     },
-    "generated_at": "2026-06-13"
+    "generated_at": "2026-06-17"
   },
   "index": {
     "schema_version": "2.0",
-    "generated_at": "2026-06-13",
+    "generated_at": "2026-06-17",
     "package_count": 1,
     "packages": [
       {

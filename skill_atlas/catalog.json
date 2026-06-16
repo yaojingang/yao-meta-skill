@@ -1,6 +1,6 @@
 {
   "workspace_root": ".",
-  "generated_at": "2026-06-16",
+  "generated_at": "2026-06-17",
   "skills": [
     {
       "name": "yao-meta-skill",
@@ -20,6 +20,8 @@
         "vscode"
       ],
       "resources": [
+        "scripts/adaptation_patch_safety.py",
+        "scripts/adaptation_report_contracts.py",
         "scripts/adjudicate_output_review.py",
         "scripts/apply_adaptation.py",
         "scripts/build_confusion_matrix.py",
@@ -52,6 +54,7 @@
         "scripts/lint_skill.py",
         "scripts/local_output_eval_runner.py",
         "scripts/optimize_description.py",
+        "scripts/output_review_privacy.py",
         "scripts/prepare_output_review_kit.py",
         "scripts/prepare_world_class_submission_kit.py",
         "scripts/probe_runtime_permissions.py",
@@ -104,6 +107,7 @@
         "scripts/review_studio_actions.py",
         "scripts/review_studio_data.py",
         "scripts/review_studio_formatting.py",
+        "scripts/review_studio_gate_contract.py",
         "scripts/review_studio_gates.py",
         "scripts/review_studio_layout.py",
         "scripts/review_studio_output_review.py",
@@ -131,11 +135,16 @@
         "scripts/telemetry_native_host.py",
         "scripts/trigger_eval.py",
         "scripts/trust_check.py",
+        "scripts/trust_check_scripts.py",
         "scripts/upgrade_check.py",
         "scripts/validate_skill.py",
         "scripts/verify_package.py",
         "scripts/world_class_evidence_contract.py",
+        "scripts/world_class_human_evidence.py",
+        "scripts/world_class_native_permission_evidence.py",
+        "scripts/world_class_native_telemetry_evidence.py",
         "scripts/world_class_preflight_layout.py",
+        "scripts/world_class_provider_evidence.py",
         "scripts/world_class_source_checks.py",
         "scripts/world_class_submission_kit_rendering.py",
         "scripts/world_class_submission_matrix.py",
@@ -220,8 +229,8 @@
         "report": "reports/adoption_drift_report.json",
         "risk_band": "low",
         "event_count": 1,
-        "adoption_sample_count": 0,
-        "adoption_rate": 0,
+        "adoption_sample_count": 1,
+        "adoption_rate": 100.0,
         "candidate_count": 0
       }
     },
