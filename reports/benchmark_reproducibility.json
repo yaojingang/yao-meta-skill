@@ -3,48 +3,43 @@
   "ok": true,
   "generated_at": "2026-06-17",
   "skill_dir": ".",
-  "commit": "c30882468f45c7e78bef73e0ada161fd1fbaef79",
+  "commit": "9eaa8f6cec4ba83c07ded0275686252576bee6c3",
   "git_status": {
     "available": true,
     "dirty": true,
-    "changed_file_count": 64,
+    "changed_file_count": 17,
     "generated_dirty": true,
-    "generated_changed_file_count": 60,
-    "source_dirty": true,
-    "source_changed_file_count": 4,
+    "generated_changed_file_count": 17,
+    "source_dirty": false,
+    "source_changed_file_count": 0,
     "sample": [
-      " M registry/index.json",
-      " M registry/packages/yao-meta-skill.json",
       " M reports/adaptation_proposals.json",
       " M reports/adaptation_proposals.md",
-      " M reports/adoption_drift_report.json",
-      " M reports/architecture_maintainability.json",
-      " M reports/architecture_maintainability.md",
       " M reports/benchmark_reproducibility.json",
       " M reports/benchmark_reproducibility.md",
-      " M reports/compiled_targets.json",
       " M reports/context_budget.json",
-      " M reports/context_budget.md"
+      " M reports/evidence_consistency.json",
+      " M reports/output_execution_runs.json",
+      " M reports/output_execution_runs.md",
+      " M reports/review-studio.html",
+      " M reports/review-studio.json",
+      " M reports/review-viewer.json",
+      " M reports/skill-interpretation.json"
     ],
-    "source_sample": [
-      " M scripts/render_evidence_consistency.py",
-      " M tests/verify_architecture_maintainability.py",
-      " M tests/verify_evidence_consistency.py",
-      "?? scripts/evidence_consistency_phase_queue.py"
-    ],
+    "source_sample": [],
     "generated_sample": [
-      " M registry/index.json",
-      " M registry/packages/yao-meta-skill.json",
       " M reports/adaptation_proposals.json",
       " M reports/adaptation_proposals.md",
-      " M reports/adoption_drift_report.json",
-      " M reports/architecture_maintainability.json",
-      " M reports/architecture_maintainability.md",
       " M reports/benchmark_reproducibility.json",
       " M reports/benchmark_reproducibility.md",
-      " M reports/compiled_targets.json",
       " M reports/context_budget.json",
-      " M reports/context_budget.md"
+      " M reports/evidence_consistency.json",
+      " M reports/output_execution_runs.json",
+      " M reports/output_execution_runs.md",
+      " M reports/review-studio.html",
+      " M reports/review-studio.json",
+      " M reports/review-viewer.json",
+      " M reports/skill-interpretation.json"
     ],
     "generated_dirty_prefixes": [
       "dist/",
@@ -58,11 +53,11 @@
   },
   "summary": {
     "reproducibility_ready": true,
-    "release_lock_ready": false,
+    "release_lock_ready": true,
     "methodology_complete": true,
     "required_artifact_count": 25,
     "missing_artifact_count": 0,
-    "evidence_bundle_sha256": "0cb0e7e0eea477ba17f31508bcac41bd049cfeda2fc9fe16a46e7e89f6c024cd",
+    "evidence_bundle_sha256": "98271c40046d1bf5f6a3ada701b5b1fd88b188bf4122a15424c8b4566cfc8fcf",
     "source_contract_sha256": "5533575c144fb56486ab7320bfbd9f6655a6360cc1c2fbab837c40a7bc57ca6d",
     "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2",
     "output_case_count": 5,
@@ -82,19 +77,18 @@
     "world_class_source_pass_count": 10,
     "world_class_source_blocked_count": 9,
     "public_claim_ready": false,
-    "public_claim_blocker_count": 5,
+    "public_claim_blocker_count": 4,
     "working_tree_dirty": true,
-    "changed_file_count": 64,
-    "source_tree_dirty": true,
-    "source_changed_file_count": 4,
+    "changed_file_count": 17,
+    "source_tree_dirty": false,
+    "source_changed_file_count": 0,
     "generated_tree_dirty": true,
-    "generated_changed_file_count": 60
+    "generated_changed_file_count": 17
   },
   "public_claim": {
     "ready": false,
     "scope": "public benchmark or world-class readiness claim",
     "blockers": [
-      "release lock is not clean or commit is unavailable",
       "provider-backed model holdout evidence is incomplete",
       "human blind-review adjudication is incomplete",
       "world-class evidence is not accepted yet (4 open gaps, 4 ledger pending)",
@@ -103,12 +97,12 @@
     "policy": "Local reproducibility can pass before public claims; public claims require provider evidence, human adjudication, clean release lock, accepted world-class evidence, and complete source checks."
   },
   "release_lock": {
-    "ready": false,
-    "commit": "c30882468f45c7e78bef73e0ada161fd1fbaef79",
+    "ready": true,
+    "commit": "9eaa8f6cec4ba83c07ded0275686252576bee6c3",
     "status_scope": "generation-time status before this report is written",
-    "source_changed_file_count": 4,
-    "generated_changed_file_count": 60,
-    "reason": "source files were dirty at generation time"
+    "source_changed_file_count": 0,
+    "generated_changed_file_count": 17,
+    "reason": "only generated evidence artifacts were dirty at generation time"
   },
   "evidence_bundle": {
     "algorithm": "sha256(path,label,exists,artifact_sha256)",
@@ -116,7 +110,7 @@
     "existing_count": 25,
     "missing_count": 0,
     "missing_paths": [],
-    "sha256": "0cb0e7e0eea477ba17f31508bcac41bd049cfeda2fc9fe16a46e7e89f6c024cd"
+    "sha256": "98271c40046d1bf5f6a3ada701b5b1fd88b188bf4122a15424c8b4566cfc8fcf"
   },
   "methodology": {
     "path": "reports/benchmark_methodology.md",
@@ -190,7 +184,7 @@
       "path": "reports/output_execution_runs.json",
       "exists": true,
       "bytes": 7967,
-      "sha256": "615d4b9ec6fb8d487c98e06ffb8cdbe7d34b08b07a2d9ea069eee3cdd4edc0a9"
+      "sha256": "6edee9440d276bd62d36deee7a5a2c45ce2e7c6817a0e517f0339b266e4055aa"
     },
     {
       "label": "blind_review",
