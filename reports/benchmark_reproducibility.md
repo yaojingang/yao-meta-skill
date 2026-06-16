@@ -1,16 +1,16 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-17`
-Commit: `4a1a5295708ba3570821583652ef91fda0f0874f`
+Commit: `ed6960f65dbba0a36c335835f2ac6e8133435ea7`
 Working tree dirty at generation: `true`
-Source tree dirty at generation: `true`
+Source tree dirty at generation: `false`
 Generated evidence dirty at generation: `true`
-Evidence bundle SHA256: `e114eec2acbc1cbb7ac578dd4e5165c3ed2b88e4922ba3e64d2c6232a577fc6d`
+Evidence bundle SHA256: `38a010bc2913be5c7aadd809095c436abf8e566c8c53b8b4a63a821fea6acc98`
 
 ## Summary
 
 - reproducibility ready: `true`
-- release lock ready: `false`
+- release lock ready: `true`
 - methodology complete: `true`
 - required artifacts: `25`
 - missing artifacts: `0`
@@ -22,12 +22,12 @@ Evidence bundle SHA256: `e114eec2acbc1cbb7ac578dd4e5165c3ed2b88e4922ba3e64d2c623
 - provider evidence complete: `false`
 - human review complete: `false`
 - world-class ready: `false`
-- world-class source checks: `9` pass / `19` total; `10` blocked
+- world-class source checks: `10` pass / `19` total; `9` blocked
 - public claim ready: `false`
-- public claim blockers: `5`
-- changed files at generation: `62`
-- source changed files at generation: `6`
-- generated changed files at generation: `56`
+- public claim blockers: `4`
+- changed files at generation: `19`
+- source changed files at generation: `0`
+- generated changed files at generation: `19`
 
 This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete. The git commit and dirty samples are generation-time context; the evidence bundle SHA is the durable anchor for the artifacts listed below.
 
@@ -39,23 +39,22 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 | Blocker |
 | --- |
-| release lock is not clean or commit is unavailable |
 | provider-backed model holdout evidence is incomplete |
 | human blind-review adjudication is incomplete |
 | world-class evidence is not accepted yet (4 open gaps, 4 ledger pending) |
-| world-class source checks are not all accepted (9/19 pass, 10 blocked) |
+| world-class source checks are not all accepted (10/19 pass, 9 blocked) |
 
 ## Release Lock
 
-- ready: `false`
-- reason: source files were dirty at generation time
+- ready: `true`
+- reason: only generated evidence artifacts were dirty at generation time
 - status scope: generation-time status before this report is written
 
 ## Evidence Bundle
 
 - algorithm: `sha256(path,label,exists,artifact_sha256)`
 - artifacts: `25` / `25`
-- sha256: `e114eec2acbc1cbb7ac578dd4e5165c3ed2b88e4922ba3e64d2c6232a577fc6d`
+- sha256: `38a010bc2913be5c7aadd809095c436abf8e566c8c53b8b4a63a821fea6acc98`
 
 ## Methodology Sections
 
@@ -77,7 +76,7 @@ This report proves local benchmark reproducibility only. It keeps external provi
 | output_cases | `evals/output/cases.jsonl` | present | `a6ae96857116` |
 | output_schema | `evals/output/schema.json` | present | `8ee340c95064` |
 | output_scorecard | `reports/output_quality_scorecard.json` | present | `0806258a8e08` |
-| output_execution | `reports/output_execution_runs.json` | present | `c9c054c2e0a7` |
+| output_execution | `reports/output_execution_runs.json` | present | `3b9c37bdf022` |
 | blind_review | `reports/output_blind_review_pack.json` | present | `bbe2db8ec277` |
 | review_adjudication | `reports/output_review_adjudication.json` | present | `91fd88dd9b0f` |
 | trigger_scorecard | `reports/route_scorecard.json` | present | `c164e83e36d0` |
@@ -88,15 +87,15 @@ This report proves local benchmark reproducibility only. It keeps external provi
 | package_verification | `reports/package_verification.json` | present | `755a9c6788cc` |
 | install_simulation | `reports/install_simulation.json` | present | `15b77ec2b473` |
 | skill_os2_audit | `reports/skill_os2_audit.json` | present | `16cbe378cc1a` |
-| world_class_evidence_plan | `reports/world_class_evidence_plan.json` | present | `2beb888d7992` |
-| world_class_evidence_ledger | `reports/world_class_evidence_ledger.json` | present | `22c85613d7be` |
-| world_class_evidence_intake | `reports/world_class_evidence_intake.json` | present | `d3f44570e605` |
-| world_class_evidence_preflight | `reports/world_class_evidence_preflight.json` | present | `c9d5fc06305c` |
-| world_class_submission_review | `reports/world_class_submission_review.json` | present | `96624a5b7f79` |
-| world_class_operator_runbook | `reports/world_class_operator_runbook.json` | present | `a7b7809d3b42` |
-| world_class_operator_runbook_markdown | `reports/world_class_operator_runbook.md` | present | `d72777b421b5` |
-| world_class_operator_runbook_html | `reports/world_class_operator_runbook.html` | present | `73d8ef2898f2` |
-| world_class_claim_guard | `reports/world_class_claim_guard.json` | present | `abe7f7d60c00` |
+| world_class_evidence_plan | `reports/world_class_evidence_plan.json` | present | `4193115d881d` |
+| world_class_evidence_ledger | `reports/world_class_evidence_ledger.json` | present | `cb66d3284045` |
+| world_class_evidence_intake | `reports/world_class_evidence_intake.json` | present | `002fbf07989a` |
+| world_class_evidence_preflight | `reports/world_class_evidence_preflight.json` | present | `758807fa5749` |
+| world_class_submission_review | `reports/world_class_submission_review.json` | present | `f5b1e0e44aeb` |
+| world_class_operator_runbook | `reports/world_class_operator_runbook.json` | present | `8da2e2cde3ad` |
+| world_class_operator_runbook_markdown | `reports/world_class_operator_runbook.md` | present | `bfac92bc14f3` |
+| world_class_operator_runbook_html | `reports/world_class_operator_runbook.html` | present | `46b435f98d8a` |
+| world_class_claim_guard | `reports/world_class_claim_guard.json` | present | `c846ffc8565a` |
 
 ## Reproduction Commands
 
