@@ -222,7 +222,7 @@
       "actual": {
         "available": true,
         "clean": false,
-        "changed_file_count": 20
+        "changed_file_count": 13
       },
       "paths": [
         "reports/benchmark_reproducibility.json"
@@ -263,8 +263,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "5b52d7db65202d3a5bba4b217aa324cb53a79beb",
-      "actual": "5b52d7db65202d3a5bba4b217aa324cb53a79beb",
+      "expected": "c8febd1a7b25341fce62fb5154198f4e740fbdbe",
+      "actual": "c8febd1a7b25341fce62fb5154198f4e740fbdbe",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -280,7 +280,7 @@
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
         "source_contract_sha256": "e9d5b26e20c81f565271a1ecd793981ee1e56826313b160aebe776d2f89ca995",
-        "archive_sha256": "8319a98a3f3c325905b1968f9ff68aa072d5e0ab969f19c0a333cb22eb4b5557",
+        "archive_sha256": "563d37a1085a9b598bca7b132da6c50c1233864855591085b260d4d4bb312a3e",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 7,
@@ -293,7 +293,7 @@
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
         "source_contract_sha256": "e9d5b26e20c81f565271a1ecd793981ee1e56826313b160aebe776d2f89ca995",
-        "archive_sha256": "8319a98a3f3c325905b1968f9ff68aa072d5e0ab969f19c0a333cb22eb4b5557",
+        "archive_sha256": "563d37a1085a9b598bca7b132da6c50c1233864855591085b260d4d4bb312a3e",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 7,
@@ -409,8 +409,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "5b52d7db65202d3a5bba4b217aa324cb53a79beb",
-      "actual": "5b52d7db65202d3a5bba4b217aa324cb53a79beb",
+      "expected": "c8febd1a7b25341fce62fb5154198f4e740fbdbe",
+      "actual": "c8febd1a7b25341fce62fb5154198f4e740fbdbe",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
@@ -426,7 +426,7 @@
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
         "source_contract_sha256": "e9d5b26e20c81f565271a1ecd793981ee1e56826313b160aebe776d2f89ca995",
-        "archive_sha256": "8319a98a3f3c325905b1968f9ff68aa072d5e0ab969f19c0a333cb22eb4b5557",
+        "archive_sha256": "563d37a1085a9b598bca7b132da6c50c1233864855591085b260d4d4bb312a3e",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 7,
@@ -439,7 +439,7 @@
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
         "source_contract_sha256": "e9d5b26e20c81f565271a1ecd793981ee1e56826313b160aebe776d2f89ca995",
-        "archive_sha256": "8319a98a3f3c325905b1968f9ff68aa072d5e0ab969f19c0a333cb22eb4b5557",
+        "archive_sha256": "563d37a1085a9b598bca7b132da6c50c1233864855591085b260d4d4bb312a3e",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 7,
