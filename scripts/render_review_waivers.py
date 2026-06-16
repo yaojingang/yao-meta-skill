@@ -6,26 +6,10 @@ from datetime import date, timedelta
 from pathlib import Path
 from typing import Any
 
+from review_studio_gates import REVIEW_STUDIO_GATE_KEYS
+
 
 ROOT = Path(__file__).resolve().parent.parent
-REVIEW_STUDIO_GATE_KEYS = {
-    "intent-canvas",
-    "trigger-lab",
-    "output-lab",
-    "context-budget",
-    "runtime-matrix",
-    "trust-report",
-    "python-compat",
-    "architecture-maintainability",
-    "permission-gates",
-    "permission-runtime",
-    "skill-atlas",
-    "operations-loop",
-    "review-waivers",
-    "world-class-evidence",
-    "registry-audit",
-    "release-notes",
-}
 NON_WAIVABLE_GATE_KEYS = {"review-waivers", "world-class-evidence"}
 WAIVERABLE_GATE_KEYS = REVIEW_STUDIO_GATE_KEYS - NON_WAIVABLE_GATE_KEYS
 KNOWN_GATE_KEYS = WAIVERABLE_GATE_KEYS

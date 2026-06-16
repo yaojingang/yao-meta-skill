@@ -20,6 +20,26 @@ SCRIPT_INTERFACE_REASON = "Imported by render_review_studio.py to keep Review St
 
 ROOT = Path(__file__).resolve().parent.parent
 
+GATE_WEIGHTS = {
+    "trigger-lab": 15,
+    "output-lab": 20,
+    "context-budget": 10,
+    "runtime-matrix": 10,
+    "trust-report": 10,
+    "python-compat": 10,
+    "architecture-maintainability": 10,
+    "permission-gates": 10,
+    "permission-runtime": 10,
+    "skill-atlas": 10,
+    "operations-loop": 10,
+    "review-waivers": 10,
+    "world-class-evidence": 10,
+    "registry-audit": 10,
+    "release-notes": 10,
+    "intent-canvas": 10,
+}
+REVIEW_STUDIO_GATE_KEYS = frozenset(GATE_WEIGHTS)
+
 
 def _load_json(path: Path) -> dict[str, Any]:
     if not path.exists():
@@ -653,28 +673,10 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
 
 
 def weighted_score(gates: list[dict[str, str]]) -> int:
-    weights = {
-        "trigger-lab": 15,
-        "output-lab": 20,
-        "context-budget": 10,
-        "runtime-matrix": 10,
-        "trust-report": 10,
-        "python-compat": 10,
-        "architecture-maintainability": 10,
-        "permission-gates": 10,
-        "permission-runtime": 10,
-        "skill-atlas": 10,
-        "operations-loop": 10,
-        "review-waivers": 10,
-        "world-class-evidence": 10,
-        "registry-audit": 10,
-        "release-notes": 10,
-        "intent-canvas": 10,
-    }
     earned = 0.0
     total = 0.0
     for item in gates:
-        weight = weights.get(item["key"], 5)
+        weight = GATE_WEIGHTS.get(item["key"], 5)
         total += weight
         if item["status"] == "pass":
             earned += weight

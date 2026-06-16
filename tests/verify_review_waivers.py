@@ -11,6 +11,7 @@ SCRIPT = ROOT / "scripts" / "render_review_waivers.py"
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import render_review_waivers as review_waivers  # noqa: E402
+import review_studio_gates as review_gates  # noqa: E402
 
 
 def run(*args: str, check: bool = True) -> subprocess.CompletedProcess:
@@ -24,7 +25,7 @@ def run(*args: str, check: bool = True) -> subprocess.CompletedProcess:
 
 
 def main() -> None:
-    assert review_waivers.REVIEW_STUDIO_GATE_KEYS == {
+    expected_gate_keys = {
         "intent-canvas",
         "trigger-lab",
         "output-lab",
@@ -41,7 +42,10 @@ def main() -> None:
         "world-class-evidence",
         "registry-audit",
         "release-notes",
-    }, review_waivers.REVIEW_STUDIO_GATE_KEYS
+    }
+    assert review_gates.REVIEW_STUDIO_GATE_KEYS == expected_gate_keys, review_gates.REVIEW_STUDIO_GATE_KEYS
+    assert set(review_gates.GATE_WEIGHTS) == expected_gate_keys, review_gates.GATE_WEIGHTS
+    assert review_waivers.REVIEW_STUDIO_GATE_KEYS == review_gates.REVIEW_STUDIO_GATE_KEYS
     assert review_waivers.NON_WAIVABLE_GATE_KEYS == {"review-waivers", "world-class-evidence"}
     assert "python-compat" in review_waivers.WAIVERABLE_GATE_KEYS
     assert "architecture-maintainability" in review_waivers.WAIVERABLE_GATE_KEYS

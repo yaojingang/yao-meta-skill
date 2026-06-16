@@ -13,7 +13,7 @@ Generated at: `2026-06-16`
 - Yao CLI command handlers: `68`
 - entrypoint command handlers: `18`
 - command modules: `6`
-- largest file lines: `836`
+- largest file lines: `837`
 - watch threshold lines: `720`
 - watchlist: `8`
 - hotspots: `0`
@@ -29,7 +29,7 @@ No file-size hotspots found.
 
 | File | Lines | Kind | Recommended next split |
 | --- | ---: | --- | --- |
-| `tests/verify_review_studio.py` | `836` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
+| `tests/verify_review_studio.py` | `837` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
 | `scripts/skill_report_model.py` | `800` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `tests/verify_yao_cli.py` | `785` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
 | `scripts/render_evidence_consistency.py` | `766` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
@@ -42,7 +42,7 @@ No file-size hotspots found.
 
 | File | Lines | Kind | Severity |
 | --- | ---: | --- | --- |
-| `tests/verify_review_studio.py` | `836` | `test` | `pass` |
+| `tests/verify_review_studio.py` | `837` | `test` | `pass` |
 | `scripts/skill_report_model.py` | `800` | `internal-module` | `pass` |
 | `tests/verify_yao_cli.py` | `785` | `test` | `pass` |
 | `scripts/render_evidence_consistency.py` | `766` | `cli-script` | `pass` |

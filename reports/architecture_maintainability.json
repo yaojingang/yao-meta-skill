@@ -15,7 +15,7 @@
     "warn_line_threshold": 900,
     "watch_line_threshold": 720,
     "block_line_threshold": 1500,
-    "largest_file_lines": 836,
+    "largest_file_lines": 837,
     "watchlist_count": 8,
     "hotspot_count": 0,
     "blocker_count": 0,
@@ -24,7 +24,7 @@
   "largest_files": [
     {
       "path": "tests/verify_review_studio.py",
-      "lines": 836,
+      "lines": 837,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
@@ -110,7 +110,7 @@
   "watchlist": [
     {
       "path": "tests/verify_review_studio.py",
-      "lines": 836,
+      "lines": 837,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."

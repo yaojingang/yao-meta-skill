@@ -308,7 +308,8 @@ def main() -> None:
         "world-class-evidence",
     }, payload
     gate_keys = {item["key"] for item in payload["gates"]}
-    assert {"intent-canvas", "trigger-lab", "output-lab", "context-budget", "runtime-matrix", "trust-report", "python-compat", "architecture-maintainability", "permission-gates", "permission-runtime", "skill-atlas", "operations-loop", "review-waivers", "world-class-evidence", "registry-audit", "release-notes"} <= gate_keys, payload
+    assert gate_keys == review_gates.REVIEW_STUDIO_GATE_KEYS, payload
+    assert set(review_gates.GATE_WEIGHTS) == review_gates.REVIEW_STUDIO_GATE_KEYS, review_gates.GATE_WEIGHTS
     output_gate = next(item for item in payload["gates"] if item["key"] == "output-lab")
     assert output_gate["status"] == "warn", output_gate
     assert "5/5 cases" in output_gate["detail"], output_gate
