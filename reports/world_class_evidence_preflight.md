@@ -1,6 +1,6 @@
 # World-Class Evidence Preflight
 
-Generated at: `2026-06-17`
+Generated at: `2026-06-13`
 
 ## Summary
 
@@ -10,8 +10,8 @@ Generated at: `2026-06-17`
 - credential value exposed: `false`
 - collection ready: `1`
 - collection blocked: `3`
-- source checks: `9` pass / `19` total
-- repair rows: `14` blocked / `14` total
+- source checks: `10` pass / `19` total
+- repair rows: `13` blocked / `13` total
 
 This preflight report checks whether an operator can start collecting the remaining external or human evidence. It never accepts evidence, prints secret values, or changes the world-class ledger.
 
@@ -66,7 +66,6 @@ Repair rows convert preflight and source blockers into concrete operator actions
 | `native-permission-enforcement` | `source-check` | `native_enforcement_count` | `blocked` | Collect real target-client or external runtime guard proof. |
 | `native-client-telemetry` | `precheck` | `external-client` | `blocked` | Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events. |
 | `native-client-telemetry` | `source-check` | `external_source_events` | `blocked` | Import at least one metadata-only event from a real client. |
-| `native-client-telemetry` | `source-check` | `adoption_sample_count` | `blocked` | Telemetry must include adoption outcome evidence. |
 
 ## Provider Holdout
 
@@ -178,7 +177,7 @@ Repair rows convert preflight and source blockers into concrete operator actions
 | Check | Current | Expected | Status | Next action |
 | --- | --- | --- | --- | --- |
 | External events | `0` | `>0` | `blocked` | Import at least one metadata-only event from a real client. |
-| Adoption sample | `0` | `>0` | `blocked` | Telemetry must include adoption outcome evidence. |
+| Adoption sample | `1` | `>0` | `pass` | Telemetry must include adoption outcome evidence. |
 | Raw content blocked | `False` | `false` | `pass` | Telemetry must stay metadata-only. |
 
 ## Boundary

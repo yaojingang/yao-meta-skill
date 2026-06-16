@@ -98,6 +98,7 @@ def world_class_action_steps(data: dict[str, Any]) -> list[dict[str, Any]]:
         if not key:
             continue
         checklist = intake_by_key.get(key, {})
+        preflight_item = preflight_by_key.get(key, {})
         submission = entry.get("submission_state", {}) if isinstance(entry.get("submission_state", {}), dict) else {}
         source_checks = entry.get("source_checklist", []) if isinstance(entry.get("source_checklist", []), list) else []
         blocked_checks = [
@@ -112,12 +113,25 @@ def world_class_action_steps(data: dict[str, Any]) -> list[dict[str, Any]]:
             for row in source_checks
             if isinstance(row, dict) and str(row.get("status", "")) != "pass"
         ]
+        repair_rows = []
+        for row in preflight_item.get("repair_checklist", []) if isinstance(preflight_item, dict) else []:
+            if not isinstance(row, dict):
+                continue
+            repair_rows.append(
+                {
+                    "repair_type": str(row.get("repair_type", "")),
+                    "target": str(row.get("target", "")),
+                    "status": str(row.get("status", "blocked")),
+                    "blocking_reason": str(row.get("blocking_reason", "")),
+                    "next_action": str(row.get("next_action", "")),
+                    "counts_as_completion": row.get("counts_as_completion") is True,
+                }
+            )
         derived_pass_count = sum(1 for row in source_checks if isinstance(row, dict) and str(row.get("status", "")) == "pass")
         runbook = entry.get("runbook", [])
         if not runbook and isinstance(checklist.get("must_collect", {}), dict):
             runbook = checklist["must_collect"].get("runbook", [])
         must_collect = checklist.get("must_collect", {}) if isinstance(checklist.get("must_collect", {}), dict) else {}
-        preflight_item = preflight_by_key.get(key, {})
         submission_kit = (
             preflight_item.get("submission_kit", {})
             if isinstance(preflight_item.get("submission_kit", {}), dict)
@@ -137,6 +151,9 @@ def world_class_action_steps(data: dict[str, Any]) -> list[dict[str, Any]]:
                 "source_pass_count": int(entry.get("source_pass_count", 0) or derived_pass_count),
                 "source_blocked_count": int(entry.get("source_blocked_count", 0) or len(blocked_checks)),
                 "blocked_checks": blocked_checks,
+                "repair_rows": repair_rows,
+                "repair_blocked_count": sum(1 for row in repair_rows if row.get("status") != "ready"),
+                "repair_counts_as_completion": any(row.get("counts_as_completion") for row in repair_rows),
                 "commands": action_command_rows(checklist.get("commands", {}) if isinstance(checklist.get("commands", {}), dict) else {}),
                 "runbook": [str(item) for item in runbook[:3]],
                 "provenance_requirements": first_text_items(
@@ -228,6 +245,17 @@ def render_action_evidence_steps(steps: list[dict[str, Any]]) -> str:
                 "</li>"
             )
         runbook_rows = [f"<li>{html.escape(str(item))}</li>" for item in step.get("runbook", [])]
+        repair_rows = []
+        for row in step.get("repair_rows", []):
+            repair_rows.append(
+                "<li class='action-repair-row "
+                + html.escape(str(row.get("status", "blocked")))
+                + "'>"
+                f"<span>{html.escape(str(row.get('repair_type', '')))} · {html.escape(str(row.get('target', '')))}</span>"
+                f"<code>{html.escape(str(row.get('blocking_reason', '')))}</code>"
+                f"<small>{html.escape(str(row.get('next_action', '')))}</small>"
+                "</li>"
+            )
         cards.append(
             "<article class='action-evidence-item "
             + html.escape(str(step.get("status", "pending")))
@@ -238,6 +266,7 @@ def render_action_evidence_steps(steps: list[dict[str, Any]]) -> str:
             f"<dl><dt>提交</dt><dd><code>{html.escape(str(step.get('submission_path', '')))}</code></dd>"
             f"<dt>模板</dt><dd><code>{html.escape(str(step.get('template_path', '')))}</code></dd>"
             f"<dt>阻断</dt><dd>{html.escape(str(step.get('source_blocked_count', 0)))} blocked / {html.escape(str(step.get('source_pass_count', 0)))} pass</dd>"
+            f"<dt>修复</dt><dd>{html.escape(str(step.get('repair_blocked_count', 0)))} repair rows; counts as completion: {html.escape(str(step.get('repair_counts_as_completion') is True).lower())}</dd>"
             f"<dt>下一步</dt><dd>{html.escape(str(step.get('next_action', '')))}</dd></dl>"
             "<section><h5>阻断检查</h5>"
             + (
@@ -246,6 +275,13 @@ def render_action_evidence_steps(steps: list[dict[str, Any]]) -> str:
                 else "<p class='muted'>暂无阻断检查。</p>"
             )
             + "</section>"
+            "<details class='action-repair-details'><summary>修复清单</summary>"
+            + (
+                "<ul class='action-repair-list'>" + "".join(repair_rows) + "</ul>"
+                if repair_rows
+                else "<p class='muted'>暂无修复项。</p>"
+            )
+            + "</details>"
             "<details class='action-command-details'><summary>操作命令</summary>"
             + (
                 "<ul class='action-command-list'>" + "".join(command_rows) + "</ul>"

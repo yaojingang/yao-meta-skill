@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-17",
+  "generated_at": "2026-06-13",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 223,
+    "python_file_count": 224,
     "script_file_count": 148,
-    "test_file_count": 75,
+    "test_file_count": 76,
     "internal_module_count": 64,
     "cli_script_count": 86,
     "command_handler_count": 68,
@@ -65,14 +65,6 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
-      "path": "tests/verify_review_studio.py",
-      "lines": 590,
-      "kind": "test",
-      "severity": "pass",
-      "early_watch": false,
-      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
-    },
-    {
       "path": "scripts/render_skill_overview.py",
       "lines": 588,
       "kind": "cli-script",
@@ -119,6 +111,14 @@
       "severity": "pass",
       "early_watch": false,
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/render_review_studio.py",
+      "lines": 568,
+      "kind": "cli-script",
+      "severity": "pass",
+      "early_watch": false,
+      "recommendation": "Move data loading and large section renderers into focused review_studio_* modules."
     }
   ],
   "watchlist": [],

@@ -290,12 +290,14 @@
     }
     .action-evidence-checks,
     .action-command-list,
+    .action-repair-list,
     .action-runbook-list {
       margin: 0;
       display: grid;
       gap: 8px;
     }
     .action-evidence-checks,
+    .action-repair-list,
     .action-command-list {
       padding: 0;
       list-style: none;
@@ -304,6 +306,7 @@
       padding-left: 20px;
     }
     .action-evidence-check,
+    .action-repair-row,
     .action-command-list li {
       display: grid;
       gap: 3px;
@@ -313,13 +316,18 @@
     }
     .action-evidence-check.blocked { border-left: 3px solid var(--warn); padding-left: 8px; }
     .action-evidence-check.pass { border-left: 3px solid var(--pass); padding-left: 8px; }
+    .action-repair-row.blocked { border-left: 3px solid var(--warn); padding-left: 8px; }
+    .action-repair-row.ready { border-left: 3px solid var(--pass); padding-left: 8px; }
     .action-evidence-check span,
+    .action-repair-row span,
     .action-command-list span {
       color: var(--ink);
       font-size: 13px;
     }
     .action-evidence-check code,
     .action-evidence-check small,
+    .action-repair-row code,
+    .action-repair-row small,
     .action-command-list code,
     .action-runbook-list li {
       color: var(--muted);

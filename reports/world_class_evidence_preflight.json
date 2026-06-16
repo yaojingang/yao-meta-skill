@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-17",
+  "generated_at": "2026-06-13",
   "skill_dir": ".",
   "summary": {
     "evidence_item_count": 4,
@@ -14,10 +14,10 @@
     "collection_ready_count": 1,
     "collection_blocked_count": 3,
     "source_check_count": 19,
-    "source_pass_count": 9,
-    "source_blocked_count": 10,
-    "repair_checklist_count": 14,
-    "repair_blocked_count": 14,
+    "source_pass_count": 10,
+    "source_blocked_count": 9,
+    "repair_checklist_count": 13,
+    "repair_blocked_count": 13,
     "repair_ready_count": 0,
     "repair_counts_as_completion": false,
     "pending_count": 4,
@@ -715,8 +715,8 @@
           "label": "Adoption sample",
           "field": "adoption_sample_count",
           "expected": ">0",
-          "actual": 0,
-          "status": "blocked",
+          "actual": 1,
+          "status": "pass",
           "source_accepted": false,
           "next_action": "Telemetry must include adoption outcome evidence."
         },
@@ -802,16 +802,6 @@
           "status": "blocked",
           "blocking_reason": "Current value 0 does not satisfy '>0'.",
           "next_action": "Import at least one metadata-only event from a real client.",
-          "source": "source_checklist",
-          "counts_as_completion": false
-        },
-        {
-          "evidence_key": "native-client-telemetry",
-          "repair_type": "source-check",
-          "target": "adoption_sample_count",
-          "status": "blocked",
-          "blocking_reason": "Current value 0 does not satisfy '>0'.",
-          "next_action": "Telemetry must include adoption outcome evidence.",
           "source": "source_checklist",
           "counts_as_completion": false
         }
@@ -1163,8 +1153,8 @@
       "label": "Adoption sample",
       "field": "adoption_sample_count",
       "expected": ">0",
-      "actual": 0,
-      "status": "blocked",
+      "actual": 1,
+      "status": "pass",
       "source_accepted": false,
       "next_action": "Telemetry must include adoption outcome evidence."
     },
@@ -1307,16 +1297,6 @@
       "status": "blocked",
       "blocking_reason": "Current value 0 does not satisfy '>0'.",
       "next_action": "Import at least one metadata-only event from a real client.",
-      "source": "source_checklist",
-      "counts_as_completion": false
-    },
-    {
-      "evidence_key": "native-client-telemetry",
-      "repair_type": "source-check",
-      "target": "adoption_sample_count",
-      "status": "blocked",
-      "blocking_reason": "Current value 0 does not satisfy '>0'.",
-      "next_action": "Telemetry must include adoption outcome evidence.",
       "source": "source_checklist",
       "counts_as_completion": false
     }

@@ -229,6 +229,8 @@ ACTION_GUIDANCE: dict[str, dict[str, Any]] = {
             {"path": "reports/world_class_evidence_ledger.md", "label": "world-class evidence ledger", "kind": "report", "patterns": ["# World-Class Evidence Ledger"]},
             {"path": "reports/world_class_evidence_plan.md", "label": "world-class evidence plan", "kind": "report", "patterns": ["# World-Class Evidence Plan"]},
             {"path": "reports/world_class_evidence_intake.md", "label": "world-class evidence intake", "kind": "report", "patterns": ["# World-Class Evidence Intake"]},
+            {"path": "reports/world_class_evidence_preflight.md", "label": "world-class evidence preflight", "kind": "report", "patterns": ["# World-Class Evidence Preflight"]},
+            {"path": "reports/world_class_evidence_preflight.html", "label": "world-class preflight HTML", "kind": "report", "patterns": ["World-Class Evidence Preflight"]},
             {"path": "reports/world_class_submission_review.md", "label": "world-class submission review", "kind": "report", "patterns": ["# World-Class Submission Review"]},
             {"path": "reports/world_class_claim_guard.md", "label": "world-class claim guard", "kind": "report", "patterns": ["# World-Class Claim Guard"]},
             {"path": "evidence/world_class/intake.schema.json", "label": "evidence intake schema", "kind": "schema", "patterns": ["Yao World-Class Evidence Intake"]},

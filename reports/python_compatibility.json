@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-17",
+  "generated_at": "2026-06-13",
   "root": ".",
   "summary": {
     "target_python": "3.11",
-    "file_count": 226,
+    "file_count": 227,
     "issue_count": 0,
     "syntax_error_count": 0,
     "fstring_311_violation_count": 0,
@@ -930,6 +930,12 @@
     },
     {
       "path": "tests/review_studio_helpers.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "tests/review_studio_world_class_assertions.py",
       "ok": true,
       "issue_count": 0,
       "issues": []
