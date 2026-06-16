@@ -314,6 +314,44 @@ def main() -> None:
     assert any("forbidden raw or answer-key fields" in failure for failure in private_payload["failures"]), private_payload
     assert not (tmp_root / "private_decisions.json").exists(), private_payload
 
+    nested_private_source = tmp_root / "nested_private_source.json"
+    nested_private_source.write_text(
+        json.dumps(
+            {
+                "reviewer": "Yao QA",
+                "reviewed_at": "2026-06-13",
+                "decisions": [
+                    {
+                        "case_id": answer_key["answers"][0]["case_id"],
+                        "winner_variant": "A",
+                        "metadata": {"raw_output": "nested raw output must not be imported"},
+                    }
+                ],
+            },
+            ensure_ascii=False,
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    nested_private_proc = run(
+        [
+            str(IMPORTER),
+            "--input",
+            str(nested_private_source),
+            "--blind-pack",
+            str(blind_pack_json),
+            "--output-json",
+            str(tmp_root / "nested_private_decisions.json"),
+        ],
+        check=False,
+    )
+    nested_private_payload = json.loads(nested_private_proc.stdout)
+    assert nested_private_proc.returncode == 2, nested_private_payload
+    assert nested_private_payload["ok"] is False, nested_private_payload
+    assert any("decision #1.metadata.raw_output" in failure for failure in nested_private_payload["failures"]), nested_private_payload
+    assert not (tmp_root / "nested_private_decisions.json").exists(), nested_private_payload
+
     unknown_case = tmp_root / "unknown_case.json"
     unknown_case.write_text(
         json.dumps(

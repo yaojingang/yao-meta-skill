@@ -142,9 +142,19 @@ def parse_confidence(value: Any, case_id: str) -> tuple[float | None, str | None
     return round(parsed, 3), None
 
 
-def forbidden_fields(item: dict[str, Any]) -> list[str]:
-    keys = {str(key) for key in item}
-    return sorted((keys & RAW_CONTENT_FIELDS) | (keys & ANSWER_KEY_FIELDS))
+def forbidden_field_paths(value: Any, prefix: str) -> list[str]:
+    found: list[str] = []
+    if isinstance(value, dict):
+        for key, child in value.items():
+            key_text = str(key).strip()
+            child_path = f"{prefix}.{key_text}"
+            if key_text in RAW_CONTENT_FIELDS or key_text in ANSWER_KEY_FIELDS:
+                found.append(child_path)
+            found.extend(forbidden_field_paths(child, child_path))
+    elif isinstance(value, list):
+        for index, child in enumerate(value):
+            found.extend(forbidden_field_paths(child, f"{prefix}[{index}]"))
+    return found
 
 
 def normalize_decisions(
@@ -158,7 +168,7 @@ def normalize_decisions(
         if not isinstance(item, dict):
             failures.append(f"decision #{index} must be an object")
             continue
-        blocked_fields = forbidden_fields(item)
+        blocked_fields = forbidden_field_paths(item, f"decision #{index}")
         if blocked_fields:
             failures.append(f"decision #{index} contains forbidden raw or answer-key fields: {', '.join(blocked_fields)}")
         case_id = str(item.get("case_id", "")).strip()
