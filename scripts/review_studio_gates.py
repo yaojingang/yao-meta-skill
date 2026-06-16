@@ -3,6 +3,7 @@
 
 import json
 import os
+from collections import Counter
 from pathlib import Path
 from typing import Any
 
@@ -78,6 +79,27 @@ def add_blockers_from_gate(gates: list[dict[str, str]]) -> tuple[list[dict[str, 
     blockers = [item for item in gates if item["status"] == "block"]
     warnings = [item for item in gates if item["status"] == "warn"]
     return blockers, warnings
+
+
+def gate_contract(gates: list[dict[str, str]]) -> dict[str, Any]:
+    rendered_gate_keys = [str(item.get("key", "")) for item in gates]
+    rendered_gate_set = set(rendered_gate_keys)
+    expected_gate_set = set(REVIEW_STUDIO_GATE_KEYS)
+    duplicate_gate_keys = sorted(key for key, count in Counter(rendered_gate_keys).items() if count > 1)
+    missing_gate_keys = sorted(expected_gate_set - rendered_gate_set)
+    unknown_gate_keys = sorted(rendered_gate_set - expected_gate_set)
+    unweighted_gate_keys = sorted(rendered_gate_set - set(GATE_WEIGHTS))
+    return {
+        "ok": not (missing_gate_keys or unknown_gate_keys or duplicate_gate_keys or unweighted_gate_keys),
+        "expected_gate_count": len(expected_gate_set),
+        "actual_gate_count": len(rendered_gate_keys),
+        "expected_gate_keys": sorted(expected_gate_set),
+        "rendered_gate_keys": rendered_gate_keys,
+        "missing_gate_keys": missing_gate_keys,
+        "unknown_gate_keys": unknown_gate_keys,
+        "duplicate_gate_keys": duplicate_gate_keys,
+        "unweighted_gate_keys": unweighted_gate_keys,
+    }
 
 
 def target_maturity(skill_dir: Path, overview: dict[str, Any]) -> str:

@@ -1001,13 +1001,13 @@
     "ok": true,
     "summary": {
       "reproducibility_ready": true,
-      "release_lock_ready": true,
+      "release_lock_ready": false,
       "methodology_complete": true,
       "required_artifact_count": 25,
       "missing_artifact_count": 0,
-      "evidence_bundle_sha256": "813517ab4bc2b504a720544f29c80e1bf7b09bbd1938ffdbb840b33aa5abb76a",
-      "source_contract_sha256": "363354808bdd7c9517352e7a709ea13cd2a3878e526fb1f7121f71de5e746453",
-      "archive_sha256": "a5a62aeb079b925fe3e52446a607508209ab40a9fa9b2be2335dee35b182c482",
+      "evidence_bundle_sha256": "7d33c2082209f18d4e9530e53fc574eae34fe148316947b166407426922c9961",
+      "source_contract_sha256": "8fcd68d906823c7bcd96d21c765555ab7d53183876b34806a6b5bc29e817154b",
+      "archive_sha256": "11c535377813c5424308dbb30a57bbedde6b9acefffbfe0456364b00f130b89e",
       "output_case_count": 5,
       "failure_disclosure_count": 3,
       "command_count": 23,
@@ -1025,11 +1025,11 @@
       "world_class_source_pass_count": 6,
       "world_class_source_blocked_count": 7,
       "public_claim_ready": false,
-      "public_claim_blocker_count": 4,
-      "working_tree_dirty": false,
-      "changed_file_count": 0
+      "public_claim_blocker_count": 5,
+      "working_tree_dirty": true,
+      "changed_file_count": 45
     },
-    "commit": "0ee209e7fdbb78f51659d6f92e135d7239ac1bc5",
+    "commit": "538d7ed4017fec0e152a5fd87590dbe4cf75f273",
     "missing_artifacts": [],
     "limitations": [
       "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -1134,7 +1134,7 @@
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
     "package_hash_file_count": 216,
-    "package_sha256": "363354808bdd7c9517352e7a709ea13cd2a3878e526fb1f7121f71de5e746453"
+    "package_sha256": "8fcd68d906823c7bcd96d21c765555ab7d53183876b34806a6b5bc29e817154b"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -1172,8 +1172,8 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "363354808bdd7c9517352e7a709ea13cd2a3878e526fb1f7121f71de5e746453",
-        "archive_sha256": "a5a62aeb079b925fe3e52446a607508209ab40a9fa9b2be2335dee35b182c482"
+        "package_sha256": "8fcd68d906823c7bcd96d21c765555ab7d53183876b34806a6b5bc29e817154b",
+        "archive_sha256": "11c535377813c5424308dbb30a57bbedde6b9acefffbfe0456364b00f130b89e"
       },
       "compatibility": {
         "openai": "pass",
@@ -1204,12 +1204,12 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "a5a62aeb079b925fe3e52446a607508209ab40a9fa9b2be2335dee35b182c482",
+        "archive_sha256": "11c535377813c5424308dbb30a57bbedde6b9acefffbfe0456364b00f130b89e",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
       },
-      "generated_at": "2026-06-16"
+      "generated_at": "2026-06-13"
     },
     "failures": [],
     "warnings": []
@@ -1220,7 +1220,7 @@
       "target_count": 4,
       "adapter_count": 4,
       "archive_present": true,
-      "archive_sha256": "a5a62aeb079b925fe3e52446a607508209ab40a9fa9b2be2335dee35b182c482",
+      "archive_sha256": "11c535377813c5424308dbb30a57bbedde6b9acefffbfe0456364b00f130b89e",
       "archive_entry_count": 652,
       "failure_count": 0,
       "warning_count": 0
@@ -1299,12 +1299,12 @@
         {
           "field": "archive_sha256",
           "from": "",
-          "to": "a5a62aeb079b925fe3e52446a607508209ab40a9fa9b2be2335dee35b182c482"
+          "to": "11c535377813c5424308dbb30a57bbedde6b9acefffbfe0456364b00f130b89e"
         },
         {
           "field": "package_sha256",
           "from": "0000000000000000000000000000000000000000000000000000000000000000",
-          "to": "363354808bdd7c9517352e7a709ea13cd2a3878e526fb1f7121f71de5e746453"
+          "to": "8fcd68d906823c7bcd96d21c765555ab7d53183876b34806a6b5bc29e817154b"
         }
       ]
     },

@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-16",
+  "generated_at": "2026-06-16T07:12:11Z",
   "skill_dir": ".",
   "source_patterns": "reports/user_patterns.json",
   "pattern_count": 5,

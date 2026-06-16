@@ -295,6 +295,7 @@ def main() -> None:
     assert payload["schema_version"] == "2.0", payload
     assert payload["summary"]["decision"] == "review", payload
     assert payload["summary"]["gate_count"] == 16, payload
+    assert payload["summary"]["gate_contract_ok"] is True, payload
     assert payload["summary"]["world_class_score"] == 91, payload
     assert payload["summary"]["warning_count"] == 3, payload
     assert payload["summary"]["blocker_count"] == 0, payload
@@ -310,6 +311,16 @@ def main() -> None:
     gate_keys = {item["key"] for item in payload["gates"]}
     assert gate_keys == review_gates.REVIEW_STUDIO_GATE_KEYS, payload
     assert set(review_gates.GATE_WEIGHTS) == review_gates.REVIEW_STUDIO_GATE_KEYS, review_gates.GATE_WEIGHTS
+    gate_contract = payload["gate_contract"]
+    assert gate_contract["ok"] is True, gate_contract
+    assert gate_contract["expected_gate_count"] == 16, gate_contract
+    assert gate_contract["actual_gate_count"] == 16, gate_contract
+    assert set(gate_contract["expected_gate_keys"]) == review_gates.REVIEW_STUDIO_GATE_KEYS, gate_contract
+    assert set(gate_contract["rendered_gate_keys"]) == review_gates.REVIEW_STUDIO_GATE_KEYS, gate_contract
+    assert gate_contract["missing_gate_keys"] == [], gate_contract
+    assert gate_contract["unknown_gate_keys"] == [], gate_contract
+    assert gate_contract["duplicate_gate_keys"] == [], gate_contract
+    assert gate_contract["unweighted_gate_keys"] == [], gate_contract
     output_gate = next(item for item in payload["gates"] if item["key"] == "output-lab")
     assert output_gate["status"] == "warn", output_gate
     assert "5/5 cases" in output_gate["detail"], output_gate
@@ -821,6 +832,7 @@ def main() -> None:
     assert review_gates.status_label("warn") == "关注"
     assert review_gates.weighted_score([{"key": "output-lab", "status": "pass"}]) == 100
     assert review_gates.weighted_score([{"key": "output-lab", "status": "warn"}]) == 60
+    assert not review_gates.gate_contract([{"key": "output-lab", "status": "pass"}])["ok"]
     assert len(review_layout.REVIEW_STUDIO_NAV) == 16, review_layout.REVIEW_STUDIO_NAV
     assert ("#world-class", "世界证据") in review_layout.REVIEW_STUDIO_NAV, review_layout.REVIEW_STUDIO_NAV
     assert "position: sticky" in review_layout.review_studio_css(), review_layout.review_studio_css()[:400]
@@ -829,6 +841,9 @@ def main() -> None:
     ).strip()
     assert "#overview" in review_layout.render_review_nav(), review_layout.render_review_nav()
     assert "审查总览" in review_layout.render_review_nav(), review_layout.render_review_nav()
+    assert "闸门契约" in html, html[:9000]
+    assert "期望 Gate" in html, html[:9000]
+    assert "实际 Gate" in html, html[:9000]
     assert review_layout.render_review_nav([]) == ""
     print(json.dumps({"ok": True}, ensure_ascii=False, indent=2))
 

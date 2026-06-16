@@ -52,9 +52,12 @@ def main() -> None:
     assert ".metrics-primary" in css_contract, css_contract[:7000]
     assert ".metrics-flow" in css_contract, css_contract[:9000]
     assert ".metric-detail-grid" in css_contract, css_contract[:9000]
-    assert "repeat(auto-fit, minmax(min(100%, 340px), 1fr))" in css_contract, css_contract[:9000]
+    assert ".metrics-primary {\n      display: grid;\n      grid-template-columns: minmax(0, 1fr);" in css_contract, css_contract[:9000]
+    assert ".metric-detail-grid {\n      grid-template-columns: repeat(2, minmax(0, 1fr));" in css_contract, css_contract[:9000]
+    assert "repeat(auto-fit, minmax(min(100%, 340px), 1fr))" not in css_contract, css_contract[:9000]
     assert "grid-template-columns: minmax(420px, 1fr)" not in css_contract, css_contract[:9000]
     assert "overflow-wrap: break-word" in css_contract, css_contract[:9000]
+    assert ".metrics-primary, .metric-detail-grid, .two-col" in css_contract, css_contract[-2600:]
     assert "@media (max-width: 980px)" in css_contract, css_contract[-2200:]
 
     script_contract = skill_overview_script()

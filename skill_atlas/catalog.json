@@ -1,6 +1,6 @@
 {
   "workspace_root": ".",
-  "generated_at": "2026-06-16",
+  "generated_at": "2026-06-13",
   "skills": [
     {
       "name": "yao-meta-skill",
@@ -214,8 +214,8 @@
         "report": "reports/adoption_drift_report.json",
         "risk_band": "low",
         "event_count": 1,
-        "adoption_sample_count": 0,
-        "adoption_rate": 0,
+        "adoption_sample_count": 1,
+        "adoption_rate": 100.0,
         "candidate_count": 0
       }
     },

@@ -15,7 +15,7 @@
     "warn_line_threshold": 900,
     "watch_line_threshold": 720,
     "block_line_threshold": 1500,
-    "largest_file_lines": 837,
+    "largest_file_lines": 852,
     "watchlist_count": 8,
     "hotspot_count": 0,
     "blocker_count": 0,
@@ -24,7 +24,7 @@
   "largest_files": [
     {
       "path": "tests/verify_review_studio.py",
-      "lines": 837,
+      "lines": 852,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
@@ -86,6 +86,13 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
+      "path": "scripts/review_studio_gates.py",
+      "lines": 707,
+      "kind": "internal-module",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
       "path": "scripts/apply_adaptation.py",
       "lines": 706,
       "kind": "cli-script",
@@ -98,19 +105,12 @@
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
-      "path": "scripts/render_review_viewer.py",
-      "lines": 685,
-      "kind": "cli-script",
-      "severity": "pass",
-      "recommendation": "Split viewer data assembly from HTML section rendering."
     }
   ],
   "watchlist": [
     {
       "path": "tests/verify_review_studio.py",
-      "lines": 837,
+      "lines": 852,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."

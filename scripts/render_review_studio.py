@@ -8,7 +8,7 @@ from typing import Any
 from review_studio_actions import build_review_actions, render_review_actions
 from review_studio_data import evidence_paths, insight_cards, load_review_data
 from review_studio_formatting import registry_package_summary, render_kv_grid
-from review_studio_gates import add_blockers_from_gate, build_gates, status_label, weighted_score
+from review_studio_gates import add_blockers_from_gate, build_gates, gate_contract, status_label, weighted_score
 from review_studio_layout import render_review_nav, review_studio_css
 from review_studio_output_review import render_output_review_section
 from review_studio_skillops import render_skillops_section
@@ -123,6 +123,19 @@ def render_html(report: dict[str, Any]) -> str:
     description = overview.get("description") or frontmatter.get("description", "")
     nav_html = render_review_nav()
     gates_html = render_gate_list(gates)
+    gate_contract_panel = render_kv_grid(
+        report.get("gate_contract", {}),
+        [
+            "ok",
+            "expected_gate_count",
+            "actual_gate_count",
+            "missing_gate_keys",
+            "unknown_gate_keys",
+            "duplicate_gate_keys",
+            "unweighted_gate_keys",
+        ],
+        "gate contract missing",
+    )
     metrics_html = render_insights(insights)
     blockers_html = render_issue_list("阻断事项", blockers)
     warnings_html = render_issue_list("关注事项", warnings)
@@ -413,6 +426,11 @@ def render_html(report: dict[str, Any]) -> str:
       <div class="gates">{gates_html}</div>
     </section>
 
+    <section>
+      <h2>闸门契约</h2>
+      <div class="panel">{gate_contract_panel}</div>
+    </section>
+
     <div class="twocol">
       {blockers_html}
       {warnings_html}
@@ -584,6 +602,7 @@ def render_review_studio(skill_dir: Path, output_html: Path | None = None, outpu
     output_json = output_json or reports_dir / "review-studio.json"
     data = load_review_data(skill_dir)
     gates = build_gates(skill_dir, output_html, data)
+    contract = gate_contract(gates)
     blockers, warnings = add_blockers_from_gate(gates)
     review_actions = build_review_actions(gates, skill_dir, output_html, data)
     score = weighted_score(gates)
@@ -593,12 +612,13 @@ def render_review_studio(skill_dir: Path, output_html: Path | None = None, outpu
     decision = "blocked" if blockers or open_annotation_blockers else ("review" if warnings or open_annotation_warnings else "ready")
     report = {
         "schema_version": "2.0",
-        "ok": True,
+        "ok": contract["ok"],
         "skill_dir": display_path(skill_dir, skill_dir),
         "summary": {
             "decision": decision,
             "world_class_score": score,
             "gate_count": len(gates),
+            "gate_contract_ok": contract["ok"],
             "blocker_count": len(blockers),
             "warning_count": len(warnings),
             "action_count": len(review_actions),
@@ -608,6 +628,7 @@ def render_review_studio(skill_dir: Path, output_html: Path | None = None, outpu
             "open_annotation_warning_count": open_annotation_warnings,
         },
         "gates": gates,
+        "gate_contract": contract,
         "blockers": blockers,
         "warnings": warnings,
         "review_actions": review_actions,
