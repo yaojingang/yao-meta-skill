@@ -126,11 +126,13 @@ def submission_state(skill_dir: Path, task: dict[str, Any], submissions_dir: Pat
         return {
             "status": load_status,
             "path": rel_path(path, skill_dir),
-        "artifact_ref_count": 0,
-        "attested_real_evidence": False,
-        "privacy_contract_satisfied": False,
-        "ledger_reviewer_approved": False,
-        "ledger_counts_as_completion": False,
+            "artifact_ref_count": 0,
+            "attested_real_evidence": False,
+            "privacy_contract_satisfied": False,
+            "ledger_reviewer_approved": False,
+            "ledger_reviewer": "",
+            "ledger_reviewed_at": "",
+            "ledger_counts_as_completion": False,
         }
     validation = validate_payload(payload, task, path=path, root=skill_dir, template_expected=False)
     refs = payload.get("artifact_refs", [])
@@ -149,6 +151,8 @@ def submission_state(skill_dir: Path, task: dict[str, Any], submissions_dir: Pat
         "reviewer_or_operator_identity_present": attestation.get("reviewer_or_operator_identity_present") is True,
         "privacy_contract_satisfied": attestation.get("privacy_contract_satisfied") is True,
         "ledger_reviewer_approved": attestation.get("ledger_reviewer_approved") is True,
+        "ledger_reviewer": str(attestation.get("ledger_reviewer", "")).strip(),
+        "ledger_reviewed_at": str(attestation.get("ledger_reviewed_at", "")).strip(),
         "errors": validation.get("errors", []),
         "ledger_counts_as_completion": False,
     }

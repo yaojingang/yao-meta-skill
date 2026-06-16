@@ -25,7 +25,7 @@ def render_readme(report: dict[str, Any]) -> str:
         "2. Edit the matching JSON draft with only aggregate artifact references and provenance metadata.",
         "3. Set `template_only` to `false` only after real evidence exists.",
         "4. Set attestation booleans truthfully; do not include credentials, raw prompts, raw outputs, transcripts, notes, or private user content.",
-        "5. Validate the packet before asking the ledger reviewer to set `attestation.ledger_reviewer_approved` truthfully.",
+        "5. Validate the packet before asking the ledger reviewer to set `attestation.ledger_reviewer`, `attestation.ledger_reviewed_at`, and `attestation.ledger_reviewer_approved` truthfully.",
         "6. Optional artifact prefill only inserts SHA-256 digests for current local aggregate artifacts; it does not mark a draft as real evidence.",
         "",
         "## Commands",

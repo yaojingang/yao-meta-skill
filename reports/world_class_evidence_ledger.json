@@ -158,6 +158,8 @@
         "attested_real_evidence": false,
         "privacy_contract_satisfied": false,
         "ledger_reviewer_approved": false,
+        "ledger_reviewer": "",
+        "ledger_reviewed_at": "",
         "ledger_counts_as_completion": false
       },
       "anti_overclaim": {
@@ -277,6 +279,8 @@
         "attested_real_evidence": false,
         "privacy_contract_satisfied": false,
         "ledger_reviewer_approved": false,
+        "ledger_reviewer": "",
+        "ledger_reviewed_at": "",
         "ledger_counts_as_completion": false
       },
       "anti_overclaim": {
@@ -386,6 +390,8 @@
         "attested_real_evidence": false,
         "privacy_contract_satisfied": false,
         "ledger_reviewer_approved": false,
+        "ledger_reviewer": "",
+        "ledger_reviewed_at": "",
         "ledger_counts_as_completion": false
       },
       "anti_overclaim": {
@@ -488,6 +494,8 @@
         "attested_real_evidence": false,
         "privacy_contract_satisfied": false,
         "ledger_reviewer_approved": false,
+        "ledger_reviewer": "",
+        "ledger_reviewed_at": "",
         "ledger_counts_as_completion": false
       },
       "anti_overclaim": {

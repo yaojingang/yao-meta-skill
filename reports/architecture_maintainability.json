@@ -15,7 +15,7 @@
     "warn_line_threshold": 900,
     "watch_line_threshold": 720,
     "block_line_threshold": 1500,
-    "largest_file_lines": 696,
+    "largest_file_lines": 700,
     "watchlist_count": 0,
     "hotspot_count": 0,
     "blocker_count": 0,
@@ -23,18 +23,18 @@
   },
   "largest_files": [
     {
+      "path": "scripts/world_class_evidence_contract.py",
+      "lines": 700,
+      "kind": "internal-module",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
       "path": "tests/verify_yao_cli.py",
       "lines": 696,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
-    },
-    {
-      "path": "scripts/world_class_evidence_contract.py",
-      "lines": 687,
-      "kind": "internal-module",
-      "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
       "path": "scripts/render_review_viewer.py",
@@ -44,18 +44,18 @@
       "recommendation": "Split viewer data assembly from HTML section rendering."
     },
     {
+      "path": "tests/verify_world_class_evidence_intake.py",
+      "lines": 669,
+      "kind": "test",
+      "severity": "pass",
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
       "path": "scripts/skill_report_model.py",
       "lines": 665,
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
-      "path": "tests/verify_world_class_evidence_intake.py",
-      "lines": 663,
-      "kind": "test",
-      "severity": "pass",
-      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
       "path": "scripts/render_skill_os2_coverage.py",

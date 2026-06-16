@@ -151,7 +151,9 @@
         "reviewer_or_operator_identity_present",
         "artifact_refs_reviewed",
         "privacy_contract_satisfied",
-        "ledger_reviewer_approved"
+        "ledger_reviewer_approved",
+        "ledger_reviewer",
+        "ledger_reviewed_at"
       ],
       "properties": {
         "real_external_or_human_evidence": {
@@ -168,6 +170,12 @@
         },
         "ledger_reviewer_approved": {
           "type": "boolean"
+        },
+        "ledger_reviewer": {
+          "type": "string"
+        },
+        "ledger_reviewed_at": {
+          "type": "string"
         },
         "notes": {
           "type": "string"

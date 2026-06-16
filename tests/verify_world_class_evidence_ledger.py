@@ -61,6 +61,8 @@ def provider_submission(artifact_root: Path = ROOT, artifact_path: str = "report
             "artifact_refs_reviewed": True,
             "privacy_contract_satisfied": True,
             "ledger_reviewer_approved": True,
+            "ledger_reviewer": "Yao ledger reviewer",
+            "ledger_reviewed_at": "2026-06-13",
         },
     }
 
@@ -385,6 +387,82 @@ def main() -> None:
         "attestation.ledger_reviewer_approved must be true" in error
         for error in unapproved_provider["submission_state"]["errors"]
     ), unapproved_provider
+
+    missing_reviewer_submissions = TMP / "missing_reviewer_submissions"
+    missing_reviewer_submissions.mkdir()
+    missing_reviewer_submission = provider_submission(accepted_source_skill)
+    missing_reviewer_submission["attestation"]["ledger_reviewer"] = ""
+    (missing_reviewer_submissions / "provider-holdout.json").write_text(
+        json.dumps(missing_reviewer_submission, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    missing_reviewer_proc = subprocess.run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            str(accepted_source_skill),
+            "--output-json",
+            str(TMP / "missing_reviewer_provider_ledger.json"),
+            "--output-md",
+            str(TMP / "missing_reviewer_provider_ledger.md"),
+            "--submissions-dir",
+            str(missing_reviewer_submissions),
+            "--generated-at",
+            "2026-06-13",
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    missing_reviewer_payload = json.loads(missing_reviewer_proc.stdout)
+    missing_reviewer_provider = {
+        entry["key"]: entry for entry in missing_reviewer_payload["entries"]
+    }["provider-holdout"]
+    assert missing_reviewer_provider["status"] == "pending", missing_reviewer_provider
+    assert missing_reviewer_provider["submission_state"]["status"] == "invalid-contract", missing_reviewer_provider
+    assert any(
+        "attestation.ledger_reviewer is required" in error
+        for error in missing_reviewer_provider["submission_state"]["errors"]
+    ), missing_reviewer_provider
+
+    self_approved_submissions = TMP / "self_approved_submissions"
+    self_approved_submissions.mkdir()
+    self_approved_submission = provider_submission(accepted_source_skill)
+    self_approved_submission["attestation"]["ledger_reviewer"] = self_approved_submission["submitted_by"]
+    (self_approved_submissions / "provider-holdout.json").write_text(
+        json.dumps(self_approved_submission, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    self_approved_proc = subprocess.run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            str(accepted_source_skill),
+            "--output-json",
+            str(TMP / "self_approved_provider_ledger.json"),
+            "--output-md",
+            str(TMP / "self_approved_provider_ledger.md"),
+            "--submissions-dir",
+            str(self_approved_submissions),
+            "--generated-at",
+            "2026-06-13",
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    self_approved_payload = json.loads(self_approved_proc.stdout)
+    self_approved_provider = {
+        entry["key"]: entry for entry in self_approved_payload["entries"]
+    }["provider-holdout"]
+    assert self_approved_provider["status"] == "pending", self_approved_provider
+    assert self_approved_provider["submission_state"]["status"] == "invalid-contract", self_approved_provider
+    assert any(
+        "attestation.ledger_reviewer must be different from submitted_by" in error
+        for error in self_approved_provider["submission_state"]["errors"]
+    ), self_approved_provider
 
     accepted_submissions = TMP / "accepted_submissions"
     accepted_submissions.mkdir()

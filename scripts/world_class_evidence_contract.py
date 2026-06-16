@@ -676,6 +676,19 @@ def validate_payload(
     if not template_expected:
         for key in REQUIRED_ATTESTATION_TRUE:
             add_error(errors, attestation.get(key) is True, f"attestation.{key} must be true for a real submission")
+        ledger_reviewer = str(attestation.get("ledger_reviewer", "")).strip()
+        submitted_by = str(payload.get("submitted_by", "")).strip()
+        require_real_text(errors, ledger_reviewer, "attestation.ledger_reviewer")
+        add_error(
+            errors,
+            bool(SUBMITTED_AT_RE.match(str(attestation.get("ledger_reviewed_at", "")).strip())),
+            "attestation.ledger_reviewed_at must use YYYY-MM-DD or YYYY-MM-DDTHH:MM:SSZ",
+        )
+        add_error(
+            errors,
+            bool(ledger_reviewer and submitted_by and ledger_reviewer.casefold() != submitted_by.casefold()),
+            "attestation.ledger_reviewer must be different from submitted_by",
+        )
     validate_real_artifact_payloads(payload, errors, root, template_expected)
     return {
         "path": rel_path(path, root),

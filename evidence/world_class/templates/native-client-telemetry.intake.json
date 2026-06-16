@@ -46,6 +46,8 @@
     "artifact_refs_reviewed": false,
     "privacy_contract_satisfied": false,
     "ledger_reviewer_approved": false,
+    "ledger_reviewer": "",
+    "ledger_reviewed_at": "",
     "notes": "Copy this template into submissions/ after real client events have been imported."
   }
 }

@@ -163,6 +163,9 @@ def main() -> None:
     kit_draft = json.loads((kit_dir / "provider-holdout.json").read_text(encoding="utf-8"))
     assert kit_draft["template_only"] is True, kit_draft
     assert kit_draft["attestation"]["real_external_or_human_evidence"] is False, kit_draft
+    assert kit_draft["attestation"]["ledger_reviewer_approved"] is False, kit_draft
+    assert kit_draft["attestation"]["ledger_reviewer"] == "", kit_draft
+    assert kit_draft["attestation"]["ledger_reviewed_at"] == "", kit_draft
     assert "sha256" not in kit_draft["artifact_refs"][0], kit_draft
     assert kit_draft["provenance"]["run_command"] == (
         "python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60"
@@ -190,6 +193,7 @@ def main() -> None:
     assert "Evidence Matrix" in kit_readme, kit_readme
     assert "Operator Handoff" in kit_readme, kit_readme
     assert "Handoff rows are procedural" in kit_readme, kit_readme
+    assert "ledger_reviewed_at" in kit_readme, kit_readme
     assert "`review-submission`" in kit_readme, kit_readme
     assert "Submission refs" in kit_readme, kit_readme
     assert "Supporting assets" in kit_readme, kit_readme
@@ -249,6 +253,7 @@ def main() -> None:
     prefilled_draft = json.loads((prefilled_kit_dir / "provider-holdout.json").read_text(encoding="utf-8"))
     assert prefilled_draft["template_only"] is True, prefilled_draft
     assert prefilled_draft["attestation"]["real_external_or_human_evidence"] is False, prefilled_draft
+    assert prefilled_draft["attestation"]["ledger_reviewer_approved"] is False, prefilled_draft
     assert len(prefilled_draft["artifact_refs"][0]["sha256"]) == 64, prefilled_draft
     assert prefilled_draft["artifact_refs"][0]["contains_raw_content"] is False, prefilled_draft
     prefilled_readme = (prefilled_kit_dir / "README.md").read_text(encoding="utf-8")

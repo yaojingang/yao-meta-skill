@@ -59,6 +59,8 @@ def provider_submission() -> dict:
             "artifact_refs_reviewed": True,
             "privacy_contract_satisfied": True,
             "ledger_reviewer_approved": True,
+            "ledger_reviewer": "Yao ledger reviewer",
+            "ledger_reviewed_at": "2026-06-14",
         },
     }
 

@@ -6,15 +6,15 @@
     "context_budget_tier": "production",
     "context_budget_limit": 1000,
     "skill_body_tokens": 797,
-    "other_text_tokens": 1056256,
+    "other_text_tokens": 1057945,
     "estimated_initial_load_tokens": 990,
-    "estimated_total_text_tokens": 1057053,
-    "deferred_resource_tokens": 489692,
+    "estimated_total_text_tokens": 1058742,
+    "deferred_resource_tokens": 489964,
     "deferred_resource_warn_threshold": 120000,
     "deferred_resource_dirs": [
       {
         "path": "scripts",
-        "estimated_tokens": 429594,
+        "estimated_tokens": 429866,
         "file_count": 135
       },
       {
@@ -36,7 +36,7 @@
     "large_deferred_resource_dirs": [
       {
         "path": "scripts",
-        "estimated_tokens": 429594,
+        "estimated_tokens": 429866,
         "file_count": 135
       }
     ],
@@ -59,7 +59,7 @@
           ],
           "missing": [],
           "path": "scripts",
-          "estimated_tokens": 429594,
+          "estimated_tokens": 429866,
           "file_count": 135,
           "rationale": "Script resources are deterministic deferred tools, not initial-load prompt context."
         }

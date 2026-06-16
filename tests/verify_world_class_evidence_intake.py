@@ -87,6 +87,8 @@ def provider_submission(*, valid: bool, artifact_path: str = "reports/output_exe
             "artifact_refs_reviewed": valid,
             "privacy_contract_satisfied": valid,
             "ledger_reviewer_approved": valid,
+            "ledger_reviewer": "Yao ledger reviewer" if valid else "",
+            "ledger_reviewed_at": "2026-06-14" if valid else "",
         },
     }
 
@@ -138,6 +140,8 @@ def external_submission(
             "artifact_refs_reviewed": True,
             "privacy_contract_satisfied": True,
             "ledger_reviewer_approved": True,
+            "ledger_reviewer": "Yao ledger reviewer",
+            "ledger_reviewed_at": "2026-06-14",
         },
     }
 
@@ -372,6 +376,8 @@ def human_submission(skill_root: Path, *, reviewer: str = "Yao QA") -> dict:
             "artifact_refs_reviewed": True,
             "privacy_contract_satisfied": True,
             "ledger_reviewer_approved": True,
+            "ledger_reviewer": "Yao ledger reviewer",
+            "ledger_reviewed_at": "2026-06-14",
         },
     }
 
