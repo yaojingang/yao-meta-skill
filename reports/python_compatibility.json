@@ -5,7 +5,7 @@
   "root": ".",
   "summary": {
     "target_python": "3.11",
-    "file_count": 209,
+    "file_count": 211,
     "issue_count": 0,
     "syntax_error_count": 0,
     "fstring_311_violation_count": 0,
@@ -36,6 +36,18 @@
     },
     {
       "path": "geo-ranking-article-generator/scripts/build_html_index.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "scripts/adaptation_patch_safety.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "scripts/adaptation_report_contracts.py",
       "ok": true,
       "issue_count": 0,
       "issues": []

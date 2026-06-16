@@ -2,9 +2,9 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 224,
-    "script_count": 133,
-    "internal_module_count": 47,
+    "scanned_files": 226,
+    "script_count": 135,
+    "internal_module_count": 49,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -22,13 +22,41 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 224,
-    "package_sha256": "c74c96a2bc7dfd7e12c89cb475a6853fcd012bcfe7b4a3905007b896ed2cf957"
+    "package_hash_file_count": 226,
+    "package_sha256": "11432d13467e6822ac0fff5d8bde27fdf326322dfed62aca7cb9ad5ee1a706ab"
   },
   "failures": [],
   "warnings": [],
   "secrets": [],
   "scripts": [
+    {
+      "path": "scripts/adaptation_patch_safety.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Shared adaptation patch target parsing and target-file baseline verification helpers.",
+      "has_argparse": false,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
+      "path": "scripts/adaptation_report_contracts.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Shared adaptation approval and regression report contract decoration helpers.",
+      "has_argparse": false,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
     {
       "path": "scripts/adjudicate_output_review.py",
       "interface": "cli",
@@ -1943,7 +1971,7 @@
     "checked_count": 86,
     "passed_count": 86,
     "failed_count": 0,
-    "skipped_count": 47,
+    "skipped_count": 49,
     "failed_scripts": [],
     "results": [
       {
@@ -2808,6 +2836,14 @@
       }
     ],
     "skipped": [
+      {
+        "path": "scripts/adaptation_patch_safety.py",
+        "reason": "internal module"
+      },
+      {
+        "path": "scripts/adaptation_report_contracts.py",
+        "reason": "internal module"
+      },
       {
         "path": "scripts/build_skill_atlas_layout.py",
         "reason": "internal module"

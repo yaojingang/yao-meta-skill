@@ -4,10 +4,10 @@
   "generated_at": "2026-06-16",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 206,
-    "script_file_count": 133,
+    "python_file_count": 208,
+    "script_file_count": 135,
     "test_file_count": 73,
-    "internal_module_count": 49,
+    "internal_module_count": 51,
     "cli_script_count": 86,
     "command_handler_count": 68,
     "entrypoint_command_handler_count": 18,
@@ -15,20 +15,13 @@
     "warn_line_threshold": 900,
     "watch_line_threshold": 720,
     "block_line_threshold": 1500,
-    "largest_file_lines": 706,
+    "largest_file_lines": 696,
     "watchlist_count": 0,
     "hotspot_count": 0,
     "blocker_count": 0,
     "decision": "pass"
   },
   "largest_files": [
-    {
-      "path": "scripts/apply_adaptation.py",
-      "lines": 706,
-      "kind": "cli-script",
-      "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
     {
       "path": "tests/verify_yao_cli.py",
       "lines": 696,
@@ -102,6 +95,13 @@
     {
       "path": "scripts/build_skill_atlas.py",
       "lines": 637,
+      "kind": "cli-script",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/render_benchmark_reproducibility.py",
+      "lines": 595,
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."

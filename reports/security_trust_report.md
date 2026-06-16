@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `224`
-- Scripts: `133`
-- Internal script modules: `47`
+- Scanned files: `226`
+- Scripts: `135`
+- Internal script modules: `49`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `224`
-- Package SHA256: `c74c96a2bc7dfd7e12c89cb475a6853fcd012bcfe7b4a3905007b896ed2cf957`
+- Package hash files: `226`
+- Package SHA256: `11432d13467e6822ac0fff5d8bde27fdf326322dfed62aca7cb9ad5ee1a706ab`
 
 ## Failures
 
@@ -62,6 +62,8 @@
 
 | Script | Interface | Declared | Argparse | Main Guard | Input | Network | File Write | Subprocess | Reason |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| scripts/adaptation_patch_safety.py | internal-module | True | False | False | False | False | False | False | Shared adaptation patch target parsing and target-file baseline verification helpers. |
+| scripts/adaptation_report_contracts.py | internal-module | True | False | False | False | False | False | False | Shared adaptation approval and regression report contract decoration helpers. |
 | scripts/adjudicate_output_review.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/apply_adaptation.py | cli | True | True | True | False | False | True | True | Approval-gated adaptive patch application with dry-run, allowlist, regression, and rollback evidence. |
 | scripts/build_confusion_matrix.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |

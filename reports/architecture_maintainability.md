@@ -5,15 +5,15 @@ Generated at: `2026-06-16`
 ## Summary
 
 - decision: `pass`
-- python files: `206`
-- scripts: `133`
+- python files: `208`
+- scripts: `135`
 - tests: `73`
-- internal modules: `49`
+- internal modules: `51`
 - CLI scripts: `86`
 - Yao CLI command handlers: `68`
 - entrypoint command handlers: `18`
 - command modules: `6`
-- largest file lines: `706`
+- largest file lines: `696`
 - watch threshold lines: `720`
 - watchlist: `0`
 - hotspots: `0`
@@ -33,7 +33,6 @@ No near-threshold files found.
 
 | File | Lines | Kind | Severity |
 | --- | ---: | --- | --- |
-| `scripts/apply_adaptation.py` | `706` | `cli-script` | `pass` |
 | `tests/verify_yao_cli.py` | `696` | `test` | `pass` |
 | `scripts/world_class_evidence_contract.py` | `686` | `internal-module` | `pass` |
 | `scripts/render_review_viewer.py` | `685` | `cli-script` | `pass` |
@@ -45,6 +44,7 @@ No near-threshold files found.
 | `scripts/review_studio_gates.py` | `643` | `internal-module` | `pass` |
 | `scripts/cross_packager.py` | `638` | `cli-script` | `pass` |
 | `scripts/build_skill_atlas.py` | `637` | `cli-script` | `pass` |
+| `scripts/render_benchmark_reproducibility.py` | `595` | `cli-script` | `pass` |
 
 ## Release Rule
 
