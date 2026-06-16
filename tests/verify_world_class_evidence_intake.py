@@ -14,6 +14,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from world_class_evidence_contract import validate_payload  # noqa: E402
 from world_class_human_fixtures import assert_human_contract_artifact_validation  # noqa: E402
+from world_class_native_telemetry_fixtures import assert_native_telemetry_contract_artifact_validation  # noqa: E402
 
 
 def sha256_file(path: Path) -> str:
@@ -296,53 +297,6 @@ def native_permission_submission(skill_root: Path) -> dict:
     )
 
 
-def write_native_telemetry_artifacts(skill_root: Path, *, complete: bool) -> None:
-    write_json(
-        skill_root / "reports" / "adoption_drift_report.json",
-        {
-            "schema_version": "2.0",
-            "ok": True,
-            "privacy_contract": {
-                "raw_content_allowed": False,
-                "raw_event_log_packaged": False,
-            },
-            "summary": {
-                "source_types": {"external": 1 if complete else 0},
-                "adoption_sample_count": 1 if complete else 0,
-            },
-        },
-    )
-    write_json(
-        skill_root / "reports" / "telemetry_hook_recipes.json",
-        {
-            "schema_version": "1.0",
-            "ok": True,
-            "privacy_contract": {"raw_content_allowed": False},
-            "summary": {"metadata_only_recipe_count": 5},
-        },
-    )
-
-
-def native_telemetry_submission(skill_root: Path) -> dict:
-    return external_submission(
-        skill_root,
-        evidence_key="native-client-telemetry",
-        source_type="native-client-telemetry",
-        submitted_by="Yao client integrator",
-        artifact_paths=("reports/adoption_drift_report.json", "reports/telemetry_hook_recipes.json"),
-        artifact_kinds={
-            "reports/adoption_drift_report.json": "adoption-drift-report",
-            "reports/telemetry_hook_recipes.json": "hook-recipes",
-        },
-        provenance={
-            "client": "Chrome extension production build",
-            "native_host_manifest": "/Users/laoyao/.config/chrome/native-hosts/yao-meta-skill.json",
-            "event_source": "external",
-            "metadata_only": True,
-        },
-    )
-
-
 def write_json(path: Path, payload: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -492,28 +446,6 @@ def assert_external_contract_artifact_validation() -> None:
     assert permission_invalid["status"] == "fail", permission_invalid
     assert any("summary.native_enforcement_count must be >0" in error for error in permission_invalid["errors"]), permission_invalid["errors"]
 
-    telemetry_entry = {"key": "native-client-telemetry", "category": "external"}
-    write_native_telemetry_artifacts(skill_root, complete=True)
-    telemetry_valid = validate_payload(
-        native_telemetry_submission(skill_root),
-        telemetry_entry,
-        path=skill_root / "evidence" / "world_class" / "submissions" / "native-client-telemetry.json",
-        root=skill_root,
-        template_expected=False,
-    )
-    assert telemetry_valid["status"] == "pass", telemetry_valid
-    write_native_telemetry_artifacts(skill_root, complete=False)
-    telemetry_invalid = validate_payload(
-        native_telemetry_submission(skill_root),
-        telemetry_entry,
-        path=skill_root / "evidence" / "world_class" / "submissions" / "native-client-telemetry.json",
-        root=skill_root,
-        template_expected=False,
-    )
-    assert telemetry_invalid["status"] == "fail", telemetry_invalid
-    assert any("summary.source_types.external must be >0" in error for error in telemetry_invalid["errors"]), telemetry_invalid["errors"]
-    assert any("summary.adoption_sample_count must be >0" in error for error in telemetry_invalid["errors"]), telemetry_invalid["errors"]
-
 
 def main() -> None:
     shutil.rmtree(TMP, ignore_errors=True)
@@ -522,6 +454,7 @@ def main() -> None:
     default_md = TMP / "world_class_evidence_intake.md"
     assert_human_contract_artifact_validation()
     assert_external_contract_artifact_validation()
+    assert_native_telemetry_contract_artifact_validation()
     payload = run_intake("--output-json", str(default_json), "--output-md", str(default_md))
     assert payload["schema_version"] == "1.0", payload
     assert payload["ok"] is True, payload

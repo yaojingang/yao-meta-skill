@@ -4,10 +4,10 @@
   "generated_at": "2026-06-16",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 212,
-    "script_file_count": 138,
-    "test_file_count": 74,
-    "internal_module_count": 54,
+    "python_file_count": 214,
+    "script_file_count": 139,
+    "test_file_count": 75,
+    "internal_module_count": 55,
     "cli_script_count": 86,
     "command_handler_count": 68,
     "entrypoint_command_handler_count": 18,
@@ -35,13 +35,6 @@
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Split viewer data assembly from HTML section rendering."
-    },
-    {
-      "path": "tests/verify_world_class_evidence_intake.py",
-      "lines": 677,
-      "kind": "test",
-      "severity": "pass",
-      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
       "path": "scripts/skill_report_model.py",
@@ -93,15 +86,22 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
-      "path": "scripts/world_class_evidence_contract.py",
-      "lines": 618,
-      "kind": "internal-module",
+      "path": "tests/verify_world_class_evidence_intake.py",
+      "lines": 610,
+      "kind": "test",
       "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
       "path": "scripts/render_benchmark_reproducibility.py",
       "lines": 595,
+      "kind": "cli-script",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/optimize_description.py",
+      "lines": 585,
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."

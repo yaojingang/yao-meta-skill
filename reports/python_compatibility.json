@@ -5,7 +5,7 @@
   "root": ".",
   "summary": {
     "target_python": "3.11",
-    "file_count": 215,
+    "file_count": 217,
     "issue_count": 0,
     "syntax_error_count": 0,
     "fstring_311_violation_count": 0,
@@ -767,6 +767,12 @@
       "issues": []
     },
     {
+      "path": "scripts/world_class_native_telemetry_evidence.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
       "path": "scripts/world_class_preflight_layout.py",
       "ok": true,
       "issue_count": 0,
@@ -1296,6 +1302,12 @@
     },
     {
       "path": "tests/world_class_human_fixtures.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "tests/world_class_native_telemetry_fixtures.py",
       "ok": true,
       "issue_count": 0,
       "issues": []

@@ -8,6 +8,7 @@ from typing import Any
 
 from world_class_human_evidence import validate_human_adjudication_report
 from world_class_native_permission_evidence import validate_native_permission_report
+from world_class_native_telemetry_evidence import validate_native_telemetry_report
 from world_class_provider_evidence import validate_provider_execution_report
 
 
@@ -369,25 +370,6 @@ def artifact_ref_path_map(payload: dict[str, Any], root: Path) -> dict[str, Path
     return paths
 
 
-def real_int(value: Any) -> int | None:
-    return value if isinstance(value, int) and not isinstance(value, bool) else None
-
-
-def summary(payload: dict[str, Any]) -> dict[str, Any]:
-    value = payload.get("summary", {})
-    return value if isinstance(value, dict) else {}
-
-
-def source_types(payload: dict[str, Any]) -> dict[str, Any]:
-    value = summary(payload).get("source_types", {})
-    return value if isinstance(value, dict) else {}
-
-
-def privacy_contract(payload: dict[str, Any]) -> dict[str, Any]:
-    value = payload.get("privacy_contract", {})
-    return value if isinstance(value, dict) else {}
-
-
 def validate_provider_holdout_artifacts(payload: dict[str, Any], errors: list[str], root: Path) -> None:
     paths = artifact_ref_path_map(payload, root)
     execution = load_json(paths.get("reports/output_execution_runs.json", root / "__missing__"))
@@ -419,47 +401,7 @@ def validate_native_client_telemetry_artifacts(payload: dict[str, Any], errors: 
     paths = artifact_ref_path_map(payload, root)
     adoption = load_json(paths.get("reports/adoption_drift_report.json", root / "__missing__"))
     recipes = load_json(paths.get("reports/telemetry_hook_recipes.json", root / "__missing__"))
-    if adoption:
-        adoption_summary = summary(adoption)
-        adoption_privacy = privacy_contract(adoption)
-        add_error(errors, adoption.get("ok") is True, "native-client-telemetry adoption drift report ok must be true")
-        add_error(
-            errors,
-            bool(real_int(source_types(adoption).get("external")) and source_types(adoption)["external"] > 0),
-            "native-client-telemetry adoption drift summary.source_types.external must be >0",
-        )
-        add_error(
-            errors,
-            bool(real_int(adoption_summary.get("adoption_sample_count")) and adoption_summary["adoption_sample_count"] > 0),
-            "native-client-telemetry adoption drift summary.adoption_sample_count must be >0",
-        )
-        add_error(
-            errors,
-            adoption_privacy.get("raw_content_allowed") is False,
-            "native-client-telemetry adoption drift privacy_contract.raw_content_allowed must be false",
-        )
-        add_error(
-            errors,
-            adoption_privacy.get("raw_event_log_packaged") is False,
-            "native-client-telemetry adoption drift privacy_contract.raw_event_log_packaged must be false",
-        )
-    if recipes:
-        recipes_summary = summary(recipes)
-        recipes_privacy = privacy_contract(recipes)
-        add_error(errors, recipes.get("ok") is True, "native-client-telemetry hook recipes report ok must be true")
-        add_error(
-            errors,
-            bool(
-                real_int(recipes_summary.get("metadata_only_recipe_count"))
-                and recipes_summary["metadata_only_recipe_count"] > 0
-            ),
-            "native-client-telemetry hook recipes summary.metadata_only_recipe_count must be >0",
-        )
-        add_error(
-            errors,
-            recipes_privacy.get("raw_content_allowed") is False,
-            "native-client-telemetry hook recipes privacy_contract.raw_content_allowed must be false",
-        )
+    validate_native_telemetry_report(adoption, recipes, errors)
 
 
 def validate_real_artifact_payloads(payload: dict[str, Any], errors: list[str], root: Path, template_expected: bool) -> None:

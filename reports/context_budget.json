@@ -6,16 +6,16 @@
     "context_budget_tier": "production",
     "context_budget_limit": 1000,
     "skill_body_tokens": 797,
-    "other_text_tokens": 1067291,
+    "other_text_tokens": 1069589,
     "estimated_initial_load_tokens": 990,
-    "estimated_total_text_tokens": 1068088,
-    "deferred_resource_tokens": 494370,
+    "estimated_total_text_tokens": 1070386,
+    "deferred_resource_tokens": 495216,
     "deferred_resource_warn_threshold": 120000,
     "deferred_resource_dirs": [
       {
         "path": "scripts",
-        "estimated_tokens": 434272,
-        "file_count": 138
+        "estimated_tokens": 435118,
+        "file_count": 139
       },
       {
         "path": "references",
@@ -36,8 +36,8 @@
     "large_deferred_resource_dirs": [
       {
         "path": "scripts",
-        "estimated_tokens": 434272,
-        "file_count": 138
+        "estimated_tokens": 435118,
+        "file_count": 139
       }
     ],
     "deferred_resource_governance": {
@@ -59,14 +59,14 @@
           ],
           "missing": [],
           "path": "scripts",
-          "estimated_tokens": 434272,
-          "file_count": 138,
+          "estimated_tokens": 435118,
+          "file_count": 139,
           "rationale": "Script resources are deterministic deferred tools, not initial-load prompt context."
         }
       ],
       "summary": "Large deferred resources are indexed and backed by evidence."
     },
-    "relevant_file_count": 671,
+    "relevant_file_count": 675,
     "unused_resource_dirs": [],
     "quality_signal_points": 130,
     "quality_density": 131.3

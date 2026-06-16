@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `229`
-- Scripts: `138`
-- Internal script modules: `52`
+- Scanned files: `230`
+- Scripts: `139`
+- Internal script modules: `53`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `229`
-- Package SHA256: `2bc5e8214814c344534e5155301cd3f86e4ceee351313fb3a538d6fd9d400b75`
+- Package hash files: `230`
+- Package SHA256: `79e555f12cb95ad51753c69fdb7fce367f3a394c3e55c075ab4754feb6d3200b`
 
 ## Failures
 
@@ -183,6 +183,7 @@
 | scripts/world_class_evidence_contract.py | internal-module | True | False | False | False | False | False | False | Imported by world-class evidence reports to share intake validation and artifact integrity checks. |
 | scripts/world_class_human_evidence.py | internal-module | True | False | False | False | False | False | False | Imported by world_class_evidence_contract.py to validate blind A/B human adjudication evidence from decision rows. |
 | scripts/world_class_native_permission_evidence.py | internal-module | True | False | False | False | False | False | False | Imported by world_class_evidence_contract.py to validate runtime permission evidence from target-level probe rows. |
+| scripts/world_class_native_telemetry_evidence.py | internal-module | True | False | False | False | False | False | False | Imported by world_class_evidence_contract.py to validate native client telemetry evidence from metadata event rows. |
 | scripts/world_class_preflight_layout.py | internal-module | True | False | False | False | False | False | False | Imported by render_world_class_preflight.py to keep preflight HTML layout out of data assembly. |
 | scripts/world_class_provider_evidence.py | internal-module | True | False | False | False | False | False | False | Imported by world_class_evidence_contract.py to validate provider-backed holdout execution evidence from run rows. |
 | scripts/world_class_source_checks.py | internal-module | True | False | False | False | False | False | False | Imported by world-class evidence reports to keep source-evidence readiness checks consistent. |
