@@ -16,6 +16,9 @@
 - Minimum reason chars: `20`
 - Expiry is required for every waiver.
 - World-class evidence completion cannot be waived; it can only be proven by accepted ledger evidence.
+- Review Studio gates: `architecture-maintainability, context-budget, intent-canvas, operations-loop, output-lab, permission-gates, permission-runtime, python-compat, registry-audit, release-notes, review-waivers, runtime-matrix, skill-atlas, trigger-lab, trust-report, world-class-evidence`
+- Waiverable gates: `architecture-maintainability, context-budget, intent-canvas, operations-loop, output-lab, permission-gates, permission-runtime, python-compat, registry-audit, release-notes, runtime-matrix, skill-atlas, trigger-lab, trust-report`
+- Non-waivable gates: `review-waivers, world-class-evidence`
 
 ## Waivers
 

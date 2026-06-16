@@ -25,6 +25,16 @@ Every waiver must include:
 - `evidence`: optional path or note that explains the decision.
 - `scope`: default `current-release`.
 
+## Gate Key Policy
+
+The waiver ledger must track the Review Studio gate universe explicitly:
+
+- `review_studio_gate_keys`: every gate Review Studio can render.
+- `waiverable_gate_keys`: warning gates that may receive bounded human acceptance.
+- `non_waivable_gate_keys`: gates that must not be accepted through a waiver.
+
+When Review Studio adds or renames a gate, update the waiver gate policy and tests in the same change. `review-waivers` and `world-class-evidence` stay non-waivable: the first is the waiver mechanism itself, and the second can only be satisfied by accepted ledger evidence.
+
 ## Release Semantics
 
 - Invalid waiver records block Review Studio.

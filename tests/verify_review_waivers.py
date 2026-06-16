@@ -8,6 +8,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPT = ROOT / "scripts" / "render_review_waivers.py"
+sys.path.insert(0, str(ROOT / "scripts"))
+
+import render_review_waivers as review_waivers  # noqa: E402
 
 
 def run(*args: str, check: bool = True) -> subprocess.CompletedProcess:
@@ -21,6 +24,29 @@ def run(*args: str, check: bool = True) -> subprocess.CompletedProcess:
 
 
 def main() -> None:
+    assert review_waivers.REVIEW_STUDIO_GATE_KEYS == {
+        "intent-canvas",
+        "trigger-lab",
+        "output-lab",
+        "context-budget",
+        "runtime-matrix",
+        "trust-report",
+        "python-compat",
+        "architecture-maintainability",
+        "permission-gates",
+        "permission-runtime",
+        "skill-atlas",
+        "operations-loop",
+        "review-waivers",
+        "world-class-evidence",
+        "registry-audit",
+        "release-notes",
+    }, review_waivers.REVIEW_STUDIO_GATE_KEYS
+    assert review_waivers.NON_WAIVABLE_GATE_KEYS == {"review-waivers", "world-class-evidence"}
+    assert "python-compat" in review_waivers.WAIVERABLE_GATE_KEYS
+    assert "architecture-maintainability" in review_waivers.WAIVERABLE_GATE_KEYS
+    assert "world-class-evidence" not in review_waivers.WAIVERABLE_GATE_KEYS
+
     tmp_root = ROOT / "tests" / "tmp_review_waivers"
     if tmp_root.exists():
         shutil.rmtree(tmp_root)
@@ -55,6 +81,64 @@ def main() -> None:
     assert added_payload["summary"]["active_count"] == 1, added_payload
     assert added_payload["summary"]["covered_gate_keys"] == ["trust-report"], added_payload
     assert "trust-report" in (skill / "reports" / "review_waivers.md").read_text(encoding="utf-8")
+
+    python_compat = run(
+        str(skill),
+        "--generated-at",
+        "2026-06-13",
+        "--add-waiver",
+        "--gate-key",
+        "python-compat",
+        "--reviewer",
+        "Yao Team",
+        "--reason",
+        "Python compatibility warning is understood and bounded to this release.",
+        "--expires-at",
+        "2026-09-30",
+    )
+    python_compat_payload = json.loads(python_compat.stdout)
+    assert python_compat_payload["ok"], python_compat_payload
+    assert python_compat_payload["summary"]["covered_gate_keys"] == ["python-compat", "trust-report"], python_compat_payload
+
+    architecture = run(
+        str(skill),
+        "--generated-at",
+        "2026-06-13",
+        "--add-waiver",
+        "--gate-key",
+        "architecture-maintainability",
+        "--reviewer",
+        "Yao Team",
+        "--reason",
+        "Architecture warning is accepted only while the planned split remains in scope.",
+        "--expires-at",
+        "2026-09-30",
+    )
+    architecture_payload = json.loads(architecture.stdout)
+    assert architecture_payload["ok"], architecture_payload
+    assert architecture_payload["summary"]["covered_gate_keys"] == [
+        "architecture-maintainability",
+        "python-compat",
+        "trust-report",
+    ], architecture_payload
+
+    non_waivable = run(
+        str(skill),
+        "--generated-at",
+        "2026-06-13",
+        "--add-waiver",
+        "--gate-key",
+        "world-class-evidence",
+        "--reviewer",
+        "Yao Team",
+        "--reason",
+        "World class evidence cannot be waived even with a reviewer.",
+        "--expires-at",
+        "2026-09-30",
+        check=False,
+    )
+    assert non_waivable.returncode == 2, non_waivable.stdout
+    assert "invalid choice" in non_waivable.stderr, non_waivable.stderr
 
     expired_source = tmp_root / "expired.json"
     expired_source.write_text(
@@ -123,6 +207,9 @@ def main() -> None:
     root_markdown = root_report_md.read_text(encoding="utf-8")
     assert "Candidate Actions" in root_markdown, root_markdown
     assert "World-class evidence completion cannot be waived" in root_markdown, root_markdown
+    assert "Review Studio gates" in root_markdown, root_markdown
+    assert "Waiverable gates" in root_markdown, root_markdown
+    assert "Non-waivable gates" in root_markdown, root_markdown
     assert "`world-class-evidence` | `cannot-waive` | `false`" in root_markdown, root_markdown
 
     print(json.dumps({"ok": True}, ensure_ascii=False, indent=2))

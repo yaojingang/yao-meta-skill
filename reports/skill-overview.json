@@ -101,7 +101,7 @@
       "label": "上下文成本",
       "score": 42,
       "reasons": [
-        "入口约 360 个词/字，references 约 16828 个词/字。",
+        "入口约 360 个词/字，references 约 16914 个词/字。",
         "分数越高代表上下文成本越低。",
         "上下文成本偏高，建议压缩入口或拆分 references。"
       ]
@@ -205,7 +205,7 @@
       "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
     ],
     "gaps": [
-      "上下文成本需要补强：入口约 360 个词/字，references 约 16828 个词/字。"
+      "上下文成本需要补强：入口约 360 个词/字，references 约 16914 个词/字。"
     ],
     "recommendations": [
       "先改触发边界，再扩展工作流。",
@@ -996,13 +996,13 @@
     "ok": true,
     "summary": {
       "reproducibility_ready": true,
-      "release_lock_ready": true,
+      "release_lock_ready": false,
       "methodology_complete": true,
       "required_artifact_count": 25,
       "missing_artifact_count": 0,
-      "evidence_bundle_sha256": "f91abd056143c4d3a50857e8b7ae90d49139157b1cd7bb81eb103d4c9951e59d",
-      "source_contract_sha256": "795cfae7d2e06fc741fda329b649400b55031f3a959f2016ff0222a47a6dac31",
-      "archive_sha256": "c061bfca61f625a3cc88b55d91f35bdac9d9679509c4bb01b590d45532ec2c1c",
+      "evidence_bundle_sha256": "7540215c8aa2db458cd10433f2cac56bc2931c58df057232309fdae3a5f8e0e8",
+      "source_contract_sha256": "1e466c4508d6ebb845923331fe534197df4fddf9e3b778c789ce8d349a555642",
+      "archive_sha256": "88dc8d39204730f91d5738858e9000ac9b657ba09ab02d6d4804dac1b2546288",
       "output_case_count": 5,
       "failure_disclosure_count": 3,
       "command_count": 23,
@@ -1020,11 +1020,11 @@
       "world_class_source_pass_count": 6,
       "world_class_source_blocked_count": 7,
       "public_claim_ready": false,
-      "public_claim_blocker_count": 4,
-      "working_tree_dirty": false,
-      "changed_file_count": 0
+      "public_claim_blocker_count": 5,
+      "working_tree_dirty": true,
+      "changed_file_count": 33
     },
-    "commit": "be399c8b60c7734bde87b479d1bbacb43757f64b",
+    "commit": "6a879132211add348540043cc2ff2c87cf2a50e6",
     "missing_artifacts": [],
     "limitations": [
       "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -1129,7 +1129,7 @@
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
     "package_hash_file_count": 216,
-    "package_sha256": "795cfae7d2e06fc741fda329b649400b55031f3a959f2016ff0222a47a6dac31"
+    "package_sha256": "1e466c4508d6ebb845923331fe534197df4fddf9e3b778c789ce8d349a555642"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -1167,8 +1167,8 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "795cfae7d2e06fc741fda329b649400b55031f3a959f2016ff0222a47a6dac31",
-        "archive_sha256": "c061bfca61f625a3cc88b55d91f35bdac9d9679509c4bb01b590d45532ec2c1c"
+        "package_sha256": "1e466c4508d6ebb845923331fe534197df4fddf9e3b778c789ce8d349a555642",
+        "archive_sha256": "88dc8d39204730f91d5738858e9000ac9b657ba09ab02d6d4804dac1b2546288"
       },
       "compatibility": {
         "openai": "pass",
@@ -1199,7 +1199,7 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "c061bfca61f625a3cc88b55d91f35bdac9d9679509c4bb01b590d45532ec2c1c",
+        "archive_sha256": "88dc8d39204730f91d5738858e9000ac9b657ba09ab02d6d4804dac1b2546288",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
@@ -1215,7 +1215,7 @@
       "target_count": 4,
       "adapter_count": 4,
       "archive_present": true,
-      "archive_sha256": "c061bfca61f625a3cc88b55d91f35bdac9d9679509c4bb01b590d45532ec2c1c",
+      "archive_sha256": "88dc8d39204730f91d5738858e9000ac9b657ba09ab02d6d4804dac1b2546288",
       "archive_entry_count": 652,
       "failure_count": 0,
       "warning_count": 0
@@ -1294,12 +1294,12 @@
         {
           "field": "archive_sha256",
           "from": "",
-          "to": "c061bfca61f625a3cc88b55d91f35bdac9d9679509c4bb01b590d45532ec2c1c"
+          "to": "88dc8d39204730f91d5738858e9000ac9b657ba09ab02d6d4804dac1b2546288"
         },
         {
           "field": "package_sha256",
           "from": "0000000000000000000000000000000000000000000000000000000000000000",
-          "to": "795cfae7d2e06fc741fda329b649400b55031f3a959f2016ff0222a47a6dac31"
+          "to": "1e466c4508d6ebb845923331fe534197df4fddf9e3b778c789ce8d349a555642"
         }
       ]
     },
@@ -1380,19 +1380,59 @@
       "blocker_waivers_allowed": false,
       "minimum_reason_chars": 20,
       "expires_required": true,
-      "known_gate_keys": [
+      "review_studio_gate_keys": [
+        "architecture-maintainability",
         "context-budget",
         "intent-canvas",
         "operations-loop",
         "output-lab",
         "permission-gates",
         "permission-runtime",
+        "python-compat",
+        "registry-audit",
+        "release-notes",
+        "review-waivers",
+        "runtime-matrix",
+        "skill-atlas",
+        "trigger-lab",
+        "trust-report",
+        "world-class-evidence"
+      ],
+      "known_gate_keys": [
+        "architecture-maintainability",
+        "context-budget",
+        "intent-canvas",
+        "operations-loop",
+        "output-lab",
+        "permission-gates",
+        "permission-runtime",
+        "python-compat",
         "registry-audit",
         "release-notes",
         "runtime-matrix",
         "skill-atlas",
         "trigger-lab",
         "trust-report"
+      ],
+      "waiverable_gate_keys": [
+        "architecture-maintainability",
+        "context-budget",
+        "intent-canvas",
+        "operations-loop",
+        "output-lab",
+        "permission-gates",
+        "permission-runtime",
+        "python-compat",
+        "registry-audit",
+        "release-notes",
+        "runtime-matrix",
+        "skill-atlas",
+        "trigger-lab",
+        "trust-report"
+      ],
+      "non_waivable_gate_keys": [
+        "review-waivers",
+        "world-class-evidence"
       ]
     },
     "failures": [],

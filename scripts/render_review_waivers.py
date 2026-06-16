@@ -8,20 +8,27 @@ from typing import Any
 
 
 ROOT = Path(__file__).resolve().parent.parent
-KNOWN_GATE_KEYS = {
+REVIEW_STUDIO_GATE_KEYS = {
     "intent-canvas",
     "trigger-lab",
     "output-lab",
     "context-budget",
     "runtime-matrix",
     "trust-report",
+    "python-compat",
+    "architecture-maintainability",
     "permission-gates",
     "permission-runtime",
     "skill-atlas",
     "operations-loop",
+    "review-waivers",
+    "world-class-evidence",
     "registry-audit",
     "release-notes",
 }
+NON_WAIVABLE_GATE_KEYS = {"review-waivers", "world-class-evidence"}
+WAIVERABLE_GATE_KEYS = REVIEW_STUDIO_GATE_KEYS - NON_WAIVABLE_GATE_KEYS
+KNOWN_GATE_KEYS = WAIVERABLE_GATE_KEYS
 VALID_DECISIONS = {"accepted-risk", "false-positive", "temporary-exception"}
 MIN_REASON_CHARS = 20
 
@@ -270,7 +277,10 @@ def render_report(
             "blocker_waivers_allowed": False,
             "minimum_reason_chars": MIN_REASON_CHARS,
             "expires_required": True,
+            "review_studio_gate_keys": sorted(REVIEW_STUDIO_GATE_KEYS),
             "known_gate_keys": sorted(KNOWN_GATE_KEYS),
+            "waiverable_gate_keys": sorted(WAIVERABLE_GATE_KEYS),
+            "non_waivable_gate_keys": sorted(NON_WAIVABLE_GATE_KEYS),
         },
         "waivers": waivers,
         "waiver_candidates": waiver_candidates,
@@ -308,6 +318,9 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- Minimum reason chars: `{report['policy']['minimum_reason_chars']}`",
         "- Expiry is required for every waiver.",
         "- World-class evidence completion cannot be waived; it can only be proven by accepted ledger evidence.",
+        f"- Review Studio gates: `{', '.join(report['policy']['review_studio_gate_keys'])}`",
+        f"- Waiverable gates: `{', '.join(report['policy']['waiverable_gate_keys'])}`",
+        f"- Non-waivable gates: `{', '.join(report['policy']['non_waivable_gate_keys'])}`",
         "",
         "## Waivers",
         "",
