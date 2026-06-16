@@ -1,14 +1,14 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-16`
-Commit: `54851019f53f3ee3f508dedfc0daaf192d6bc6ad`
-Working tree dirty at generation: `true`
-Evidence bundle SHA256: `95c6335a413934f197ca1595747c312701edb6028e8fc2ffed6cc4755c0a8d1f`
+Commit: `0ee1f89637ac1c26d70498e6d726fcffbbc5e8e8`
+Working tree dirty at generation: `false`
+Evidence bundle SHA256: `51261159180a2763fe1239729cb6e3da86bf76811560baa342f742086d0c3c6a`
 
 ## Summary
 
 - reproducibility ready: `true`
-- release lock ready: `false`
+- release lock ready: `true`
 - methodology complete: `true`
 - required artifacts: `25`
 - missing artifacts: `0`
@@ -22,8 +22,8 @@ Evidence bundle SHA256: `95c6335a413934f197ca1595747c312701edb6028e8fc2ffed6cc47
 - world-class ready: `false`
 - world-class source checks: `7` pass / `13` total; `6` blocked
 - public claim ready: `false`
-- public claim blockers: `5`
-- changed files at generation: `64`
+- public claim blockers: `4`
+- changed files at generation: `0`
 
 This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete. The git commit is generation-time context; the evidence bundle SHA is the durable anchor for the artifacts listed below.
 
@@ -35,7 +35,6 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 | Blocker |
 | --- |
-| release lock is not clean or commit is unavailable |
 | provider-backed model holdout evidence is incomplete |
 | human blind-review adjudication is incomplete |
 | world-class evidence is not accepted yet (4 open gaps, 4 ledger pending) |
@@ -43,15 +42,15 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 ## Release Lock
 
-- ready: `false`
-- reason: working tree was dirty at generation time
+- ready: `true`
+- reason: clean generation-time HEAD
 - status scope: generation-time status before this report is written
 
 ## Evidence Bundle
 
 - algorithm: `sha256(path,label,exists,artifact_sha256)`
 - artifacts: `25` / `25`
-- sha256: `95c6335a413934f197ca1595747c312701edb6028e8fc2ffed6cc4755c0a8d1f`
+- sha256: `51261159180a2763fe1239729cb6e3da86bf76811560baa342f742086d0c3c6a`
 
 ## Methodology Sections
 
@@ -83,16 +82,16 @@ This report proves local benchmark reproducibility only. It keeps external provi
 | registry_audit | `reports/registry_audit.json` | present | `7762378b6fe7` |
 | package_verification | `reports/package_verification.json` | present | `bbe73152879c` |
 | install_simulation | `reports/install_simulation.json` | present | `ba0b8b088b64` |
-| skill_os2_audit | `reports/skill_os2_audit.json` | present | `6187a8850680` |
-| world_class_evidence_plan | `reports/world_class_evidence_plan.json` | present | `af3c3f101ad9` |
-| world_class_evidence_ledger | `reports/world_class_evidence_ledger.json` | present | `6c135aced344` |
-| world_class_evidence_intake | `reports/world_class_evidence_intake.json` | present | `69afd0ff3d49` |
-| world_class_evidence_preflight | `reports/world_class_evidence_preflight.json` | present | `97924dd4be88` |
-| world_class_submission_review | `reports/world_class_submission_review.json` | present | `17def7ba6982` |
-| world_class_operator_runbook | `reports/world_class_operator_runbook.json` | present | `f2e53f857320` |
-| world_class_operator_runbook_markdown | `reports/world_class_operator_runbook.md` | present | `337fb764b98a` |
+| skill_os2_audit | `reports/skill_os2_audit.json` | present | `242af549b85c` |
+| world_class_evidence_plan | `reports/world_class_evidence_plan.json` | present | `51c663a77890` |
+| world_class_evidence_ledger | `reports/world_class_evidence_ledger.json` | present | `d8a5e113a273` |
+| world_class_evidence_intake | `reports/world_class_evidence_intake.json` | present | `d4a53a4610d3` |
+| world_class_evidence_preflight | `reports/world_class_evidence_preflight.json` | present | `129a64f446db` |
+| world_class_submission_review | `reports/world_class_submission_review.json` | present | `0ad7baa75814` |
+| world_class_operator_runbook | `reports/world_class_operator_runbook.json` | present | `8b95ae1b4d60` |
+| world_class_operator_runbook_markdown | `reports/world_class_operator_runbook.md` | present | `7b957aa91b38` |
 | world_class_operator_runbook_html | `reports/world_class_operator_runbook.html` | present | `ca72c65b437b` |
-| world_class_claim_guard | `reports/world_class_claim_guard.json` | present | `25206d72ff91` |
+| world_class_claim_guard | `reports/world_class_claim_guard.json` | present | `704aba252d55` |
 
 ## Reproduction Commands
 
