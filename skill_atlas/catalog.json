@@ -144,6 +144,7 @@
         "scripts/yao_cli_output_commands.py",
         "scripts/yao_cli_parser.py",
         "scripts/yao_cli_parser_evidence.py",
+        "scripts/yao_cli_parser_operations.py",
         "scripts/yao_cli_report_commands.py",
         "scripts/yao_cli_runtime.py",
         "scripts/yao_cli_telemetry.py",

@@ -5,7 +5,7 @@
   "root": ".",
   "summary": {
     "target_python": "3.11",
-    "file_count": 201,
+    "file_count": 202,
     "issue_count": 0,
     "syntax_error_count": 0,
     "fstring_311_violation_count": 0,
@@ -780,6 +780,12 @@
     },
     {
       "path": "scripts/yao_cli_parser_evidence.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "scripts/yao_cli_parser_operations.py",
       "ok": true,
       "issue_count": 0,
       "issues": []

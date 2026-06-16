@@ -16,6 +16,7 @@ import yao_cli_distribution_commands  # noqa: E402
 import yao_cli_output_commands  # noqa: E402
 import yao_cli_parser  # noqa: E402
 import yao_cli_parser_evidence  # noqa: E402
+import yao_cli_parser_operations  # noqa: E402
 import yao_cli_report_commands  # noqa: E402
 import yao_cli_runtime  # noqa: E402
 from yao_cli_report_refresh import refresh_root_report_consistency_inputs  # noqa: E402
@@ -77,6 +78,7 @@ def main() -> None:
     for module in (
         yao_cli_parser,
         yao_cli_parser_evidence,
+        yao_cli_parser_operations,
         yao_cli_runtime,
         yao_cli_adaptation_commands,
         yao_cli_distribution_commands,

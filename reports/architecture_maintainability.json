@@ -4,10 +4,10 @@
   "generated_at": "2026-06-16",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 198,
-    "script_file_count": 127,
+    "python_file_count": 199,
+    "script_file_count": 128,
     "test_file_count": 71,
-    "internal_module_count": 44,
+    "internal_module_count": 45,
     "cli_script_count": 85,
     "command_handler_count": 68,
     "entrypoint_command_handler_count": 18,
@@ -16,7 +16,7 @@
     "watch_line_threshold": 720,
     "block_line_threshold": 1500,
     "largest_file_lines": 852,
-    "watchlist_count": 6,
+    "watchlist_count": 5,
     "hotspot_count": 0,
     "blocker_count": 0,
     "decision": "pass"
@@ -31,17 +31,10 @@
     },
     {
       "path": "tests/verify_yao_cli.py",
-      "lines": 785,
+      "lines": 787,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
-    },
-    {
-      "path": "scripts/yao_cli_parser.py",
-      "lines": 759,
-      "kind": "internal-module",
-      "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
       "path": "scripts/build_skill_atlas.py",
@@ -105,6 +98,13 @@
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "tests/verify_world_class_evidence_intake.py",
+      "lines": 660,
+      "kind": "test",
+      "severity": "pass",
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     }
   ],
   "watchlist": [
@@ -117,17 +117,10 @@
     },
     {
       "path": "tests/verify_yao_cli.py",
-      "lines": 785,
+      "lines": 787,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
-    },
-    {
-      "path": "scripts/yao_cli_parser.py",
-      "lines": 759,
-      "kind": "internal-module",
-      "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
       "path": "scripts/build_skill_atlas.py",
