@@ -248,8 +248,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "de51f71ec378d820f0f25d247223dbcd82160b73",
-      "actual": "de51f71ec378d820f0f25d247223dbcd82160b73",
+      "expected": "46b9f7a2606f529d501db0772a7da43ea6336a23",
+      "actual": "46b9f7a2606f529d501db0772a7da43ea6336a23",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -394,8 +394,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "de51f71ec378d820f0f25d247223dbcd82160b73",
-      "actual": "de51f71ec378d820f0f25d247223dbcd82160b73",
+      "expected": "46b9f7a2606f529d501db0772a7da43ea6336a23",
+      "actual": "46b9f7a2606f529d501db0772a7da43ea6336a23",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"

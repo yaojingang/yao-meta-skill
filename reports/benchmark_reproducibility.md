@@ -1,7 +1,7 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-16`
-Commit: `de51f71ec378d820f0f25d247223dbcd82160b73`
+Commit: `46b9f7a2606f529d501db0772a7da43ea6336a23`
 Working tree dirty at generation: `false`
 Evidence bundle SHA256: `a3b7e76bf37cbf3a9cc983ff7df3b6780fd0212b5e941386b008d86ed2438339`
 
