@@ -119,11 +119,16 @@ def world_class_action_steps(data: dict[str, Any]) -> list[dict[str, Any]]:
                 continue
             repair_rows.append(
                 {
+                    "action_id": str(row.get("action_id", "")),
                     "repair_type": str(row.get("repair_type", "")),
                     "target": str(row.get("target", "")),
+                    "phase": str(row.get("phase", "")),
+                    "priority": int(row.get("priority", 90) or 90),
+                    "owner": str(row.get("owner", "")),
                     "status": str(row.get("status", "blocked")),
                     "blocking_reason": str(row.get("blocking_reason", "")),
                     "next_action": str(row.get("next_action", "")),
+                    "verification_command": str(row.get("verification_command", "")),
                     "counts_as_completion": row.get("counts_as_completion") is True,
                 }
             )
@@ -251,9 +256,12 @@ def render_action_evidence_steps(steps: list[dict[str, Any]]) -> str:
                 "<li class='action-repair-row "
                 + html.escape(str(row.get("status", "blocked")))
                 + "'>"
-                f"<span>{html.escape(str(row.get('repair_type', '')))} · {html.escape(str(row.get('target', '')))}</span>"
+                f"<span>#{html.escape(str(row.get('priority', '')))} · {html.escape(str(row.get('phase', '')))} · {html.escape(str(row.get('repair_type', '')))}</span>"
+                f"<strong>{html.escape(str(row.get('target', '')))}</strong>"
+                f"<em>{html.escape(str(row.get('owner', '')))}</em>"
                 f"<code>{html.escape(str(row.get('blocking_reason', '')))}</code>"
                 f"<small>{html.escape(str(row.get('next_action', '')))}</small>"
+                f"<code>{html.escape(str(row.get('verification_command', '')))}</code>"
                 "</li>"
             )
         cards.append(

@@ -87,6 +87,14 @@ def main() -> None:
     ), summary
     assert summary["repair_blocked_count"] == summary["repair_checklist_count"], summary
     assert summary["repair_ready_count"] == 0, summary
+    assert summary["repair_phase_counts"]["unblock-access"] >= 1, summary
+    assert summary["repair_phase_counts"]["collect-source"] >= 1, summary
+    assert summary["next_repair_action_id"] == "human-adjudication-precheck-human-reviewer", summary
+    assert summary["next_repair_phase"] == "unblock-access", summary
+    assert summary["next_repair_owner"] == "human reviewer", summary
+    assert summary["next_repair_command"] == (
+        "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions"
+    ), summary
     assert summary["repair_counts_as_completion"] is False, summary
     assert payload["submissions"]["preflight_counts_submission_as_completion"] is False, payload
     assert payload["submissions"]["drafts_count_as_evidence"] is False, payload
@@ -158,8 +166,20 @@ def main() -> None:
     assert "set OPENAI_API_KEY" not in proc.stdout.lower(), proc.stdout
     provider_repairs = {item["target"]: item for item in provider["repair_checklist"]}
     assert provider_repairs["openai-api-key"]["repair_type"] == "precheck", provider_repairs
+    assert provider_repairs["openai-api-key"]["action_id"] == "provider-holdout-precheck-openai-api-key", provider_repairs
+    assert provider_repairs["openai-api-key"]["phase"] == "unblock-access", provider_repairs
+    assert provider_repairs["openai-api-key"]["priority"] == 20, provider_repairs
+    assert provider_repairs["openai-api-key"]["owner"] == "operator with provider credentials", provider_repairs
+    assert provider_repairs["openai-api-key"]["verification_command"].endswith(
+        "world-class-preflight . --submissions-dir evidence/world_class/submissions"
+    ), provider_repairs
     assert provider_repairs["openai-api-key"]["counts_as_completion"] is False, provider_repairs
     assert provider_repairs["model_executed_count"]["repair_type"] == "source-check", provider_repairs
+    assert provider_repairs["model_executed_count"]["phase"] == "collect-source", provider_repairs
+    assert provider_repairs["model_executed_count"]["priority"] == 40, provider_repairs
+    assert "output-exec --provider-runner openai" in provider_repairs["model_executed_count"][
+        "verification_command"
+    ], provider_repairs
     assert provider_repairs["token_observed_count"]["status"] == "blocked", provider_repairs
 
     human = by_key(payload["items"], "human-adjudication")
@@ -172,7 +192,9 @@ def main() -> None:
     assert any("reviewed_at" in item["next_action"] for item in human["prechecks"]), human
     human_repairs = {item["target"]: item for item in human["repair_checklist"]}
     assert human_repairs["human-reviewer"]["repair_type"] == "precheck", human_repairs
+    assert human_repairs["human-reviewer"]["owner"] == "human reviewer", human_repairs
     assert human_repairs["pending_count"]["repair_type"] == "source-check", human_repairs
+    assert "output-review" in human_repairs["pending_count"]["verification_command"], human_repairs
 
     native = by_key(payload["items"], "native-permission-enforcement")
     assert native["status"] == "blocked", native
@@ -185,8 +207,12 @@ def main() -> None:
     assert "credential value exposed: `false`" in markdown, markdown
     assert "Submission Kit Handoff" in markdown, markdown
     assert "Repair Checklist" in markdown, markdown
-    assert "Repair rows convert preflight and source blockers" in markdown, markdown
+    assert "Repair rows convert preflight and source blockers into a prioritized operator queue" in markdown, markdown
     assert "repair rows:" in markdown, markdown
+    assert "next repair action: `human-adjudication-precheck-human-reviewer`" in markdown, markdown
+    assert "| Priority | Phase | Owner | Evidence | Type | Target | Status | Verify | Next action |" in markdown, markdown
+    assert "`unblock-access`" in markdown, markdown
+    assert "operator with provider credentials" in markdown, markdown
     assert "`openai-api-key`" in markdown, markdown
     assert "`model_executed_count`" in markdown, markdown
     assert "world-class-submission-kit . --output-dir evidence/world_class/submissions" in markdown, markdown
@@ -208,6 +234,11 @@ def main() -> None:
     assert "Repair Rows" in html, html
     assert "Repairs" in html, html
     assert "repair-row blocked" in html, html
+    assert "<dt>Priority</dt>" in html, html
+    assert "<dt>Phase</dt>" in html, html
+    assert "<dt>Owner</dt>" in html, html
+    assert "operator with provider credentials" in html, html
+    assert "world-class-preflight . --submissions-dir evidence/world_class/submissions" in html, html
     assert "<strong>openai-api-key</strong>" in html, html
     assert "<strong>model_executed_count</strong>" in html, html
     assert "world-class-submission-kit . --output-dir evidence/world_class/submissions" in html, html

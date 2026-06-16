@@ -57,8 +57,17 @@ def assert_world_class_action(full_payload: dict) -> None:
     }, provider_action_step
     provider_repair_rows = {item["target"]: item for item in provider_action_step["repair_rows"]}
     assert set(provider_repair_rows) == {"openai-api-key", "model_executed_count", "token_observed_count"}, provider_repair_rows
+    assert provider_repair_rows["openai-api-key"]["action_id"] == "provider-holdout-precheck-openai-api-key", provider_repair_rows
     assert provider_repair_rows["openai-api-key"]["repair_type"] == "precheck", provider_repair_rows
+    assert provider_repair_rows["openai-api-key"]["phase"] == "unblock-access", provider_repair_rows
+    assert provider_repair_rows["openai-api-key"]["priority"] == 20, provider_repair_rows
+    assert provider_repair_rows["openai-api-key"]["owner"] == "operator with provider credentials", provider_repair_rows
     assert provider_repair_rows["model_executed_count"]["repair_type"] == "source-check", provider_repair_rows
+    assert provider_repair_rows["model_executed_count"]["phase"] == "collect-source", provider_repair_rows
+    assert provider_repair_rows["model_executed_count"]["priority"] == 40, provider_repair_rows
+    assert "output-exec --provider-runner openai" in provider_repair_rows["model_executed_count"][
+        "verification_command"
+    ], provider_repair_rows
     assert all(item["counts_as_completion"] is False for item in provider_action_step["repair_rows"]), provider_action_step
     assert any("world-class-intake" in item["command"] for item in provider_action_step["commands"]), provider_action_step
     assert any("world-class-ledger" in item["command"] for item in provider_action_step["commands"]), provider_action_step
@@ -84,7 +93,9 @@ def assert_world_class_action(full_payload: dict) -> None:
     assert human_action_step["repair_blocked_count"] >= 2, human_action_step
     human_repair_rows = {item["target"]: item for item in human_action_step["repair_rows"]}
     assert human_repair_rows["human-reviewer"]["repair_type"] == "precheck", human_repair_rows
+    assert human_repair_rows["human-reviewer"]["owner"] == "human reviewer", human_repair_rows
     assert human_repair_rows["pending_count"]["repair_type"] == "source-check", human_repair_rows
+    assert "output-review" in human_repair_rows["pending_count"]["verification_command"], human_repair_rows
     assert "prompt_sha256" in " ".join(human_action_step["success_checks"]), human_action_step
     assert "prompt_sha256" in " ".join(human_action_step["privacy_contract"]), human_action_step
 

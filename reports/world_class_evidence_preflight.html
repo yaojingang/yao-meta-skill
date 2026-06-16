@@ -240,41 +240,53 @@
           <div>
             <span>precheck</span>
             <strong>openai-api-key</strong>
-          </div>
-          <dl>
-            <dt>Status</dt><dd>blocked</dd>
-            <dt>Reason</dt><dd>Required env precheck is missing.</dd>
-            <dt>Action</dt><dd>Set OPENAI_API_KEY in the operator shell; never commit or print the value.</dd>
-            <dt>Evidence</dt><dd>does not count as completion</dd>
-          </dl>
-        </article>
+	          </div>
+	          <dl>
+	            <dt>Priority</dt><dd>20</dd>
+	            <dt>Phase</dt><dd>unblock-access</dd>
+	            <dt>Owner</dt><dd>operator with provider credentials</dd>
+	            <dt>Status</dt><dd>blocked</dd>
+	            <dt>Reason</dt><dd>Required env precheck is missing.</dd>
+	            <dt>Action</dt><dd>Set OPENAI_API_KEY in the operator shell; never commit or print the value.</dd>
+	            <dt>Verify</dt><dd><code>python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions</code></dd>
+	            <dt>Evidence</dt><dd>does not count as completion</dd>
+	          </dl>
+	        </article>
 
         <article class="repair-row blocked">
           <div>
             <span>source-check</span>
             <strong>model_executed_count</strong>
-          </div>
-          <dl>
-            <dt>Status</dt><dd>blocked</dd>
-            <dt>Reason</dt><dd>Current value 0 does not satisfy &#x27;&gt;0&#x27;.</dd>
-            <dt>Action</dt><dd>Run provider-backed output-exec with real credentials.</dd>
-            <dt>Evidence</dt><dd>does not count as completion</dd>
-          </dl>
-        </article>
+	          </div>
+	          <dl>
+	            <dt>Priority</dt><dd>40</dd>
+	            <dt>Phase</dt><dd>collect-source</dd>
+	            <dt>Owner</dt><dd>operator with provider credentials</dd>
+	            <dt>Status</dt><dd>blocked</dd>
+	            <dt>Reason</dt><dd>Current value 0 does not satisfy &#x27;&gt;0&#x27;.</dd>
+	            <dt>Action</dt><dd>Run provider-backed output-exec with real credentials.</dd>
+	            <dt>Verify</dt><dd><code>python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60 &amp;&amp; python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions</code></dd>
+	            <dt>Evidence</dt><dd>does not count as completion</dd>
+	          </dl>
+	        </article>
 
         <article class="repair-row blocked">
           <div>
             <span>source-check</span>
             <strong>token_observed_count</strong>
-          </div>
-          <dl>
-            <dt>Status</dt><dd>blocked</dd>
-            <dt>Reason</dt><dd>Current value 0 does not satisfy &#x27;&gt;0&#x27;.</dd>
-            <dt>Action</dt><dd>Provider execution should return non-estimated token usage.</dd>
-            <dt>Evidence</dt><dd>does not count as completion</dd>
-          </dl>
-        </article>
-        </div>
+	          </div>
+	          <dl>
+	            <dt>Priority</dt><dd>40</dd>
+	            <dt>Phase</dt><dd>collect-source</dd>
+	            <dt>Owner</dt><dd>operator with provider credentials</dd>
+	            <dt>Status</dt><dd>blocked</dd>
+	            <dt>Reason</dt><dd>Current value 0 does not satisfy &#x27;&gt;0&#x27;.</dd>
+	            <dt>Action</dt><dd>Provider execution should return non-estimated token usage.</dd>
+	            <dt>Verify</dt><dd><code>python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60 &amp;&amp; python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions</code></dd>
+	            <dt>Evidence</dt><dd>does not count as completion</dd>
+	          </dl>
+	        </article>
+	        </div>
         </section>
         <section class="runbook">
           <h4>Runbook</h4>
@@ -513,80 +525,104 @@
           <div>
             <span>precheck</span>
             <strong>human-reviewer</strong>
-          </div>
-          <dl>
-            <dt>Status</dt><dd>blocked</dd>
-            <dt>Reason</dt><dd>Required human precheck is human-required.</dd>
-            <dt>Action</dt><dd>Assign a real reviewer identity before claiming human adjudication.</dd>
-            <dt>Evidence</dt><dd>does not count as completion</dd>
-          </dl>
-        </article>
-
-        <article class="repair-row blocked">
-          <div>
-            <span>source-check</span>
-            <strong>pending_count</strong>
-          </div>
-          <dl>
-            <dt>Status</dt><dd>blocked</dd>
-            <dt>Reason</dt><dd>Current value 5 does not satisfy &#x27;==0&#x27;.</dd>
-            <dt>Action</dt><dd>Record a reviewer choice and reason for every pair.</dd>
-            <dt>Evidence</dt><dd>does not count as completion</dd>
-          </dl>
-        </article>
-
-        <article class="repair-row blocked">
-          <div>
-            <span>source-check</span>
-            <strong>judgment_count</strong>
-          </div>
-          <dl>
-            <dt>Status</dt><dd>blocked</dd>
-            <dt>Reason</dt><dd>Current value 0 does not satisfy &#x27;==pair_count&#x27;.</dd>
-            <dt>Action</dt><dd>Every pair needs one valid human judgment.</dd>
-            <dt>Evidence</dt><dd>does not count as completion</dd>
-          </dl>
-        </article>
-
-        <article class="repair-row blocked">
-          <div>
-            <span>source-check</span>
-            <strong>reviewer_metadata_present</strong>
-          </div>
-          <dl>
-            <dt>Status</dt><dd>blocked</dd>
-            <dt>Reason</dt><dd>Current value False does not satisfy &#x27;true&#x27;.</dd>
-            <dt>Action</dt><dd>Record reviewer and reviewed_at before adjudication can count.</dd>
-            <dt>Evidence</dt><dd>does not count as completion</dd>
-          </dl>
-        </article>
+	          </div>
+	          <dl>
+	            <dt>Priority</dt><dd>20</dd>
+	            <dt>Phase</dt><dd>unblock-access</dd>
+	            <dt>Owner</dt><dd>human reviewer</dd>
+	            <dt>Status</dt><dd>blocked</dd>
+	            <dt>Reason</dt><dd>Required human precheck is human-required.</dd>
+	            <dt>Action</dt><dd>Assign a real reviewer identity before claiming human adjudication.</dd>
+	            <dt>Verify</dt><dd><code>python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions</code></dd>
+	            <dt>Evidence</dt><dd>does not count as completion</dd>
+	          </dl>
+	        </article>
 
         <article class="repair-row blocked">
           <div>
             <span>source-check</span>
             <strong>blind_review_attested</strong>
-          </div>
-          <dl>
-            <dt>Status</dt><dd>blocked</dd>
-            <dt>Reason</dt><dd>Current value False does not satisfy &#x27;true&#x27;.</dd>
-            <dt>Action</dt><dd>Set reviewer_attestation only after choices are completed before opening the answer key.</dd>
-            <dt>Evidence</dt><dd>does not count as completion</dd>
-          </dl>
-        </article>
+	          </div>
+	          <dl>
+	            <dt>Priority</dt><dd>40</dd>
+	            <dt>Phase</dt><dd>collect-source</dd>
+	            <dt>Owner</dt><dd>human reviewer</dd>
+	            <dt>Status</dt><dd>blocked</dd>
+	            <dt>Reason</dt><dd>Current value False does not satisfy &#x27;true&#x27;.</dd>
+	            <dt>Action</dt><dd>Set reviewer_attestation only after choices are completed before opening the answer key.</dd>
+	            <dt>Verify</dt><dd><code>python3 scripts/yao.py output-review &amp;&amp; python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions</code></dd>
+	            <dt>Evidence</dt><dd>does not count as completion</dd>
+	          </dl>
+	        </article>
+
+        <article class="repair-row blocked">
+          <div>
+            <span>source-check</span>
+            <strong>judgment_count</strong>
+	          </div>
+	          <dl>
+	            <dt>Priority</dt><dd>40</dd>
+	            <dt>Phase</dt><dd>collect-source</dd>
+	            <dt>Owner</dt><dd>human reviewer</dd>
+	            <dt>Status</dt><dd>blocked</dd>
+	            <dt>Reason</dt><dd>Current value 0 does not satisfy &#x27;==pair_count&#x27;.</dd>
+	            <dt>Action</dt><dd>Every pair needs one valid human judgment.</dd>
+	            <dt>Verify</dt><dd><code>python3 scripts/yao.py output-review &amp;&amp; python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions</code></dd>
+	            <dt>Evidence</dt><dd>does not count as completion</dd>
+	          </dl>
+	        </article>
+
+        <article class="repair-row blocked">
+          <div>
+            <span>source-check</span>
+            <strong>pending_count</strong>
+	          </div>
+	          <dl>
+	            <dt>Priority</dt><dd>40</dd>
+	            <dt>Phase</dt><dd>collect-source</dd>
+	            <dt>Owner</dt><dd>human reviewer</dd>
+	            <dt>Status</dt><dd>blocked</dd>
+	            <dt>Reason</dt><dd>Current value 5 does not satisfy &#x27;==0&#x27;.</dd>
+	            <dt>Action</dt><dd>Record a reviewer choice and reason for every pair.</dd>
+	            <dt>Verify</dt><dd><code>python3 scripts/yao.py output-review &amp;&amp; python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions</code></dd>
+	            <dt>Evidence</dt><dd>does not count as completion</dd>
+	          </dl>
+	        </article>
 
         <article class="repair-row blocked">
           <div>
             <span>source-check</span>
             <strong>ready_for_human_evidence</strong>
-          </div>
-          <dl>
-            <dt>Status</dt><dd>blocked</dd>
-            <dt>Reason</dt><dd>Current value False does not satisfy &#x27;true&#x27;.</dd>
-            <dt>Action</dt><dd>Complete all reviewer decisions with metadata and rationale, plus blind-review attestation and integrity fingerprints.</dd>
-            <dt>Evidence</dt><dd>does not count as completion</dd>
-          </dl>
-        </article>
-        </div>
+	          </div>
+	          <dl>
+	            <dt>Priority</dt><dd>40</dd>
+	            <dt>Phase</dt><dd>collect-source</dd>
+	            <dt>Owner</dt><dd>human reviewer</dd>
+	            <dt>Status</dt><dd>blocked</dd>
+	            <dt>Reason</dt><dd>Current value False does not satisfy &#x27;true&#x27;.</dd>
+	            <dt>Action</dt><dd>Complete all reviewer decisions with metadata and rationale, plus blind-review attestation and integrity fingerprints.</dd>
+	            <dt>Verify</dt><dd><code>python3 scripts/yao.py output-review &amp;&amp; python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions</code></dd>
+	            <dt>Evidence</dt><dd>does not count as completion</dd>
+	          </dl>
+	        </article>
+
+        <article class="repair-row blocked">
+          <div>
+            <span>source-check</span>
+            <strong>reviewer_metadata_present</strong>
+	          </div>
+	          <dl>
+	            <dt>Priority</dt><dd>40</dd>
+	            <dt>Phase</dt><dd>collect-source</dd>
+	            <dt>Owner</dt><dd>human reviewer</dd>
+	            <dt>Status</dt><dd>blocked</dd>
+	            <dt>Reason</dt><dd>Current value False does not satisfy &#x27;true&#x27;.</dd>
+	            <dt>Action</dt><dd>Record reviewer and reviewed_at before adjudication can count.</dd>
+	            <dt>Verify</dt><dd><code>python3 scripts/yao.py output-review &amp;&amp; python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions</code></dd>
+	            <dt>Evidence</dt><dd>does not count as completion</dd>
+	          </dl>
+	        </article>
+	        </div>
         </section>
         <section class="runbook">
           <h4>Runbook</h4>
@@ -722,28 +758,36 @@
           <div>
             <span>precheck</span>
             <strong>native-guard</strong>
-          </div>
-          <dl>
-            <dt>Status</dt><dd>blocked</dd>
-            <dt>Reason</dt><dd>Required external precheck is external-required.</dd>
-            <dt>Action</dt><dd>Attach a real target-client or external installer runtime guard; metadata fallback is not enough.</dd>
-            <dt>Evidence</dt><dd>does not count as completion</dd>
-          </dl>
-        </article>
+	          </div>
+	          <dl>
+	            <dt>Priority</dt><dd>20</dd>
+	            <dt>Phase</dt><dd>unblock-access</dd>
+	            <dt>Owner</dt><dd>target client or installer integrator</dd>
+	            <dt>Status</dt><dd>blocked</dd>
+	            <dt>Reason</dt><dd>Required external precheck is external-required.</dd>
+	            <dt>Action</dt><dd>Attach a real target-client or external installer runtime guard; metadata fallback is not enough.</dd>
+	            <dt>Verify</dt><dd><code>python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions</code></dd>
+	            <dt>Evidence</dt><dd>does not count as completion</dd>
+	          </dl>
+	        </article>
 
         <article class="repair-row blocked">
           <div>
             <span>source-check</span>
             <strong>native_enforcement_count</strong>
-          </div>
-          <dl>
-            <dt>Status</dt><dd>blocked</dd>
-            <dt>Reason</dt><dd>Current value 0 does not satisfy &#x27;&gt;0&#x27;.</dd>
-            <dt>Action</dt><dd>Collect real target-client or external runtime guard proof.</dd>
-            <dt>Evidence</dt><dd>does not count as completion</dd>
-          </dl>
-        </article>
-        </div>
+	          </div>
+	          <dl>
+	            <dt>Priority</dt><dd>40</dd>
+	            <dt>Phase</dt><dd>collect-source</dd>
+	            <dt>Owner</dt><dd>target client or installer integrator</dd>
+	            <dt>Status</dt><dd>blocked</dd>
+	            <dt>Reason</dt><dd>Current value 0 does not satisfy &#x27;&gt;0&#x27;.</dd>
+	            <dt>Action</dt><dd>Collect real target-client or external runtime guard proof.</dd>
+	            <dt>Verify</dt><dd><code>python3 scripts/yao.py runtime-permissions . --package-dir dist &amp;&amp; python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions</code></dd>
+	            <dt>Evidence</dt><dd>does not count as completion</dd>
+	          </dl>
+	        </article>
+	        </div>
         </section>
         <section class="runbook">
           <h4>Runbook</h4>
@@ -879,28 +923,36 @@
           <div>
             <span>precheck</span>
             <strong>external-client</strong>
-          </div>
-          <dl>
-            <dt>Status</dt><dd>blocked</dd>
-            <dt>Reason</dt><dd>Required external precheck is external-required.</dd>
-            <dt>Action</dt><dd>Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events.</dd>
-            <dt>Evidence</dt><dd>does not count as completion</dd>
-          </dl>
-        </article>
+	          </div>
+	          <dl>
+	            <dt>Priority</dt><dd>20</dd>
+	            <dt>Phase</dt><dd>unblock-access</dd>
+	            <dt>Owner</dt><dd>Browser/Chrome/IDE/provider client integrator</dd>
+	            <dt>Status</dt><dd>blocked</dd>
+	            <dt>Reason</dt><dd>Required external precheck is external-required.</dd>
+	            <dt>Action</dt><dd>Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events.</dd>
+	            <dt>Verify</dt><dd><code>python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions</code></dd>
+	            <dt>Evidence</dt><dd>does not count as completion</dd>
+	          </dl>
+	        </article>
 
         <article class="repair-row blocked">
           <div>
             <span>source-check</span>
             <strong>external_source_events</strong>
-          </div>
-          <dl>
-            <dt>Status</dt><dd>blocked</dd>
-            <dt>Reason</dt><dd>Current value 0 does not satisfy &#x27;&gt;0&#x27;.</dd>
-            <dt>Action</dt><dd>Import at least one metadata-only event from a real client.</dd>
-            <dt>Evidence</dt><dd>does not count as completion</dd>
-          </dl>
-        </article>
-        </div>
+	          </div>
+	          <dl>
+	            <dt>Priority</dt><dd>40</dd>
+	            <dt>Phase</dt><dd>collect-source</dd>
+	            <dt>Owner</dt><dd>Browser/Chrome/IDE/provider client integrator</dd>
+	            <dt>Status</dt><dd>blocked</dd>
+	            <dt>Reason</dt><dd>Current value 0 does not satisfy &#x27;&gt;0&#x27;.</dd>
+	            <dt>Action</dt><dd>Import at least one metadata-only event from a real client.</dd>
+	            <dt>Verify</dt><dd><code>python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl &amp;&amp; python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions</code></dd>
+	            <dt>Evidence</dt><dd>does not count as completion</dd>
+	          </dl>
+	        </article>
+	        </div>
         </section>
         <section class="runbook">
           <h4>Runbook</h4>

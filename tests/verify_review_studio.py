@@ -337,6 +337,10 @@ def main() -> None:
     assert "action-repair-row blocked" in html, html
     assert "openai-api-key" in html, html
     assert "model_executed_count" in html, html
+    assert "#20 · unblock-access · precheck" in html, html
+    assert "#40 · collect-source · source-check" in html, html
+    assert "operator with provider credentials" in html, html
+    assert "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions" in html, html
     assert "action-command-list" in html, html
     assert "action-runbook-list" in html, html
     assert "采集契约" in html, html

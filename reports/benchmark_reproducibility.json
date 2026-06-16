@@ -3,24 +3,24 @@
   "ok": true,
   "generated_at": "2026-06-17",
   "skill_dir": ".",
-  "commit": "e3367775750edf6b2f811e7e1f3680c1e2c3e7ab",
+  "commit": "f2cf8a9e53f02dbaf34bf1d0b874284d893ebc11",
   "git_status": {
     "available": true,
     "dirty": true,
-    "changed_file_count": 38,
+    "changed_file_count": 67,
     "sample": [
       " M assets/review-studio.css",
       " M registry/index.json",
       " M registry/packages/yao-meta-skill.json",
+      " M reports/adoption_drift_report.json",
+      " M reports/adoption_drift_report.md",
       " M reports/architecture_maintainability.json",
       " M reports/architecture_maintainability.md",
       " M reports/benchmark_reproducibility.json",
       " M reports/benchmark_reproducibility.md",
-      " M reports/compiled_targets.json",
       " M reports/context_budget.json",
       " M reports/context_budget.md",
-      " M reports/context_budget_summary.json",
-      " M reports/evidence_consistency.json"
+      " M reports/context_budget_summary.json"
     ],
     "scope": "generation-time status before this report is written"
   },
@@ -30,9 +30,9 @@
     "methodology_complete": true,
     "required_artifact_count": 25,
     "missing_artifact_count": 0,
-    "evidence_bundle_sha256": "3f8e332ac63fc5c841400052005674876f29d2f715a48da46424f581dbad8c49",
-    "source_contract_sha256": "f5722de72ecc9012625622740af45a982c120984a0c8189eb91742b152745a12",
-    "archive_sha256": "52a98e5dd903b6896643f3c0a725cd5dddc0b38dc6ec20b8c3ab8b88ffb85806",
+    "evidence_bundle_sha256": "55fc0caa28b80022bd16a0a84f77bb0040c4f6eee14fabb526f492ae7c962ef6",
+    "source_contract_sha256": "7993d9f426409a0307d85fa6d9a4a9815a3cbe2faaa06cffff9deba813c4ef7e",
+    "archive_sha256": "e0d57b8bede61d6e2e75e068d6ae1e7c3cc62ae64e2b6374edd58f31ace5ee40",
     "output_case_count": 5,
     "failure_disclosure_count": 3,
     "command_count": 23,
@@ -52,7 +52,7 @@
     "public_claim_ready": false,
     "public_claim_blocker_count": 5,
     "working_tree_dirty": true,
-    "changed_file_count": 38
+    "changed_file_count": 67
   },
   "public_claim": {
     "ready": false,
@@ -68,7 +68,7 @@
   },
   "release_lock": {
     "ready": false,
-    "commit": "e3367775750edf6b2f811e7e1f3680c1e2c3e7ab",
+    "commit": "f2cf8a9e53f02dbaf34bf1d0b874284d893ebc11",
     "status_scope": "generation-time status before this report is written",
     "reason": "working tree was dirty at generation time"
   },
@@ -78,7 +78,7 @@
     "existing_count": 25,
     "missing_count": 0,
     "missing_paths": [],
-    "sha256": "3f8e332ac63fc5c841400052005674876f29d2f715a48da46424f581dbad8c49"
+    "sha256": "55fc0caa28b80022bd16a0a84f77bb0040c4f6eee14fabb526f492ae7c962ef6"
   },
   "methodology": {
     "path": "reports/benchmark_methodology.md",
@@ -151,8 +151,8 @@
       "label": "output_execution",
       "path": "reports/output_execution_runs.json",
       "exists": true,
-      "bytes": 7967,
-      "sha256": "4ea56f4558ee371f71a7908f55a1fbcd2d3f3f18a517a6642a5ed7df6a204b59"
+      "bytes": 7965,
+      "sha256": "5291115a0e1348926c8afe739fc2185754e571766bcc1d6a6e88b80ba07f8a9e"
     },
     {
       "label": "blind_review",
@@ -187,7 +187,7 @@
       "path": "reports/security_trust_report.json",
       "exists": true,
       "bytes": 134467,
-      "sha256": "525f9766700afd55e2b5113b5f30a1ca4826ebab0902228a702f7927bffb6019"
+      "sha256": "596dafa184943797bd77591b0f2ba9366ddd541f90cb9c08d92ce7069c1b326c"
     },
     {
       "label": "python_compatibility",
@@ -201,14 +201,14 @@
       "path": "reports/registry_audit.json",
       "exists": true,
       "bytes": 3183,
-      "sha256": "995ded23370adb49997ef5bdd37e32c59b6aad31ed7813c7520e7e7b40d6e546"
+      "sha256": "79532bfc006cabfd1f086601112b58c1fe84660d6606521d0256c77177d6c993"
     },
     {
       "label": "package_verification",
       "path": "reports/package_verification.json",
       "exists": true,
       "bytes": 19338,
-      "sha256": "afb99167c57179ff0435c678e7e5638ceaed07042fa9177568ca21d6dc1bef3d"
+      "sha256": "df947ca7f0e5737c0f7961ee146171b3727c189f8dc5439941597d3c646fe06a"
     },
     {
       "label": "install_simulation",
@@ -249,8 +249,8 @@
       "label": "world_class_evidence_preflight",
       "path": "reports/world_class_evidence_preflight.json",
       "exists": true,
-      "bytes": 58119,
-      "sha256": "10671b699295453b130ef8afe6488d2a4ac3220a901df2f86a69ee5eb896c36e"
+      "bytes": 68674,
+      "sha256": "c9d5fc06305c41f0870f32f30c0440a95e6fbdba402326e339cfd0c771ff960d"
     },
     {
       "label": "world_class_submission_review",

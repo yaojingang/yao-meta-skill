@@ -58,7 +58,7 @@
     },
     {
       "path": "scripts/render_world_class_preflight.py",
-      "lines": 590,
+      "lines": 593,
       "kind": "cli-script",
       "severity": "pass",
       "early_watch": false,

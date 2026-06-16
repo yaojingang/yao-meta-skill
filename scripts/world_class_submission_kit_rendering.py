@@ -305,24 +305,32 @@ def render_html_repair_checklist(items: list[dict[str, Any]]) -> str:
           <header>
             <span>{key} · {repair_type}</span>
             <h3>{target}</h3>
-          </header>
-          <dl>
-            <dt>Status</dt><dd>{status}</dd>
-            <dt>Reason</dt><dd>{reason}</dd>
-            <dt>Action</dt><dd>{action}</dd>
-            <dt>Evidence</dt><dd>does not count as completion</dd>
-          </dl>
-        </article>
-        """.format(
-            status=html_text(item.get("status", "")),
-            key=html_text(item.get("evidence_key", "")),
-            repair_type=html_text(item.get("repair_type", "")),
-            target=html_text(item.get("target", "")),
-            reason=html_text(item.get("blocking_reason", "")),
-            action=html_text(item.get("next_action", "")),
-        )
-        for item in items
-    )
+	          </header>
+	          <dl>
+	            <dt>Priority</dt><dd>{priority}</dd>
+	            <dt>Phase</dt><dd>{phase}</dd>
+	            <dt>Owner</dt><dd>{owner}</dd>
+	            <dt>Status</dt><dd>{status}</dd>
+	            <dt>Reason</dt><dd>{reason}</dd>
+	            <dt>Action</dt><dd>{action}</dd>
+	            <dt>Verify</dt><dd><code>{verify}</code></dd>
+	            <dt>Evidence</dt><dd>does not count as completion</dd>
+	          </dl>
+	        </article>
+	        """.format(
+	            status=html_text(item.get("status", "")),
+	            key=html_text(item.get("evidence_key", "")),
+	            repair_type=html_text(item.get("repair_type", "")),
+	            target=html_text(item.get("target", "")),
+	            priority=html_text(item.get("priority", "")),
+	            phase=html_text(item.get("phase", "")),
+	            owner=html_text(item.get("owner", "")),
+	            reason=html_text(item.get("blocking_reason", "")),
+	            action=html_text(item.get("next_action", "")),
+	            verify=html_text(item.get("verification_command", "")),
+	        )
+	        for item in items
+	    )
 
 
 def render_html_handoff(items: list[dict[str, Any]]) -> str:

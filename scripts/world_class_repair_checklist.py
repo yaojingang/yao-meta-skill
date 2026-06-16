@@ -2,11 +2,28 @@
 """Build machine-readable repair checklists for world-class submission kits."""
 
 from collections import defaultdict
+import re
 from typing import Any
 
 
 SCRIPT_INTERFACE = "internal-module"
 SCRIPT_INTERFACE_REASON = "Shared by submission kit generation to turn readiness blockers into actionable repair rows."
+
+
+OWNER_BY_EVIDENCE = {
+    "provider-holdout": "operator with provider credentials",
+    "human-adjudication": "human reviewer",
+    "native-permission-enforcement": "target client or installer integrator",
+    "native-client-telemetry": "Browser/Chrome/IDE/provider client integrator",
+}
+
+REPAIR_PHASES = {
+    "unknown-key": ("select-evidence", 5),
+    "draft": ("prepare-draft", 10),
+    "precheck": ("unblock-access", 20),
+    "artifact": ("attach-artifacts", 30),
+    "source-check": ("collect-source", 40),
+}
 
 
 def _by_key(rows: list[dict[str, Any]], key_name: str = "evidence_key") -> dict[str, list[dict[str, Any]]]:
@@ -16,6 +33,40 @@ def _by_key(rows: list[dict[str, Any]], key_name: str = "evidence_key") -> dict[
         if key:
             grouped[key].append(row)
     return dict(grouped)
+
+
+def _slug(value: str) -> str:
+    slug = re.sub(r"[^a-zA-Z0-9_.-]+", "-", value.strip()).strip("-")
+    return slug or "repair"
+
+
+def repair_verification_command(evidence_key: str, repair_type: str) -> str:
+    preflight = "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions"
+    if repair_type == "draft":
+        return (
+            "python3 scripts/yao.py world-class-submission-kit . "
+            f"--evidence-key {evidence_key} --output-dir evidence/world_class/submissions"
+        )
+    if repair_type == "artifact":
+        return (
+            "python3 scripts/yao.py world-class-submission-kit . "
+            f"--evidence-key {evidence_key} --output-dir evidence/world_class/submissions --prefill-artifacts"
+        )
+    if repair_type == "unknown-key":
+        return "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
+    if evidence_key == "provider-holdout" and repair_type == "source-check":
+        return "python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60 && " + preflight
+    if evidence_key == "human-adjudication" and repair_type == "source-check":
+        return "python3 scripts/yao.py output-review && " + preflight
+    if evidence_key == "native-permission-enforcement" and repair_type == "source-check":
+        return "python3 scripts/yao.py runtime-permissions . --package-dir dist && " + preflight
+    if evidence_key == "native-client-telemetry" and repair_type == "source-check":
+        return (
+            "python3 scripts/yao.py telemetry-import . "
+            "--input-jsonl .yao/telemetry_spool/external_events.jsonl && "
+            + preflight
+        )
+    return preflight
 
 
 def _repair_row(
@@ -28,16 +79,33 @@ def _repair_row(
     next_action: str,
     source: str,
 ) -> dict[str, Any]:
+    phase, priority = REPAIR_PHASES.get(repair_type, ("repair", 90))
     return {
+        "action_id": _slug(f"{evidence_key}:{repair_type}:{target}"),
         "evidence_key": evidence_key,
         "repair_type": repair_type,
         "target": target,
+        "phase": phase,
+        "priority": priority,
+        "owner": OWNER_BY_EVIDENCE.get(evidence_key, "release reviewer"),
         "status": status,
         "blocking_reason": blocking_reason,
         "next_action": next_action,
+        "verification_command": repair_verification_command(evidence_key, repair_type),
         "source": source,
         "counts_as_completion": False,
     }
+
+
+def sort_repair_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return sorted(
+        rows,
+        key=lambda row: (
+            int(row.get("priority", 90) or 90),
+            str(row.get("evidence_key", "")),
+            str(row.get("target", "")),
+        ),
+    )
 
 
 def build_repair_checklist(
@@ -141,7 +209,7 @@ def build_repair_checklist(
             )
         )
 
-    return rows
+    return sort_repair_rows(rows)
 
 
 def build_preflight_repair_checklist(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -191,14 +259,24 @@ def build_preflight_repair_checklist(items: list[dict[str, Any]]) -> list[dict[s
                     source="source_checklist",
                 )
             )
-    return rows
+    return sort_repair_rows(rows)
 
 
 def summarize_repair_checklist(rows: list[dict[str, Any]]) -> dict[str, Any]:
     blocked_count = sum(1 for row in rows if row.get("status") != "ready")
+    phase_counts: dict[str, int] = {}
+    for row in rows:
+        phase = str(row.get("phase", "repair"))
+        phase_counts[phase] = phase_counts.get(phase, 0) + 1
+    next_row = sort_repair_rows(rows)[0] if rows else {}
     return {
         "repair_checklist_count": len(rows),
         "repair_blocked_count": blocked_count,
         "repair_ready_count": len(rows) - blocked_count,
+        "repair_phase_counts": phase_counts,
+        "next_repair_action_id": next_row.get("action_id", ""),
+        "next_repair_phase": next_row.get("phase", ""),
+        "next_repair_owner": next_row.get("owner", ""),
+        "next_repair_command": next_row.get("verification_command", ""),
         "repair_counts_as_completion": False,
     }

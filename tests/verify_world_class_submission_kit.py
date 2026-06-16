@@ -100,6 +100,11 @@ def main() -> None:
     assert kit_payload["summary"]["repair_checklist_count"] == 2, kit_payload["summary"]
     assert kit_payload["summary"]["repair_blocked_count"] == 2, kit_payload["summary"]
     assert kit_payload["summary"]["repair_ready_count"] == 0, kit_payload["summary"]
+    assert kit_payload["summary"]["repair_phase_counts"] == {"collect-source": 2}, kit_payload["summary"]
+    assert kit_payload["summary"]["next_repair_action_id"] == "provider-holdout-source-check-model_executed_count", kit_payload["summary"]
+    assert kit_payload["summary"]["next_repair_phase"] == "collect-source", kit_payload["summary"]
+    assert kit_payload["summary"]["next_repair_owner"] == "operator with provider credentials", kit_payload["summary"]
+    assert "output-exec --provider-runner openai" in kit_payload["summary"]["next_repair_command"], kit_payload["summary"]
     assert kit_payload["summary"]["repair_counts_as_completion"] is False, kit_payload["summary"]
     assert kit_payload["summary"]["handoff_step_count"] == 7, kit_payload["summary"]
     assert kit_payload["summary"]["handoff_blocked_count"] == 1, kit_payload["summary"]
@@ -134,6 +139,13 @@ def main() -> None:
     repair_rows = {item["target"]: item for item in kit_payload["repair_checklist"]}
     assert set(repair_rows) == {"model_executed_count", "token_observed_count"}, repair_rows
     assert repair_rows["model_executed_count"]["repair_type"] == "source-check", repair_rows
+    assert repair_rows["model_executed_count"]["action_id"] == "provider-holdout-source-check-model_executed_count", repair_rows
+    assert repair_rows["model_executed_count"]["phase"] == "collect-source", repair_rows
+    assert repair_rows["model_executed_count"]["priority"] == 40, repair_rows
+    assert repair_rows["model_executed_count"]["owner"] == "operator with provider credentials", repair_rows
+    assert "output-exec --provider-runner openai" in repair_rows["model_executed_count"][
+        "verification_command"
+    ], repair_rows
     assert repair_rows["model_executed_count"]["status"] == "blocked", repair_rows
     assert repair_rows["model_executed_count"]["counts_as_completion"] is False, repair_rows
     assert "real credentials" in repair_rows["model_executed_count"]["next_action"], repair_rows
@@ -228,6 +240,12 @@ def main() -> None:
     assert "Artifact Checklist" in kit_html, kit_html
     assert "Evidence Matrix" in kit_html, kit_html
     assert "Repair Checklist" in kit_html, kit_html
+    assert "<dt>Priority</dt>" in kit_html, kit_html
+    assert "<dt>Phase</dt>" in kit_html, kit_html
+    assert "<dt>Owner</dt>" in kit_html, kit_html
+    assert "collect-source" in kit_html, kit_html
+    assert "operator with provider credentials" in kit_html, kit_html
+    assert "output-exec --provider-runner openai" in kit_html, kit_html
     assert "Operator Handoff" in kit_html, kit_html
     assert "handoff-card blocked" in kit_html, kit_html
     assert "does not count as completion" in kit_html, kit_html

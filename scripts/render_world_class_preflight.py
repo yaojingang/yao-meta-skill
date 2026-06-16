@@ -437,6 +437,8 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- collection blocked: `{summary['collection_blocked_count']}`",
         f"- source checks: `{summary['source_pass_count']}` pass / `{summary['source_check_count']}` total",
         f"- repair rows: `{summary['repair_blocked_count']}` blocked / `{summary['repair_checklist_count']}` total",
+        f"- next repair action: `{summary.get('next_repair_action_id', '')}`",
+        f"- next repair owner: `{summary.get('next_repair_owner', '')}`",
         "",
         "This preflight report checks whether an operator can start collecting the remaining external or human evidence. It never accepts evidence, prints secret values, or changes the world-class ledger.",
         "",
@@ -492,16 +494,17 @@ def render_markdown(report: dict[str, Any]) -> str:
             "",
             "## Repair Checklist",
             "",
-            "Repair rows convert preflight and source blockers into concrete operator actions. They are guidance only and do not count as completion evidence.",
+            "Repair rows convert preflight and source blockers into a prioritized operator queue. They are guidance only and do not count as completion evidence.",
             "",
-            "| Evidence | Type | Target | Status | Next action |",
-            "| --- | --- | --- | --- | --- |",
+            "| Priority | Phase | Owner | Evidence | Type | Target | Status | Verify | Next action |",
+            "| --- | --- | --- | --- | --- | --- | --- | --- | --- |",
         ]
     )
     for row in report.get("repair_checklist", []):
         lines.append(
-            f"| `{row['evidence_key']}` | `{row['repair_type']}` | `{row['target']}` | "
-            f"`{row['status']}` | {md_cell(row['next_action'])} |"
+            f"| `{row.get('priority', '')}` | `{row.get('phase', '')}` | {md_cell(row.get('owner', ''))} | "
+            f"`{row['evidence_key']}` | `{row['repair_type']}` | `{row['target']}` | "
+            f"`{row['status']}` | `{md_cell(row.get('verification_command', ''))}` | {md_cell(row['next_action'])} |"
         )
     for item in report["items"]:
         lines.extend(

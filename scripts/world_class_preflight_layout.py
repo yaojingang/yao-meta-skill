@@ -88,23 +88,31 @@ def render_html_repair_rows(rows: list[dict[str, Any]]) -> str:
           <div>
             <span>{repair_type}</span>
             <strong>{target}</strong>
-          </div>
-          <dl>
-            <dt>Status</dt><dd>{status}</dd>
-            <dt>Reason</dt><dd>{reason}</dd>
-            <dt>Action</dt><dd>{action}</dd>
-            <dt>Evidence</dt><dd>does not count as completion</dd>
-          </dl>
-        </article>
-        """.format(
-            status=html_text(row.get("status", "")),
-            repair_type=html_text(row.get("repair_type", "")),
-            target=html_text(row.get("target", "")),
-            reason=html_text(row.get("blocking_reason", "")),
-            action=html_text(row.get("next_action", "")),
-        )
-        for row in rows
-    )
+	          </div>
+	          <dl>
+	            <dt>Priority</dt><dd>{priority}</dd>
+	            <dt>Phase</dt><dd>{phase}</dd>
+	            <dt>Owner</dt><dd>{owner}</dd>
+	            <dt>Status</dt><dd>{status}</dd>
+	            <dt>Reason</dt><dd>{reason}</dd>
+	            <dt>Action</dt><dd>{action}</dd>
+	            <dt>Verify</dt><dd><code>{verify}</code></dd>
+	            <dt>Evidence</dt><dd>does not count as completion</dd>
+	          </dl>
+	        </article>
+	        """.format(
+	            status=html_text(row.get("status", "")),
+	            repair_type=html_text(row.get("repair_type", "")),
+	            target=html_text(row.get("target", "")),
+	            priority=html_text(row.get("priority", "")),
+	            phase=html_text(row.get("phase", "")),
+	            owner=html_text(row.get("owner", "")),
+	            reason=html_text(row.get("blocking_reason", "")),
+	            action=html_text(row.get("next_action", "")),
+	            verify=html_text(row.get("verification_command", "")),
+	        )
+	        for row in rows
+	    )
 
 
 def render_html_artifact_roles(contract: dict[str, Any]) -> str:

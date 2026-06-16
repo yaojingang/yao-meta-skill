@@ -324,6 +324,17 @@
       color: var(--ink);
       font-size: 13px;
     }
+    .action-repair-row strong {
+      color: var(--ink);
+      font-size: 14px;
+      overflow-wrap: anywhere;
+    }
+    .action-repair-row em {
+      color: var(--muted);
+      font-size: 12px;
+      font-style: normal;
+      overflow-wrap: anywhere;
+    }
     .action-evidence-check code,
     .action-evidence-check small,
     .action-repair-row code,
