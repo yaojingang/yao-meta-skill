@@ -165,6 +165,20 @@ def main() -> None:
     assert checks["skill-ir-evidence-path-contract"]["actual"]["review_studio_evidence_path"] == (
         "skill-ir/examples/yao-meta-skill.json"
     ), checks["skill-ir-evidence-path-contract"]
+    assert checks["review-studio-gate-action-mirror"]["status"] == "pass", checks[
+        "review-studio-gate-action-mirror"
+    ]
+    gate_action_mirror = checks["review-studio-gate-action-mirror"]["actual"]
+    assert gate_action_mirror["non_pass_gate_keys"] == [
+        "output-lab",
+        "review-waivers",
+        "world-class-evidence",
+    ], gate_action_mirror
+    assert gate_action_mirror["action_gate_keys"] == gate_action_mirror["non_pass_gate_keys"], gate_action_mirror
+    assert gate_action_mirror["pass_gate_action_ids_empty"] is True, gate_action_mirror
+    assert gate_action_mirror["gate_action_mirrors"]["world-class-evidence"]["source_ref_present"] is True, (
+        gate_action_mirror
+    )
     assert checks["overview-benchmark-summary"]["status"] == "pass", checks["overview-benchmark-summary"]
     assert checks["interpretation-adoption-summary"]["status"] == "pass", checks["interpretation-adoption-summary"]
     assert checks["coverage-world-class-boundary"]["status"] == "pass", checks["coverage-world-class-boundary"]
@@ -395,6 +409,38 @@ def main() -> None:
     phase_queue_drift_checks = {item["key"]: item for item in phase_queue_drift_payload["checks"]}
     assert phase_queue_drift_checks["world-class-phase-queue-consistency"]["status"] == "fail", (
         phase_queue_drift_checks["world-class-phase-queue-consistency"]
+    )
+
+    gate_action_drift_root = TMP / "gate-action-drift-skill"
+    copy_reports(gate_action_drift_root)
+    gate_action_path = gate_action_drift_root / "reports" / "review-studio.json"
+    gate_action_payload = json.loads(gate_action_path.read_text(encoding="utf-8"))
+    for gate in gate_action_payload["gates"]:
+        if gate["key"] == "world-class-evidence":
+            gate["review_action_id"] = ""
+            gate["review_action_source_ref_count"] = 0
+    for action in gate_action_payload["review_actions"]:
+        if action["gate_key"] == "world-class-evidence":
+            action["source_refs"] = []
+    gate_action_path.write_text(json.dumps(gate_action_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    gate_action_drift_proc = run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            str(gate_action_drift_root),
+            "--output-json",
+            str(TMP / "gate_action_drift.json"),
+            "--output-md",
+            str(TMP / "gate_action_drift.md"),
+            "--generated-at",
+            "2026-06-15",
+        ]
+    )
+    assert gate_action_drift_proc.returncode == 2, gate_action_drift_proc.stdout
+    gate_action_drift_payload = json.loads(gate_action_drift_proc.stdout)
+    gate_action_drift_checks = {item["key"]: item for item in gate_action_drift_payload["checks"]}
+    assert gate_action_drift_checks["review-studio-gate-action-mirror"]["status"] == "fail", (
+        gate_action_drift_checks["review-studio-gate-action-mirror"]
     )
 
     release_flow_drift_root = TMP / "release-flow-drift-skill"

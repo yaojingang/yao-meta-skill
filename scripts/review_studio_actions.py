@@ -297,6 +297,7 @@ def build_review_actions(
         refs = source_refs(skill_dir, output_html, guidance.get("source_paths", []))
         actions.append(
             {
+                "action_id": f"review-action-{gate_item['key']}",
                 "gate_key": gate_item["key"],
                 "label": gate_item["label"],
                 "status": gate_item["status"],

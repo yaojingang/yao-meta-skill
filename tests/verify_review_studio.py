@@ -35,8 +35,20 @@ def main() -> None:
         "review-waivers",
         "world-class-evidence",
     }, payload
+    action_by_gate = {item["gate_key"]: item for item in payload["review_actions"]}
     gate_keys = {item["key"] for item in payload["gates"]}
     assert gate_keys == review_gates.REVIEW_STUDIO_GATE_KEYS, payload
+    for gate in payload["gates"]:
+        if gate["status"] == "pass":
+            assert gate["review_action_id"] == "", gate
+            assert gate["review_action_source_ref_count"] == 0, gate
+            assert gate["review_action_verification_command"] == "", gate
+            continue
+        action = action_by_gate[gate["key"]]
+        assert gate["review_action_id"] == action["action_id"] == f"review-action-{gate['key']}", gate
+        assert gate["review_action_status"] == action["status"] == gate["status"], gate
+        assert gate["review_action_source_ref_count"] == len(action["source_refs"]) > 0, gate
+        assert gate["review_action_verification_command"] == action["verification_command"], gate
     assert set(review_gates.GATE_WEIGHTS) == review_gates.REVIEW_STUDIO_GATE_KEYS, review_gates.GATE_WEIGHTS
     gate_contract = payload["gate_contract"]
     assert gate_contract["ok"] is True, gate_contract

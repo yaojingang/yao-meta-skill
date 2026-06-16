@@ -48,7 +48,7 @@ This report maps the Skill OS 2.0 upgrade blueprint to concrete local artifacts,
 | Registry Package Format | `pass` | registry ok True | `make ci-test` | `tests/verify_registry_audit.py` |
 | Review Studio 2.0 | `pass` | 16 review gates | `make ci-test` | `tests/verify_review_studio.py` |
 | Migration V2 Docs | `pass` | migration guide present | `make ci-test` | `docs review` |
-| Evidence Consistency | `pass` | 37 consistency checks | `make ci-test` | `tests/verify_evidence_consistency.py` |
+| Evidence Consistency | `pass` | 38 consistency checks | `make ci-test` | `tests/verify_evidence_consistency.py` |
 
 ## Reference Extension Tracks
 

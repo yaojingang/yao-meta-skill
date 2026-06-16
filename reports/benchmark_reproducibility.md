@@ -1,20 +1,20 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-17`
-Commit: `4309d9bbcd21ad8e068cfdad034cd9d5a9e3570f`
+Commit: `7050664b482a8ed9ff8d763f08800902fdf1f02d`
 Working tree dirty at generation: `true`
-Source tree dirty at generation: `false`
+Source tree dirty at generation: `true`
 Generated evidence dirty at generation: `true`
-Evidence bundle SHA256: `48071ebca4a8bfc9b45e5d4194858870fd0e7f50faff88d4abb79308113126eb`
+Evidence bundle SHA256: `c31e8bd9e49e60f14344e25ae71dabf911612d9c1ae6aee292ce566c66b88fce`
 
 ## Summary
 
 - reproducibility ready: `true`
-- release lock ready: `true`
+- release lock ready: `false`
 - methodology complete: `true`
 - required artifacts: `25`
 - missing artifacts: `0`
-- source contract sha256: `f57c75f37b2b`
+- source contract sha256: `a7c24fc193a5`
 - archive sha256: `7db44f059844`
 - output cases: `5`
 - disclosed failure cases: `3`
@@ -24,10 +24,10 @@ Evidence bundle SHA256: `48071ebca4a8bfc9b45e5d4194858870fd0e7f50faff88d4abb7930
 - world-class ready: `false`
 - world-class source checks: `10` pass / `19` total; `9` blocked
 - public claim ready: `false`
-- public claim blockers: `4`
-- changed files at generation: `13`
-- source changed files at generation: `0`
-- generated changed files at generation: `13`
+- public claim blockers: `5`
+- changed files at generation: `39`
+- source changed files at generation: `5`
+- generated changed files at generation: `34`
 
 This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete. The git commit and dirty samples are generation-time context; the evidence bundle SHA is the durable anchor for the artifacts listed below.
 
@@ -39,6 +39,7 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 | Blocker |
 | --- |
+| release lock is not clean or commit is unavailable |
 | provider-backed model holdout evidence is incomplete |
 | human blind-review adjudication is incomplete |
 | world-class evidence is not accepted yet (4 open gaps, 4 ledger pending) |
@@ -46,15 +47,15 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 ## Release Lock
 
-- ready: `true`
-- reason: only generated evidence artifacts were dirty at generation time
+- ready: `false`
+- reason: source files were dirty at generation time
 - status scope: generation-time status before this report is written
 
 ## Evidence Bundle
 
 - algorithm: `sha256(path,label,exists,artifact_sha256)`
 - artifacts: `25` / `25`
-- sha256: `48071ebca4a8bfc9b45e5d4194858870fd0e7f50faff88d4abb79308113126eb`
+- sha256: `c31e8bd9e49e60f14344e25ae71dabf911612d9c1ae6aee292ce566c66b88fce`
 
 ## Methodology Sections
 
@@ -76,14 +77,14 @@ This report proves local benchmark reproducibility only. It keeps external provi
 | output_cases | `evals/output/cases.jsonl` | present | `a6ae96857116` |
 | output_schema | `evals/output/schema.json` | present | `8ee340c95064` |
 | output_scorecard | `reports/output_quality_scorecard.json` | present | `0806258a8e08` |
-| output_execution | `reports/output_execution_runs.json` | present | `7795806f5549` |
+| output_execution | `reports/output_execution_runs.json` | present | `9d1dbd75c98b` |
 | blind_review | `reports/output_blind_review_pack.json` | present | `bbe2db8ec277` |
 | review_adjudication | `reports/output_review_adjudication.json` | present | `91fd88dd9b0f` |
 | trigger_scorecard | `reports/route_scorecard.json` | present | `c164e83e36d0` |
 | runtime_conformance | `reports/conformance_matrix.json` | present | `97f9ba949c23` |
-| trust_report | `reports/security_trust_report.json` | present | `e3bee7ca1d83` |
+| trust_report | `reports/security_trust_report.json` | present | `079165fefd9f` |
 | python_compatibility | `reports/python_compatibility.json` | present | `cb95afb7d7cc` |
-| registry_audit | `reports/registry_audit.json` | present | `b4ecfad8408c` |
+| registry_audit | `reports/registry_audit.json` | present | `db05339565be` |
 | package_verification | `reports/package_verification.json` | present | `7aa6c25e8154` |
 | install_simulation | `reports/install_simulation.json` | present | `d2bea19ea46f` |
 | skill_os2_audit | `reports/skill_os2_audit.json` | present | `ad57230481ed` |

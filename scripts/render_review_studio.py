@@ -514,6 +514,13 @@ def render_review_studio(skill_dir: Path, output_html: Path | None = None, outpu
     contract = gate_contract(gates)
     blockers, warnings = add_blockers_from_gate(gates)
     review_actions = build_review_actions(gates, skill_dir, output_html, data)
+    action_by_gate = {str(item.get("gate_key", "")): item for item in review_actions}
+    for gate in gates:
+        action = action_by_gate.get(str(gate.get("key", "")))
+        gate["review_action_id"] = str(action.get("action_id", "")) if action else ""
+        gate["review_action_status"] = str(action.get("status", "")) if action else ""
+        gate["review_action_source_ref_count"] = len(action.get("source_refs", [])) if action else 0
+        gate["review_action_verification_command"] = str(action.get("verification_command", "")) if action else ""
     score = weighted_score(gates)
     annotation_summary = data["review_annotations"].get("summary", {})
     open_annotation_blockers = int(annotation_summary.get("open_blocker_count", 0) or 0)

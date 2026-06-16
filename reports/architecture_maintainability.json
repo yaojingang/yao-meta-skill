@@ -18,7 +18,7 @@
     "block_line_threshold": 1500,
     "largest_file_lines": 696,
     "watchlist_count": 0,
-    "early_watchlist_count": 3,
+    "early_watchlist_count": 4,
     "hotspot_count": 0,
     "blocker_count": 0,
     "decision": "pass"
@@ -42,11 +42,19 @@
     },
     {
       "path": "tests/verify_evidence_consistency.py",
-      "lines": 625,
+      "lines": 671,
       "kind": "test",
       "severity": "pass",
       "early_watch": true,
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
+      "path": "scripts/render_evidence_consistency.py",
+      "lines": 647,
+      "kind": "cli-script",
+      "severity": "pass",
+      "early_watch": true,
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
       "path": "tests/verify_output_review_adjudication.py",
@@ -89,14 +97,6 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
-      "path": "scripts/render_evidence_consistency.py",
-      "lines": 580,
-      "kind": "cli-script",
-      "severity": "pass",
-      "early_watch": false,
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
       "path": "tests/verify_world_class_evidence_ledger.py",
       "lines": 579,
       "kind": "test",
@@ -114,7 +114,7 @@
     },
     {
       "path": "scripts/render_review_studio.py",
-      "lines": 568,
+      "lines": 575,
       "kind": "cli-script",
       "severity": "pass",
       "early_watch": false,
@@ -141,11 +141,19 @@
     },
     {
       "path": "tests/verify_evidence_consistency.py",
-      "lines": 625,
+      "lines": 671,
       "kind": "test",
       "severity": "pass",
       "early_watch": true,
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
+      "path": "scripts/render_evidence_consistency.py",
+      "lines": 647,
+      "kind": "cli-script",
+      "severity": "pass",
+      "early_watch": true,
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     }
   ],
   "hotspots": [],
