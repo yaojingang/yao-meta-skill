@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import argparse
-import ast
 import json
 from datetime import date
 from pathlib import Path
@@ -8,6 +7,7 @@ from typing import Any
 
 from evidence_consistency_artifact_roles import build_preflight_artifact_role_handoff_checks
 from evidence_consistency_release import build_release_evidence_flow_check
+from evidence_consistency_skill_os2_review import build_skill_os2_review_current_evidence_check
 from evidence_consistency_world_class import build_world_class_workflow_check
 from skill_ir_paths import find_skill_ir_path
 
@@ -101,20 +101,6 @@ def load_text(path: Path) -> tuple[str, str | None]:
     if not path.exists():
         return "", "missing"
     return path.read_text(encoding="utf-8"), None
-
-
-def ci_default_target_count(path: Path) -> int | None:
-    if not path.exists():
-        return None
-    tree = ast.parse(path.read_text(encoding="utf-8"))
-    for node in tree.body:
-        if not isinstance(node, ast.Assign):
-            continue
-        if not any(isinstance(target, ast.Name) and target.id == "DEFAULT_TARGETS" for target in node.targets):
-            continue
-        if isinstance(node.value, (ast.List, ast.Tuple)):
-            return len(node.value.elts)
-    return None
 
 
 def rel_path(path: Path, root: Path) -> str:
@@ -660,47 +646,19 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
         )
     )
     skill_os2_review = text_reports.get("skill_os2_review", "")
-    ci_target_count = ci_default_target_count(skill_dir / "scripts" / "ci_test.py")
-    expected_review_snippets = [
-        f"score `{studio_summary.get('world_class_score')}`",
-        f"`{studio_summary.get('gate_count')}` gates",
-        f"`{studio_summary.get('warning_count')}` warnings",
-        f"`{trust_summary.get('internal_module_count')}` declared internal modules",
-        (
-            f"`{trust_summary.get('help_smoke_checked_count')} / {trust_summary.get('help_smoke_checked_count')}` "
-            f"CLI help smoke checks passing across `{trust_summary.get('script_count')}` scripts"
-        ),
-        f"`{package_summary.get('archive_entry_count')}` zip entries",
-        f"archive with `{package_summary.get('archive_entry_count')}` entries",
-        f"`{install_summary.get('installer_permission_enforced_count')}` installer permission checks enforced",
-        f"`{install_summary.get('installer_permission_failure_count')}` permission failures",
-        f"`{benchmark_summary.get('required_artifact_count')}` required artifacts",
-        f"`{benchmark_summary.get('command_count')}` reproduction commands",
-        (
-            f"initial load `{context_stats.get('estimated_initial_load_tokens')}/"
-            f"{context_stats.get('context_budget_limit')}`"
-        ),
-        f"target count is `{ci_target_count}`",
-    ]
-    missing_review_snippets = [snippet for snippet in expected_review_snippets if snippet not in skill_os2_review]
-    add_check(
-        checks,
-        key="skill-os-2-review-current-evidence",
-        label="Skill OS 2.0 review summary mirrors current evidence",
-        status="pass" if not missing_review_snippets else "fail",
-        expected=expected_review_snippets,
-        actual="all present" if not missing_review_snippets else {"missing": missing_review_snippets},
-        paths=[
-            REQUIRED_TEXT_REPORTS["skill_os2_review"],
-            REQUIRED_REPORTS["review_studio"],
-            REQUIRED_REPORTS["package_verification"],
-            REQUIRED_REPORTS["install_simulation"],
-            REQUIRED_REPORTS["trust"],
-            REQUIRED_REPORTS["context_budget"],
-            REQUIRED_REPORTS["benchmark"],
-            "scripts/ci_test.py",
-        ],
-        detail="Manual 2.0 review summaries must not drift from generated gate, package, trust, context, benchmark, or CI evidence.",
+    checks.append(
+        build_skill_os2_review_current_evidence_check(
+            skill_dir=skill_dir,
+            skill_os2_review=skill_os2_review,
+            studio_summary=studio_summary if isinstance(studio_summary, dict) else {},
+            trust_summary=trust_summary if isinstance(trust_summary, dict) else {},
+            package_summary=package_summary if isinstance(package_summary, dict) else {},
+            install_summary=install_summary if isinstance(install_summary, dict) else {},
+            benchmark_summary=benchmark_summary if isinstance(benchmark_summary, dict) else {},
+            context_stats=context_stats if isinstance(context_stats, dict) else {},
+            required_text_reports=REQUIRED_TEXT_REPORTS,
+            required_reports=REQUIRED_REPORTS,
+        )
     )
     status_counts: dict[str, int] = {"pass": 0, "warn": 0, "fail": 0}
     for check in checks:

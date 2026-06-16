@@ -4,10 +4,10 @@
   "generated_at": "2026-06-16",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 195,
-    "script_file_count": 124,
+    "python_file_count": 196,
+    "script_file_count": 125,
     "test_file_count": 71,
-    "internal_module_count": 41,
+    "internal_module_count": 42,
     "cli_script_count": 85,
     "command_handler_count": 68,
     "entrypoint_command_handler_count": 18,
@@ -30,13 +30,6 @@
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
-      "path": "scripts/render_evidence_consistency.py",
-      "lines": 808,
-      "kind": "cli-script",
-      "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
       "path": "scripts/skill_report_model.py",
       "lines": 800,
       "kind": "internal-module",
@@ -49,6 +42,13 @@
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
+      "path": "scripts/render_evidence_consistency.py",
+      "lines": 766,
+      "kind": "cli-script",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
       "path": "scripts/yao_cli_parser.py",
@@ -116,13 +116,6 @@
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
-      "path": "scripts/render_evidence_consistency.py",
-      "lines": 808,
-      "kind": "cli-script",
-      "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
       "path": "scripts/skill_report_model.py",
       "lines": 800,
       "kind": "internal-module",
@@ -135,6 +128,13 @@
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
+      "path": "scripts/render_evidence_consistency.py",
+      "lines": 766,
+      "kind": "cli-script",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
       "path": "scripts/yao_cli_parser.py",

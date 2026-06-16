@@ -2,9 +2,9 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 215,
-    "script_count": 124,
-    "internal_module_count": 38,
+    "scanned_files": 216,
+    "script_count": 125,
+    "internal_module_count": 39,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 215,
-    "package_sha256": "cd5b790b3cfa42cd4238d63e2fb428cd148184ee871c92b7f6b0eb603be2335f"
+    "package_hash_file_count": 216,
+    "package_sha256": "a8b415ac609bac9263d7572d3e1bf8b1b2bf5156812138dbf617fc07e6200833"
   },
   "failures": [],
   "warnings": [],
@@ -235,6 +235,20 @@
       "interface": "internal-module",
       "interface_declared": true,
       "interface_reason": "Imported by render_evidence_consistency.py to verify release evidence refresh instructions.",
+      "has_argparse": false,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
+      "path": "scripts/evidence_consistency_skill_os2_review.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Imported by render_evidence_consistency.py to keep Skill OS 2.0 review summary drift checks out of the main consistency renderer.",
       "has_argparse": false,
       "has_main_guard": false,
       "uses_input": false,
@@ -1817,7 +1831,7 @@
     "checked_count": 86,
     "passed_count": 86,
     "failed_count": 0,
-    "skipped_count": 38,
+    "skipped_count": 39,
     "failed_scripts": [],
     "results": [
       {
@@ -2688,6 +2702,10 @@
       },
       {
         "path": "scripts/evidence_consistency_release.py",
+        "reason": "internal module"
+      },
+      {
+        "path": "scripts/evidence_consistency_skill_os2_review.py",
         "reason": "internal module"
       },
       {

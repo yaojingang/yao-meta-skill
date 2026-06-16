@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `215`
-- Scripts: `124`
-- Internal script modules: `38`
+- Scanned files: `216`
+- Scripts: `125`
+- Internal script modules: `39`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `215`
-- Package SHA256: `cd5b790b3cfa42cd4238d63e2fb428cd148184ee871c92b7f6b0eb603be2335f`
+- Package hash files: `216`
+- Package SHA256: `a8b415ac609bac9263d7572d3e1bf8b1b2bf5156812138dbf617fc07e6200833`
 
 ## Failures
 
@@ -77,6 +77,7 @@
 | scripts/emit_telemetry_event.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/evidence_consistency_artifact_roles.py | internal-module | True | False | False | False | False | False | False | Imported by render_evidence_consistency.py to compare preflight and Review Studio artifact-role contracts. |
 | scripts/evidence_consistency_release.py | internal-module | True | False | False | False | False | False | False | Imported by render_evidence_consistency.py to verify release evidence refresh instructions. |
+| scripts/evidence_consistency_skill_os2_review.py | internal-module | True | False | False | False | False | False | False | Imported by render_evidence_consistency.py to keep Skill OS 2.0 review summary drift checks out of the main consistency renderer. |
 | scripts/evidence_consistency_world_class.py | internal-module | True | False | False | False | False | False | False | Imported by render_evidence_consistency.py to isolate world-class evidence workflow consistency checks. |
 | scripts/export_skill_ir.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/github_benchmark_scan.py | cli | False | True | True | False | True | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
