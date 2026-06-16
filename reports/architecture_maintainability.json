@@ -42,7 +42,7 @@
     },
     {
       "path": "tests/verify_evidence_consistency.py",
-      "lines": 609,
+      "lines": 625,
       "kind": "test",
       "severity": "pass",
       "early_watch": true,
@@ -90,7 +90,7 @@
     },
     {
       "path": "scripts/render_evidence_consistency.py",
-      "lines": 579,
+      "lines": 580,
       "kind": "cli-script",
       "severity": "pass",
       "early_watch": false,
@@ -141,7 +141,7 @@
     },
     {
       "path": "tests/verify_evidence_consistency.py",
-      "lines": 609,
+      "lines": 625,
       "kind": "test",
       "severity": "pass",
       "early_watch": true,

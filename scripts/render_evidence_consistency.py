@@ -404,6 +404,7 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
         checks.append(
             build_phase_queue_consistency_check(
                 world_class_preflight=world_class_preflight,
+                world_class_operator_runbook=world_class_operator_runbook,
                 review_studio=review_studio,
                 report_paths=REQUIRED_REPORTS,
             )

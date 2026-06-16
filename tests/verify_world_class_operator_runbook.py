@@ -111,8 +111,19 @@ def main() -> None:
     assert summary["source_check_count"] >= 13, summary
     assert summary["source_pass_count"] + summary["source_blocked_count"] == summary["source_check_count"], summary
     assert summary["source_blocked_count"] >= 6, summary
+    assert summary["repair_checklist_count"] >= summary["source_blocked_count"], summary
+    assert summary["phase_queue_count"] == 2, summary
+    assert summary["phase_queue_blocked_count"] == 2, summary
+    assert summary["phase_queue_row_count"] == summary["repair_checklist_count"], summary
+    assert summary["phase_queue_next_phase"] == "unblock-access", summary
+    assert summary["phase_queue_counts_as_completion"] is False, summary
     assert summary["ready_to_claim_world_class"] is False, summary
     assert summary["runbook_counts_as_completion"] is False, summary
+    assert payload["repair_checklist"], payload
+    assert len(payload["phase_queue"]) == summary["phase_queue_count"], payload["phase_queue"]
+    assert sum(item["row_count"] for item in payload["phase_queue"]) == summary["phase_queue_row_count"], payload[
+        "phase_queue"
+    ]
     items = {item["evidence_key"]: item for item in payload["items"]}
     assert set(items) == {
         "provider-holdout",
@@ -124,6 +135,11 @@ def main() -> None:
     assert provider["review_state"] == "awaiting-submission", provider
     assert provider["source_accepted"] is False, provider
     assert provider["blocked_source_check_count"] == 2, provider
+    assert provider["repair_blocked_count"] == 3, provider
+    assert provider["repair_counts_as_completion"] is False, provider
+    assert provider["phase_queue_blocked_count"] == 2, provider
+    assert provider["phase_queue_counts_as_completion"] is False, provider
+    assert [item["phase"] for item in provider["phase_queue"]] == ["unblock-access", "collect-source"], provider
     assert any("output-exec --provider-runner openai" in step for step in provider["execution_runbook"]), provider
     assert not any("<redacted>" in step or "OPENAI_API_KEY=" in step for step in provider["execution_runbook"]), provider
     assert "Run provider-backed output-exec with real credentials." in provider["next_source_actions"], provider
@@ -146,10 +162,14 @@ def main() -> None:
     markdown = output_md.read_text(encoding="utf-8")
     assert "World-Class Operator Runbook" in markdown, markdown
     assert "runbook counts as completion: `false`" in markdown, markdown
+    assert "phase queue counts as completion: `false`" in markdown, markdown
+    assert "## Phase Queue" in markdown, markdown
+    assert "| `unblock-access` | `blocked` |" in markdown, markdown
     assert "Valid intake means ready for submission review; ledger review still requires passing source evidence." in markdown, markdown
     assert "| Evidence | Ledger | Intake | Review | Blocked checks | Next source action | Owner |" in markdown, markdown
     assert "| `provider-holdout` | `pending` | `awaiting-submission` | `awaiting-submission` | `2` | Run provider-backed output-exec with real credentials." in markdown, markdown
     assert "Source Runbook" in markdown, markdown
+    assert "### Phase Queue" in markdown, markdown
     assert "output-exec --provider-runner openai" in markdown, markdown
     assert "<redacted>" not in markdown, markdown
     assert "OPENAI_API_KEY=<redacted>" not in markdown, markdown
@@ -164,8 +184,11 @@ def main() -> None:
     assert "position:sticky" in html, html
     assert "<span>Ready</span><strong>0</strong>" in html, html
     assert "<span>Invalid</span><strong>0</strong>" in html, html
+    assert f"<span>Queue</span><strong>{summary['phase_queue_blocked_count']}/{summary['phase_queue_count']}</strong>" in html, html
     assert f"<span>Blocked</span><strong>{summary['source_blocked_count']}</strong>" in html, html
     assert "<dt>Blocked</dt><dd><code>2</code></dd>" in html, html
+    assert "<dt>Queue</dt><dd><code>2</code></dd>" in html, html
+    assert "Phase Queue" in html, html
     assert "Next Source Actions" in html, html
     assert "Source Runbook" in html, html
     assert "output-exec --provider-runner openai" in html, html
@@ -208,12 +231,16 @@ def main() -> None:
     assert submitted_summary["ready_for_ledger_review_count"] == 0, submitted_summary
     assert submitted_summary["source_pass_count"] + submitted_summary["source_blocked_count"] == submitted_summary["source_check_count"], submitted_summary
     assert submitted_summary["source_blocked_count"] >= 6, submitted_summary
+    assert submitted_summary["phase_queue_count"] == 2, submitted_summary
+    assert submitted_summary["phase_queue_blocked_count"] == 2, submitted_summary
+    assert submitted_summary["phase_queue_counts_as_completion"] is False, submitted_summary
     assert submitted_summary["ready_to_claim_world_class"] is False, submitted_summary
     submitted_provider = {item["evidence_key"]: item for item in submitted["items"]}["provider-holdout"]
     assert submitted_provider["intake_readiness"] == "fix-submission", submitted_provider
     assert submitted_provider["review_state"] == "fix-submission", submitted_provider
     assert submitted_provider["source_accepted"] is False, submitted_provider
     assert submitted_provider["blocked_source_check_count"] == 2, submitted_provider
+    assert submitted_provider["phase_queue_blocked_count"] == 2, submitted_provider
     assert submitted_provider["next_source_actions"] == provider["next_source_actions"], submitted_provider
     assert "tests/tmp_world_class_operator_runbook/valid_submissions" in submitted_provider["commands"]["validate_intake"], submitted_provider
     assert "tests/tmp_world_class_operator_runbook/valid_submissions" in submitted_provider["commands"]["review_queue"], submitted_provider

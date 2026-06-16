@@ -37,7 +37,7 @@ No near-threshold files found.
 | --- | ---: | --- | --- |
 | `tests/verify_yao_cli.py` | `696` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
 | `tests/verify_world_class_evidence_intake.py` | `690` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
-| `tests/verify_evidence_consistency.py` | `609` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
+| `tests/verify_evidence_consistency.py` | `625` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
 
 ## Largest Files
 
@@ -45,13 +45,13 @@ No near-threshold files found.
 | --- | ---: | --- | --- |
 | `tests/verify_yao_cli.py` | `696` | `test` | `pass` |
 | `tests/verify_world_class_evidence_intake.py` | `690` | `test` | `pass` |
-| `tests/verify_evidence_consistency.py` | `609` | `test` | `pass` |
+| `tests/verify_evidence_consistency.py` | `625` | `test` | `pass` |
 | `tests/verify_output_review_adjudication.py` | `599` | `test` | `pass` |
 | `scripts/render_skill_overview.py` | `588` | `cli-script` | `pass` |
 | `scripts/build_skill_atlas.py` | `586` | `cli-script` | `pass` |
 | `scripts/optimize_description.py` | `585` | `cli-script` | `pass` |
 | `scripts/trust_check.py` | `582` | `cli-script` | `pass` |
-| `scripts/render_evidence_consistency.py` | `579` | `cli-script` | `pass` |
+| `scripts/render_evidence_consistency.py` | `580` | `cli-script` | `pass` |
 | `tests/verify_world_class_evidence_ledger.py` | `579` | `test` | `pass` |
 | `scripts/world_class_submission_kit_rendering.py` | `576` | `internal-module` | `pass` |
 | `scripts/render_review_studio.py` | `568` | `cli-script` | `pass` |

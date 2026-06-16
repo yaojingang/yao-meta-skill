@@ -153,7 +153,7 @@ This report is a read-only reviewer queue. It does not accept evidence or make w
 #### Source Checks
 
 - External events: 0 / >0 => blocked
-- Adoption sample: 0 / >0 => blocked
+- Adoption sample: 1 / >0 => pass
 - Raw content blocked: False / false => pass
 
 #### Completion Assertions

@@ -74,9 +74,27 @@ def keyed_phase_queue_signatures_from_items(items: dict[str, dict[str, Any]], qu
     return signatures
 
 
+def any_phase_queue_counts_as_completion(
+    *queues: list[dict[str, Any]],
+    item_maps: dict[str, dict[str, Any]] | None = None,
+) -> bool:
+    item_maps = item_maps or {}
+    for queue in queues:
+        for item in queue:
+            if isinstance(item, dict) and item.get("counts_as_completion") is True:
+                return True
+    for item in item_maps.values():
+        queue = item.get("phase_queue", []) if isinstance(item.get("phase_queue", []), list) else []
+        for row in queue:
+            if isinstance(row, dict) and row.get("counts_as_completion") is True:
+                return True
+    return False
+
+
 def build_phase_queue_consistency_check(
     *,
     world_class_preflight: dict[str, Any],
+    world_class_operator_runbook: dict[str, Any],
     review_studio: dict[str, Any],
     report_paths: dict[str, str],
 ) -> dict[str, Any]:
@@ -88,6 +106,7 @@ def build_phase_queue_consistency_check(
     expected_queue = build_phase_queue(repair_rows)
     expected_summary = summarize_phase_queue(expected_queue)
     preflight_items = keyed_preflight_items(world_class_preflight)
+    operator_runbook_items = keyed_preflight_items(world_class_operator_runbook)
     review_steps = world_class_review_action_steps(review_studio)
     expected = {
         "summary": summary_signature(expected_summary),
@@ -106,14 +125,35 @@ def build_phase_queue_consistency_check(
             if isinstance(world_class_preflight.get("phase_queue", []), list)
             else []
         ),
+        "operator_runbook_summary": summary_signature(
+            world_class_operator_runbook.get("summary", {})
+            if isinstance(world_class_operator_runbook.get("summary", {}), dict)
+            else {}
+        ),
+        "operator_runbook_top_level_phase_queue": phase_queue_signature(
+            world_class_operator_runbook.get("phase_queue", [])
+            if isinstance(world_class_operator_runbook.get("phase_queue", []), list)
+            else []
+        ),
         "item_phase_queues": keyed_phase_queue_signatures_from_items(preflight_items, "phase_queue"),
+        "operator_runbook_phase_queues": keyed_phase_queue_signatures_from_items(
+            operator_runbook_items,
+            "phase_queue",
+        ),
         "review_studio_phase_queues": keyed_phase_queue_signatures_from_items(review_steps, "phase_queue"),
-        "phase_queue_counts_as_completion": any(
-            item.get("counts_as_completion") is True
-            for item in world_class_preflight.get("phase_queue", [])
-            if isinstance(item, dict)
+        "phase_queue_counts_as_completion": any_phase_queue_counts_as_completion(
+            world_class_preflight.get("phase_queue", [])
+            if isinstance(world_class_preflight.get("phase_queue", []), list)
+            else [],
+            world_class_operator_runbook.get("phase_queue", [])
+            if isinstance(world_class_operator_runbook.get("phase_queue", []), list)
+            else [],
+            item_maps={**preflight_items, **operator_runbook_items, **review_steps},
         ),
     }
+    expected["operator_runbook_summary"] = expected["summary"]
+    expected["operator_runbook_top_level_phase_queue"] = expected["top_level_phase_queue"]
+    expected["operator_runbook_phase_queues"] = expected["item_phase_queues"]
     expected["review_studio_phase_queues"] = expected["item_phase_queues"]
     return {
         "key": "world-class-phase-queue-consistency",
@@ -121,9 +161,13 @@ def build_phase_queue_consistency_check(
         "status": "pass" if expected == actual else "fail",
         "expected": expected,
         "actual": actual,
-        "paths": [report_paths["world_class_preflight"], report_paths["review_studio"]],
+        "paths": [
+            report_paths["world_class_preflight"],
+            report_paths["world_class_operator_runbook"],
+            report_paths["review_studio"],
+        ],
         "detail": (
-            "Phase queues must be derived from repair rows in preflight and mirrored into Review Studio "
-            "without counting queue guidance as completion evidence."
+            "Phase queues must be derived from repair rows in preflight and mirrored into the operator runbook "
+            "and Review Studio without counting queue guidance as completion evidence."
         ),
     }

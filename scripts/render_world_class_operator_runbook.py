@@ -8,6 +8,7 @@ from typing import Any
 from html_rendering import html_text
 from render_world_class_evidence_intake import build_intake
 from render_world_class_evidence_ledger import build_ledger
+from render_world_class_preflight import build_preflight
 from render_world_class_submission_review import build_submission_review
 
 
@@ -38,6 +39,7 @@ def build_runbook_item(
     entry: dict[str, Any],
     checklist: dict[str, Any],
     review_item: dict[str, Any],
+    preflight_item: dict[str, Any],
 ) -> dict[str, Any]:
     commands = checklist.get("commands", {}) if isinstance(checklist.get("commands", {}), dict) else {}
     must_collect = checklist.get("must_collect", {}) if isinstance(checklist.get("must_collect", {}), dict) else {}
@@ -82,6 +84,24 @@ def build_runbook_item(
         "source_checklist": source_checklist,
         "blocked_source_check_count": len(blocked_source_checks),
         "next_source_actions": next_source_actions,
+        "repair_checklist": preflight_item.get("repair_checklist", [])
+        if isinstance(preflight_item.get("repair_checklist", []), list)
+        else [],
+        "repair_blocked_count": sum(
+            1
+            for row in preflight_item.get("repair_checklist", [])
+            if isinstance(row, dict) and row.get("status") != "ready"
+        ),
+        "repair_counts_as_completion": False,
+        "phase_queue": preflight_item.get("phase_queue", [])
+        if isinstance(preflight_item.get("phase_queue", []), list)
+        else [],
+        "phase_queue_blocked_count": sum(
+            1
+            for row in preflight_item.get("phase_queue", [])
+            if isinstance(row, dict) and row.get("status") != "ready"
+        ),
+        "phase_queue_counts_as_completion": False,
         "submission_state": entry.get("submission_state", {}),
         "anti_overclaim": entry.get("anti_overclaim", {}),
     }
@@ -92,14 +112,22 @@ def build_operator_runbook(skill_dir: Path, generated_at: str, submissions_dir: 
     ledger = build_ledger(skill_dir, generated_at, submissions_dir=submissions_dir)
     intake = build_intake(skill_dir, generated_at, submissions_dir=submissions_dir)
     review = build_submission_review(skill_dir, generated_at, submissions_dir=submissions_dir)
+    preflight = build_preflight(skill_dir, generated_at, submissions_dir=submissions_dir)
     checklist_by_key = by_key(intake.get("operator_checklist", []), "evidence_key")
     review_by_key = by_key(review.get("items", []), "evidence_key")
+    preflight_by_key = by_key(preflight.get("items", []), "evidence_key")
     items = [
-        build_runbook_item(entry, checklist_by_key.get(str(entry.get("key", "")), {}), review_by_key.get(str(entry.get("key", "")), {}))
+        build_runbook_item(
+            entry,
+            checklist_by_key.get(str(entry.get("key", "")), {}),
+            review_by_key.get(str(entry.get("key", "")), {}),
+            preflight_by_key.get(str(entry.get("key", "")), {}),
+        )
         for entry in ledger.get("entries", [])
     ]
     summary = ledger.get("summary", {})
     review_summary = review.get("summary", {})
+    preflight_summary = preflight.get("summary", {}) if isinstance(preflight.get("summary", {}), dict) else {}
     return {
         "schema_version": "1.0",
         "ok": True,
@@ -116,6 +144,15 @@ def build_operator_runbook(skill_dir: Path, generated_at: str, submissions_dir: 
             "source_check_count": review_summary.get("source_check_count", 0),
             "source_pass_count": review_summary.get("source_pass_count", 0),
             "source_blocked_count": review_summary.get("source_blocked_count", 0),
+            "repair_checklist_count": preflight_summary.get("repair_checklist_count", 0),
+            "repair_blocked_count": preflight_summary.get("repair_blocked_count", 0),
+            "phase_queue_count": preflight_summary.get("phase_queue_count", 0),
+            "phase_queue_blocked_count": preflight_summary.get("phase_queue_blocked_count", 0),
+            "phase_queue_row_count": preflight_summary.get("phase_queue_row_count", 0),
+            "phase_queue_next_phase": preflight_summary.get("phase_queue_next_phase", ""),
+            "phase_queue_next_action_id": preflight_summary.get("phase_queue_next_action_id", ""),
+            "phase_queue_next_command": preflight_summary.get("phase_queue_next_command", ""),
+            "phase_queue_counts_as_completion": False,
             "ready_to_claim_world_class": summary.get("ready_to_claim_world_class") is True,
             "runbook_counts_as_completion": False,
             "decision": "ready-for-completion-audit" if summary.get("ready_to_claim_world_class") is True else "collect-evidence",
@@ -125,9 +162,14 @@ def build_operator_runbook(skill_dir: Path, generated_at: str, submissions_dir: 
             "runbook_counts_submission_as_completion": False,
         },
         "items": items,
+        "repair_checklist": preflight.get("repair_checklist", [])
+        if isinstance(preflight.get("repair_checklist", []), list)
+        else [],
+        "phase_queue": preflight.get("phase_queue", []) if isinstance(preflight.get("phase_queue", []), list) else [],
         "source_reports": {
             "ledger": "reports/world_class_evidence_ledger.json",
             "intake": "reports/world_class_evidence_intake.json",
+            "preflight": "reports/world_class_evidence_preflight.json",
             "submission_review": "reports/world_class_submission_review.json",
             "claim_guard": "reports/world_class_claim_guard.json",
         },
@@ -161,6 +203,9 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- pending: `{summary['pending_count']}`",
         f"- awaiting submission: `{summary['awaiting_submission_count']}`",
         f"- ready for ledger review: `{summary['ready_for_ledger_review_count']}`",
+        f"- phase queue: `{summary['phase_queue_blocked_count']}` blocked / `{summary['phase_queue_count']}` phases",
+        f"- phase queue rows: `{summary['phase_queue_row_count']}`",
+        f"- phase queue counts as completion: `{str(summary['phase_queue_counts_as_completion']).lower()}`",
         "",
         "This runbook coordinates evidence collection only. It does not accept submissions or make world-class completion true.",
         "",
@@ -171,11 +216,30 @@ def render_markdown(report: dict[str, Any]) -> str:
         "3. Replace template-only fields with aggregate evidence and provenance.",
         "4. Validate intake, review the queue, refresh the ledger, then run the claim guard.",
         "",
-        "## Evidence Items",
-        "",
-        "| Evidence | Ledger | Intake | Review | Blocked checks | Next source action | Owner |",
-        "| --- | --- | --- | --- | ---: | --- | --- |",
     ]
+    lines.extend(
+        [
+            "## Phase Queue",
+            "",
+            "| Phase | Status | Rows | Blocked | Owners | Next action | Verify |",
+            "| --- | --- | ---: | ---: | --- | --- | --- |",
+        ]
+    )
+    for row in report.get("phase_queue", []):
+        owners = ", ".join(str(owner) for owner in row.get("owners", []))
+        lines.append(
+            f"| `{row.get('phase', '')}` | `{row.get('status', '')}` | `{row.get('row_count', 0)}` | "
+            f"`{row.get('blocked_count', 0)}` | {owners} | {row.get('next_action', '')} | `{row.get('verification_command', '')}` |"
+        )
+    lines.append("")
+    lines.extend(
+        [
+            "## Evidence Items",
+            "",
+            "| Evidence | Ledger | Intake | Review | Blocked checks | Next source action | Owner |",
+            "| --- | --- | --- | --- | ---: | --- | --- |",
+        ]
+    )
     for item in report["items"]:
         next_action = item.get("next_source_actions", ["none"])[0] if item.get("next_source_actions") else "none"
         lines.append(
@@ -191,8 +255,28 @@ def render_markdown(report: dict[str, Any]) -> str:
                 f"- objective: {item['objective']}",
                 f"- blocking reason: {item['blocking_reason']}",
                 f"- blocked source checks: `{item.get('blocked_source_check_count', 0)}`",
+                f"- repair rows: `{item.get('repair_blocked_count', 0)}` blocked",
+                f"- phase queue: `{item.get('phase_queue_blocked_count', 0)}` blocked phases",
                 f"- submission: `{item['submission_path'] or 'missing'}`",
                 f"- template: `{item['template_path'] or 'missing'}`",
+                "",
+                "### Phase Queue",
+                "",
+                "| Phase | Status | Rows | Blocked | Next action |",
+                "| --- | --- | ---: | ---: | --- |",
+            ]
+        )
+        item_phase_queue = item.get("phase_queue", [])
+        if item_phase_queue:
+            for row in item_phase_queue:
+                lines.append(
+                    f"| `{row.get('phase', '')}` | `{row.get('status', '')}` | `{row.get('row_count', 0)}` | "
+                    f"`{row.get('blocked_count', 0)}` | {row.get('next_action', '')} |"
+                )
+        else:
+            lines.append("| No phase queue listed. | `n/a` | `0` | `0` | n/a |")
+        lines.extend(
+            [
                 "",
                 "### Source Runbook",
                 "",
@@ -267,6 +351,21 @@ def html_source_checks(rows: list[dict[str, Any]]) -> str:
     return "<ul class='source-checks'>" + "".join(items) + "</ul>"
 
 
+def html_phase_queue(rows: list[dict[str, Any]]) -> str:
+    if not rows:
+        return "<p class='muted'>No phase queue listed.</p>"
+    items = []
+    for row in rows:
+        items.append(
+            "<li class='source-check'>"
+            f"<span>{html_text(row.get('label', row.get('phase', '')))}</span>"
+            f"<code>{html_text(row.get('phase', ''))}: {html_text(row.get('blocked_count', 0))} / {html_text(row.get('row_count', 0))}</code>"
+            f"<small>{html_text(row.get('next_action', ''))}</small>"
+            "</li>"
+        )
+    return "<ul class='source-checks'>" + "".join(items) + "</ul>"
+
+
 def render_html_item(item: dict[str, Any]) -> str:
     commands = "".join(
         f"<li><span>{html_text(label.replace('_', ' '))}</span><code>{html_text(command)}</code></li>"
@@ -281,8 +380,10 @@ def render_html_item(item: dict[str, Any]) -> str:
           <dt>Owner</dt><dd>{html_text(item['owner'])}</dd>
           <dt>Ledger</dt><dd><code>{html_text(item['ledger_status'])}</code></dd>
           <dt>Blocked</dt><dd><code>{html_text(item.get('blocked_source_check_count', 0))}</code></dd>
+          <dt>Queue</dt><dd><code>{html_text(item.get('phase_queue_blocked_count', 0))}</code></dd>
           <dt>Submission</dt><dd><code>{html_text(item['submission_path'])}</code></dd>
         </dl>
+        <section class="source-panel"><h4>Phase Queue</h4>{html_phase_queue(item.get('phase_queue', []))}</section>
         <section class="source-panel"><h4>Source Runbook</h4><ul>{html_list(item.get('execution_runbook', []), 'No source runbook listed.')}</ul></section>
         <section><h4>Commands</h4><ul class="commands">{commands}</ul></section>
         <div class="mini-grid">
@@ -303,6 +404,7 @@ def render_html(report: dict[str, Any]) -> str:
         ("Awaiting", summary["awaiting_submission_count"]),
         ("Ready", summary["ready_for_ledger_review_count"]),
         ("Source", f"{summary.get('source_pass_count', 0)}/{summary.get('source_check_count', 0)}"),
+        ("Queue", f"{summary.get('phase_queue_blocked_count', 0)}/{summary.get('phase_queue_count', 0)}"),
         ("Blocked", summary.get("source_blocked_count", 0)),
         ("Invalid", summary["invalid_submission_count"]),
     ]
@@ -370,6 +472,7 @@ def render_html(report: dict[str, Any]) -> str:
       <div class="stats">{stat_html}</div>
     </section>
     <section class="section panel" id="fast-path"><h2>Fast Path</h2><ol><li>Run the real external or human work for one evidence item.</li><li>Generate and fill the matching submission draft.</li><li>Validate intake and inspect the submission review queue.</li><li>Refresh the ledger and run the claim guard before making any completion claim.</li></ol></section>
+    <section class="section panel" id="phase-queue"><h2>Phase Queue</h2>{html_phase_queue(report.get('phase_queue', []))}</section>
     <section class="section" id="items"><h2>Evidence Items</h2><div class="item-grid">{item_html}</div></section>
     <section class="section panel" id="boundary"><h2>Boundary</h2><ul><li>Planned work, draft packets, metadata fallback, pending human decisions, and local command runners do not count as completion.</li><li>Valid intake means ready for submission review; ledger review still requires passing source evidence.</li><li>The world-class ledger and claim guard remain the source of truth.</li></ul></section>
   </main>

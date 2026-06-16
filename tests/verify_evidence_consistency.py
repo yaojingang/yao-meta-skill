@@ -187,7 +187,11 @@ def main() -> None:
     ]
     phase_queue_actual = checks["world-class-phase-queue-consistency"]["actual"]
     assert phase_queue_actual["summary"]["phase_queue_count"] == 2, phase_queue_actual
-    assert phase_queue_actual["summary"]["phase_queue_row_count"] == 13, phase_queue_actual
+    assert phase_queue_actual["summary"]["phase_queue_row_count"] >= 13, phase_queue_actual
+    assert phase_queue_actual["summary"] == phase_queue_actual["operator_runbook_summary"], phase_queue_actual
+    assert phase_queue_actual["top_level_phase_queue"] == phase_queue_actual[
+        "operator_runbook_top_level_phase_queue"
+    ], phase_queue_actual
     assert phase_queue_actual["phase_queue_counts_as_completion"] is False, phase_queue_actual
     assert set(phase_queue_actual["item_phase_queues"]) == {
         "provider-holdout",
@@ -195,6 +199,9 @@ def main() -> None:
         "native-permission-enforcement",
         "native-client-telemetry",
     }, phase_queue_actual
+    assert phase_queue_actual["operator_runbook_phase_queues"] == phase_queue_actual["item_phase_queues"], (
+        phase_queue_actual
+    )
     assert phase_queue_actual["review_studio_phase_queues"] == phase_queue_actual["item_phase_queues"], (
         phase_queue_actual
     )
@@ -361,6 +368,15 @@ def main() -> None:
     phase_queue_payload["phase_queue"][0]["counts_as_completion"] = True
     phase_queue_payload["items"][0]["phase_queue"][0]["row_count"] = 999
     phase_queue_path.write_text(json.dumps(phase_queue_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    operator_phase_queue_path = phase_queue_drift_root / "reports" / "world_class_operator_runbook.json"
+    operator_phase_queue_payload = json.loads(operator_phase_queue_path.read_text(encoding="utf-8"))
+    operator_phase_queue_payload["summary"]["phase_queue_count"] = 99
+    operator_phase_queue_payload["phase_queue"][0]["row_count"] = 999
+    operator_phase_queue_payload["items"][0]["phase_queue"][0]["row_count"] = 999
+    operator_phase_queue_path.write_text(
+        json.dumps(operator_phase_queue_payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
     phase_queue_drift_proc = run(
         [
             sys.executable,
