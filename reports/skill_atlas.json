@@ -154,6 +154,7 @@
           "scripts/review_studio_data.py",
           "scripts/review_studio_formatting.py",
           "scripts/review_studio_gate_contract.py",
+          "scripts/review_studio_gate_helpers.py",
           "scripts/review_studio_gates.py",
           "scripts/review_studio_layout.py",
           "scripts/review_studio_output_review.py",

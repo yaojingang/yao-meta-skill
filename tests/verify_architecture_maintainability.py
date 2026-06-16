@@ -40,7 +40,7 @@ def main() -> None:
     assert payload["summary"]["decision"] == "pass", payload["summary"]
     assert payload["summary"]["early_watch_line_threshold"] == 600, payload["summary"]
     assert payload["summary"]["watch_line_threshold"] == 720, payload["summary"]
-    assert payload["summary"]["early_watchlist_count"] >= 4, payload["summary"]
+    assert payload["summary"]["early_watchlist_count"] >= 3, payload["summary"]
     assert payload["summary"]["watchlist_count"] == 0, payload["summary"]
     assert payload["summary"]["hotspot_count"] == 0, payload["summary"]
     assert payload["summary"]["blocker_count"] == 0, payload["summary"]
@@ -59,6 +59,7 @@ def main() -> None:
     assert "scripts/build_skill_atlas.py" not in early_watch_paths, payload["early_watchlist"]
     assert "scripts/skill_report_model.py" not in early_watch_paths, payload["early_watchlist"]
     assert "scripts/render_review_studio.py" not in early_watch_paths, payload["early_watchlist"]
+    assert "scripts/review_studio_gates.py" not in early_watch_paths, payload["early_watchlist"]
     renderer_lines = len((ROOT / "scripts" / "render_review_studio.py").read_text(encoding="utf-8").splitlines())
     action_module = (ROOT / "scripts" / "review_studio_actions.py").read_text(encoding="utf-8")
     action_lines = len(action_module.splitlines())
@@ -76,7 +77,7 @@ def main() -> None:
     assert "No file-size hotspots found." in markdown, markdown
     assert "No near-threshold files found." in markdown, markdown
     assert "## Early Watchlist" in markdown, markdown
-    assert "- early watchlist: `4`" in markdown, markdown
+    assert "- early watchlist: `3`" in markdown, markdown
     early_watch_markdown = markdown.split("## Early Watchlist", 1)[1].split("## Largest Files", 1)[0]
     assert "scripts/render_review_viewer.py" not in markdown, markdown
     assert "scripts/render_skill_os2_coverage.py" not in markdown, markdown
@@ -84,6 +85,7 @@ def main() -> None:
     assert "scripts/build_skill_atlas.py" not in early_watch_markdown, early_watch_markdown
     assert "scripts/skill_report_model.py" not in early_watch_markdown, early_watch_markdown
     assert "scripts/render_review_studio.py" not in early_watch_markdown, early_watch_markdown
+    assert "scripts/review_studio_gates.py" not in early_watch_markdown, early_watch_markdown
     assert "Do not split a file only for line count" in markdown, markdown
 
     blocker_proc = subprocess.run(

@@ -1,7 +1,7 @@
 {
   "ok": true,
   "schema_version": "2.0",
-  "generated_at": "2026-06-16T17:29:39Z",
+  "generated_at": "2026-06-16T17:39:17Z",
   "skill_dir": ".",
   "privacy_contract": {
     "storage": "local-first",

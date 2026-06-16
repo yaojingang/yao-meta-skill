@@ -5,7 +5,7 @@
   "root": ".",
   "summary": {
     "target_python": "3.11",
-    "file_count": 223,
+    "file_count": 224,
     "issue_count": 0,
     "syntax_error_count": 0,
     "fstring_311_violation_count": 0,
@@ -576,6 +576,12 @@
     },
     {
       "path": "scripts/review_studio_gate_contract.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "scripts/review_studio_gate_helpers.py",
       "ok": true,
       "issue_count": 0,
       "issues": []

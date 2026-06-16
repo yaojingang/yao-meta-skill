@@ -1,17 +1,8 @@
 #!/usr/bin/env python3
 """Gate evaluation contract for Review Studio 2.0."""
 
-import json
-import os
 from pathlib import Path
 from typing import Any
-
-try:
-    from trust_check import permission_governance_status as compute_permission_governance_status
-    from trust_check import script_inventory as trust_script_inventory
-except ImportError:  # pragma: no cover
-    compute_permission_governance_status = None
-    trust_script_inventory = None
 
 from review_studio_gate_contract import (
     GATE_WEIGHTS,
@@ -22,6 +13,13 @@ from review_studio_gate_contract import (
     status_label,
     weighted_score,
 )
+from review_studio_gate_helpers import (
+    build_output_lab_gate,
+    fallback_permission_governance,
+    gate,
+    report_link,
+    target_maturity,
+)
 
 
 SCRIPT_INTERFACE = "internal-module"
@@ -29,54 +27,6 @@ SCRIPT_INTERFACE_REASON = "Imported by render_review_studio.py to keep Review St
 
 
 ROOT = Path(__file__).resolve().parent.parent
-
-def _load_json(path: Path) -> dict[str, Any]:
-    if not path.exists():
-        return {}
-    try:
-        payload = json.loads(path.read_text(encoding="utf-8"))
-    except json.JSONDecodeError:
-        return {}
-    return payload if isinstance(payload, dict) else {}
-
-
-def _link_from(output_html: Path, target: Path) -> str:
-    return os.path.relpath(target.resolve(), output_html.parent.resolve())
-
-
-def _report_link(output_html: Path, skill_dir: Path, rel_path: str) -> str:
-    return _link_from(output_html, skill_dir / rel_path)
-
-
-def gate(key: str, label: str, status: str, detail: str, evidence: str, link: str = "") -> dict[str, str]:
-    return {
-        "key": key,
-        "label": label,
-        "status": status,
-        "detail": detail,
-        "evidence": evidence,
-        "link": link,
-    }
-
-
-def target_maturity(skill_dir: Path, overview: dict[str, Any]) -> str:
-    manifest = _load_json(skill_dir / "manifest.json")
-    if manifest.get("maturity_tier"):
-        return str(manifest["maturity_tier"])
-    metadata = overview.get("metadata", {}) if isinstance(overview, dict) else {}
-    if metadata.get("maturity_tier"):
-        return str(metadata["maturity_tier"])
-    return "scaffold"
-
-
-def fallback_permission_governance(skill_dir: Path) -> dict[str, Any]:
-    if compute_permission_governance_status is None or trust_script_inventory is None:
-        return {}
-    try:
-        scripts = trust_script_inventory(skill_dir)
-        return compute_permission_governance_status(skill_dir, scripts)
-    except Exception:
-        return {}
 
 
 def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, Any]]) -> list[dict[str, str]]:
@@ -94,7 +44,7 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
             intent_status,
             f"intent confidence {intent_score}/100; {intent.get('recommended_action', 'review current intent frame')}",
             "reports/intent-confidence.json",
-            _report_link(output_html, skill_dir, "reports/intent-confidence.md"),
+            report_link(output_html, skill_dir, "reports/intent-confidence.md"),
         )
     )
 
@@ -115,72 +65,19 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
             route_status,
             route_detail,
             "reports/route_scorecard.json",
-            _report_link(output_html, skill_dir, "reports/route_scorecard.md"),
+            report_link(output_html, skill_dir, "reports/route_scorecard.md"),
         )
     )
 
-    output = data["output_quality"]
-    output_execution = data["output_execution"]
-    output_blind = data["output_blind_review"]
-    output_review = data["output_review_adjudication"]
-    output_summary = output.get("summary", {})
-    output_execution_summary = output_execution.get("summary", {})
-    output_blind_summary = output_blind.get("summary", {})
-    output_review_summary = output_review.get("summary", {})
-    required_cases = min_output_cases(maturity)
-    case_count = int(output_summary.get("case_count", 0) or 0)
-    file_backed = int(output_summary.get("file_backed_case_count", 0) or 0)
-    near_neighbor = int(output_summary.get("near_neighbor_case_count", 0) or 0)
-    boundary = int(output_summary.get("boundary_case_count", 0) or 0)
-    blind_pair_count = int(output_blind_summary.get("pair_count", 0) or 0)
-    execution_variant_count = int(output_execution_summary.get("variant_run_count", 0) or 0)
-    execution_command_count = int(output_execution_summary.get("command_executed_count", 0) or 0)
-    execution_model_count = int(output_execution_summary.get("model_executed_count", 0) or 0)
-    execution_recorded_count = int(output_execution_summary.get("recorded_fixture_count", 0) or 0)
-    review_pair_count = int(output_review_summary.get("pair_count", 0) or 0)
-    review_judgment_count = int(output_review_summary.get("judgment_count", 0) or 0)
-    review_pending_count = int(output_review_summary.get("pending_count", 0) or 0)
-    review_invalid_count = int(output_review_summary.get("invalid_decision_count", 0) or 0)
-    blind_missing = maturity in {"production", "library", "governed"} and (not output_blind or blind_pair_count < case_count)
-    review_missing = maturity in {"production", "library", "governed"} and case_count > 0 and not output_review
-    review_pending = maturity in {"production", "library", "governed"} and bool(output_review) and review_pending_count > 0
-    execution_failed = bool(output_execution) and (not output_execution.get("ok", True) or int(output_execution_summary.get("failure_count", 0) or 0) > 0)
-    review_invalid = bool(output_review) and (not output_review.get("ok", True) or review_invalid_count > 0)
-    output_blocked = (
-        not output.get("ok", False)
-        or not output_summary.get("gate_pass", False)
-        or case_count < required_cases
-        or execution_failed
-        or review_invalid
-    )
-    output_warn = file_backed == 0 or near_neighbor == 0 or boundary == 0 or blind_missing or review_missing or review_pending
-    if not output:
-        output_status = "warn"
-        output_detail = "output eval scorecard is missing; generate it before production review"
-    else:
-        output_status = "block" if output_blocked else ("warn" if output_warn else "pass")
-        output_detail = (
-            f"{case_count}/{required_cases} cases; with-skill {output_summary.get('with_skill_pass_rate', 0)}; "
-            f"baseline {output_summary.get('baseline_pass_rate', 0)}; file-backed {file_backed}; near-neighbor {near_neighbor}; "
-            f"blind A/B {blind_pair_count}"
-            + (
-                f"; exec {execution_variant_count}; command {execution_command_count}; "
-                f"model {execution_model_count}; recorded {execution_recorded_count}"
-                if output_execution
-                else ""
-            )
-            + (f"; reviewed {review_judgment_count}/{review_pair_count}" if output_review else "")
-            + (f"; review pending {review_pending_count}" if review_pending else "")
-            + ("; review adjudication missing" if review_missing else "")
-        )
     gates.append(
-        gate(
-            "output-lab",
-            "输出实验",
-            output_status,
-            output_detail,
-            "reports/output_quality_scorecard.json",
-            _report_link(output_html, skill_dir, "reports/output_quality_scorecard.md"),
+        build_output_lab_gate(
+            skill_dir,
+            output_html,
+            maturity,
+            data["output_quality"],
+            data["output_execution"],
+            data["output_blind_review"],
+            data["output_review_adjudication"],
         )
     )
 
@@ -214,7 +111,7 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
             context_status,
             context_detail,
             "reports/context_budget.json",
-            _report_link(output_html, skill_dir, "reports/context_budget.md"),
+            report_link(output_html, skill_dir, "reports/context_budget.md"),
         )
     )
 
@@ -234,7 +131,7 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
             conformance_status,
             conformance_detail,
             "reports/conformance_matrix.json",
-            _report_link(output_html, skill_dir, "reports/conformance_matrix.md"),
+            report_link(output_html, skill_dir, "reports/conformance_matrix.md"),
         )
     )
 
@@ -258,7 +155,7 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
             trust_status,
             trust_detail,
             "reports/security_trust_report.json",
-            _report_link(output_html, skill_dir, "reports/security_trust_report.md"),
+            report_link(output_html, skill_dir, "reports/security_trust_report.md"),
         )
     )
 
@@ -290,7 +187,7 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
             python_compat_status,
             python_compat_detail,
             "reports/python_compatibility.json",
-            _report_link(output_html, skill_dir, "reports/python_compatibility.md"),
+            report_link(output_html, skill_dir, "reports/python_compatibility.md"),
         )
     )
 
@@ -330,7 +227,7 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
             architecture_status,
             architecture_detail,
             "reports/architecture_maintainability.json",
-            _report_link(output_html, skill_dir, "reports/architecture_maintainability.md"),
+            report_link(output_html, skill_dir, "reports/architecture_maintainability.md"),
         )
     )
 
@@ -364,7 +261,7 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
             permission_status,
             permission_detail,
             "reports/security_trust_report.json + security/permission_policy.json",
-            _report_link(output_html, skill_dir, "security/permission_policy.md"),
+            report_link(output_html, skill_dir, "security/permission_policy.md"),
         )
     )
 
@@ -392,7 +289,7 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
             runtime_permission_status,
             runtime_permission_detail,
             "reports/runtime_permission_probes.json",
-            _report_link(output_html, skill_dir, "reports/runtime_permission_probes.md"),
+            report_link(output_html, skill_dir, "reports/runtime_permission_probes.md"),
         )
     )
 
@@ -426,7 +323,7 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
             atlas_status,
             atlas_detail,
             "reports/skill_atlas.json",
-            _report_link(output_html, skill_dir, "reports/skill_atlas.html"),
+            report_link(output_html, skill_dir, "reports/skill_atlas.html"),
         )
     )
 
@@ -489,7 +386,7 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
             adoption_status,
             adoption_detail,
             "reports/adoption_drift_report.json + reports/skillops/daily + reports/skillops/weekly",
-            _report_link(output_html, skill_dir, "reports/adoption_drift_report.md"),
+            report_link(output_html, skill_dir, "reports/adoption_drift_report.md"),
         )
     )
 
@@ -524,7 +421,7 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
             waiver_status,
             waiver_detail,
             "reports/review_waivers.json",
-            _report_link(output_html, skill_dir, "reports/review_waivers.md"),
+            report_link(output_html, skill_dir, "reports/review_waivers.md"),
         )
     )
 
@@ -567,7 +464,7 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
             world_class_status,
             world_class_detail,
             "reports/world_class_evidence_ledger.json",
-            _report_link(output_html, skill_dir, "reports/world_class_evidence_ledger.md"),
+            report_link(output_html, skill_dir, "reports/world_class_evidence_ledger.md"),
         )
     )
 
@@ -607,7 +504,7 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
             registry_status,
             registry_detail,
             "reports/registry_audit.json + reports/install_simulation.json",
-            _report_link(output_html, skill_dir, "reports/registry_audit.md"),
+            report_link(output_html, skill_dir, "reports/registry_audit.md"),
         )
     )
 
@@ -639,7 +536,7 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
             release_status,
             release_detail,
             "reports/promotion_decisions.json + reports/upgrade_check.json + docs/migration-v2.md",
-            _report_link(output_html, skill_dir, "reports/promotion_decisions.md") if promotion else str(migration_path),
+            report_link(output_html, skill_dir, "reports/promotion_decisions.md") if promotion else str(migration_path),
         )
     )
 

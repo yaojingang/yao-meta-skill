@@ -2,9 +2,9 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 237,
-    "script_count": 145,
-    "internal_module_count": 59,
+    "scanned_files": 238,
+    "script_count": 146,
+    "internal_module_count": 60,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 237,
-    "package_sha256": "712f00ca2202e81f1a88fc46adea462b248dcec996e09125f7c0fc97af5476fc"
+    "package_hash_file_count": 238,
+    "package_sha256": "58b8388686e47011bcd943ed528b172b2f5991430fcc41eb3f86146f47498652"
   },
   "failures": [],
   "warnings": [],
@@ -1307,6 +1307,20 @@
       "network_hosts": []
     },
     {
+      "path": "scripts/review_studio_gate_helpers.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Imported by review_studio_gates.py to keep reusable Review Studio gate helpers out of the main gate sequence.",
+      "has_argparse": false,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
       "path": "scripts/review_studio_gates.py",
       "interface": "internal-module",
       "interface_declared": true,
@@ -2111,7 +2125,7 @@
     "checked_count": 86,
     "passed_count": 86,
     "failed_count": 0,
-    "skipped_count": 59,
+    "skipped_count": 60,
     "failed_scripts": [],
     "results": [
       {
@@ -3050,6 +3064,10 @@
       },
       {
         "path": "scripts/review_studio_gate_contract.py",
+        "reason": "internal module"
+      },
+      {
+        "path": "scripts/review_studio_gate_helpers.py",
         "reason": "internal module"
       },
       {
