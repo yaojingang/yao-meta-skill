@@ -108,7 +108,7 @@
       "key": "operations-loop",
       "label": "运营回路",
       "status": "pass",
-      "detail": "1 metadata events; adoption 0; missed 0; bad-output 0; risk low; daily proposals 5; daily decision proposal-review; daily release lock false; weekly queue 5 unique; weekly ready 1; weekly top 88; weekly release lock false",
+      "detail": "1 metadata events; adoption 0; missed 0; bad-output 0; risk low; daily proposals 5; daily decision proposal-review; daily release lock true; weekly queue 5 unique; weekly ready 1; weekly top 88; weekly release lock true",
       "evidence": "reports/adoption_drift_report.json + reports/skillops/daily + reports/skillops/weekly",
       "link": "adoption_drift_report.md"
     },
@@ -1972,7 +1972,7 @@
           "methodology_complete": true,
           "required_artifact_count": 25,
           "missing_artifact_count": 0,
-          "evidence_bundle_sha256": "c76666b64b01fbc6f421863b68fd621585935574fe0ce3959a472c26604e1c2c",
+          "evidence_bundle_sha256": "678c3839e1d41692b4fb991e542e7d6ef60fbca5248dab2e3f313e138aedde77",
           "source_contract_sha256": "d50f6ac9714b62b985f9f9edb181f87bb57246be1e4249cb92e7e4a87ae5aa69",
           "archive_sha256": "5802e5f522558cf77666ae59390a28845cf3affd22fa1267b6629891ddeba76b",
           "output_case_count": 5,
@@ -1994,9 +1994,9 @@
           "public_claim_ready": false,
           "public_claim_blocker_count": 5,
           "working_tree_dirty": true,
-          "changed_file_count": 30
+          "changed_file_count": 18
         },
-        "commit": "500f8cc34ef5ff9a3c8125a72509faabbe95ac9a",
+        "commit": "3961b60341a893464c1ea96f9921f804809f37f9",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -5659,24 +5659,24 @@
       "ok": true,
       "generated_at": "2026-06-17",
       "skill_dir": ".",
-      "commit": "500f8cc34ef5ff9a3c8125a72509faabbe95ac9a",
+      "commit": "3961b60341a893464c1ea96f9921f804809f37f9",
       "git_status": {
         "available": true,
         "dirty": true,
-        "changed_file_count": 30,
+        "changed_file_count": 18,
         "sample": [
           " M reports/adaptation_proposals.json",
           " M reports/adaptation_proposals.md",
-          " M reports/adoption_drift_report.json",
-          " M reports/architecture_maintainability.json",
-          " M reports/architecture_maintainability.md",
           " M reports/benchmark_reproducibility.json",
           " M reports/benchmark_reproducibility.md",
           " M reports/context_budget.json",
-          " M reports/context_budget.md",
           " M reports/context_budget_summary.json",
-          " M reports/output_execution_runs.json",
-          " M reports/output_execution_runs.md"
+          " M reports/evidence_consistency.json",
+          " M reports/python_compatibility.json",
+          " M reports/python_compatibility.md",
+          " M reports/review-studio.html",
+          " M reports/review-studio.json",
+          " M reports/review-viewer.json"
         ],
         "scope": "generation-time status before this report is written"
       },
@@ -5686,7 +5686,7 @@
         "methodology_complete": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "c76666b64b01fbc6f421863b68fd621585935574fe0ce3959a472c26604e1c2c",
+        "evidence_bundle_sha256": "678c3839e1d41692b4fb991e542e7d6ef60fbca5248dab2e3f313e138aedde77",
         "source_contract_sha256": "d50f6ac9714b62b985f9f9edb181f87bb57246be1e4249cb92e7e4a87ae5aa69",
         "archive_sha256": "5802e5f522558cf77666ae59390a28845cf3affd22fa1267b6629891ddeba76b",
         "output_case_count": 5,
@@ -5708,7 +5708,7 @@
         "public_claim_ready": false,
         "public_claim_blocker_count": 5,
         "working_tree_dirty": true,
-        "changed_file_count": 30
+        "changed_file_count": 18
       },
       "public_claim": {
         "ready": false,
@@ -5724,7 +5724,7 @@
       },
       "release_lock": {
         "ready": false,
-        "commit": "500f8cc34ef5ff9a3c8125a72509faabbe95ac9a",
+        "commit": "3961b60341a893464c1ea96f9921f804809f37f9",
         "status_scope": "generation-time status before this report is written",
         "reason": "working tree was dirty at generation time"
       },
@@ -5734,7 +5734,7 @@
         "existing_count": 25,
         "missing_count": 0,
         "missing_paths": [],
-        "sha256": "c76666b64b01fbc6f421863b68fd621585935574fe0ce3959a472c26604e1c2c"
+        "sha256": "678c3839e1d41692b4fb991e542e7d6ef60fbca5248dab2e3f313e138aedde77"
       },
       "methodology": {
         "path": "reports/benchmark_methodology.md",
@@ -5850,7 +5850,7 @@
           "path": "reports/python_compatibility.json",
           "exists": true,
           "bytes": 28298,
-          "sha256": "8b48340618cc702a8d8f5aaf6ce6d05a1a5463a8008d06a28809671632b212da"
+          "sha256": "b223212ec521b782c479ace75a0e93866e09aff7f2637fdd181e8906bb4b0376"
         },
         {
           "label": "registry_audit",
@@ -15408,7 +15408,7 @@
     "python_compatibility": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-17",
+      "generated_at": "2026-06-13",
       "root": ".",
       "summary": {
         "target_python": "3.11",
@@ -16869,9 +16869,9 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 797,
-        "other_text_tokens": 1076748,
+        "other_text_tokens": 1076737,
         "estimated_initial_load_tokens": 990,
-        "estimated_total_text_tokens": 1077545,
+        "estimated_total_text_tokens": 1077534,
         "deferred_resource_tokens": 495216,
         "deferred_resource_warn_threshold": 120000,
         "deferred_resource_dirs": [
@@ -18922,7 +18922,7 @@
       "local_blueprint_ready": true,
       "public_world_class_ready": false,
       "world_class_pending_count": 4,
-      "release_lock_ready": false,
+      "release_lock_ready": true,
       "evidence_consistency_ok": true,
       "writes_source_files": false,
       "auto_patch_enabled": false,
@@ -18939,7 +18939,7 @@
         "local_blueprint_ready": true,
         "public_world_class_ready": false,
         "world_class_pending_count": 4,
-        "release_lock_ready": false,
+        "release_lock_ready": true,
         "evidence_consistency_ok": true,
         "writes_source_files": false,
         "auto_patch_enabled": false,
@@ -19388,7 +19388,7 @@
         "local_blueprint_ready": true,
         "public_world_class_ready": false,
         "world_class_pending_count": 4,
-        "release_lock_ready": false,
+        "release_lock_ready": true,
         "evidence_consistency_ok": true
       },
       "actions": [
@@ -19423,7 +19423,7 @@
     "weekly_curator": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-16T16:14:10Z",
+      "generated_at": "2026-06-17",
       "skill_dir": ".",
       "decision": "curator-review",
       "week_id": "2026-W25",
@@ -19437,7 +19437,7 @@
       "top_score": 88,
       "skill_count": 12,
       "actionable_portfolio_issue_count": 0,
-      "release_lock_ready": false,
+      "release_lock_ready": true,
       "evidence_consistency_ok": true,
       "public_world_class_ready": false,
       "world_class_pending_count": 4,
@@ -19457,7 +19457,7 @@
         "top_score": 88,
         "skill_count": 12,
         "actionable_portfolio_issue_count": 0,
-        "release_lock_ready": false,
+        "release_lock_ready": true,
         "evidence_consistency_ok": true,
         "public_world_class_ready": false,
         "world_class_pending_count": 4,
@@ -19710,7 +19710,7 @@
         "no_route_opportunity_count": 0
       },
       "release_state": {
-        "release_lock_ready": false,
+        "release_lock_ready": true,
         "evidence_consistency_ok": true,
         "public_world_class_ready": false,
         "world_class_pending_count": 4
@@ -19888,7 +19888,7 @@
     "adaptation_proposals": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-16T16:14:10Z",
+      "generated_at": "2026-06-17",
       "skill_dir": ".",
       "source_patterns": "reports/user_patterns.json",
       "pattern_count": 5,

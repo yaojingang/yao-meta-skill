@@ -1,9 +1,9 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-17`
-Commit: `500f8cc34ef5ff9a3c8125a72509faabbe95ac9a`
+Commit: `3961b60341a893464c1ea96f9921f804809f37f9`
 Working tree dirty at generation: `true`
-Evidence bundle SHA256: `c76666b64b01fbc6f421863b68fd621585935574fe0ce3959a472c26604e1c2c`
+Evidence bundle SHA256: `678c3839e1d41692b4fb991e542e7d6ef60fbca5248dab2e3f313e138aedde77`
 
 ## Summary
 
@@ -23,7 +23,7 @@ Evidence bundle SHA256: `c76666b64b01fbc6f421863b68fd621585935574fe0ce3959a472c2
 - world-class source checks: `6` pass / `13` total; `7` blocked
 - public claim ready: `false`
 - public claim blockers: `5`
-- changed files at generation: `30`
+- changed files at generation: `18`
 
 This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete. The git commit is generation-time context; the evidence bundle SHA is the durable anchor for the artifacts listed below.
 
@@ -51,7 +51,7 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 - algorithm: `sha256(path,label,exists,artifact_sha256)`
 - artifacts: `25` / `25`
-- sha256: `c76666b64b01fbc6f421863b68fd621585935574fe0ce3959a472c26604e1c2c`
+- sha256: `678c3839e1d41692b4fb991e542e7d6ef60fbca5248dab2e3f313e138aedde77`
 
 ## Methodology Sections
 
@@ -79,7 +79,7 @@ This report proves local benchmark reproducibility only. It keeps external provi
 | trigger_scorecard | `reports/route_scorecard.json` | present | `c164e83e36d0` |
 | runtime_conformance | `reports/conformance_matrix.json` | present | `97f9ba949c23` |
 | trust_report | `reports/security_trust_report.json` | present | `0d60cae96105` |
-| python_compatibility | `reports/python_compatibility.json` | present | `8b48340618cc` |
+| python_compatibility | `reports/python_compatibility.json` | present | `b223212ec521` |
 | registry_audit | `reports/registry_audit.json` | present | `e75a341d15e4` |
 | package_verification | `reports/package_verification.json` | present | `a27941fdb865` |
 | install_simulation | `reports/install_simulation.json` | present | `e29ae26bc97c` |

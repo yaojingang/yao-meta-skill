@@ -57,7 +57,7 @@
       <span class="eyebrow">Evidence Operations</span>
       <h1>World-Class Operator Runbook</h1>
       <p class="lede">A single operating page for collecting the remaining human and external evidence. It coordinates action, but does not accept evidence or change the ledger.</p>
-      <div class="stats"><article><span>Pending</span><strong>4</strong></article><article><span>Awaiting</span><strong>4</strong></article><article><span>Ready</span><strong>0</strong></article><article><span>Source</span><strong>6/13</strong></article><article><span>Blocked</span><strong>7</strong></article><article><span>Invalid</span><strong>0</strong></article></div>
+      <div class="stats"><article><span>Pending</span><strong>4</strong></article><article><span>Awaiting</span><strong>4</strong></article><article><span>Ready</span><strong>0</strong></article><article><span>Source</span><strong>7/13</strong></article><article><span>Blocked</span><strong>6</strong></article><article><span>Invalid</span><strong>0</strong></article></div>
     </section>
     <section class="section panel" id="fast-path"><h2>Fast Path</h2><ol><li>Run the real external or human work for one evidence item.</li><li>Generate and fill the matching submission draft.</li><li>Validate intake and inspect the submission review queue.</li><li>Refresh the ledger and run the claim guard before making any completion claim.</li></ol></section>
     <section class="section" id="items"><h2>Evidence Items</h2><div class="item-grid"><article class="item-card awaiting-submission">
@@ -120,7 +120,7 @@
         <dl>
           <dt>Owner</dt><dd>Browser/Chrome/IDE/provider client integrator</dd>
           <dt>Ledger</dt><dd><code>pending</code></dd>
-          <dt>Blocked</dt><dd><code>2</code></dd>
+          <dt>Blocked</dt><dd><code>1</code></dd>
           <dt>Submission</dt><dd><code>evidence/world_class/submissions/native-client-telemetry.json</code></dd>
         </dl>
         <section class="source-panel"><h4>Source Runbook</h4><ul><li>python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://&lt;extension-id&gt;/</li><li>Install the generated native messaging manifest for the real client and send at least one accepted skill_activation or skill_output event.</li><li>python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl</li><li>python3 scripts/yao.py skill-atlas --workspace-root .</li><li>python3 scripts/yao.py skill-os2-audit . --generated-at &lt;YYYY-MM-DD&gt;</li><li>Copy evidence/world_class/templates/native-client-telemetry.intake.json to evidence/world_class/submissions/native-client-telemetry.json and fill only real evidence fields.</li><li>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</li></ul></section>
@@ -130,8 +130,8 @@
           <section><h4>Success Checks</h4><ul><li>reports/adoption_drift_report.json summary.source_types.external &gt; 0</li><li>reports/adoption_drift_report.json summary.adoption_sample_count &gt; 0</li><li>reports/skill_os2_audit.json item native-client-telemetry status becomes pass</li></ul></section>
           <section><h4>Privacy</h4><ul><li>Telemetry must remain metadata-only and local-first.</li><li>Do not package reports/telemetry_events.jsonl or any raw prompt, output, transcript, note, or message field.</li></ul></section>
         </div>
-        <section class="source-panel"><h4>Next Source Actions</h4><ul><li>Import at least one metadata-only event from a real client.</li><li>Telemetry must include adoption outcome evidence.</li></ul></section>
-        <section class="source-panel"><h4>Source Evidence Snapshot</h4><ul class='source-checks'><li class='source-check blocked'><span>External events</span><code>external_source_events: 0 / &gt;0</code><small>Import at least one metadata-only event from a real client.</small></li><li class='source-check blocked'><span>Adoption sample</span><code>adoption_sample_count: 0 / &gt;0</code><small>Telemetry must include adoption outcome evidence.</small></li><li class='source-check pass'><span>Raw content blocked</span><code>raw_content_allowed: False / false</code><small>Telemetry must stay metadata-only.</small></li></ul></section>
+        <section class="source-panel"><h4>Next Source Actions</h4><ul><li>Import at least one metadata-only event from a real client.</li></ul></section>
+        <section class="source-panel"><h4>Source Evidence Snapshot</h4><ul class='source-checks'><li class='source-check blocked'><span>External events</span><code>external_source_events: 0 / &gt;0</code><small>Import at least one metadata-only event from a real client.</small></li><li class='source-check pass'><span>Adoption sample</span><code>adoption_sample_count: 1 / &gt;0</code><small>Telemetry must include adoption outcome evidence.</small></li><li class='source-check pass'><span>Raw content blocked</span><code>raw_content_allowed: False / false</code><small>Telemetry must stay metadata-only.</small></li></ul></section>
       </article></div></section>
     <section class="section panel" id="boundary"><h2>Boundary</h2><ul><li>Planned work, draft packets, metadata fallback, pending human decisions, and local command runners do not count as completion.</li><li>Valid intake means ready for submission review; ledger review still requires passing source evidence.</li><li>The world-class ledger and claim guard remain the source of truth.</li></ul></section>
   </main>

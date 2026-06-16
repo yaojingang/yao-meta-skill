@@ -1,6 +1,6 @@
 # World-Class Evidence Preflight
 
-Generated at: `2026-06-17`
+Generated at: `2026-06-13`
 
 ## Summary
 
@@ -10,7 +10,7 @@ Generated at: `2026-06-17`
 - credential value exposed: `false`
 - collection ready: `1`
 - collection blocked: `3`
-- source checks: `6` pass / `13` total
+- source checks: `7` pass / `13` total
 
 This preflight report checks whether an operator can start collecting the remaining external or human evidence. It never accepts evidence, prints secret values, or changes the world-class ledger.
 
@@ -150,7 +150,7 @@ Generate the submission kit after the real provider, human, native-permission, o
 | Check | Current | Expected | Status | Next action |
 | --- | --- | --- | --- | --- |
 | External events | `0` | `>0` | `blocked` | Import at least one metadata-only event from a real client. |
-| Adoption sample | `0` | `>0` | `blocked` | Telemetry must include adoption outcome evidence. |
+| Adoption sample | `1` | `>0` | `pass` | Telemetry must include adoption outcome evidence. |
 | Raw content blocked | `False` | `false` | `pass` | Telemetry must stay metadata-only. |
 
 ## Boundary

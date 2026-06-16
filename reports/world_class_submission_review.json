@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-17",
+  "generated_at": "2026-06-13",
   "skill_dir": ".",
   "decision": "awaiting-submissions",
   "ready_to_claim_world_class": false,
@@ -14,8 +14,8 @@
   "unmatched_submission_count": 0,
   "invalid_submission_count": 0,
   "source_check_count": 13,
-  "source_pass_count": 6,
-  "source_blocked_count": 7,
+  "source_pass_count": 7,
+  "source_blocked_count": 6,
   "review_counts_submission_as_completion": false,
   "summary": {
     "review_item_count": 4,
@@ -27,8 +27,8 @@
     "unmatched_submission_count": 0,
     "invalid_submission_count": 0,
     "source_check_count": 13,
-    "source_pass_count": 6,
-    "source_blocked_count": 7,
+    "source_pass_count": 7,
+    "source_blocked_count": 6,
     "ready_to_claim_world_class": false,
     "review_counts_submission_as_completion": false,
     "decision": "awaiting-submissions"
@@ -302,7 +302,7 @@
       "intake_errors": [],
       "observed_state": {
         "external_source_events": 0,
-        "adoption_sample_count": 0,
+        "adoption_sample_count": 1,
         "raw_content_allowed": false,
         "risk_band": "low",
         "accepted": false
@@ -323,8 +323,8 @@
           "label": "Adoption sample",
           "field": "adoption_sample_count",
           "expected": ">0",
-          "actual": 0,
-          "status": "blocked",
+          "actual": 1,
+          "status": "pass",
           "source_accepted": false,
           "next_action": "Telemetry must include adoption outcome evidence."
         },
@@ -340,8 +340,8 @@
         }
       ],
       "source_check_count": 3,
-      "source_pass_count": 1,
-      "source_blocked_count": 2,
+      "source_pass_count": 2,
+      "source_blocked_count": 1,
       "success_checks": [
         "reports/adoption_drift_report.json summary.source_types.external > 0",
         "reports/adoption_drift_report.json summary.adoption_sample_count > 0",

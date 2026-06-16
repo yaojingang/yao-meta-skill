@@ -1,7 +1,7 @@
 {
   "ok": true,
   "schema_version": "2.0",
-  "generated_at": "2026-06-16T16:14:10Z",
+  "generated_at": "2026-06-16T16:15:39Z",
   "skill_dir": ".",
   "privacy_contract": {
     "storage": "local-first",
@@ -25,14 +25,14 @@
   },
   "summary": {
     "event_count": 1,
-    "adoption_sample_count": 0,
-    "activation_count": 0,
-    "accepted_count": 0,
+    "adoption_sample_count": 1,
+    "activation_count": 1,
+    "accepted_count": 1,
     "edited_count": 0,
     "rejected_count": 0,
     "missed_count": 0,
     "failed_count": 0,
-    "adoption_rate": 0,
+    "adoption_rate": 100.0,
     "missed_trigger_count": 0,
     "wrong_trigger_count": 0,
     "bad_output_count": 0,
@@ -41,7 +41,7 @@
     "review_overdue_count": 0,
     "risk_band": "low",
     "event_types": {
-      "review_event": 1
+      "skill_activation": 1
     },
     "failure_types": {},
     "source_types": {
@@ -53,31 +53,31 @@
     {
       "skill": "yao-meta-skill",
       "events": 1,
-      "adoption_events": 0,
-      "accepted": 0,
+      "adoption_events": 1,
+      "accepted": 1,
       "edited": 0,
       "rejected": 0,
       "missed": 0,
-      "adoption_rate": 0
+      "adoption_rate": 100.0
     }
   ],
   "next_iteration_candidates": [],
   "recent_events": [
     {
       "command": "unknown",
-      "event": "review_event",
+      "event": "skill_activation",
       "skill": "yao-meta-skill",
       "source": "manual",
       "version": "1.1.0",
-      "activation_type": "manual",
-      "outcome": "reviewed",
+      "activation_type": "explicit",
+      "outcome": "accepted",
       "failure_type": "none",
-      "timestamp": "2026-06-13T12:00:00Z"
+      "timestamp": "2026-06-13T10:00:00Z"
     }
   ],
   "failures": [],
   "artifacts": {
-    "events_jsonl": "reports/telemetry_events.jsonl",
+    "events_jsonl": "tests/tmp_review_studio/telemetry_events.jsonl",
     "json": "reports/adoption_drift_report.json",
     "markdown": "reports/adoption_drift_report.md"
   }
