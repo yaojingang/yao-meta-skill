@@ -1,9 +1,9 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-17`
-Commit: `fb00ecbd5ab3f5e4bcd61c8f5fc826a571490e84`
+Commit: `5c1ff9f94a9d6fbd7436b3673b4841073e061371`
 Working tree dirty at generation: `true`
-Evidence bundle SHA256: `70fd90ebdc741d6982e4048e016510deaaecb51a93263d68b5e0e9cfad6042b8`
+Evidence bundle SHA256: `f30d9663314c60e1f400058e92bf4b00c9a3521034a8008d7571ae970c854ae9`
 
 ## Summary
 
@@ -23,7 +23,7 @@ Evidence bundle SHA256: `70fd90ebdc741d6982e4048e016510deaaecb51a93263d68b5e0e9c
 - world-class source checks: `7` pass / `13` total; `6` blocked
 - public claim ready: `false`
 - public claim blockers: `5`
-- changed files at generation: `2`
+- changed files at generation: `1`
 
 This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete. The git commit is generation-time context; the evidence bundle SHA is the durable anchor for the artifacts listed below.
 
@@ -51,7 +51,7 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 - algorithm: `sha256(path,label,exists,artifact_sha256)`
 - artifacts: `25` / `25`
-- sha256: `70fd90ebdc741d6982e4048e016510deaaecb51a93263d68b5e0e9cfad6042b8`
+- sha256: `f30d9663314c60e1f400058e92bf4b00c9a3521034a8008d7571ae970c854ae9`
 
 ## Methodology Sections
 
@@ -87,7 +87,7 @@ This report proves local benchmark reproducibility only. It keeps external provi
 | world_class_evidence_plan | `reports/world_class_evidence_plan.json` | present | `af3c3f101ad9` |
 | world_class_evidence_ledger | `reports/world_class_evidence_ledger.json` | present | `74deeabfac9f` |
 | world_class_evidence_intake | `reports/world_class_evidence_intake.json` | present | `69afd0ff3d49` |
-| world_class_evidence_preflight | `reports/world_class_evidence_preflight.json` | present | `97924dd4be88` |
+| world_class_evidence_preflight | `reports/world_class_evidence_preflight.json` | present | `b7fd72d7e754` |
 | world_class_submission_review | `reports/world_class_submission_review.json` | present | `17def7ba6982` |
 | world_class_operator_runbook | `reports/world_class_operator_runbook.json` | present | `00bfa998b24a` |
 | world_class_operator_runbook_markdown | `reports/world_class_operator_runbook.md` | present | `337fb764b98a` |

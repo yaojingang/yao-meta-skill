@@ -1000,7 +1000,7 @@
         "methodology_complete": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "70fd90ebdc741d6982e4048e016510deaaecb51a93263d68b5e0e9cfad6042b8",
+        "evidence_bundle_sha256": "f30d9663314c60e1f400058e92bf4b00c9a3521034a8008d7571ae970c854ae9",
         "source_contract_sha256": "58b8388686e47011bcd943ed528b172b2f5991430fcc41eb3f86146f47498652",
         "archive_sha256": "29c3154e87935a6ffc92a42b6e270da17ef0aa2d3c156c518770ece272d4b58b",
         "output_case_count": 5,
@@ -1022,9 +1022,9 @@
         "public_claim_ready": false,
         "public_claim_blocker_count": 5,
         "working_tree_dirty": true,
-        "changed_file_count": 2
+        "changed_file_count": 1
       },
-      "commit": "fb00ecbd5ab3f5e4bcd61c8f5fc826a571490e84",
+      "commit": "5c1ff9f94a9d6fbd7436b3673b4841073e061371",
       "missing_artifacts": [],
       "limitations": [
         "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
