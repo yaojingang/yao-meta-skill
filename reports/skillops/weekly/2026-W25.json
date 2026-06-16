@@ -16,7 +16,7 @@
   "skill_count": 12,
   "actionable_portfolio_issue_count": 0,
   "release_lock_ready": false,
-  "evidence_consistency_ok": true,
+  "evidence_consistency_ok": false,
   "public_world_class_ready": false,
   "world_class_pending_count": 4,
   "writes_source_files": false,
@@ -36,7 +36,7 @@
     "skill_count": 12,
     "actionable_portfolio_issue_count": 0,
     "release_lock_ready": false,
-    "evidence_consistency_ok": true,
+    "evidence_consistency_ok": false,
     "public_world_class_ready": false,
     "world_class_pending_count": 4,
     "writes_source_files": false,
@@ -289,7 +289,7 @@
   },
   "release_state": {
     "release_lock_ready": false,
-    "evidence_consistency_ok": true,
+    "evidence_consistency_ok": false,
     "public_world_class_ready": false,
     "world_class_pending_count": 4
   },
@@ -303,6 +303,11 @@
       "key": "close-world-class-evidence",
       "priority": "high",
       "action": "Collect accepted external or human evidence for pending world-class ledger entries before public claims."
+    },
+    {
+      "key": "refresh-evidence-consistency",
+      "priority": "high",
+      "action": "Regenerate evidence consistency before using this curator report for release decisions."
     }
   ],
   "failures": [],

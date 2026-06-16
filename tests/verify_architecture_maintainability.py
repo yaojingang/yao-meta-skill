@@ -38,7 +38,9 @@ def main() -> None:
     payload = json.loads(proc.stdout)
     assert payload["ok"], payload
     assert payload["summary"]["decision"] == "pass", payload["summary"]
+    assert payload["summary"]["early_watch_line_threshold"] == 600, payload["summary"]
     assert payload["summary"]["watch_line_threshold"] == 720, payload["summary"]
+    assert payload["summary"]["early_watchlist_count"] >= 8, payload["summary"]
     assert payload["summary"]["watchlist_count"] == 0, payload["summary"]
     assert payload["summary"]["hotspot_count"] == 0, payload["summary"]
     assert payload["summary"]["blocker_count"] == 0, payload["summary"]
@@ -48,6 +50,9 @@ def main() -> None:
     assert payload["summary"]["largest_file_lines"] < 900, payload["summary"]
     assert all(item["severity"] == "pass" for item in payload["largest_files"]), payload["largest_files"]
     assert payload["watchlist"] == [], payload["watchlist"]
+    assert payload["early_watchlist"], payload["early_watchlist"]
+    assert all(item["early_watch"] is True for item in payload["early_watchlist"]), payload["early_watchlist"]
+    assert "scripts/render_review_viewer.py" in {item["path"] for item in payload["early_watchlist"]}, payload["early_watchlist"]
     renderer_lines = len((ROOT / "scripts" / "render_review_studio.py").read_text(encoding="utf-8").splitlines())
     action_module = (ROOT / "scripts" / "review_studio_actions.py").read_text(encoding="utf-8")
     action_lines = len(action_module.splitlines())
@@ -64,6 +69,8 @@ def main() -> None:
     assert "# Architecture Maintainability" in markdown, markdown
     assert "No file-size hotspots found." in markdown, markdown
     assert "No near-threshold files found." in markdown, markdown
+    assert "## Early Watchlist" in markdown, markdown
+    assert "scripts/render_review_viewer.py" in markdown, markdown
     assert "Do not split a file only for line count" in markdown, markdown
 
     blocker_proc = subprocess.run(

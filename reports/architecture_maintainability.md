@@ -14,6 +14,8 @@ Generated at: `2026-06-17`
 - entrypoint command handlers: `18`
 - command modules: `6`
 - largest file lines: `696`
+- early watch threshold lines: `600`
+- early watchlist: `10`
 - watch threshold lines: `720`
 - watchlist: `0`
 - hotspots: `0`
@@ -29,6 +31,21 @@ No file-size hotspots found.
 
 No near-threshold files found.
 
+## Early Watchlist
+
+| File | Lines | Kind | Recommended next split |
+| --- | ---: | --- | --- |
+| `tests/verify_yao_cli.py` | `696` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
+| `scripts/render_review_viewer.py` | `685` | `cli-script` | Split viewer data assembly from HTML section rendering. |
+| `scripts/skill_report_model.py` | `665` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
+| `scripts/render_skill_os2_coverage.py` | `649` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
+| `scripts/render_review_studio.py` | `647` | `cli-script` | Move data loading and large section renderers into focused review_studio_* modules. |
+| `scripts/review_studio_gates.py` | `646` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
+| `scripts/render_reference_synthesis.py` | `644` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
+| `scripts/cross_packager.py` | `638` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
+| `scripts/build_skill_atlas.py` | `637` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
+| `tests/verify_world_class_evidence_intake.py` | `628` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
+
 ## Largest Files
 
 | File | Lines | Kind | Severity |
@@ -38,8 +55,8 @@ No near-threshold files found.
 | `scripts/skill_report_model.py` | `665` | `internal-module` | `pass` |
 | `scripts/render_skill_os2_coverage.py` | `649` | `cli-script` | `pass` |
 | `scripts/render_review_studio.py` | `647` | `cli-script` | `pass` |
+| `scripts/review_studio_gates.py` | `646` | `internal-module` | `pass` |
 | `scripts/render_reference_synthesis.py` | `644` | `cli-script` | `pass` |
-| `scripts/review_studio_gates.py` | `643` | `internal-module` | `pass` |
 | `scripts/cross_packager.py` | `638` | `cli-script` | `pass` |
 | `scripts/build_skill_atlas.py` | `637` | `cli-script` | `pass` |
 | `tests/verify_world_class_evidence_intake.py` | `628` | `test` | `pass` |
