@@ -3,7 +3,7 @@
   "ok": true,
   "generated_at": "2026-06-16",
   "skill_dir": ".",
-  "commit": "6fd6399ed2047ee8796193fa6226626a9b322fb9",
+  "commit": "001210458f638786162a1ea8300f193ff1fc6160",
   "git_status": {
     "available": true,
     "dirty": false,
@@ -17,8 +17,8 @@
     "methodology_complete": true,
     "required_artifact_count": 25,
     "missing_artifact_count": 0,
-    "evidence_bundle_sha256": "1be5b6bc22a5bbc6ab24dc45c0b6120762c61f5f9b810b650730309e72d3982a",
-    "source_contract_sha256": "c74c96a2bc7dfd7e12c89cb475a6853fcd012bcfe7b4a3905007b896ed2cf957",
+    "evidence_bundle_sha256": "b28ee4d670b9f3b084f3550d6b9fd45d13db56a8c0ed32c568eeaa613a4628d5",
+    "source_contract_sha256": "11432d13467e6822ac0fff5d8bde27fdf326322dfed62aca7cb9ad5ee1a706ab",
     "archive_sha256": "5802e5f522558cf77666ae59390a28845cf3affd22fa1267b6629891ddeba76b",
     "output_case_count": 5,
     "failure_disclosure_count": 3,
@@ -54,7 +54,7 @@
   },
   "release_lock": {
     "ready": true,
-    "commit": "6fd6399ed2047ee8796193fa6226626a9b322fb9",
+    "commit": "001210458f638786162a1ea8300f193ff1fc6160",
     "status_scope": "generation-time status before this report is written",
     "reason": "clean generation-time HEAD"
   },
@@ -64,7 +64,7 @@
     "existing_count": 25,
     "missing_count": 0,
     "missing_paths": [],
-    "sha256": "1be5b6bc22a5bbc6ab24dc45c0b6120762c61f5f9b810b650730309e72d3982a"
+    "sha256": "b28ee4d670b9f3b084f3550d6b9fd45d13db56a8c0ed32c568eeaa613a4628d5"
   },
   "methodology": {
     "path": "reports/benchmark_methodology.md",
@@ -172,15 +172,15 @@
       "label": "trust_report",
       "path": "reports/security_trust_report.json",
       "exists": true,
-      "bytes": 125120,
-      "sha256": "7ec30004141a3415e3147bd7f03f4c4036a5f1310134941f5a4797bd0b26062b"
+      "bytes": 126302,
+      "sha256": "cd94c895d5d69c6de3b751c6db885d9e9083c4956eb8acc8b66a50e5563301f2"
     },
     {
       "label": "python_compatibility",
       "path": "reports/python_compatibility.json",
       "exists": true,
-      "bytes": 27111,
-      "sha256": "e681ed23385740ec9919f9ac714bf665f3c27a7c9a252c4e460af15e51a8a948"
+      "bytes": 27367,
+      "sha256": "fca6eb5f6f0e25f2ea42aa5ff39f7583a7145ef85d877c209f5300828d702788"
     },
     {
       "label": "registry_audit",

@@ -44,7 +44,7 @@
       "key": "context-budget",
       "label": "上下文",
       "status": "pass",
-      "detail": "initial load 990/1000; deferred 487478/120000; top deferred scripts 427380; resource governance governed; quality density 131.3",
+      "detail": "initial load 990/1000; deferred 487673/120000; top deferred scripts 427575; resource governance governed; quality density 131.3",
       "evidence": "reports/context_budget.json",
       "link": "context_budget.md"
     },
@@ -60,7 +60,7 @@
       "key": "trust-report",
       "label": "信任报告",
       "status": "pass",
-      "detail": "0 secrets; 133 scripts; 3 network-capable scripts; 0 help smoke failures",
+      "detail": "0 secrets; 135 scripts; 3 network-capable scripts; 0 help smoke failures",
       "evidence": "reports/security_trust_report.json",
       "link": "security_trust_report.md"
     },
@@ -68,7 +68,7 @@
       "key": "python-compat",
       "label": "Python 兼容",
       "status": "pass",
-      "detail": "Python 3.11; 209 files; 0 compatibility issues; 0 syntax; 0 f-string 3.11 hazards",
+      "detail": "Python 3.11; 211 files; 0 compatibility issues; 0 syntax; 0 f-string 3.11 hazards",
       "evidence": "reports/python_compatibility.json",
       "link": "python_compatibility.md"
     },
@@ -76,7 +76,7 @@
       "key": "architecture-maintainability",
       "label": "架构维护",
       "status": "pass",
-      "detail": "206 Python files; 0 hotspots; 0 watchlist files; 0 blockers; largest 706 lines; 68 CLI handlers; 18 in entrypoint",
+      "detail": "208 Python files; 0 hotspots; 0 watchlist files; 0 blockers; largest 696 lines; 68 CLI handlers; 18 in entrypoint",
       "evidence": "reports/architecture_maintainability.json",
       "link": "architecture_maintainability.md"
     },
@@ -1484,7 +1484,7 @@
             "path": "scripts",
             "label": "Deterministic helpers or local tooling",
             "kind": "folder",
-            "file_count": 133
+            "file_count": 135
           },
           {
             "path": "evals",
@@ -1499,7 +1499,7 @@
             "file_count": 229
           }
         ],
-        "file_count": 430,
+        "file_count": 432,
         "folder_count": 4,
         "distribution": [
           {
@@ -1524,7 +1524,7 @@
           },
           {
             "label": "scripts",
-            "value": 133
+            "value": 135
           },
           {
             "label": "evals",
@@ -1654,7 +1654,7 @@
           "path": "scripts",
           "label": "Deterministic helpers or local tooling",
           "kind": "folder",
-          "file_count": 133
+          "file_count": 135
         },
         {
           "path": "evals",
@@ -1972,8 +1972,8 @@
           "methodology_complete": true,
           "required_artifact_count": 25,
           "missing_artifact_count": 0,
-          "evidence_bundle_sha256": "1be5b6bc22a5bbc6ab24dc45c0b6120762c61f5f9b810b650730309e72d3982a",
-          "source_contract_sha256": "c74c96a2bc7dfd7e12c89cb475a6853fcd012bcfe7b4a3905007b896ed2cf957",
+          "evidence_bundle_sha256": "b28ee4d670b9f3b084f3550d6b9fd45d13db56a8c0ed32c568eeaa613a4628d5",
+          "source_contract_sha256": "11432d13467e6822ac0fff5d8bde27fdf326322dfed62aca7cb9ad5ee1a706ab",
           "archive_sha256": "5802e5f522558cf77666ae59390a28845cf3affd22fa1267b6629891ddeba76b",
           "output_case_count": 5,
           "failure_disclosure_count": 3,
@@ -1996,7 +1996,7 @@
           "working_tree_dirty": false,
           "changed_file_count": 0
         },
-        "commit": "6fd6399ed2047ee8796193fa6226626a9b322fb9",
+        "commit": "001210458f638786162a1ea8300f193ff1fc6160",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -2080,9 +2080,9 @@
         "failures": []
       },
       "trust_security": {
-        "scanned_files": 224,
-        "script_count": 133,
-        "internal_module_count": 47,
+        "scanned_files": 226,
+        "script_count": 135,
+        "internal_module_count": 49,
         "secret_findings": 0,
         "dependency_files": [
           "requirements-ci.txt"
@@ -2100,8 +2100,8 @@
         "help_smoke_failed_count": 0,
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
-        "package_hash_file_count": 224,
-        "package_sha256": "c74c96a2bc7dfd7e12c89cb475a6853fcd012bcfe7b4a3905007b896ed2cf957"
+        "package_hash_file_count": 226,
+        "package_sha256": "11432d13467e6822ac0fff5d8bde27fdf326322dfed62aca7cb9ad5ee1a706ab"
       },
       "skill_atlas": {
         "skill_count": 12,
@@ -5646,7 +5646,7 @@
       "ok": true,
       "generated_at": "2026-06-16",
       "skill_dir": ".",
-      "commit": "6fd6399ed2047ee8796193fa6226626a9b322fb9",
+      "commit": "001210458f638786162a1ea8300f193ff1fc6160",
       "git_status": {
         "available": true,
         "dirty": false,
@@ -5660,8 +5660,8 @@
         "methodology_complete": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "1be5b6bc22a5bbc6ab24dc45c0b6120762c61f5f9b810b650730309e72d3982a",
-        "source_contract_sha256": "c74c96a2bc7dfd7e12c89cb475a6853fcd012bcfe7b4a3905007b896ed2cf957",
+        "evidence_bundle_sha256": "b28ee4d670b9f3b084f3550d6b9fd45d13db56a8c0ed32c568eeaa613a4628d5",
+        "source_contract_sha256": "11432d13467e6822ac0fff5d8bde27fdf326322dfed62aca7cb9ad5ee1a706ab",
         "archive_sha256": "5802e5f522558cf77666ae59390a28845cf3affd22fa1267b6629891ddeba76b",
         "output_case_count": 5,
         "failure_disclosure_count": 3,
@@ -5697,7 +5697,7 @@
       },
       "release_lock": {
         "ready": true,
-        "commit": "6fd6399ed2047ee8796193fa6226626a9b322fb9",
+        "commit": "001210458f638786162a1ea8300f193ff1fc6160",
         "status_scope": "generation-time status before this report is written",
         "reason": "clean generation-time HEAD"
       },
@@ -5707,7 +5707,7 @@
         "existing_count": 25,
         "missing_count": 0,
         "missing_paths": [],
-        "sha256": "1be5b6bc22a5bbc6ab24dc45c0b6120762c61f5f9b810b650730309e72d3982a"
+        "sha256": "b28ee4d670b9f3b084f3550d6b9fd45d13db56a8c0ed32c568eeaa613a4628d5"
       },
       "methodology": {
         "path": "reports/benchmark_methodology.md",
@@ -5815,15 +5815,15 @@
           "label": "trust_report",
           "path": "reports/security_trust_report.json",
           "exists": true,
-          "bytes": 125120,
-          "sha256": "7ec30004141a3415e3147bd7f03f4c4036a5f1310134941f5a4797bd0b26062b"
+          "bytes": 126302,
+          "sha256": "cd94c895d5d69c6de3b751c6db885d9e9083c4956eb8acc8b66a50e5563301f2"
         },
         {
           "label": "python_compatibility",
           "path": "reports/python_compatibility.json",
           "exists": true,
-          "bytes": 27111,
-          "sha256": "e681ed23385740ec9919f9ac714bf665f3c27a7c9a252c4e460af15e51a8a948"
+          "bytes": 27367,
+          "sha256": "fca6eb5f6f0e25f2ea42aa5ff39f7583a7145ef85d877c209f5300828d702788"
         },
         {
           "label": "registry_audit",
@@ -12070,9 +12070,9 @@
       "ok": true,
       "skill_dir": ".",
       "summary": {
-        "scanned_files": 224,
-        "script_count": 133,
-        "internal_module_count": 47,
+        "scanned_files": 226,
+        "script_count": 135,
+        "internal_module_count": 49,
         "secret_findings": 0,
         "dependency_files": [
           "requirements-ci.txt"
@@ -12090,13 +12090,41 @@
         "help_smoke_failed_count": 0,
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
-        "package_hash_file_count": 224,
-        "package_sha256": "c74c96a2bc7dfd7e12c89cb475a6853fcd012bcfe7b4a3905007b896ed2cf957"
+        "package_hash_file_count": 226,
+        "package_sha256": "11432d13467e6822ac0fff5d8bde27fdf326322dfed62aca7cb9ad5ee1a706ab"
       },
       "failures": [],
       "warnings": [],
       "secrets": [],
       "scripts": [
+        {
+          "path": "scripts/adaptation_patch_safety.py",
+          "interface": "internal-module",
+          "interface_declared": true,
+          "interface_reason": "Shared adaptation patch target parsing and target-file baseline verification helpers.",
+          "has_argparse": false,
+          "has_main_guard": false,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_file_write": false,
+          "uses_subprocess": false,
+          "network_urls": [],
+          "network_hosts": []
+        },
+        {
+          "path": "scripts/adaptation_report_contracts.py",
+          "interface": "internal-module",
+          "interface_declared": true,
+          "interface_reason": "Shared adaptation approval and regression report contract decoration helpers.",
+          "has_argparse": false,
+          "has_main_guard": false,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_file_write": false,
+          "uses_subprocess": false,
+          "network_urls": [],
+          "network_hosts": []
+        },
         {
           "path": "scripts/adjudicate_output_review.py",
           "interface": "cli",
@@ -14011,7 +14039,7 @@
         "checked_count": 86,
         "passed_count": 86,
         "failed_count": 0,
-        "skipped_count": 47,
+        "skipped_count": 49,
         "failed_scripts": [],
         "results": [
           {
@@ -14877,6 +14905,14 @@
         ],
         "skipped": [
           {
+            "path": "scripts/adaptation_patch_safety.py",
+            "reason": "internal module"
+          },
+          {
+            "path": "scripts/adaptation_report_contracts.py",
+            "reason": "internal module"
+          },
+          {
             "path": "scripts/build_skill_atlas_layout.py",
             "reason": "internal module"
           },
@@ -15259,7 +15295,7 @@
       "root": ".",
       "summary": {
         "target_python": "3.11",
-        "file_count": 209,
+        "file_count": 211,
         "issue_count": 0,
         "syntax_error_count": 0,
         "fstring_311_violation_count": 0,
@@ -15290,6 +15326,18 @@
         },
         {
           "path": "geo-ranking-article-generator/scripts/build_html_index.py",
+          "ok": true,
+          "issue_count": 0,
+          "issues": []
+        },
+        {
+          "path": "scripts/adaptation_patch_safety.py",
+          "ok": true,
+          "issue_count": 0,
+          "issues": []
+        },
+        {
+          "path": "scripts/adaptation_report_contracts.py",
           "ok": true,
           "issue_count": 0,
           "issues": []
@@ -16543,10 +16591,10 @@
       "generated_at": "2026-06-16",
       "skill_dir": ".",
       "summary": {
-        "python_file_count": 206,
-        "script_file_count": 133,
+        "python_file_count": 208,
+        "script_file_count": 135,
         "test_file_count": 73,
-        "internal_module_count": 49,
+        "internal_module_count": 51,
         "cli_script_count": 86,
         "command_handler_count": 68,
         "entrypoint_command_handler_count": 18,
@@ -16554,20 +16602,13 @@
         "warn_line_threshold": 900,
         "watch_line_threshold": 720,
         "block_line_threshold": 1500,
-        "largest_file_lines": 706,
+        "largest_file_lines": 696,
         "watchlist_count": 0,
         "hotspot_count": 0,
         "blocker_count": 0,
         "decision": "pass"
       },
       "largest_files": [
-        {
-          "path": "scripts/apply_adaptation.py",
-          "lines": 706,
-          "kind": "cli-script",
-          "severity": "pass",
-          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-        },
         {
           "path": "tests/verify_yao_cli.py",
           "lines": 696,
@@ -16644,6 +16685,13 @@
           "kind": "cli-script",
           "severity": "pass",
           "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+        },
+        {
+          "path": "scripts/render_benchmark_reproducibility.py",
+          "lines": 595,
+          "kind": "cli-script",
+          "severity": "pass",
+          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
         }
       ],
       "watchlist": [],
@@ -16662,16 +16710,16 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 797,
-        "other_text_tokens": 1052511,
+        "other_text_tokens": 1053172,
         "estimated_initial_load_tokens": 990,
-        "estimated_total_text_tokens": 1053308,
-        "deferred_resource_tokens": 487478,
+        "estimated_total_text_tokens": 1053969,
+        "deferred_resource_tokens": 487673,
         "deferred_resource_warn_threshold": 120000,
         "deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 427380,
-            "file_count": 133
+            "estimated_tokens": 427575,
+            "file_count": 135
           },
           {
             "path": "references",
@@ -16692,8 +16740,8 @@
         "large_deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 427380,
-            "file_count": 133
+            "estimated_tokens": 427575,
+            "file_count": 135
           }
         ],
         "deferred_resource_governance": {
@@ -16715,14 +16763,14 @@
               ],
               "missing": [],
               "path": "scripts",
-              "estimated_tokens": 427380,
-              "file_count": 133,
+              "estimated_tokens": 427575,
+              "file_count": 135,
               "rationale": "Script resources are deterministic deferred tools, not initial-load prompt context."
             }
           ],
           "summary": "Large deferred resources are indexed and backed by evidence."
         },
-        "relevant_file_count": 658,
+        "relevant_file_count": 662,
         "unused_resource_dirs": [],
         "quality_signal_points": 130,
         "quality_density": 131.3
