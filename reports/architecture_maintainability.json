@@ -4,9 +4,9 @@
   "generated_at": "2026-06-16",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 202,
+    "python_file_count": 203,
     "script_file_count": 131,
-    "test_file_count": 71,
+    "test_file_count": 72,
     "internal_module_count": 48,
     "cli_script_count": 85,
     "command_handler_count": 68,
@@ -16,7 +16,7 @@
     "watch_line_threshold": 720,
     "block_line_threshold": 1500,
     "largest_file_lines": 852,
-    "watchlist_count": 2,
+    "watchlist_count": 1,
     "hotspot_count": 0,
     "blocker_count": 0,
     "decision": "pass"
@@ -25,13 +25,6 @@
     {
       "path": "tests/verify_review_studio.py",
       "lines": 852,
-      "kind": "test",
-      "severity": "pass",
-      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
-    },
-    {
-      "path": "tests/verify_yao_cli.py",
-      "lines": 787,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
@@ -56,6 +49,13 @@
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "tests/verify_yao_cli.py",
+      "lines": 696,
+      "kind": "test",
+      "severity": "pass",
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
       "path": "scripts/world_class_evidence_contract.py",
@@ -111,13 +111,6 @@
     {
       "path": "tests/verify_review_studio.py",
       "lines": 852,
-      "kind": "test",
-      "severity": "pass",
-      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
-    },
-    {
-      "path": "tests/verify_yao_cli.py",
-      "lines": 787,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."

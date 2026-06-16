@@ -48,7 +48,9 @@ def main() -> None:
     assert payload["summary"]["largest_file_lines"] < 900, payload["summary"]
     assert all(item["severity"] == "pass" for item in payload["largest_files"]), payload["largest_files"]
     assert all(item["severity"] == "pass" for item in payload["watchlist"]), payload["watchlist"]
-    assert any(item["path"] == "tests/verify_yao_cli.py" for item in payload["watchlist"]), payload["watchlist"]
+    watchlist_paths = {item["path"] for item in payload["watchlist"]}
+    assert "tests/verify_yao_cli.py" not in watchlist_paths, payload["watchlist"]
+    assert "tests/verify_review_studio.py" in watchlist_paths, payload["watchlist"]
     renderer_lines = len((ROOT / "scripts" / "render_review_studio.py").read_text(encoding="utf-8").splitlines())
     action_module = (ROOT / "scripts" / "review_studio_actions.py").read_text(encoding="utf-8")
     action_lines = len(action_module.splitlines())

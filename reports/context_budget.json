@@ -6,9 +6,9 @@
     "context_budget_tier": "production",
     "context_budget_limit": 1000,
     "skill_body_tokens": 797,
-    "other_text_tokens": 1052655,
+    "other_text_tokens": 1052729,
     "estimated_initial_load_tokens": 990,
-    "estimated_total_text_tokens": 1053452,
+    "estimated_total_text_tokens": 1053526,
     "deferred_resource_tokens": 487270,
     "deferred_resource_warn_threshold": 120000,
     "deferred_resource_dirs": [
@@ -66,7 +66,7 @@
       ],
       "summary": "Large deferred resources are indexed and backed by evidence."
     },
-    "relevant_file_count": 650,
+    "relevant_file_count": 652,
     "unused_resource_dirs": [],
     "quality_signal_points": 130,
     "quality_density": 131.3
