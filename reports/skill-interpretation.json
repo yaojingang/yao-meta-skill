@@ -1043,13 +1043,13 @@
       "public_claim_ready": false,
       "public_claim_blocker_count": 3,
       "working_tree_dirty": true,
-      "changed_file_count": 45,
+      "changed_file_count": 18,
       "source_tree_dirty": false,
       "source_changed_file_count": 0,
       "generated_tree_dirty": true,
-      "generated_changed_file_count": 45
+      "generated_changed_file_count": 18
     },
-    "commit": "cece6f9b04869e46db9aed1bf0206ccb8fb887e4",
+    "commit": "e39be9d5d40513f362d657b81846b48ce140673b",
     "missing_artifacts": [],
     "limitations": [
       "The git commit and dirty flags are generation-time context; release lock is blocked by source changes, while generated evidence artifacts are tracked separately.",

@@ -2502,13 +2502,13 @@
           "public_claim_ready": false,
           "public_claim_blocker_count": 3,
           "working_tree_dirty": true,
-          "changed_file_count": 45,
+          "changed_file_count": 18,
           "source_tree_dirty": false,
           "source_changed_file_count": 0,
           "generated_tree_dirty": true,
-          "generated_changed_file_count": 45
+          "generated_changed_file_count": 18
         },
-        "commit": "cece6f9b04869e46db9aed1bf0206ccb8fb887e4",
+        "commit": "e39be9d5d40513f362d657b81846b48ce140673b",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flags are generation-time context; release lock is blocked by source changes, while generated evidence artifacts are tracked separately.",
@@ -6343,43 +6343,43 @@
       "ok": true,
       "generated_at": "2026-06-17",
       "skill_dir": ".",
-      "commit": "cece6f9b04869e46db9aed1bf0206ccb8fb887e4",
+      "commit": "e39be9d5d40513f362d657b81846b48ce140673b",
       "git_status": {
         "available": true,
         "dirty": true,
-        "changed_file_count": 45,
+        "changed_file_count": 18,
         "generated_dirty": true,
-        "generated_changed_file_count": 45,
+        "generated_changed_file_count": 18,
         "source_dirty": false,
         "source_changed_file_count": 0,
         "sample": [
           " M reports/adaptation_proposals.json",
           " M reports/adaptation_proposals.md",
           " M reports/adoption_drift_report.json",
-          " M reports/adoption_drift_report.md",
-          " M reports/architecture_maintainability.json",
-          " M reports/architecture_maintainability.md",
           " M reports/benchmark_reproducibility.json",
           " M reports/benchmark_reproducibility.md",
-          " M reports/compiled_targets.json",
           " M reports/context_budget.json",
-          " M reports/context_budget.md",
-          " M reports/context_budget_summary.json"
+          " M reports/evidence_consistency.json",
+          " M reports/review-studio.html",
+          " M reports/review-studio.json",
+          " M reports/review-viewer.json",
+          " M reports/skill-interpretation.html",
+          " M reports/skill-interpretation.json"
         ],
         "source_sample": [],
         "generated_sample": [
           " M reports/adaptation_proposals.json",
           " M reports/adaptation_proposals.md",
           " M reports/adoption_drift_report.json",
-          " M reports/adoption_drift_report.md",
-          " M reports/architecture_maintainability.json",
-          " M reports/architecture_maintainability.md",
           " M reports/benchmark_reproducibility.json",
           " M reports/benchmark_reproducibility.md",
-          " M reports/compiled_targets.json",
           " M reports/context_budget.json",
-          " M reports/context_budget.md",
-          " M reports/context_budget_summary.json"
+          " M reports/evidence_consistency.json",
+          " M reports/review-studio.html",
+          " M reports/review-studio.json",
+          " M reports/review-viewer.json",
+          " M reports/skill-interpretation.html",
+          " M reports/skill-interpretation.json"
         ],
         "generated_dirty_prefixes": [
           "dist/",
@@ -6419,11 +6419,11 @@
         "public_claim_ready": false,
         "public_claim_blocker_count": 3,
         "working_tree_dirty": true,
-        "changed_file_count": 45,
+        "changed_file_count": 18,
         "source_tree_dirty": false,
         "source_changed_file_count": 0,
         "generated_tree_dirty": true,
-        "generated_changed_file_count": 45
+        "generated_changed_file_count": 18
       },
       "public_claim": {
         "ready": false,
@@ -6437,10 +6437,10 @@
       },
       "release_lock": {
         "ready": true,
-        "commit": "cece6f9b04869e46db9aed1bf0206ccb8fb887e4",
+        "commit": "e39be9d5d40513f362d657b81846b48ce140673b",
         "status_scope": "generation-time status before this report is written",
         "source_changed_file_count": 0,
-        "generated_changed_file_count": 45,
+        "generated_changed_file_count": 18,
         "reason": "only generated evidence artifacts were dirty at generation time"
       },
       "evidence_bundle": {
@@ -18127,9 +18127,9 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 805,
-        "other_text_tokens": 1152733,
+        "other_text_tokens": 1152749,
         "estimated_initial_load_tokens": 998,
-        "estimated_total_text_tokens": 1153538,
+        "estimated_total_text_tokens": 1153554,
         "deferred_resource_tokens": 523653,
         "deferred_resource_warn_threshold": 120000,
         "deferred_resource_dirs": [
@@ -20107,7 +20107,7 @@
     "adoption_drift": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-17T07:53:09Z",
+      "generated_at": "2026-06-17T07:56:35Z",
       "skill_dir": ".",
       "privacy_contract": {
         "storage": "local-first",
@@ -20191,7 +20191,7 @@
     "daily_skillops": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-17T07:53:10Z",
+      "generated_at": "2026-06-17T07:56:36Z",
       "skill_dir": ".",
       "decision": "proposal-review",
       "source_supplied": false,
@@ -20705,7 +20705,7 @@
     "weekly_curator": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-17T07:53:10Z",
+      "generated_at": "2026-06-17T07:56:36Z",
       "skill_dir": ".",
       "decision": "curator-review",
       "week_id": "2026-W25",
@@ -21170,7 +21170,7 @@
     "adaptation_proposals": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-17T07:53:10Z",
+      "generated_at": "2026-06-17T07:56:36Z",
       "skill_dir": ".",
       "source_patterns": "reports/user_patterns.json",
       "pattern_count": 5,
