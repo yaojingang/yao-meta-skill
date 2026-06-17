@@ -14,8 +14,8 @@
   "unmatched_submission_count": 0,
   "invalid_submission_count": 1,
   "source_check_count": 19,
-  "source_pass_count": 12,
-  "source_blocked_count": 7,
+  "source_pass_count": 11,
+  "source_blocked_count": 8,
   "review_counts_submission_as_completion": false,
   "summary": {
     "review_item_count": 4,
@@ -27,8 +27,8 @@
     "unmatched_submission_count": 0,
     "invalid_submission_count": 1,
     "source_check_count": 19,
-    "source_pass_count": 12,
-    "source_blocked_count": 7,
+    "source_pass_count": 11,
+    "source_blocked_count": 8,
     "ready_to_claim_world_class": false,
     "review_counts_submission_as_completion": false,
     "decision": "fix-submissions"
@@ -384,7 +384,7 @@
       "intake_errors": [],
       "observed_state": {
         "external_source_events": 0,
-        "adoption_sample_count": 1,
+        "adoption_sample_count": 0,
         "raw_content_allowed": false,
         "risk_band": "low",
         "accepted": false
@@ -405,8 +405,8 @@
           "label": "Adoption sample",
           "field": "adoption_sample_count",
           "expected": ">0",
-          "actual": 1,
-          "status": "pass",
+          "actual": 0,
+          "status": "blocked",
           "source_accepted": false,
           "next_action": "Telemetry must include adoption outcome evidence."
         },
@@ -422,8 +422,8 @@
         }
       ],
       "source_check_count": 3,
-      "source_pass_count": 2,
-      "source_blocked_count": 1,
+      "source_pass_count": 1,
+      "source_blocked_count": 2,
       "success_checks": [
         "reports/adoption_drift_report.json summary.source_types.external > 0",
         "reports/adoption_drift_report.json summary.adoption_sample_count > 0",

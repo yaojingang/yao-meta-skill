@@ -10,10 +10,10 @@ Generated at: `2026-06-17`
 - credential value exposed: `false`
 - collection ready: `1`
 - collection blocked: `3`
-- source checks: `10` pass / `19` total
-- repair rows: `13` blocked / `13` total
+- source checks: `11` pass / `19` total
+- repair rows: `12` blocked / `12` total
 - phase queue: `2` blocked / `2` phases
-- phase queue rows: `13`
+- phase queue rows: `12`
 - next repair action: `human-adjudication-precheck-human-reviewer`
 - next repair owner: `human reviewer`
 - next phase: `unblock-access`
@@ -51,13 +51,13 @@ Phase queue rows group the same repair checklist into operator execution phases.
 | Priority | Phase | Status | Rows | Owners | Evidence | Verify | Next action |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | `20` | `unblock-access` | `blocked` | 4 / 4 blocked | Browser/Chrome/IDE/provider client integrator, human reviewer, operator with provider credentials, target client or installer integrator | human-adjudication, native-client-telemetry, native-permission-enforcement, provider-holdout | `python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions` | Assign a real reviewer identity before claiming human adjudication. |
-| `40` | `collect-source` | `blocked` | 9 / 9 blocked | Browser/Chrome/IDE/provider client integrator, human reviewer, operator with provider credentials, target client or installer integrator | human-adjudication, native-client-telemetry, native-permission-enforcement, provider-holdout | `python3 scripts/yao.py output-review && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions` | Set reviewer_attestation only after choices are completed before opening the answer key. |
+| `40` | `collect-source` | `blocked` | 8 / 8 blocked | Browser/Chrome/IDE/provider client integrator, human reviewer, target client or installer integrator | human-adjudication, native-client-telemetry, native-permission-enforcement | `python3 scripts/yao.py output-review && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions` | Set reviewer_attestation only after choices are completed before opening the answer key. |
 
 ## Evidence Items
 
 | Evidence | Status | Intake | Review | Next action |
 | --- | --- | --- | --- | --- |
-| `provider-holdout` | `blocked` | `awaiting-submission` | `awaiting-submission` | Set OPENAI_API_KEY in the operator shell; never commit or print the value. |
+| `provider-holdout` | `blocked` | `fix-submission` | `fix-submission` | Set one provider API key in the operator shell, such as OPENAI_API_KEY or DEEPSEEK_API_KEY; never commit or print the value. |
 | `human-adjudication` | `ready-for-human-review` | `awaiting-submission` | `awaiting-submission` | Assign a real reviewer identity before claiming human adjudication. |
 | `native-permission-enforcement` | `blocked` | `awaiting-submission` | `awaiting-submission` | Attach a real target-client or external installer runtime guard; metadata fallback is not enough. |
 | `native-client-telemetry` | `blocked` | `awaiting-submission` | `awaiting-submission` | Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events. |
@@ -71,16 +71,15 @@ Repair rows convert preflight and source blockers into a prioritized operator qu
 | `20` | `unblock-access` | human reviewer | `human-adjudication` | `precheck` | `human-reviewer` | `blocked` | `python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions` | Assign a real reviewer identity before claiming human adjudication. |
 | `20` | `unblock-access` | Browser/Chrome/IDE/provider client integrator | `native-client-telemetry` | `precheck` | `external-client` | `blocked` | `python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions` | Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events. |
 | `20` | `unblock-access` | target client or installer integrator | `native-permission-enforcement` | `precheck` | `native-guard` | `blocked` | `python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions` | Attach a real target-client or external installer runtime guard; metadata fallback is not enough. |
-| `20` | `unblock-access` | operator with provider credentials | `provider-holdout` | `precheck` | `openai-api-key` | `blocked` | `python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions` | Set OPENAI_API_KEY in the operator shell; never commit or print the value. |
+| `20` | `unblock-access` | operator with provider credentials | `provider-holdout` | `precheck` | `provider-api-key` | `blocked` | `python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions` | Set one provider API key in the operator shell, such as OPENAI_API_KEY or DEEPSEEK_API_KEY; never commit or print the value. |
 | `40` | `collect-source` | human reviewer | `human-adjudication` | `source-check` | `blind_review_attested` | `blocked` | `python3 scripts/yao.py output-review && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions` | Set reviewer_attestation only after choices are completed before opening the answer key. |
 | `40` | `collect-source` | human reviewer | `human-adjudication` | `source-check` | `judgment_count` | `blocked` | `python3 scripts/yao.py output-review && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions` | Every pair needs one valid human judgment. |
 | `40` | `collect-source` | human reviewer | `human-adjudication` | `source-check` | `pending_count` | `blocked` | `python3 scripts/yao.py output-review && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions` | Record a reviewer choice and reason for every pair. |
 | `40` | `collect-source` | human reviewer | `human-adjudication` | `source-check` | `ready_for_human_evidence` | `blocked` | `python3 scripts/yao.py output-review && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions` | Complete all reviewer decisions with metadata and rationale, plus blind-review attestation and integrity fingerprints. |
 | `40` | `collect-source` | human reviewer | `human-adjudication` | `source-check` | `reviewer_metadata_present` | `blocked` | `python3 scripts/yao.py output-review && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions` | Record reviewer and reviewed_at before adjudication can count. |
+| `40` | `collect-source` | Browser/Chrome/IDE/provider client integrator | `native-client-telemetry` | `source-check` | `adoption_sample_count` | `blocked` | `python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions` | Telemetry must include adoption outcome evidence. |
 | `40` | `collect-source` | Browser/Chrome/IDE/provider client integrator | `native-client-telemetry` | `source-check` | `external_source_events` | `blocked` | `python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions` | Import at least one metadata-only event from a real client. |
 | `40` | `collect-source` | target client or installer integrator | `native-permission-enforcement` | `source-check` | `native_enforcement_count` | `blocked` | `python3 scripts/yao.py runtime-permissions . --package-dir dist && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions` | Collect real target-client or external runtime guard proof. |
-| `40` | `collect-source` | operator with provider credentials | `provider-holdout` | `source-check` | `model_executed_count` | `blocked` | `python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60 && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions` | Run provider-backed output-exec with real credentials. |
-| `40` | `collect-source` | operator with provider credentials | `provider-holdout` | `source-check` | `token_observed_count` | `blocked` | `python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60 && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions` | Provider execution should return non-estimated token usage. |
 
 ## Provider Holdout
 
@@ -98,16 +97,16 @@ Repair rows convert preflight and source blockers into a prioritized operator qu
 | --- | --- | --- | --- | --- |
 | Output eval cases | `file` | `present` | `pass` | Keep output holdout cases available before provider execution. |
 | Provider runner | `file` | `present` | `pass` | Use the provider runner instead of the local command runner for model-backed evidence. |
-| Provider credential | `env` | `not-set` | `missing` | Set OPENAI_API_KEY in the operator shell; never commit or print the value. |
-| Provider model | `env` | `not-set` | `optional` | Optionally set YAO_OUTPUT_EVAL_MODEL; the runbook defaults to gpt-4.1-mini. |
+| Provider credential | `env_any` | `not-set` | `missing` | Set one provider API key in the operator shell, such as OPENAI_API_KEY or DEEPSEEK_API_KEY; never commit or print the value. |
+| Provider model | `env` | `not-set` | `optional` | Optionally set YAO_OUTPUT_EVAL_MODEL, or pass --provider-model for the selected provider. |
 
 ### Source Checks
 
 | Check | Current | Expected | Status | Next action |
 | --- | --- | --- | --- | --- |
-| Provider model run | `0` | `>0` | `blocked` | Run provider-backed output-exec with real credentials. |
+| Provider model run | `10` | `>0` | `pass` | Run provider-backed output-exec with real credentials. |
 | Timing observed | `10` | `>0` | `pass` | Provider execution should record timing metadata. |
-| Token usage observed | `0` | `>0` | `blocked` | Provider execution should return non-estimated token usage. |
+| Token usage observed | `10` | `>0` | `pass` | Provider execution should return non-estimated token usage. |
 
 ## Human Adjudication
 
@@ -192,7 +191,7 @@ Repair rows convert preflight and source blockers into a prioritized operator qu
 | Check | Current | Expected | Status | Next action |
 | --- | --- | --- | --- | --- |
 | External events | `0` | `>0` | `blocked` | Import at least one metadata-only event from a real client. |
-| Adoption sample | `1` | `>0` | `pass` | Telemetry must include adoption outcome evidence. |
+| Adoption sample | `0` | `>0` | `blocked` | Telemetry must include adoption outcome evidence. |
 | Raw content blocked | `False` | `false` | `pass` | Telemetry must stay metadata-only. |
 
 ## Boundary

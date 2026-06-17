@@ -3,7 +3,7 @@
     "name": "yao-meta-skill",
     "title": "Yao Meta Skill",
     "display_name": "Yao Meta Skill",
-    "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
+    "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use for skill creation, reusable workflow packaging, skill improvement, evals, and team-ready distribution.",
     "maturity": "governed",
     "updated_at": "2026-03-31",
     "core_value": "把一次性经验沉淀为可复用、可评估、可迁移的 Skill 包体。",
@@ -81,7 +81,7 @@
       "label": "可维护性",
       "score": 100,
       "reasons": [
-        "SKILL.md 约 360 个词/字。",
+        "SKILL.md 约 339 个词/字。",
         "入口文件保持克制，可维护性较好。",
         "references/ 已承载扩展指导。",
         "scripts/ 已承载确定性逻辑。",
@@ -102,7 +102,7 @@
       "label": "上下文成本",
       "score": 42,
       "reasons": [
-        "入口约 360 个词/字，references 约 16934 个词/字。",
+        "入口约 339 个词/字，references 约 16934 个词/字。",
         "分数越高代表上下文成本越低。",
         "上下文成本偏高，建议压缩入口或拆分 references。"
       ]
@@ -156,7 +156,7 @@
   },
   "contract_boundary": {
     "trigger": {
-      "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
+      "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use for skill creation, reusable workflow packaging, skill improvement, evals, and team-ready distribution.",
       "activation": "manual",
       "execution": "inline",
       "shell": "bash"
@@ -184,7 +184,7 @@
     "boundary_cards": [
       {
         "label": "Owned",
-        "body": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse."
+        "body": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use for skill creation, reusable workflow packaging, skill improvement, evals, and team-ready distribution."
       },
       {
         "label": "Adjacent",
@@ -206,7 +206,7 @@
       "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
     ],
     "gaps": [
-      "上下文成本需要补强：入口约 360 个词/字，references 约 16934 个词/字。"
+      "上下文成本需要补强：入口约 339 个词/字，references 约 16934 个词/字。"
     ],
     "recommendations": [
       "先改触发边界，再扩展工作流。",
@@ -216,10 +216,10 @@
     "artifact_design": {
       "design_system": "metric editorial",
       "highlights": [
-        "Execution-focused technical artifact with environment assumptions, copyable commands, expected outputs, and side effects made explicit.",
-        "Name the working directory and required inputs for commands.",
-        "Mark destructive, networked, or external side-effect operations.",
-        "Prefer the smallest runnable snippet over broad framework scaffolding."
+        "Metric-first dashboard with stable dimensions, short labels, visible deltas, and narrative callouts only where they change interpretation.",
+        "Avoid paragraph-heavy table cells.",
+        "Keep charts tied to one analytical question each.",
+        "Preserve stable color meaning across metrics and entities."
       ]
     },
     "prompt_quality": {
@@ -271,7 +271,7 @@
         "name": "包体膨胀风险",
         "impact": 2,
         "probability": 1,
-        "signal": "SKILL.md 约 360 个词/字。",
+        "signal": "SKILL.md 约 339 个词/字。",
         "response": "先补证据和边界，再增加包体复杂度。"
       },
       {
@@ -412,7 +412,7 @@
     "external_pending_count": 3,
     "human_pending_count": 1,
     "source_check_count": 19,
-    "source_pass_count": 10,
+    "source_pass_count": 11,
     "conclusion_zh": "世界级证据尚未完成：4 项待补，0 项已接受。",
     "conclusion_en": "World-class evidence is not complete: 4 pending, 0 accepted.",
     "entries": [
@@ -426,10 +426,7 @@
         "status": "pending",
         "summary_zh": "缺少真实 provider 模型运行和 token metadata。",
         "summary_en": "Missing a real provider model run and token metadata.",
-        "blocked_checks": [
-          "Provider model run",
-          "Token usage observed"
-        ]
+        "blocked_checks": []
       },
       {
         "key": "human-adjudication",
@@ -472,7 +469,8 @@
         "summary_zh": "真实外部客户端 metadata-only 事件仍未导入。",
         "summary_en": "Real external-client metadata-only events have not been imported yet.",
         "blocked_checks": [
-          "External events"
+          "External events",
+          "Adoption sample"
         ]
       }
     ]
@@ -640,17 +638,17 @@
   "name": "yao-meta-skill",
   "title": "Yao Meta Skill",
   "display_name": "Yao Meta Skill",
-  "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
+  "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use for skill creation, reusable workflow packaging, skill improvement, evals, and team-ready distribution.",
   "logic_steps": [
-    "Decide whether the request should become a skill and choose the lightest fit.",
-    "Capture job, output, exclusions, constraints, and standards.",
-    "Run reference scan: external benchmarks first, user references second, local fit third; surface only uncertainty or conflict.",
-    "Write the `description` early and test route quality before expanding the package.",
-    "Add output-risk, artifact-design, prompt-quality, and system-model reports only when they matter."
+    "For one-off/no reusable process: `Do not create a skill`; `near-neighbor`; require `repeated use` + `reusable output contract`.",
+    "Capture job, output, exclusions, constraints, standards, and the lightest fit.",
+    "Scan references in order: external benchmark, user source, local fit; surface only uncertainty or conflict.",
+    "Write `description` early, test route quality, then add only earned folders and gates.",
+    "Add output-risk, artifact-design, prompt-quality, system-model, and next directions only when useful."
   ],
   "usage_steps": [
     "Use $yao-meta-skill to turn my workflow or notes into a reusable skill with lean structure, clear triggering, and the right evals.",
-    "Use this skill when the request matches: Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse."
+    "Use this skill when the request matches: Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use for skill creation, reusable workflow packaging, skill improvement, evals, and team-ready distribution."
   ],
   "package_map": [
     {
@@ -717,7 +715,7 @@
     "用户说出类似需求时：Use $yao-meta-skill to turn my workflow or notes into a reusable skill with lean structure, clear triggering, and the right evals."
   ],
   "trigger_contract": {
-    "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
+    "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use for skill creation, reusable workflow packaging, skill improvement, evals, and team-ready distribution.",
     "activation": "manual",
     "execution": "inline",
     "shell": "bash"
@@ -917,14 +915,14 @@
       "case_count": 5,
       "variant_run_count": 10,
       "command_executed_count": 10,
-      "model_executed_count": 0,
+      "model_executed_count": 10,
       "recorded_fixture_count": 0,
       "timing_observed_count": 10,
-      "token_observed_count": 0,
-      "token_estimated_count": 10,
-      "baseline_pass_rate": 0.0,
-      "with_skill_pass_rate": 100.0,
-      "delta": 100.0,
+      "token_observed_count": 10,
+      "token_estimated_count": 0,
+      "baseline_pass_rate": 23.67,
+      "with_skill_pass_rate": 43.67,
+      "delta": 20.0,
       "regression_count": 0,
       "failure_count": 0,
       "gate_pass": true
@@ -933,9 +931,19 @@
       "mode": "command",
       "command": [
         "python3",
-        "scripts/local_output_eval_runner.py"
+        "scripts/provider_output_eval_runner.py",
+        "--provider",
+        "deepseek",
+        "--model",
+        "deepseek-v4-flash",
+        "--api-format",
+        "chat-completions",
+        "--thinking",
+        "disabled",
+        "--api-key-env",
+        "DEEPSEEK_API_KEY"
       ],
-      "timeout_seconds": 30.0
+      "timeout_seconds": 180.0
     },
     "failures": []
   },
@@ -1009,43 +1017,43 @@
     "ok": true,
     "summary": {
       "reproducibility_ready": true,
-      "release_lock_ready": false,
+      "release_lock_ready": true,
       "methodology_complete": true,
       "required_artifact_count": 25,
       "missing_artifact_count": 0,
-      "evidence_bundle_sha256": "9a91175581e3285aebba447f68246d86af01e3f7bc5e541ca572cce12d3c500d",
-      "source_contract_sha256": "7958467751730998d7f2a8f38c9e8ef324874459e62f0c0a197232cd8386b291",
+      "evidence_bundle_sha256": "53b15993b4b79fd9bf3d5016ca565969d27a8a2604fe659a876f3eebe7292350",
+      "source_contract_sha256": "7fc324e26d614c46b350c2b3e20cb87a86f967d3a74d345bc0baf73d78d8b111",
       "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2",
       "output_case_count": 5,
       "failure_disclosure_count": 3,
       "command_count": 23,
       "command_executed_count": 10,
       "timing_observed_count": 10,
-      "model_executed_count": 0,
-      "token_observed_count": 0,
+      "model_executed_count": 10,
+      "token_observed_count": 10,
       "human_review_complete": false,
-      "provider_evidence_complete": false,
+      "provider_evidence_complete": true,
       "world_class_ready": false,
-      "world_class_open_gap_count": 4,
+      "world_class_open_gap_count": 3,
       "world_class_task_count": 4,
       "world_class_ledger_pending_count": 4,
       "world_class_source_check_count": 19,
-      "world_class_source_pass_count": 10,
-      "world_class_source_blocked_count": 9,
+      "world_class_source_pass_count": 11,
+      "world_class_source_blocked_count": 8,
       "public_claim_ready": false,
-      "public_claim_blocker_count": 5,
+      "public_claim_blocker_count": 3,
       "working_tree_dirty": true,
-      "changed_file_count": 64,
-      "source_tree_dirty": true,
-      "source_changed_file_count": 6,
+      "changed_file_count": 45,
+      "source_tree_dirty": false,
+      "source_changed_file_count": 0,
       "generated_tree_dirty": true,
-      "generated_changed_file_count": 58
+      "generated_changed_file_count": 45
     },
-    "commit": "ff0473ac02f14a3a431cb01f157453335eb14901",
+    "commit": "cece6f9b04869e46db9aed1bf0206ccb8fb887e4",
     "missing_artifacts": [],
     "limitations": [
       "The git commit and dirty flags are generation-time context; release lock is blocked by source changes, while generated evidence artifacts are tracked separately.",
-      "Local command-runner evidence is reproducible but does not replace provider-backed model holdout evidence.",
+      "Provider-backed model holdout source evidence is complete, but ledger acceptance still requires a valid independently reviewed submission packet.",
       "Pending blind-review decisions are visible but do not count as human adjudication.",
       "World-class readiness remains false until external and human evidence gaps close."
     ]
@@ -1146,7 +1154,7 @@
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
     "package_hash_file_count": 245,
-    "package_sha256": "7958467751730998d7f2a8f38c9e8ef324874459e62f0c0a197232cd8386b291"
+    "package_sha256": "7fc324e26d614c46b350c2b3e20cb87a86f967d3a74d345bc0baf73d78d8b111"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -1170,7 +1178,7 @@
       "schema_version": "2.0",
       "name": "yao-meta-skill",
       "version": "1.1.0",
-      "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
+      "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use for skill creation, reusable workflow packaging, skill improvement, evals, and team-ready distribution.",
       "targets": [
         "openai",
         "claude",
@@ -1184,7 +1192,7 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "7958467751730998d7f2a8f38c9e8ef324874459e62f0c0a197232cd8386b291",
+        "package_sha256": "7fc324e26d614c46b350c2b3e20cb87a86f967d3a74d345bc0baf73d78d8b111",
         "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2"
       },
       "compatibility": {
@@ -1244,7 +1252,7 @@
     "ok": true,
     "summary": {
       "archive_present": true,
-      "archive_entry_count": 692,
+      "archive_entry_count": 696,
       "archive_extracted": true,
       "entrypoint_loaded": true,
       "manifest_loaded": true,
@@ -1304,7 +1312,7 @@
         {
           "field": "description",
           "from": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes.",
-          "to": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse."
+          "to": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use for skill creation, reusable workflow packaging, skill improvement, evals, and team-ready distribution."
         }
       ],
       "checksum_changes": [
@@ -1316,7 +1324,7 @@
         {
           "field": "package_sha256",
           "from": "0000000000000000000000000000000000000000000000000000000000000000",
-          "to": "7958467751730998d7f2a8f38c9e8ef324874459e62f0c0a197232cd8386b291"
+          "to": "7fc324e26d614c46b350c2b3e20cb87a86f967d3a74d345bc0baf73d78d8b111"
         }
       ]
     },
@@ -1333,14 +1341,14 @@
     "ok": true,
     "summary": {
       "event_count": 1,
-      "adoption_sample_count": 1,
-      "activation_count": 1,
-      "accepted_count": 1,
+      "adoption_sample_count": 0,
+      "activation_count": 0,
+      "accepted_count": 0,
       "edited_count": 0,
       "rejected_count": 0,
       "missed_count": 0,
       "failed_count": 0,
-      "adoption_rate": 100.0,
+      "adoption_rate": 0,
       "missed_trigger_count": 0,
       "wrong_trigger_count": 0,
       "bad_output_count": 0,
@@ -1349,7 +1357,7 @@
       "review_overdue_count": 0,
       "risk_band": "low",
       "event_types": {
-        "skill_activation": 1
+        "review_event": 1
       },
       "failure_types": {},
       "source_types": {
@@ -1490,15 +1498,15 @@
       {
         "key": "provider-holdout",
         "label": "Provider Holdout",
-        "status": "external_required",
+        "status": "pass",
         "category": "external",
         "owner": "operator with provider credentials",
-        "current": "model-executed 0; token-observed 0",
+        "current": "model-executed 10; token-observed 10",
         "objective": "Collect at least one provider-backed output-eval holdout run with model, timing, and token metadata.",
         "runbook": [
-          "Set OPENAI_API_KEY in the operator shell before running provider evidence; never commit or print the value.",
-          "export YAO_OUTPUT_EVAL_MODEL=${YAO_OUTPUT_EVAL_MODEL:-gpt-4.1-mini}",
-          "python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60",
+          "Set one provider API key in the operator shell, such as OPENAI_API_KEY or DEEPSEEK_API_KEY; never commit or print the value.",
+          "For OpenAI Responses: python3 scripts/yao.py output-exec --provider-runner openai --provider-model ${YAO_OUTPUT_EVAL_MODEL:-gpt-4.1-mini} --timeout-seconds 60",
+          "For DeepSeek Chat Completions: python3 scripts/yao.py output-exec --provider-runner deepseek --provider-model deepseek-v4-flash --provider-api-format chat-completions --provider-thinking disabled --api-key-env DEEPSEEK_API_KEY --timeout-seconds 120",
           "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
           "Copy evidence/world_class/templates/provider-holdout.intake.json to evidence/world_class/submissions/provider-holdout.json and fill only real evidence fields.",
           "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
@@ -1624,7 +1632,7 @@
         "status": "external_required",
         "category": "external",
         "owner": "Browser/Chrome/IDE/provider client integrator",
-        "current": "external source events 0; adoption samples 1",
+        "current": "external source events 0; adoption samples 0",
         "objective": "Import production metadata-only events from a real external client into the local drift loop.",
         "runbook": [
           "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
@@ -1660,27 +1668,27 @@
     "source_audit": {
       "json": "reports/skill_os2_audit.json",
       "markdown": "reports/skill_os2_audit.md",
-      "open_gap_count": 4
+      "open_gap_count": 3
     }
   },
   "world_class_evidence_ledger": {
     "ok": true,
     "summary": {
       "ledger_entry_count": 4,
-      "source_accepted_count": 0,
+      "source_accepted_count": 1,
       "accepted_count": 0,
       "pending_count": 4,
       "human_pending_count": 1,
       "external_pending_count": 3,
       "submitted_entry_count": 0,
       "reviewer_approved_submission_count": 0,
-      "missing_submission_count": 4,
-      "invalid_submission_count": 0,
+      "missing_submission_count": 3,
+      "invalid_submission_count": 1,
       "source_check_count": 19,
-      "source_pass_count": 10,
-      "source_blocked_count": 9,
+      "source_pass_count": 11,
+      "source_blocked_count": 8,
       "submitted_but_pending_count": 0,
-      "source_accepted_without_valid_submission_count": 0,
+      "source_accepted_without_valid_submission_count": 1,
       "overclaim_guard_active": true,
       "ready_to_claim_world_class": false,
       "decision": "evidence-pending"
@@ -1692,14 +1700,14 @@
         "category": "external",
         "owner": "operator with provider credentials",
         "status": "pending",
-        "source_status": "external_required",
-        "source_accepted": false,
-        "current": "model-executed 0; token-observed 0",
+        "source_status": "pass",
+        "source_accepted": true,
+        "current": "model-executed 10; token-observed 10",
         "objective": "Collect at least one provider-backed output-eval holdout run with model, timing, and token metadata.",
         "runbook": [
-          "Set OPENAI_API_KEY in the operator shell before running provider evidence; never commit or print the value.",
-          "export YAO_OUTPUT_EVAL_MODEL=${YAO_OUTPUT_EVAL_MODEL:-gpt-4.1-mini}",
-          "python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60",
+          "Set one provider API key in the operator shell, such as OPENAI_API_KEY or DEEPSEEK_API_KEY; never commit or print the value.",
+          "For OpenAI Responses: python3 scripts/yao.py output-exec --provider-runner openai --provider-model ${YAO_OUTPUT_EVAL_MODEL:-gpt-4.1-mini} --timeout-seconds 60",
+          "For DeepSeek Chat Completions: python3 scripts/yao.py output-exec --provider-runner deepseek --provider-model deepseek-v4-flash --provider-api-format chat-completions --provider-thinking disabled --api-key-env DEEPSEEK_API_KEY --timeout-seconds 120",
           "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
           "Copy evidence/world_class/templates/provider-holdout.intake.json to evidence/world_class/submissions/provider-holdout.json and fill only real evidence fields.",
           "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
@@ -1729,10 +1737,10 @@
           "The output execution report records output hashes and aggregate run metadata, not raw provider prompts."
         ],
         "observed_state": {
-          "model_executed_count": 0,
+          "model_executed_count": 10,
           "timing_observed_count": 10,
-          "token_observed_count": 0,
-          "accepted": false
+          "token_observed_count": 10,
+          "accepted": true
         },
         "source_checklist": [
           {
@@ -1740,9 +1748,9 @@
             "label": "Provider model run",
             "field": "model_executed_count",
             "expected": ">0",
-            "actual": 0,
-            "status": "blocked",
-            "source_accepted": false,
+            "actual": 10,
+            "status": "pass",
+            "source_accepted": true,
             "next_action": "Run provider-backed output-exec with real credentials."
           },
           {
@@ -1752,7 +1760,7 @@
             "expected": ">0",
             "actual": 10,
             "status": "pass",
-            "source_accepted": false,
+            "source_accepted": true,
             "next_action": "Provider execution should record timing metadata."
           },
           {
@@ -1760,24 +1768,36 @@
             "label": "Token usage observed",
             "field": "token_observed_count",
             "expected": ">0",
-            "actual": 0,
-            "status": "blocked",
-            "source_accepted": false,
+            "actual": 10,
+            "status": "pass",
+            "source_accepted": true,
             "next_action": "Provider execution should return non-estimated token usage."
           }
         ],
         "source_check_count": 3,
-        "source_pass_count": 1,
-        "source_blocked_count": 2,
+        "source_pass_count": 3,
+        "source_blocked_count": 0,
         "submission_state": {
-          "status": "missing",
+          "status": "invalid-contract",
           "path": "evidence/world_class/submissions/provider-holdout.json",
-          "artifact_ref_count": 0,
-          "attested_real_evidence": false,
-          "privacy_contract_satisfied": false,
+          "submitted_by": "Codex operator using DeepSeek official API",
+          "submitted_at": "2026-06-17",
+          "artifact_ref_count": 1,
+          "artifact_existing_count": 1,
+          "artifact_sha256_verified_count": 1,
+          "attested_real_evidence": true,
+          "reviewer_or_operator_identity_present": true,
+          "privacy_contract_satisfied": true,
           "ledger_reviewer_approved": false,
           "ledger_reviewer": "",
           "ledger_reviewed_at": "",
+          "errors": [
+            "attestation.ledger_reviewer_approved must be true for a real submission",
+            "attestation.ledger_reviewer is required",
+            "attestation.ledger_reviewed_at must use YYYY-MM-DD or YYYY-MM-DDTHH:MM:SSZ",
+            "attestation.ledger_reviewer must be different from submitted_by",
+            "attestation.ledger_reviewed_at must be at or after submitted_at"
+          ],
           "ledger_counts_as_completion": false
         },
         "anti_overclaim": {
@@ -2104,7 +2124,7 @@
         "status": "pending",
         "source_status": "external_required",
         "source_accepted": false,
-        "current": "external source events 0; adoption samples 1",
+        "current": "external source events 0; adoption samples 0",
         "objective": "Import production metadata-only events from a real external client into the local drift loop.",
         "runbook": [
           "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
@@ -2141,7 +2161,7 @@
         ],
         "observed_state": {
           "external_source_events": 0,
-          "adoption_sample_count": 1,
+          "adoption_sample_count": 0,
           "raw_content_allowed": false,
           "risk_band": "low",
           "accepted": false
@@ -2162,8 +2182,8 @@
             "label": "Adoption sample",
             "field": "adoption_sample_count",
             "expected": ">0",
-            "actual": 1,
-            "status": "pass",
+            "actual": 0,
+            "status": "blocked",
             "source_accepted": false,
             "next_action": "Telemetry must include adoption outcome evidence."
           },
@@ -2179,8 +2199,8 @@
           }
         ],
         "source_check_count": 3,
-        "source_pass_count": 2,
-        "source_blocked_count": 1,
+        "source_pass_count": 1,
+        "source_blocked_count": 2,
         "submission_state": {
           "status": "missing",
           "path": "evidence/world_class/submissions/native-client-telemetry.json",
@@ -2216,10 +2236,10 @@
   "artifact_design": {
     "design_system": "metric editorial",
     "highlights": [
-      "Execution-focused technical artifact with environment assumptions, copyable commands, expected outputs, and side effects made explicit.",
-      "Name the working directory and required inputs for commands.",
-      "Mark destructive, networked, or external side-effect operations.",
-      "Prefer the smallest runnable snippet over broad framework scaffolding."
+      "Metric-first dashboard with stable dimensions, short labels, visible deltas, and narrative callouts only where they change interpretation.",
+      "Avoid paragraph-heavy table cells.",
+      "Keep charts tied to one analytical question each.",
+      "Preserve stable color meaning across metrics and entities."
     ]
   },
   "prompt_quality": {

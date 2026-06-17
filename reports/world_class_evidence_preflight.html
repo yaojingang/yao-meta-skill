@@ -68,7 +68,7 @@
       <span class="eyebrow">Evidence Collection</span>
       <h1>World-Class Evidence Preflight</h1>
       <p class="lede">This operator view shows which external and human evidence is still blocked, which commands prepare editable submission drafts, and why preflight never counts as accepted evidence.</p>
-      <div class="stats"><article><span>Decision</span><strong>collection-preflight-blocked</strong></article><article><span>Pending</span><strong>4</strong></article><article><span>Ready</span><strong>1</strong></article><article><span>Blocked</span><strong>3</strong></article><article><span>Source</span><strong>10/19</strong></article><article><span>Repairs</span><strong>13/13</strong></article><article><span>Phases</span><strong>2/2</strong></article></div>
+      <div class="stats"><article><span>Decision</span><strong>collection-preflight-blocked</strong></article><article><span>Pending</span><strong>4</strong></article><article><span>Ready</span><strong>1</strong></article><article><span>Blocked</span><strong>3</strong></article><article><span>Source</span><strong>11/19</strong></article><article><span>Repairs</span><strong>12/12</strong></article><article><span>Phases</span><strong>2/2</strong></article></div>
     </section>
     <section class="section two-col" id="handoff">
       <article class="panel">
@@ -128,9 +128,9 @@
           </header>
           <dl>
             <dt>Phase</dt><dd><code>collect-source</code></dd>
-            <dt>Rows</dt><dd>9 / 9 blocked</dd>
-            <dt>Owners</dt><dd>Browser/Chrome/IDE/provider client integrator, human reviewer, operator with provider credentials, target client or installer integrator</dd>
-            <dt>Evidence</dt><dd>human-adjudication, native-client-telemetry, native-permission-enforcement, provider-holdout</dd>
+            <dt>Rows</dt><dd>8 / 8 blocked</dd>
+            <dt>Owners</dt><dd>Browser/Chrome/IDE/provider client integrator, human reviewer, target client or installer integrator</dd>
+            <dt>Evidence</dt><dd>human-adjudication, native-client-telemetry, native-permission-enforcement</dd>
             <dt>Next</dt><dd>Set reviewer_attestation only after choices are completed before opening the answer key.</dd>
             <dt>Verify</dt><dd><code>python3 scripts/yao.py output-review &amp;&amp; python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions</code></dd>
             <dt>Counts</dt><dd>does not count as completion</dd>
@@ -147,13 +147,13 @@
         <dl class="meta">
           <dt>Evidence</dt><dd><code>provider-holdout</code></dd>
           <dt>Ledger</dt><dd>pending</dd>
-          <dt>Intake</dt><dd>awaiting-submission</dd>
-          <dt>Review</dt><dd>awaiting-submission</dd>
+          <dt>Intake</dt><dd>fix-submission</dd>
+          <dt>Review</dt><dd>fix-submission</dd>
           <dt>Draft</dt><dd><code>evidence/world_class/submissions/provider-holdout.json</code></dd>
         </dl>
         <section class="next-action">
           <h4>Next Action</h4>
-          <p>Set OPENAI_API_KEY in the operator shell; never commit or print the value.</p>
+          <p>Set one provider API key in the operator shell, such as OPENAI_API_KEY or DEEPSEEK_API_KEY; never commit or print the value.</p>
           <code>python3 scripts/yao.py world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions</code>
           <code>python3 scripts/yao.py world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions --prefill-artifacts</code>
         </section>
@@ -206,13 +206,13 @@
 
         <article class="check-row missing">
           <div>
-            <span>env</span>
+            <span>env_any</span>
             <strong>Provider credential</strong>
           </div>
           <dl>
             <dt>Current</dt><dd><code>not-set</code></dd>
             <dt>Status</dt><dd>missing</dd>
-            <dt>Action</dt><dd>Set OPENAI_API_KEY in the operator shell; never commit or print the value.</dd>
+            <dt>Action</dt><dd>Set one provider API key in the operator shell, such as OPENAI_API_KEY or DEEPSEEK_API_KEY; never commit or print the value.</dd>
           </dl>
         </article>
 
@@ -224,7 +224,7 @@
           <dl>
             <dt>Current</dt><dd><code>not-set</code></dd>
             <dt>Status</dt><dd>optional</dd>
-            <dt>Action</dt><dd>Optionally set YAO_OUTPUT_EVAL_MODEL; the runbook defaults to gpt-4.1-mini.</dd>
+            <dt>Action</dt><dd>Optionally set YAO_OUTPUT_EVAL_MODEL, or pass --provider-model for the selected provider.</dd>
           </dl>
         </article>
         </div>
@@ -232,15 +232,15 @@
         <section class="check-section">
           <h4>Source Checks</h4>
           <div class="check-grid">
-        <article class="check-row blocked">
+        <article class="check-row pass">
           <div>
             <span>model_executed_count</span>
             <strong>Provider model run</strong>
           </div>
           <dl>
-            <dt>Current</dt><dd><code>0</code></dd>
+            <dt>Current</dt><dd><code>10</code></dd>
             <dt>Expected</dt><dd><code>&gt;0</code></dd>
-            <dt>Status</dt><dd>blocked</dd>
+            <dt>Status</dt><dd>pass</dd>
             <dt>Action</dt><dd>Run provider-backed output-exec with real credentials.</dd>
           </dl>
         </article>
@@ -258,15 +258,15 @@
           </dl>
         </article>
 
-        <article class="check-row blocked">
+        <article class="check-row pass">
           <div>
             <span>token_observed_count</span>
             <strong>Token usage observed</strong>
           </div>
           <dl>
-            <dt>Current</dt><dd><code>0</code></dd>
+            <dt>Current</dt><dd><code>10</code></dd>
             <dt>Expected</dt><dd><code>&gt;0</code></dd>
-            <dt>Status</dt><dd>blocked</dd>
+            <dt>Status</dt><dd>pass</dd>
             <dt>Action</dt><dd>Provider execution should return non-estimated token usage.</dd>
           </dl>
         </article>
@@ -278,50 +278,16 @@
         <article class="repair-row blocked">
           <div>
             <span>precheck</span>
-            <strong>openai-api-key</strong>
+            <strong>provider-api-key</strong>
 	          </div>
 	          <dl>
 	            <dt>Priority</dt><dd>20</dd>
 	            <dt>Phase</dt><dd>unblock-access</dd>
 	            <dt>Owner</dt><dd>operator with provider credentials</dd>
 	            <dt>Status</dt><dd>blocked</dd>
-	            <dt>Reason</dt><dd>Required env precheck is missing.</dd>
-	            <dt>Action</dt><dd>Set OPENAI_API_KEY in the operator shell; never commit or print the value.</dd>
+	            <dt>Reason</dt><dd>Required env_any precheck is missing.</dd>
+	            <dt>Action</dt><dd>Set one provider API key in the operator shell, such as OPENAI_API_KEY or DEEPSEEK_API_KEY; never commit or print the value.</dd>
 	            <dt>Verify</dt><dd><code>python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions</code></dd>
-	            <dt>Evidence</dt><dd>does not count as completion</dd>
-	          </dl>
-	        </article>
-
-        <article class="repair-row blocked">
-          <div>
-            <span>source-check</span>
-            <strong>model_executed_count</strong>
-	          </div>
-	          <dl>
-	            <dt>Priority</dt><dd>40</dd>
-	            <dt>Phase</dt><dd>collect-source</dd>
-	            <dt>Owner</dt><dd>operator with provider credentials</dd>
-	            <dt>Status</dt><dd>blocked</dd>
-	            <dt>Reason</dt><dd>Current value 0 does not satisfy &#x27;&gt;0&#x27;.</dd>
-	            <dt>Action</dt><dd>Run provider-backed output-exec with real credentials.</dd>
-	            <dt>Verify</dt><dd><code>python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60 &amp;&amp; python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions</code></dd>
-	            <dt>Evidence</dt><dd>does not count as completion</dd>
-	          </dl>
-	        </article>
-
-        <article class="repair-row blocked">
-          <div>
-            <span>source-check</span>
-            <strong>token_observed_count</strong>
-	          </div>
-	          <dl>
-	            <dt>Priority</dt><dd>40</dd>
-	            <dt>Phase</dt><dd>collect-source</dd>
-	            <dt>Owner</dt><dd>operator with provider credentials</dd>
-	            <dt>Status</dt><dd>blocked</dd>
-	            <dt>Reason</dt><dd>Current value 0 does not satisfy &#x27;&gt;0&#x27;.</dd>
-	            <dt>Action</dt><dd>Provider execution should return non-estimated token usage.</dd>
-	            <dt>Verify</dt><dd><code>python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60 &amp;&amp; python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions</code></dd>
 	            <dt>Evidence</dt><dd>does not count as completion</dd>
 	          </dl>
 	        </article>
@@ -329,7 +295,7 @@
         </section>
         <section class="runbook">
           <h4>Runbook</h4>
-          <ul><li>Set OPENAI_API_KEY in the operator shell before running provider evidence; never commit or print the value.</li><li>export YAO_OUTPUT_EVAL_MODEL=${YAO_OUTPUT_EVAL_MODEL:-gpt-4.1-mini}</li><li>python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60</li><li>python3 scripts/yao.py skill-os2-audit . --generated-at &lt;YYYY-MM-DD&gt;</li><li>Copy evidence/world_class/templates/provider-holdout.intake.json to evidence/world_class/submissions/provider-holdout.json and fill only real evidence fields.</li><li>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</li></ul>
+          <ul><li>Set one provider API key in the operator shell, such as OPENAI_API_KEY or DEEPSEEK_API_KEY; never commit or print the value.</li><li>For OpenAI Responses: python3 scripts/yao.py output-exec --provider-runner openai --provider-model ${YAO_OUTPUT_EVAL_MODEL:-gpt-4.1-mini} --timeout-seconds 60</li><li>For DeepSeek Chat Completions: python3 scripts/yao.py output-exec --provider-runner deepseek --provider-model deepseek-v4-flash --provider-api-format chat-completions --provider-thinking disabled --api-key-env DEEPSEEK_API_KEY --timeout-seconds 120</li><li>python3 scripts/yao.py skill-os2-audit . --generated-at &lt;YYYY-MM-DD&gt;</li><li>Copy evidence/world_class/templates/provider-holdout.intake.json to evidence/world_class/submissions/provider-holdout.json and fill only real evidence fields.</li><li>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</li></ul>
         </section>
       </article>
 
@@ -928,15 +894,15 @@
           </dl>
         </article>
 
-        <article class="check-row pass">
+        <article class="check-row blocked">
           <div>
             <span>adoption_sample_count</span>
             <strong>Adoption sample</strong>
           </div>
           <dl>
-            <dt>Current</dt><dd><code>1</code></dd>
+            <dt>Current</dt><dd><code>0</code></dd>
             <dt>Expected</dt><dd><code>&gt;0</code></dd>
-            <dt>Status</dt><dd>pass</dd>
+            <dt>Status</dt><dd>blocked</dd>
             <dt>Action</dt><dd>Telemetry must include adoption outcome evidence.</dd>
           </dl>
         </article>
@@ -971,6 +937,23 @@
 	            <dt>Reason</dt><dd>Required external precheck is external-required.</dd>
 	            <dt>Action</dt><dd>Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events.</dd>
 	            <dt>Verify</dt><dd><code>python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions</code></dd>
+	            <dt>Evidence</dt><dd>does not count as completion</dd>
+	          </dl>
+	        </article>
+
+        <article class="repair-row blocked">
+          <div>
+            <span>source-check</span>
+            <strong>adoption_sample_count</strong>
+	          </div>
+	          <dl>
+	            <dt>Priority</dt><dd>40</dd>
+	            <dt>Phase</dt><dd>collect-source</dd>
+	            <dt>Owner</dt><dd>Browser/Chrome/IDE/provider client integrator</dd>
+	            <dt>Status</dt><dd>blocked</dd>
+	            <dt>Reason</dt><dd>Current value 0 does not satisfy &#x27;&gt;0&#x27;.</dd>
+	            <dt>Action</dt><dd>Telemetry must include adoption outcome evidence.</dd>
+	            <dt>Verify</dt><dd><code>python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl &amp;&amp; python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions</code></dd>
 	            <dt>Evidence</dt><dd>does not count as completion</dd>
 	          </dl>
 	        </article>
