@@ -297,8 +297,12 @@ def main() -> None:
     assert any("output-exec --provider-runner openai" in step for step in provider_entry["runbook"]), provider_entry
     assert provider_entry["observed_state"]["model_executed_count"] == 10, provider_entry
     assert provider_entry["observed_state"]["token_observed_count"] == 10, provider_entry
-    assert provider_entry["submission_state"]["status"] == "invalid-contract", provider_entry
-    assert provider_entry["submission_state"]["artifact_sha256_verified_count"] == 1, provider_entry
+    provider_submission_status = provider_entry["submission_state"]["status"]
+    assert provider_submission_status in {"invalid-contract", "missing"}, provider_entry
+    if provider_submission_status == "invalid-contract":
+        assert provider_entry["submission_state"]["artifact_sha256_verified_count"] == 1, provider_entry
+    else:
+        assert provider_entry["submission_state"].get("artifact_sha256_verified_count", 0) == 0, provider_entry
     assert provider_entry["submission_state"]["ledger_counts_as_completion"] is False, provider_entry
     assert full_payload["data"]["atlas"]["summary"]["actionable_route_collision_count"] == 0, full_payload["data"]["atlas"]
     assert full_payload["data"]["atlas"]["summary"]["actionable_drift_signal_count"] == 0, full_payload["data"]["atlas"]

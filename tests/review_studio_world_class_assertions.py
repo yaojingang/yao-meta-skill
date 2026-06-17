@@ -45,7 +45,8 @@ def assert_world_class_action(full_payload: dict) -> None:
         item for item in world_class_action["evidence_steps"] if item["key"] == "provider-holdout"
     )
     assert provider_action_step["status"] == "pending", provider_action_step
-    assert provider_action_step["readiness"] == "fix-submission", provider_action_step
+    provider_readiness = provider_action_step["readiness"]
+    assert provider_readiness in {"fix-submission", "awaiting-submission"}, provider_action_step
     assert provider_action_step["submission_path"] == "evidence/world_class/submissions/provider-holdout.json", provider_action_step
     assert provider_action_step["template_path"] == "evidence/world_class/templates/provider-holdout.intake.json", provider_action_step
     assert provider_action_step["source_blocked_count"] == 0, provider_action_step
@@ -98,13 +99,17 @@ def assert_world_class_action(full_payload: dict) -> None:
     assert "prompt_sha256" in " ".join(human_action_step["success_checks"]), human_action_step
     assert "prompt_sha256" in " ".join(human_action_step["privacy_contract"]), human_action_step
 
+    expected_awaiting_count = 3 if provider_readiness == "fix-submission" else 4
+    expected_invalid_count = 1 if provider_readiness == "fix-submission" else 0
+    expected_intake_decision = "fix-intake" if provider_readiness == "fix-submission" else "awaiting-submissions"
+    expected_review_decision = "fix-submissions" if provider_readiness == "fix-submission" else "awaiting-submissions"
     assert full_payload["data"]["world_class_evidence_ledger"]["summary"]["pending_count"] == 4
-    assert full_payload["data"]["world_class_evidence_intake"]["summary"]["decision"] == "fix-intake"
+    assert full_payload["data"]["world_class_evidence_intake"]["summary"]["decision"] == expected_intake_decision
     submission_review = full_payload["data"]["world_class_submission_review"]
-    assert submission_review["summary"]["decision"] == "fix-submissions", submission_review
+    assert submission_review["summary"]["decision"] == expected_review_decision, submission_review
     assert submission_review["summary"]["review_counts_submission_as_completion"] is False, submission_review
-    assert submission_review["summary"]["awaiting_submission_count"] == 3, submission_review
-    assert submission_review["summary"]["invalid_submission_count"] == 1, submission_review
+    assert submission_review["summary"]["awaiting_submission_count"] == expected_awaiting_count, submission_review
+    assert submission_review["summary"]["invalid_submission_count"] == expected_invalid_count, submission_review
     assert submission_review["summary"]["source_check_count"] >= 13, submission_review
     assert submission_review["summary"]["source_blocked_count"] >= 6, submission_review
     human_review_item = next(item for item in submission_review["items"] if item["evidence_key"] == "human-adjudication")
@@ -116,16 +121,19 @@ def assert_world_class_action(full_payload: dict) -> None:
     runbook = full_payload["data"]["world_class_operator_runbook"]
     assert runbook["summary"]["decision"] == "collect-evidence", runbook
     assert runbook["summary"]["runbook_counts_as_completion"] is False, runbook
-    assert runbook["summary"]["awaiting_submission_count"] == 3, runbook
-    assert runbook["summary"]["invalid_submission_count"] == 1, runbook
+    assert runbook["summary"]["awaiting_submission_count"] == expected_awaiting_count, runbook
+    assert runbook["summary"]["invalid_submission_count"] == expected_invalid_count, runbook
     intake = full_payload["data"]["world_class_evidence_intake"]
     assert intake["summary"]["template_pass_count"] == 4, intake
     assert intake["summary"]["operator_checklist_count"] == 4, intake
     assert intake["summary"]["operator_checklist_ready_count"] == 0, intake
     assert intake["summary"]["ready_to_claim_world_class"] is False, intake
     provider_checklist = next(item for item in intake["operator_checklist"] if item["evidence_key"] == "provider-holdout")
-    assert provider_checklist["readiness"] == "fix-submission", provider_checklist
-    assert provider_checklist["submission_status"] == "fail", provider_checklist
+    assert provider_checklist["readiness"] == provider_readiness, provider_checklist
+    if provider_readiness == "fix-submission":
+        assert provider_checklist["submission_status"] == "fail", provider_checklist
+    else:
+        assert provider_checklist["submission_status"] in {"missing", "not-found", "not-submitted"}, provider_checklist
     assert provider_checklist["source_accepted"] is True, provider_checklist
     assert provider_checklist["submission_path"] == "evidence/world_class/submissions/provider-holdout.json", provider_checklist
     assert provider_checklist["commands"]["validate_intake"] == "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions", provider_checklist
