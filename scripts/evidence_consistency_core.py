@@ -41,6 +41,9 @@ BENCHMARK_SUMMARY_KEYS = [
     "world_class_source_check_count",
     "world_class_source_pass_count",
     "world_class_source_blocked_count",
+    "beta_test_ready",
+    "beta_test_blocker_count",
+    "beta_test_deferred_evidence_count",
     "public_claim_ready",
     "public_claim_blocker_count",
 ]

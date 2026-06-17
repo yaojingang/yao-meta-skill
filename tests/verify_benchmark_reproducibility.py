@@ -173,6 +173,27 @@ def main() -> None:
         + payload["summary"]["world_class_source_blocked_count"]
         == payload["summary"]["world_class_source_check_count"]
     ), payload
+    expected_beta_ready = (
+        payload["summary"]["reproducibility_ready"]
+        and payload["summary"]["release_lock_ready"]
+        and payload["summary"]["provider_evidence_complete"]
+    )
+    assert payload["summary"]["beta_test_ready"] is expected_beta_ready, payload
+    assert payload["summary"]["beta_test_blocker_count"] == len(payload["beta_test_release"]["blockers"]), payload
+    assert payload["summary"]["beta_test_deferred_evidence_count"] == len(
+        payload["beta_test_release"]["allowed_deferred_evidence"]
+    ), payload
+    assert payload["beta_test_release"]["ready"] is expected_beta_ready, payload["beta_test_release"]
+    assert "beta/public test release" in payload["beta_test_release"]["scope"], payload["beta_test_release"]
+    assert "Human blind-review" in payload["beta_test_release"]["policy"], payload["beta_test_release"]
+    assert "do not claim world-class" in payload["beta_test_release"]["required_wording"], payload[
+        "beta_test_release"
+    ]
+    deferred_keys = {item["key"] for item in payload["beta_test_release"]["allowed_deferred_evidence"]}
+    assert "human-adjudication" in deferred_keys, payload["beta_test_release"]
+    assert not any("human blind-review" in item for item in payload["beta_test_release"]["blockers"]), payload[
+        "beta_test_release"
+    ]
     assert payload["summary"]["public_claim_ready"] is False, payload
     minimum_blockers = 3 if payload["summary"]["release_lock_ready"] else 4
     assert payload["summary"]["public_claim_blocker_count"] >= minimum_blockers, payload
@@ -221,6 +242,10 @@ def main() -> None:
     assert "source changed files at generation" in markdown, markdown
     assert "generated changed files at generation" in markdown, markdown
     assert "world-class source checks" in markdown, markdown
+    assert "beta test ready" in markdown, markdown
+    assert "## Beta Test Boundary" in markdown, markdown
+    assert "human-adjudication" in markdown, markdown
+    assert "do not claim world-class" in markdown, markdown
     assert "public claim ready: `false`" in markdown, markdown
     assert "## Public Claim Boundary" in markdown, markdown
     assert "provider-backed model holdout evidence is incomplete" not in markdown, markdown

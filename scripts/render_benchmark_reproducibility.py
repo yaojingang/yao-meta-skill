@@ -311,6 +311,54 @@ def public_claim_blockers(
     return blockers
 
 
+def beta_test_blockers(
+    local_reproducibility_ready: bool,
+    release_lock_ready: bool,
+    provider_evidence_complete: bool,
+) -> list[str]:
+    blockers = []
+    if not local_reproducibility_ready:
+        blockers.append("local benchmark reproducibility is incomplete")
+    if not release_lock_ready:
+        blockers.append("release lock is not clean or commit is unavailable")
+    if not provider_evidence_complete:
+        blockers.append("provider-backed model holdout source evidence is incomplete")
+    return blockers
+
+
+def beta_deferred_evidence(human_review_complete: bool, world_class_ready: bool) -> list[dict[str, str]]:
+    deferred = []
+    if not human_review_complete:
+        deferred.append(
+            {
+                "key": "human-adjudication",
+                "label": "Human blind-review adjudication",
+                "reason": "Deferred for beta/public testing; still required before superiority, fully-reviewed, or world-class claims.",
+            }
+        )
+    if not world_class_ready:
+        deferred.extend(
+            [
+                {
+                    "key": "provider-ledger-review",
+                    "label": "Independent provider ledger review",
+                    "reason": "Provider source evidence may be complete, but independent ledger acceptance remains formal-claim evidence.",
+                },
+                {
+                    "key": "native-permission-enforcement",
+                    "label": "Native permission enforcement evidence",
+                    "reason": "Native enforcement proof is deferred for beta/public testing and remains required for world-class claims.",
+                },
+                {
+                    "key": "native-client-telemetry",
+                    "label": "Real client telemetry evidence",
+                    "reason": "Real client telemetry is deferred for beta/public testing and remains required for world-class claims.",
+                },
+            ]
+        )
+    return deferred
+
+
 def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
     reports = skill_dir / "reports"
     output_quality = load_json(reports / "output_quality_scorecard.json")
@@ -364,10 +412,18 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
         world_class_source_blocked_count,
     )
     public_claim_ready = not claim_blockers
+    beta_blockers = beta_test_blockers(
+        local_reproducibility_ready,
+        release_lock["ready"],
+        provider_evidence_complete,
+    )
+    beta_deferred = beta_deferred_evidence(human_review_complete, world_class_ready)
+    beta_test_ready = not beta_blockers
     limitations = [
         "The git commit and dirty flags are generation-time context; release lock is blocked by source changes, while generated evidence artifacts are tracked separately.",
         "Pending blind-review decisions are visible but do not count as human adjudication.",
         "World-class readiness remains false until external and human evidence gaps close.",
+        "Beta/public testing may proceed without human blind-review only when wording avoids superiority, fully-reviewed, or world-class claims.",
     ]
     if provider_evidence_complete:
         limitations.insert(
@@ -411,6 +467,9 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             "world_class_source_check_count": world_class_source_check_count,
             "world_class_source_pass_count": world_class_source_pass_count,
             "world_class_source_blocked_count": world_class_source_blocked_count,
+            "beta_test_ready": beta_test_ready,
+            "beta_test_blocker_count": len(beta_blockers),
+            "beta_test_deferred_evidence_count": len(beta_deferred),
             "public_claim_ready": public_claim_ready,
             "public_claim_blocker_count": len(claim_blockers),
             "working_tree_dirty": status.get("dirty"),
@@ -419,6 +478,14 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             "source_changed_file_count": status.get("source_changed_file_count"),
             "generated_tree_dirty": status.get("generated_dirty"),
             "generated_changed_file_count": status.get("generated_changed_file_count"),
+        },
+        "beta_test_release": {
+            "ready": beta_test_ready,
+            "scope": "beta/public test release without superiority, fully-reviewed, or world-class claims",
+            "blockers": beta_blockers,
+            "allowed_deferred_evidence": beta_deferred,
+            "policy": "Human blind-review, native permission enforcement, real client telemetry, and ledger acceptance may be deferred for beta/public testing, but public claims must remain blocked until those evidence entries are accepted.",
+            "required_wording": "Use beta, public test, or technical preview wording; do not claim world-class readiness, fully reviewed quality, or proven superiority over baseline.",
         },
         "public_claim": {
             "ready": public_claim_ready,
@@ -473,6 +540,9 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- human review complete: `{str(summary['human_review_complete']).lower()}`",
         f"- world-class ready: `{str(summary['world_class_ready']).lower()}`",
         f"- world-class source checks: `{summary.get('world_class_source_pass_count', 0)}` pass / `{summary.get('world_class_source_check_count', 0)}` total; `{summary.get('world_class_source_blocked_count', 0)}` blocked",
+        f"- beta test ready: `{str(summary['beta_test_ready']).lower()}`",
+        f"- beta test blockers: `{summary['beta_test_blocker_count']}`",
+        f"- beta deferred evidence: `{summary['beta_test_deferred_evidence_count']}`",
         f"- public claim ready: `{str(summary['public_claim_ready']).lower()}`",
         f"- public claim blockers: `{summary['public_claim_blocker_count']}`",
         f"- changed files at generation: `{summary.get('changed_file_count')}`",
@@ -481,15 +551,49 @@ def render_markdown(report: dict[str, Any]) -> str:
         "",
         "This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete. The git commit and dirty samples are generation-time context; the evidence bundle SHA is the durable anchor for the artifacts listed below.",
         "",
-        "## Public Claim Boundary",
-        "",
-        f"- ready: `{str(report.get('public_claim', {}).get('ready')).lower()}`",
-        f"- scope: {report.get('public_claim', {}).get('scope', 'public benchmark claim')}",
-        f"- policy: {report.get('public_claim', {}).get('policy', '')}",
-        "",
-        "| Blocker |",
-        "| --- |",
     ]
+    beta_release = report.get("beta_test_release", {})
+    lines.extend(
+        [
+            "## Beta Test Boundary",
+            "",
+            f"- ready: `{str(beta_release.get('ready')).lower()}`",
+            f"- scope: {beta_release.get('scope', 'beta/public test release')}",
+            f"- policy: {beta_release.get('policy', '')}",
+            f"- required wording: {beta_release.get('required_wording', '')}",
+            "",
+            "| Blocker |",
+            "| --- |",
+        ]
+    )
+    beta_blockers = beta_release.get("blockers", [])
+    if beta_blockers:
+        lines.extend(f"| {item} |" for item in beta_blockers)
+    else:
+        lines.append("| none |")
+    lines.extend(["", "| Deferred evidence | Reason |", "| --- | --- |"])
+    deferred = beta_release.get("allowed_deferred_evidence", [])
+    if deferred:
+        lines.extend(f"| `{item.get('key', '')}` | {item.get('reason', '')} |" for item in deferred)
+    else:
+        lines.append("| none | none |")
+    lines.extend(
+        [
+            "",
+            "## Public Claim Boundary",
+            "",
+        ]
+    )
+    lines.extend(
+        [
+            f"- ready: `{str(report.get('public_claim', {}).get('ready')).lower()}`",
+            f"- scope: {report.get('public_claim', {}).get('scope', 'public benchmark claim')}",
+            f"- policy: {report.get('public_claim', {}).get('policy', '')}",
+            "",
+            "| Blocker |",
+            "| --- |",
+        ]
+    )
     blockers = report.get("public_claim", {}).get("blockers", [])
     if blockers:
         lines.extend(f"| {item} |" for item in blockers)

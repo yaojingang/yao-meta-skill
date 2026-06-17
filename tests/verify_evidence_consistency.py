@@ -196,6 +196,13 @@ def main() -> None:
     assert checks["overview-benchmark-summary"]["status"] == "pass", checks["overview-benchmark-summary"]
     assert checks["interpretation-adoption-summary"]["status"] == "pass", checks["interpretation-adoption-summary"]
     assert checks["coverage-world-class-boundary"]["status"] == "pass", checks["coverage-world-class-boundary"]
+    assert checks["benchmark-beta-public-claim-split"]["status"] == "pass", checks[
+        "benchmark-beta-public-claim-split"
+    ]
+    beta_split = checks["benchmark-beta-public-claim-split"]["actual"]
+    assert beta_split["public_claim_ready"] is False, beta_split
+    assert beta_split["human_review_complete"] is False, beta_split
+    assert beta_split["deferred_human_review"] is True, beta_split
     assert checks["preflight-world-class-boundary"]["status"] == "pass", checks["preflight-world-class-boundary"]
     assert checks["preflight-submission-kit-handoff"]["status"] == "pass", checks[
         "preflight-submission-kit-handoff"

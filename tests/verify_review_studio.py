@@ -212,6 +212,19 @@ def main() -> None:
     assert benchmark_summary["reproducibility_ready"] is True, benchmark_summary
     assert benchmark_summary["release_lock_ready"] == (benchmark_summary["source_tree_dirty"] is False), benchmark_summary
     assert "generated_tree_dirty" in benchmark_summary, benchmark_summary
+    expected_beta_ready = (
+        benchmark_summary["reproducibility_ready"]
+        and benchmark_summary["release_lock_ready"]
+        and benchmark_summary["provider_evidence_complete"]
+    )
+    assert benchmark_summary["beta_test_ready"] is expected_beta_ready, benchmark_summary
+    assert benchmark_summary["beta_test_deferred_evidence_count"] >= 1, benchmark_summary
+    beta_release = full_payload["data"]["benchmark_reproducibility"]["beta_test_release"]
+    assert beta_release["ready"] is expected_beta_ready, beta_release
+    assert not any("human blind-review" in item for item in beta_release["blockers"]), beta_release
+    assert any(item["key"] == "human-adjudication" for item in beta_release["allowed_deferred_evidence"]), (
+        beta_release
+    )
     assert benchmark_summary["public_claim_ready"] is False, benchmark_summary
     assert benchmark_summary["public_claim_blocker_count"] >= 3, benchmark_summary
     public_claim = full_payload["data"]["benchmark_reproducibility"]["public_claim"]
