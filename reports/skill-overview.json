@@ -1016,8 +1016,8 @@
       "methodology_complete": true,
       "required_artifact_count": 25,
       "missing_artifact_count": 0,
-      "evidence_bundle_sha256": "1a1f43932b87e208a18729f742be830c4c6554be2bde13d65591c525cbe51935",
-      "source_contract_sha256": "7fc324e26d614c46b350c2b3e20cb87a86f967d3a74d345bc0baf73d78d8b111",
+      "evidence_bundle_sha256": "c4403c485ef4483467cef4a9a374a90a03f99f6145e71b62e57916eb918c14f1",
+      "source_contract_sha256": "c39574e9de8127ce31e5b3f15fd8372278319c342346753480e6ad39904e808c",
       "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2",
       "output_case_count": 5,
       "failure_disclosure_count": 3,
@@ -1035,22 +1035,26 @@
       "world_class_source_check_count": 19,
       "world_class_source_pass_count": 11,
       "world_class_source_blocked_count": 8,
+      "beta_test_ready": true,
+      "beta_test_blocker_count": 0,
+      "beta_test_deferred_evidence_count": 4,
       "public_claim_ready": false,
       "public_claim_blocker_count": 3,
       "working_tree_dirty": true,
-      "changed_file_count": 30,
+      "changed_file_count": 32,
       "source_tree_dirty": false,
       "source_changed_file_count": 0,
       "generated_tree_dirty": true,
-      "generated_changed_file_count": 30
+      "generated_changed_file_count": 32
     },
-    "commit": "d845e9513c67b9572fb6c2a8754d3a0051e735ad",
+    "commit": "ed975a2bf25b9ab9b2fd8e62afd4ec7e7bc07789",
     "missing_artifacts": [],
     "limitations": [
       "The git commit and dirty flags are generation-time context; release lock is blocked by source changes, while generated evidence artifacts are tracked separately.",
       "Provider-backed model holdout source evidence is complete, but ledger acceptance still requires a valid independently reviewed submission packet.",
       "Pending blind-review decisions are visible but do not count as human adjudication.",
-      "World-class readiness remains false until external and human evidence gaps close."
+      "World-class readiness remains false until external and human evidence gaps close.",
+      "Beta/public testing may proceed without human blind-review only when wording avoids superiority, fully-reviewed, or world-class claims."
     ]
   },
   "runtime_conformance": {
@@ -1149,7 +1153,7 @@
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
     "package_hash_file_count": 245,
-    "package_sha256": "7fc324e26d614c46b350c2b3e20cb87a86f967d3a74d345bc0baf73d78d8b111"
+    "package_sha256": "c39574e9de8127ce31e5b3f15fd8372278319c342346753480e6ad39904e808c"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -1187,7 +1191,7 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "7fc324e26d614c46b350c2b3e20cb87a86f967d3a74d345bc0baf73d78d8b111",
+        "package_sha256": "c39574e9de8127ce31e5b3f15fd8372278319c342346753480e6ad39904e808c",
         "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2"
       },
       "compatibility": {
@@ -1319,7 +1323,7 @@
         {
           "field": "package_sha256",
           "from": "0000000000000000000000000000000000000000000000000000000000000000",
-          "to": "7fc324e26d614c46b350c2b3e20cb87a86f967d3a74d345bc0baf73d78d8b111"
+          "to": "c39574e9de8127ce31e5b3f15fd8372278319c342346753480e6ad39904e808c"
         }
       ]
     },

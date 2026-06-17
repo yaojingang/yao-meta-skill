@@ -1,11 +1,11 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-17`
-Commit: `d845e9513c67b9572fb6c2a8754d3a0051e735ad`
+Commit: `ed975a2bf25b9ab9b2fd8e62afd4ec7e7bc07789`
 Working tree dirty at generation: `true`
 Source tree dirty at generation: `false`
 Generated evidence dirty at generation: `true`
-Evidence bundle SHA256: `1a1f43932b87e208a18729f742be830c4c6554be2bde13d65591c525cbe51935`
+Evidence bundle SHA256: `c4403c485ef4483467cef4a9a374a90a03f99f6145e71b62e57916eb918c14f1`
 
 ## Summary
 
@@ -14,7 +14,7 @@ Evidence bundle SHA256: `1a1f43932b87e208a18729f742be830c4c6554be2bde13d65591c52
 - methodology complete: `true`
 - required artifacts: `25`
 - missing artifacts: `0`
-- source contract sha256: `7fc324e26d61`
+- source contract sha256: `c39574e9de81`
 - archive sha256: `7db44f059844`
 - output cases: `5`
 - disclosed failure cases: `3`
@@ -23,13 +23,34 @@ Evidence bundle SHA256: `1a1f43932b87e208a18729f742be830c4c6554be2bde13d65591c52
 - human review complete: `false`
 - world-class ready: `false`
 - world-class source checks: `11` pass / `19` total; `8` blocked
+- beta test ready: `true`
+- beta test blockers: `0`
+- beta deferred evidence: `4`
 - public claim ready: `false`
 - public claim blockers: `3`
-- changed files at generation: `30`
+- changed files at generation: `32`
 - source changed files at generation: `0`
-- generated changed files at generation: `30`
+- generated changed files at generation: `32`
 
 This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete. The git commit and dirty samples are generation-time context; the evidence bundle SHA is the durable anchor for the artifacts listed below.
+
+## Beta Test Boundary
+
+- ready: `true`
+- scope: beta/public test release without superiority, fully-reviewed, or world-class claims
+- policy: Human blind-review, native permission enforcement, real client telemetry, and ledger acceptance may be deferred for beta/public testing, but public claims must remain blocked until those evidence entries are accepted.
+- required wording: Use beta, public test, or technical preview wording; do not claim world-class readiness, fully reviewed quality, or proven superiority over baseline.
+
+| Blocker |
+| --- |
+| none |
+
+| Deferred evidence | Reason |
+| --- | --- |
+| `human-adjudication` | Deferred for beta/public testing; still required before superiority, fully-reviewed, or world-class claims. |
+| `provider-ledger-review` | Provider source evidence may be complete, but independent ledger acceptance remains formal-claim evidence. |
+| `native-permission-enforcement` | Native enforcement proof is deferred for beta/public testing and remains required for world-class claims. |
+| `native-client-telemetry` | Real client telemetry is deferred for beta/public testing and remains required for world-class claims. |
 
 ## Public Claim Boundary
 
@@ -53,7 +74,7 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 - algorithm: `sha256(path,label,exists,artifact_sha256)`
 - artifacts: `25` / `25`
-- sha256: `1a1f43932b87e208a18729f742be830c4c6554be2bde13d65591c525cbe51935`
+- sha256: `c4403c485ef4483467cef4a9a374a90a03f99f6145e71b62e57916eb918c14f1`
 
 ## Methodology Sections
 
@@ -80,9 +101,9 @@ This report proves local benchmark reproducibility only. It keeps external provi
 | review_adjudication | `reports/output_review_adjudication.json` | present | `91fd88dd9b0f` |
 | trigger_scorecard | `reports/route_scorecard.json` | present | `a649547a7d3d` |
 | runtime_conformance | `reports/conformance_matrix.json` | present | `97f9ba949c23` |
-| trust_report | `reports/security_trust_report.json` | present | `76e0d31fe1e0` |
+| trust_report | `reports/security_trust_report.json` | present | `cd8289dd2d82` |
 | python_compatibility | `reports/python_compatibility.json` | present | `d31dc03c74f1` |
-| registry_audit | `reports/registry_audit.json` | present | `49e2aee07e38` |
+| registry_audit | `reports/registry_audit.json` | present | `2c236f7c2fff` |
 | package_verification | `reports/package_verification.json` | present | `7aa6c25e8154` |
 | install_simulation | `reports/install_simulation.json` | present | `c1f1122264b8` |
 | skill_os2_audit | `reports/skill_os2_audit.json` | present | `6362e79a8cfd` |
@@ -157,3 +178,4 @@ This report proves local benchmark reproducibility only. It keeps external provi
 - Provider-backed model holdout source evidence is complete, but ledger acceptance still requires a valid independently reviewed submission packet.
 - Pending blind-review decisions are visible but do not count as human adjudication.
 - World-class readiness remains false until external and human evidence gaps close.
+- Beta/public testing may proceed without human blind-review only when wording avoids superiority, fully-reviewed, or world-class claims.

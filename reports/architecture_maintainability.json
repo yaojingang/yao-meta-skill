@@ -16,9 +16,9 @@
     "watch_line_threshold": 720,
     "early_watch_line_threshold": 600,
     "block_line_threshold": 1500,
-    "largest_file_lines": 711,
+    "largest_file_lines": 718,
     "watchlist_count": 0,
-    "early_watchlist_count": 5,
+    "early_watchlist_count": 6,
     "hotspot_count": 0,
     "blocker_count": 0,
     "decision": "pass"
@@ -26,7 +26,7 @@
   "largest_files": [
     {
       "path": "tests/verify_evidence_consistency.py",
-      "lines": 711,
+      "lines": 718,
       "kind": "test",
       "severity": "pass",
       "early_watch": true,
@@ -50,7 +50,15 @@
     },
     {
       "path": "scripts/render_evidence_consistency.py",
-      "lines": 659,
+      "lines": 699,
+      "kind": "cli-script",
+      "severity": "pass",
+      "early_watch": true,
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/render_benchmark_reproducibility.py",
+      "lines": 673,
       "kind": "cli-script",
       "severity": "pass",
       "early_watch": true,
@@ -111,21 +119,13 @@
       "severity": "pass",
       "early_watch": false,
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
-      "path": "scripts/render_review_studio.py",
-      "lines": 578,
-      "kind": "cli-script",
-      "severity": "pass",
-      "early_watch": false,
-      "recommendation": "Move data loading and large section renderers into focused review_studio_* modules."
     }
   ],
   "watchlist": [],
   "early_watchlist": [
     {
       "path": "tests/verify_evidence_consistency.py",
-      "lines": 711,
+      "lines": 718,
       "kind": "test",
       "severity": "pass",
       "early_watch": true,
@@ -149,7 +149,15 @@
     },
     {
       "path": "scripts/render_evidence_consistency.py",
-      "lines": 659,
+      "lines": 699,
+      "kind": "cli-script",
+      "severity": "pass",
+      "early_watch": true,
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/render_benchmark_reproducibility.py",
+      "lines": 673,
       "kind": "cli-script",
       "severity": "pass",
       "early_watch": true,

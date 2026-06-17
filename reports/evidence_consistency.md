@@ -5,8 +5,8 @@ Generated at: `2026-06-17`
 ## Summary
 
 - decision: `consistent`
-- checks: `38`
-- pass: `38`
+- checks: `39`
+- pass: `39`
 - warn: `0`
 - fail: `0`
 
@@ -46,6 +46,7 @@ This gate compares generated evidence reports against each other. It does not cr
 | interpretation has a stable HTML contract | `pass` | Report output paths and language defaults are part of the user-facing contract. | `reports/skill-interpretation.json`, `reports/skill-interpretation.html` |
 | Coverage report mirrors world-class evidence boundary | `pass` | Blueprint coverage can be locally complete while public world-class evidence remains pending. | `reports/world_class_evidence_ledger.json`, `reports/skill_os2_coverage.json` |
 | Benchmark report mirrors world-class evidence boundary | `pass` | Benchmark reproducibility must not overstate public claim readiness. | `reports/world_class_evidence_ledger.json`, `reports/benchmark_reproducibility.json` |
+| Benchmark separates beta testing from public claims | `pass` | Beta/public testing may proceed with human blind review deferred, but public world-class or superiority claims must remain blocked. | `reports/benchmark_reproducibility.json`, `reports/world_class_evidence_ledger.json` |
 | Preflight mirrors ledger without accepting evidence | `pass` | Collection preflight may help operators gather evidence, but it must not print secrets or change world-class readiness. | `reports/world_class_evidence_ledger.json`, `reports/world_class_evidence_preflight.json` |
 | Preflight exposes a safe submission-kit handoff | `pass` | Preflight must give operators the exact draft, SHA-prefill, intake, review, ledger, and claim-guard commands without letting drafts, prefill, or submissions count as accepted evidence. | `reports/world_class_evidence_preflight.json`, `reports/world_class_evidence_preflight.html` |
 | Review Studio mirrors preflight artifact roles | `pass` | The Review Studio world-class action card must carry the same submission-ref versus supporting-evidence contract as the preflight handoff. | `reports/world_class_evidence_preflight.json`, `reports/review-studio.json` |
