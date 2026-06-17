@@ -57,7 +57,7 @@ Phase queue rows group the same repair checklist into operator execution phases.
 
 | Evidence | Status | Intake | Review | Next action |
 | --- | --- | --- | --- | --- |
-| `provider-holdout` | `blocked` | `fix-submission` | `fix-submission` | Set one provider API key in the operator shell, such as OPENAI_API_KEY or DEEPSEEK_API_KEY; never commit or print the value. |
+| `provider-holdout` | `blocked` | `awaiting-submission` | `awaiting-submission` | Set one provider API key in the operator shell, such as OPENAI_API_KEY or DEEPSEEK_API_KEY; never commit or print the value. |
 | `human-adjudication` | `ready-for-human-review` | `awaiting-submission` | `awaiting-submission` | Assign a real reviewer identity before claiming human adjudication. |
 | `native-permission-enforcement` | `blocked` | `awaiting-submission` | `awaiting-submission` | Attach a real target-client or external installer runtime guard; metadata fallback is not enough. |
 | `native-client-telemetry` | `blocked` | `awaiting-submission` | `awaiting-submission` | Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events. |

@@ -18,7 +18,7 @@ Generated at: `2026-06-17`
 - reviewer approved submissions: `0`
 - submitted but pending: `0`
 - source accepted without valid submission: `1`
-- invalid submissions: `1`
+- invalid submissions: `0`
 - overclaim guard active: `true`
 
 This ledger records the current evidence state. It requires both passing source evidence and a validated intake submission with artifact SHA-256 checks before accepting an item. It does not treat planned work, metadata fallback, pending review, or local command-runner output as world-class completion evidence.
@@ -27,7 +27,7 @@ This ledger records the current evidence state. It requires both passing source 
 
 | Evidence | Status | Submission | Category | Current | Next action |
 | --- | --- | --- | --- | --- | --- |
-| `provider-holdout` | `pending` | `invalid-contract` | `external` | model-executed 10; token-observed 10 | Run provider-backed holdout cases with real credentials and commit only aggregate evidence. |
+| `provider-holdout` | `pending` | `missing` | `external` | model-executed 10; token-observed 10 | Run provider-backed holdout cases with real credentials and commit only aggregate evidence. |
 | `human-adjudication` | `pending` | `missing` | `human` | 0/5 decisions; pending 5 | Record real A/B choices, reviewer metadata, and blind-review attestation, then regenerate adjudication. |
 | `native-permission-enforcement` | `pending` | `missing` | `external` | native-enforced targets 0; installer-enforced targets 4 | Integrate a real target-client or external installer runtime guard before claiming native permission enforcement. |
 | `native-client-telemetry` | `pending` | `missing` | `external` | external source events 0; adoption samples 0 | Install a real client against the native host and import production metadata-only events. |
@@ -38,7 +38,7 @@ This ledger records the current evidence state. It requires both passing source 
 - source status: `pass`
 - observed state: `{"model_executed_count": 10, "timing_observed_count": 10, "token_observed_count": 10, "accepted": true}`
 - source checks: `3` pass / `3` total
-- submission state: `{"status": "invalid-contract", "path": "evidence/world_class/submissions/provider-holdout.json", "submitted_by": "Codex operator using DeepSeek official API", "submitted_at": "2026-06-17", "artifact_ref_count": 1, "artifact_existing_count": 1, "artifact_sha256_verified_count": 1, "attested_real_evidence": true, "reviewer_or_operator_identity_present": true, "privacy_contract_satisfied": true, "ledger_reviewer_approved": false, "ledger_reviewer": "", "ledger_reviewed_at": "", "errors": ["attestation.ledger_reviewer_approved must be true for a real submission", "attestation.ledger_reviewer is required", "attestation.ledger_reviewed_at must use YYYY-MM-DD or YYYY-MM-DDTHH:MM:SSZ", "attestation.ledger_reviewer must be different from submitted_by", "attestation.ledger_reviewed_at must be at or after submitted_at"], "ledger_counts_as_completion": false}`
+- submission state: `{"status": "missing", "path": "evidence/world_class/submissions/provider-holdout.json", "artifact_ref_count": 0, "attested_real_evidence": false, "privacy_contract_satisfied": false, "ledger_reviewer_approved": false, "ledger_reviewer": "", "ledger_reviewed_at": "", "ledger_counts_as_completion": false}`
 
 ### Provenance Requirements
 

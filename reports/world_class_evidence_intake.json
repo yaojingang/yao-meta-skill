@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "ok": false,
+  "ok": true,
   "generated_at": "2026-06-17",
   "skill_dir": ".",
   "summary": {
@@ -8,17 +8,17 @@
     "ledger_entry_count": 4,
     "template_count": 4,
     "template_pass_count": 4,
-    "submission_count": 1,
+    "submission_count": 0,
     "valid_submission_count": 0,
-    "invalid_submission_count": 1,
+    "invalid_submission_count": 0,
     "operator_checklist_count": 4,
     "operator_checklist_ready_count": 0,
     "valid_packet_source_incomplete_count": 0,
-    "ready_for_external_collection": false,
+    "ready_for_external_collection": true,
     "ready_for_ledger_review": false,
     "ready_to_claim_world_class": false,
     "overclaim_guard_active": true,
-    "decision": "fix-intake"
+    "decision": "awaiting-submissions"
   },
   "schema": "evidence/world_class/intake.schema.json",
   "templates": [
@@ -79,38 +79,17 @@
       "errors": []
     }
   ],
-  "submissions": [
-    {
-      "path": "evidence/world_class/submissions/provider-holdout.json",
-      "evidence_key": "provider-holdout",
-      "status": "fail",
-      "template_only": false,
-      "artifact_integrity": {
-        "artifact_ref_count": 1,
-        "artifact_existing_count": 1,
-        "artifact_sha256_verified_count": 1,
-        "required_artifact_count": 1,
-        "required_artifact_verified_count": 1
-      },
-      "errors": [
-        "attestation.ledger_reviewer_approved must be true for a real submission",
-        "attestation.ledger_reviewer is required",
-        "attestation.ledger_reviewed_at must use YYYY-MM-DD or YYYY-MM-DDTHH:MM:SSZ",
-        "attestation.ledger_reviewer must be different from submitted_by",
-        "attestation.ledger_reviewed_at must be at or after submitted_at"
-      ]
-    }
-  ],
+  "submissions": [],
   "operator_checklist": [
     {
       "evidence_key": "provider-holdout",
       "label": "Provider Holdout",
       "category": "external",
       "owner": "operator with provider credentials",
-      "readiness": "fix-submission",
-      "blocking_reason": "Submission exists but failed intake validation.",
+      "readiness": "awaiting-submission",
+      "blocking_reason": "No real evidence submission has been provided yet.",
       "template_status": "pass",
-      "submission_status": "fail",
+      "submission_status": "missing",
       "source_accepted": true,
       "observed_state": {
         "model_executed_count": 10,

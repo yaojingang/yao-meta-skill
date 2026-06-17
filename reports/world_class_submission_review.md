@@ -4,13 +4,13 @@ Generated at: `2026-06-17`
 
 ## Summary
 
-- decision: `fix-submissions`
+- decision: `awaiting-submissions`
 - review items: `4`
 - accepted: `0`
-- awaiting submission: `3`
+- awaiting submission: `4`
 - valid packet but source incomplete: `0`
 - ready for ledger review: `0`
-- fix submission: `1`
+- fix submission: `0`
 - unmatched submissions: `0`
 - ready to claim world-class: `false`
 - review counts submission as completion: `false`
@@ -21,7 +21,7 @@ This report is a read-only reviewer queue. It does not accept evidence or make w
 
 | Evidence | Review state | Intake | Source accepted | Submission | Next action |
 | --- | --- | --- | --- | --- | --- |
-| `provider-holdout` | `fix-submission` | `fail` | `true` | `invalid-contract` | Run provider-backed holdout cases with real credentials and commit only aggregate evidence. |
+| `provider-holdout` | `awaiting-submission` | `missing` | `true` | `missing` | Run provider-backed holdout cases with real credentials and commit only aggregate evidence. |
 | `human-adjudication` | `awaiting-submission` | `missing` | `false` | `missing` | Record real A/B choices, reviewer metadata, and blind-review attestation, then regenerate adjudication. |
 | `native-permission-enforcement` | `awaiting-submission` | `missing` | `false` | `missing` | Integrate a real target-client or external installer runtime guard before claiming native permission enforcement. |
 | `native-client-telemetry` | `awaiting-submission` | `missing` | `false` | `missing` | Install a real client against the native host and import production metadata-only events. |
@@ -30,11 +30,11 @@ This report is a read-only reviewer queue. It does not accept evidence or make w
 
 ### Provider Holdout
 
-- review state: `fix-submission`
-- blocking reason: Submission exists but fails the ledger submission contract.
+- review state: `awaiting-submission`
+- blocking reason: No evidence packet has been submitted for review.
 - ledger status: `pending`
-- submission status: `invalid-contract`
-- intake status: `fail`
+- submission status: `missing`
+- intake status: `missing`
 - source accepted: `true`
 - submission path: `evidence/world_class/submissions/provider-holdout.json`
 
@@ -53,11 +53,7 @@ This report is a read-only reviewer queue. It does not accept evidence or make w
 
 #### Intake Errors
 
-- attestation.ledger_reviewer_approved must be true for a real submission
-- attestation.ledger_reviewer is required
-- attestation.ledger_reviewed_at must use YYYY-MM-DD or YYYY-MM-DDTHH:MM:SSZ
-- attestation.ledger_reviewer must be different from submitted_by
-- attestation.ledger_reviewed_at must be at or after submitted_at
+- No intake errors.
 
 #### Privacy Contract
 

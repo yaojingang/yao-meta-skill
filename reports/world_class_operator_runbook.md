@@ -9,7 +9,7 @@ Generated at: `2026-06-17`
 - runbook counts as completion: `false`
 - evidence items: `4`
 - pending: `4`
-- awaiting submission: `3`
+- awaiting submission: `4`
 - ready for ledger review: `0`
 - phase queue: `2` blocked / `2` phases
 - phase queue rows: `12`
@@ -52,7 +52,7 @@ This runbook coordinates evidence collection only. It does not accept submission
 
 | Evidence | Ledger | Intake | Review | Blocked checks | Next source action | Owner |
 | --- | --- | --- | --- | ---: | --- | --- |
-| `provider-holdout` | `pending` | `fix-submission` | `fix-submission` | `0` | none | operator with provider credentials |
+| `provider-holdout` | `pending` | `awaiting-submission` | `awaiting-submission` | `0` | none | operator with provider credentials |
 | `human-adjudication` | `pending` | `awaiting-submission` | `awaiting-submission` | `5` | Record a reviewer choice and reason for every pair. | human reviewer |
 | `native-permission-enforcement` | `pending` | `awaiting-submission` | `awaiting-submission` | `1` | Collect real target-client or external runtime guard proof. | target client or installer integrator |
 | `native-client-telemetry` | `pending` | `awaiting-submission` | `awaiting-submission` | `2` | Import at least one metadata-only event from a real client. | Browser/Chrome/IDE/provider client integrator |
@@ -60,7 +60,7 @@ This runbook coordinates evidence collection only. It does not accept submission
 ## Provider Holdout
 
 - objective: Collect at least one provider-backed output-eval holdout run with model, timing, and token metadata.
-- blocking reason: Submission exists but fails the ledger submission contract.
+- blocking reason: No evidence packet has been submitted for review.
 - blocked source checks: `0`
 - repair rows: `1` blocked
 - phase queue: `1` blocked phases

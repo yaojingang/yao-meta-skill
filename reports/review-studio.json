@@ -185,7 +185,7 @@
       "key": "operations-loop",
       "label": "运营回路",
       "status": "pass",
-      "detail": "1 metadata events; adoption 0; missed 0; bad-output 0; risk low; daily proposals 5; daily decision proposal-review; daily release lock true; weekly queue 5 unique; weekly ready 1; weekly top 88; weekly release lock true",
+      "detail": "1 metadata events; adoption 0; missed 0; bad-output 0; risk low; daily proposals 5; daily decision proposal-review; daily release lock false; weekly queue 5 unique; weekly ready 1; weekly top 88; weekly release lock false",
       "evidence": "reports/adoption_drift_report.json + reports/skillops/daily + reports/skillops/weekly",
       "link": "adoption_drift_report.md",
       "review_action_id": "",
@@ -652,7 +652,7 @@
           "label": "Provider Holdout",
           "category": "external",
           "status": "pending",
-          "readiness": "fix-submission",
+          "readiness": "awaiting-submission",
           "current": "model-executed 10; token-observed 10",
           "next_action": "Run provider-backed holdout cases with real credentials and commit only aggregate evidence.",
           "submission_path": "evidence/world_class/submissions/provider-holdout.json",
@@ -2480,7 +2480,7 @@
           "methodology_complete": true,
           "required_artifact_count": 25,
           "missing_artifact_count": 0,
-          "evidence_bundle_sha256": "53b15993b4b79fd9bf3d5016ca565969d27a8a2604fe659a876f3eebe7292350",
+          "evidence_bundle_sha256": "1a1f43932b87e208a18729f742be830c4c6554be2bde13d65591c525cbe51935",
           "source_contract_sha256": "7fc324e26d614c46b350c2b3e20cb87a86f967d3a74d345bc0baf73d78d8b111",
           "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2",
           "output_case_count": 5,
@@ -2502,13 +2502,13 @@
           "public_claim_ready": false,
           "public_claim_blocker_count": 3,
           "working_tree_dirty": true,
-          "changed_file_count": 18,
+          "changed_file_count": 30,
           "source_tree_dirty": false,
           "source_changed_file_count": 0,
           "generated_tree_dirty": true,
-          "generated_changed_file_count": 18
+          "generated_changed_file_count": 30
         },
-        "commit": "e39be9d5d40513f362d657b81846b48ce140673b",
+        "commit": "d845e9513c67b9572fb6c2a8754d3a0051e735ad",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flags are generation-time context; release lock is blocked by source changes, while generated evidence artifacts are tracked separately.",
@@ -3141,8 +3141,8 @@
           "external_pending_count": 3,
           "submitted_entry_count": 0,
           "reviewer_approved_submission_count": 0,
-          "missing_submission_count": 3,
-          "invalid_submission_count": 1,
+          "missing_submission_count": 4,
+          "invalid_submission_count": 0,
           "source_check_count": 19,
           "source_pass_count": 11,
           "source_blocked_count": 8,
@@ -3237,26 +3237,14 @@
             "source_pass_count": 3,
             "source_blocked_count": 0,
             "submission_state": {
-              "status": "invalid-contract",
+              "status": "missing",
               "path": "evidence/world_class/submissions/provider-holdout.json",
-              "submitted_by": "Codex operator using DeepSeek official API",
-              "submitted_at": "2026-06-17",
-              "artifact_ref_count": 1,
-              "artifact_existing_count": 1,
-              "artifact_sha256_verified_count": 1,
-              "attested_real_evidence": true,
-              "reviewer_or_operator_identity_present": true,
-              "privacy_contract_satisfied": true,
+              "artifact_ref_count": 0,
+              "attested_real_evidence": false,
+              "privacy_contract_satisfied": false,
               "ledger_reviewer_approved": false,
               "ledger_reviewer": "",
               "ledger_reviewed_at": "",
-              "errors": [
-                "attestation.ledger_reviewer_approved must be true for a real submission",
-                "attestation.ledger_reviewer is required",
-                "attestation.ledger_reviewed_at must use YYYY-MM-DD or YYYY-MM-DDTHH:MM:SSZ",
-                "attestation.ledger_reviewer must be different from submitted_by",
-                "attestation.ledger_reviewed_at must be at or after submitted_at"
-              ],
               "ledger_counts_as_completion": false
             },
             "anti_overclaim": {
@@ -6343,13 +6331,13 @@
       "ok": true,
       "generated_at": "2026-06-17",
       "skill_dir": ".",
-      "commit": "e39be9d5d40513f362d657b81846b48ce140673b",
+      "commit": "d845e9513c67b9572fb6c2a8754d3a0051e735ad",
       "git_status": {
         "available": true,
         "dirty": true,
-        "changed_file_count": 18,
+        "changed_file_count": 30,
         "generated_dirty": true,
-        "generated_changed_file_count": 18,
+        "generated_changed_file_count": 30,
         "source_dirty": false,
         "source_changed_file_count": 0,
         "sample": [
@@ -6397,7 +6385,7 @@
         "methodology_complete": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "53b15993b4b79fd9bf3d5016ca565969d27a8a2604fe659a876f3eebe7292350",
+        "evidence_bundle_sha256": "1a1f43932b87e208a18729f742be830c4c6554be2bde13d65591c525cbe51935",
         "source_contract_sha256": "7fc324e26d614c46b350c2b3e20cb87a86f967d3a74d345bc0baf73d78d8b111",
         "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2",
         "output_case_count": 5,
@@ -6419,11 +6407,11 @@
         "public_claim_ready": false,
         "public_claim_blocker_count": 3,
         "working_tree_dirty": true,
-        "changed_file_count": 18,
+        "changed_file_count": 30,
         "source_tree_dirty": false,
         "source_changed_file_count": 0,
         "generated_tree_dirty": true,
-        "generated_changed_file_count": 18
+        "generated_changed_file_count": 30
       },
       "public_claim": {
         "ready": false,
@@ -6437,10 +6425,10 @@
       },
       "release_lock": {
         "ready": true,
-        "commit": "e39be9d5d40513f362d657b81846b48ce140673b",
+        "commit": "d845e9513c67b9572fb6c2a8754d3a0051e735ad",
         "status_scope": "generation-time status before this report is written",
         "source_changed_file_count": 0,
-        "generated_changed_file_count": 18,
+        "generated_changed_file_count": 30,
         "reason": "only generated evidence artifacts were dirty at generation time"
       },
       "evidence_bundle": {
@@ -6449,7 +6437,7 @@
         "existing_count": 25,
         "missing_count": 0,
         "missing_paths": [],
-        "sha256": "53b15993b4b79fd9bf3d5016ca565969d27a8a2604fe659a876f3eebe7292350"
+        "sha256": "1a1f43932b87e208a18729f742be830c4c6554be2bde13d65591c525cbe51935"
       },
       "methodology": {
         "path": "reports/benchmark_methodology.md",
@@ -6606,50 +6594,50 @@
           "label": "world_class_evidence_ledger",
           "path": "reports/world_class_evidence_ledger.json",
           "exists": true,
-          "bytes": 26940,
-          "sha256": "a345880034709fcad8741cf20114dba739e2652a76e65d58265f8a87d10c8698"
+          "bytes": 26277,
+          "sha256": "6038b6cd6e0667f25cfd69a5e40afa314d9efc3a93753a2a3a0509ae9b516a15"
         },
         {
           "label": "world_class_evidence_intake",
           "path": "reports/world_class_evidence_intake.json",
           "exists": true,
-          "bytes": 21720,
-          "sha256": "ebbfa25a5211125583f333fdd41a3dea936a54350cc6361dee751fa1da46881b"
+          "bytes": 20922,
+          "sha256": "aa262da0ecee7232974ce061a51c8966c310de0b0be9f91eb82bb28bf1c7c0a8"
         },
         {
           "label": "world_class_evidence_preflight",
           "path": "reports/world_class_evidence_preflight.json",
           "exists": true,
-          "bytes": 94331,
-          "sha256": "eecbe8b0eed0581af20140cfdccbf4346b9b0ca8022f4a033940a166c2415195"
+          "bytes": 94341,
+          "sha256": "95cb56581224aab06be84d0b338d6ba9aa4aef0b1ebd480801f1e2226b873b0d"
         },
         {
           "label": "world_class_submission_review",
           "path": "reports/world_class_submission_review.json",
           "exists": true,
-          "bytes": 17725,
-          "sha256": "56f927077bbdb0f601dc56f0d8645432db8e9a8ad78e323828a91dd2f52a1f1b"
+          "bytes": 17295,
+          "sha256": "12fbb84926294c4bd05af526fcbe0983db26e449d2c305006094baf27332a0ba"
         },
         {
           "label": "world_class_operator_runbook",
           "path": "reports/world_class_operator_runbook.json",
           "exists": true,
-          "bytes": 87920,
-          "sha256": "94cce92c415b0348348c9b7dbe9eaf233a1b64ff37b5b98e128e11f2f40412ea"
+          "bytes": 87257,
+          "sha256": "f321dc118ee931a1e1510559e5e64774168a58b0446ae62d232009eb42e3b384"
         },
         {
           "label": "world_class_operator_runbook_markdown",
           "path": "reports/world_class_operator_runbook.md",
           "exists": true,
           "bytes": 25549,
-          "sha256": "94a63a39d2d0989db7a0c6d15f49a5027148654ab30fd197205e7b78173be262"
+          "sha256": "858ee11bbacb143f648e9c00735bc248a0b9f3c9303dc9e0ad5c0a65d9d6e07f"
         },
         {
           "label": "world_class_operator_runbook_html",
           "path": "reports/world_class_operator_runbook.html",
           "exists": true,
           "bytes": 34702,
-          "sha256": "4dc91fdfc2e54a83aedf5ea99e80481949326d74c6933abd9d85c5f4a8f10c5b"
+          "sha256": "31b24658c59ee1dee25aec378e72033b042af88dfdf40c325d361d0c9bec2ca7"
         },
         {
           "label": "world_class_claim_guard",
@@ -18127,9 +18115,9 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 805,
-        "other_text_tokens": 1152749,
+        "other_text_tokens": 1153001,
         "estimated_initial_load_tokens": 998,
-        "estimated_total_text_tokens": 1153554,
+        "estimated_total_text_tokens": 1153806,
         "deferred_resource_tokens": 523653,
         "deferred_resource_warn_threshold": 120000,
         "deferred_resource_dirs": [
@@ -20107,7 +20095,7 @@
     "adoption_drift": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-17T07:56:35Z",
+      "generated_at": "2026-06-17T08:08:10Z",
       "skill_dir": ".",
       "privacy_contract": {
         "storage": "local-first",
@@ -20191,7 +20179,7 @@
     "daily_skillops": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-17T07:56:36Z",
+      "generated_at": "2026-06-17T08:08:10Z",
       "skill_dir": ".",
       "decision": "proposal-review",
       "source_supplied": false,
@@ -20204,7 +20192,7 @@
       "local_blueprint_ready": true,
       "public_world_class_ready": false,
       "world_class_pending_count": 4,
-      "release_lock_ready": true,
+      "release_lock_ready": false,
       "evidence_consistency_ok": true,
       "writes_source_files": false,
       "auto_patch_enabled": false,
@@ -20221,7 +20209,7 @@
         "local_blueprint_ready": true,
         "public_world_class_ready": false,
         "world_class_pending_count": 4,
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "evidence_consistency_ok": true,
         "writes_source_files": false,
         "auto_patch_enabled": false,
@@ -20670,7 +20658,7 @@
         "local_blueprint_ready": true,
         "public_world_class_ready": false,
         "world_class_pending_count": 4,
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "evidence_consistency_ok": true
       },
       "actions": [
@@ -20705,7 +20693,7 @@
     "weekly_curator": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-17T07:56:36Z",
+      "generated_at": "2026-06-17T08:08:10Z",
       "skill_dir": ".",
       "decision": "curator-review",
       "week_id": "2026-W25",
@@ -20719,7 +20707,7 @@
       "top_score": 88,
       "skill_count": 12,
       "actionable_portfolio_issue_count": 0,
-      "release_lock_ready": true,
+      "release_lock_ready": false,
       "evidence_consistency_ok": true,
       "public_world_class_ready": false,
       "world_class_pending_count": 4,
@@ -20739,7 +20727,7 @@
         "top_score": 88,
         "skill_count": 12,
         "actionable_portfolio_issue_count": 0,
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "evidence_consistency_ok": true,
         "public_world_class_ready": false,
         "world_class_pending_count": 4,
@@ -20992,7 +20980,7 @@
         "no_route_opportunity_count": 0
       },
       "release_state": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "evidence_consistency_ok": true,
         "public_world_class_ready": false,
         "world_class_pending_count": 4
@@ -21170,7 +21158,7 @@
     "adaptation_proposals": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-17T07:56:36Z",
+      "generated_at": "2026-06-17T08:08:10Z",
       "skill_dir": ".",
       "source_patterns": "reports/user_patterns.json",
       "pattern_count": 5,
@@ -21580,8 +21568,8 @@
       "external_pending_count": 3,
       "submitted_entry_count": 0,
       "reviewer_approved_submission_count": 0,
-      "missing_submission_count": 3,
-      "invalid_submission_count": 1,
+      "missing_submission_count": 4,
+      "invalid_submission_count": 0,
       "source_check_count": 19,
       "source_pass_count": 11,
       "source_blocked_count": 8,
@@ -21597,8 +21585,8 @@
         "external_pending_count": 3,
         "submitted_entry_count": 0,
         "reviewer_approved_submission_count": 0,
-        "missing_submission_count": 3,
-        "invalid_submission_count": 1,
+        "missing_submission_count": 4,
+        "invalid_submission_count": 0,
         "source_check_count": 19,
         "source_pass_count": 11,
         "source_blocked_count": 8,
@@ -21719,26 +21707,14 @@
           "source_pass_count": 3,
           "source_blocked_count": 0,
           "submission_state": {
-            "status": "invalid-contract",
+            "status": "missing",
             "path": "evidence/world_class/submissions/provider-holdout.json",
-            "submitted_by": "Codex operator using DeepSeek official API",
-            "submitted_at": "2026-06-17",
-            "artifact_ref_count": 1,
-            "artifact_existing_count": 1,
-            "artifact_sha256_verified_count": 1,
-            "attested_real_evidence": true,
-            "reviewer_or_operator_identity_present": true,
-            "privacy_contract_satisfied": true,
+            "artifact_ref_count": 0,
+            "attested_real_evidence": false,
+            "privacy_contract_satisfied": false,
             "ledger_reviewer_approved": false,
             "ledger_reviewer": "",
             "ledger_reviewed_at": "",
-            "errors": [
-              "attestation.ledger_reviewer_approved must be true for a real submission",
-              "attestation.ledger_reviewer is required",
-              "attestation.ledger_reviewed_at must use YYYY-MM-DD or YYYY-MM-DDTHH:MM:SSZ",
-              "attestation.ledger_reviewer must be different from submitted_by",
-              "attestation.ledger_reviewed_at must be at or after submitted_at"
-            ],
             "ledger_counts_as_completion": false
           },
           "anti_overclaim": {
@@ -22181,7 +22157,7 @@
     },
     "world_class_evidence_intake": {
       "schema_version": "1.0",
-      "ok": false,
+      "ok": true,
       "generated_at": "2026-06-17",
       "skill_dir": ".",
       "summary": {
@@ -22189,17 +22165,17 @@
         "ledger_entry_count": 4,
         "template_count": 4,
         "template_pass_count": 4,
-        "submission_count": 1,
+        "submission_count": 0,
         "valid_submission_count": 0,
-        "invalid_submission_count": 1,
+        "invalid_submission_count": 0,
         "operator_checklist_count": 4,
         "operator_checklist_ready_count": 0,
         "valid_packet_source_incomplete_count": 0,
-        "ready_for_external_collection": false,
+        "ready_for_external_collection": true,
         "ready_for_ledger_review": false,
         "ready_to_claim_world_class": false,
         "overclaim_guard_active": true,
-        "decision": "fix-intake"
+        "decision": "awaiting-submissions"
       },
       "schema": "evidence/world_class/intake.schema.json",
       "templates": [
@@ -22260,38 +22236,17 @@
           "errors": []
         }
       ],
-      "submissions": [
-        {
-          "path": "evidence/world_class/submissions/provider-holdout.json",
-          "evidence_key": "provider-holdout",
-          "status": "fail",
-          "template_only": false,
-          "artifact_integrity": {
-            "artifact_ref_count": 1,
-            "artifact_existing_count": 1,
-            "artifact_sha256_verified_count": 1,
-            "required_artifact_count": 1,
-            "required_artifact_verified_count": 1
-          },
-          "errors": [
-            "attestation.ledger_reviewer_approved must be true for a real submission",
-            "attestation.ledger_reviewer is required",
-            "attestation.ledger_reviewed_at must use YYYY-MM-DD or YYYY-MM-DDTHH:MM:SSZ",
-            "attestation.ledger_reviewer must be different from submitted_by",
-            "attestation.ledger_reviewed_at must be at or after submitted_at"
-          ]
-        }
-      ],
+      "submissions": [],
       "operator_checklist": [
         {
           "evidence_key": "provider-holdout",
           "label": "Provider Holdout",
           "category": "external",
           "owner": "operator with provider credentials",
-          "readiness": "fix-submission",
-          "blocking_reason": "Submission exists but failed intake validation.",
+          "readiness": "awaiting-submission",
+          "blocking_reason": "No real evidence submission has been provided yet.",
           "template_status": "pass",
-          "submission_status": "fail",
+          "submission_status": "missing",
           "source_accepted": true,
           "observed_state": {
             "model_executed_count": 10,
@@ -22660,8 +22615,8 @@
           "owner": "operator with provider credentials",
           "status": "blocked",
           "ledger_status": "pending",
-          "intake_readiness": "fix-submission",
-          "review_state": "fix-submission",
+          "intake_readiness": "awaiting-submission",
+          "review_state": "awaiting-submission",
           "source_accepted": true,
           "prechecks": [
             {
@@ -24638,19 +24593,19 @@
     },
     "world_class_submission_review": {
       "schema_version": "1.0",
-      "ok": false,
+      "ok": true,
       "generated_at": "2026-06-17",
       "skill_dir": ".",
-      "decision": "fix-submissions",
+      "decision": "awaiting-submissions",
       "ready_to_claim_world_class": false,
       "review_item_count": 4,
       "accepted_count": 0,
-      "awaiting_submission_count": 3,
+      "awaiting_submission_count": 4,
       "valid_packet_source_incomplete_count": 0,
       "ready_for_ledger_review_count": 0,
-      "fix_submission_count": 1,
+      "fix_submission_count": 0,
       "unmatched_submission_count": 0,
-      "invalid_submission_count": 1,
+      "invalid_submission_count": 0,
       "source_check_count": 19,
       "source_pass_count": 11,
       "source_blocked_count": 8,
@@ -24658,18 +24613,18 @@
       "summary": {
         "review_item_count": 4,
         "accepted_count": 0,
-        "awaiting_submission_count": 3,
+        "awaiting_submission_count": 4,
         "valid_packet_source_incomplete_count": 0,
         "ready_for_ledger_review_count": 0,
-        "fix_submission_count": 1,
+        "fix_submission_count": 0,
         "unmatched_submission_count": 0,
-        "invalid_submission_count": 1,
+        "invalid_submission_count": 0,
         "source_check_count": 19,
         "source_pass_count": 11,
         "source_blocked_count": 8,
         "ready_to_claim_world_class": false,
         "review_counts_submission_as_completion": false,
-        "decision": "fix-submissions"
+        "decision": "awaiting-submissions"
       },
       "report_contract": {
         "schema_version": "1.0",
@@ -24704,22 +24659,16 @@
           "category": "external",
           "owner": "operator with provider credentials",
           "ledger_status": "pending",
-          "submission_status": "invalid-contract",
-          "intake_status": "fail",
+          "submission_status": "missing",
+          "intake_status": "missing",
           "source_accepted": true,
-          "review_state": "fix-submission",
-          "blocking_reason": "Submission exists but fails the ledger submission contract.",
+          "review_state": "awaiting-submission",
+          "blocking_reason": "No evidence packet has been submitted for review.",
           "submission_path": "evidence/world_class/submissions/provider-holdout.json",
-          "submitted_by": "Codex operator using DeepSeek official API",
-          "submitted_at": "2026-06-17",
-          "artifact_ref_count": 1,
-          "intake_errors": [
-            "attestation.ledger_reviewer_approved must be true for a real submission",
-            "attestation.ledger_reviewer is required",
-            "attestation.ledger_reviewed_at must use YYYY-MM-DD or YYYY-MM-DDTHH:MM:SSZ",
-            "attestation.ledger_reviewer must be different from submitted_by",
-            "attestation.ledger_reviewed_at must be at or after submitted_at"
-          ],
+          "submitted_by": "",
+          "submitted_at": "",
+          "artifact_ref_count": 0,
+          "intake_errors": [],
           "observed_state": {
             "model_executed_count": 10,
             "timing_observed_count": 10,
@@ -25093,10 +25042,10 @@
         "evidence_item_count": 4,
         "pending_count": 4,
         "accepted_count": 0,
-        "awaiting_submission_count": 3,
+        "awaiting_submission_count": 4,
         "ready_for_ledger_review_count": 0,
         "valid_packet_source_incomplete_count": 0,
-        "invalid_submission_count": 1,
+        "invalid_submission_count": 0,
         "source_check_count": 19,
         "source_pass_count": 11,
         "source_blocked_count": 8,
@@ -25137,8 +25086,8 @@
           "category": "external",
           "owner": "operator with provider credentials",
           "ledger_status": "pending",
-          "intake_readiness": "fix-submission",
-          "review_state": "fix-submission",
+          "intake_readiness": "awaiting-submission",
+          "review_state": "awaiting-submission",
           "source_accepted": true,
           "objective": "Collect at least one provider-backed output-eval holdout run with model, timing, and token metadata.",
           "current": "model-executed 10; token-observed 10",
@@ -25150,7 +25099,7 @@
             "Copy evidence/world_class/templates/provider-holdout.intake.json to evidence/world_class/submissions/provider-holdout.json and fill only real evidence fields.",
             "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
           ],
-          "blocking_reason": "Submission exists but fails the ledger submission contract.",
+          "blocking_reason": "No evidence packet has been submitted for review.",
           "submission_path": "evidence/world_class/submissions/provider-holdout.json",
           "template_path": "evidence/world_class/templates/provider-holdout.intake.json",
           "commands": {
@@ -25285,26 +25234,14 @@
           "phase_queue_blocked_count": 1,
           "phase_queue_counts_as_completion": false,
           "submission_state": {
-            "status": "invalid-contract",
+            "status": "missing",
             "path": "evidence/world_class/submissions/provider-holdout.json",
-            "submitted_by": "Codex operator using DeepSeek official API",
-            "submitted_at": "2026-06-17",
-            "artifact_ref_count": 1,
-            "artifact_existing_count": 1,
-            "artifact_sha256_verified_count": 1,
-            "attested_real_evidence": true,
-            "reviewer_or_operator_identity_present": true,
-            "privacy_contract_satisfied": true,
+            "artifact_ref_count": 0,
+            "attested_real_evidence": false,
+            "privacy_contract_satisfied": false,
             "ledger_reviewer_approved": false,
             "ledger_reviewer": "",
             "ledger_reviewed_at": "",
-            "errors": [
-              "attestation.ledger_reviewer_approved must be true for a real submission",
-              "attestation.ledger_reviewer is required",
-              "attestation.ledger_reviewed_at must use YYYY-MM-DD or YYYY-MM-DDTHH:MM:SSZ",
-              "attestation.ledger_reviewer must be different from submitted_by",
-              "attestation.ledger_reviewed_at must be at or after submitted_at"
-            ],
             "ledger_counts_as_completion": false
           },
           "anti_overclaim": {

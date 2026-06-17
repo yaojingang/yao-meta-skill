@@ -4,14 +4,14 @@ Generated at: `2026-06-17`
 
 ## Summary
 
-- decision: `fix-intake`
+- decision: `awaiting-submissions`
 - schema present: `true`
 - templates: `4` / `4`
-- submissions: `0` valid / `1` total
-- invalid submissions: `1`
+- submissions: `0` valid / `0` total
+- invalid submissions: `0`
 - valid packet but source incomplete: `0`
 - operator checklist: `0` ready / `4` total
-- ready for external collection: `false`
+- ready for external collection: `true`
 - ready for ledger review: `false`
 - ready to claim world-class: `false`
 - overclaim guard active: `true`
@@ -31,21 +31,21 @@ This report validates the intake contract for human and external evidence. A val
 
 | Evidence | Status | Path | Artifacts | Errors |
 | --- | --- | --- | --- | --- |
-| `provider-holdout` | `fail` | `evidence/world_class/submissions/provider-holdout.json` | 1 existing / 1 sha256 verified / 1 required verified / 1 refs | attestation.ledger_reviewer_approved must be true for a real submission; attestation.ledger_reviewer is required; attestation.ledger_reviewed_at must use YYYY-MM-DD or YYYY-MM-DDTHH:MM:SSZ; attestation.ledger_reviewer must be different from submitted_by; attestation.ledger_reviewed_at must be at or after submitted_at |
+| `none` | `n/a` | none | none | none |
 
 ## Operator Checklist
 
 | Evidence | Readiness | Submission | Next action |
 | --- | --- | --- | --- |
-| `provider-holdout` | `fix-submission` | `fail` | Run provider-backed holdout cases with real credentials and commit only aggregate evidence. |
+| `provider-holdout` | `awaiting-submission` | `missing` | Run provider-backed holdout cases with real credentials and commit only aggregate evidence. |
 | `human-adjudication` | `awaiting-submission` | `missing` | Record real A/B choices, reviewer metadata, and blind-review attestation, then regenerate adjudication. |
 | `native-permission-enforcement` | `awaiting-submission` | `missing` | Integrate a real target-client or external installer runtime guard before claiming native permission enforcement. |
 | `native-client-telemetry` | `awaiting-submission` | `missing` | Install a real client against the native host and import production metadata-only events. |
 
 ### Provider Holdout
 
-- readiness: `fix-submission`
-- blocking reason: Submission exists but failed intake validation.
+- readiness: `awaiting-submission`
+- blocking reason: No real evidence submission has been provided yet.
 - owner: operator with provider credentials
 - template: `evidence/world_class/templates/provider-holdout.intake.json`
 - submission: `evidence/world_class/submissions/provider-holdout.json`

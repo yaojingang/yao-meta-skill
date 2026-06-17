@@ -60,8 +60,8 @@
       "owner": "operator with provider credentials",
       "status": "blocked",
       "ledger_status": "pending",
-      "intake_readiness": "fix-submission",
-      "review_state": "fix-submission",
+      "intake_readiness": "awaiting-submission",
+      "review_state": "awaiting-submission",
       "source_accepted": true,
       "prechecks": [
         {

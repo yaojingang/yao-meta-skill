@@ -3,13 +3,13 @@
   "ok": true,
   "generated_at": "2026-06-17",
   "skill_dir": ".",
-  "commit": "e39be9d5d40513f362d657b81846b48ce140673b",
+  "commit": "d845e9513c67b9572fb6c2a8754d3a0051e735ad",
   "git_status": {
     "available": true,
     "dirty": true,
-    "changed_file_count": 18,
+    "changed_file_count": 30,
     "generated_dirty": true,
-    "generated_changed_file_count": 18,
+    "generated_changed_file_count": 30,
     "source_dirty": false,
     "source_changed_file_count": 0,
     "sample": [
@@ -57,7 +57,7 @@
     "methodology_complete": true,
     "required_artifact_count": 25,
     "missing_artifact_count": 0,
-    "evidence_bundle_sha256": "53b15993b4b79fd9bf3d5016ca565969d27a8a2604fe659a876f3eebe7292350",
+    "evidence_bundle_sha256": "1a1f43932b87e208a18729f742be830c4c6554be2bde13d65591c525cbe51935",
     "source_contract_sha256": "7fc324e26d614c46b350c2b3e20cb87a86f967d3a74d345bc0baf73d78d8b111",
     "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2",
     "output_case_count": 5,
@@ -79,11 +79,11 @@
     "public_claim_ready": false,
     "public_claim_blocker_count": 3,
     "working_tree_dirty": true,
-    "changed_file_count": 18,
+    "changed_file_count": 30,
     "source_tree_dirty": false,
     "source_changed_file_count": 0,
     "generated_tree_dirty": true,
-    "generated_changed_file_count": 18
+    "generated_changed_file_count": 30
   },
   "public_claim": {
     "ready": false,
@@ -97,10 +97,10 @@
   },
   "release_lock": {
     "ready": true,
-    "commit": "e39be9d5d40513f362d657b81846b48ce140673b",
+    "commit": "d845e9513c67b9572fb6c2a8754d3a0051e735ad",
     "status_scope": "generation-time status before this report is written",
     "source_changed_file_count": 0,
-    "generated_changed_file_count": 18,
+    "generated_changed_file_count": 30,
     "reason": "only generated evidence artifacts were dirty at generation time"
   },
   "evidence_bundle": {
@@ -109,7 +109,7 @@
     "existing_count": 25,
     "missing_count": 0,
     "missing_paths": [],
-    "sha256": "53b15993b4b79fd9bf3d5016ca565969d27a8a2604fe659a876f3eebe7292350"
+    "sha256": "1a1f43932b87e208a18729f742be830c4c6554be2bde13d65591c525cbe51935"
   },
   "methodology": {
     "path": "reports/benchmark_methodology.md",
@@ -266,50 +266,50 @@
       "label": "world_class_evidence_ledger",
       "path": "reports/world_class_evidence_ledger.json",
       "exists": true,
-      "bytes": 26940,
-      "sha256": "a345880034709fcad8741cf20114dba739e2652a76e65d58265f8a87d10c8698"
+      "bytes": 26277,
+      "sha256": "6038b6cd6e0667f25cfd69a5e40afa314d9efc3a93753a2a3a0509ae9b516a15"
     },
     {
       "label": "world_class_evidence_intake",
       "path": "reports/world_class_evidence_intake.json",
       "exists": true,
-      "bytes": 21720,
-      "sha256": "ebbfa25a5211125583f333fdd41a3dea936a54350cc6361dee751fa1da46881b"
+      "bytes": 20922,
+      "sha256": "aa262da0ecee7232974ce061a51c8966c310de0b0be9f91eb82bb28bf1c7c0a8"
     },
     {
       "label": "world_class_evidence_preflight",
       "path": "reports/world_class_evidence_preflight.json",
       "exists": true,
-      "bytes": 94331,
-      "sha256": "eecbe8b0eed0581af20140cfdccbf4346b9b0ca8022f4a033940a166c2415195"
+      "bytes": 94341,
+      "sha256": "95cb56581224aab06be84d0b338d6ba9aa4aef0b1ebd480801f1e2226b873b0d"
     },
     {
       "label": "world_class_submission_review",
       "path": "reports/world_class_submission_review.json",
       "exists": true,
-      "bytes": 17725,
-      "sha256": "56f927077bbdb0f601dc56f0d8645432db8e9a8ad78e323828a91dd2f52a1f1b"
+      "bytes": 17295,
+      "sha256": "12fbb84926294c4bd05af526fcbe0983db26e449d2c305006094baf27332a0ba"
     },
     {
       "label": "world_class_operator_runbook",
       "path": "reports/world_class_operator_runbook.json",
       "exists": true,
-      "bytes": 87920,
-      "sha256": "94cce92c415b0348348c9b7dbe9eaf233a1b64ff37b5b98e128e11f2f40412ea"
+      "bytes": 87257,
+      "sha256": "f321dc118ee931a1e1510559e5e64774168a58b0446ae62d232009eb42e3b384"
     },
     {
       "label": "world_class_operator_runbook_markdown",
       "path": "reports/world_class_operator_runbook.md",
       "exists": true,
       "bytes": 25549,
-      "sha256": "94a63a39d2d0989db7a0c6d15f49a5027148654ab30fd197205e7b78173be262"
+      "sha256": "858ee11bbacb143f648e9c00735bc248a0b9f3c9303dc9e0ad5c0a65d9d6e07f"
     },
     {
       "label": "world_class_operator_runbook_html",
       "path": "reports/world_class_operator_runbook.html",
       "exists": true,
       "bytes": 34702,
-      "sha256": "4dc91fdfc2e54a83aedf5ea99e80481949326d74c6933abd9d85c5f4a8f10c5b"
+      "sha256": "31b24658c59ee1dee25aec378e72033b042af88dfdf40c325d361d0c9bec2ca7"
     },
     {
       "label": "world_class_claim_guard",
