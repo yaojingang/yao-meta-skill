@@ -9,10 +9,10 @@ Generated at: `2026-06-17`
 - runbook counts as completion: `false`
 - evidence items: `4`
 - pending: `4`
-- awaiting submission: `4`
+- awaiting submission: `3`
 - ready for ledger review: `0`
 - phase queue: `2` blocked / `2` phases
-- phase queue rows: `13`
+- phase queue rows: `11`
 - phase queue counts as completion: `false`
 - coordination steps: `6` user-required / `6` total
 - coordination pending keys: `human-adjudication, native-client-telemetry, native-permission-enforcement, provider-holdout`
@@ -35,7 +35,7 @@ This runbook coordinates evidence collection only. It does not accept submission
 | Step | Evidence | Owner | Needs user | User action | Assistant action | Command | Pass condition |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | `prepare-evidence-session` | `all` | assistant + user | `true` | Confirm provider access, reviewer availability, target client path, and telemetry client path before collection starts. | Run preflight and prepare submission drafts without accepting them as evidence. | `python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions && python3 scripts/yao.py world-class-submission-kit . --output-dir evidence/world_class/submissions --prefill-artifacts` | Preflight lists the same pending evidence keys and no credential values are printed. |
-| `collect-provider-holdout` | `provider-holdout` | assistant + operator with provider credentials | `true` | Provide the provider API key through an environment variable and confirm the model to use. | Run provider-backed output execution, verify aggregate timing and token metadata, then prepare the evidence packet. | `python3 scripts/yao.py output-exec . --provider-runner openai --provider-model <model> --timeout-seconds 60` | reports/output_execution_runs.json has model_executed_count > 0 and token_observed_count > 0. |
+| `collect-provider-holdout` | `provider-holdout` | assistant + operator with provider credentials | `true` | Provide the selected provider API key through an environment variable and confirm the provider, model, endpoint, and API format to use. | Run provider-backed output execution, verify aggregate timing and token metadata, then prepare the evidence packet. | `python3 scripts/yao.py output-exec . --provider-runner <openai|deepseek> --provider-model <model> --timeout-seconds 60` | reports/output_execution_runs.json has model_executed_count > 0 and token_observed_count > 0. |
 | `collect-human-adjudication` | `human-adjudication` | human reviewer + assistant | `true` | Open the blind review kit, choose winners for all pairs, add reviewer metadata and reasons, and keep the answer key hidden until decisions are saved. | Generate the review kit, import decisions, validate integrity, and prepare the human evidence packet. | `python3 scripts/yao.py output-review-kit . && python3 scripts/yao.py output-review .` | reports/output_review_adjudication.json has pending_count == 0 and ready_for_human_evidence == true. |
 | `collect-native-permission-enforcement` | `native-permission-enforcement` | target client or installer integrator + assistant | `true` | Select a real target client or external installer guard that can enforce declared capabilities instead of metadata-only fallback. | Run runtime permission probes, package verification, install simulation, and prepare the native enforcement evidence packet. | `python3 scripts/yao.py runtime-permissions . --package-dir dist` | reports/runtime_permission_probes.json has native_enforcement_count > 0 and failure_count == 0. |
 | `collect-native-client-telemetry` | `native-client-telemetry` | real client integrator + assistant | `true` | Install the native host manifest in a real Browser, Chrome, IDE, or provider client and trigger a metadata-only event. | Generate native host assets, import the external event JSONL, refresh adoption drift, and prepare the telemetry evidence packet. | `python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl --source external` | reports/adoption_drift_report.json has source_types.external > 0 and adoption_sample_count > 0. |
@@ -46,13 +46,13 @@ This runbook coordinates evidence collection only. It does not accept submission
 | Phase | Status | Rows | Blocked | Owners | Next action | Verify |
 | --- | --- | ---: | ---: | --- | --- | --- |
 | `unblock-access` | `blocked` | `4` | `4` | Browser/Chrome/IDE/provider client integrator, human reviewer, operator with provider credentials, target client or installer integrator | Assign a real reviewer identity before claiming human adjudication. | `python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions` |
-| `collect-source` | `blocked` | `9` | `9` | Browser/Chrome/IDE/provider client integrator, human reviewer, operator with provider credentials, target client or installer integrator | Set reviewer_attestation only after choices are completed before opening the answer key. | `python3 scripts/yao.py output-review && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions` |
+| `collect-source` | `blocked` | `7` | `7` | Browser/Chrome/IDE/provider client integrator, human reviewer, target client or installer integrator | Set reviewer_attestation only after choices are completed before opening the answer key. | `python3 scripts/yao.py output-review && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions` |
 
 ## Evidence Items
 
 | Evidence | Ledger | Intake | Review | Blocked checks | Next source action | Owner |
 | --- | --- | --- | --- | ---: | --- | --- |
-| `provider-holdout` | `pending` | `awaiting-submission` | `awaiting-submission` | `2` | Run provider-backed output-exec with real credentials. | operator with provider credentials |
+| `provider-holdout` | `pending` | `fix-submission` | `fix-submission` | `0` | none | operator with provider credentials |
 | `human-adjudication` | `pending` | `awaiting-submission` | `awaiting-submission` | `5` | Record a reviewer choice and reason for every pair. | human reviewer |
 | `native-permission-enforcement` | `pending` | `awaiting-submission` | `awaiting-submission` | `1` | Collect real target-client or external runtime guard proof. | target client or installer integrator |
 | `native-client-telemetry` | `pending` | `awaiting-submission` | `awaiting-submission` | `1` | Import at least one metadata-only event from a real client. | Browser/Chrome/IDE/provider client integrator |
@@ -60,10 +60,10 @@ This runbook coordinates evidence collection only. It does not accept submission
 ## Provider Holdout
 
 - objective: Collect at least one provider-backed output-eval holdout run with model, timing, and token metadata.
-- blocking reason: No evidence packet has been submitted for review.
-- blocked source checks: `2`
-- repair rows: `3` blocked
-- phase queue: `2` blocked phases
+- blocking reason: Submission exists but fails the ledger submission contract.
+- blocked source checks: `0`
+- repair rows: `1` blocked
+- phase queue: `1` blocked phases
 - submission: `evidence/world_class/submissions/provider-holdout.json`
 - template: `evidence/world_class/templates/provider-holdout.intake.json`
 
@@ -71,14 +71,13 @@ This runbook coordinates evidence collection only. It does not accept submission
 
 | Phase | Status | Rows | Blocked | Next action |
 | --- | --- | ---: | ---: | --- |
-| `unblock-access` | `blocked` | `1` | `1` | Set OPENAI_API_KEY in the operator shell; never commit or print the value. |
-| `collect-source` | `blocked` | `2` | `2` | Run provider-backed output-exec with real credentials. |
+| `unblock-access` | `blocked` | `1` | `1` | Set one provider API key in the operator shell, such as OPENAI_API_KEY or DEEPSEEK_API_KEY; never commit or print the value. |
 
 ### Source Runbook
 
-- Set OPENAI_API_KEY in the operator shell before running provider evidence; never commit or print the value.
-- export YAO_OUTPUT_EVAL_MODEL=${YAO_OUTPUT_EVAL_MODEL:-gpt-4.1-mini}
-- python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60
+- Set one provider API key in the operator shell, such as OPENAI_API_KEY or DEEPSEEK_API_KEY; never commit or print the value.
+- For OpenAI Responses: python3 scripts/yao.py output-exec --provider-runner openai --provider-model ${YAO_OUTPUT_EVAL_MODEL:-gpt-4.1-mini} --timeout-seconds 60
+- For DeepSeek Chat Completions: python3 scripts/yao.py output-exec --provider-runner deepseek --provider-model deepseek-v4-flash --provider-api-format chat-completions --provider-thinking disabled --api-key-env DEEPSEEK_API_KEY --timeout-seconds 120
 - python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>
 - Copy evidence/world_class/templates/provider-holdout.intake.json to evidence/world_class/submissions/provider-holdout.json and fill only real evidence fields.
 - python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions
@@ -121,16 +120,15 @@ This runbook coordinates evidence collection only. It does not accept submission
 
 ### Next Source Actions
 
-- Run provider-backed output-exec with real credentials.
-- Provider execution should return non-estimated token usage.
+- No blocked source checks.
 
 ### Source Evidence Snapshot
 
 | Check | Current | Expected | Status | Next action |
 | --- | --- | --- | --- | --- |
-| Provider model run | `0` | `>0` | `blocked` | Run provider-backed output-exec with real credentials. |
+| Provider model run | `10` | `>0` | `pass` | Run provider-backed output-exec with real credentials. |
 | Timing observed | `10` | `>0` | `pass` | Provider execution should record timing metadata. |
-| Token usage observed | `0` | `>0` | `blocked` | Provider execution should return non-estimated token usage. |
+| Token usage observed | `10` | `>0` | `pass` | Provider execution should return non-estimated token usage. |
 
 ## Human Adjudication
 

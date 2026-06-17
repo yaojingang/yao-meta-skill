@@ -10,6 +10,7 @@
 - `no_candidate_outperformed_current`
 - `current_holdout_gap_present`
 - `current_holdout_risk`
+- `adversarial_watch_risk`
 
 ## Gate Status
 
@@ -28,12 +29,12 @@
 
 | Role | Label | Ranking State | Promotion State | Tokens | Dev Errors | Holdout Errors |
 | --- | --- | --- | --- | ---: | ---: | ---: |
-| baseline | `Baseline` | reference | reference | 93 | 1 | 2 |
-| current | `Current` | selected_by_dev | kept_current | 37 | 1 | 1 |
-| candidate | `Guardrail` | not_selected | blocked | 51 | 1 | 2 |
-| candidate | `Balanced` | not_selected | blocked | 54 | 1 | 1 |
-| candidate | `Boundary` | not_selected | blocked | 78 | 1 | 1 |
-| candidate | `Artifact Aware` | not_selected | blocked | 78 | 1 | 1 |
+| baseline | `Baseline` | reference | reference | 93 | 0 | 1 |
+| current | `Current` | selected_by_dev | kept_current | 37 | 0 | 1 |
+| candidate | `Balanced` | not_selected | blocked | 54 | 0 | 1 |
+| candidate | `Boundary` | not_selected | blocked | 78 | 0 | 1 |
+| candidate | `Artifact Aware` | not_selected | blocked | 78 | 0 | 1 |
+| candidate | `Guardrail` | not_selected | blocked | 51 | 1 | 1 |
 
 ## Human Review Stub
 

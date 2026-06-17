@@ -37,9 +37,12 @@
       "weight": 0.32,
       "phrases": [
         "incident command packet",
+        "incident command packets",
         "governed incident packet",
         "incident packet assembly",
-        "incident review skill"
+        "incident review skill",
+        "incident review",
+        "standardize incident review"
       ]
     },
     "incident_inputs": {
@@ -59,6 +62,8 @@
         "severity assessment",
         "severity",
         "impact scope",
+        "incident review",
+        "outage review",
         "sev"
       ]
     },
@@ -68,6 +73,8 @@
         "stakeholder update",
         "incident communication",
         "owner",
+        "owners",
+        "owner actions",
         "action ownership",
         "next actions"
       ]
@@ -76,6 +83,9 @@
       "weight": 0.1,
       "phrases": [
         "governed",
+        "governed workflow",
+        "reusable governed workflow",
+        "standardize",
         "reviewed",
         "audited",
         "maintained",
@@ -128,9 +138,13 @@
       "exclusive": true,
       "phrases": [
         "brainstorm",
+        "sketch a future",
+        "for later",
         "possible response ideas",
         "improve incident handling",
-        "ideas for later"
+        "ideas for later",
+        "do not package",
+        "do not package a reusable workflow"
       ]
     },
     "summary_only": {

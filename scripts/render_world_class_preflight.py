@@ -43,13 +43,13 @@ PREFLIGHT_SPECS: dict[str, list[dict[str, Any]]] = {
             "next_action": "Use the provider runner instead of the local command runner for model-backed evidence.",
         },
         {
-            "key": "openai-api-key",
+            "key": "provider-api-key",
             "label": "Provider credential",
-            "kind": "env",
-            "name": "OPENAI_API_KEY",
+            "kind": "env_any",
+            "names": ["OPENAI_API_KEY", "DEEPSEEK_API_KEY"],
             "required": True,
             "secret": True,
-            "next_action": "Set OPENAI_API_KEY in the operator shell; never commit or print the value.",
+            "next_action": "Set one provider API key in the operator shell, such as OPENAI_API_KEY or DEEPSEEK_API_KEY; never commit or print the value.",
         },
         {
             "key": "provider-model",
@@ -57,8 +57,8 @@ PREFLIGHT_SPECS: dict[str, list[dict[str, Any]]] = {
             "kind": "env",
             "name": "YAO_OUTPUT_EVAL_MODEL",
             "required": False,
-            "default": "gpt-4.1-mini",
-            "next_action": "Optionally set YAO_OUTPUT_EVAL_MODEL; the runbook defaults to gpt-4.1-mini.",
+            "default": "provider-specific model, or pass --provider-model",
+            "next_action": "Optionally set YAO_OUTPUT_EVAL_MODEL, or pass --provider-model for the selected provider.",
         },
     ],
     "human-adjudication": [
@@ -242,6 +242,19 @@ def build_precheck(skill_dir: Path, evidence_key: str, spec: dict[str, Any]) -> 
                 "status": "pass" if present else ("missing" if required else "optional"),
                 "actual": "set" if present else "not-set",
                 "default": spec.get("default", ""),
+            }
+        )
+        return row
+    if kind == "env_any":
+        names = [str(name) for name in spec.get("names", []) if str(name).strip()]
+        set_names = [name for name in names if env_present(name)]
+        row.update(
+            {
+                "env_any": names,
+                "status": "pass" if set_names else ("missing" if required else "optional"),
+                "actual": "set" if set_names else "not-set",
+                "set_count": len(set_names),
+                "set_envs": set_names,
             }
         )
         return row

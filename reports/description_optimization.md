@@ -2,19 +2,19 @@
 
 Winner: `Current`
 
-- current tokens: `65`
-- winner tokens: `65`
+- current tokens: `53`
+- winner tokens: `53`
 - baseline tokens: `8`
 
 ## Winner
 
-Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.
+Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use for skill creation, reusable workflow packaging, skill improvement, evals, and team-ready distribution.
 
 ## Candidate Ranking
 
 | Candidate | Tokens | Dev FP | Dev FN | Dev Near | Holdout FP | Holdout FN |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| `Current` | 65 | 0 | 0 | 1.0 | 0 | 0 |
+| `Current` | 53 | 0 | 0 | 1.0 | 0 | 0 |
 | `Minimal` | 41 | 1 | 1 | 1.0 | 0 | 0 |
 | `Guardrail` | 56 | 1 | 1 | 1.0 | 0 | 0 |
 | `Balanced` | 60 | 1 | 1 | 1.0 | 0 | 0 |
@@ -34,9 +34,9 @@ Create, refactor, evaluate, and package agent skills from workflows, prompts, tr
 
 | Gate | Winner Gap | Winner Risk | Winner Boundary Rate | Current Gap | Baseline Gap |
 | --- | ---: | --- | ---: | ---: | ---: |
-| Holdout | 0.468 | healthy | 0.0 | 0.468 | 0.416 |
-| Blind Holdout | 0.364 | watch | 0.333 | 0.364 | 0.368 |
-| Adversarial Holdout | 0.834 | healthy | 0.0 | 0.834 | 0.845 |
+| Holdout | 0.744 | healthy | 0.0 | 0.744 | 0.416 |
+| Blind Holdout | 0.36 | tight | 0.167 | 0.36 | 0.368 |
+| Adversarial Holdout | 1.0 | healthy | 0.0 | 1.0 | 0.845 |
 
 ## Judge Blind Summary
 

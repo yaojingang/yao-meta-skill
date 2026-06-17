@@ -9,9 +9,9 @@
 
 | Route | Expected | Predicted | Precision | Recall | Avg Margin |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| `yao-meta-skill` | 3 | 3 | 1.0 | 1.0 | 0.611 |
+| `yao-meta-skill` | 3 | 3 | 1.0 | 1.0 | 0.701 |
 | `team-frontend-review` | 3 | 3 | 1.0 | 1.0 | 0.805 |
-| `governed-incident-command` | 3 | 3 | 1.0 | 1.0 | 0.659 |
+| `governed-incident-command` | 3 | 3 | 1.0 | 1.0 | 0.586 |
 | `no_route` | 4 | 4 | 1.0 | 1.0 | - |
 
 ## Confusion Matrix

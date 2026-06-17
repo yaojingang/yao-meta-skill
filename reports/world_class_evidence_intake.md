@@ -4,14 +4,14 @@ Generated at: `2026-06-17`
 
 ## Summary
 
-- decision: `awaiting-submissions`
+- decision: `fix-intake`
 - schema present: `true`
 - templates: `4` / `4`
-- submissions: `0` valid / `0` total
-- invalid submissions: `0`
+- submissions: `0` valid / `1` total
+- invalid submissions: `1`
 - valid packet but source incomplete: `0`
 - operator checklist: `0` ready / `4` total
-- ready for external collection: `true`
+- ready for external collection: `false`
 - ready for ledger review: `false`
 - ready to claim world-class: `false`
 - overclaim guard active: `true`
@@ -31,21 +31,21 @@ This report validates the intake contract for human and external evidence. A val
 
 | Evidence | Status | Path | Artifacts | Errors |
 | --- | --- | --- | --- | --- |
-| `none` | `n/a` | none | none | none |
+| `provider-holdout` | `fail` | `evidence/world_class/submissions/provider-holdout.json` | 1 existing / 1 sha256 verified / 1 required verified / 1 refs | attestation.ledger_reviewer_approved must be true for a real submission; attestation.ledger_reviewer is required; attestation.ledger_reviewed_at must use YYYY-MM-DD or YYYY-MM-DDTHH:MM:SSZ; attestation.ledger_reviewer must be different from submitted_by; attestation.ledger_reviewed_at must be at or after submitted_at |
 
 ## Operator Checklist
 
 | Evidence | Readiness | Submission | Next action |
 | --- | --- | --- | --- |
-| `provider-holdout` | `awaiting-submission` | `missing` | Run provider-backed holdout cases with real credentials and commit only aggregate evidence. |
+| `provider-holdout` | `fix-submission` | `fail` | Run provider-backed holdout cases with real credentials and commit only aggregate evidence. |
 | `human-adjudication` | `awaiting-submission` | `missing` | Record real A/B choices, reviewer metadata, and blind-review attestation, then regenerate adjudication. |
 | `native-permission-enforcement` | `awaiting-submission` | `missing` | Integrate a real target-client or external installer runtime guard before claiming native permission enforcement. |
 | `native-client-telemetry` | `awaiting-submission` | `missing` | Install a real client against the native host and import production metadata-only events. |
 
 ### Provider Holdout
 
-- readiness: `awaiting-submission`
-- blocking reason: No real evidence submission has been provided yet.
+- readiness: `fix-submission`
+- blocking reason: Submission exists but failed intake validation.
 - owner: operator with provider credentials
 - template: `evidence/world_class/templates/provider-holdout.intake.json`
 - submission: `evidence/world_class/submissions/provider-holdout.json`
@@ -83,9 +83,9 @@ This report validates the intake contract for human and external evidence. A val
 
 #### Source Runbook
 
-- Set OPENAI_API_KEY in the operator shell before running provider evidence; never commit or print the value.
-- `export YAO_OUTPUT_EVAL_MODEL=${YAO_OUTPUT_EVAL_MODEL:-gpt-4.1-mini}`
-- `python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60`
+- Set one provider API key in the operator shell, such as OPENAI_API_KEY or DEEPSEEK_API_KEY; never commit or print the value.
+- For OpenAI Responses: python3 scripts/yao.py output-exec --provider-runner openai --provider-model ${YAO_OUTPUT_EVAL_MODEL:-gpt-4.1-mini} --timeout-seconds 60
+- For DeepSeek Chat Completions: python3 scripts/yao.py output-exec --provider-runner deepseek --provider-model deepseek-v4-flash --provider-api-format chat-completions --provider-thinking disabled --api-key-env DEEPSEEK_API_KEY --timeout-seconds 120
 - `python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>`
 - Copy evidence/world_class/templates/provider-holdout.intake.json to evidence/world_class/submissions/provider-holdout.json and fill only real evidence fields.
 - `python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions`

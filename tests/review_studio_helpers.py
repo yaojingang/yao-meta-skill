@@ -11,12 +11,19 @@ SCRIPTS = ROOT / "scripts"
 SCRIPT = SCRIPTS / "render_review_studio.py"
 
 
-def run(args: list[object]) -> subprocess.CompletedProcess[str]:
-    return subprocess.run([str(item) for item in args], cwd=ROOT, check=True, capture_output=True, text=True)
+def run(args: list[object], allowed_returncodes: tuple[int, ...] = (0,)) -> subprocess.CompletedProcess[str]:
+    proc = subprocess.run([str(item) for item in args], cwd=ROOT, check=False, capture_output=True, text=True)
+    if proc.returncode not in allowed_returncodes:
+        raise subprocess.CalledProcessError(proc.returncode, proc.args, output=proc.stdout, stderr=proc.stderr)
+    return proc
 
 
-def run_script(script_name: str, *args: object) -> subprocess.CompletedProcess[str]:
-    return run([sys.executable, SCRIPTS / script_name, *args])
+def run_script(
+    script_name: str,
+    *args: object,
+    allowed_returncodes: tuple[int, ...] = (0,),
+) -> subprocess.CompletedProcess[str]:
+    return run([sys.executable, SCRIPTS / script_name, *args], allowed_returncodes=allowed_returncodes)
 
 
 def prepare_tmp_root() -> Path:
@@ -35,10 +42,29 @@ def copy_tmp_report(tmp_root: Path, stem: str) -> None:
         )
 
 
+def output_execution_has_provider_evidence() -> bool:
+    path = ROOT / "reports" / "output_execution_runs.json"
+    if not path.exists():
+        return False
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return False
+    summary = payload.get("summary", {})
+    if not isinstance(summary, dict):
+        return False
+    return (
+        int(summary.get("model_executed_count") or 0) > 0
+        and int(summary.get("timing_observed_count") or 0) > 0
+        and int(summary.get("token_observed_count") or 0) > 0
+    )
+
+
 def prepare_review_studio_inputs(tmp_root: Path) -> None:
     run_script("run_output_eval.py")
     run_script("prepare_output_review_kit.py")
-    run_script("run_output_execution.py", "--runner-command", json.dumps(["python3", "scripts/local_output_eval_runner.py"]))
+    if not output_execution_has_provider_evidence():
+        run_script("run_output_execution.py", "--runner-command", json.dumps(["python3", "scripts/local_output_eval_runner.py"]))
     run_script("adjudicate_output_review.py")
     run_script("compile_skill.py", ROOT, "--generated-at", "2026-06-13")
 
@@ -145,7 +171,8 @@ def prepare_review_studio_inputs(tmp_root: Path) -> None:
         "render_world_class_claim_guard.py",
         "render_skill_os2_coverage.py",
     ]:
-        run_script(script_name, ROOT, "--generated-at", "2026-06-13")
+        allowed_returncodes = (0, 2) if script_name == "render_world_class_submission_review.py" else (0,)
+        run_script(script_name, ROOT, "--generated-at", "2026-06-13", allowed_returncodes=allowed_returncodes)
 
 
 def render_review_studio_fixture(tmp_root: Path) -> tuple[Path, Path, subprocess.CompletedProcess[str]]:

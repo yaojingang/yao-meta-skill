@@ -364,6 +364,21 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
         world_class_source_blocked_count,
     )
     public_claim_ready = not claim_blockers
+    limitations = [
+        "The git commit and dirty flags are generation-time context; release lock is blocked by source changes, while generated evidence artifacts are tracked separately.",
+        "Pending blind-review decisions are visible but do not count as human adjudication.",
+        "World-class readiness remains false until external and human evidence gaps close.",
+    ]
+    if provider_evidence_complete:
+        limitations.insert(
+            1,
+            "Provider-backed model holdout source evidence is complete, but ledger acceptance still requires a valid independently reviewed submission packet.",
+        )
+    else:
+        limitations.insert(
+            1,
+            "Local command-runner evidence is reproducible but does not replace provider-backed model holdout evidence.",
+        )
     return {
         "schema_version": "1.0",
         "ok": local_reproducibility_ready,
@@ -422,12 +437,7 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             "case_count": failure_case_count,
             "policy": "Keep representative failures visible and tied to regression checks.",
         },
-        "limitations": [
-            "The git commit and dirty flags are generation-time context; release lock is blocked by source changes, while generated evidence artifacts are tracked separately.",
-            "Local command-runner evidence is reproducible but does not replace provider-backed model holdout evidence.",
-            "Pending blind-review decisions are visible but do not count as human adjudication.",
-            "World-class readiness remains false until external and human evidence gaps close.",
-        ],
+        "limitations": limitations,
         "artifacts": {
             "json": "reports/benchmark_reproducibility.json",
             "markdown": "reports/benchmark_reproducibility.md",

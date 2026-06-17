@@ -13,7 +13,7 @@ Generated at: `2026-06-13`
 - Yao CLI command handlers: `68`
 - entrypoint command handlers: `18`
 - command modules: `6`
-- largest file lines: `706`
+- largest file lines: `711`
 - early watch threshold lines: `600`
 - early watchlist: `5`
 - watch threshold lines: `720`
@@ -35,27 +35,27 @@ No near-threshold files found.
 
 | File | Lines | Kind | Recommended next split |
 | --- | ---: | --- | --- |
-| `tests/verify_evidence_consistency.py` | `706` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
-| `tests/verify_yao_cli.py` | `696` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
-| `tests/verify_world_class_evidence_intake.py` | `690` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
+| `tests/verify_evidence_consistency.py` | `711` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
+| `tests/verify_world_class_evidence_intake.py` | `703` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
+| `tests/verify_yao_cli.py` | `700` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
 | `scripts/render_evidence_consistency.py` | `659` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
-| `scripts/render_world_class_operator_runbook.py` | `647` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
+| `scripts/render_world_class_operator_runbook.py` | `651` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 
 ## Largest Files
 
 | File | Lines | Kind | Severity |
 | --- | ---: | --- | --- |
-| `tests/verify_evidence_consistency.py` | `706` | `test` | `pass` |
-| `tests/verify_yao_cli.py` | `696` | `test` | `pass` |
-| `tests/verify_world_class_evidence_intake.py` | `690` | `test` | `pass` |
+| `tests/verify_evidence_consistency.py` | `711` | `test` | `pass` |
+| `tests/verify_world_class_evidence_intake.py` | `703` | `test` | `pass` |
+| `tests/verify_yao_cli.py` | `700` | `test` | `pass` |
 | `scripts/render_evidence_consistency.py` | `659` | `cli-script` | `pass` |
-| `scripts/render_world_class_operator_runbook.py` | `647` | `cli-script` | `pass` |
+| `scripts/render_world_class_operator_runbook.py` | `651` | `cli-script` | `pass` |
 | `tests/verify_output_review_adjudication.py` | `599` | `test` | `pass` |
 | `scripts/render_skill_overview.py` | `588` | `cli-script` | `pass` |
+| `tests/verify_world_class_evidence_ledger.py` | `587` | `test` | `pass` |
 | `scripts/build_skill_atlas.py` | `586` | `cli-script` | `pass` |
 | `scripts/optimize_description.py` | `585` | `cli-script` | `pass` |
 | `scripts/trust_check.py` | `582` | `cli-script` | `pass` |
-| `tests/verify_world_class_evidence_ledger.py` | `579` | `test` | `pass` |
 | `scripts/render_review_studio.py` | `578` | `cli-script` | `pass` |
 
 ## Release Rule

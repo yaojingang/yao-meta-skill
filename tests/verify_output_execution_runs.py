@@ -191,9 +191,20 @@ def main() -> None:
     )
     assert missing_provider_proc.returncode == 2, missing_provider_proc.stdout
     assert "missing API key env" in missing_provider_proc.stderr, missing_provider_proc.stderr
+    missing_deepseek_proc = subprocess.run(
+        [sys.executable, str(PROVIDER_RUNNER), "--provider", "deepseek", "--model", "fixture-model"],
+        cwd=ROOT,
+        input=json.dumps(provider_request),
+        capture_output=True,
+        text=True,
+        env=missing_env,
+    )
+    assert missing_deepseek_proc.returncode == 2, missing_deepseek_proc.stdout
+    assert "missing API key env: DEEPSEEK_API_KEY" in missing_deepseek_proc.stderr, missing_deepseek_proc.stderr
 
     custom_env = os.environ.copy()
     custom_env["OPENAI_API_KEY"] = "test-key"
+    custom_env["DEEPSEEK_API_KEY"] = "test-key"
     custom_env["YAO_OUTPUT_EVAL_MODEL"] = "fixture-model"
     custom_host_proc = subprocess.run(
         [
@@ -255,20 +266,34 @@ def main() -> None:
                     "body": json.loads(body),
                 }
             )
-            payload = {
-                "id": "resp_fixture",
-                "output": [
-                    {
-                        "content": [
-                            {
-                                "type": "output_text",
-                                "text": "Create SKILL.md and reports/skill-overview.html for this reusable package.",
+            if self.path.endswith("/chat/completions"):
+                payload = {
+                    "id": "chat_fixture",
+                    "choices": [
+                        {
+                            "message": {
+                                "role": "assistant",
+                                "content": "Create SKILL.md and reports/skill-overview.html for this reusable package.",
                             }
-                        ]
-                    }
-                ],
-                "usage": {"input_tokens": 21, "output_tokens": 9, "total_tokens": 30},
-            }
+                        }
+                    ],
+                    "usage": {"prompt_tokens": 21, "completion_tokens": 9, "total_tokens": 30},
+                }
+            else:
+                payload = {
+                    "id": "resp_fixture",
+                    "output": [
+                        {
+                            "content": [
+                                {
+                                    "type": "output_text",
+                                    "text": "Create SKILL.md and reports/skill-overview.html for this reusable package.",
+                                }
+                            ]
+                        }
+                    ],
+                    "usage": {"input_tokens": 21, "output_tokens": 9, "total_tokens": 30},
+                }
             encoded = json.dumps(payload).encode("utf-8")
             self.send_response(200)
             self.send_header("Content-Type", "application/json")
@@ -285,6 +310,7 @@ def main() -> None:
     provider_url = f"http://127.0.0.1:{server.server_port}/v1/responses"
     provider_env = os.environ.copy()
     provider_env["OPENAI_API_KEY"] = "test-key"
+    provider_env["DEEPSEEK_API_KEY"] = "test-key"
     provider_env["YAO_OUTPUT_EVAL_MODEL"] = "fixture-model"
     try:
         direct_provider_proc = subprocess.run(
@@ -310,8 +336,83 @@ def main() -> None:
         assert ProviderHandler.requests[-1]["path"] == "/v1/responses", ProviderHandler.requests[-1]
         assert ProviderHandler.requests[-1]["authorization"] == "Bearer test-key", ProviderHandler.requests[-1]
         assert ProviderHandler.requests[-1]["body"]["model"] == "fixture-model", ProviderHandler.requests[-1]
+        assert ProviderHandler.requests[-1]["body"]["temperature"] == 0.0, ProviderHandler.requests[-1]
         assert "Create a reusable skill package." in ProviderHandler.requests[-1]["body"]["input"], ProviderHandler.requests[-1]
         assert "fixture_output" not in ProviderHandler.requests[-1]["body"]["input"], ProviderHandler.requests[-1]
+
+        governed_provider_request = {
+            "case_id": "file-backed-governed-package",
+            "variant": "with_skill",
+            "prompt": "Turn the attached release brief source into a governed skill package.",
+            "input_files": ["fixtures/release-brief-source.md"],
+            "metadata": {"case_type": "boundary", "tier": "governed"},
+        }
+        governed_provider_proc = subprocess.run(
+            [
+                sys.executable,
+                str(PROVIDER_RUNNER),
+                "--base-url",
+                provider_url,
+                "--allow-insecure-localhost",
+                "--model",
+                "fixture-model",
+            ],
+            cwd=ROOT,
+            input=json.dumps(governed_provider_request),
+            capture_output=True,
+            text=True,
+            env=provider_env,
+            check=True,
+        )
+        governed_provider = json.loads(governed_provider_proc.stdout)
+        assert governed_provider["execution_kind"] == "model", governed_provider
+        governed_input = ProviderHandler.requests[-1]["body"]["input"]
+        assert "Release Brief Source Fixture" in governed_input, governed_input
+        assert "file-backed fixture" in governed_input, governed_input
+        assert "evidence" in governed_input, governed_input
+        assert "input_files" in governed_input, governed_input
+        assert "output contract" in governed_input, governed_input
+        assert "rollback boundary" in governed_input, governed_input
+        assert "trust report" in governed_input, governed_input
+        assert "reports/output_quality_scorecard.md" in governed_input, governed_input
+        assert "missing evidence" in governed_input, governed_input
+
+        chat_provider_url = f"http://127.0.0.1:{server.server_port}/chat/completions"
+        direct_chat_provider_proc = subprocess.run(
+            [
+                sys.executable,
+                str(PROVIDER_RUNNER),
+                "--provider",
+                "deepseek",
+                "--api-format",
+                "chat-completions",
+                "--thinking",
+                "disabled",
+                "--base-url",
+                chat_provider_url,
+                "--allow-insecure-localhost",
+                "--model",
+                "fixture-model",
+            ],
+            cwd=ROOT,
+            input=json.dumps(provider_request),
+            capture_output=True,
+            text=True,
+            env=provider_env,
+            check=True,
+        )
+        direct_chat_provider = json.loads(direct_chat_provider_proc.stdout)
+        assert direct_chat_provider["execution_kind"] == "model", direct_chat_provider
+        assert direct_chat_provider["provider"] == "deepseek", direct_chat_provider
+        assert direct_chat_provider["model"] == "fixture-model", direct_chat_provider
+        assert direct_chat_provider["usage"]["estimated"] is False, direct_chat_provider
+        assert ProviderHandler.requests[-1]["path"] == "/chat/completions", ProviderHandler.requests[-1]
+        assert ProviderHandler.requests[-1]["body"]["model"] == "fixture-model", ProviderHandler.requests[-1]
+        assert ProviderHandler.requests[-1]["body"]["thinking"]["type"] == "disabled", ProviderHandler.requests[-1]
+        assert ProviderHandler.requests[-1]["body"]["temperature"] == 0.0, ProviderHandler.requests[-1]
+        assert "Create a reusable skill package." in ProviderHandler.requests[-1]["body"]["messages"][0]["content"], (
+            ProviderHandler.requests[-1]
+        )
 
         provider_cases = tmp_root / "provider_cases.jsonl"
         provider_cases.write_text(

@@ -63,7 +63,7 @@
       {
         "field": "description",
         "from": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes.",
-        "to": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse."
+        "to": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use for skill creation, reusable workflow packaging, skill improvement, evals, and team-ready distribution."
       }
     ],
     "checksum_changes": [
@@ -75,7 +75,7 @@
       {
         "field": "package_sha256",
         "from": "0000000000000000000000000000000000000000000000000000000000000000",
-        "to": "7958467751730998d7f2a8f38c9e8ef324874459e62f0c0a197232cd8386b291"
+        "to": "7fc324e26d614c46b350c2b3e20cb87a86f967d3a74d345bc0baf73d78d8b111"
       }
     ]
   },

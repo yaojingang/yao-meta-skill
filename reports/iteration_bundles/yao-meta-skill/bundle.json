@@ -35,8 +35,8 @@
       "label": "Current",
       "ranking_state": "selected_by_dev",
       "promotion_state": "kept_current",
-      "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
-      "tokens": 65,
+      "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use for skill creation, reusable workflow packaging, skill improvement, evals, and team-ready distribution.",
+      "tokens": 53,
       "dev_errors": 0,
       "holdout_errors": 0,
       "reason_tags": []
@@ -66,7 +66,8 @@
       "dev_errors": 2,
       "holdout_errors": 0,
       "reason_tags": [
-        "weaker_dev_fit"
+        "weaker_dev_fit",
+        "longer_without_gain"
       ]
     },
     {
@@ -80,7 +81,8 @@
       "dev_errors": 2,
       "holdout_errors": 0,
       "reason_tags": [
-        "weaker_dev_fit"
+        "weaker_dev_fit",
+        "longer_without_gain"
       ]
     },
     {
@@ -116,8 +118,8 @@
   ],
   "review_template": {
     "target": "yao-meta-skill",
-    "current_description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
-    "candidate_description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
+    "current_description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use for skill creation, reusable workflow packaging, skill improvement, evals, and team-ready distribution.",
+    "candidate_description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use for skill creation, reusable workflow packaging, skill improvement, evals, and team-ready distribution.",
     "focus": [
       "no_candidate_outperformed_current"
     ]

@@ -27,7 +27,7 @@
 | Role | Label | Ranking State | Promotion State | Tokens | Dev Errors | Holdout Errors |
 | --- | --- | --- | --- | ---: | ---: | ---: |
 | baseline | `Baseline` | reference | reference | 8 | 1 | 0 |
-| current | `Current` | selected_by_dev | kept_current | 65 | 0 | 0 |
+| current | `Current` | selected_by_dev | kept_current | 53 | 0 | 0 |
 | candidate | `Minimal` | not_selected | blocked | 41 | 2 | 0 |
 | candidate | `Guardrail` | not_selected | blocked | 56 | 2 | 0 |
 | candidate | `Balanced` | not_selected | blocked | 60 | 2 | 0 |
@@ -37,8 +37,8 @@
 ## Human Review Stub
 
 - target: yao-meta-skill
-- current description: Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.
-- candidate description: Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.
+- current description: Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use for skill creation, reusable workflow packaging, skill improvement, evals, and team-ready distribution.
+- candidate description: Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use for skill creation, reusable workflow packaging, skill improvement, evals, and team-ready distribution.
 - review focus: no_candidate_outperformed_current
 
 ## Artifact Paths

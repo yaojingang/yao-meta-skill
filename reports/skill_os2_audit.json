@@ -5,21 +5,21 @@
   "skill_dir": ".",
   "summary": {
     "item_count": 15,
-    "pass_count": 11,
+    "pass_count": 12,
     "warn_count": 0,
     "human_required_count": 1,
-    "external_required_count": 3,
+    "external_required_count": 2,
     "missing_count": 0,
-    "open_gap_count": 4,
+    "open_gap_count": 3,
     "local_foundation_ready": true,
     "world_class_ready": false,
     "decision": "continue-iteration"
   },
   "status_counts": {
-    "pass": 11,
+    "pass": 12,
     "warn": 0,
     "human_required": 1,
-    "external_required": 3,
+    "external_required": 2,
     "missing": 0
   },
   "items": [
@@ -104,8 +104,8 @@
     {
       "key": "provider-holdout",
       "label": "Provider Holdout",
-      "status": "external_required",
-      "current": "model-executed 0; token-observed 0",
+      "status": "pass",
+      "current": "model-executed 10; token-observed 10",
       "target": "At least one real provider-backed holdout run with observed model/timing/token metadata",
       "evidence": [
         {
@@ -367,24 +367,6 @@
     }
   ],
   "next_highest_leverage": [
-    {
-      "key": "provider-holdout",
-      "label": "Provider Holdout",
-      "status": "external_required",
-      "current": "model-executed 0; token-observed 0",
-      "target": "At least one real provider-backed holdout run with observed model/timing/token metadata",
-      "evidence": [
-        {
-          "path": "scripts/provider_output_eval_runner.py",
-          "exists": true
-        },
-        {
-          "path": "reports/output_execution_runs.json",
-          "exists": true
-        }
-      ],
-      "next_action": "Run provider-backed holdout cases with real credentials and commit only aggregate evidence."
-    },
     {
       "key": "human-adjudication",
       "label": "Human Adjudication",

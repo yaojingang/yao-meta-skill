@@ -72,7 +72,7 @@ def main() -> None:
     assert "file-backed 1" in output_gate["detail"], output_gate
     assert "blind A/B 5" in output_gate["detail"], output_gate
     assert "exec 10" in output_gate["detail"], output_gate
-    assert "model 0" in output_gate["detail"], output_gate
+    assert "model 10" in output_gate["detail"], output_gate
     assert "reviewed 0/5" in output_gate["detail"], output_gate
     assert "review pending 5" in output_gate["detail"], output_gate
     context_gate = next(item for item in payload["gates"] if item["key"] == "context-budget")
@@ -198,7 +198,9 @@ def main() -> None:
     assert full_payload["data"]["output_blind_review"]["summary"]["pair_count"] == 5, full_payload["data"]["output_blind_review"]
     assert full_payload["data"]["output_execution"]["summary"]["command_executed_count"] == 10, full_payload["data"]["output_execution"]
     assert full_payload["data"]["output_execution"]["summary"]["recorded_fixture_count"] == 0, full_payload["data"]["output_execution"]
-    assert full_payload["data"]["output_execution"]["summary"]["model_executed_count"] == 0, full_payload["data"]["output_execution"]
+    assert full_payload["data"]["output_execution"]["summary"]["model_executed_count"] == 10, full_payload["data"]["output_execution"]
+    assert full_payload["data"]["output_execution"]["summary"]["token_observed_count"] == 10, full_payload["data"]["output_execution"]
+    assert full_payload["data"]["output_execution"]["summary"]["token_estimated_count"] == 0, full_payload["data"]["output_execution"]
     assert full_payload["data"]["output_review_adjudication"]["summary"]["pending_count"] == 5, full_payload["data"]["output_review_adjudication"]
     assert full_payload["data"]["output_review_adjudication"]["summary"]["answer_revealed_count"] == 0, full_payload["data"]["output_review_adjudication"]
     assert full_payload["data"]["output_review_adjudication"]["summary"]["pending_answer_hidden_count"] == 5, full_payload["data"]["output_review_adjudication"]
@@ -214,7 +216,7 @@ def main() -> None:
     assert benchmark_summary["public_claim_blocker_count"] >= 3, benchmark_summary
     public_claim = full_payload["data"]["benchmark_reproducibility"]["public_claim"]
     assert public_claim["ready"] is False, public_claim
-    assert any("provider-backed model holdout evidence is incomplete" in item for item in public_claim["blockers"]), public_claim
+    assert not any("provider-backed model holdout evidence is incomplete" in item for item in public_claim["blockers"]), public_claim
     assert any("human blind-review adjudication is incomplete" in item for item in public_claim["blockers"]), public_claim
     output_review_checklist = full_payload["data"]["output_review_adjudication"]["reviewer_checklist"]
     assert len(output_review_checklist) == 5, output_review_checklist
@@ -241,7 +243,7 @@ def main() -> None:
     waiver_candidates = {item["gate_key"]: item for item in full_payload["data"]["review_waivers"]["waiver_candidates"]}
     assert waiver_candidates["output-lab"]["waiver_allowed"] is True, waiver_candidates
     assert waiver_candidates["output-lab"]["status"] == "needs-reviewer-decision", waiver_candidates
-    assert waiver_candidates["output-lab"]["risk_summary"] == "review pending 5; model-executed 0; output failures 0", waiver_candidates
+    assert waiver_candidates["output-lab"]["risk_summary"] == "review pending 5; model-executed 10; output failures 0", waiver_candidates
     assert "review-waivers . --add-waiver" in waiver_candidates["output-lab"]["suggested_command"], waiver_candidates
     assert "Does not count as provider, human, or public world-class completion evidence" in waiver_candidates["output-lab"]["world_class_boundary"], waiver_candidates
     assert waiver_candidates["world-class-evidence"]["waiver_allowed"] is False, waiver_candidates
@@ -293,8 +295,10 @@ def main() -> None:
     assert provider_entry["status"] == "pending", provider_entry
     assert "reports/output_execution_runs.json summary.model_executed_count > 0" in provider_entry["success_checks"], provider_entry
     assert any("output-exec --provider-runner openai" in step for step in provider_entry["runbook"]), provider_entry
-    assert provider_entry["observed_state"]["model_executed_count"] == 0, provider_entry
-    assert provider_entry["submission_state"]["status"] == "missing", provider_entry
+    assert provider_entry["observed_state"]["model_executed_count"] == 10, provider_entry
+    assert provider_entry["observed_state"]["token_observed_count"] == 10, provider_entry
+    assert provider_entry["submission_state"]["status"] == "invalid-contract", provider_entry
+    assert provider_entry["submission_state"]["artifact_sha256_verified_count"] == 1, provider_entry
     assert provider_entry["submission_state"]["ledger_counts_as_completion"] is False, provider_entry
     assert full_payload["data"]["atlas"]["summary"]["actionable_route_collision_count"] == 0, full_payload["data"]["atlas"]
     assert full_payload["data"]["atlas"]["summary"]["actionable_drift_signal_count"] == 0, full_payload["data"]["atlas"]
@@ -362,7 +366,7 @@ def main() -> None:
     assert "#40 · collect-source" in html, html
     assert "action-repair-list" in html, html
     assert "action-repair-row blocked" in html, html
-    assert "openai-api-key" in html, html
+    assert "provider-api-key" in html, html
     assert "model_executed_count" in html, html
     assert "#20 · unblock-access · precheck" in html, html
     assert "#40 · collect-source · source-check" in html, html
@@ -422,7 +426,7 @@ def main() -> None:
     assert "源证据检查" in html, html
     assert "world-source-checks" in html, html
     assert "Provider model run" in html, html
-    assert "model_executed_count: 0 / &gt;0" in html, html
+    assert "model_executed_count: 10 / &gt;0" in html, html
     assert "Token usage observed" in html, html
     assert "蓝图覆盖" in html, html
     assert "Extension Track Count" in html, html
@@ -436,7 +440,7 @@ def main() -> None:
     assert "公开声明" in html, html
     assert "声明阻断" in html, html
     assert "可公开声明" in html, html
-    assert "provider-backed model holdout evidence is incomplete" in html, html
+    assert "provider-backed model holdout evidence is incomplete" not in html, html
     assert "human blind-review adjudication is incomplete" in html, html
     assert "审查批注" in html, html[:9000]
     assert "当前没有 reviewer 批注" in html, html[:9000]
@@ -467,7 +471,7 @@ def main() -> None:
     assert "waiver-candidate-grid" in html, html
     assert "可批准 · needs-reviewer-decision" in html, html
     assert "不可批准 · cannot-waive" in html, html
-    assert "review pending 5; model-executed 0; output failures 0" in html, html
+    assert "review pending 5; model-executed 10; output failures 0" in html, html
     assert "4 pending evidence entries; 1 human pending; 3 external pending" in html, html
     assert "Does not count as provider, human, or public world-class completion evidence" in html, html
     assert "Non-waivable completion boundary" in html, html

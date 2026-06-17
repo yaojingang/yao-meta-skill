@@ -45,6 +45,17 @@ def run_script(name: str, args: list[str], cwd: Path | None = None) -> dict:
     }
 
 
+def allow_report_status(result: dict, *, allowed_returncodes: set[int] | None = None) -> dict:
+    allowed = allowed_returncodes or {2}
+    if result.get("ok") or result.get("returncode") not in allowed or result.get("payload") is None:
+        return result
+    normalized = dict(result)
+    normalized["ok"] = True
+    normalized["soft_status_returncode"] = result.get("returncode")
+    normalized["soft_status_reason"] = "report generated with a non-passing evidence decision"
+    return normalized
+
+
 def run_adoption_drift_if_source_exists(skill_dir: Path | None = None) -> dict:
     target = (skill_dir or ROOT).resolve()
     events_path = target / "reports" / "telemetry_events.jsonl"

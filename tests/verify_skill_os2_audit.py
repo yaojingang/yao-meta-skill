@@ -40,16 +40,17 @@ def main() -> None:
     assert payload["summary"]["world_class_ready"] is False, payload
     assert payload["summary"]["missing_count"] == 0, payload
     assert payload["summary"]["item_count"] >= 15, payload
-    assert payload["summary"]["pass_count"] >= 11, payload
+    assert payload["summary"]["pass_count"] >= 12, payload
     assert payload["summary"]["human_required_count"] >= 1, payload
-    assert payload["summary"]["external_required_count"] >= 3, payload
+    assert payload["summary"]["external_required_count"] >= 2, payload
     assert payload["artifacts"]["world_class_evidence_plan"] == "reports/world_class_evidence_plan.md", payload
     items = {item["key"]: item for item in payload["items"]}
     assert items["skill-ir"]["status"] == "pass", items["skill-ir"]
     assert items["target-compiler"]["status"] == "pass", items["target-compiler"]
     assert items["output-eval-lab"]["status"] == "pass", items["output-eval-lab"]
     assert items["benchmark-reproducibility"]["status"] == "pass", items["benchmark-reproducibility"]
-    assert items["provider-holdout"]["status"] == "external_required", items["provider-holdout"]
+    assert items["provider-holdout"]["status"] == "pass", items["provider-holdout"]
+    assert "model-executed 10" in items["provider-holdout"]["current"], items["provider-holdout"]
     assert items["human-adjudication"]["status"] == "human_required", items["human-adjudication"]
     assert items["native-permission-enforcement"]["status"] == "external_required", items["native-permission-enforcement"]
     assert "installer-enforced targets" in items["native-permission-enforcement"]["current"], items["native-permission-enforcement"]
@@ -60,7 +61,7 @@ def main() -> None:
     markdown = output_md.read_text(encoding="utf-8")
     assert "Skill OS 2.0 Audit" in markdown, markdown
     assert "reports/world_class_evidence_plan.md" in markdown, markdown
-    assert "`provider-holdout`" in markdown, markdown
+    assert "Provider Holdout" in markdown, markdown
     assert "Benchmark Reproducibility" in markdown, markdown
     assert "`human-adjudication`" in markdown, markdown
     assert "`native-client-telemetry`" in markdown, markdown

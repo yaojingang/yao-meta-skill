@@ -7,7 +7,8 @@
   "cause_tags": [
     "no_candidate_outperformed_current",
     "current_holdout_gap_present",
-    "current_holdout_risk"
+    "current_holdout_risk",
+    "adversarial_watch_risk"
   ],
   "gate_status": {
     "visible_holdout_non_regression": true,
@@ -28,8 +29,8 @@
       "promotion_state": "reference",
       "description": "Build governed incident command packets from alerts, incident notes, transcripts, and stakeholder requirements. Use when asked to standardize incident review, severity assessment, incident communication, or incident packet assembly into one reusable operational skill. Do not use for generic debugging, one-off incident explanations, or brainstorming possible response ideas.",
       "tokens": 93,
-      "dev_errors": 1,
-      "holdout_errors": 2
+      "dev_errors": 0,
+      "holdout_errors": 1
     },
     {
       "name": "governed-incident-command",
@@ -39,24 +40,9 @@
       "promotion_state": "kept_current",
       "description": "Build governed incident command packets. Use when asked to standardize incident review, run severity assessment, or assemble incident communication.",
       "tokens": 37,
-      "dev_errors": 1,
+      "dev_errors": 0,
       "holdout_errors": 1,
       "reason_tags": []
-    },
-    {
-      "name": "governed-incident-command",
-      "role": "candidate",
-      "label": "Guardrail",
-      "ranking_state": "not_selected",
-      "promotion_state": "blocked",
-      "description": "Build governed incident command packets from alerts, incident notes, transcripts, or stakeholder requirements. Do not use for generic debugging, one-off incident explanations, or drafting a single update.",
-      "tokens": 51,
-      "dev_errors": 1,
-      "holdout_errors": 2,
-      "reason_tags": [
-        "visible_holdout_regression",
-        "longer_without_gain"
-      ]
     },
     {
       "name": "governed-incident-command",
@@ -66,7 +52,7 @@
       "promotion_state": "blocked",
       "description": "Build governed incident command packets from alerts, incident notes, transcripts, or stakeholder requirements. Use when asked to standardize incident review, run severity assessment, or assemble incident communication.",
       "tokens": 54,
-      "dev_errors": 1,
+      "dev_errors": 0,
       "holdout_errors": 1,
       "reason_tags": [
         "longer_without_gain"
@@ -80,7 +66,7 @@
       "promotion_state": "blocked",
       "description": "Build governed incident command packets from alerts, incident notes, transcripts, or stakeholder requirements. Use when asked to standardize incident review, run severity assessment, or assemble incident communication. Do not use for generic debugging, one-off incident explanations, or drafting a single update.",
       "tokens": 78,
-      "dev_errors": 1,
+      "dev_errors": 0,
       "holdout_errors": 1,
       "reason_tags": [
         "longer_without_gain"
@@ -94,9 +80,24 @@
       "promotion_state": "blocked",
       "description": "Build governed incident command packets from alerts, incident notes, transcripts, or stakeholder requirements. Trigger when requests mention alerts, incident notes, transcripts, or stakeholder requirements and the job is to standardize incident review, run severity assessment, or assemble incident communication.",
       "tokens": 78,
+      "dev_errors": 0,
+      "holdout_errors": 1,
+      "reason_tags": [
+        "longer_without_gain"
+      ]
+    },
+    {
+      "name": "governed-incident-command",
+      "role": "candidate",
+      "label": "Guardrail",
+      "ranking_state": "not_selected",
+      "promotion_state": "blocked",
+      "description": "Build governed incident command packets from alerts, incident notes, transcripts, or stakeholder requirements. Do not use for generic debugging, one-off incident explanations, or drafting a single update.",
+      "tokens": 51,
       "dev_errors": 1,
       "holdout_errors": 1,
       "reason_tags": [
+        "weaker_dev_fit",
         "longer_without_gain"
       ]
     }

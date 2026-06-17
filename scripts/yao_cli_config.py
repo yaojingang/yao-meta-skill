@@ -72,15 +72,28 @@ def provider_output_runner_command(
     provider: str,
     model: str | None = None,
     base_url: str | None = None,
+    api_format: str | None = None,
+    thinking: str | None = None,
+    temperature: float | None = None,
     api_key_env: str | None = None,
     allow_insecure_localhost: bool = False,
     allow_custom_base_url: bool = False,
 ) -> str:
     command = ["python3", "scripts/provider_output_eval_runner.py", "--provider", provider]
+    if provider == "deepseek":
+        api_format = api_format or "chat-completions"
+        thinking = thinking or "disabled"
+        api_key_env = api_key_env or "DEEPSEEK_API_KEY"
     if model:
         command.extend(["--model", model])
     if base_url:
         command.extend(["--base-url", base_url])
+    if api_format:
+        command.extend(["--api-format", api_format])
+    if thinking:
+        command.extend(["--thinking", thinking])
+    if temperature is not None:
+        command.extend(["--temperature", str(temperature)])
     if api_key_env:
         command.extend(["--api-key-env", api_key_env])
     if allow_insecure_localhost:

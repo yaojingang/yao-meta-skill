@@ -39,8 +39,8 @@ def provider_submission(*, valid: bool = True) -> dict:
             }
         ],
         "provenance": {
-            "provider": "openai",
-            "model": "gpt-4.1-mini",
+            "provider": "deepseek",
+            "model": "deepseek-v4-flash",
             "credential_material_committed": False,
         },
         "privacy": {
@@ -87,10 +87,19 @@ def run_review(*extra: str, check: bool = True) -> subprocess.CompletedProcess[s
 def main() -> None:
     shutil.rmtree(TMP, ignore_errors=True)
     TMP.mkdir(parents=True, exist_ok=True)
+    empty_submissions = TMP / "empty-submissions"
+    empty_submissions.mkdir()
 
     output_json = TMP / "world_class_submission_review.json"
     output_md = TMP / "world_class_submission_review.md"
-    default_proc = run_review("--output-json", str(output_json), "--output-md", str(output_md))
+    default_proc = run_review(
+        "--output-json",
+        str(output_json),
+        "--output-md",
+        str(output_md),
+        "--submissions-dir",
+        str(empty_submissions),
+    )
     payload = json.loads(default_proc.stdout)
     assert payload["schema_version"] == "1.0", payload
     assert payload["ok"] is True, payload
@@ -115,11 +124,11 @@ def main() -> None:
     provider_item = {item["evidence_key"]: item for item in payload["items"]}["provider-holdout"]
     assert provider_item["review_state"] == "awaiting-submission", provider_item
     assert provider_item["submission_status"] == "missing", provider_item
-    assert provider_item["source_accepted"] is False, provider_item
+    assert provider_item["source_accepted"] is True, provider_item
     provider_source = {item["field"]: item for item in provider_item["source_checklist"]}
-    assert provider_source["model_executed_count"]["status"] == "blocked", provider_source
+    assert provider_source["model_executed_count"]["status"] == "pass", provider_source
     assert provider_source["timing_observed_count"]["status"] == "pass", provider_source
-    assert provider_source["token_observed_count"]["status"] == "blocked", provider_source
+    assert provider_source["token_observed_count"]["status"] == "pass", provider_source
     human_item = {item["evidence_key"]: item for item in payload["items"]}["human-adjudication"]
     human_source = {item["field"]: item for item in human_item["source_checklist"]}
     assert human_item["observed_state"]["raw_content_allowed"] is False, human_item
@@ -130,7 +139,7 @@ def main() -> None:
     markdown = output_md.read_text(encoding="utf-8")
     assert "World-Class Submission Review" in markdown, markdown
     assert "review counts submission as completion: `false`" in markdown, markdown
-    assert "Provider model run: 0 / >0 => blocked" in markdown, markdown
+    assert "Provider model run: 10 / >0 => pass" in markdown, markdown
     assert "`provider-holdout`" in markdown, markdown
 
     submissions = TMP / "valid_submissions"
@@ -153,26 +162,27 @@ def main() -> None:
         str(TMP / "submitted_review.md"),
         check=False,
     )
-    assert submitted_proc.returncode == 2, submitted_proc.stdout
+    assert submitted_proc.returncode == 0, submitted_proc.stdout
     submitted_payload = json.loads(submitted_proc.stdout)
     submitted_summary = submitted_payload["summary"]
-    assert submitted_payload["ok"] is False, submitted_payload
-    assert submitted_summary["decision"] == "fix-submissions", submitted_summary
+    assert submitted_payload["ok"] is True, submitted_payload
+    assert submitted_summary["decision"] == "awaiting-submissions", submitted_summary
     assert submitted_summary["valid_packet_source_incomplete_count"] == 0, submitted_summary
     assert submitted_summary["awaiting_submission_count"] == 3, submitted_summary
-    assert submitted_summary["invalid_submission_count"] == 1, submitted_summary
+    assert submitted_summary["invalid_submission_count"] == 0, submitted_summary
+    assert submitted_summary["accepted_count"] == 1, submitted_summary
     assert submitted_summary["source_pass_count"] + submitted_summary["source_blocked_count"] == submitted_summary["source_check_count"], submitted_summary
     assert submitted_summary["source_blocked_count"] >= 6, submitted_summary
     submitted_provider = {item["evidence_key"]: item for item in submitted_payload["items"]}["provider-holdout"]
-    assert submitted_provider["review_state"] == "fix-submission", submitted_provider
-    assert submitted_provider["intake_status"] == "fail", submitted_provider
-    assert submitted_provider["submission_status"] == "invalid-contract", submitted_provider
+    assert submitted_provider["review_state"] == "accepted", submitted_provider
+    assert submitted_provider["intake_status"] == "pass", submitted_provider
+    assert submitted_provider["submission_status"] == "submitted", submitted_provider
     assert submitted_provider["artifact_ref_count"] == 1, submitted_provider
-    assert submitted_provider["source_accepted"] is False, submitted_provider
-    assert any("summary.model_executed_count must be >0" in error for error in submitted_provider["intake_errors"]), submitted_provider
+    assert submitted_provider["source_accepted"] is True, submitted_provider
+    assert submitted_provider["intake_errors"] == [], submitted_provider
     assert "model_executed_count" in submitted_provider["observed_state"], submitted_provider
     submitted_source = {item["field"]: item for item in submitted_provider["source_checklist"]}
-    assert submitted_source["model_executed_count"]["status"] == "blocked", submitted_source
+    assert submitted_source["model_executed_count"]["status"] == "pass", submitted_source
     assert submitted_source["timing_observed_count"]["status"] == "pass", submitted_source
 
     invalid_dir = TMP / "invalid_submissions"

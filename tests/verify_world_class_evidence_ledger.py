@@ -39,8 +39,8 @@ def provider_submission(artifact_root: Path = ROOT, artifact_path: str = "report
             }
         ],
         "provenance": {
-            "provider": "openai",
-            "model": "gpt-4.1-mini",
+            "provider": "deepseek",
+            "model": "deepseek-v4-flash",
             "credential_material_committed": False,
         },
         "privacy": {
@@ -87,8 +87,8 @@ def accepted_provider_execution_report() -> dict:
                 "model_executed": True,
                 "command_executed": True,
                 "duration_ms": 1234.5,
-                "provider": "openai",
-                "model": "gpt-4.1-mini",
+                "provider": "deepseek",
+                "model": "deepseek-v4-flash",
                 "usage": {
                     "input_tokens": 20,
                     "output_tokens": 30,
@@ -105,6 +105,8 @@ def accepted_provider_execution_report() -> dict:
 def main() -> None:
     shutil.rmtree(TMP, ignore_errors=True)
     TMP.mkdir(parents=True, exist_ok=True)
+    empty_submissions = TMP / "empty-submissions"
+    empty_submissions.mkdir()
     output_json = TMP / "world_class_evidence_ledger.json"
     output_md = TMP / "world_class_evidence_ledger.md"
     proc = subprocess.run(
@@ -116,6 +118,8 @@ def main() -> None:
             str(output_json),
             "--output-md",
             str(output_md),
+            "--submissions-dir",
+            str(empty_submissions),
             "--generated-at",
             "2026-06-13",
         ],
@@ -158,13 +162,15 @@ def main() -> None:
         "native-permission-enforcement",
         "native-client-telemetry",
     }, entries
-    assert entries["provider-holdout"]["observed_state"]["model_executed_count"] == 0, entries["provider-holdout"]
-    assert any("output-exec --provider-runner openai" in step for step in entries["provider-holdout"]["runbook"]), entries["provider-holdout"]
+    assert entries["provider-holdout"]["source_accepted"] is True, entries["provider-holdout"]
+    assert entries["provider-holdout"]["observed_state"]["model_executed_count"] > 0, entries["provider-holdout"]
+    assert any("--provider-runner openai" in step for step in entries["provider-holdout"]["runbook"]), entries["provider-holdout"]
+    assert any("--provider-runner deepseek" in step for step in entries["provider-holdout"]["runbook"]), entries["provider-holdout"]
     assert not any("<redacted>" in step or "OPENAI_API_KEY=" in step for step in entries["provider-holdout"]["runbook"]), entries["provider-holdout"]
     provider_source = {item["field"]: item for item in entries["provider-holdout"]["source_checklist"]}
-    assert provider_source["model_executed_count"]["status"] == "blocked", provider_source
+    assert provider_source["model_executed_count"]["status"] == "pass", provider_source
     assert provider_source["timing_observed_count"]["status"] == "pass", provider_source
-    assert provider_source["token_observed_count"]["status"] == "blocked", provider_source
+    assert provider_source["token_observed_count"]["status"] == "pass", provider_source
     assert entries["provider-holdout"]["submission_state"]["status"] == "missing", entries["provider-holdout"]
     assert entries["provider-holdout"]["submission_state"]["ledger_counts_as_completion"] is False, entries["provider-holdout"]
     assert entries["human-adjudication"]["observed_state"]["pending_count"] == 5, entries["human-adjudication"]
@@ -197,11 +203,12 @@ def main() -> None:
     assert "submitted entries: `0`" in markdown, markdown
     assert "source checks:" in markdown, markdown
     assert "Source Runbook" in markdown, markdown
-    assert "output-exec --provider-runner openai" in markdown, markdown
+    assert "--provider-runner openai" in markdown, markdown
+    assert "--provider-runner deepseek" in markdown, markdown
     assert "<redacted>" not in markdown, markdown
     assert "OPENAI_API_KEY=<redacted>" not in markdown, markdown
     assert "Source Evidence Checks" in markdown, markdown
-    assert "| Provider model run | `0` | `>0` | `blocked` |" in markdown, markdown
+    assert "| Provider model run | `10` | `>0` | `pass` |" in markdown, markdown
     assert "`provider-holdout`" in markdown, markdown
 
     submissions = TMP / "submissions"
@@ -231,18 +238,19 @@ def main() -> None:
     )
     submitted_payload = json.loads(submitted_proc.stdout)
     submitted_summary = submitted_payload["summary"]
-    assert submitted_summary["submitted_entry_count"] == 0, submitted_summary
+    assert submitted_summary["submitted_entry_count"] == 1, submitted_summary
     assert submitted_summary["submitted_but_pending_count"] == 0, submitted_summary
-    assert submitted_summary["invalid_submission_count"] == 1, submitted_summary
-    assert submitted_summary["accepted_count"] == 0, submitted_summary
+    assert submitted_summary["invalid_submission_count"] == 0, submitted_summary
+    assert submitted_summary["accepted_count"] == 1, submitted_summary
+    assert submitted_summary["pending_count"] == 3, submitted_summary
     assert submitted_summary["source_blocked_count"] >= 6, submitted_summary
     submitted_provider = {entry["key"]: entry for entry in submitted_payload["entries"]}["provider-holdout"]
-    assert submitted_provider["status"] == "pending", submitted_provider
-    assert submitted_provider["submission_state"]["status"] == "invalid-contract", submitted_provider
+    assert submitted_provider["status"] == "accepted", submitted_provider
+    assert submitted_provider["submission_state"]["status"] == "submitted", submitted_provider
     assert submitted_provider["submission_state"]["artifact_sha256_verified_count"] == 1, submitted_provider
     assert submitted_provider["submission_state"]["attested_real_evidence"] is True, submitted_provider
     assert submitted_provider["submission_state"]["ledger_counts_as_completion"] is False, submitted_provider
-    assert any("summary.model_executed_count must be >0" in error for error in submitted_provider["submission_state"]["errors"]), submitted_provider
+    assert submitted_provider["submission_state"]["errors"] == [], submitted_provider
 
     accepted_source_skill = TMP / "accepted_source_skill"
     (accepted_source_skill / "reports").mkdir(parents=True)

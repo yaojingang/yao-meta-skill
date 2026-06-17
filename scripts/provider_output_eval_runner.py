@@ -11,9 +11,26 @@ from urllib.request import Request, urlopen
 
 
 ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_BASE_URL = "https://api.openai.com/v1/responses"
-DEFAULT_HOST = urlparse(DEFAULT_BASE_URL).hostname or "api.openai.com"
+DEFAULT_OPENAI_BASE_URL = "https://api.openai.com/v1/responses"
+DEFAULT_DEEPSEEK_BASE_URL = "https://api.deepseek.com/chat/completions"
+DEFAULT_BASE_URL = DEFAULT_OPENAI_BASE_URL
+DEFAULT_HOST = urlparse(DEFAULT_OPENAI_BASE_URL).hostname or "api.openai.com"
+DEFAULT_PROVIDER_CONFIGS = {
+    "openai": {
+        "base_url": DEFAULT_OPENAI_BASE_URL,
+        "api_format": "responses",
+        "api_key_env": "OPENAI_API_KEY",
+        "thinking": "",
+    },
+    "deepseek": {
+        "base_url": DEFAULT_DEEPSEEK_BASE_URL,
+        "api_format": "chat-completions",
+        "api_key_env": "DEEPSEEK_API_KEY",
+        "thinking": "disabled",
+    },
+}
 ALLOWED_PATH_PREFIX = "/v1/responses"
+CHAT_COMPLETIONS_PATHS = {"/chat/completions", "/v1/chat/completions"}
 LOCAL_HOSTS = {"127.0.0.1", "localhost", "::1"}
 
 
@@ -22,18 +39,33 @@ def fail(message: str) -> None:
     raise SystemExit(2)
 
 
-def validate_base_url(base_url: str, allow_insecure_localhost: bool, allow_custom_base_url: bool) -> None:
+def validate_base_url(
+    base_url: str,
+    allow_insecure_localhost: bool,
+    allow_custom_base_url: bool,
+    api_format: str,
+) -> None:
     parsed = urlparse(base_url)
     host = parsed.hostname or ""
-    if not parsed.path.startswith(ALLOWED_PATH_PREFIX):
+    if api_format == "responses" and not parsed.path.startswith(ALLOWED_PATH_PREFIX):
         fail(f"provider endpoint path must start with {ALLOWED_PATH_PREFIX}")
-    if parsed.scheme == "https" and (host == DEFAULT_HOST or allow_custom_base_url):
+    if api_format == "chat-completions" and parsed.path not in CHAT_COMPLETIONS_PATHS:
+        fail("chat-completions provider endpoint path must be /chat/completions or /v1/chat/completions")
+    if parsed.scheme == "https" and (
+        base_url in {DEFAULT_OPENAI_BASE_URL, DEFAULT_DEEPSEEK_BASE_URL}
+        or host == DEFAULT_HOST
+        or allow_custom_base_url
+    ):
         return
     if parsed.scheme == "https":
         fail("custom provider host requires --allow-custom-base-url")
     if parsed.scheme == "http" and allow_insecure_localhost and (parsed.hostname or "") in LOCAL_HOSTS:
         return
     fail("provider runner requires HTTPS; use --allow-insecure-localhost only for local test servers")
+
+
+def provider_defaults(provider: str) -> dict[str, str]:
+    return DEFAULT_PROVIDER_CONFIGS.get(provider, DEFAULT_PROVIDER_CONFIGS["openai"])
 
 
 def load_request() -> dict[str, Any]:
@@ -173,8 +205,43 @@ def observed_usage(payload: dict[str, Any]) -> dict[str, Any]:
     return result
 
 
-def call_provider(base_url: str, api_key: str, model: str, provider_input: str, timeout_seconds: float) -> dict[str, Any]:
-    body = json.dumps({"model": model, "input": provider_input}, ensure_ascii=False).encode("utf-8")
+def request_body(
+    model: str,
+    provider_input: str,
+    api_format: str,
+    thinking_type: str,
+    temperature: float | None,
+) -> dict[str, Any]:
+    if api_format == "chat-completions":
+        body: dict[str, Any] = {
+            "model": model,
+            "messages": [{"role": "user", "content": provider_input}],
+        }
+        if thinking_type:
+            body["thinking"] = {"type": thinking_type}
+        if temperature is not None:
+            body["temperature"] = temperature
+        return body
+    body = {"model": model, "input": provider_input}
+    if temperature is not None:
+        body["temperature"] = temperature
+    return body
+
+
+def call_provider(
+    base_url: str,
+    api_key: str,
+    model: str,
+    provider_input: str,
+    timeout_seconds: float,
+    api_format: str,
+    thinking_type: str,
+    temperature: float | None,
+) -> dict[str, Any]:
+    body = json.dumps(
+        request_body(model, provider_input, api_format, thinking_type, temperature),
+        ensure_ascii=False,
+    ).encode("utf-8")
     request = Request(
         base_url,
         data=body,
@@ -209,9 +276,19 @@ def main() -> None:
         )
     )
     parser.add_argument("--provider", default="openai", help="Provider label to write into execution evidence.")
-    parser.add_argument("--base-url", default=DEFAULT_BASE_URL, help="OpenAI Responses API compatible endpoint.")
+    parser.add_argument(
+        "--base-url",
+        help="Override the provider endpoint. Defaults are selected from --provider.",
+    )
+    parser.add_argument(
+        "--api-format",
+        choices=["responses", "chat-completions"],
+        help="Provider API shape. Defaults are selected from --provider.",
+    )
+    parser.add_argument("--thinking", choices=["enabled", "disabled"], help="Optional chat-completions thinking mode.")
+    parser.add_argument("--temperature", type=float, default=0.0, help="Sampling temperature for provider requests.")
     parser.add_argument("--model", default=os.environ.get("YAO_OUTPUT_EVAL_MODEL", ""))
-    parser.add_argument("--api-key-env", default="OPENAI_API_KEY")
+    parser.add_argument("--api-key-env", help="Environment variable that contains the provider API key.")
     parser.add_argument("--input-root", default=str(ROOT / "evals" / "output"))
     parser.add_argument("--skill-file", default=str(ROOT / "SKILL.md"))
     parser.add_argument("--timeout-seconds", type=float, default=60.0)
@@ -221,18 +298,35 @@ def main() -> None:
     parser.add_argument("--allow-custom-base-url", action="store_true")
     args = parser.parse_args()
 
-    validate_base_url(args.base_url, args.allow_insecure_localhost, args.allow_custom_base_url)
+    defaults = provider_defaults(args.provider)
+    base_url = args.base_url or defaults["base_url"]
+    api_format = args.api_format or defaults["api_format"]
+    thinking = args.thinking if args.thinking is not None else defaults["thinking"]
+    api_key_env = args.api_key_env or defaults["api_key_env"]
+
+    validate_base_url(base_url, args.allow_insecure_localhost, args.allow_custom_base_url, api_format)
+    if args.temperature is not None and not 0 <= args.temperature <= 2:
+        fail("--temperature must be between 0 and 2")
     if not args.model:
         fail("missing model; pass --model or set YAO_OUTPUT_EVAL_MODEL")
-    api_key = os.environ.get(args.api_key_env, "")
+    api_key = os.environ.get(api_key_env, "")
     if not api_key:
-        fail(f"missing API key env: {args.api_key_env}")
+        fail(f"missing API key env: {api_key_env}")
 
     request = load_request()
     input_files = read_input_files(request.get("input_files", []), Path(args.input_root).resolve(), args.max_input_file_chars)
     skill_text = read_skill_instructions(Path(args.skill_file).resolve(), args.max_skill_chars)
     provider_input = build_provider_input(request, skill_text, input_files)
-    response = call_provider(args.base_url, api_key, args.model, provider_input, args.timeout_seconds)
+    response = call_provider(
+        base_url,
+        api_key,
+        args.model,
+        provider_input,
+        args.timeout_seconds,
+        api_format,
+        thinking,
+        args.temperature,
+    )
     output = response_text(response)
     if not output:
         fail("provider response did not contain output text")

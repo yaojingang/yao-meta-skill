@@ -67,8 +67,8 @@ def provider_submission(*, valid: bool, artifact_path: str = "reports/output_exe
             }
         ],
         "provenance": {
-            "provider": "openai",
-            "model": "gpt-4.1-mini",
+            "provider": "deepseek",
+            "model": "deepseek-v4-flash",
             "credential_material_committed": False,
         },
         "privacy": {
@@ -522,12 +522,21 @@ def assert_external_contract_artifact_validation() -> None:
 def main() -> None:
     shutil.rmtree(TMP, ignore_errors=True)
     TMP.mkdir(parents=True, exist_ok=True)
+    empty_submissions = TMP / "empty-submissions"
+    empty_submissions.mkdir()
     default_json = TMP / "world_class_evidence_intake.json"
     default_md = TMP / "world_class_evidence_intake.md"
     assert_human_contract_artifact_validation()
     assert_external_contract_artifact_validation()
     assert_native_telemetry_contract_artifact_validation()
-    payload = run_intake("--output-json", str(default_json), "--output-md", str(default_md))
+    payload = run_intake(
+        "--output-json",
+        str(default_json),
+        "--output-md",
+        str(default_md),
+        "--submissions-dir",
+        str(empty_submissions),
+    )
     assert payload["schema_version"] == "1.0", payload
     assert payload["ok"] is True, payload
     summary = payload["summary"]
@@ -570,21 +579,24 @@ def main() -> None:
     }, checklist
     assert checklist["provider-holdout"]["readiness"] == "awaiting-submission", checklist["provider-holdout"]
     assert checklist["provider-holdout"]["template_path"] == "evidence/world_class/templates/provider-holdout.intake.json", checklist["provider-holdout"]
-    assert checklist["provider-holdout"]["submission_path"] == "evidence/world_class/submissions/provider-holdout.json", checklist["provider-holdout"]
+    empty_submissions_rel = str(empty_submissions.relative_to(ROOT))
+    assert checklist["provider-holdout"]["submission_path"] == f"{empty_submissions_rel}/provider-holdout.json", checklist["provider-holdout"]
     assert checklist["provider-holdout"]["commands"]["prepare_submission"] == (
         "python3 scripts/yao.py world-class-submission-kit . "
-        "--evidence-key provider-holdout --output-dir evidence/world_class/submissions"
+        f"--evidence-key provider-holdout --output-dir {empty_submissions_rel}"
     ), checklist["provider-holdout"]
-    assert checklist["provider-holdout"]["commands"]["validate_intake"] == "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions", checklist["provider-holdout"]
-    assert checklist["provider-holdout"]["commands"]["submission_review"] == "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions", checklist["provider-holdout"]
-    assert checklist["provider-holdout"]["commands"]["refresh_ledger"] == "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions", checklist["provider-holdout"]
+    assert checklist["provider-holdout"]["commands"]["validate_intake"] == f"python3 scripts/yao.py world-class-intake . --submissions-dir {empty_submissions_rel}", checklist["provider-holdout"]
+    assert checklist["provider-holdout"]["commands"]["submission_review"] == f"python3 scripts/yao.py world-class-submission-review . --submissions-dir {empty_submissions_rel}", checklist["provider-holdout"]
+    assert checklist["provider-holdout"]["commands"]["refresh_ledger"] == f"python3 scripts/yao.py world-class-ledger . --submissions-dir {empty_submissions_rel}", checklist["provider-holdout"]
     assert "provider-backed model run" in checklist["provider-holdout"]["must_collect"]["provenance_requirements"], checklist["provider-holdout"]
-    assert any("output-exec --provider-runner openai" in step for step in checklist["provider-holdout"]["must_collect"]["runbook"]), checklist["provider-holdout"]
+    assert any("--provider-runner openai" in step for step in checklist["provider-holdout"]["must_collect"]["runbook"]), checklist["provider-holdout"]
+    assert any("--provider-runner deepseek" in step for step in checklist["provider-holdout"]["must_collect"]["runbook"]), checklist["provider-holdout"]
     assert "reports/output_execution_runs.json summary.model_executed_count > 0" in checklist["provider-holdout"]["must_collect"]["success_checks"], checklist["provider-holdout"]
     assert checklist["provider-holdout"]["anti_overclaim"]["local_command_runner_counts_as_provider_model"] is False, checklist["provider-holdout"]
-    assert checklist["provider-holdout"]["source_accepted"] is False, checklist["provider-holdout"]
-    assert checklist["provider-holdout"]["observed_state"]["model_executed_count"] == 0, checklist["provider-holdout"]
+    assert checklist["provider-holdout"]["source_accepted"] is True, checklist["provider-holdout"]
+    assert checklist["provider-holdout"]["observed_state"]["model_executed_count"] > 0, checklist["provider-holdout"]
     assert checklist["provider-holdout"]["observed_state"]["timing_observed_count"] > 0, checklist["provider-holdout"]
+    assert checklist["provider-holdout"]["observed_state"]["token_observed_count"] > 0, checklist["provider-holdout"]
     markdown = default_md.read_text(encoding="utf-8")
     assert "World-Class Evidence Intake" in markdown, markdown
     assert "ready to claim world-class: `false`" in markdown, markdown
@@ -592,12 +604,13 @@ def main() -> None:
     assert "valid packet but source incomplete: `0`" in markdown, markdown
     assert "operator checklist: `0` ready / `4` total" in markdown, markdown
     assert "0 existing / 0 sha256 verified / 0 required verified / 1 refs" in markdown, markdown
-    assert "`evidence/world_class/submissions/provider-holdout.json`" in markdown, markdown
-    assert "`python3 scripts/yao.py world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions`" in markdown, markdown
-    assert "`python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions`" in markdown, markdown
-    assert "`python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions`" in markdown, markdown
+    assert f"`{empty_submissions_rel}/provider-holdout.json`" in markdown, markdown
+    assert f"`python3 scripts/yao.py world-class-submission-kit . --evidence-key provider-holdout --output-dir {empty_submissions_rel}`" in markdown, markdown
+    assert f"`python3 scripts/yao.py world-class-submission-review . --submissions-dir {empty_submissions_rel}`" in markdown, markdown
+    assert f"`python3 scripts/yao.py world-class-ledger . --submissions-dir {empty_submissions_rel}`" in markdown, markdown
     assert "Source Runbook" in markdown, markdown
-    assert "output-exec --provider-runner openai" in markdown, markdown
+    assert "--provider-runner openai" in markdown, markdown
+    assert "--provider-runner deepseek" in markdown, markdown
     assert "<redacted>" not in markdown, markdown
     assert "OPENAI_API_KEY=<redacted>" not in markdown, markdown
     assert "Templates and planned work do not count as accepted evidence." in markdown, markdown
@@ -616,20 +629,20 @@ def main() -> None:
         encoding="utf-8",
     )
     valid_payload = run_intake("--submissions-dir", str(valid_dir))
-    assert valid_payload["ok"] is False, valid_payload
-    assert valid_payload["summary"]["decision"] == "fix-intake", valid_payload["summary"]
-    assert valid_payload["summary"]["valid_submission_count"] == 0, valid_payload["summary"]
-    assert valid_payload["summary"]["invalid_submission_count"] == 1, valid_payload["summary"]
+    assert valid_payload["ok"] is True, valid_payload
+    assert valid_payload["summary"]["decision"] == "intake-ready-for-ledger-review", valid_payload["summary"]
+    assert valid_payload["summary"]["valid_submission_count"] == 1, valid_payload["summary"]
+    assert valid_payload["summary"]["invalid_submission_count"] == 0, valid_payload["summary"]
     assert valid_payload["summary"]["valid_packet_source_incomplete_count"] == 0, valid_payload["summary"]
-    assert valid_payload["summary"]["operator_checklist_ready_count"] == 0, valid_payload["summary"]
-    assert valid_payload["summary"]["ready_for_ledger_review"] is False, valid_payload["summary"]
+    assert valid_payload["summary"]["operator_checklist_ready_count"] == 1, valid_payload["summary"]
+    assert valid_payload["summary"]["ready_for_ledger_review"] is True, valid_payload["summary"]
     assert valid_payload["summary"]["ready_to_claim_world_class"] is False, valid_payload["summary"]
-    assert valid_payload["submissions"][0]["status"] == "fail", valid_payload["submissions"]
+    assert valid_payload["submissions"][0]["status"] == "pass", valid_payload["submissions"]
     assert valid_payload["submissions"][0]["artifact_integrity"]["artifact_existing_count"] == 1, valid_payload["submissions"]
     assert valid_payload["submissions"][0]["artifact_integrity"]["artifact_sha256_verified_count"] == 1, valid_payload["submissions"]
-    assert any("summary.model_executed_count must be >0" in error for error in valid_payload["submissions"][0]["errors"]), valid_payload["submissions"]
+    assert valid_payload["submissions"][0]["errors"] == [], valid_payload["submissions"]
     valid_checklist = {item["evidence_key"]: item for item in valid_payload["operator_checklist"]}
-    assert valid_checklist["provider-holdout"]["readiness"] == "fix-submission", valid_checklist["provider-holdout"]
+    assert valid_checklist["provider-holdout"]["readiness"] == "ready-for-ledger-review", valid_checklist["provider-holdout"]
     assert "tests/tmp_world_class_evidence_intake/valid_submissions" in valid_checklist["provider-holdout"]["commands"]["validate_intake"], valid_checklist["provider-holdout"]
     assert "tests/tmp_world_class_evidence_intake/valid_submissions" in valid_checklist["provider-holdout"]["commands"]["submission_review"], valid_checklist["provider-holdout"]
     assert "tests/tmp_world_class_evidence_intake/valid_submissions" in valid_checklist["provider-holdout"]["commands"]["refresh_ledger"], valid_checklist["provider-holdout"]

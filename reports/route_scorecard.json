@@ -15,7 +15,7 @@
       "correct_count": 3,
       "precision": 1.0,
       "recall": 1.0,
-      "average_margin": 0.611
+      "average_margin": 0.701
     },
     "team-frontend-review": {
       "expected_count": 3,
@@ -31,7 +31,7 @@
       "correct_count": 3,
       "precision": 1.0,
       "recall": 1.0,
-      "average_margin": 0.659
+      "average_margin": 0.586
     },
     "no_route": {
       "expected_count": 4,
@@ -77,17 +77,16 @@
       "expected_route": "yao-meta-skill",
       "predicted_route": "yao-meta-skill",
       "correct": true,
-      "margin": 0.741,
+      "margin": 1.0,
       "ambiguous": false,
       "ranked_routes": [
         {
           "name": "yao-meta-skill",
-          "score": 0.741,
+          "score": 1.0,
           "passed_threshold": true,
           "threshold": 0.33,
           "matched_desired_concepts": [
             "eval_optimize",
-            "iterate_existing_skill",
             "reuse_package",
             "team_operationalize",
             "transform_workflow"
@@ -118,17 +117,16 @@
       "expected_route": "yao-meta-skill",
       "predicted_route": "yao-meta-skill",
       "correct": true,
-      "margin": 0.535,
+      "margin": 0.661,
       "ambiguous": false,
       "ranked_routes": [
         {
           "name": "yao-meta-skill",
-          "score": 0.535,
+          "score": 0.661,
           "passed_threshold": true,
           "threshold": 0.33,
           "matched_desired_concepts": [
             "eval_optimize",
-            "iterate_existing_skill",
             "reuse_package"
           ],
           "matched_negative_concepts": []
@@ -157,23 +155,22 @@
       "expected_route": "yao-meta-skill",
       "predicted_route": "yao-meta-skill",
       "correct": true,
-      "margin": 0.558,
+      "margin": 0.441,
       "ambiguous": false,
       "ranked_routes": [
         {
           "name": "yao-meta-skill",
-          "score": 0.558,
+          "score": 0.441,
           "passed_threshold": true,
           "threshold": 0.33,
           "matched_desired_concepts": [
-            "build_skill",
             "reuse_package"
           ],
           "matched_negative_concepts": []
         },
         {
           "name": "governed-incident-command",
-          "score": 0.269,
+          "score": 0.181,
           "passed_threshold": false,
           "threshold": 0.48,
           "matched_desired_concepts": [
@@ -216,7 +213,7 @@
         },
         {
           "name": "yao-meta-skill",
-          "score": 0.018,
+          "score": 0.012,
           "passed_threshold": false,
           "threshold": 0.33,
           "matched_desired_concepts": [],
@@ -256,7 +253,7 @@
         },
         {
           "name": "yao-meta-skill",
-          "score": 0.013,
+          "score": 0.008,
           "passed_threshold": false,
           "threshold": 0.33,
           "matched_desired_concepts": [],
@@ -329,13 +326,14 @@
           "matched_desired_concepts": [
             "comms_and_owners",
             "governed_workflow",
+            "incident_packet",
             "severity_assessment"
           ],
           "matched_negative_concepts": []
         },
         {
           "name": "yao-meta-skill",
-          "score": 0.021,
+          "score": 0.016,
           "passed_threshold": false,
           "threshold": 0.33,
           "matched_desired_concepts": [],
@@ -357,12 +355,12 @@
       "expected_route": "governed-incident-command",
       "predicted_route": "governed-incident-command",
       "correct": true,
-      "margin": 0.805,
+      "margin": 0.505,
       "ambiguous": false,
       "ranked_routes": [
         {
           "name": "governed-incident-command",
-          "score": 0.805,
+          "score": 0.505,
           "passed_threshold": true,
           "threshold": 0.48,
           "matched_desired_concepts": [
@@ -373,7 +371,7 @@
         },
         {
           "name": "yao-meta-skill",
-          "score": 0.189,
+          "score": 0.328,
           "passed_threshold": false,
           "threshold": 0.33,
           "matched_desired_concepts": [
@@ -397,23 +395,25 @@
       "expected_route": "governed-incident-command",
       "predicted_route": "governed-incident-command",
       "correct": true,
-      "margin": 0.172,
+      "margin": 0.252,
       "ambiguous": false,
       "ranked_routes": [
         {
           "name": "governed-incident-command",
-          "score": 0.62,
+          "score": 1.0,
           "passed_threshold": true,
           "threshold": 0.48,
           "matched_desired_concepts": [
             "comms_and_owners",
-            "governed_workflow"
+            "governed_workflow",
+            "incident_packet",
+            "severity_assessment"
           ],
           "matched_negative_concepts": []
         },
         {
           "name": "yao-meta-skill",
-          "score": 0.448,
+          "score": 0.748,
           "passed_threshold": true,
           "threshold": 0.33,
           "matched_desired_concepts": [
@@ -483,7 +483,7 @@
       "ranked_routes": [
         {
           "name": "yao-meta-skill",
-          "score": 0.016,
+          "score": 0.008,
           "passed_threshold": false,
           "threshold": 0.33,
           "matched_desired_concepts": [],

@@ -42,6 +42,7 @@ def build_runbook_item(
     review_item: dict[str, Any],
     preflight_item: dict[str, Any],
 ) -> dict[str, Any]:
+    accepted = entry.get("status") == "accepted" or review_item.get("review_state") == "accepted"
     commands = checklist.get("commands", {}) if isinstance(checklist.get("commands", {}), dict) else {}
     must_collect = checklist.get("must_collect", {}) if isinstance(checklist.get("must_collect", {}), dict) else {}
     source_checklist = review_item.get("source_checklist", [])
@@ -53,6 +54,13 @@ def build_runbook_item(
         action = str(row.get("next_action", "")).strip()
         if action and action not in next_source_actions:
             next_source_actions.append(action)
+    repair_checklist = (
+        preflight_item.get("repair_checklist", []) if isinstance(preflight_item.get("repair_checklist", []), list) else []
+    )
+    phase_queue = preflight_item.get("phase_queue", []) if isinstance(preflight_item.get("phase_queue", []), list) else []
+    if accepted:
+        repair_checklist = []
+        phase_queue = []
     return {
         "evidence_key": entry.get("key", ""),
         "label": entry.get("label", entry.get("key", "")),
@@ -85,21 +93,17 @@ def build_runbook_item(
         "source_checklist": source_checklist,
         "blocked_source_check_count": len(blocked_source_checks),
         "next_source_actions": next_source_actions,
-        "repair_checklist": preflight_item.get("repair_checklist", [])
-        if isinstance(preflight_item.get("repair_checklist", []), list)
-        else [],
+        "repair_checklist": repair_checklist,
         "repair_blocked_count": sum(
             1
-            for row in preflight_item.get("repair_checklist", [])
+            for row in repair_checklist
             if isinstance(row, dict) and row.get("status") != "ready"
         ),
         "repair_counts_as_completion": False,
-        "phase_queue": preflight_item.get("phase_queue", [])
-        if isinstance(preflight_item.get("phase_queue", []), list)
-        else [],
+        "phase_queue": phase_queue,
         "phase_queue_blocked_count": sum(
             1
-            for row in preflight_item.get("phase_queue", [])
+            for row in phase_queue
             if isinstance(row, dict) and row.get("status") != "ready"
         ),
         "phase_queue_counts_as_completion": False,

@@ -45,38 +45,27 @@ def assert_world_class_action(full_payload: dict) -> None:
         item for item in world_class_action["evidence_steps"] if item["key"] == "provider-holdout"
     )
     assert provider_action_step["status"] == "pending", provider_action_step
-    assert provider_action_step["readiness"] == "awaiting-submission", provider_action_step
+    assert provider_action_step["readiness"] == "fix-submission", provider_action_step
     assert provider_action_step["submission_path"] == "evidence/world_class/submissions/provider-holdout.json", provider_action_step
     assert provider_action_step["template_path"] == "evidence/world_class/templates/provider-holdout.intake.json", provider_action_step
-    assert provider_action_step["source_blocked_count"] == 2, provider_action_step
-    assert provider_action_step["repair_blocked_count"] == 3, provider_action_step
+    assert provider_action_step["source_blocked_count"] == 0, provider_action_step
+    assert provider_action_step["repair_blocked_count"] == 1, provider_action_step
     assert provider_action_step["repair_counts_as_completion"] is False, provider_action_step
-    assert provider_action_step["phase_queue_blocked_count"] == 2, provider_action_step
+    assert provider_action_step["phase_queue_blocked_count"] == 1, provider_action_step
     assert provider_action_step["phase_queue_counts_as_completion"] is False, provider_action_step
     provider_phase_queue = {item["phase"]: item for item in provider_action_step["phase_queue"]}
-    assert set(provider_phase_queue) == {"unblock-access", "collect-source"}, provider_phase_queue
-    assert provider_phase_queue["unblock-access"]["next_action_id"] == "provider-holdout-precheck-openai-api-key", provider_phase_queue
+    assert set(provider_phase_queue) == {"unblock-access"}, provider_phase_queue
+    assert provider_phase_queue["unblock-access"]["next_action_id"] == "provider-holdout-precheck-provider-api-key", provider_phase_queue
     assert provider_phase_queue["unblock-access"]["row_count"] == 1, provider_phase_queue
-    assert provider_phase_queue["collect-source"]["row_count"] == 2, provider_phase_queue
-    assert provider_phase_queue["collect-source"]["counts_as_completion"] is False, provider_phase_queue
     assert "operator with provider credentials" in provider_phase_queue["unblock-access"]["owners"], provider_phase_queue
-    assert {item["label"] for item in provider_action_step["blocked_checks"]} == {
-        "Provider model run",
-        "Token usage observed",
-    }, provider_action_step
+    assert provider_action_step["blocked_checks"] == [], provider_action_step
     provider_repair_rows = {item["target"]: item for item in provider_action_step["repair_rows"]}
-    assert set(provider_repair_rows) == {"openai-api-key", "model_executed_count", "token_observed_count"}, provider_repair_rows
-    assert provider_repair_rows["openai-api-key"]["action_id"] == "provider-holdout-precheck-openai-api-key", provider_repair_rows
-    assert provider_repair_rows["openai-api-key"]["repair_type"] == "precheck", provider_repair_rows
-    assert provider_repair_rows["openai-api-key"]["phase"] == "unblock-access", provider_repair_rows
-    assert provider_repair_rows["openai-api-key"]["priority"] == 20, provider_repair_rows
-    assert provider_repair_rows["openai-api-key"]["owner"] == "operator with provider credentials", provider_repair_rows
-    assert provider_repair_rows["model_executed_count"]["repair_type"] == "source-check", provider_repair_rows
-    assert provider_repair_rows["model_executed_count"]["phase"] == "collect-source", provider_repair_rows
-    assert provider_repair_rows["model_executed_count"]["priority"] == 40, provider_repair_rows
-    assert "output-exec --provider-runner openai" in provider_repair_rows["model_executed_count"][
-        "verification_command"
-    ], provider_repair_rows
+    assert set(provider_repair_rows) == {"provider-api-key"}, provider_repair_rows
+    assert provider_repair_rows["provider-api-key"]["action_id"] == "provider-holdout-precheck-provider-api-key", provider_repair_rows
+    assert provider_repair_rows["provider-api-key"]["repair_type"] == "precheck", provider_repair_rows
+    assert provider_repair_rows["provider-api-key"]["phase"] == "unblock-access", provider_repair_rows
+    assert provider_repair_rows["provider-api-key"]["priority"] == 20, provider_repair_rows
+    assert provider_repair_rows["provider-api-key"]["owner"] == "operator with provider credentials", provider_repair_rows
     assert all(item["counts_as_completion"] is False for item in provider_action_step["repair_rows"]), provider_action_step
     assert any("world-class-intake" in item["command"] for item in provider_action_step["commands"]), provider_action_step
     assert any("world-class-ledger" in item["command"] for item in provider_action_step["commands"]), provider_action_step
@@ -110,11 +99,12 @@ def assert_world_class_action(full_payload: dict) -> None:
     assert "prompt_sha256" in " ".join(human_action_step["privacy_contract"]), human_action_step
 
     assert full_payload["data"]["world_class_evidence_ledger"]["summary"]["pending_count"] == 4
-    assert full_payload["data"]["world_class_evidence_intake"]["summary"]["decision"] == "awaiting-submissions"
+    assert full_payload["data"]["world_class_evidence_intake"]["summary"]["decision"] == "fix-intake"
     submission_review = full_payload["data"]["world_class_submission_review"]
-    assert submission_review["summary"]["decision"] == "awaiting-submissions", submission_review
+    assert submission_review["summary"]["decision"] == "fix-submissions", submission_review
     assert submission_review["summary"]["review_counts_submission_as_completion"] is False, submission_review
-    assert submission_review["summary"]["awaiting_submission_count"] == 4, submission_review
+    assert submission_review["summary"]["awaiting_submission_count"] == 3, submission_review
+    assert submission_review["summary"]["invalid_submission_count"] == 1, submission_review
     assert submission_review["summary"]["source_check_count"] >= 13, submission_review
     assert submission_review["summary"]["source_blocked_count"] >= 6, submission_review
     human_review_item = next(item for item in submission_review["items"] if item["evidence_key"] == "human-adjudication")
@@ -126,14 +116,17 @@ def assert_world_class_action(full_payload: dict) -> None:
     runbook = full_payload["data"]["world_class_operator_runbook"]
     assert runbook["summary"]["decision"] == "collect-evidence", runbook
     assert runbook["summary"]["runbook_counts_as_completion"] is False, runbook
-    assert runbook["summary"]["awaiting_submission_count"] == 4, runbook
+    assert runbook["summary"]["awaiting_submission_count"] == 3, runbook
+    assert runbook["summary"]["invalid_submission_count"] == 1, runbook
     intake = full_payload["data"]["world_class_evidence_intake"]
     assert intake["summary"]["template_pass_count"] == 4, intake
     assert intake["summary"]["operator_checklist_count"] == 4, intake
     assert intake["summary"]["operator_checklist_ready_count"] == 0, intake
     assert intake["summary"]["ready_to_claim_world_class"] is False, intake
     provider_checklist = next(item for item in intake["operator_checklist"] if item["evidence_key"] == "provider-holdout")
-    assert provider_checklist["readiness"] == "awaiting-submission", provider_checklist
+    assert provider_checklist["readiness"] == "fix-submission", provider_checklist
+    assert provider_checklist["submission_status"] == "fail", provider_checklist
+    assert provider_checklist["source_accepted"] is True, provider_checklist
     assert provider_checklist["submission_path"] == "evidence/world_class/submissions/provider-holdout.json", provider_checklist
     assert provider_checklist["commands"]["validate_intake"] == "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions", provider_checklist
     assert provider_checklist["commands"]["submission_review"] == "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions", provider_checklist

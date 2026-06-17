@@ -9,9 +9,9 @@
     {
       "name": "yao-meta-skill",
       "winner_label": "Current",
-      "winner_description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
-      "winner_tokens": 65,
-      "current_tokens": 65,
+      "winner_description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use for skill creation, reusable workflow packaging, skill improvement, evals, and team-ready distribution.",
+      "winner_tokens": 53,
+      "current_tokens": 53,
       "winner_holdout_fp": 0,
       "winner_holdout_fn": 0,
       "current_holdout_fp": 0,
@@ -42,44 +42,44 @@
       "calibration": {
         "holdout": {
           "threshold": 0.33,
-          "mean_positive_score": 0.673,
-          "mean_non_trigger_score": 0.0,
-          "mean_near_neighbor_score": 0.0,
-          "min_positive_score": 0.468,
-          "max_non_trigger_score": 0.0,
-          "score_gap": 0.468,
-          "threshold_margin": 0.138,
-          "positive_threshold_buffer": 0.138,
-          "negative_threshold_buffer": 0.33,
+          "mean_positive_score": 0.908,
+          "mean_non_trigger_score": 0.003,
+          "mean_near_neighbor_score": 0.006,
+          "min_positive_score": 0.767,
+          "max_non_trigger_score": 0.023,
+          "score_gap": 0.744,
+          "threshold_margin": 0.307,
+          "positive_threshold_buffer": 0.437,
+          "negative_threshold_buffer": 0.307,
           "boundary_case_count": 0,
           "boundary_case_rate": 0.0,
           "risk_band": "healthy"
         },
         "blind_holdout": {
           "threshold": 0.33,
-          "mean_positive_score": 0.399,
-          "mean_non_trigger_score": 0.013,
-          "mean_near_neighbor_score": 0.013,
-          "min_positive_score": 0.392,
-          "max_non_trigger_score": 0.028,
-          "score_gap": 0.364,
-          "threshold_margin": 0.062,
-          "positive_threshold_buffer": 0.062,
-          "negative_threshold_buffer": 0.302,
-          "boundary_case_count": 2,
-          "boundary_case_rate": 0.333,
-          "risk_band": "watch"
+          "mean_positive_score": 0.669,
+          "mean_non_trigger_score": 0.116,
+          "mean_near_neighbor_score": 0.152,
+          "min_positive_score": 0.665,
+          "max_non_trigger_score": 0.305,
+          "score_gap": 0.36,
+          "threshold_margin": 0.025,
+          "positive_threshold_buffer": 0.335,
+          "negative_threshold_buffer": 0.025,
+          "boundary_case_count": 1,
+          "boundary_case_rate": 0.167,
+          "risk_band": "tight"
         },
         "adversarial_holdout": {
           "threshold": 0.33,
-          "mean_positive_score": 0.838,
+          "mean_positive_score": 1.0,
           "mean_non_trigger_score": 0.0,
           "mean_near_neighbor_score": 0.0,
-          "min_positive_score": 0.834,
+          "min_positive_score": 1.0,
           "max_non_trigger_score": 0.0,
-          "score_gap": 0.834,
+          "score_gap": 1.0,
           "threshold_margin": 0.33,
-          "positive_threshold_buffer": 0.504,
+          "positive_threshold_buffer": 0.67,
           "negative_threshold_buffer": 0.33,
           "boundary_case_count": 0,
           "boundary_case_rate": 0.0,
@@ -170,7 +170,7 @@
         "route_metrics": {
           "precision": 1.0,
           "recall": 1.0,
-          "average_margin": 0.611,
+          "average_margin": 0.701,
           "misroute_count": 0,
           "ambiguous_case_count": 0
         }
@@ -193,8 +193,8 @@
           "label": "Current",
           "ranking_state": "selected_by_dev",
           "promotion_state": "kept_current",
-          "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
-          "tokens": 65,
+          "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use for skill creation, reusable workflow packaging, skill improvement, evals, and team-ready distribution.",
+          "tokens": 53,
           "dev_errors": 0,
           "holdout_errors": 0,
           "reason_tags": []
@@ -224,7 +224,8 @@
           "dev_errors": 2,
           "holdout_errors": 0,
           "reason_tags": [
-            "weaker_dev_fit"
+            "weaker_dev_fit",
+            "longer_without_gain"
           ]
         },
         {
@@ -238,7 +239,8 @@
           "dev_errors": 2,
           "holdout_errors": 0,
           "reason_tags": [
-            "weaker_dev_fit"
+            "weaker_dev_fit",
+            "longer_without_gain"
           ]
         },
         {
@@ -538,13 +540,13 @@
       "current_holdout_fp": 0,
       "current_holdout_fn": 1,
       "baseline_holdout_fp": 0,
-      "baseline_holdout_fn": 2,
+      "baseline_holdout_fn": 1,
       "winner_blind_holdout_fp": 0,
       "winner_blind_holdout_fn": 0,
       "current_blind_holdout_fp": 0,
       "current_blind_holdout_fn": 0,
       "baseline_blind_holdout_fp": 0,
-      "baseline_blind_holdout_fn": 1,
+      "baseline_blind_holdout_fn": 0,
       "winner_blind_holdout_total_errors": 0,
       "winner_judge_blind_holdout_fp": 0,
       "winner_judge_blind_holdout_fn": 0,
@@ -563,7 +565,7 @@
       "calibration": {
         "holdout": {
           "threshold": 0.48,
-          "mean_positive_score": 0.37,
+          "mean_positive_score": 0.45,
           "mean_non_trigger_score": 0.019,
           "mean_near_neighbor_score": 0.037,
           "min_positive_score": 0.08,
@@ -578,49 +580,49 @@
         },
         "blind_holdout": {
           "threshold": 0.48,
-          "mean_positive_score": 0.902,
-          "mean_non_trigger_score": 0.168,
-          "mean_near_neighbor_score": 0.138,
-          "min_positive_score": 0.804,
-          "max_non_trigger_score": 0.386,
-          "score_gap": 0.418,
-          "threshold_margin": 0.094,
-          "positive_threshold_buffer": 0.324,
-          "negative_threshold_buffer": 0.094,
-          "boundary_case_count": 1,
-          "boundary_case_rate": 0.167,
+          "mean_positive_score": 0.82,
+          "mean_non_trigger_score": 0.059,
+          "mean_near_neighbor_score": 0.0,
+          "min_positive_score": 0.645,
+          "max_non_trigger_score": 0.228,
+          "score_gap": 0.417,
+          "threshold_margin": 0.165,
+          "positive_threshold_buffer": 0.165,
+          "negative_threshold_buffer": 0.252,
+          "boundary_case_count": 0,
+          "boundary_case_rate": 0.0,
           "risk_band": "healthy"
         },
         "adversarial_holdout": {
           "threshold": 0.34,
-          "mean_positive_score": 0.827,
-          "mean_non_trigger_score": 0.027,
-          "mean_near_neighbor_score": 0.011,
-          "min_positive_score": 0.654,
-          "max_non_trigger_score": 0.056,
-          "score_gap": 0.598,
-          "threshold_margin": 0.284,
-          "positive_threshold_buffer": 0.314,
-          "negative_threshold_buffer": 0.284,
-          "boundary_case_count": 0,
-          "boundary_case_rate": 0.0,
-          "risk_band": "healthy"
+          "mean_positive_score": 0.907,
+          "mean_non_trigger_score": 0.083,
+          "mean_near_neighbor_score": 0.139,
+          "min_positive_score": 0.815,
+          "max_non_trigger_score": 0.277,
+          "score_gap": 0.538,
+          "threshold_margin": 0.063,
+          "positive_threshold_buffer": 0.475,
+          "negative_threshold_buffer": 0.063,
+          "boundary_case_count": 1,
+          "boundary_case_rate": 0.167,
+          "risk_band": "watch"
         }
       },
       "judge_blind": {
         "winner": {
           "agreement_rate": 1.0,
-          "mean_confidence": 0.657,
+          "mean_confidence": 0.677,
           "rubric_version": "blind-v1"
         },
         "current": {
           "agreement_rate": 1.0,
-          "mean_confidence": 0.657,
+          "mean_confidence": 0.677,
           "rubric_version": "blind-v1"
         },
         "baseline": {
           "agreement_rate": 1.0,
-          "mean_confidence": 0.69,
+          "mean_confidence": 0.677,
           "rubric_version": "blind-v1"
         }
       },
@@ -683,7 +685,8 @@
         "causes": [
           "no_candidate_outperformed_current",
           "current_holdout_gap_present",
-          "current_holdout_risk"
+          "current_holdout_risk",
+          "adversarial_watch_risk"
         ],
         "next_action": "Keep the current description and open a new candidate only when fresh route evidence appears.",
         "gate_status": {
@@ -699,7 +702,7 @@
         "route_metrics": {
           "precision": 1.0,
           "recall": 1.0,
-          "average_margin": 0.659,
+          "average_margin": 0.586,
           "misroute_count": 0,
           "ambiguous_case_count": 0
         }
@@ -713,8 +716,8 @@
           "promotion_state": "reference",
           "description": "Build governed incident command packets from alerts, incident notes, transcripts, and stakeholder requirements. Use when asked to standardize incident review, severity assessment, incident communication, or incident packet assembly into one reusable operational skill. Do not use for generic debugging, one-off incident explanations, or brainstorming possible response ideas.",
           "tokens": 93,
-          "dev_errors": 1,
-          "holdout_errors": 2
+          "dev_errors": 0,
+          "holdout_errors": 1
         },
         {
           "name": "governed-incident-command",
@@ -724,24 +727,9 @@
           "promotion_state": "kept_current",
           "description": "Build governed incident command packets. Use when asked to standardize incident review, run severity assessment, or assemble incident communication.",
           "tokens": 37,
-          "dev_errors": 1,
+          "dev_errors": 0,
           "holdout_errors": 1,
           "reason_tags": []
-        },
-        {
-          "name": "governed-incident-command",
-          "role": "candidate",
-          "label": "Guardrail",
-          "ranking_state": "not_selected",
-          "promotion_state": "blocked",
-          "description": "Build governed incident command packets from alerts, incident notes, transcripts, or stakeholder requirements. Do not use for generic debugging, one-off incident explanations, or drafting a single update.",
-          "tokens": 51,
-          "dev_errors": 1,
-          "holdout_errors": 2,
-          "reason_tags": [
-            "visible_holdout_regression",
-            "longer_without_gain"
-          ]
         },
         {
           "name": "governed-incident-command",
@@ -751,7 +739,7 @@
           "promotion_state": "blocked",
           "description": "Build governed incident command packets from alerts, incident notes, transcripts, or stakeholder requirements. Use when asked to standardize incident review, run severity assessment, or assemble incident communication.",
           "tokens": 54,
-          "dev_errors": 1,
+          "dev_errors": 0,
           "holdout_errors": 1,
           "reason_tags": [
             "longer_without_gain"
@@ -765,7 +753,7 @@
           "promotion_state": "blocked",
           "description": "Build governed incident command packets from alerts, incident notes, transcripts, or stakeholder requirements. Use when asked to standardize incident review, run severity assessment, or assemble incident communication. Do not use for generic debugging, one-off incident explanations, or drafting a single update.",
           "tokens": 78,
-          "dev_errors": 1,
+          "dev_errors": 0,
           "holdout_errors": 1,
           "reason_tags": [
             "longer_without_gain"
@@ -779,9 +767,24 @@
           "promotion_state": "blocked",
           "description": "Build governed incident command packets from alerts, incident notes, transcripts, or stakeholder requirements. Trigger when requests mention alerts, incident notes, transcripts, or stakeholder requirements and the job is to standardize incident review, run severity assessment, or assemble incident communication.",
           "tokens": 78,
+          "dev_errors": 0,
+          "holdout_errors": 1,
+          "reason_tags": [
+            "longer_without_gain"
+          ]
+        },
+        {
+          "name": "governed-incident-command",
+          "role": "candidate",
+          "label": "Guardrail",
+          "ranking_state": "not_selected",
+          "promotion_state": "blocked",
+          "description": "Build governed incident command packets from alerts, incident notes, transcripts, or stakeholder requirements. Do not use for generic debugging, one-off incident explanations, or drafting a single update.",
+          "tokens": 51,
           "dev_errors": 1,
           "holdout_errors": 1,
           "reason_tags": [
+            "weaker_dev_fit",
             "longer_without_gain"
           ]
         }

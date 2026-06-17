@@ -88,33 +88,33 @@ def main() -> None:
     assert kit_payload["summary"]["supporting_artifact_count"] >= 1, kit_payload["summary"]
     assert kit_payload["summary"]["supporting_artifact_ready_count"] >= 1, kit_payload["summary"]
     assert kit_payload["summary"]["source_check_count"] == 3, kit_payload["summary"]
-    assert kit_payload["summary"]["source_pass_count"] == 1, kit_payload["summary"]
-    assert kit_payload["summary"]["source_blocked_count"] == 2, kit_payload["summary"]
+    assert kit_payload["summary"]["source_pass_count"] == 3, kit_payload["summary"]
+    assert kit_payload["summary"]["source_blocked_count"] == 0, kit_payload["summary"]
     assert kit_payload["summary"]["evidence_matrix_count"] == 1, kit_payload["summary"]
-    assert kit_payload["summary"]["evidence_matrix_collect_source_count"] == 1, kit_payload["summary"]
+    assert kit_payload["summary"]["evidence_matrix_collect_source_count"] == 0, kit_payload["summary"]
     assert kit_payload["summary"]["evidence_matrix_submission_ref_count"] == 1, kit_payload["summary"]
     assert kit_payload["summary"]["evidence_matrix_submission_ref_ready_count"] == 1, kit_payload["summary"]
     assert kit_payload["summary"]["evidence_matrix_supporting_artifact_count"] >= 1, kit_payload["summary"]
     assert kit_payload["summary"]["evidence_matrix_supporting_artifact_ready_count"] >= 1, kit_payload["summary"]
     assert kit_payload["summary"]["evidence_matrix_counts_as_completion"] == 0, kit_payload["summary"]
-    assert kit_payload["summary"]["repair_checklist_count"] == 2, kit_payload["summary"]
-    assert kit_payload["summary"]["repair_blocked_count"] == 2, kit_payload["summary"]
+    assert kit_payload["summary"]["repair_checklist_count"] == 0, kit_payload["summary"]
+    assert kit_payload["summary"]["repair_blocked_count"] == 0, kit_payload["summary"]
     assert kit_payload["summary"]["repair_ready_count"] == 0, kit_payload["summary"]
-    assert kit_payload["summary"]["repair_phase_counts"] == {"collect-source": 2}, kit_payload["summary"]
-    assert kit_payload["summary"]["phase_queue_count"] == 1, kit_payload["summary"]
-    assert kit_payload["summary"]["phase_queue_blocked_count"] == 1, kit_payload["summary"]
-    assert kit_payload["summary"]["phase_queue_row_count"] == 2, kit_payload["summary"]
-    assert kit_payload["summary"]["phase_queue_next_phase"] == "collect-source", kit_payload["summary"]
-    assert kit_payload["summary"]["phase_queue_next_action_id"] == "provider-holdout-source-check-model_executed_count", kit_payload["summary"]
-    assert "output-exec --provider-runner openai" in kit_payload["summary"]["phase_queue_next_command"], kit_payload["summary"]
+    assert kit_payload["summary"]["repair_phase_counts"] == {}, kit_payload["summary"]
+    assert kit_payload["summary"]["phase_queue_count"] == 0, kit_payload["summary"]
+    assert kit_payload["summary"]["phase_queue_blocked_count"] == 0, kit_payload["summary"]
+    assert kit_payload["summary"]["phase_queue_row_count"] == 0, kit_payload["summary"]
+    assert kit_payload["summary"]["phase_queue_next_phase"] == "", kit_payload["summary"]
+    assert kit_payload["summary"]["phase_queue_next_action_id"] == "", kit_payload["summary"]
+    assert kit_payload["summary"]["phase_queue_next_command"] == "", kit_payload["summary"]
     assert kit_payload["summary"]["phase_queue_counts_as_completion"] is False, kit_payload["summary"]
-    assert kit_payload["summary"]["next_repair_action_id"] == "provider-holdout-source-check-model_executed_count", kit_payload["summary"]
-    assert kit_payload["summary"]["next_repair_phase"] == "collect-source", kit_payload["summary"]
-    assert kit_payload["summary"]["next_repair_owner"] == "operator with provider credentials", kit_payload["summary"]
-    assert "output-exec --provider-runner openai" in kit_payload["summary"]["next_repair_command"], kit_payload["summary"]
+    assert kit_payload["summary"]["next_repair_action_id"] == "", kit_payload["summary"]
+    assert kit_payload["summary"]["next_repair_phase"] == "", kit_payload["summary"]
+    assert kit_payload["summary"]["next_repair_owner"] == "", kit_payload["summary"]
+    assert kit_payload["summary"]["next_repair_command"] == "", kit_payload["summary"]
     assert kit_payload["summary"]["repair_counts_as_completion"] is False, kit_payload["summary"]
     assert kit_payload["summary"]["handoff_step_count"] == 7, kit_payload["summary"]
-    assert kit_payload["summary"]["handoff_blocked_count"] == 1, kit_payload["summary"]
+    assert kit_payload["summary"]["handoff_blocked_count"] == 0, kit_payload["summary"]
     assert kit_payload["summary"]["handoff_fix_required_count"] == 0, kit_payload["summary"]
     assert kit_payload["summary"]["handoff_counts_as_completion"] is False, kit_payload["summary"]
     assert kit_payload["summary"]["drafts_count_as_evidence"] is False, kit_payload["summary"]
@@ -129,7 +129,7 @@ def main() -> None:
     assert len(kit_payload["evidence_matrix"]) == 1, kit_payload["evidence_matrix"]
     matrix_row = kit_payload["evidence_matrix"][0]
     assert matrix_row["evidence_key"] == "provider-holdout", matrix_row
-    assert matrix_row["stage"] == "collect-source", matrix_row
+    assert matrix_row["stage"] == "validate-packet", matrix_row
     assert matrix_row["draft_status"] == "written", matrix_row
     assert matrix_row["artifact_ready_count"] >= 1, matrix_row
     assert matrix_row["artifact_total_count"] >= matrix_row["artifact_ready_count"], matrix_row
@@ -137,37 +137,16 @@ def main() -> None:
     assert matrix_row["submission_ref_total_count"] == 1, matrix_row
     assert matrix_row["supporting_artifact_ready_count"] >= 1, matrix_row
     assert matrix_row["supporting_artifact_total_count"] >= matrix_row["supporting_artifact_ready_count"], matrix_row
-    assert matrix_row["source_pass_count"] == 1, matrix_row
+    assert matrix_row["source_pass_count"] == 3, matrix_row
     assert matrix_row["source_check_count"] == 3, matrix_row
-    assert matrix_row["source_blocked_count"] == 2, matrix_row
+    assert matrix_row["source_blocked_count"] == 0, matrix_row
     assert matrix_row["counts_as_completion"] is False, matrix_row
-    assert "real credentials" in matrix_row["next_action"], matrix_row
+    assert "validate intake" in matrix_row["next_action"].lower() or "packet" in matrix_row["next_action"].lower(), matrix_row
 
     repair_rows = {item["target"]: item for item in kit_payload["repair_checklist"]}
-    assert set(repair_rows) == {"model_executed_count", "token_observed_count"}, repair_rows
-    assert repair_rows["model_executed_count"]["repair_type"] == "source-check", repair_rows
-    assert repair_rows["model_executed_count"]["action_id"] == "provider-holdout-source-check-model_executed_count", repair_rows
-    assert repair_rows["model_executed_count"]["phase"] == "collect-source", repair_rows
-    assert repair_rows["model_executed_count"]["priority"] == 40, repair_rows
-    assert repair_rows["model_executed_count"]["owner"] == "operator with provider credentials", repair_rows
-    assert "output-exec --provider-runner openai" in repair_rows["model_executed_count"][
-        "verification_command"
-    ], repair_rows
-    assert repair_rows["model_executed_count"]["status"] == "blocked", repair_rows
-    assert repair_rows["model_executed_count"]["counts_as_completion"] is False, repair_rows
-    assert "real credentials" in repair_rows["model_executed_count"]["next_action"], repair_rows
-    assert "does not satisfy" in repair_rows["token_observed_count"]["blocking_reason"], repair_rows
+    assert repair_rows == {}, repair_rows
 
-    assert len(kit_payload["phase_queue"]) == 1, kit_payload["phase_queue"]
-    queue_row = kit_payload["phase_queue"][0]
-    assert queue_row["phase"] == "collect-source", queue_row
-    assert queue_row["status"] == "blocked", queue_row
-    assert queue_row["row_count"] == 2, queue_row
-    assert queue_row["blocked_count"] == 2, queue_row
-    assert queue_row["owners"] == ["operator with provider credentials"], queue_row
-    assert queue_row["evidence_keys"] == ["provider-holdout"], queue_row
-    assert queue_row["counts_as_completion"] is False, queue_row
-    assert queue_row["rows"] == kit_payload["repair_checklist"], queue_row
+    assert kit_payload["phase_queue"] == [], kit_payload["phase_queue"]
 
     handoff_steps = {item["step_id"]: item for item in kit_payload["operator_handoff"]}
     assert list(handoff_steps) == [
@@ -180,9 +159,9 @@ def main() -> None:
         "guard-claim",
     ], handoff_steps
     assert handoff_steps["prepare-drafts"]["status"] == "ready", handoff_steps
-    assert handoff_steps["collect-source"]["status"] == "blocked", handoff_steps
+    assert handoff_steps["collect-source"]["status"] == "ready", handoff_steps
     assert handoff_steps["collect-source"]["counts_as_completion"] is False, handoff_steps
-    assert "source check" in handoff_steps["collect-source"]["blocking_condition"], handoff_steps
+    assert handoff_steps["collect-source"]["blocking_condition"] == "", handoff_steps
     assert "world-class-submission-review" in handoff_steps["review-submission"]["command"], handoff_steps
     assert all(item["counts_as_completion"] is False for item in kit_payload["operator_handoff"]), handoff_steps
 
@@ -197,10 +176,10 @@ def main() -> None:
     assert artifact_rows["reports/output_execution_runs.md"]["submission_ref_required"] is False, artifact_rows
 
     source_rows = {item["field"]: item for item in kit_payload["source_checklist"]}
-    assert source_rows["model_executed_count"]["status"] == "blocked", source_rows
-    assert source_rows["model_executed_count"]["actual"] == 0, source_rows
+    assert source_rows["model_executed_count"]["status"] == "pass", source_rows
+    assert source_rows["model_executed_count"]["actual"] > 0, source_rows
     assert source_rows["timing_observed_count"]["status"] == "pass", source_rows
-    assert source_rows["token_observed_count"]["status"] == "blocked", source_rows
+    assert source_rows["token_observed_count"]["status"] == "pass", source_rows
 
     kit_draft = json.loads((kit_dir / "provider-holdout.json").read_text(encoding="utf-8"))
     assert kit_draft["template_only"] is True, kit_draft
@@ -210,9 +189,9 @@ def main() -> None:
     assert kit_draft["attestation"]["ledger_reviewed_at"] == "", kit_draft
     assert "sha256" not in kit_draft["artifact_refs"][0], kit_draft
     assert kit_draft["provenance"]["run_command"] == (
-        "python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60"
+        "python3 scripts/yao.py output-exec --provider-runner <provider> --provider-model <provider-model> --timeout-seconds 60"
     ), kit_draft
-    assert kit_draft["provenance"]["credential_env"] == "OPENAI_API_KEY", kit_draft
+    assert kit_draft["provenance"]["credential_env"] == "<PROVIDER_API_KEY_ENV>", kit_draft
     assert "<redacted>" not in json.dumps(kit_draft), kit_draft
 
     kit_manifest = json.loads((kit_dir / "submission_manifest.json").read_text(encoding="utf-8"))
@@ -230,7 +209,8 @@ def main() -> None:
     kit_readme = (kit_dir / "README.md").read_text(encoding="utf-8")
     assert "Drafts are not accepted evidence." in kit_readme, kit_readme
     assert "Execution Runbook" in kit_readme, kit_readme
-    assert "output-exec --provider-runner openai" in kit_readme, kit_readme
+    assert "--provider-runner openai" in kit_readme, kit_readme
+    assert "--provider-runner deepseek" in kit_readme, kit_readme
     assert "<redacted>" not in kit_readme, kit_readme
     assert "validate intake" in kit_readme, kit_readme
     assert "Artifact Checklist" in kit_readme, kit_readme
@@ -251,7 +231,7 @@ def main() -> None:
     assert "Matrix rows are guidance only" in kit_readme, kit_readme
     assert "Repair rows are procedural guidance and do not count as completion evidence." in kit_readme, kit_readme
     assert "Source Evidence Snapshot" in kit_readme, kit_readme
-    assert "model_executed_count" in kit_readme, kit_readme
+    assert "Provider model run" in kit_readme, kit_readme
     assert "reports/output_execution_runs.json" in kit_readme, kit_readme
     assert "Provider model run" in kit_readme, kit_readme
 
@@ -262,21 +242,17 @@ def main() -> None:
     assert "Artifact Checklist" in kit_html, kit_html
     assert "Evidence Matrix" in kit_html, kit_html
     assert "Phase Queue" in kit_html, kit_html
-    assert "queue-card blocked" in kit_html, kit_html
-    assert "<dt>Phase</dt><dd><code>collect-source</code></dd>" in kit_html, kit_html
-    assert "<dt>Rows</dt><dd>2/2 blocked</dd>" in kit_html, kit_html
+    assert "No phase queue rows were generated" in kit_html, kit_html
     assert "Repair Checklist" in kit_html, kit_html
-    assert "<dt>Priority</dt>" in kit_html, kit_html
-    assert "<dt>Phase</dt>" in kit_html, kit_html
-    assert "<dt>Owner</dt>" in kit_html, kit_html
+    assert "No repair rows were generated" in kit_html, kit_html
     assert "collect-source" in kit_html, kit_html
     assert "operator with provider credentials" in kit_html, kit_html
-    assert "output-exec --provider-runner openai" in kit_html, kit_html
+    assert "--provider-runner openai" in kit_html, kit_html
+    assert "--provider-runner deepseek" in kit_html, kit_html
     assert "Operator Handoff" in kit_html, kit_html
-    assert "handoff-card blocked" in kit_html, kit_html
+    assert "handoff-card ready" in kit_html, kit_html
     assert "does not count as completion" in kit_html, kit_html
-    assert "matrix-card collect-source" in kit_html, kit_html
-    assert "repair-card blocked" in kit_html, kit_html
+    assert "matrix-card validate-packet" in kit_html, kit_html
     assert (
         f"<dt>Submission refs</dt><dd>{matrix_row['submission_ref_ready_count']}/{matrix_row['submission_ref_total_count']} ready</dd>"
         in kit_html
@@ -285,15 +261,16 @@ def main() -> None:
         f"<dt>Supporting assets</dt><dd>{matrix_row['supporting_artifact_ready_count']}/{matrix_row['supporting_artifact_total_count']} ready</dd>"
         in kit_html
     ), kit_html
-    assert "<dt>Source</dt><dd>1/3 pass</dd>" in kit_html, kit_html
+    assert "<dt>Source</dt><dd>3/3 pass</dd>" in kit_html, kit_html
     assert "Source Evidence Snapshot" in kit_html, kit_html
     assert "<dt>Field</dt><dd><code>model_executed_count</code></dd>" in kit_html, kit_html
-    assert "<h3>model_executed_count</h3>" in kit_html, kit_html
-    assert "<dt>Current</dt><dd><code>0</code></dd>" in kit_html, kit_html
+    assert "<h3>Provider model run</h3>" in kit_html, kit_html
+    assert "<dt>Current</dt><dd><code>10</code></dd>" in kit_html, kit_html
     assert "<dt>Expected</dt><dd><code>&gt;0</code></dd>" in kit_html, kit_html
     assert "World-Class Evidence Submission Kit" in kit_html, kit_html
     assert "Execution Runbook" in kit_html, kit_html
-    assert "output-exec --provider-runner openai" in kit_html, kit_html
+    assert "--provider-runner openai" in kit_html, kit_html
+    assert "--provider-runner deepseek" in kit_html, kit_html
     assert "&lt;redacted&gt;" not in kit_html and "<redacted>" not in kit_html, kit_html
     assert "Do not include credentials, raw prompts, raw outputs, transcripts, notes, or private user content." in kit_html, kit_html
     assert "Rows marked submission-ref are the paths expected in artifact_refs" in kit_html, kit_html

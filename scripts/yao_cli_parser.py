@@ -356,12 +356,27 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     output_execution_cmd.add_argument("--runner-command")
     output_execution_cmd.add_argument(
         "--provider-runner",
-        choices=["openai"],
+        choices=["openai", "deepseek"],
         help="Use the bundled provider-backed runner instead of a custom runner command.",
     )
     output_execution_cmd.add_argument("--provider-model", help="Model for --provider-runner; otherwise use YAO_OUTPUT_EVAL_MODEL.")
     output_execution_cmd.add_argument("--provider-base-url", help="Override provider endpoint for compatible APIs.")
-    output_execution_cmd.add_argument("--api-key-env", default="OPENAI_API_KEY")
+    output_execution_cmd.add_argument(
+        "--provider-api-format",
+        choices=["responses", "chat-completions"],
+        help="Provider API shape used by the bundled provider runner. Defaults are selected from --provider-runner.",
+    )
+    output_execution_cmd.add_argument(
+        "--provider-thinking",
+        choices=["enabled", "disabled"],
+        help="Optional thinking mode override for chat-completions providers that support it.",
+    )
+    output_execution_cmd.add_argument(
+        "--provider-temperature",
+        type=float,
+        help="Sampling temperature for the bundled provider runner. Defaults to 0 for reproducibility.",
+    )
+    output_execution_cmd.add_argument("--api-key-env")
     output_execution_cmd.add_argument("--allow-insecure-localhost", action="store_true")
     output_execution_cmd.add_argument("--allow-custom-base-url", action="store_true")
     output_execution_cmd.add_argument("--timeout-seconds", type=float)

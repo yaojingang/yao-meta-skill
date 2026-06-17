@@ -85,7 +85,7 @@
         "false-positive",
         "temporary-exception"
       ],
-      "risk_summary": "review pending 5; model-executed 0; output failures 0",
+      "risk_summary": "review pending 5; model-executed 10; output failures 0",
       "required_review": [
         "Reviewer confirms this release does not claim provider-backed or human-adjudicated output superiority.",
         "Reviewer names the release scope and expiry date.",

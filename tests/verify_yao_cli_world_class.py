@@ -35,6 +35,8 @@ def main() -> None:
     if TMP.exists():
         subprocess.run(["rm", "-rf", str(TMP)], check=True)
     TMP.mkdir(parents=True, exist_ok=True)
+    empty_submissions = TMP / "empty_submissions"
+    empty_submissions.mkdir(parents=True, exist_ok=True)
 
     world_class_evidence_result = run(
         "world-class-evidence",
@@ -57,6 +59,8 @@ def main() -> None:
         str(TMP / "world_class_evidence_ledger.json"),
         "--output-md",
         str(TMP / "world_class_evidence_ledger.md"),
+        "--submissions-dir",
+        str(empty_submissions),
         "--generated-at",
         "2026-06-13",
     )
@@ -70,6 +74,8 @@ def main() -> None:
     world_class_intake_result = run(
         "world-class-intake",
         str(ROOT),
+        "--submissions-dir",
+        str(empty_submissions),
         "--output-json",
         str(TMP / "world_class_evidence_intake.json"),
         "--output-md",
@@ -88,9 +94,10 @@ def main() -> None:
         item for item in world_class_intake_result["payload"]["operator_checklist"] if item["evidence_key"] == "provider-holdout"
     )
     assert provider_checklist["readiness"] == "awaiting-submission", provider_checklist
+    empty_submissions_arg = str(empty_submissions.relative_to(ROOT))
     assert provider_checklist["commands"]["prepare_submission"] == (
         "python3 scripts/yao.py world-class-submission-kit . "
-        "--evidence-key provider-holdout --output-dir evidence/world_class/submissions"
+        f"--evidence-key provider-holdout --output-dir {empty_submissions_arg}"
     ), provider_checklist
     assert world_class_ledger_result["payload"]["summary"]["ready_to_claim_world_class"] is False, world_class_ledger_result
 
@@ -111,12 +118,9 @@ def main() -> None:
     assert kit_payload["summary"]["decision"] == "submission-kit-ready", world_class_submission_kit_result
     assert kit_payload["summary"]["written_count"] == 1, world_class_submission_kit_result
     assert kit_payload["summary"]["drafts_count_as_evidence"] is False, world_class_submission_kit_result
-    assert kit_payload["summary"]["repair_checklist_count"] == 2, world_class_submission_kit_result
+    assert kit_payload["summary"]["repair_checklist_count"] == 0, world_class_submission_kit_result
     assert kit_payload["summary"]["repair_counts_as_completion"] is False, world_class_submission_kit_result
-    assert {item["target"] for item in kit_payload["repair_checklist"]} == {
-        "model_executed_count",
-        "token_observed_count",
-    }, world_class_submission_kit_result
+    assert kit_payload["repair_checklist"] == [], world_class_submission_kit_result
     assert kit_payload["artifacts"]["html"].endswith("tests/tmp_yao_cli_world_class/world_class_submission_kit.html"), world_class_submission_kit_result
     assert (TMP / "world_class_submission_kit" / "provider-holdout.json").exists(), world_class_submission_kit_result
     assert (TMP / "world_class_submission_kit" / "submission_manifest.json").exists(), world_class_submission_kit_result

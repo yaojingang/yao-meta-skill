@@ -53,14 +53,23 @@ def main() -> None:
         "native-permission-enforcement",
         "native-client-telemetry",
     }, tasks
-    assert set(requirements) == set(tasks), requirements
-    provider_runbook = tasks["provider-holdout"]["runbook"]
-    assert any("--provider-runner openai" in command for command in provider_runbook), tasks["provider-holdout"]
-    assert any(command.startswith("Set OPENAI_API_KEY") for command in provider_runbook), tasks["provider-holdout"]
-    assert any(command.startswith("export YAO_OUTPUT_EVAL_MODEL=") for command in provider_runbook), tasks["provider-holdout"]
-    assert not any("<redacted>" in command or "OPENAI_API_KEY=" in command for command in provider_runbook), tasks["provider-holdout"]
-    assert any("world-class-intake . --submissions-dir evidence/world_class/submissions" in command for command in tasks["provider-holdout"]["runbook"]), tasks["provider-holdout"]
-    assert any("evidence/world_class/templates/provider-holdout.intake.json" in command for command in tasks["provider-holdout"]["runbook"]), tasks["provider-holdout"]
+    assert set(requirements) == {
+        "provider-holdout",
+        "human-adjudication",
+        "native-permission-enforcement",
+        "native-client-telemetry",
+    }, requirements
+    assert requirements["provider-holdout"]["status"] == "pass", requirements["provider-holdout"]
+    provider_runbook = requirements["provider-holdout"]["runbook"]
+    assert any("--provider-runner openai" in command for command in provider_runbook), requirements["provider-holdout"]
+    assert any("--provider-runner deepseek" in command for command in provider_runbook), requirements["provider-holdout"]
+    assert any(command.startswith("Set one provider API key") for command in provider_runbook), requirements["provider-holdout"]
+    assert any("DEEPSEEK_API_KEY" in command for command in provider_runbook), requirements["provider-holdout"]
+    assert not any("<redacted>" in command or "OPENAI_API_KEY=" in command for command in provider_runbook), requirements["provider-holdout"]
+    assert any("world-class-intake . --submissions-dir evidence/world_class/submissions" in command for command in provider_runbook), requirements["provider-holdout"]
+    assert any("evidence/world_class/templates/provider-holdout.intake.json" in command for command in provider_runbook), requirements["provider-holdout"]
+    assert tasks["provider-holdout"]["status"] == "pass", tasks["provider-holdout"]
+    assert any("--provider-runner deepseek" in command for command in tasks["provider-holdout"]["runbook"]), tasks["provider-holdout"]
     assert "reports/output_review_decisions.json" in tasks["human-adjudication"]["evidence_artifacts"], tasks["human-adjudication"]
     assert any("output-review-import" in command for command in tasks["human-adjudication"]["runbook"]), tasks["human-adjudication"]
     assert any("required reason" in command for command in tasks["human-adjudication"]["runbook"]), tasks["human-adjudication"]
@@ -81,7 +90,7 @@ def main() -> None:
         assert task["privacy_contract"], task
     markdown = output_md.read_text(encoding="utf-8")
     assert "World-Class Evidence Plan" in markdown, markdown
-    assert "`provider-holdout`" in markdown, markdown
+    assert "tasks: `4`" in markdown, markdown
     assert "ready to claim world-class: `false`" in markdown, markdown
     assert "ledger completion required: `true`" in markdown, markdown
     assert "<redacted>" not in markdown, markdown

@@ -71,6 +71,16 @@ def assert_cli_module_contracts() -> None:
     assert "--entry" in yao_cli_config.baseline_compare_args()
     assert "scripts/provider_output_eval_runner.py" in yao_cli_config.provider_output_runner_command("openai")
     assert "--allow-custom-base-url" in yao_cli_config.provider_output_runner_command("openai", allow_custom_base_url=True)
+    deepseek_command = yao_cli_config.provider_output_runner_command(
+        "deepseek",
+        model="deepseek-v4-flash",
+        temperature=0.0,
+    )
+    assert "--api-format" in deepseek_command and "chat-completions" in deepseek_command, deepseek_command
+    assert "--thinking" in deepseek_command and "disabled" in deepseek_command, deepseek_command
+    assert "--temperature" in deepseek_command and "0.0" in deepseek_command, deepseek_command
+    assert "DEEPSEEK_API_KEY" in deepseek_command, deepseek_command
+    assert "api.deepseek.com" not in deepseek_command, deepseek_command
     for module in (
         yao_cli_parser,
         yao_cli_parser_evidence,

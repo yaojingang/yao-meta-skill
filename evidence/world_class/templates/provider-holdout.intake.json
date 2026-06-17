@@ -16,12 +16,12 @@
     }
   ],
   "provenance": {
-    "provider": "openai",
-    "model": "gpt-4.1-mini",
-    "run_command": "python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60",
-    "credential_env": "OPENAI_API_KEY",
+    "provider": "<provider>",
+    "model": "<provider-model>",
+    "run_command": "python3 scripts/yao.py output-exec --provider-runner <provider> --provider-model <provider-model> --timeout-seconds 60",
+    "credential_env": "<PROVIDER_API_KEY_ENV>",
     "model_env": "YAO_OUTPUT_EVAL_MODEL",
-    "model_default": "gpt-4.1-mini",
+    "model_default": "<provider-default-model>",
     "credential_material_committed": false
   },
   "privacy": {

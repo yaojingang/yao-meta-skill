@@ -28,7 +28,7 @@
 
 | Gate | Status | Waiver | Risk | Evidence |
 | --- | --- | --- | --- | --- |
-| `output-lab` | `needs-reviewer-decision` | `true` | review pending 5; model-executed 0; output failures 0 | `reports/output_review_adjudication.md` |
+| `output-lab` | `needs-reviewer-decision` | `true` | review pending 5; model-executed 10; output failures 0 | `reports/output_review_adjudication.md` |
 | `world-class-evidence` | `cannot-waive` | `false` | 4 pending evidence entries; 1 human pending; 3 external pending | `reports/world_class_evidence_ledger.md` |
 
 ### Output Lab
@@ -36,7 +36,7 @@
 - gate: `output-lab`
 - status: `needs-reviewer-decision`
 - waiver allowed: `true`
-- risk: review pending 5; model-executed 0; output failures 0
+- risk: review pending 5; model-executed 10; output failures 0
 - evidence: `reports/output_review_adjudication.md`
 - verification: `python3 scripts/yao.py review-waivers . --add-waiver --gate-key output-lab --reviewer "<reviewer>" --reason "Output Lab has pending human/provider evidence; accepted only for this bounded review scope." --expires-at 2027-06-13 --evidence reports/output_review_adjudication.md`
 - world-class boundary: Does not count as provider, human, or public world-class completion evidence.

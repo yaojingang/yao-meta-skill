@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Any
 
 from render_skill_os2_audit import build_audit
+from world_class_evidence_contract import load_json_with_status, validate_payload
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -17,9 +18,9 @@ TASK_TEMPLATES: dict[str, dict[str, Any]] = {
         "owner": "operator with provider credentials",
         "objective": "Collect at least one provider-backed output-eval holdout run with model, timing, and token metadata.",
         "runbook": [
-            "Set OPENAI_API_KEY in the operator shell before running provider evidence; never commit or print the value.",
-            "export YAO_OUTPUT_EVAL_MODEL=${YAO_OUTPUT_EVAL_MODEL:-gpt-4.1-mini}",
-            "python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60",
+            "Set one provider API key in the operator shell, such as OPENAI_API_KEY or DEEPSEEK_API_KEY; never commit or print the value.",
+            "For OpenAI Responses: python3 scripts/yao.py output-exec --provider-runner openai --provider-model ${YAO_OUTPUT_EVAL_MODEL:-gpt-4.1-mini} --timeout-seconds 60",
+            "For DeepSeek Chat Completions: python3 scripts/yao.py output-exec --provider-runner deepseek --provider-model deepseek-v4-flash --provider-api-format chat-completions --provider-thinking disabled --api-key-env DEEPSEEK_API_KEY --timeout-seconds 120",
             "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
         ],
         "success_checks": [
@@ -186,12 +187,25 @@ def build_task(item: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def build_plan(skill_dir: Path, generated_at: str) -> dict[str, Any]:
+def has_accepted_ledger_submission(skill_dir: Path, task: dict[str, Any], submissions_dir: Path) -> bool:
+    path = submissions_dir / f"{task['key']}.json"
+    payload, load_status = load_json_with_status(path)
+    if load_status != "present":
+        return False
+    validation = validate_payload(payload, task, path=path, root=skill_dir, template_expected=False)
+    return validation.get("status") == "pass"
+
+
+def build_plan(skill_dir: Path, generated_at: str, submissions_dir: Path | None = None) -> dict[str, Any]:
     audit = build_audit(skill_dir, generated_at)
+    submissions_dir = submissions_dir or (skill_dir / "evidence" / "world_class" / "submissions")
     evidence_keys = set(TASK_TEMPLATES)
     evidence_requirements = [build_task(item) for item in audit["items"] if item["key"] in evidence_keys]
-    tasks = [task for task in evidence_requirements if task["status"] != "pass"]
-    tasks.extend(build_task(item) for item in audit["items"] if item["status"] != "pass" and item["key"] not in evidence_keys)
+    tasks = [
+        task
+        for task in evidence_requirements
+        if task["status"] != "pass" or not has_accepted_ledger_submission(skill_dir, task, submissions_dir)
+    ]
     category_counts: dict[str, int] = {}
     for task in tasks:
         category_counts[task["category"]] = category_counts.get(task["category"], 0) + 1

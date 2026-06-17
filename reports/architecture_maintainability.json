@@ -16,7 +16,7 @@
     "watch_line_threshold": 720,
     "early_watch_line_threshold": 600,
     "block_line_threshold": 1500,
-    "largest_file_lines": 706,
+    "largest_file_lines": 711,
     "watchlist_count": 0,
     "early_watchlist_count": 5,
     "hotspot_count": 0,
@@ -26,15 +26,7 @@
   "largest_files": [
     {
       "path": "tests/verify_evidence_consistency.py",
-      "lines": 706,
-      "kind": "test",
-      "severity": "pass",
-      "early_watch": true,
-      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
-    },
-    {
-      "path": "tests/verify_yao_cli.py",
-      "lines": 696,
+      "lines": 711,
       "kind": "test",
       "severity": "pass",
       "early_watch": true,
@@ -42,7 +34,15 @@
     },
     {
       "path": "tests/verify_world_class_evidence_intake.py",
-      "lines": 690,
+      "lines": 703,
+      "kind": "test",
+      "severity": "pass",
+      "early_watch": true,
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
+      "path": "tests/verify_yao_cli.py",
+      "lines": 700,
       "kind": "test",
       "severity": "pass",
       "early_watch": true,
@@ -58,7 +58,7 @@
     },
     {
       "path": "scripts/render_world_class_operator_runbook.py",
-      "lines": 647,
+      "lines": 651,
       "kind": "cli-script",
       "severity": "pass",
       "early_watch": true,
@@ -79,6 +79,14 @@
       "severity": "pass",
       "early_watch": false,
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "tests/verify_world_class_evidence_ledger.py",
+      "lines": 587,
+      "kind": "test",
+      "severity": "pass",
+      "early_watch": false,
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
       "path": "scripts/build_skill_atlas.py",
@@ -105,14 +113,6 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
-      "path": "tests/verify_world_class_evidence_ledger.py",
-      "lines": 579,
-      "kind": "test",
-      "severity": "pass",
-      "early_watch": false,
-      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
-    },
-    {
       "path": "scripts/render_review_studio.py",
       "lines": 578,
       "kind": "cli-script",
@@ -125,15 +125,7 @@
   "early_watchlist": [
     {
       "path": "tests/verify_evidence_consistency.py",
-      "lines": 706,
-      "kind": "test",
-      "severity": "pass",
-      "early_watch": true,
-      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
-    },
-    {
-      "path": "tests/verify_yao_cli.py",
-      "lines": 696,
+      "lines": 711,
       "kind": "test",
       "severity": "pass",
       "early_watch": true,
@@ -141,7 +133,15 @@
     },
     {
       "path": "tests/verify_world_class_evidence_intake.py",
-      "lines": 690,
+      "lines": 703,
+      "kind": "test",
+      "severity": "pass",
+      "early_watch": true,
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
+      "path": "tests/verify_yao_cli.py",
+      "lines": 700,
       "kind": "test",
       "severity": "pass",
       "early_watch": true,
@@ -157,7 +157,7 @@
     },
     {
       "path": "scripts/render_world_class_operator_runbook.py",
-      "lines": 647,
+      "lines": 651,
       "kind": "cli-script",
       "severity": "pass",
       "early_watch": true,

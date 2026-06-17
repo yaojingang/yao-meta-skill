@@ -570,7 +570,11 @@ def main() -> None:
     report_output_execution = json.loads((ROOT / "reports" / "output_execution_runs.json").read_text(encoding="utf-8"))
     assert report_output_execution["summary"]["command_executed_count"] == 10, report_output_execution
     assert report_output_execution["summary"]["recorded_fixture_count"] == 0, report_output_execution
-    assert report_output_execution["summary"]["model_executed_count"] == 0, report_output_execution
+    if report_output_execution["summary"]["model_executed_count"] > 0:
+        assert report_output_execution["summary"]["token_observed_count"] == 10, report_output_execution
+        assert report_output_execution["summary"]["token_estimated_count"] == 0, report_output_execution
+    else:
+        assert report_output_execution["summary"]["model_executed_count"] == 0, report_output_execution
 
     package_dir = tmp_root / "dist"
     package_result = run("package", ".", "--platform", "generic", "--output-dir", str(package_dir))

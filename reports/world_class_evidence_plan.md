@@ -19,7 +19,7 @@ This report is an execution plan for the remaining world-class evidence gaps. It
 
 | Task | Status | Category | Owner | Current |
 | --- | --- | --- | --- | --- |
-| `provider-holdout` | `external_required` | `external` | operator with provider credentials | model-executed 0; token-observed 0 |
+| `provider-holdout` | `pass` | `external` | operator with provider credentials | model-executed 10; token-observed 10 |
 | `human-adjudication` | `human_required` | `human` | human reviewer | 0/5 decisions; pending 5 |
 | `native-permission-enforcement` | `external_required` | `external` | target client or installer integrator | native-enforced targets 0; installer-enforced targets 4 |
 | `native-client-telemetry` | `external_required` | `external` | Browser/Chrome/IDE/provider client integrator | external source events 0; adoption samples 1 |
@@ -31,9 +31,9 @@ This report is an execution plan for the remaining world-class evidence gaps. It
 
 ### Runbook
 
-- Set OPENAI_API_KEY in the operator shell before running provider evidence; never commit or print the value.
-- `export YAO_OUTPUT_EVAL_MODEL=${YAO_OUTPUT_EVAL_MODEL:-gpt-4.1-mini}`
-- `python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60`
+- Set one provider API key in the operator shell, such as OPENAI_API_KEY or DEEPSEEK_API_KEY; never commit or print the value.
+- For OpenAI Responses: python3 scripts/yao.py output-exec --provider-runner openai --provider-model ${YAO_OUTPUT_EVAL_MODEL:-gpt-4.1-mini} --timeout-seconds 60
+- For DeepSeek Chat Completions: python3 scripts/yao.py output-exec --provider-runner deepseek --provider-model deepseek-v4-flash --provider-api-format chat-completions --provider-thinking disabled --api-key-env DEEPSEEK_API_KEY --timeout-seconds 120
 - `python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>`
 - Copy evidence/world_class/templates/provider-holdout.intake.json to evidence/world_class/submissions/provider-holdout.json and fill only real evidence fields.
 - `python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions`

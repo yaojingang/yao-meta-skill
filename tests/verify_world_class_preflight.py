@@ -16,6 +16,7 @@ TMP = ROOT / "tests" / "tmp_world_class_preflight"
 def run_preflight(extra_env: dict[str, str] | None = None, *extra: str) -> subprocess.CompletedProcess[str]:
     env = dict(os.environ)
     env.pop("OPENAI_API_KEY", None)
+    env.pop("DEEPSEEK_API_KEY", None)
     env.pop("YAO_OUTPUT_EVAL_MODEL", None)
     if extra_env:
         env.update(extra_env)
@@ -40,6 +41,7 @@ def run_cli(*extra: str) -> subprocess.CompletedProcess[str]:
     env = dict(os.environ)
     env["YAO_CLI_TELEMETRY"] = "0"
     env.pop("OPENAI_API_KEY", None)
+    env.pop("DEEPSEEK_API_KEY", None)
     return subprocess.run(
         [sys.executable, str(CLI), "world-class-preflight", str(ROOT), *extra],
         cwd=ROOT,
@@ -180,34 +182,30 @@ def main() -> None:
     assert provider_roles["submission_ref_ready_count"] == 1, provider_roles
     assert provider_roles["supporting_evidence_total_count"] >= 1, provider_roles
     provider_checks = {item["key"]: item for item in provider["prechecks"]}
-    assert provider_checks["openai-api-key"]["status"] == "missing", provider_checks
-    assert provider_checks["openai-api-key"]["actual"] == "not-set", provider_checks
-    assert provider_checks["openai-api-key"]["secret_value_redacted"] is True, provider_checks
+    assert provider_checks["provider-api-key"]["status"] == "missing", provider_checks
+    assert provider_checks["provider-api-key"]["actual"] == "not-set", provider_checks
+    assert provider_checks["provider-api-key"]["secret_value_redacted"] is True, provider_checks
+    assert provider_checks["provider-api-key"]["env_any"] == ["OPENAI_API_KEY", "DEEPSEEK_API_KEY"], provider_checks
     assert "sk-test-secret" not in proc.stdout, proc.stdout
     assert "OPENAI_API_KEY" in proc.stdout, proc.stdout
-    assert "set OPENAI_API_KEY" not in proc.stdout.lower(), proc.stdout
+    assert "DEEPSEEK_API_KEY" in proc.stdout, proc.stdout
     provider_repairs = {item["target"]: item for item in provider["repair_checklist"]}
     provider_phases = {item["phase"]: item for item in provider["phase_queue"]}
-    assert set(provider_phases) == {"unblock-access", "collect-source"}, provider_phases
-    assert provider_phases["unblock-access"]["next_action_id"] == "provider-holdout-precheck-openai-api-key", provider_phases
-    assert provider_phases["collect-source"]["row_count"] == 2, provider_phases
-    assert provider_phases["collect-source"]["counts_as_completion"] is False, provider_phases
-    assert provider_repairs["openai-api-key"]["repair_type"] == "precheck", provider_repairs
-    assert provider_repairs["openai-api-key"]["action_id"] == "provider-holdout-precheck-openai-api-key", provider_repairs
-    assert provider_repairs["openai-api-key"]["phase"] == "unblock-access", provider_repairs
-    assert provider_repairs["openai-api-key"]["priority"] == 20, provider_repairs
-    assert provider_repairs["openai-api-key"]["owner"] == "operator with provider credentials", provider_repairs
-    assert provider_repairs["openai-api-key"]["verification_command"].endswith(
+    assert set(provider_phases) == {"unblock-access"}, provider_phases
+    assert provider_phases["unblock-access"]["next_action_id"] == "provider-holdout-precheck-provider-api-key", provider_phases
+    assert provider_repairs["provider-api-key"]["repair_type"] == "precheck", provider_repairs
+    assert provider_repairs["provider-api-key"]["action_id"] == "provider-holdout-precheck-provider-api-key", provider_repairs
+    assert provider_repairs["provider-api-key"]["phase"] == "unblock-access", provider_repairs
+    assert provider_repairs["provider-api-key"]["priority"] == 20, provider_repairs
+    assert provider_repairs["provider-api-key"]["owner"] == "operator with provider credentials", provider_repairs
+    assert provider_repairs["provider-api-key"]["verification_command"].endswith(
         "world-class-preflight . --submissions-dir evidence/world_class/submissions"
     ), provider_repairs
-    assert provider_repairs["openai-api-key"]["counts_as_completion"] is False, provider_repairs
-    assert provider_repairs["model_executed_count"]["repair_type"] == "source-check", provider_repairs
-    assert provider_repairs["model_executed_count"]["phase"] == "collect-source", provider_repairs
-    assert provider_repairs["model_executed_count"]["priority"] == 40, provider_repairs
-    assert "output-exec --provider-runner openai" in provider_repairs["model_executed_count"][
-        "verification_command"
-    ], provider_repairs
-    assert provider_repairs["token_observed_count"]["status"] == "blocked", provider_repairs
+    assert provider_repairs["provider-api-key"]["counts_as_completion"] is False, provider_repairs
+    provider_source = {item["field"]: item for item in provider["source_checklist"]}
+    assert provider_source["model_executed_count"]["status"] == "pass", provider_source
+    assert provider_source["timing_observed_count"]["status"] == "pass", provider_source
+    assert provider_source["token_observed_count"]["status"] == "pass", provider_source
 
     human = by_key(payload["items"], "human-adjudication")
     assert human["status"] == "ready-for-human-review", human
@@ -245,8 +243,8 @@ def main() -> None:
     assert "| Priority | Phase | Owner | Evidence | Type | Target | Status | Verify | Next action |" in markdown, markdown
     assert "`unblock-access`" in markdown, markdown
     assert "operator with provider credentials" in markdown, markdown
-    assert "`openai-api-key`" in markdown, markdown
-    assert "`model_executed_count`" in markdown, markdown
+    assert "`provider-api-key`" in markdown, markdown
+    assert "Provider model run" in markdown, markdown
     assert "world-class-submission-kit . --output-dir evidence/world_class/submissions" in markdown, markdown
     assert "world-class-submission-kit . --output-dir evidence/world_class/submissions --prefill-artifacts" in markdown, markdown
     assert "world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions" in markdown, markdown
@@ -276,8 +274,8 @@ def main() -> None:
     assert "<dt>Owner</dt>" in html, html
     assert "operator with provider credentials" in html, html
     assert "world-class-preflight . --submissions-dir evidence/world_class/submissions" in html, html
-    assert "<strong>openai-api-key</strong>" in html, html
-    assert "<strong>model_executed_count</strong>" in html, html
+    assert "<strong>provider-api-key</strong>" in html, html
+    assert "<strong>Provider model run</strong>" in html, html
     assert "world-class-submission-kit . --output-dir evidence/world_class/submissions" in html, html
     assert "world-class-submission-kit . --output-dir evidence/world_class/submissions --prefill-artifacts" in html, html
     assert "provider-holdout" in html, html
@@ -292,7 +290,7 @@ def main() -> None:
 
     env_json = TMP / "preflight_with_env.json"
     env_proc = run_preflight(
-        {"OPENAI_API_KEY": "sk-test-secret", "YAO_OUTPUT_EVAL_MODEL": "gpt-test"},
+        {"DEEPSEEK_API_KEY": "sk-test-secret", "YAO_OUTPUT_EVAL_MODEL": "deepseek-test"},
         "--output-json",
         str(env_json),
         "--output-md",
@@ -303,8 +301,9 @@ def main() -> None:
     env_payload = json.loads(env_proc.stdout)
     env_provider = by_key(env_payload["items"], "provider-holdout")
     env_provider_checks = {item["key"]: item for item in env_provider["prechecks"]}
-    assert env_provider_checks["openai-api-key"]["status"] == "pass", env_provider_checks
-    assert env_provider_checks["openai-api-key"]["actual"] == "set", env_provider_checks
+    assert env_provider_checks["provider-api-key"]["status"] == "pass", env_provider_checks
+    assert env_provider_checks["provider-api-key"]["actual"] == "set", env_provider_checks
+    assert env_provider_checks["provider-api-key"]["set_envs"] == ["DEEPSEEK_API_KEY"], env_provider_checks
     assert env_provider_checks["provider-model"]["status"] == "pass", env_provider_checks
     assert "sk-test-secret" not in env_proc.stdout, env_proc.stdout
     assert "sk-test-secret" not in (TMP / "preflight_with_env.html").read_text(encoding="utf-8"), env_payload

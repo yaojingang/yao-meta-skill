@@ -23,7 +23,7 @@
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
     "package_hash_file_count": 245,
-    "package_sha256": "7958467751730998d7f2a8f38c9e8ef324874459e62f0c0a197232cd8386b291"
+    "package_sha256": "7fc324e26d614c46b350c2b3e20cb87a86f967d3a74d345bc0baf73d78d8b111"
   },
   "failures": [],
   "warnings": [],
@@ -666,9 +666,11 @@
       "uses_file_write": false,
       "uses_subprocess": false,
       "network_urls": [
-        "https://api.openai.com/v1/responses"
+        "https://api.openai.com/v1/responses",
+        "https://api.deepseek.com/chat/completions"
       ],
       "network_hosts": [
+        "api.deepseek.com",
         "api.openai.com"
       ]
     },
@@ -2513,7 +2515,7 @@
         "timed_out": false,
         "passed": true,
         "has_help_text": true,
-        "stdout_excerpt": "usage: provider_output_eval_runner.py [-h] [--provider PROVIDER]\n                                      [--base-url BASE_URL] [--model MODEL]\n                                      [--api-key-env API_KEY_ENV]\n                                 ",
+        "stdout_excerpt": "usage: provider_output_eval_runner.py [-h] [--provider PROVIDER]\n                                      [--base-url BASE_URL]\n                                      [--api-format {responses,chat-completions}]\n                                 ",
         "stderr_excerpt": ""
       },
       {
@@ -3392,7 +3394,7 @@
         ],
         "reviewer": "Yao Team",
         "scope": "Only scripts declared in security/network_policy.json may perform outbound requests.",
-        "reason": "Network use is bounded to public GitHub metadata and benchmark discovery, with allowed hosts reviewed in security/network_policy.json.",
+        "reason": "Network use is bounded to public GitHub metadata, benchmark discovery, update checks, and reviewed provider output-eval endpoints, with allowed hosts reviewed in security/network_policy.json.",
         "expires_at": "2026-09-30",
         "evidence": [
           "security/network_policy.json",

@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 
 from yao_cli_config import baseline_compare_args, local_output_runner_command
-from yao_cli_runtime import ROOT, run_adoption_drift_if_source_exists, run_script
+from yao_cli_runtime import ROOT, allow_report_status, run_adoption_drift_if_source_exists, run_script
 
 
 SCRIPT_INTERFACE = "internal-module"
@@ -15,6 +15,42 @@ SCRIPT_INTERFACE_REASON = "Imported by yao.py to keep report and evidence comman
 def emit_result(result: dict) -> int:
     print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
     return 0 if result["ok"] else 2
+
+
+def load_json_file(path: Path) -> dict:
+    if not path.exists():
+        return {}
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return {}
+
+
+def output_execution_has_provider_evidence() -> bool:
+    summary = load_json_file(ROOT / "reports" / "output_execution_runs.json").get("summary", {})
+    return (
+        int(summary.get("model_executed_count", 0) or 0) > 0
+        and int(summary.get("timing_observed_count", 0) or 0) > 0
+        and int(summary.get("token_observed_count", 0) or 0) > 0
+    )
+
+
+def run_output_execution_refresh() -> dict:
+    command = f"run_output_execution.py --runner-command {local_output_runner_command()}"
+    if output_execution_has_provider_evidence():
+        return {
+            "command": f"{command} skipped: provider-backed evidence already present",
+            "returncode": 0,
+            "ok": True,
+            "stdout": "",
+            "stderr": "",
+            "payload": {
+                "ok": True,
+                "skipped": True,
+                "reason": "provider-backed output execution evidence already has observed model, timing, and token metadata",
+            },
+        }
+    return run_script("run_output_execution.py", ["--runner-command", local_output_runner_command()])
 
 
 def resolved_skill_dir(args: argparse.Namespace) -> str:
@@ -63,7 +99,7 @@ def command_report(args: argparse.Namespace) -> int:
             run_script("render_system_model.py", [str(ROOT)]),
             run_script("compile_skill.py", [str(ROOT)]),
             run_script("run_output_eval.py", []),
-            run_script("run_output_execution.py", ["--runner-command", local_output_runner_command()]),
+            run_output_execution_refresh(),
             run_script("prepare_output_review_kit.py", []),
             run_script("adjudicate_output_review.py", []),
             run_adoption_drift_if_source_exists(),
@@ -74,7 +110,7 @@ def command_report(args: argparse.Namespace) -> int:
             run_script("render_world_class_evidence_ledger.py", [str(ROOT)]),
             run_script("render_world_class_evidence_intake.py", [str(ROOT)]),
             run_script("render_world_class_preflight.py", [str(ROOT)]),
-            run_script("render_world_class_submission_review.py", [str(ROOT)]),
+            allow_report_status(run_script("render_world_class_submission_review.py", [str(ROOT)])),
             run_script("render_world_class_operator_runbook.py", [str(ROOT)]),
             run_script("render_world_class_claim_guard.py", [str(ROOT)]),
             run_script("render_daily_skillops_report.py", [str(ROOT)]),

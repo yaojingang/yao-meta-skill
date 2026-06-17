@@ -6,7 +6,7 @@
       "decision": "approved",
       "reviewer": "Yao Team",
       "scope": "Only scripts declared in security/network_policy.json may perform outbound requests.",
-      "reason": "Network use is bounded to public GitHub metadata and benchmark discovery, with allowed hosts reviewed in security/network_policy.json.",
+      "reason": "Network use is bounded to public GitHub metadata, benchmark discovery, update checks, and reviewed provider output-eval endpoints, with allowed hosts reviewed in security/network_policy.json.",
       "expires_at": "2026-09-30",
       "evidence": [
         "security/network_policy.json",

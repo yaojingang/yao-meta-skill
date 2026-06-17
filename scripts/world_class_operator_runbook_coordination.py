@@ -19,10 +19,10 @@ COORDINATION_GUIDANCE: dict[str, dict[str, str]] = {
     "provider-holdout": {
         "phase": "provider-holdout",
         "owner": "assistant + operator with provider credentials",
-        "user_action": "Provide the provider API key through an environment variable and confirm the model to use.",
+        "user_action": "Provide the selected provider API key through an environment variable and confirm the provider, model, endpoint, and API format to use.",
         "assistant_action": "Run provider-backed output execution, verify aggregate timing and token metadata, then prepare the evidence packet.",
         "external_dependency": "Valid provider credentials and a live provider endpoint.",
-        "command": "python3 scripts/yao.py output-exec . --provider-runner openai --provider-model <model> --timeout-seconds 60",
+        "command": "python3 scripts/yao.py output-exec . --provider-runner <openai|deepseek> --provider-model <model> --timeout-seconds 60",
         "pass_condition": "reports/output_execution_runs.json has model_executed_count > 0 and token_observed_count > 0.",
         "artifact": "reports/output_execution_runs.json",
         "privacy_boundary": "Commit aggregate metadata only; do not commit API keys, raw prompts, raw outputs, or provider request payloads.",

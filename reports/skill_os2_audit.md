@@ -5,9 +5,9 @@ Generated at: `2026-06-13`
 ## Summary
 
 - decision: `continue-iteration`
-- pass: `11` / `15`
+- pass: `12` / `15`
 - human required: `1`
-- external required: `3`
+- external required: `2`
 - missing: `0`
 - world-class ready: `false`
 - evidence plan: `reports/world_class_evidence_plan.md`
@@ -19,7 +19,7 @@ Generated at: `2026-06-13`
 | Skill IR | pass | schema 2.0.0; targets 5 | 2.0 schema, root export, and target-neutral contract evidence | Keep IR as the source before target packaging. |
 | Target Compiler | pass | 5/5 targets pass | OpenAI, Claude, generic, Agent Skills compatible, and VS Code contracts generated from IR | Deepen target-native transforms when provider clients expose stronger runtime APIs. |
 | Output Eval Lab | pass | 5 cases; delta 100.0; exec 10; blind 5 | with-skill/baseline, assertions, execution evidence, blind A/B, failure taxonomy | Add more real-file and adversarial holdout cases as usage grows. |
-| Provider Holdout | external-required | model-executed 0; token-observed 0 | At least one real provider-backed holdout run with observed model/timing/token metadata | Run provider-backed holdout cases with real credentials and commit only aggregate evidence. |
+| Provider Holdout | pass | model-executed 10; token-observed 10 | At least one real provider-backed holdout run with observed model/timing/token metadata | Run provider-backed holdout cases with real credentials and commit only aggregate evidence. |
 | Human Adjudication | human-required | 0/5 decisions; pending 5 | Real reviewer decisions, blind-review attestation, and integrity fingerprints recorded before claiming output review completion | Record real A/B choices, reviewer metadata, and blind-review attestation, then regenerate adjudication. |
 | Benchmark Reproducibility | pass | artifacts 25; missing 0; failures 3 | Public methodology, reproducible commands, required artifacts, and failure disclosure are machine-checkable | Keep the manifest current with every benchmark, package, and release evidence change. |
 | Runtime Conformance | pass | 5/5 targets pass | Target package structure, metadata, relative paths, and degradation notes pass | Keep target conformance fixtures updated as platform contracts change. |
@@ -34,7 +34,6 @@ Generated at: `2026-06-13`
 
 ## Open Highest-Leverage Gaps
 
-- `provider-holdout` (external-required): Run provider-backed holdout cases with real credentials and commit only aggregate evidence.
 - `human-adjudication` (human-required): Record real A/B choices, reviewer metadata, and blind-review attestation, then regenerate adjudication.
 - `native-permission-enforcement` (external-required): Integrate a real target-client or external installer runtime guard before claiming native permission enforcement.
 - `native-client-telemetry` (external-required): Install a real client against the native host and import production metadata-only events.

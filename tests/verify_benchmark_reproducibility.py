@@ -53,7 +53,7 @@ def main() -> None:
         text=True,
         check=True,
     )
-    subprocess.run(
+    submission_review_proc = subprocess.run(
         [
             sys.executable,
             str(ROOT / "scripts" / "render_world_class_submission_review.py"),
@@ -64,8 +64,9 @@ def main() -> None:
         cwd=ROOT,
         capture_output=True,
         text=True,
-        check=True,
+        check=False,
     )
+    assert submission_review_proc.returncode in {0, 2}, submission_review_proc.stderr
     subprocess.run(
         [
             sys.executable,
@@ -161,7 +162,7 @@ def main() -> None:
     assert payload["evidence_bundle"]["existing_count"] == payload["summary"]["required_artifact_count"], payload
     assert payload["evidence_bundle"]["missing_count"] == 0, payload
     assert payload["evidence_bundle"]["missing_paths"] == [], payload
-    assert payload["summary"]["provider_evidence_complete"] is False, payload
+    assert payload["summary"]["provider_evidence_complete"] is True, payload
     assert payload["summary"]["human_review_complete"] is False, payload
     assert payload["summary"]["world_class_ready"] is False, payload
     assert payload["summary"]["world_class_source_check_count"] >= 13, payload
@@ -173,9 +174,14 @@ def main() -> None:
         == payload["summary"]["world_class_source_check_count"]
     ), payload
     assert payload["summary"]["public_claim_ready"] is False, payload
-    assert payload["summary"]["public_claim_blocker_count"] >= 4, payload
+    minimum_blockers = 3 if payload["summary"]["release_lock_ready"] else 4
+    assert payload["summary"]["public_claim_blocker_count"] >= minimum_blockers, payload
     assert payload["public_claim"]["ready"] is False, payload["public_claim"]
-    assert any("provider-backed" in item for item in payload["public_claim"]["blockers"]), payload["public_claim"]
+    if payload["summary"]["release_lock_ready"]:
+        assert not any("release lock" in item for item in payload["public_claim"]["blockers"]), payload["public_claim"]
+    else:
+        assert any("release lock" in item for item in payload["public_claim"]["blockers"]), payload["public_claim"]
+    assert not any("provider-backed model holdout evidence is incomplete" in item for item in payload["public_claim"]["blockers"]), payload["public_claim"]
     assert any("human blind-review" in item for item in payload["public_claim"]["blockers"]), payload["public_claim"]
     assert any("world-class evidence" in item for item in payload["public_claim"]["blockers"]), payload["public_claim"]
     assert any("world-class source checks" in item for item in payload["public_claim"]["blockers"]), payload["public_claim"]
@@ -205,7 +211,7 @@ def main() -> None:
     assert any(command["command"] == "python3 scripts/yao.py world-class-claim-guard ." for command in payload["reproduction_commands"]), payload
     assert any(command["command"] == "python3 scripts/yao.py python-compat ." for command in payload["reproduction_commands"]), payload
     assert any(command["command"] == "python3 scripts/yao.py evidence-consistency ." for command in payload["reproduction_commands"]), payload
-    assert any("provider-backed" in item for item in payload["limitations"]), payload["limitations"]
+    assert any("Provider-backed model holdout source evidence is complete" in item for item in payload["limitations"]), payload["limitations"]
     markdown = output_md.read_text(encoding="utf-8")
     assert "Benchmark Reproducibility" in markdown, markdown
     assert "Evidence bundle SHA256" in markdown, markdown
@@ -217,7 +223,8 @@ def main() -> None:
     assert "world-class source checks" in markdown, markdown
     assert "public claim ready: `false`" in markdown, markdown
     assert "## Public Claim Boundary" in markdown, markdown
-    assert "provider-backed model holdout evidence is incomplete" in markdown, markdown
+    assert "provider-backed model holdout evidence is incomplete" not in markdown, markdown
+    assert "Provider-backed model holdout source evidence is complete" in markdown, markdown
     assert "world-class source checks are not all accepted" in markdown, markdown
     assert "## Release Lock" in markdown, markdown
     assert "## Evidence Bundle" in markdown, markdown

@@ -68,7 +68,7 @@ from yao_cli_report_commands import (
     command_world_class_submission_kit,
     command_world_class_submission_review,
 )
-from yao_cli_runtime import ROOT, run_adoption_drift_if_source_exists, run_script
+from yao_cli_runtime import ROOT, allow_report_status, run_adoption_drift_if_source_exists, run_script
 from yao_cli_telemetry import add_telemetry_args, maybe_record_cli_event
 
 
@@ -442,7 +442,10 @@ def command_workspace_flow(args: argparse.Namespace) -> int:
             {"phase": "report-refresh", "result": run_script("render_world_class_evidence_plan.py", [str(ROOT)])},
             {"phase": "report-refresh", "result": run_script("render_world_class_evidence_ledger.py", [str(ROOT)])},
             {"phase": "report-refresh", "result": run_script("render_world_class_evidence_intake.py", [str(ROOT)])},
-            {"phase": "report-refresh", "result": run_script("render_world_class_submission_review.py", [str(ROOT)])},
+            {
+                "phase": "report-refresh",
+                "result": allow_report_status(run_script("render_world_class_submission_review.py", [str(ROOT)])),
+            },
             {"phase": "report-refresh", "result": run_script("render_world_class_operator_runbook.py", [str(ROOT)])},
             {"phase": "report-refresh", "result": run_script("render_world_class_claim_guard.py", [str(ROOT)])},
             {"phase": "report-refresh", "result": run_script("render_skill_os2_coverage.py", [str(ROOT)])},
