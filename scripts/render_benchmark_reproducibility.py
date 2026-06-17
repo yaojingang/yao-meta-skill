@@ -326,35 +326,47 @@ def beta_test_blockers(
     return blockers
 
 
-def beta_deferred_evidence(human_review_complete: bool, world_class_ready: bool) -> list[dict[str, str]]:
+BETA_DEFERRED_EVIDENCE = {
+    "provider-holdout": {
+        "label": "Provider holdout ledger review",
+        "reason": "Provider-backed source evidence exists, but formal ledger submission and reviewer acceptance are still pending before public claims.",
+    },
+    "human-adjudication": {
+        "label": "Human blind-review adjudication",
+        "reason": "Human adjudication evidence is still pending; deferred for beta/public testing and still required before superiority, fully-reviewed, or world-class claims.",
+    },
+    "native-permission-enforcement": {
+        "label": "Native permission enforcement evidence",
+        "reason": "Native enforcement proof is still pending; deferred for beta/public testing and still required before world-class claims.",
+    },
+    "native-client-telemetry": {
+        "label": "Real client telemetry evidence",
+        "reason": "Real client telemetry is still pending; deferred for beta/public testing and still required before world-class claims.",
+    },
+}
+
+
+def beta_deferred_evidence(world_class_ledger: dict[str, Any]) -> list[dict[str, str]]:
     deferred = []
-    if not human_review_complete:
+    entries = world_class_ledger.get("entries", [])
+    if not isinstance(entries, list):
+        return deferred
+    for entry in entries:
+        if not isinstance(entry, dict) or entry.get("status") != "pending":
+            continue
+        key = str(entry.get("key") or "")
+        if not key:
+            continue
+        fallback = BETA_DEFERRED_EVIDENCE.get(key, {})
         deferred.append(
             {
-                "key": "human-adjudication",
-                "label": "Human blind-review adjudication",
-                "reason": "Deferred for beta/public testing; still required before superiority, fully-reviewed, or world-class claims.",
+                "key": key,
+                "label": str(entry.get("label") or fallback.get("label") or key),
+                "reason": str(
+                    fallback.get("reason")
+                    or "Formal evidence is still pending; deferred for beta/public testing and still required before public claims."
+                ),
             }
-        )
-    if not world_class_ready:
-        deferred.extend(
-            [
-                {
-                    "key": "provider-ledger-review",
-                    "label": "Independent provider ledger review",
-                    "reason": "Provider source evidence may be complete, but independent ledger acceptance remains formal-claim evidence.",
-                },
-                {
-                    "key": "native-permission-enforcement",
-                    "label": "Native permission enforcement evidence",
-                    "reason": "Native enforcement proof is deferred for beta/public testing and remains required for world-class claims.",
-                },
-                {
-                    "key": "native-client-telemetry",
-                    "label": "Real client telemetry evidence",
-                    "reason": "Real client telemetry is deferred for beta/public testing and remains required for world-class claims.",
-                },
-            ]
         )
     return deferred
 
@@ -417,7 +429,7 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
         release_lock["ready"],
         provider_evidence_complete,
     )
-    beta_deferred = beta_deferred_evidence(human_review_complete, world_class_ready)
+    beta_deferred = beta_deferred_evidence(world_class_ledger)
     beta_test_ready = not beta_blockers
     limitations = [
         "The git commit and dirty flags are generation-time context; release lock is blocked by source changes, while generated evidence artifacts are tracked separately.",

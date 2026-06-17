@@ -9,6 +9,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPT = ROOT / "scripts" / "render_benchmark_reproducibility.py"
 TMP = ROOT / "tests" / "tmp_benchmark_reproducibility"
+sys.path.insert(0, str(ROOT / "scripts"))
+from evidence_consistency_core import beta_public_claim_split_values  # noqa: E402
+from render_benchmark_reproducibility import beta_deferred_evidence  # noqa: E402
 
 
 def main() -> None:
@@ -189,11 +192,55 @@ def main() -> None:
     assert "do not claim world-class" in payload["beta_test_release"]["required_wording"], payload[
         "beta_test_release"
     ]
+    ledger_payload = json.loads((ROOT / "reports" / "world_class_evidence_ledger.json").read_text(encoding="utf-8"))
+    pending_ledger_keys = {
+        item["key"] for item in ledger_payload["entries"] if item.get("status") == "pending"
+    }
     deferred_keys = {item["key"] for item in payload["beta_test_release"]["allowed_deferred_evidence"]}
+    assert deferred_keys == pending_ledger_keys, payload["beta_test_release"]
     assert "human-adjudication" in deferred_keys, payload["beta_test_release"]
+    assert "provider-holdout" in deferred_keys, payload["beta_test_release"]
+    assert "provider-ledger-review" not in deferred_keys, payload["beta_test_release"]
     assert not any("human blind-review" in item for item in payload["beta_test_release"]["blockers"]), payload[
         "beta_test_release"
     ]
+    synthetic_deferred = beta_deferred_evidence(
+        {
+            "entries": [
+                {"key": "provider-holdout", "label": "Provider Holdout", "status": "accepted"},
+                {"key": "native-client-telemetry", "label": "Native Client Telemetry", "status": "pending"},
+            ]
+        }
+    )
+    assert {item["key"] for item in synthetic_deferred} == {"native-client-telemetry"}, synthetic_deferred
+    expected_beta_split, actual_beta_split = beta_public_claim_split_values(
+        {
+            "summary": {
+                "reproducibility_ready": True,
+                "release_lock_ready": True,
+                "provider_evidence_complete": True,
+                "beta_test_ready": True,
+                "public_claim_ready": False,
+                "human_review_complete": True,
+            },
+            "beta_test_release": {
+                "ready": True,
+                "scope": "beta/public test release without superiority, fully-reviewed, or world-class claims",
+                "allowed_deferred_evidence": [{"key": "native-client-telemetry", "reason": "still pending"}],
+            },
+        },
+        {
+            "summary": {"ready_to_claim_world_class": False},
+            "entries": [
+                {"key": "human-adjudication", "status": "accepted"},
+                {"key": "native-client-telemetry", "status": "pending"},
+            ],
+        },
+        {"data": {"output_review_adjudication": {"summary": {"pair_count": 5, "pending_count": 0}}}},
+    )
+    assert expected_beta_split == actual_beta_split, (expected_beta_split, actual_beta_split)
+    assert expected_beta_split["human_review_complete"] is True, expected_beta_split
+    assert expected_beta_split["deferred_human_review"] is False, expected_beta_split
     assert payload["summary"]["public_claim_ready"] is False, payload
     minimum_blockers = 3 if payload["summary"]["release_lock_ready"] else 4
     assert payload["summary"]["public_claim_blocker_count"] >= minimum_blockers, payload

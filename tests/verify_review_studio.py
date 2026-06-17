@@ -222,6 +222,13 @@ def main() -> None:
     beta_release = full_payload["data"]["benchmark_reproducibility"]["beta_test_release"]
     assert beta_release["ready"] is expected_beta_ready, beta_release
     assert not any("human blind-review" in item for item in beta_release["blockers"]), beta_release
+    pending_ledger_keys = {
+        item["key"]
+        for item in full_payload["data"]["world_class_evidence_ledger"]["entries"]
+        if item.get("status") == "pending"
+    }
+    deferred_keys = {item["key"] for item in beta_release["allowed_deferred_evidence"]}
+    assert deferred_keys == pending_ledger_keys, beta_release
     assert any(item["key"] == "human-adjudication" for item in beta_release["allowed_deferred_evidence"]), (
         beta_release
     )

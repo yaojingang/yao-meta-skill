@@ -217,6 +217,59 @@ def gate_by_key(review_studio: dict[str, Any], key: str) -> dict[str, Any]:
     return {}
 
 
+def beta_public_claim_split_values(
+    benchmark: dict[str, Any],
+    ledger: dict[str, Any],
+    review_studio: dict[str, Any],
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    benchmark_summary = nested(benchmark, ["summary"], {})
+    ledger_summary = nested(ledger, ["summary"], {})
+    expected_beta_ready = (
+        bool(benchmark_summary.get("reproducibility_ready"))
+        and bool(benchmark_summary.get("release_lock_ready"))
+        and bool(benchmark_summary.get("provider_evidence_complete"))
+    )
+    output_review_summary = nested(review_studio, ["data", "output_review_adjudication", "summary"], {})
+    review_pair_count = as_int(output_review_summary.get("pair_count")) if isinstance(output_review_summary, dict) else None
+    review_pending_count = as_int(output_review_summary.get("pending_count")) if isinstance(output_review_summary, dict) else None
+    expected_human_review_complete = (
+        review_pair_count is not None and review_pair_count > 0 and review_pending_count == 0
+    )
+    ledger_entries = ledger.get("entries", []) if isinstance(ledger, dict) else []
+    pending_ledger_keys = sorted(
+        str(entry.get("key", ""))
+        for entry in ledger_entries
+        if isinstance(entry, dict) and entry.get("status") == "pending" and str(entry.get("key", ""))
+    )
+    beta_boundary = {
+        "beta_test_ready": expected_beta_ready,
+        "public_claim_ready": ledger_summary.get("ready_to_claim_world_class"),
+        "human_review_complete": expected_human_review_complete,
+        "beta_release_ready": expected_beta_ready,
+        "beta_release_scope": "beta/public test release without superiority, fully-reviewed, or world-class claims",
+        "deferred_evidence_keys": pending_ledger_keys,
+        "deferred_human_review": "human-adjudication" in pending_ledger_keys,
+    }
+    beta_release = benchmark.get("beta_test_release", {}) if isinstance(benchmark, dict) else {}
+    deferred_keys = sorted(
+        str(item.get("key", ""))
+        for item in beta_release.get("allowed_deferred_evidence", [])
+        if isinstance(item, dict) and str(item.get("key", ""))
+    )
+    actual_beta_boundary = {
+        "beta_test_ready": benchmark_summary.get("beta_test_ready") if isinstance(benchmark_summary, dict) else None,
+        "public_claim_ready": benchmark_summary.get("public_claim_ready") if isinstance(benchmark_summary, dict) else None,
+        "human_review_complete": benchmark_summary.get("human_review_complete")
+        if isinstance(benchmark_summary, dict)
+        else None,
+        "beta_release_ready": beta_release.get("ready") if isinstance(beta_release, dict) else None,
+        "beta_release_scope": beta_release.get("scope") if isinstance(beta_release, dict) else None,
+        "deferred_evidence_keys": deferred_keys,
+        "deferred_human_review": "human-adjudication" in deferred_keys,
+    }
+    return beta_boundary, actual_beta_boundary
+
+
 def report_contract(payload: dict[str, Any]) -> dict[str, Any]:
     contract = payload.get("report_contract")
     return contract if isinstance(contract, dict) else {}

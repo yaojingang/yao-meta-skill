@@ -170,6 +170,7 @@ def prepare_review_studio_inputs(tmp_root: Path) -> None:
         "render_world_class_operator_runbook.py",
         "render_world_class_claim_guard.py",
         "render_skill_os2_coverage.py",
+        "render_benchmark_reproducibility.py",
     ]:
         allowed_returncodes = (0, 2) if script_name == "render_world_class_submission_review.py" else (0,)
         run_script(script_name, ROOT, "--generated-at", "2026-06-13", allowed_returncodes=allowed_returncodes)

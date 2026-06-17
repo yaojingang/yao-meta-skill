@@ -202,6 +202,7 @@ def main() -> None:
     beta_split = checks["benchmark-beta-public-claim-split"]["actual"]
     assert beta_split["public_claim_ready"] is False, beta_split
     assert beta_split["human_review_complete"] is False, beta_split
+    assert beta_split["deferred_evidence_keys"] == ["human-adjudication", "native-client-telemetry", "native-permission-enforcement", "provider-holdout"], beta_split
     assert beta_split["deferred_human_review"] is True, beta_split
     assert checks["preflight-world-class-boundary"]["status"] == "pass", checks["preflight-world-class-boundary"]
     assert checks["preflight-submission-kit-handoff"]["status"] == "pass", checks[

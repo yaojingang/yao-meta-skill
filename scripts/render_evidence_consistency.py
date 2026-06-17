@@ -16,6 +16,7 @@ from evidence_consistency_core import (
     REQUIRED_TEXT_REPORTS,
     add_check,
     as_int,
+    beta_public_claim_split_values,
     compare_summary_keys,
     compare_values,
     gate_by_key,
@@ -450,35 +451,11 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             paths=[REQUIRED_REPORTS["world_class_ledger"], REQUIRED_REPORTS["benchmark"]],
             detail="Benchmark reproducibility must not overstate public claim readiness.",
         )
-        expected_beta_ready = (
-            bool(benchmark_summary.get("reproducibility_ready"))
-            and bool(benchmark_summary.get("release_lock_ready"))
-            and bool(benchmark_summary.get("provider_evidence_complete"))
+        beta_boundary, actual_beta_boundary = beta_public_claim_split_values(
+            benchmark,
+            ledger,
+            review_studio,
         )
-        beta_boundary = {
-            "beta_test_ready": expected_beta_ready,
-            "public_claim_ready": ledger_summary.get("ready_to_claim_world_class"),
-            "human_review_complete": False,
-            "beta_release_ready": expected_beta_ready,
-            "beta_release_scope": "beta/public test release without superiority, fully-reviewed, or world-class claims",
-            "deferred_human_review": True,
-        }
-        beta_release = benchmark.get("beta_test_release", {}) if isinstance(benchmark, dict) else {}
-        deferred_keys = {
-            str(item.get("key", ""))
-            for item in beta_release.get("allowed_deferred_evidence", [])
-            if isinstance(item, dict)
-        }
-        actual_beta_boundary = {
-            "beta_test_ready": benchmark_summary.get("beta_test_ready") if isinstance(benchmark_summary, dict) else None,
-            "public_claim_ready": benchmark_summary.get("public_claim_ready") if isinstance(benchmark_summary, dict) else None,
-            "human_review_complete": benchmark_summary.get("human_review_complete")
-            if isinstance(benchmark_summary, dict)
-            else None,
-            "beta_release_ready": beta_release.get("ready") if isinstance(beta_release, dict) else None,
-            "beta_release_scope": beta_release.get("scope") if isinstance(beta_release, dict) else None,
-            "deferred_human_review": "human-adjudication" in deferred_keys,
-        }
         compare_values(
             checks,
             key="benchmark-beta-public-claim-split",
