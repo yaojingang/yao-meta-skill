@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-13",
+  "generated_at": "2026-06-17",
   "skill_dir": ".",
   "summary": {
     "evidence_item_count": 4,
@@ -23,6 +23,19 @@
     "phase_queue_next_action_id": "human-adjudication-precheck-human-reviewer",
     "phase_queue_next_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions",
     "phase_queue_counts_as_completion": false,
+    "coordination_step_count": 6,
+    "coordination_user_required_step_count": 6,
+    "coordination_pending_evidence_keys": [
+      "human-adjudication",
+      "native-client-telemetry",
+      "native-permission-enforcement",
+      "provider-holdout"
+    ],
+    "coordination_counts_as_completion": false,
+    "release_gate_ready": false,
+    "release_gate_blocked_count": 4,
+    "release_gate_check_count": 5,
+    "release_gate_counts_as_completion": false,
     "ready_to_claim_world_class": false,
     "runbook_counts_as_completion": false,
     "decision": "collect-evidence"
@@ -1186,6 +1199,182 @@
       }
     }
   ],
+  "coordination_plan": [
+    {
+      "step_id": "prepare-evidence-session",
+      "phase": "prepare",
+      "evidence_key": "",
+      "owner": "assistant + user",
+      "requires_user_input": true,
+      "user_action": "Confirm provider access, reviewer availability, target client path, and telemetry client path before collection starts.",
+      "assistant_action": "Run preflight and prepare submission drafts without accepting them as evidence.",
+      "external_dependency": "User-selected provider, reviewer, and real client surfaces.",
+      "command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions && python3 scripts/yao.py world-class-submission-kit . --output-dir evidence/world_class/submissions --prefill-artifacts",
+      "pass_condition": "Preflight lists the same pending evidence keys and no credential values are printed.",
+      "artifact": "reports/world_class_evidence_preflight.json",
+      "privacy_boundary": "Drafts and preflight are planning artifacts only; they do not count as evidence.",
+      "counts_as_completion": false
+    },
+    {
+      "step_id": "collect-provider-holdout",
+      "phase": "provider-holdout",
+      "evidence_key": "provider-holdout",
+      "owner": "assistant + operator with provider credentials",
+      "requires_user_input": true,
+      "user_action": "Provide the provider API key through an environment variable and confirm the model to use.",
+      "assistant_action": "Run provider-backed output execution, verify aggregate timing and token metadata, then prepare the evidence packet.",
+      "external_dependency": "Valid provider credentials and a live provider endpoint.",
+      "command": "python3 scripts/yao.py output-exec . --provider-runner openai --provider-model <model> --timeout-seconds 60",
+      "pass_condition": "reports/output_execution_runs.json has model_executed_count > 0 and token_observed_count > 0.",
+      "artifact": "reports/output_execution_runs.json",
+      "privacy_boundary": "Commit aggregate metadata only; do not commit API keys, raw prompts, raw outputs, or provider request payloads.",
+      "counts_as_completion": false
+    },
+    {
+      "step_id": "collect-human-adjudication",
+      "phase": "human-review",
+      "evidence_key": "human-adjudication",
+      "owner": "human reviewer + assistant",
+      "requires_user_input": true,
+      "user_action": "Open the blind review kit, choose winners for all pairs, add reviewer metadata and reasons, and keep the answer key hidden until decisions are saved.",
+      "assistant_action": "Generate the review kit, import decisions, validate integrity, and prepare the human evidence packet.",
+      "external_dependency": "A real human reviewer who can make blind A/B judgments.",
+      "command": "python3 scripts/yao.py output-review-kit . && python3 scripts/yao.py output-review .",
+      "pass_condition": "reports/output_review_adjudication.json has pending_count == 0 and ready_for_human_evidence == true.",
+      "artifact": "reports/output_review_adjudication.json",
+      "privacy_boundary": "Store reviewer choices, reasons, hashes, and attestations; do not store raw prompts or answer-key exposure before decisions.",
+      "counts_as_completion": false
+    },
+    {
+      "step_id": "collect-native-permission-enforcement",
+      "phase": "native-permission",
+      "evidence_key": "native-permission-enforcement",
+      "owner": "target client or installer integrator + assistant",
+      "requires_user_input": true,
+      "user_action": "Select a real target client or external installer guard that can enforce declared capabilities instead of metadata-only fallback.",
+      "assistant_action": "Run runtime permission probes, package verification, install simulation, and prepare the native enforcement evidence packet.",
+      "external_dependency": "A real target runtime, extension, client, or installer guard that can block undeclared capabilities.",
+      "command": "python3 scripts/yao.py runtime-permissions . --package-dir dist",
+      "pass_condition": "reports/runtime_permission_probes.json has native_enforcement_count > 0 and failure_count == 0.",
+      "artifact": "reports/runtime_permission_probes.json",
+      "privacy_boundary": "Do not mark metadata fallback as native enforcement; keep residual risks visible for fallback targets.",
+      "counts_as_completion": false
+    },
+    {
+      "step_id": "collect-native-client-telemetry",
+      "phase": "native-telemetry",
+      "evidence_key": "native-client-telemetry",
+      "owner": "real client integrator + assistant",
+      "requires_user_input": true,
+      "user_action": "Install the native host manifest in a real Browser, Chrome, IDE, or provider client and trigger a metadata-only event.",
+      "assistant_action": "Generate native host assets, import the external event JSONL, refresh adoption drift, and prepare the telemetry evidence packet.",
+      "external_dependency": "A real client process that emits metadata-only telemetry through the native host.",
+      "command": "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl --source external",
+      "pass_condition": "reports/adoption_drift_report.json has source_types.external > 0 and adoption_sample_count > 0.",
+      "artifact": "reports/adoption_drift_report.json",
+      "privacy_boundary": "Telemetry must remain metadata-only; do not store raw prompts, outputs, transcripts, notes, or messages.",
+      "counts_as_completion": false
+    },
+    {
+      "step_id": "review-and-release-gate",
+      "phase": "release-gate",
+      "evidence_key": "",
+      "owner": "assistant + ledger reviewer",
+      "requires_user_input": true,
+      "user_action": "Approve only validated evidence packets and confirm the release wording after the claim guard passes.",
+      "assistant_action": "Run intake, submission review, ledger, claim guard, benchmark, evidence consistency, Review Studio, and CI before final publish.",
+      "external_dependency": "Accepted evidence packets for every pending world-class key.",
+      "command": "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions && python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions && python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions && python3 scripts/yao.py world-class-claim-guard . && make ci-test",
+      "pass_condition": "Ledger ready_to_claim_world_class, benchmark public_claim_ready, claim guard violation_count == 0, Review Studio has no blockers, and CI passes.",
+      "artifact": "reports/world_class_evidence_ledger.json",
+      "privacy_boundary": "Release evidence may include aggregate reports and hashes only; raw content and credentials remain out of git.",
+      "counts_as_completion": false
+    }
+  ],
+  "release_gate": {
+    "ready": false,
+    "decision": "blocked-until-evidence-accepted",
+    "check_count": 5,
+    "blocked_count": 4,
+    "checks": [
+      {
+        "key": "world_class_ledger_ready",
+        "label": "World-class ledger ready",
+        "passed": false,
+        "current": "evidence-pending",
+        "expected": "ready_to_claim_world_class == true",
+        "artifact": "reports/world_class_evidence_ledger.json"
+      },
+      {
+        "key": "claim_guard_clean",
+        "label": "Claim guard clean",
+        "passed": false,
+        "current": "violations 0; ledger ready False",
+        "expected": "violation_count == 0 and ledger_ready_to_claim_world_class == true",
+        "artifact": "reports/world_class_claim_guard.json"
+      },
+      {
+        "key": "benchmark_public_claim_ready",
+        "label": "Benchmark public claim ready",
+        "passed": false,
+        "current": "public_claim_ready False",
+        "expected": "public_claim_ready == true",
+        "artifact": "reports/benchmark_reproducibility.json"
+      },
+      {
+        "key": "review_studio_clean",
+        "label": "Review Studio clean",
+        "passed": false,
+        "current": "blockers 0; warnings 3",
+        "expected": "blocker_count == 0 and warning_count == 0",
+        "artifact": "reports/review-studio.json"
+      },
+      {
+        "key": "evidence_consistency_clean",
+        "label": "Evidence consistency clean",
+        "passed": true,
+        "current": "consistent",
+        "expected": "decision == consistent and fail_count == 0",
+        "artifact": "reports/evidence_consistency.json"
+      }
+    ],
+    "blocked_checks": [
+      {
+        "key": "world_class_ledger_ready",
+        "label": "World-class ledger ready",
+        "passed": false,
+        "current": "evidence-pending",
+        "expected": "ready_to_claim_world_class == true",
+        "artifact": "reports/world_class_evidence_ledger.json"
+      },
+      {
+        "key": "claim_guard_clean",
+        "label": "Claim guard clean",
+        "passed": false,
+        "current": "violations 0; ledger ready False",
+        "expected": "violation_count == 0 and ledger_ready_to_claim_world_class == true",
+        "artifact": "reports/world_class_claim_guard.json"
+      },
+      {
+        "key": "benchmark_public_claim_ready",
+        "label": "Benchmark public claim ready",
+        "passed": false,
+        "current": "public_claim_ready False",
+        "expected": "public_claim_ready == true",
+        "artifact": "reports/benchmark_reproducibility.json"
+      },
+      {
+        "key": "review_studio_clean",
+        "label": "Review Studio clean",
+        "passed": false,
+        "current": "blockers 0; warnings 3",
+        "expected": "blocker_count == 0 and warning_count == 0",
+        "artifact": "reports/review-studio.json"
+      }
+    ],
+    "final_manual_check": "Run make ci-test in a clean worktree and verify GitHub Actions before converting the PR out of Draft.",
+    "counts_as_completion": false
+  },
   "repair_checklist": [
     {
       "action_id": "human-adjudication-precheck-human-reviewer",

@@ -15,6 +15,7 @@ python3 scripts/yao.py world-class-submission-kit . --output-dir "$SUBMISSIONS_D
 python3 scripts/yao.py world-class-intake . --submissions-dir "$SUBMISSIONS_DIR"
 python3 scripts/yao.py world-class-submission-review . --submissions-dir "$SUBMISSIONS_DIR"
 python3 scripts/yao.py world-class-ledger . --submissions-dir "$SUBMISSIONS_DIR"
+python3 scripts/yao.py world-class-runbook . --submissions-dir "$SUBMISSIONS_DIR"
 ```
 
 The intake validator checks:
@@ -38,5 +39,7 @@ The submission kit command creates editable JSON drafts plus a local README for 
 The submission kit separates artifact rows into `submission-ref` and `supporting-evidence`. `submission-ref` rows are the concrete paths expected in a real packet's `artifact_refs`; `supporting-evidence` rows help reviewers audit the packet and do not all need to be copied into the submission.
 
 The submission review command renders a read-only queue that compares valid packets with the source evidence checks and current ledger state. It is for reviewer triage only; it does not accept evidence or make the world-class claim true.
+
+The operator runbook is the step-by-step coordination cockpit for finishing the remaining real-world work. It includes a Coordination Plan that separates user-required provider, reviewer, native-client, and telemetry actions from assistant-run commands, plus a Release Gate that mirrors the ledger, claim guard, benchmark, Review Studio, evidence consistency, and final CI checks. The runbook is operational guidance only: planning rows, submission drafts, and release-gate rows keep `counts_as_completion: false`.
 
 Accepted intake means "ready for ledger review", not evidence that the final public claim is ready. The ledger remains the source of truth for `ready_to_claim_world_class`.

@@ -115,8 +115,23 @@ def build_world_class_workflow_check(
     intake_checklist = keyed_items(world_class_intake, "operator_checklist")
     submission_review_items = keyed_items(world_class_submission_review, "items")
     operator_runbook_items = keyed_items(world_class_operator_runbook, "items")
+    coordination_plan = (
+        world_class_operator_runbook.get("coordination_plan")
+        if isinstance(world_class_operator_runbook.get("coordination_plan"), list)
+        else []
+    )
+    release_gate = (
+        world_class_operator_runbook.get("release_gate")
+        if isinstance(world_class_operator_runbook.get("release_gate"), dict)
+        else {}
+    )
     review_action_steps = world_class_review_action_steps(review_studio)
     pending_keys = sorted(key for key, item in ledger_items.items() if item.get("status") != "accepted")
+    operator_coordination_keys = sorted(
+        key
+        for key in {str(step.get("evidence_key", "")) for step in coordination_plan if isinstance(step, dict)}
+        if key
+    )
 
     actual_command_groups = {
         key: {
@@ -138,6 +153,10 @@ def build_world_class_workflow_check(
         "intake_keys": pending_keys,
         "submission_review_keys": pending_keys,
         "operator_runbook_keys": pending_keys,
+        "operator_coordination_keys": pending_keys,
+        "operator_coordination_counts_as_completion": False,
+        "operator_release_gate_ready": ledger_summary.get("ready_to_claim_world_class") is True,
+        "operator_release_gate_counts_as_completion": False,
         "review_studio_keys": pending_keys,
         "intake_ready_to_claim_world_class": False,
         "submission_review_ready_to_claim_world_class": False,
@@ -159,6 +178,12 @@ def build_world_class_workflow_check(
         "intake_keys": sorted(intake_checklist),
         "submission_review_keys": sorted(submission_review_items),
         "operator_runbook_keys": sorted(operator_runbook_items),
+        "operator_coordination_keys": operator_coordination_keys,
+        "operator_coordination_counts_as_completion": operator_runbook_summary.get(
+            "coordination_counts_as_completion"
+        ),
+        "operator_release_gate_ready": release_gate.get("ready"),
+        "operator_release_gate_counts_as_completion": release_gate.get("counts_as_completion"),
         "review_studio_keys": sorted(review_action_steps),
         "intake_ready_to_claim_world_class": intake_summary.get("ready_to_claim_world_class"),
         "submission_review_ready_to_claim_world_class": submission_review_summary.get("ready_to_claim_world_class"),

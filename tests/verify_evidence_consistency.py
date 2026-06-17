@@ -240,6 +240,16 @@ def main() -> None:
     assert checks["world-class-evidence-workflow-coverage"]["status"] == "pass", checks[
         "world-class-evidence-workflow-coverage"
     ]
+    workflow_actual = checks["world-class-evidence-workflow-coverage"]["actual"]
+    assert workflow_actual["operator_coordination_keys"] == [
+        "human-adjudication",
+        "native-client-telemetry",
+        "native-permission-enforcement",
+        "provider-holdout",
+    ], workflow_actual
+    assert workflow_actual["operator_coordination_counts_as_completion"] is False, workflow_actual
+    assert workflow_actual["operator_release_gate_ready"] is False, workflow_actual
+    assert workflow_actual["operator_release_gate_counts_as_completion"] is False, workflow_actual
     assert checks["skill-os-2-review-current-evidence"]["status"] == "pass", checks[
         "skill-os-2-review-current-evidence"
     ]
@@ -660,6 +670,16 @@ def main() -> None:
                 item for item in action["evidence_steps"] if item.get("key") != "native-client-telemetry"
             ]
     studio_path.write_text(json.dumps(studio, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    operator_runbook_path = workflow_drift_root / "reports" / "world_class_operator_runbook.json"
+    operator_runbook = json.loads(operator_runbook_path.read_text(encoding="utf-8"))
+    operator_runbook["coordination_plan"] = [
+        item
+        for item in operator_runbook["coordination_plan"]
+        if item.get("evidence_key") != "native-client-telemetry"
+    ]
+    operator_runbook["summary"]["coordination_counts_as_completion"] = True
+    operator_runbook["release_gate"]["counts_as_completion"] = True
+    operator_runbook_path.write_text(json.dumps(operator_runbook, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     workflow_drift_proc = run(
         [
             sys.executable,

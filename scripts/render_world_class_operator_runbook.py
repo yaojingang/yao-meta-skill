@@ -10,6 +10,7 @@ from render_world_class_evidence_intake import build_intake
 from render_world_class_evidence_ledger import build_ledger
 from render_world_class_preflight import build_preflight
 from render_world_class_submission_review import build_submission_review
+from world_class_operator_runbook_coordination import build_coordination_plan, build_release_gate
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -125,6 +126,8 @@ def build_operator_runbook(skill_dir: Path, generated_at: str, submissions_dir: 
         )
         for entry in ledger.get("entries", [])
     ]
+    coordination_plan = build_coordination_plan(items)
+    release_gate = build_release_gate(skill_dir, ledger)
     summary = ledger.get("summary", {})
     review_summary = review.get("summary", {})
     preflight_summary = preflight.get("summary", {}) if isinstance(preflight.get("summary", {}), dict) else {}
@@ -153,6 +156,18 @@ def build_operator_runbook(skill_dir: Path, generated_at: str, submissions_dir: 
             "phase_queue_next_action_id": preflight_summary.get("phase_queue_next_action_id", ""),
             "phase_queue_next_command": preflight_summary.get("phase_queue_next_command", ""),
             "phase_queue_counts_as_completion": False,
+            "coordination_step_count": len(coordination_plan),
+            "coordination_user_required_step_count": sum(1 for step in coordination_plan if step.get("requires_user_input")),
+            "coordination_pending_evidence_keys": sorted(
+                key
+                for key in {str(step.get("evidence_key", "")) for step in coordination_plan}
+                if key
+            ),
+            "coordination_counts_as_completion": False,
+            "release_gate_ready": release_gate["ready"],
+            "release_gate_blocked_count": release_gate["blocked_count"],
+            "release_gate_check_count": release_gate["check_count"],
+            "release_gate_counts_as_completion": False,
             "ready_to_claim_world_class": summary.get("ready_to_claim_world_class") is True,
             "runbook_counts_as_completion": False,
             "decision": "ready-for-completion-audit" if summary.get("ready_to_claim_world_class") is True else "collect-evidence",
@@ -162,6 +177,8 @@ def build_operator_runbook(skill_dir: Path, generated_at: str, submissions_dir: 
             "runbook_counts_submission_as_completion": False,
         },
         "items": items,
+        "coordination_plan": coordination_plan,
+        "release_gate": release_gate,
         "repair_checklist": preflight.get("repair_checklist", [])
         if isinstance(preflight.get("repair_checklist", []), list)
         else [],
@@ -206,6 +223,12 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- phase queue: `{summary['phase_queue_blocked_count']}` blocked / `{summary['phase_queue_count']}` phases",
         f"- phase queue rows: `{summary['phase_queue_row_count']}`",
         f"- phase queue counts as completion: `{str(summary['phase_queue_counts_as_completion']).lower()}`",
+        f"- coordination steps: `{summary['coordination_user_required_step_count']}` user-required / `{summary['coordination_step_count']}` total",
+        f"- coordination pending keys: `{', '.join(summary['coordination_pending_evidence_keys'])}`",
+        f"- coordination counts as completion: `{str(summary['coordination_counts_as_completion']).lower()}`",
+        f"- release gate ready: `{str(summary['release_gate_ready']).lower()}`",
+        f"- release gate blocked checks: `{summary['release_gate_blocked_count']}` / `{summary['release_gate_check_count']}`",
+        f"- release gate counts as completion: `{str(summary['release_gate_counts_as_completion']).lower()}`",
         "",
         "This runbook coordinates evidence collection only. It does not accept submissions or make world-class completion true.",
         "",
@@ -217,6 +240,21 @@ def render_markdown(report: dict[str, Any]) -> str:
         "4. Validate intake, review the queue, refresh the ledger, then run the claim guard.",
         "",
     ]
+    lines.extend(
+        [
+            "## Coordination Plan",
+            "",
+            "| Step | Evidence | Owner | Needs user | User action | Assistant action | Command | Pass condition |",
+            "| --- | --- | --- | --- | --- | --- | --- | --- |",
+        ]
+    )
+    for step in report.get("coordination_plan", []):
+        lines.append(
+            f"| `{step.get('step_id', '')}` | `{step.get('evidence_key', '') or 'all'}` | {step.get('owner', '')} | "
+            f"`{str(step.get('requires_user_input') is True).lower()}` | {step.get('user_action', '')} | "
+            f"{step.get('assistant_action', '')} | `{step.get('command', '')}` | {step.get('pass_condition', '')} |"
+        )
+    lines.append("")
     lines.extend(
         [
             "## Phase Queue",
@@ -315,6 +353,28 @@ def render_markdown(report: dict[str, Any]) -> str:
                 )
         else:
             lines.append("| No source checks listed. | `n/a` | `n/a` | `n/a` | n/a |")
+    release_gate = report.get("release_gate", {})
+    lines.extend(
+        [
+            "",
+            "## Release Gate",
+            "",
+            f"- decision: `{release_gate.get('decision', 'missing')}`",
+            f"- ready: `{str(release_gate.get('ready') is True).lower()}`",
+            f"- blocked checks: `{release_gate.get('blocked_count', 0)}` / `{release_gate.get('check_count', 0)}`",
+            f"- counts as completion: `{str(release_gate.get('counts_as_completion') is True).lower()}`",
+            f"- final manual check: {release_gate.get('final_manual_check', '')}",
+            "",
+            "| Check | Current | Expected | Status | Artifact |",
+            "| --- | --- | --- | --- | --- |",
+        ]
+    )
+    for check in release_gate.get("checks", []):
+        status = "pass" if check.get("passed") is True else "blocked"
+        lines.append(
+            f"| {check.get('label', '')} | `{check.get('current', '')}` | `{check.get('expected', '')}` | "
+            f"`{status}` | `{check.get('artifact', '')}` |"
+        )
     lines.extend(
         [
             "",
@@ -366,6 +426,59 @@ def html_phase_queue(rows: list[dict[str, Any]]) -> str:
     return "<ul class='source-checks'>" + "".join(items) + "</ul>"
 
 
+def render_html_coordination_plan(steps: list[dict[str, Any]]) -> str:
+    if not steps:
+        return "<p class='muted'>No coordination plan listed.</p>"
+    rows = []
+    for step in steps:
+        rows.append(
+            "<tr>"
+            f"<td><code>{html_text(step.get('step_id', ''))}</code></td>"
+            f"<td><code>{html_text(step.get('evidence_key', '') or 'all')}</code></td>"
+            f"<td>{html_text(step.get('owner', ''))}</td>"
+            f"<td><code>{html_text(str(step.get('requires_user_input') is True).lower())}</code></td>"
+            f"<td>{html_text(step.get('user_action', ''))}</td>"
+            f"<td>{html_text(step.get('assistant_action', ''))}</td>"
+            f"<td><code>{html_text(step.get('command', ''))}</code></td>"
+            f"<td>{html_text(step.get('pass_condition', ''))}</td>"
+            "</tr>"
+        )
+    return "<div class='table-wrap'><table><thead><tr><th>Step</th><th>Evidence</th><th>Owner</th><th>User</th><th>User action</th><th>Assistant action</th><th>Command</th><th>Pass condition</th></tr></thead><tbody>" + "".join(rows) + "</tbody></table></div>"
+
+
+def render_html_release_gate(release_gate: dict[str, Any]) -> str:
+    checks = release_gate.get("checks", []) if isinstance(release_gate.get("checks", []), list) else []
+    rows = []
+    for check in checks:
+        status = "pass" if check.get("passed") is True else "blocked"
+        rows.append(
+            f"<tr class='{html_text(status)}'>"
+            f"<td>{html_text(check.get('label', ''))}</td>"
+            f"<td><code>{html_text(check.get('current', ''))}</code></td>"
+            f"<td><code>{html_text(check.get('expected', ''))}</code></td>"
+            f"<td><code>{html_text(status)}</code></td>"
+            f"<td><code>{html_text(check.get('artifact', ''))}</code></td>"
+            "</tr>"
+        )
+    check_table = (
+        "<div class='table-wrap'><table><thead><tr><th>Check</th><th>Current</th><th>Expected</th><th>Status</th><th>Artifact</th></tr></thead><tbody>"
+        + "".join(rows)
+        + "</tbody></table></div>"
+        if rows
+        else "<p class='muted'>No release checks listed.</p>"
+    )
+    return f"""
+      <div class="gate-summary">
+        <article><span>Decision</span><strong>{html_text(release_gate.get('decision', 'missing'))}</strong></article>
+        <article><span>Ready</span><strong>{html_text(str(release_gate.get('ready') is True).lower())}</strong></article>
+        <article><span>Blocked</span><strong>{html_text(release_gate.get('blocked_count', 0))}/{html_text(release_gate.get('check_count', 0))}</strong></article>
+        <article><span>Counts</span><strong>{html_text(str(release_gate.get('counts_as_completion') is True).lower())}</strong></article>
+      </div>
+      <p class="muted">{html_text(release_gate.get('final_manual_check', ''))}</p>
+      {check_table}
+    """.strip()
+
+
 def render_html_item(item: dict[str, Any]) -> str:
     commands = "".join(
         f"<li><span>{html_text(label.replace('_', ' '))}</span><code>{html_text(command)}</code></li>"
@@ -405,11 +518,15 @@ def render_html(report: dict[str, Any]) -> str:
         ("Ready", summary["ready_for_ledger_review_count"]),
         ("Source", f"{summary.get('source_pass_count', 0)}/{summary.get('source_check_count', 0)}"),
         ("Queue", f"{summary.get('phase_queue_blocked_count', 0)}/{summary.get('phase_queue_count', 0)}"),
+        ("Steps", f"{summary.get('coordination_user_required_step_count', 0)}/{summary.get('coordination_step_count', 0)}"),
+        ("Gate", f"{summary.get('release_gate_blocked_count', 0)}/{summary.get('release_gate_check_count', 0)}"),
         ("Blocked", summary.get("source_blocked_count", 0)),
         ("Invalid", summary["invalid_submission_count"]),
     ]
     stat_html = "".join(f"<article><span>{html_text(label)}</span><strong>{html_text(value)}</strong></article>" for label, value in stats)
     item_html = "".join(render_html_item(item) for item in report["items"])
+    coordination_html = render_html_coordination_plan(report.get("coordination_plan", []))
+    release_gate_html = render_html_release_gate(report.get("release_gate", {}))
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -434,7 +551,7 @@ def render_html(report: dict[str, Any]) -> str:
     h3 {{ margin:4px 0 10px; font-size:22px; }}
     h4 {{ margin:0 0 8px; font-size:16px; }}
     .lede {{ max-width:800px; color:var(--muted); font-size:20px; }}
-    .stats {{ display:grid; grid-template-columns:repeat(6, minmax(0,1fr)); gap:12px; margin-top:26px; }}
+    .stats {{ display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:12px; margin-top:26px; }}
     .stats article, .panel, .item-card {{ border:1px solid var(--line); border-radius:8px; background:#fff; }}
     .stats article {{ padding:16px; }}
     .stats span, .item-card span, .muted {{ color:var(--muted); }}
@@ -455,15 +572,26 @@ def render_html(report: dict[str, Any]) -> str:
     .mini-grid section, .panel {{ background:var(--soft); border-radius:8px; padding:14px; min-width:0; }}
     .mini-grid li, .panel li {{ overflow-wrap:anywhere; }}
     .source-panel {{ background:var(--soft); border-radius:8px; padding:14px; min-width:0; }}
+    .table-wrap {{ overflow-x:auto; border:1px solid var(--line); border-radius:8px; background:#fff; }}
+    table {{ width:100%; min-width:980px; border-collapse:collapse; }}
+    th, td {{ padding:12px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; overflow-wrap:anywhere; }}
+    th {{ color:var(--ink); background:var(--soft); font-size:13px; }}
+    tr:last-child td {{ border-bottom:0; }}
+    .gate-summary {{ display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:12px; margin:12px 0 16px; }}
+    .gate-summary article {{ border:1px solid var(--line); border-radius:8px; background:#fff; padding:14px; min-width:0; }}
+    .gate-summary span {{ display:block; color:var(--muted); }}
+    .gate-summary strong {{ display:block; color:var(--ink); font-size:20px; line-height:1.15; overflow-wrap:anywhere; }}
+    tr.blocked td:first-child {{ border-left:3px solid var(--warn); }}
+    tr.pass td:first-child {{ border-left:3px solid var(--pass); }}
     .source-checks {{ list-style:none; padding:0; margin:0; display:grid; gap:8px; }}
     .source-check {{ border-top:1px solid var(--line); padding-top:8px; display:grid; gap:3px; }}
     .source-check span {{ color:var(--ink); }}
     .source-check code, .source-check small {{ overflow-wrap:anywhere; }}
-    @media (max-width:820px) {{ .stats, .mini-grid {{ grid-template-columns:1fr; }} h1 {{ font-size:38px; }} .topbar-inner {{ align-items:flex-start; flex-direction:column; }} }}
+    @media (max-width:820px) {{ .stats, .mini-grid, .gate-summary {{ grid-template-columns:1fr; }} h1 {{ font-size:38px; }} .topbar-inner {{ align-items:flex-start; flex-direction:column; }} }}
   </style>
 </head>
 <body>
-  <nav class="topbar"><div class="topbar-inner"><span class="brand">World-Class Runbook</span><div class="links"><a href="#fast-path">Fast Path</a><a href="#items">Evidence</a><a href="#boundary">Boundary</a></div></div></nav>
+  <nav class="topbar"><div class="topbar-inner"><span class="brand">World-Class Runbook</span><div class="links"><a href="#fast-path">Fast Path</a><a href="#coordination">Coordination</a><a href="#phase-queue">Queue</a><a href="#items">Evidence</a><a href="#release-gate">Release Gate</a><a href="#boundary">Boundary</a></div></div></nav>
   <main class="shell">
     <section class="hero">
       <span class="eyebrow">Evidence Operations</span>
@@ -472,8 +600,10 @@ def render_html(report: dict[str, Any]) -> str:
       <div class="stats">{stat_html}</div>
     </section>
     <section class="section panel" id="fast-path"><h2>Fast Path</h2><ol><li>Run the real external or human work for one evidence item.</li><li>Generate and fill the matching submission draft.</li><li>Validate intake and inspect the submission review queue.</li><li>Refresh the ledger and run the claim guard before making any completion claim.</li></ol></section>
+    <section class="section panel" id="coordination"><h2>Coordination Plan</h2><p class="muted">These steps tell the assistant what to run and where the user must supply real provider, reviewer, client, or telemetry input. Every row is operational guidance only and keeps counts_as_completion false.</p>{coordination_html}</section>
     <section class="section panel" id="phase-queue"><h2>Phase Queue</h2>{html_phase_queue(report.get('phase_queue', []))}</section>
     <section class="section" id="items"><h2>Evidence Items</h2><div class="item-grid">{item_html}</div></section>
+    <section class="section panel" id="release-gate"><h2>Release Gate</h2>{release_gate_html}</section>
     <section class="section panel" id="boundary"><h2>Boundary</h2><ul><li>Planned work, draft packets, metadata fallback, pending human decisions, and local command runners do not count as completion.</li><li>Valid intake means ready for submission review; ledger review still requires passing source evidence.</li><li>The world-class ledger and claim guard remain the source of truth.</li></ul></section>
   </main>
 </body>

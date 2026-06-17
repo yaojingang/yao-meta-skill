@@ -2,9 +2,9 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 244,
-    "script_count": 152,
-    "internal_module_count": 66,
+    "scanned_files": 245,
+    "script_count": 153,
+    "internal_module_count": 67,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 244,
-    "package_sha256": "fda25ac83d07a671d3789d6b10409bee61479200101c7e3c925df9a1998e412b"
+    "package_hash_file_count": 245,
+    "package_sha256": "7958467751730998d7f2a8f38c9e8ef324874459e62f0c0a197232cd8386b291"
   },
   "failures": [],
   "warnings": [],
@@ -1895,6 +1895,20 @@
       "network_hosts": []
     },
     {
+      "path": "scripts/world_class_operator_runbook_coordination.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Builds world-class operator coordination steps and release gates for render_world_class_operator_runbook.py.",
+      "has_argparse": false,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
       "path": "scripts/world_class_phase_queue.py",
       "interface": "internal-module",
       "interface_declared": true,
@@ -2209,7 +2223,7 @@
     "checked_count": 86,
     "passed_count": 86,
     "failed_count": 0,
-    "skipped_count": 66,
+    "skipped_count": 67,
     "failed_scripts": [],
     "results": [
       {
@@ -3260,6 +3274,10 @@
       },
       {
         "path": "scripts/world_class_native_telemetry_evidence.py",
+        "reason": "internal module"
+      },
+      {
+        "path": "scripts/world_class_operator_runbook_coordination.py",
         "reason": "internal module"
       },
       {

@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `244`
-- Scripts: `152`
-- Internal script modules: `66`
+- Scanned files: `245`
+- Scripts: `153`
+- Internal script modules: `67`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `244`
-- Package SHA256: `fda25ac83d07a671d3789d6b10409bee61479200101c7e3c925df9a1998e412b`
+- Package hash files: `245`
+- Package SHA256: `7958467751730998d7f2a8f38c9e8ef324874459e62f0c0a197232cd8386b291`
 
 ## Failures
 
@@ -194,6 +194,7 @@
 | scripts/world_class_human_evidence.py | internal-module | True | False | False | False | False | False | False | Imported by world_class_evidence_contract.py to validate blind A/B human adjudication evidence from decision rows. |
 | scripts/world_class_native_permission_evidence.py | internal-module | True | False | False | False | False | False | False | Imported by world_class_evidence_contract.py to validate runtime permission evidence from target-level probe rows. |
 | scripts/world_class_native_telemetry_evidence.py | internal-module | True | False | False | False | False | False | False | Imported by world_class_evidence_contract.py to validate native client telemetry evidence from metadata event rows. |
+| scripts/world_class_operator_runbook_coordination.py | internal-module | True | False | False | False | False | False | False | Builds world-class operator coordination steps and release gates for render_world_class_operator_runbook.py. |
 | scripts/world_class_phase_queue.py | internal-module | True | False | False | False | False | False | False | Imported by prepare_world_class_submission_kit.py to group repair rows into an operator execution queue. |
 | scripts/world_class_preflight_layout.py | internal-module | True | False | False | False | False | False | False | Imported by render_world_class_preflight.py to keep preflight HTML layout out of data assembly. |
 | scripts/world_class_preflight_markdown.py | internal-module | True | False | False | False | False | False | False | Imported by render_world_class_preflight.py to keep Markdown layout separate from preflight data assembly. |

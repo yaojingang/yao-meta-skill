@@ -117,6 +117,19 @@ def main() -> None:
     assert summary["phase_queue_row_count"] == summary["repair_checklist_count"], summary
     assert summary["phase_queue_next_phase"] == "unblock-access", summary
     assert summary["phase_queue_counts_as_completion"] is False, summary
+    assert summary["coordination_step_count"] == 6, summary
+    assert summary["coordination_user_required_step_count"] == 6, summary
+    assert summary["coordination_pending_evidence_keys"] == [
+        "human-adjudication",
+        "native-client-telemetry",
+        "native-permission-enforcement",
+        "provider-holdout",
+    ], summary
+    assert summary["coordination_counts_as_completion"] is False, summary
+    assert summary["release_gate_ready"] is False, summary
+    assert summary["release_gate_blocked_count"] == 4, summary
+    assert summary["release_gate_check_count"] == 5, summary
+    assert summary["release_gate_counts_as_completion"] is False, summary
     assert summary["ready_to_claim_world_class"] is False, summary
     assert summary["runbook_counts_as_completion"] is False, summary
     assert payload["repair_checklist"], payload
@@ -131,6 +144,29 @@ def main() -> None:
         "native-permission-enforcement",
         "native-client-telemetry",
     }, items
+    coordination_plan = payload["coordination_plan"]
+    assert len(coordination_plan) == summary["coordination_step_count"], coordination_plan
+    assert all(step["counts_as_completion"] is False for step in coordination_plan), coordination_plan
+    coordination_by_key = {step["evidence_key"]: step for step in coordination_plan if step["evidence_key"]}
+    assert set(coordination_by_key) == set(items), coordination_by_key
+    assert "output-exec . --provider-runner openai" in coordination_by_key["provider-holdout"]["command"], (
+        coordination_by_key
+    )
+    assert "output-review-kit" in coordination_by_key["human-adjudication"]["command"], coordination_by_key
+    assert "runtime-permissions" in coordination_by_key["native-permission-enforcement"]["command"], (
+        coordination_by_key
+    )
+    assert "telemetry-import" in coordination_by_key["native-client-telemetry"]["command"], coordination_by_key
+    assert payload["release_gate"]["ready"] is False, payload["release_gate"]
+    assert payload["release_gate"]["blocked_count"] == summary["release_gate_blocked_count"], payload["release_gate"]
+    assert payload["release_gate"]["check_count"] == summary["release_gate_check_count"], payload["release_gate"]
+    assert payload["release_gate"]["counts_as_completion"] is False, payload["release_gate"]
+    release_checks = {item["key"]: item for item in payload["release_gate"]["checks"]}
+    assert release_checks["world_class_ledger_ready"]["passed"] is False, release_checks
+    assert release_checks["claim_guard_clean"]["passed"] is False, release_checks
+    assert release_checks["benchmark_public_claim_ready"]["passed"] is False, release_checks
+    assert release_checks["review_studio_clean"]["passed"] is False, release_checks
+    assert release_checks["evidence_consistency_clean"]["passed"] is True, release_checks
     provider = items["provider-holdout"]
     assert provider["review_state"] == "awaiting-submission", provider
     assert provider["source_accepted"] is False, provider
@@ -163,6 +199,12 @@ def main() -> None:
     assert "World-Class Operator Runbook" in markdown, markdown
     assert "runbook counts as completion: `false`" in markdown, markdown
     assert "phase queue counts as completion: `false`" in markdown, markdown
+    assert "coordination counts as completion: `false`" in markdown, markdown
+    assert "release gate counts as completion: `false`" in markdown, markdown
+    assert "## Coordination Plan" in markdown, markdown
+    assert "`review-and-release-gate`" in markdown, markdown
+    assert "## Release Gate" in markdown, markdown
+    assert "world-class-claim-guard" in markdown, markdown
     assert "## Phase Queue" in markdown, markdown
     assert "| `unblock-access` | `blocked` |" in markdown, markdown
     assert "Valid intake means ready for submission review; ledger review still requires passing source evidence." in markdown, markdown
@@ -189,6 +231,10 @@ def main() -> None:
     assert "<dt>Blocked</dt><dd><code>2</code></dd>" in html, html
     assert "<dt>Queue</dt><dd><code>2</code></dd>" in html, html
     assert "Phase Queue" in html, html
+    assert "Coordination Plan" in html, html
+    assert "Release Gate" in html, html
+    assert "review-and-release-gate" in html, html
+    assert "blocked-until-evidence-accepted" in html, html
     assert "Next Source Actions" in html, html
     assert "Source Runbook" in html, html
     assert "output-exec --provider-runner openai" in html, html

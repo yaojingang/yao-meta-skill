@@ -1,6 +1,6 @@
 # World-Class Operator Runbook
 
-Generated at: `2026-06-13`
+Generated at: `2026-06-17`
 
 ## Summary
 
@@ -14,6 +14,12 @@ Generated at: `2026-06-13`
 - phase queue: `2` blocked / `2` phases
 - phase queue rows: `13`
 - phase queue counts as completion: `false`
+- coordination steps: `6` user-required / `6` total
+- coordination pending keys: `human-adjudication, native-client-telemetry, native-permission-enforcement, provider-holdout`
+- coordination counts as completion: `false`
+- release gate ready: `false`
+- release gate blocked checks: `4` / `5`
+- release gate counts as completion: `false`
 
 This runbook coordinates evidence collection only. It does not accept submissions or make world-class completion true.
 
@@ -23,6 +29,17 @@ This runbook coordinates evidence collection only. It does not accept submission
 2. Generate the matching submission draft.
 3. Replace template-only fields with aggregate evidence and provenance.
 4. Validate intake, review the queue, refresh the ledger, then run the claim guard.
+
+## Coordination Plan
+
+| Step | Evidence | Owner | Needs user | User action | Assistant action | Command | Pass condition |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `prepare-evidence-session` | `all` | assistant + user | `true` | Confirm provider access, reviewer availability, target client path, and telemetry client path before collection starts. | Run preflight and prepare submission drafts without accepting them as evidence. | `python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions && python3 scripts/yao.py world-class-submission-kit . --output-dir evidence/world_class/submissions --prefill-artifacts` | Preflight lists the same pending evidence keys and no credential values are printed. |
+| `collect-provider-holdout` | `provider-holdout` | assistant + operator with provider credentials | `true` | Provide the provider API key through an environment variable and confirm the model to use. | Run provider-backed output execution, verify aggregate timing and token metadata, then prepare the evidence packet. | `python3 scripts/yao.py output-exec . --provider-runner openai --provider-model <model> --timeout-seconds 60` | reports/output_execution_runs.json has model_executed_count > 0 and token_observed_count > 0. |
+| `collect-human-adjudication` | `human-adjudication` | human reviewer + assistant | `true` | Open the blind review kit, choose winners for all pairs, add reviewer metadata and reasons, and keep the answer key hidden until decisions are saved. | Generate the review kit, import decisions, validate integrity, and prepare the human evidence packet. | `python3 scripts/yao.py output-review-kit . && python3 scripts/yao.py output-review .` | reports/output_review_adjudication.json has pending_count == 0 and ready_for_human_evidence == true. |
+| `collect-native-permission-enforcement` | `native-permission-enforcement` | target client or installer integrator + assistant | `true` | Select a real target client or external installer guard that can enforce declared capabilities instead of metadata-only fallback. | Run runtime permission probes, package verification, install simulation, and prepare the native enforcement evidence packet. | `python3 scripts/yao.py runtime-permissions . --package-dir dist` | reports/runtime_permission_probes.json has native_enforcement_count > 0 and failure_count == 0. |
+| `collect-native-client-telemetry` | `native-client-telemetry` | real client integrator + assistant | `true` | Install the native host manifest in a real Browser, Chrome, IDE, or provider client and trigger a metadata-only event. | Generate native host assets, import the external event JSONL, refresh adoption drift, and prepare the telemetry evidence packet. | `python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl --source external` | reports/adoption_drift_report.json has source_types.external > 0 and adoption_sample_count > 0. |
+| `review-and-release-gate` | `all` | assistant + ledger reviewer | `true` | Approve only validated evidence packets and confirm the release wording after the claim guard passes. | Run intake, submission review, ledger, claim guard, benchmark, evidence consistency, Review Studio, and CI before final publish. | `python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions && python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions && python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions && python3 scripts/yao.py world-class-claim-guard . && make ci-test` | Ledger ready_to_claim_world_class, benchmark public_claim_ready, claim guard violation_count == 0, Review Studio has no blockers, and CI passes. |
 
 ## Phase Queue
 
@@ -368,6 +385,22 @@ This runbook coordinates evidence collection only. It does not accept submission
 | External events | `0` | `>0` | `blocked` | Import at least one metadata-only event from a real client. |
 | Adoption sample | `1` | `>0` | `pass` | Telemetry must include adoption outcome evidence. |
 | Raw content blocked | `False` | `false` | `pass` | Telemetry must stay metadata-only. |
+
+## Release Gate
+
+- decision: `blocked-until-evidence-accepted`
+- ready: `false`
+- blocked checks: `4` / `5`
+- counts as completion: `false`
+- final manual check: Run make ci-test in a clean worktree and verify GitHub Actions before converting the PR out of Draft.
+
+| Check | Current | Expected | Status | Artifact |
+| --- | --- | --- | --- | --- |
+| World-class ledger ready | `evidence-pending` | `ready_to_claim_world_class == true` | `blocked` | `reports/world_class_evidence_ledger.json` |
+| Claim guard clean | `violations 0; ledger ready False` | `violation_count == 0 and ledger_ready_to_claim_world_class == true` | `blocked` | `reports/world_class_claim_guard.json` |
+| Benchmark public claim ready | `public_claim_ready False` | `public_claim_ready == true` | `blocked` | `reports/benchmark_reproducibility.json` |
+| Review Studio clean | `blockers 0; warnings 3` | `blocker_count == 0 and warning_count == 0` | `blocked` | `reports/review-studio.json` |
+| Evidence consistency clean | `consistent` | `decision == consistent and fail_count == 0` | `pass` | `reports/evidence_consistency.json` |
 
 ## Boundary
 
