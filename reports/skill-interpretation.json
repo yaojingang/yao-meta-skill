@@ -1021,8 +1021,8 @@
       "methodology_complete": true,
       "required_artifact_count": 25,
       "missing_artifact_count": 0,
-      "evidence_bundle_sha256": "c4403c485ef4483467cef4a9a374a90a03f99f6145e71b62e57916eb918c14f1",
-      "source_contract_sha256": "c39574e9de8127ce31e5b3f15fd8372278319c342346753480e6ad39904e808c",
+      "evidence_bundle_sha256": "55a6c33c12e14d6507d4a5d4d4cf1268db35fb323d523e8b23ce9c73aedf8db0",
+      "source_contract_sha256": "5a99ef3133b0148cd5bbc1cd85fad4830bf34ca2bbac709f1e1fea2f810b1257",
       "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2",
       "output_case_count": 5,
       "failure_disclosure_count": 3,
@@ -1046,13 +1046,13 @@
       "public_claim_ready": false,
       "public_claim_blocker_count": 3,
       "working_tree_dirty": true,
-      "changed_file_count": 32,
+      "changed_file_count": 29,
       "source_tree_dirty": false,
       "source_changed_file_count": 0,
       "generated_tree_dirty": true,
-      "generated_changed_file_count": 32
+      "generated_changed_file_count": 29
     },
-    "commit": "ed975a2bf25b9ab9b2fd8e62afd4ec7e7bc07789",
+    "commit": "e79050ed12d057811d7d13ab7d8bcc5a06af76d4",
     "missing_artifacts": [],
     "limitations": [
       "The git commit and dirty flags are generation-time context; release lock is blocked by source changes, while generated evidence artifacts are tracked separately.",
@@ -1158,7 +1158,7 @@
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
     "package_hash_file_count": 245,
-    "package_sha256": "c39574e9de8127ce31e5b3f15fd8372278319c342346753480e6ad39904e808c"
+    "package_sha256": "5a99ef3133b0148cd5bbc1cd85fad4830bf34ca2bbac709f1e1fea2f810b1257"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -1196,7 +1196,7 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "c39574e9de8127ce31e5b3f15fd8372278319c342346753480e6ad39904e808c",
+        "package_sha256": "5a99ef3133b0148cd5bbc1cd85fad4830bf34ca2bbac709f1e1fea2f810b1257",
         "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2"
       },
       "compatibility": {
@@ -1328,7 +1328,7 @@
         {
           "field": "package_sha256",
           "from": "0000000000000000000000000000000000000000000000000000000000000000",
-          "to": "c39574e9de8127ce31e5b3f15fd8372278319c342346753480e6ad39904e808c"
+          "to": "5a99ef3133b0148cd5bbc1cd85fad4830bf34ca2bbac709f1e1fea2f810b1257"
         }
       ]
     },

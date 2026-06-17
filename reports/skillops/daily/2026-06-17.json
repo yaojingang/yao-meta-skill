@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-17T08:26:15Z",
+  "generated_at": "2026-06-17T08:58:54Z",
   "skill_dir": ".",
   "decision": "proposal-review",
   "source_supplied": false,

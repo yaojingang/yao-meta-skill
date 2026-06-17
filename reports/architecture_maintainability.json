@@ -16,7 +16,7 @@
     "watch_line_threshold": 720,
     "early_watch_line_threshold": 600,
     "block_line_threshold": 1500,
-    "largest_file_lines": 718,
+    "largest_file_lines": 719,
     "watchlist_count": 0,
     "early_watchlist_count": 6,
     "hotspot_count": 0,
@@ -26,7 +26,7 @@
   "largest_files": [
     {
       "path": "tests/verify_evidence_consistency.py",
-      "lines": 718,
+      "lines": 719,
       "kind": "test",
       "severity": "pass",
       "early_watch": true,
@@ -49,16 +49,16 @@
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
-      "path": "scripts/render_evidence_consistency.py",
-      "lines": 699,
+      "path": "scripts/render_benchmark_reproducibility.py",
+      "lines": 685,
       "kind": "cli-script",
       "severity": "pass",
       "early_watch": true,
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
-      "path": "scripts/render_benchmark_reproducibility.py",
-      "lines": 673,
+      "path": "scripts/render_evidence_consistency.py",
+      "lines": 676,
       "kind": "cli-script",
       "severity": "pass",
       "early_watch": true,
@@ -125,7 +125,7 @@
   "early_watchlist": [
     {
       "path": "tests/verify_evidence_consistency.py",
-      "lines": 718,
+      "lines": 719,
       "kind": "test",
       "severity": "pass",
       "early_watch": true,
@@ -148,16 +148,16 @@
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
-      "path": "scripts/render_evidence_consistency.py",
-      "lines": 699,
+      "path": "scripts/render_benchmark_reproducibility.py",
+      "lines": 685,
       "kind": "cli-script",
       "severity": "pass",
       "early_watch": true,
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
-      "path": "scripts/render_benchmark_reproducibility.py",
-      "lines": 673,
+      "path": "scripts/render_evidence_consistency.py",
+      "lines": 676,
       "kind": "cli-script",
       "severity": "pass",
       "early_watch": true,

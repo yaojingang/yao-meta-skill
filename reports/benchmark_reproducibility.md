@@ -1,11 +1,11 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-17`
-Commit: `ed975a2bf25b9ab9b2fd8e62afd4ec7e7bc07789`
+Commit: `e79050ed12d057811d7d13ab7d8bcc5a06af76d4`
 Working tree dirty at generation: `true`
 Source tree dirty at generation: `false`
 Generated evidence dirty at generation: `true`
-Evidence bundle SHA256: `c4403c485ef4483467cef4a9a374a90a03f99f6145e71b62e57916eb918c14f1`
+Evidence bundle SHA256: `55a6c33c12e14d6507d4a5d4d4cf1268db35fb323d523e8b23ce9c73aedf8db0`
 
 ## Summary
 
@@ -14,7 +14,7 @@ Evidence bundle SHA256: `c4403c485ef4483467cef4a9a374a90a03f99f6145e71b62e57916e
 - methodology complete: `true`
 - required artifacts: `25`
 - missing artifacts: `0`
-- source contract sha256: `c39574e9de81`
+- source contract sha256: `5a99ef3133b0`
 - archive sha256: `7db44f059844`
 - output cases: `5`
 - disclosed failure cases: `3`
@@ -28,9 +28,9 @@ Evidence bundle SHA256: `c4403c485ef4483467cef4a9a374a90a03f99f6145e71b62e57916e
 - beta deferred evidence: `4`
 - public claim ready: `false`
 - public claim blockers: `3`
-- changed files at generation: `32`
+- changed files at generation: `29`
 - source changed files at generation: `0`
-- generated changed files at generation: `32`
+- generated changed files at generation: `29`
 
 This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete. The git commit and dirty samples are generation-time context; the evidence bundle SHA is the durable anchor for the artifacts listed below.
 
@@ -47,10 +47,10 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 | Deferred evidence | Reason |
 | --- | --- |
-| `human-adjudication` | Deferred for beta/public testing; still required before superiority, fully-reviewed, or world-class claims. |
-| `provider-ledger-review` | Provider source evidence may be complete, but independent ledger acceptance remains formal-claim evidence. |
-| `native-permission-enforcement` | Native enforcement proof is deferred for beta/public testing and remains required for world-class claims. |
-| `native-client-telemetry` | Real client telemetry is deferred for beta/public testing and remains required for world-class claims. |
+| `provider-holdout` | Provider-backed source evidence exists, but formal ledger submission and reviewer acceptance are still pending before public claims. |
+| `human-adjudication` | Human adjudication evidence is still pending; deferred for beta/public testing and still required before superiority, fully-reviewed, or world-class claims. |
+| `native-permission-enforcement` | Native enforcement proof is still pending; deferred for beta/public testing and still required before world-class claims. |
+| `native-client-telemetry` | Real client telemetry is still pending; deferred for beta/public testing and still required before world-class claims. |
 
 ## Public Claim Boundary
 
@@ -74,7 +74,7 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 - algorithm: `sha256(path,label,exists,artifact_sha256)`
 - artifacts: `25` / `25`
-- sha256: `c4403c485ef4483467cef4a9a374a90a03f99f6145e71b62e57916eb918c14f1`
+- sha256: `55a6c33c12e14d6507d4a5d4d4cf1268db35fb323d523e8b23ce9c73aedf8db0`
 
 ## Methodology Sections
 
@@ -101,9 +101,9 @@ This report proves local benchmark reproducibility only. It keeps external provi
 | review_adjudication | `reports/output_review_adjudication.json` | present | `91fd88dd9b0f` |
 | trigger_scorecard | `reports/route_scorecard.json` | present | `a649547a7d3d` |
 | runtime_conformance | `reports/conformance_matrix.json` | present | `97f9ba949c23` |
-| trust_report | `reports/security_trust_report.json` | present | `cd8289dd2d82` |
+| trust_report | `reports/security_trust_report.json` | present | `bbff1f1bee0c` |
 | python_compatibility | `reports/python_compatibility.json` | present | `d31dc03c74f1` |
-| registry_audit | `reports/registry_audit.json` | present | `2c236f7c2fff` |
+| registry_audit | `reports/registry_audit.json` | present | `1feb80c7cdc8` |
 | package_verification | `reports/package_verification.json` | present | `7aa6c25e8154` |
 | install_simulation | `reports/install_simulation.json` | present | `c1f1122264b8` |
 | skill_os2_audit | `reports/skill_os2_audit.json` | present | `6362e79a8cfd` |
