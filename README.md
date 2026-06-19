@@ -221,6 +221,22 @@ python3 scripts/yao.py evidence-consistency .
 
 Development source: this repository is the source of truth for authoring and review.
 
+Use Python 3.11 or newer for local development. GitHub Actions runs the test suite on Python 3.11, and the Makefile checks the active interpreter before running `make test` or `make ci-test`.
+
+```bash
+python3.11 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install --requirement requirements-ci.txt
+make ci-test
+```
+
+If `python3` points to an older system interpreter, pass the interpreter explicitly:
+
+```bash
+make PYTHON=python3.11 ci-test
+```
+
 Disabled mirror: `~/.agents/skills.disabled/yao-meta-skill` is the local backup mirror for this source. Keeping the mirror outside `~/.agents/skills` prevents Codex from showing a duplicate `Yao Meta Skill` while this repository is also visible in the active workspace.
 
 Sync the current source into the disabled mirror:
