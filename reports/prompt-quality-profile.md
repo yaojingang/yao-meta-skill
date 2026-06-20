@@ -1,6 +1,6 @@
 # Prompt Quality Profile
 
-Skill: `yao-meta-skill`
+Skill: `yao-meta-skill-operator-ux-worktree`
 Relevance: `prompt-aware`
 Overall quality score: `89.0/100`
 

@@ -4,7 +4,7 @@
 
 `yao-meta-skill` 用来创建、评估、打包和治理可复用的 agent skill。1.0 的重点是把重复工作流整理成可安装、可阅读、可跨平台的 skill 包；2.0 进一步升级为 Skill OS，把建模、跨端编译、输出评测、评审工作台、证据账本、包体验证、发布门禁和后续迭代串成一套完整流程。
 
-[快速开始](#快速开始) · [Skill OS 2.0 升级](#skill-os-20-升级) · [从 1.0 到 2.0](#从-10-到-20) · [加权质量评测](#加权质量评测) · [与其他元 Skill 的适用差异](#与其他元-skill-的适用差异)
+[快速开始](#快速开始) · [Skill OS 2.0 升级](#skill-os-20-升级) · [从 1.0 到 2.0](#从-10-到-20) · [Operator UX 命令](#operator-ux-命令) · [加权质量评测](#加权质量评测) · [与其他元 Skill 的适用差异](#与其他元-skill-的适用差异)
 
 ## Skill OS 2.0 升级
 
@@ -44,6 +44,20 @@ Skill OS 2.0 保留 `yao-meta-skill` 原来的轻量入口，但把 skill 的生
 - **准备测试版发布**：运行包体验证、安装模拟、兼容检查、运行时权限探测和证据一致性检查，把测试版就绪和更强公开声明分开处理。
 - **发布后继续迭代**：用元数据级遥测、采用漂移、feedback log、SkillOps 报告和自适应建议判断下一步是补文档、补 eval、改 skill，还是调整治理规则。
 - **与其他元 skill 搭配使用**：保留 Anthropic/OpenAI 式对话创建和精简写作方法的优势，在需要证据、可移植性、发布门禁和长期维护时用 `yao-meta-skill` 加固。
+
+## Operator UX 命令
+
+这组只读辅助命令把维护者最常见的判断变成可复验诊断：
+
+```bash
+python3 scripts/yao.py install-status --expected-source .
+python3 scripts/yao.py localized-doc-sync-check
+python3 scripts/yao.py pr-review-report 4 --repo yaojingang/yao-meta-skill
+```
+
+- `install-status` 会说明当前 skill 是从 `.codex/skills`、`.agents/skills` 还是 disabled mirror（禁用镜像）被发现，并提示是否存在重复激活。
+- `localized-doc-sync-check` 会检查中文 README 是否同步包含英文 README 首页新增的公开说明模块。
+- `pr-review-report` 会只读获取 GitHub PR 元数据、变更文件、状态检查和建议本地命令，不会合并或修改 PR。
 
 ## 能力面
 

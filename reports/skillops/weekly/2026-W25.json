@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-17T08:58:54Z",
+  "generated_at": "2026-06-20T12:35:26Z",
   "skill_dir": ".",
   "decision": "curator-review",
   "week_id": "2026-W25",
-  "daily_report_count": 2,
-  "opportunity_count": 10,
+  "daily_report_count": 3,
+  "opportunity_count": 15,
   "unique_opportunity_count": 5,
   "ready_for_approval_review_count": 1,
   "proposal_review_count": 4,
@@ -15,7 +15,7 @@
   "top_score": 88,
   "skill_count": 12,
   "actionable_portfolio_issue_count": 0,
-  "release_lock_ready": false,
+  "release_lock_ready": true,
   "evidence_consistency_ok": true,
   "public_world_class_ready": false,
   "world_class_pending_count": 4,
@@ -25,8 +25,8 @@
   "summary": {
     "decision": "curator-review",
     "week_id": "2026-W25",
-    "daily_report_count": 2,
-    "opportunity_count": 10,
+    "daily_report_count": 3,
+    "opportunity_count": 15,
     "unique_opportunity_count": 5,
     "ready_for_approval_review_count": 1,
     "proposal_review_count": 4,
@@ -35,7 +35,7 @@
     "top_score": 88,
     "skill_count": 12,
     "actionable_portfolio_issue_count": 0,
-    "release_lock_ready": false,
+    "release_lock_ready": true,
     "evidence_consistency_ok": true,
     "public_world_class_ready": false,
     "world_class_pending_count": 4,
@@ -90,7 +90,8 @@
   },
   "daily_reports": [
     "reports/skillops/daily/2026-06-16.json",
-    "reports/skillops/daily/2026-06-17.json"
+    "reports/skillops/daily/2026-06-17.json",
+    "reports/skillops/daily/2026-06-20.json"
   ],
   "opportunity_summary": {
     "action_type_counts": {
@@ -288,7 +289,7 @@
     "no_route_opportunity_count": 0
   },
   "release_state": {
-    "release_lock_ready": false,
+    "release_lock_ready": true,
     "evidence_consistency_ok": true,
     "public_world_class_ready": false,
     "world_class_pending_count": 4

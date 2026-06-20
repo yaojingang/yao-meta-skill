@@ -1,0 +1,513 @@
+{
+  "schema_version": "1.0",
+  "ok": true,
+  "generated_at": "2026-06-20T12:35:26Z",
+  "skill_dir": ".",
+  "decision": "proposal-review",
+  "source_supplied": false,
+  "pattern_count": 5,
+  "proposal_count": 5,
+  "approval_count": 0,
+  "pending_review_count": 0,
+  "applied_count": 0,
+  "rollback_count": 0,
+  "local_blueprint_ready": true,
+  "public_world_class_ready": false,
+  "world_class_pending_count": 4,
+  "release_lock_ready": true,
+  "evidence_consistency_ok": true,
+  "writes_source_files": false,
+  "auto_patch_enabled": false,
+  "failure_count": 0,
+  "summary": {
+    "decision": "proposal-review",
+    "source_supplied": false,
+    "pattern_count": 5,
+    "proposal_count": 5,
+    "approval_count": 0,
+    "pending_review_count": 0,
+    "applied_count": 0,
+    "rollback_count": 0,
+    "local_blueprint_ready": true,
+    "public_world_class_ready": false,
+    "world_class_pending_count": 4,
+    "release_lock_ready": true,
+    "evidence_consistency_ok": true,
+    "writes_source_files": false,
+    "auto_patch_enabled": false,
+    "failure_count": 0
+  },
+  "operations_contract": {
+    "schema_version": "1.0",
+    "contract": "daily-skillops-report",
+    "explicit_source_required_for_scan": true,
+    "implicit_private_log_scan": false,
+    "raw_content_stored": false,
+    "redacted_excerpts_only": true,
+    "proposal_only": true,
+    "approval_required_for_writes": true,
+    "writes_source_files": false,
+    "auto_patch_enabled": false,
+    "daily_report_counts_as_world_class_evidence": false
+  },
+  "report_contract": {
+    "schema_version": "1.0",
+    "contract": "daily-skillops-report",
+    "top_level_mirrors_summary": true,
+    "summary_fields": [
+      "decision",
+      "source_supplied",
+      "pattern_count",
+      "proposal_count",
+      "approval_count",
+      "pending_review_count",
+      "applied_count",
+      "rollback_count",
+      "local_blueprint_ready",
+      "public_world_class_ready",
+      "world_class_pending_count",
+      "release_lock_ready",
+      "evidence_consistency_ok",
+      "writes_source_files",
+      "auto_patch_enabled",
+      "failure_count"
+    ],
+    "source_of_truth": [
+      "summary",
+      "operations_contract"
+    ]
+  },
+  "source": {
+    "path": "evals/adaptation/user_signals.example.jsonl",
+    "fingerprint_sha256": "48f94a4f3b82f90db29921c13d09c765ec10aabfde1adce65710c137cc6c5abf",
+    "record_count": 8,
+    "explicit_source": true,
+    "raw_content_stored": false,
+    "redacted_excerpts_only": true
+  },
+  "patterns": [
+    {
+      "pattern_id": "language_default",
+      "label": "Default language preference",
+      "signal_type": "report-language",
+      "support_count": 2,
+      "confidence": 0.79,
+      "reason": "2 redacted records matched repeated report-language signals.",
+      "recommended_action": "Keep generated reports Chinese-first with an English switch where user-facing.",
+      "evidence": [
+        {
+          "record_id": "line-1",
+          "excerpt": "新生成的 Skill 报告默认使用中文简体，并在右上角提供英文切换。"
+        },
+        {
+          "record_id": "line-2",
+          "excerpt": "HTML 报告需要双语能力，但默认内容应该保持中文简体。"
+        }
+      ]
+    },
+    {
+      "pattern_id": "report_ui",
+      "label": "Report UI and visualization preference",
+      "signal_type": "artifact-design",
+      "support_count": 5,
+      "confidence": 0.95,
+      "reason": "5 redacted records matched repeated artifact-design signals.",
+      "recommended_action": "Prioritize white-background Kami-style reports with readable charts and stable navigation.",
+      "evidence": [
+        {
+          "record_id": "line-1",
+          "excerpt": "新生成的 Skill 报告默认使用中文简体，并在右上角提供英文切换。"
+        },
+        {
+          "record_id": "line-2",
+          "excerpt": "HTML 报告需要双语能力，但默认内容应该保持中文简体。"
+        },
+        {
+          "record_id": "line-3",
+          "excerpt": "报告排版采用白底 Kami 风格，图表、模块和导航都要清晰。"
+        }
+      ]
+    },
+    {
+      "pattern_id": "approval_safety",
+      "label": "Approval and privacy boundary",
+      "signal_type": "governance",
+      "support_count": 2,
+      "confidence": 0.79,
+      "reason": "2 redacted records matched repeated governance signals.",
+      "recommended_action": "Keep adaptive work proposal-only until a reviewer approves an allowlisted patch path.",
+      "evidence": [
+        {
+          "record_id": "line-5",
+          "excerpt": "自适应升级必须先生成提案，不能直接自动修改源文件。"
+        },
+        {
+          "record_id": "line-6",
+          "excerpt": "用户偏好扫描必须由用户提供明确路径，不要默认扫描私人日志。"
+        }
+      ]
+    },
+    {
+      "pattern_id": "delivery_format",
+      "label": "Delivery format preference",
+      "signal_type": "artifact-format",
+      "support_count": 2,
+      "confidence": 0.79,
+      "reason": "2 redacted records matched repeated artifact-format signals.",
+      "recommended_action": "Surface stable artifact paths and formats in CLI output and generated summaries.",
+      "evidence": [
+        {
+          "record_id": "line-2",
+          "excerpt": "HTML 报告需要双语能力，但默认内容应该保持中文简体。"
+        },
+        {
+          "record_id": "line-6",
+          "excerpt": "用户偏好扫描必须由用户提供明确路径，不要默认扫描私人日志。"
+        }
+      ]
+    },
+    {
+      "pattern_id": "evidence_testing",
+      "label": "Evidence and testing preference",
+      "signal_type": "quality-gate",
+      "support_count": 2,
+      "confidence": 0.79,
+      "reason": "2 redacted records matched repeated quality-gate signals.",
+      "recommended_action": "Attach focused tests and refreshed evidence reports to every non-trivial skill upgrade.",
+      "evidence": [
+        {
+          "record_id": "line-7",
+          "excerpt": "每次升级都需要测试、覆盖报告和可审计证据，推送前要跑 CI。"
+        },
+        {
+          "record_id": "line-8",
+          "excerpt": "涉及 GitHub 推送时，要保留证据链，避免把计划当作完成证明。"
+        }
+      ]
+    }
+  ],
+  "proposals": [
+    {
+      "proposal_id": "adapt-18c7517f3d",
+      "pattern_id": "language_default",
+      "title": "Keep reports Chinese-first with optional English",
+      "risk_level": "low",
+      "status": "proposal-only",
+      "requires_approval": true,
+      "target_files": [
+        "scripts/render_skill_overview.py",
+        "references/artifact-design-doctrine.md"
+      ],
+      "verification_commands": [
+        "python3 tests/verify_skill_overview.py"
+      ]
+    },
+    {
+      "proposal_id": "adapt-fbfe921ba5",
+      "pattern_id": "report_ui",
+      "title": "Improve report layout, visual hierarchy, and chart readability",
+      "risk_level": "medium",
+      "status": "proposal-only",
+      "requires_approval": true,
+      "target_files": [
+        "scripts/render_skill_overview.py",
+        "references/artifact-design-doctrine.md",
+        "tests/verify_skill_overview.py"
+      ],
+      "verification_commands": [
+        "python3 tests/verify_skill_overview.py",
+        "python3 tests/verify_skill_report_charts.py"
+      ]
+    },
+    {
+      "proposal_id": "adapt-59d219a1fb",
+      "pattern_id": "approval_safety",
+      "title": "Keep adaptive iteration approval-gated",
+      "risk_level": "low",
+      "status": "proposal-only",
+      "requires_approval": true,
+      "target_files": [
+        "references/user-memory-policy.md",
+        "references/autonomous-adaptation.md",
+        "schemas/adaptation-proposal.schema.json"
+      ],
+      "verification_commands": [
+        "python3 tests/verify_adaptation_safety.py"
+      ]
+    },
+    {
+      "proposal_id": "adapt-457baca160",
+      "pattern_id": "delivery_format",
+      "title": "Make generated artifact paths explicit in CLI output",
+      "risk_level": "low",
+      "status": "proposal-only",
+      "requires_approval": true,
+      "target_files": [
+        "scripts/yao.py",
+        "README.md"
+      ],
+      "verification_commands": [
+        "python3 tests/verify_yao_cli.py"
+      ]
+    },
+    {
+      "proposal_id": "adapt-abfee25d3a",
+      "pattern_id": "evidence_testing",
+      "title": "Attach tests and evidence refresh to each upgrade",
+      "risk_level": "medium",
+      "status": "proposal-only",
+      "requires_approval": true,
+      "target_files": [
+        "tests/verify_adaptation_safety.py",
+        "scripts/render_skill_os2_coverage.py",
+        "reports/skill_os2_coverage.json"
+      ],
+      "verification_commands": [
+        "python3 tests/verify_adaptation_safety.py",
+        "python3 tests/verify_skill_os2_coverage.py"
+      ]
+    }
+  ],
+  "opportunity_summary": {
+    "opportunity_count": 5,
+    "top_score": 88,
+    "ready_for_approval_review_count": 1,
+    "proposal_review_count": 4,
+    "observe_more_evidence_count": 0,
+    "report_only_count": 0,
+    "action_type_counts": {
+      "patch_existing_skill": 3,
+      "agents_update": 1,
+      "add_eval": 1
+    },
+    "decision_counts": {
+      "ready_for_approval_review": 1,
+      "proposal_review": 4
+    }
+  },
+  "opportunities": [
+    {
+      "opportunity_id": "skillops-4ad91c18dd",
+      "proposal_id": "adapt-fbfe921ba5",
+      "pattern_id": "report_ui",
+      "title": "Improve report layout, visual hierarchy, and chart readability",
+      "opportunity_type": "artifact-quality",
+      "action_type": "patch_existing_skill",
+      "decision": "ready_for_approval_review",
+      "priority": "medium",
+      "score": 88,
+      "score_reasons": [
+        "support_count=5",
+        "confidence=0.95",
+        "risk=medium",
+        "target_files_present",
+        "verification_present",
+        "approval_required"
+      ],
+      "policy_reason": "Repeated report layout feedback maps to existing renderer and design doctrine changes.",
+      "risk_level": "medium",
+      "requires_approval": true,
+      "write_allowed_without_approval": false,
+      "evidence_count": 5,
+      "target_files": [
+        "scripts/render_skill_overview.py",
+        "references/artifact-design-doctrine.md",
+        "tests/verify_skill_overview.py"
+      ],
+      "verification_commands": [
+        "python3 tests/verify_skill_overview.py",
+        "python3 tests/verify_skill_report_charts.py"
+      ]
+    },
+    {
+      "opportunity_id": "skillops-531e13c1c6",
+      "proposal_id": "adapt-59d219a1fb",
+      "pattern_id": "approval_safety",
+      "title": "Keep adaptive iteration approval-gated",
+      "opportunity_type": "governance",
+      "action_type": "agents_update",
+      "decision": "proposal_review",
+      "priority": "medium",
+      "score": 82,
+      "score_reasons": [
+        "support_count=2",
+        "confidence=0.79",
+        "risk=low",
+        "target_files_present",
+        "verification_present",
+        "approval_required"
+      ],
+      "policy_reason": "Repeated privacy and approval signals should tighten durable operating guidance.",
+      "risk_level": "low",
+      "requires_approval": true,
+      "write_allowed_without_approval": false,
+      "evidence_count": 2,
+      "target_files": [
+        "references/user-memory-policy.md",
+        "references/autonomous-adaptation.md",
+        "schemas/adaptation-proposal.schema.json"
+      ],
+      "verification_commands": [
+        "python3 tests/verify_adaptation_safety.py"
+      ]
+    },
+    {
+      "opportunity_id": "skillops-709ef884f3",
+      "proposal_id": "adapt-18c7517f3d",
+      "pattern_id": "language_default",
+      "title": "Keep reports Chinese-first with optional English",
+      "opportunity_type": "report-experience",
+      "action_type": "patch_existing_skill",
+      "decision": "proposal_review",
+      "priority": "medium",
+      "score": 82,
+      "score_reasons": [
+        "support_count=2",
+        "confidence=0.79",
+        "risk=low",
+        "target_files_present",
+        "verification_present",
+        "approval_required"
+      ],
+      "policy_reason": "Repeated language preferences can improve existing report templates after approval.",
+      "risk_level": "low",
+      "requires_approval": true,
+      "write_allowed_without_approval": false,
+      "evidence_count": 2,
+      "target_files": [
+        "scripts/render_skill_overview.py",
+        "references/artifact-design-doctrine.md"
+      ],
+      "verification_commands": [
+        "python3 tests/verify_skill_overview.py"
+      ]
+    },
+    {
+      "opportunity_id": "skillops-f9e43237aa",
+      "proposal_id": "adapt-457baca160",
+      "pattern_id": "delivery_format",
+      "title": "Make generated artifact paths explicit in CLI output",
+      "opportunity_type": "artifact-discoverability",
+      "action_type": "patch_existing_skill",
+      "decision": "proposal_review",
+      "priority": "medium",
+      "score": 82,
+      "score_reasons": [
+        "support_count=2",
+        "confidence=0.79",
+        "risk=low",
+        "target_files_present",
+        "verification_present",
+        "approval_required"
+      ],
+      "policy_reason": "Repeated delivery-path requests can improve CLI and README artifact discoverability.",
+      "risk_level": "low",
+      "requires_approval": true,
+      "write_allowed_without_approval": false,
+      "evidence_count": 2,
+      "target_files": [
+        "scripts/yao.py",
+        "README.md"
+      ],
+      "verification_commands": [
+        "python3 tests/verify_yao_cli.py"
+      ]
+    },
+    {
+      "opportunity_id": "skillops-0a3a2de7c3",
+      "proposal_id": "adapt-abfee25d3a",
+      "pattern_id": "evidence_testing",
+      "title": "Attach tests and evidence refresh to each upgrade",
+      "opportunity_type": "quality-gate",
+      "action_type": "add_eval",
+      "decision": "proposal_review",
+      "priority": "medium",
+      "score": 74,
+      "score_reasons": [
+        "support_count=2",
+        "confidence=0.79",
+        "risk=medium",
+        "target_files_present",
+        "verification_present",
+        "approval_required"
+      ],
+      "policy_reason": "Repeated verification and evidence requests should become focused checks.",
+      "risk_level": "medium",
+      "requires_approval": true,
+      "write_allowed_without_approval": false,
+      "evidence_count": 2,
+      "target_files": [
+        "tests/verify_adaptation_safety.py",
+        "scripts/render_skill_os2_coverage.py",
+        "reports/skill_os2_coverage.json"
+      ],
+      "verification_commands": [
+        "python3 tests/verify_adaptation_safety.py",
+        "python3 tests/verify_skill_os2_coverage.py"
+      ]
+    }
+  ],
+  "decision_policy": {
+    "schema_version": "1.0",
+    "contract": "skillops-opportunity-scoring",
+    "score_range": [
+      0,
+      100
+    ],
+    "score_bands": {
+      "85-100": "ready_for_approval_review",
+      "70-84": "proposal_review",
+      "50-69": "observe_more_evidence",
+      "0-49": "report_only_or_no_action"
+    },
+    "action_types": [
+      "add_eval",
+      "agents_update",
+      "patch_existing_skill",
+      "report_only"
+    ],
+    "writes_source_files": false,
+    "auto_patch_enabled": false,
+    "approval_required_for_writes": true
+  },
+  "approval": {
+    "approval_count": 0,
+    "pending_review_count": 0,
+    "applied_count": 0,
+    "rollback_count": 0
+  },
+  "release_state": {
+    "local_blueprint_ready": true,
+    "public_world_class_ready": false,
+    "world_class_pending_count": 4,
+    "release_lock_ready": true,
+    "evidence_consistency_ok": true
+  },
+  "actions": [
+    {
+      "key": "review-adaptation-proposals",
+      "priority": "high",
+      "action": "Review proposal-only adaptation items before preparing any approval ledger entry."
+    },
+    {
+      "key": "close-world-class-evidence",
+      "priority": "high",
+      "action": "Collect accepted external or human evidence for the pending world-class ledger entries."
+    }
+  ],
+  "failures": [],
+  "source_reports": {
+    "patterns": "reports/user_patterns.json",
+    "proposals": "reports/adaptation_proposals.json",
+    "approval_ledger": "reports/adaptation_approval_ledger.json",
+    "regression": "reports/adaptation_regression_report.json",
+    "skill_os2_coverage": "reports/skill_os2_coverage.json",
+    "world_class_ledger": "reports/world_class_evidence_ledger.json",
+    "evidence_consistency": "reports/evidence_consistency.json",
+    "benchmark_reproducibility": "reports/benchmark_reproducibility.json"
+  },
+  "artifacts": {
+    "json": "reports/skillops/daily/2026-06-20.json",
+    "markdown": "reports/skillops/daily/2026-06-20.md"
+  }
+}

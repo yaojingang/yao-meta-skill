@@ -65,7 +65,7 @@
       "key": "context-budget",
       "label": "上下文",
       "status": "pass",
-      "detail": "initial load 998/1000; deferred 525864/120000; top deferred scripts 464561; resource governance governed; quality density 140.3",
+      "detail": "initial load 998/1000; deferred 530464/120000; top deferred scripts 469161; resource governance governed; quality density 140.3",
       "evidence": "reports/context_budget.json",
       "link": "context_budget.md",
       "review_action_id": "",
@@ -95,7 +95,7 @@
       "key": "trust-report",
       "label": "信任报告",
       "status": "pass",
-      "detail": "0 secrets; 153 scripts; 3 network-capable scripts; 0 help smoke failures",
+      "detail": "0 secrets; 155 scripts; 3 network-capable scripts; 0 help smoke failures",
       "evidence": "reports/security_trust_report.json",
       "link": "security_trust_report.md",
       "review_action_id": "",
@@ -110,7 +110,7 @@
       "key": "python-compat",
       "label": "Python 兼容",
       "status": "pass",
-      "detail": "Python 3.11; 232 files; 0 compatibility issues; 0 syntax; 0 f-string 3.11 hazards",
+      "detail": "Python 3.11; 234 files; 0 compatibility issues; 0 syntax; 0 f-string 3.11 hazards",
       "evidence": "reports/python_compatibility.json",
       "link": "python_compatibility.md",
       "review_action_id": "",
@@ -125,7 +125,7 @@
       "key": "architecture-maintainability",
       "label": "架构维护",
       "status": "pass",
-      "detail": "229 Python files; 0 hotspots; 0 watchlist files; 6 early watch files; 0 blockers; largest 719 lines; 68 CLI handlers; 18 in entrypoint",
+      "detail": "232 Python files; 0 hotspots; 0 watchlist files; 6 early watch files; 0 blockers; largest 719 lines; 71 CLI handlers; 18 in entrypoint",
       "evidence": "reports/architecture_maintainability.json",
       "link": "architecture_maintainability.md",
       "review_action_id": "",
@@ -170,7 +170,7 @@
       "key": "skill-atlas",
       "label": "组合治理",
       "status": "pass",
-      "detail": "12 skills, 1 actionable; 0 actionable route collisions; 0 actionable owner gaps; 0 actionable stale; 0 actionable drift; 24 scoped non-actionable issues",
+      "detail": "11 skills, 1 actionable; 0 actionable route collisions; 0 actionable owner gaps; 0 actionable stale; 0 actionable drift; 22 scoped non-actionable issues",
       "evidence": "reports/skill_atlas.json",
       "link": "skill_atlas.html",
       "review_action_id": "",
@@ -185,7 +185,7 @@
       "key": "operations-loop",
       "label": "运营回路",
       "status": "pass",
-      "detail": "1 metadata events; adoption 0; missed 0; bad-output 0; risk low; daily proposals 5; daily decision proposal-review; daily release lock false; weekly queue 5 unique; weekly ready 1; weekly top 88; weekly release lock false",
+      "detail": "1 metadata events; adoption 100.0; missed 0; bad-output 0; risk low; daily proposals 5; daily decision proposal-review; daily release lock true; weekly queue 5 unique; weekly ready 1; weekly top 88; weekly release lock true",
       "evidence": "reports/adoption_drift_report.json + reports/skillops/daily + reports/skillops/weekly",
       "link": "adoption_drift_report.md",
       "review_action_id": "",
@@ -215,7 +215,7 @@
       "key": "world-class-evidence",
       "label": "世界证据",
       "status": "warn",
-      "detail": "4 pending world-class evidence entries; 1 human pending; 3 external pending; source checks 11/19 pass; 8 blocked; overclaim guard true",
+      "detail": "4 pending world-class evidence entries; 1 human pending; 3 external pending; source checks 12/19 pass; 7 blocked; overclaim guard true",
       "evidence": "reports/world_class_evidence_ledger.json",
       "link": "world_class_evidence_ledger.md",
       "review_action_id": "review-action-world-class-evidence",
@@ -338,7 +338,7 @@
       "key": "world-class-evidence",
       "label": "世界证据",
       "status": "warn",
-      "detail": "4 pending world-class evidence entries; 1 human pending; 3 external pending; source checks 11/19 pass; 8 blocked; overclaim guard true",
+      "detail": "4 pending world-class evidence entries; 1 human pending; 3 external pending; source checks 12/19 pass; 7 blocked; overclaim guard true",
       "evidence": "reports/world_class_evidence_ledger.json",
       "link": "world_class_evidence_ledger.md",
       "review_action_id": "review-action-world-class-evidence",
@@ -1194,8 +1194,8 @@
             "artifact_prefill_counts_as_evidence": false,
             "submission_ref_ready_count": 2,
             "submission_ref_total_count": 2,
-            "supporting_evidence_ready_count": 11,
-            "supporting_evidence_total_count": 11,
+            "supporting_evidence_ready_count": 7,
+            "supporting_evidence_total_count": 8,
             "roles": [
               {
                 "role": "submission-ref",
@@ -1208,8 +1208,8 @@
               {
                 "role": "supporting-evidence",
                 "label": "Supporting evidence",
-                "ready_count": 11,
-                "total_count": 11,
+                "ready_count": 7,
+                "total_count": 8,
                 "copy_to_artifact_refs": false,
                 "description": "Supporting-evidence rows help reviewers audit the packet but do not all need to be copied into artifact_refs."
               }
@@ -1226,12 +1226,12 @@
           "category": "external",
           "status": "pending",
           "readiness": "awaiting-submission",
-          "current": "external source events 0; adoption samples 0",
+          "current": "external source events 0; adoption samples 1",
           "next_action": "Install a real client against the native host and import production metadata-only events.",
           "submission_path": "evidence/world_class/submissions/native-client-telemetry.json",
           "template_path": "evidence/world_class/templates/native-client-telemetry.intake.json",
-          "source_pass_count": 1,
-          "source_blocked_count": 2,
+          "source_pass_count": 2,
+          "source_blocked_count": 1,
           "blocked_checks": [
             {
               "label": "External events",
@@ -1240,14 +1240,6 @@
               "expected": ">0",
               "status": "blocked",
               "next_action": "Import at least one metadata-only event from a real client."
-            },
-            {
-              "label": "Adoption sample",
-              "field": "adoption_sample_count",
-              "actual": 0,
-              "expected": ">0",
-              "status": "blocked",
-              "next_action": "Telemetry must include adoption outcome evidence."
             }
           ],
           "repair_rows": [
@@ -1265,19 +1257,6 @@
               "counts_as_completion": false
             },
             {
-              "action_id": "native-client-telemetry-source-check-adoption_sample_count",
-              "repair_type": "source-check",
-              "target": "adoption_sample_count",
-              "phase": "collect-source",
-              "priority": 40,
-              "owner": "Browser/Chrome/IDE/provider client integrator",
-              "status": "blocked",
-              "blocking_reason": "Current value 0 does not satisfy '>0'.",
-              "next_action": "Telemetry must include adoption outcome evidence.",
-              "verification_command": "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions",
-              "counts_as_completion": false
-            },
-            {
               "action_id": "native-client-telemetry-source-check-external_source_events",
               "repair_type": "source-check",
               "target": "external_source_events",
@@ -1291,7 +1270,7 @@
               "counts_as_completion": false
             }
           ],
-          "repair_blocked_count": 3,
+          "repair_blocked_count": 2,
           "repair_counts_as_completion": false,
           "phase_queue": [
             {
@@ -1317,16 +1296,16 @@
               "label": "Collect source",
               "priority": 40,
               "status": "blocked",
-              "blocked_count": 2,
-              "row_count": 2,
+              "blocked_count": 1,
+              "row_count": 1,
               "owners": [
                 "Browser/Chrome/IDE/provider client integrator"
               ],
               "evidence_keys": [
                 "native-client-telemetry"
               ],
-              "next_action_id": "native-client-telemetry-source-check-adoption_sample_count",
-              "next_action": "Telemetry must include adoption outcome evidence.",
+              "next_action_id": "native-client-telemetry-source-check-external_source_events",
+              "next_action": "Import at least one metadata-only event from a real client.",
               "verification_command": "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions",
               "counts_as_completion": false
             }
@@ -1458,7 +1437,7 @@
     "upgrade_check": "reports/upgrade_check.md",
     "migration": "docs/migration-v2.md",
     "skill_ir": "skill-ir/examples/yao-meta-skill.json",
-    "daily_skillops": "reports/skillops/daily/2026-06-17.md",
+    "daily_skillops": "reports/skillops/daily/2026-06-20.md",
     "weekly_curator": "reports/skillops/weekly/2026-W25.md"
   },
   "data": {
@@ -1875,7 +1854,7 @@
         "external_pending_count": 3,
         "human_pending_count": 1,
         "source_check_count": 19,
-        "source_pass_count": 11,
+        "source_pass_count": 12,
         "conclusion_zh": "世界级证据尚未完成：4 项待补，0 项已接受。",
         "conclusion_en": "World-class evidence is not complete: 4 pending, 0 accepted.",
         "entries": [
@@ -1932,8 +1911,7 @@
             "summary_zh": "真实外部客户端 metadata-only 事件仍未导入。",
             "summary_en": "Real external-client metadata-only events have not been imported yet.",
             "blocked_checks": [
-              "External events",
-              "Adoption sample"
+              "External events"
             ]
           }
         ]
@@ -1974,7 +1952,7 @@
             "path": "scripts",
             "label": "Deterministic helpers or local tooling",
             "kind": "folder",
-            "file_count": 153
+            "file_count": 155
           },
           {
             "path": "evals",
@@ -1986,10 +1964,10 @@
             "path": "reports",
             "label": "Generated evidence and overview artifacts",
             "kind": "folder",
-            "file_count": 235
+            "file_count": 150
           }
         ],
-        "file_count": 456,
+        "file_count": 373,
         "folder_count": 4,
         "distribution": [
           {
@@ -2014,7 +1992,7 @@
           },
           {
             "label": "scripts",
-            "value": 153
+            "value": 155
           },
           {
             "label": "evals",
@@ -2022,7 +2000,7 @@
           },
           {
             "label": "reports",
-            "value": 235
+            "value": 150
           }
         ]
       },
@@ -2144,7 +2122,7 @@
           "path": "scripts",
           "label": "Deterministic helpers or local tooling",
           "kind": "folder",
-          "file_count": 153
+          "file_count": 155
         },
         {
           "path": "evals",
@@ -2156,7 +2134,7 @@
           "path": "reports",
           "label": "Generated evidence and overview artifacts",
           "kind": "folder",
-          "file_count": 235
+          "file_count": 150
         }
       ],
       "strengths": [
@@ -2480,8 +2458,8 @@
           "methodology_complete": true,
           "required_artifact_count": 25,
           "missing_artifact_count": 0,
-          "evidence_bundle_sha256": "55a6c33c12e14d6507d4a5d4d4cf1268db35fb323d523e8b23ce9c73aedf8db0",
-          "source_contract_sha256": "5a99ef3133b0148cd5bbc1cd85fad4830bf34ca2bbac709f1e1fea2f810b1257",
+          "evidence_bundle_sha256": "3f7cdbc5e28c338aa681de7729ad6b634f9a8be2f993280f001d399c50bd8ad4",
+          "source_contract_sha256": "e5b4ffc5c3f93f7f8367fd4a021a0a09567d4df4acd0c31d2964d60593f47cbd",
           "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2",
           "output_case_count": 5,
           "failure_disclosure_count": 3,
@@ -2497,21 +2475,21 @@
           "world_class_task_count": 4,
           "world_class_ledger_pending_count": 4,
           "world_class_source_check_count": 19,
-          "world_class_source_pass_count": 11,
-          "world_class_source_blocked_count": 8,
+          "world_class_source_pass_count": 12,
+          "world_class_source_blocked_count": 7,
           "beta_test_ready": true,
           "beta_test_blocker_count": 0,
           "beta_test_deferred_evidence_count": 4,
           "public_claim_ready": false,
           "public_claim_blocker_count": 3,
           "working_tree_dirty": true,
-          "changed_file_count": 29,
+          "changed_file_count": 71,
           "source_tree_dirty": false,
           "source_changed_file_count": 0,
           "generated_tree_dirty": true,
-          "generated_changed_file_count": 29
+          "generated_changed_file_count": 71
         },
-        "commit": "e79050ed12d057811d7d13ab7d8bcc5a06af76d4",
+        "commit": "f37e78def3464bc818429c47e1ecc9e033c7356c",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flags are generation-time context; release lock is blocked by source changes, while generated evidence artifacts are tracked separately.",
@@ -2596,9 +2574,9 @@
         "failures": []
       },
       "trust_security": {
-        "scanned_files": 245,
-        "script_count": 153,
-        "internal_module_count": 67,
+        "scanned_files": 247,
+        "script_count": 155,
+        "internal_module_count": 69,
         "secret_findings": 0,
         "dependency_files": [
           "requirements-ci.txt"
@@ -2606,7 +2584,7 @@
         "network_script_count": 3,
         "network_policy_covered_count": 3,
         "network_policy_missing_count": 0,
-        "file_write_script_count": 73,
+        "file_write_script_count": 74,
         "permission_required_count": 3,
         "permission_approved_count": 3,
         "permission_missing_count": 0,
@@ -2616,24 +2594,24 @@
         "help_smoke_failed_count": 0,
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
-        "package_hash_file_count": 245,
-        "package_sha256": "5a99ef3133b0148cd5bbc1cd85fad4830bf34ca2bbac709f1e1fea2f810b1257"
+        "package_hash_file_count": 247,
+        "package_sha256": "e5b4ffc5c3f93f7f8367fd4a021a0a09567d4df4acd0c31d2964d60593f47cbd"
       },
       "skill_atlas": {
-        "skill_count": 12,
+        "skill_count": 11,
         "actionable_skill_count": 1,
         "route_collision_count": 5,
         "actionable_route_collision_count": 0,
-        "owner_gap_count": 9,
+        "owner_gap_count": 8,
         "actionable_owner_gap_count": 0,
-        "stale_count": 10,
+        "stale_count": 9,
         "actionable_stale_count": 0,
         "shared_resource_count": 0,
         "no_route_opportunity_count": 0,
         "telemetry_report_count": 1,
         "drift_signal_count": 0,
         "actionable_drift_signal_count": 0,
-        "non_actionable_issue_count": 24
+        "non_actionable_issue_count": 22
       },
       "registry_distribution": {
         "ok": true,
@@ -2655,7 +2633,7 @@
           "trust_level": "local",
           "license": "MIT",
           "checksums": {
-            "package_sha256": "5a99ef3133b0148cd5bbc1cd85fad4830bf34ca2bbac709f1e1fea2f810b1257",
+            "package_sha256": "e5b4ffc5c3f93f7f8367fd4a021a0a09567d4df4acd0c31d2964d60593f47cbd",
             "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2"
           },
           "compatibility": {
@@ -2715,7 +2693,7 @@
         "ok": true,
         "summary": {
           "archive_present": true,
-          "archive_entry_count": 696,
+          "archive_entry_count": 588,
           "archive_extracted": true,
           "entrypoint_loaded": true,
           "manifest_loaded": true,
@@ -2787,7 +2765,7 @@
             {
               "field": "package_sha256",
               "from": "0000000000000000000000000000000000000000000000000000000000000000",
-              "to": "5a99ef3133b0148cd5bbc1cd85fad4830bf34ca2bbac709f1e1fea2f810b1257"
+              "to": "e5b4ffc5c3f93f7f8367fd4a021a0a09567d4df4acd0c31d2964d60593f47cbd"
             }
           ]
         },
@@ -2804,14 +2782,14 @@
         "ok": true,
         "summary": {
           "event_count": 1,
-          "adoption_sample_count": 0,
-          "activation_count": 0,
-          "accepted_count": 0,
+          "adoption_sample_count": 1,
+          "activation_count": 1,
+          "accepted_count": 1,
           "edited_count": 0,
           "rejected_count": 0,
           "missed_count": 0,
           "failed_count": 0,
-          "adoption_rate": 0,
+          "adoption_rate": 100.0,
           "missed_trigger_count": 0,
           "wrong_trigger_count": 0,
           "bad_output_count": 0,
@@ -2820,7 +2798,7 @@
           "review_overdue_count": 0,
           "risk_band": "low",
           "event_types": {
-            "review_event": 1
+            "skill_activation": 1
           },
           "failure_types": {},
           "source_types": {
@@ -3095,7 +3073,7 @@
             "status": "external_required",
             "category": "external",
             "owner": "Browser/Chrome/IDE/provider client integrator",
-            "current": "external source events 0; adoption samples 0",
+            "current": "external source events 0; adoption samples 1",
             "objective": "Import production metadata-only events from a real external client into the local drift loop.",
             "runbook": [
               "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
@@ -3148,8 +3126,8 @@
           "missing_submission_count": 4,
           "invalid_submission_count": 0,
           "source_check_count": 19,
-          "source_pass_count": 11,
-          "source_blocked_count": 8,
+          "source_pass_count": 12,
+          "source_blocked_count": 7,
           "submitted_but_pending_count": 0,
           "source_accepted_without_valid_submission_count": 1,
           "overclaim_guard_active": true,
@@ -3575,7 +3553,7 @@
             "status": "pending",
             "source_status": "external_required",
             "source_accepted": false,
-            "current": "external source events 0; adoption samples 0",
+            "current": "external source events 0; adoption samples 1",
             "objective": "Import production metadata-only events from a real external client into the local drift loop.",
             "runbook": [
               "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
@@ -3612,7 +3590,7 @@
             ],
             "observed_state": {
               "external_source_events": 0,
-              "adoption_sample_count": 0,
+              "adoption_sample_count": 1,
               "raw_content_allowed": false,
               "risk_band": "low",
               "accepted": false
@@ -3633,8 +3611,8 @@
                 "label": "Adoption sample",
                 "field": "adoption_sample_count",
                 "expected": ">0",
-                "actual": 0,
-                "status": "blocked",
+                "actual": 1,
+                "status": "pass",
                 "source_accepted": false,
                 "next_action": "Telemetry must include adoption outcome evidence."
               },
@@ -3650,8 +3628,8 @@
               }
             ],
             "source_check_count": 3,
-            "source_pass_count": 1,
-            "source_blocked_count": 2,
+            "source_pass_count": 2,
+            "source_blocked_count": 1,
             "submission_state": {
               "status": "missing",
               "path": "evidence/world_class/submissions/native-client-telemetry.json",
@@ -6333,15 +6311,15 @@
     "benchmark_reproducibility": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-17",
+      "generated_at": "2026-06-20",
       "skill_dir": ".",
-      "commit": "e79050ed12d057811d7d13ab7d8bcc5a06af76d4",
+      "commit": "f37e78def3464bc818429c47e1ecc9e033c7356c",
       "git_status": {
         "available": true,
         "dirty": true,
-        "changed_file_count": 29,
+        "changed_file_count": 71,
         "generated_dirty": true,
-        "generated_changed_file_count": 29,
+        "generated_changed_file_count": 71,
         "source_dirty": false,
         "source_changed_file_count": 0,
         "sample": [
@@ -6350,13 +6328,13 @@
           " M reports/adaptation_proposals.json",
           " M reports/adaptation_proposals.md",
           " M reports/adoption_drift_report.json",
+          " M reports/adoption_drift_report.md",
           " M reports/architecture_maintainability.json",
           " M reports/architecture_maintainability.md",
+          " M reports/artifact-design-profile.json",
+          " M reports/artifact-design-profile.md",
           " M reports/benchmark_reproducibility.json",
-          " M reports/benchmark_reproducibility.md",
-          " M reports/context_budget.json",
-          " M reports/context_budget.md",
-          " M reports/context_budget_summary.json"
+          " M reports/benchmark_reproducibility.md"
         ],
         "source_sample": [],
         "generated_sample": [
@@ -6365,13 +6343,13 @@
           " M reports/adaptation_proposals.json",
           " M reports/adaptation_proposals.md",
           " M reports/adoption_drift_report.json",
+          " M reports/adoption_drift_report.md",
           " M reports/architecture_maintainability.json",
           " M reports/architecture_maintainability.md",
+          " M reports/artifact-design-profile.json",
+          " M reports/artifact-design-profile.md",
           " M reports/benchmark_reproducibility.json",
-          " M reports/benchmark_reproducibility.md",
-          " M reports/context_budget.json",
-          " M reports/context_budget.md",
-          " M reports/context_budget_summary.json"
+          " M reports/benchmark_reproducibility.md"
         ],
         "generated_dirty_prefixes": [
           "dist/",
@@ -6389,8 +6367,8 @@
         "methodology_complete": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "55a6c33c12e14d6507d4a5d4d4cf1268db35fb323d523e8b23ce9c73aedf8db0",
-        "source_contract_sha256": "5a99ef3133b0148cd5bbc1cd85fad4830bf34ca2bbac709f1e1fea2f810b1257",
+        "evidence_bundle_sha256": "3f7cdbc5e28c338aa681de7729ad6b634f9a8be2f993280f001d399c50bd8ad4",
+        "source_contract_sha256": "e5b4ffc5c3f93f7f8367fd4a021a0a09567d4df4acd0c31d2964d60593f47cbd",
         "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2",
         "output_case_count": 5,
         "failure_disclosure_count": 3,
@@ -6406,19 +6384,19 @@
         "world_class_task_count": 4,
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 19,
-        "world_class_source_pass_count": 11,
-        "world_class_source_blocked_count": 8,
+        "world_class_source_pass_count": 12,
+        "world_class_source_blocked_count": 7,
         "beta_test_ready": true,
         "beta_test_blocker_count": 0,
         "beta_test_deferred_evidence_count": 4,
         "public_claim_ready": false,
         "public_claim_blocker_count": 3,
         "working_tree_dirty": true,
-        "changed_file_count": 29,
+        "changed_file_count": 71,
         "source_tree_dirty": false,
         "source_changed_file_count": 0,
         "generated_tree_dirty": true,
-        "generated_changed_file_count": 29
+        "generated_changed_file_count": 71
       },
       "beta_test_release": {
         "ready": true,
@@ -6455,16 +6433,16 @@
         "blockers": [
           "human blind-review adjudication is incomplete",
           "world-class evidence is not accepted yet (3 open gaps, 4 ledger pending)",
-          "world-class source checks are not all accepted (11/19 pass, 8 blocked)"
+          "world-class source checks are not all accepted (12/19 pass, 7 blocked)"
         ],
         "policy": "Local reproducibility can pass before public claims; public claims require provider evidence, human adjudication, clean release lock, accepted world-class evidence, and complete source checks."
       },
       "release_lock": {
         "ready": true,
-        "commit": "e79050ed12d057811d7d13ab7d8bcc5a06af76d4",
+        "commit": "f37e78def3464bc818429c47e1ecc9e033c7356c",
         "status_scope": "generation-time status before this report is written",
         "source_changed_file_count": 0,
-        "generated_changed_file_count": 29,
+        "generated_changed_file_count": 71,
         "reason": "only generated evidence artifacts were dirty at generation time"
       },
       "evidence_bundle": {
@@ -6473,7 +6451,7 @@
         "existing_count": 25,
         "missing_count": 0,
         "missing_paths": [],
-        "sha256": "55a6c33c12e14d6507d4a5d4d4cf1268db35fb323d523e8b23ce9c73aedf8db0"
+        "sha256": "3f7cdbc5e28c338aa681de7729ad6b634f9a8be2f993280f001d399c50bd8ad4"
       },
       "methodology": {
         "path": "reports/benchmark_methodology.md",
@@ -6581,22 +6559,22 @@
           "label": "trust_report",
           "path": "reports/security_trust_report.json",
           "exists": true,
-          "bytes": 137787,
-          "sha256": "bbff1f1bee0ce6f7014efcd4622ba11c70aacfc81f2e69e225411df7004dd616"
+          "bytes": 139090,
+          "sha256": "7ae59b7700db912ea4c72a3626d2fab5ee975e264fd067ca1ca6f94ee726c91f"
         },
         {
           "label": "python_compatibility",
           "path": "reports/python_compatibility.json",
           "exists": true,
-          "bytes": 30127,
-          "sha256": "d31dc03c74f17242f4163b8cb3f23120fe3d0712edd08fa183cb94f8120d491c"
+          "bytes": 30351,
+          "sha256": "7f3fc8e785bf7007755c0b7f277967fd478ea17a5800ab14b9c23de395576cda"
         },
         {
           "label": "registry_audit",
           "path": "reports/registry_audit.json",
           "exists": true,
           "bytes": 3137,
-          "sha256": "1feb80c7cdc833a655cc0e44150f39f9f6d0633465abaa1ae29ebe7cb0649065"
+          "sha256": "1c9d988340746f6f00406718f3c6473b440379b8f45190ef51cc9e996e9107b8"
         },
         {
           "label": "package_verification",
@@ -6610,77 +6588,77 @@
           "path": "reports/install_simulation.json",
           "exists": true,
           "bytes": 8758,
-          "sha256": "c1f1122264b868c4998482c580ef94333575c6ff7c5c9c297188b225f69a131d"
+          "sha256": "247c037353fe29aa638945a2d5633228e16f30ff44c27ca1a57cb70ccc441359"
         },
         {
           "label": "skill_os2_audit",
           "path": "reports/skill_os2_audit.json",
           "exists": true,
           "bytes": 13824,
-          "sha256": "6362e79a8cfd3ff54b1a7ca32f37de8ed1cda500b953fdf1074928c6d2d62379"
+          "sha256": "80ddfb66a136a52ff9eb9aca2f6a9fe72cb923a066028f0baa9db2c0e03f0689"
         },
         {
           "label": "world_class_evidence_plan",
           "path": "reports/world_class_evidence_plan.json",
           "exists": true,
           "bytes": 23314,
-          "sha256": "8eb5e1fbaa7580f107fd9920d13a13b239edb72d50b6959fc8f6dd43150f07d7"
+          "sha256": "374ee899a0ba5b84a95337de993439d78e5708be4fdf40dee4292766d0d2bf99"
         },
         {
           "label": "world_class_evidence_ledger",
           "path": "reports/world_class_evidence_ledger.json",
           "exists": true,
-          "bytes": 26277,
-          "sha256": "6038b6cd6e0667f25cfd69a5e40afa314d9efc3a93753a2a3a0509ae9b516a15"
+          "bytes": 26274,
+          "sha256": "565ae80a82286e912df134c88a269566ecf635f39e55618df4ed4eac69d7c7ea"
         },
         {
           "label": "world_class_evidence_intake",
           "path": "reports/world_class_evidence_intake.json",
           "exists": true,
           "bytes": 20922,
-          "sha256": "aa262da0ecee7232974ce061a51c8966c310de0b0be9f91eb82bb28bf1c7c0a8"
+          "sha256": "e36a7e753f4176e7ddd7a74fcc5b064769191baf73b5faa58752f80457ec58ff"
         },
         {
           "label": "world_class_evidence_preflight",
           "path": "reports/world_class_evidence_preflight.json",
           "exists": true,
-          "bytes": 94341,
-          "sha256": "95cb56581224aab06be84d0b338d6ba9aa4aef0b1ebd480801f1e2226b873b0d"
+          "bytes": 90852,
+          "sha256": "9e4f0bc489ca958b5a9e2854f17b847de8ee1f081de40e8c8b86cec138afe633"
         },
         {
           "label": "world_class_submission_review",
           "path": "reports/world_class_submission_review.json",
           "exists": true,
-          "bytes": 17295,
-          "sha256": "12fbb84926294c4bd05af526fcbe0983db26e449d2c305006094baf27332a0ba"
+          "bytes": 17292,
+          "sha256": "3c944b4bd27f61483e8e02aa3f3b6c8cdb4aba8dc986241e8cbe60ba64489123"
         },
         {
           "label": "world_class_operator_runbook",
           "path": "reports/world_class_operator_runbook.json",
           "exists": true,
-          "bytes": 87257,
-          "sha256": "f321dc118ee931a1e1510559e5e64774168a58b0446ae62d232009eb42e3b384"
+          "bytes": 83712,
+          "sha256": "d8678010fcfd5fb8f28d95925478496749f5498ce13a171c80f79372b874351d"
         },
         {
           "label": "world_class_operator_runbook_markdown",
           "path": "reports/world_class_operator_runbook.md",
           "exists": true,
-          "bytes": 25549,
-          "sha256": "858ee11bbacb143f648e9c00735bc248a0b9f3c9303dc9e0ad5c0a65d9d6e07f"
+          "bytes": 25504,
+          "sha256": "fe3a73bf2eb9a018ec03881c95d23d30abcbf8bc36cbb264f68daa08238d8e5f"
         },
         {
           "label": "world_class_operator_runbook_html",
           "path": "reports/world_class_operator_runbook.html",
           "exists": true,
-          "bytes": 34702,
-          "sha256": "31b24658c59ee1dee25aec378e72033b042af88dfdf40c325d361d0c9bec2ca7"
+          "bytes": 34651,
+          "sha256": "022594013b2469a0e5776e3f5f6a99fa069917c5ba5cb90256b7841b1f5fd1e3"
         },
         {
           "label": "world_class_claim_guard",
           "path": "reports/world_class_claim_guard.json",
           "exists": true,
-          "bytes": 18596,
-          "sha256": "abe7f7d60c0025e140373fadaefbed4063f285c140c74b9c7cfb464e354bb526"
+          "bytes": 17958,
+          "sha256": "47fae260e9d6d2b7c39685a1e746aa79bf79c1e6b2cd6b6c4fa706f857aa8325"
         }
       ],
       "missing_artifacts": [],
@@ -6821,7 +6799,7 @@
     "skill_os2_coverage": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-17",
+      "generated_at": "2026-06-20",
       "skill_dir": ".",
       "summary": {
         "item_count": 21,
@@ -6950,7 +6928,7 @@
           "label": "Trust Security",
           "status": "pass",
           "objective": "Scripts, dependencies, permissions, secrets, and package hash are reviewable for team distribution.",
-          "current": "153 scripts; secrets 0; help failures 0",
+          "current": "155 scripts; secrets 0; help failures 0",
           "command": "python3 scripts/yao.py trust .",
           "test": "python3 tests/verify_trust_check.py",
           "evidence": [
@@ -6987,7 +6965,7 @@
           "label": "Skill Atlas",
           "status": "pass",
           "objective": "Team skill portfolio reveals route collisions, stale ownership, dependency graph, and no-route opportunities.",
-          "current": "12 scanned skills; actionable collisions 0",
+          "current": "11 scanned skills; actionable collisions 0",
           "command": "python3 scripts/yao.py skill-atlas --workspace-root .",
           "test": "python3 tests/verify_skill_atlas.py",
           "evidence": [
@@ -7333,7 +7311,7 @@
           "label": "Skill Atlas Generator",
           "status": "pass",
           "objective": "Recommended Skill OS 2.0 implementation PR from the upgrade plan.",
-          "current": "12 scanned skills",
+          "current": "11 scanned skills",
           "command": "make ci-test",
           "test": "tests/verify_skill_atlas.py",
           "evidence": [
@@ -7569,11 +7547,11 @@
               "exists": true
             },
             {
-              "path": "reports/skillops/daily/2026-06-17.json",
+              "path": "reports/skillops/daily/2026-06-20.json",
               "exists": true
             },
             {
-              "path": "reports/skillops/daily/2026-06-17.md",
+              "path": "reports/skillops/daily/2026-06-20.md",
               "exists": true
             }
           ],
@@ -7632,7 +7610,7 @@
     "compiled_targets": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-17",
+      "generated_at": "2026-06-13",
       "skill_dir": ".",
       "summary": {
         "target_count": 5,
@@ -7922,10 +7900,12 @@
                 "scripts/yao_cli_config.py",
                 "scripts/yao_cli_create_commands.py",
                 "scripts/yao_cli_distribution_commands.py",
+                "scripts/yao_cli_operator_commands.py",
                 "scripts/yao_cli_output_commands.py",
                 "scripts/yao_cli_parser.py",
                 "scripts/yao_cli_parser_evidence.py",
                 "scripts/yao_cli_parser_operations.py",
+                "scripts/yao_cli_parser_operator.py",
                 "scripts/yao_cli_report_commands.py",
                 "scripts/yao_cli_runtime.py",
                 "scripts/yao_cli_telemetry.py"
@@ -7985,7 +7965,7 @@
               ],
               "counts": {
                 "references": 35,
-                "scripts": 153,
+                "scripts": 155,
                 "assets": 6,
                 "reports": 43
               }
@@ -8092,7 +8072,7 @@
                 },
                 "file_write": {
                   "required": true,
-                  "script_count": 73,
+                  "script_count": 74,
                   "scripts": [
                     "scripts/adjudicate_output_review.py",
                     "scripts/apply_adaptation.py",
@@ -8166,13 +8146,14 @@
                     "scripts/telemetry_native_host.py",
                     "scripts/trust_check.py",
                     "scripts/upgrade_check.py",
-                    "scripts/verify_package.py"
+                    "scripts/verify_package.py",
+                    "scripts/yao_cli_operator_commands.py"
                   ],
                   "review_reason": "Scripts write local files or generated artifacts."
                 },
                 "subprocess": {
                   "required": true,
-                  "script_count": 12,
+                  "script_count": 13,
                   "scripts": [
                     "scripts/apply_adaptation.py",
                     "scripts/benchmark_release_lock.py",
@@ -8185,6 +8166,7 @@
                     "scripts/sync_local_install.py",
                     "scripts/trust_check.py",
                     "scripts/yao.py",
+                    "scripts/yao_cli_operator_commands.py",
                     "scripts/yao_cli_runtime.py"
                   ],
                   "review_reason": "Scripts spawn local commands and need operator review."
@@ -8215,8 +8197,8 @@
               "trust_summary": {
                 "secret_findings": 0,
                 "network_script_count": 3,
-                "file_write_script_count": 73,
-                "subprocess_script_count": 12,
+                "file_write_script_count": 74,
+                "subprocess_script_count": 13,
                 "interactive_script_count": 0,
                 "help_smoke_failed_count": 0
               }
@@ -8237,8 +8219,8 @@
               ],
               "capability_counts": {
                 "network": 3,
-                "file_write": 73,
-                "subprocess": 12,
+                "file_write": 74,
+                "subprocess": 13,
                 "interactive": 0
               },
               "evidence": "reports/security_trust_report.json",
@@ -8258,7 +8240,7 @@
                 "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
                 "counts": {
                   "references": 35,
-                  "scripts": 153,
+                  "scripts": 155,
                   "assets": 6,
                   "reports": 43
                 },
@@ -8269,7 +8251,7 @@
               },
               "scripts": {
                 "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-                "script_count": 153,
+                "script_count": 155,
                 "help_smoke_failed_count": 0
               },
               "permissions": {
@@ -8350,7 +8332,7 @@
               },
               "file_write": {
                 "required": true,
-                "script_count": 73,
+                "script_count": 74,
                 "scripts": [
                   "scripts/adjudicate_output_review.py",
                   "scripts/apply_adaptation.py",
@@ -8424,13 +8406,14 @@
                   "scripts/telemetry_native_host.py",
                   "scripts/trust_check.py",
                   "scripts/upgrade_check.py",
-                  "scripts/verify_package.py"
+                  "scripts/verify_package.py",
+                  "scripts/yao_cli_operator_commands.py"
                 ],
                 "review_reason": "Scripts write local files or generated artifacts."
               },
               "subprocess": {
                 "required": true,
-                "script_count": 12,
+                "script_count": 13,
                 "scripts": [
                   "scripts/apply_adaptation.py",
                   "scripts/benchmark_release_lock.py",
@@ -8443,6 +8426,7 @@
                   "scripts/sync_local_install.py",
                   "scripts/trust_check.py",
                   "scripts/yao.py",
+                  "scripts/yao_cli_operator_commands.py",
                   "scripts/yao_cli_runtime.py"
                 ],
                 "review_reason": "Scripts spawn local commands and need operator review."
@@ -8473,8 +8457,8 @@
             "trust_summary": {
               "secret_findings": 0,
               "network_script_count": 3,
-              "file_write_script_count": 73,
-              "subprocess_script_count": 12,
+              "file_write_script_count": 74,
+              "subprocess_script_count": 13,
               "interactive_script_count": 0,
               "help_smoke_failed_count": 0
             }
@@ -8493,8 +8477,8 @@
             ],
             "capability_counts": {
               "network": 3,
-              "file_write": 73,
-              "subprocess": 12,
+              "file_write": 74,
+              "subprocess": 13,
               "interactive": 0
             },
             "evidence": "reports/security_trust_report.json",
@@ -8514,7 +8498,7 @@
               "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
               "counts": {
                 "references": 35,
-                "scripts": 153,
+                "scripts": 155,
                 "assets": 6,
                 "reports": 43
               },
@@ -8525,7 +8509,7 @@
             },
             "scripts": {
               "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-              "script_count": 153,
+              "script_count": 155,
               "help_smoke_failed_count": 0
             },
             "permissions": {
@@ -8873,10 +8857,12 @@
                 "scripts/yao_cli_config.py",
                 "scripts/yao_cli_create_commands.py",
                 "scripts/yao_cli_distribution_commands.py",
+                "scripts/yao_cli_operator_commands.py",
                 "scripts/yao_cli_output_commands.py",
                 "scripts/yao_cli_parser.py",
                 "scripts/yao_cli_parser_evidence.py",
                 "scripts/yao_cli_parser_operations.py",
+                "scripts/yao_cli_parser_operator.py",
                 "scripts/yao_cli_report_commands.py",
                 "scripts/yao_cli_runtime.py",
                 "scripts/yao_cli_telemetry.py"
@@ -8936,7 +8922,7 @@
               ],
               "counts": {
                 "references": 35,
-                "scripts": 153,
+                "scripts": 155,
                 "assets": 6,
                 "reports": 43
               }
@@ -9043,7 +9029,7 @@
                 },
                 "file_write": {
                   "required": true,
-                  "script_count": 73,
+                  "script_count": 74,
                   "scripts": [
                     "scripts/adjudicate_output_review.py",
                     "scripts/apply_adaptation.py",
@@ -9117,13 +9103,14 @@
                     "scripts/telemetry_native_host.py",
                     "scripts/trust_check.py",
                     "scripts/upgrade_check.py",
-                    "scripts/verify_package.py"
+                    "scripts/verify_package.py",
+                    "scripts/yao_cli_operator_commands.py"
                   ],
                   "review_reason": "Scripts write local files or generated artifacts."
                 },
                 "subprocess": {
                   "required": true,
-                  "script_count": 12,
+                  "script_count": 13,
                   "scripts": [
                     "scripts/apply_adaptation.py",
                     "scripts/benchmark_release_lock.py",
@@ -9136,6 +9123,7 @@
                     "scripts/sync_local_install.py",
                     "scripts/trust_check.py",
                     "scripts/yao.py",
+                    "scripts/yao_cli_operator_commands.py",
                     "scripts/yao_cli_runtime.py"
                   ],
                   "review_reason": "Scripts spawn local commands and need operator review."
@@ -9166,8 +9154,8 @@
               "trust_summary": {
                 "secret_findings": 0,
                 "network_script_count": 3,
-                "file_write_script_count": 73,
-                "subprocess_script_count": 12,
+                "file_write_script_count": 74,
+                "subprocess_script_count": 13,
                 "interactive_script_count": 0,
                 "help_smoke_failed_count": 0
               }
@@ -9188,8 +9176,8 @@
               ],
               "capability_counts": {
                 "network": 3,
-                "file_write": 73,
-                "subprocess": 12,
+                "file_write": 74,
+                "subprocess": 13,
                 "interactive": 0
               },
               "evidence": "reports/security_trust_report.json",
@@ -9209,7 +9197,7 @@
                 "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
                 "counts": {
                   "references": 35,
-                  "scripts": 153,
+                  "scripts": 155,
                   "assets": 6,
                   "reports": 43
                 },
@@ -9220,7 +9208,7 @@
               },
               "scripts": {
                 "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-                "script_count": 153,
+                "script_count": 155,
                 "help_smoke_failed_count": 0
               },
               "permissions": {
@@ -9301,7 +9289,7 @@
               },
               "file_write": {
                 "required": true,
-                "script_count": 73,
+                "script_count": 74,
                 "scripts": [
                   "scripts/adjudicate_output_review.py",
                   "scripts/apply_adaptation.py",
@@ -9375,13 +9363,14 @@
                   "scripts/telemetry_native_host.py",
                   "scripts/trust_check.py",
                   "scripts/upgrade_check.py",
-                  "scripts/verify_package.py"
+                  "scripts/verify_package.py",
+                  "scripts/yao_cli_operator_commands.py"
                 ],
                 "review_reason": "Scripts write local files or generated artifacts."
               },
               "subprocess": {
                 "required": true,
-                "script_count": 12,
+                "script_count": 13,
                 "scripts": [
                   "scripts/apply_adaptation.py",
                   "scripts/benchmark_release_lock.py",
@@ -9394,6 +9383,7 @@
                   "scripts/sync_local_install.py",
                   "scripts/trust_check.py",
                   "scripts/yao.py",
+                  "scripts/yao_cli_operator_commands.py",
                   "scripts/yao_cli_runtime.py"
                 ],
                 "review_reason": "Scripts spawn local commands and need operator review."
@@ -9424,8 +9414,8 @@
             "trust_summary": {
               "secret_findings": 0,
               "network_script_count": 3,
-              "file_write_script_count": 73,
-              "subprocess_script_count": 12,
+              "file_write_script_count": 74,
+              "subprocess_script_count": 13,
               "interactive_script_count": 0,
               "help_smoke_failed_count": 0
             }
@@ -9444,8 +9434,8 @@
             ],
             "capability_counts": {
               "network": 3,
-              "file_write": 73,
-              "subprocess": 12,
+              "file_write": 74,
+              "subprocess": 13,
               "interactive": 0
             },
             "evidence": "reports/security_trust_report.json",
@@ -9465,7 +9455,7 @@
               "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
               "counts": {
                 "references": 35,
-                "scripts": 153,
+                "scripts": 155,
                 "assets": 6,
                 "reports": 43
               },
@@ -9476,7 +9466,7 @@
             },
             "scripts": {
               "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-              "script_count": 153,
+              "script_count": 155,
               "help_smoke_failed_count": 0
             },
             "permissions": {
@@ -9824,10 +9814,12 @@
                 "scripts/yao_cli_config.py",
                 "scripts/yao_cli_create_commands.py",
                 "scripts/yao_cli_distribution_commands.py",
+                "scripts/yao_cli_operator_commands.py",
                 "scripts/yao_cli_output_commands.py",
                 "scripts/yao_cli_parser.py",
                 "scripts/yao_cli_parser_evidence.py",
                 "scripts/yao_cli_parser_operations.py",
+                "scripts/yao_cli_parser_operator.py",
                 "scripts/yao_cli_report_commands.py",
                 "scripts/yao_cli_runtime.py",
                 "scripts/yao_cli_telemetry.py"
@@ -9887,7 +9879,7 @@
               ],
               "counts": {
                 "references": 35,
-                "scripts": 153,
+                "scripts": 155,
                 "assets": 6,
                 "reports": 43
               }
@@ -9994,7 +9986,7 @@
                 },
                 "file_write": {
                   "required": true,
-                  "script_count": 73,
+                  "script_count": 74,
                   "scripts": [
                     "scripts/adjudicate_output_review.py",
                     "scripts/apply_adaptation.py",
@@ -10068,13 +10060,14 @@
                     "scripts/telemetry_native_host.py",
                     "scripts/trust_check.py",
                     "scripts/upgrade_check.py",
-                    "scripts/verify_package.py"
+                    "scripts/verify_package.py",
+                    "scripts/yao_cli_operator_commands.py"
                   ],
                   "review_reason": "Scripts write local files or generated artifacts."
                 },
                 "subprocess": {
                   "required": true,
-                  "script_count": 12,
+                  "script_count": 13,
                   "scripts": [
                     "scripts/apply_adaptation.py",
                     "scripts/benchmark_release_lock.py",
@@ -10087,6 +10080,7 @@
                     "scripts/sync_local_install.py",
                     "scripts/trust_check.py",
                     "scripts/yao.py",
+                    "scripts/yao_cli_operator_commands.py",
                     "scripts/yao_cli_runtime.py"
                   ],
                   "review_reason": "Scripts spawn local commands and need operator review."
@@ -10117,8 +10111,8 @@
               "trust_summary": {
                 "secret_findings": 0,
                 "network_script_count": 3,
-                "file_write_script_count": 73,
-                "subprocess_script_count": 12,
+                "file_write_script_count": 74,
+                "subprocess_script_count": 13,
                 "interactive_script_count": 0,
                 "help_smoke_failed_count": 0
               }
@@ -10139,8 +10133,8 @@
               ],
               "capability_counts": {
                 "network": 3,
-                "file_write": 73,
-                "subprocess": 12,
+                "file_write": 74,
+                "subprocess": 13,
                 "interactive": 0
               },
               "evidence": "reports/security_trust_report.json",
@@ -10160,7 +10154,7 @@
                 "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
                 "counts": {
                   "references": 35,
-                  "scripts": 153,
+                  "scripts": 155,
                   "assets": 6,
                   "reports": 43
                 },
@@ -10170,7 +10164,7 @@
               },
               "scripts": {
                 "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-                "script_count": 153,
+                "script_count": 155,
                 "help_smoke_failed_count": 0
               },
               "permissions": {
@@ -10245,7 +10239,7 @@
               },
               "file_write": {
                 "required": true,
-                "script_count": 73,
+                "script_count": 74,
                 "scripts": [
                   "scripts/adjudicate_output_review.py",
                   "scripts/apply_adaptation.py",
@@ -10319,13 +10313,14 @@
                   "scripts/telemetry_native_host.py",
                   "scripts/trust_check.py",
                   "scripts/upgrade_check.py",
-                  "scripts/verify_package.py"
+                  "scripts/verify_package.py",
+                  "scripts/yao_cli_operator_commands.py"
                 ],
                 "review_reason": "Scripts write local files or generated artifacts."
               },
               "subprocess": {
                 "required": true,
-                "script_count": 12,
+                "script_count": 13,
                 "scripts": [
                   "scripts/apply_adaptation.py",
                   "scripts/benchmark_release_lock.py",
@@ -10338,6 +10333,7 @@
                   "scripts/sync_local_install.py",
                   "scripts/trust_check.py",
                   "scripts/yao.py",
+                  "scripts/yao_cli_operator_commands.py",
                   "scripts/yao_cli_runtime.py"
                 ],
                 "review_reason": "Scripts spawn local commands and need operator review."
@@ -10368,8 +10364,8 @@
             "trust_summary": {
               "secret_findings": 0,
               "network_script_count": 3,
-              "file_write_script_count": 73,
-              "subprocess_script_count": 12,
+              "file_write_script_count": 74,
+              "subprocess_script_count": 13,
               "interactive_script_count": 0,
               "help_smoke_failed_count": 0
             }
@@ -10388,8 +10384,8 @@
             ],
             "capability_counts": {
               "network": 3,
-              "file_write": 73,
-              "subprocess": 12,
+              "file_write": 74,
+              "subprocess": 13,
               "interactive": 0
             },
             "evidence": "reports/security_trust_report.json",
@@ -10409,7 +10405,7 @@
               "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
               "counts": {
                 "references": 35,
-                "scripts": 153,
+                "scripts": 155,
                 "assets": 6,
                 "reports": 43
               },
@@ -10419,7 +10415,7 @@
             },
             "scripts": {
               "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-              "script_count": 153,
+              "script_count": 155,
               "help_smoke_failed_count": 0
             },
             "permissions": {
@@ -10759,10 +10755,12 @@
                 "scripts/yao_cli_config.py",
                 "scripts/yao_cli_create_commands.py",
                 "scripts/yao_cli_distribution_commands.py",
+                "scripts/yao_cli_operator_commands.py",
                 "scripts/yao_cli_output_commands.py",
                 "scripts/yao_cli_parser.py",
                 "scripts/yao_cli_parser_evidence.py",
                 "scripts/yao_cli_parser_operations.py",
+                "scripts/yao_cli_parser_operator.py",
                 "scripts/yao_cli_report_commands.py",
                 "scripts/yao_cli_runtime.py",
                 "scripts/yao_cli_telemetry.py"
@@ -10822,7 +10820,7 @@
               ],
               "counts": {
                 "references": 35,
-                "scripts": 153,
+                "scripts": 155,
                 "assets": 6,
                 "reports": 43
               }
@@ -10929,7 +10927,7 @@
                 },
                 "file_write": {
                   "required": true,
-                  "script_count": 73,
+                  "script_count": 74,
                   "scripts": [
                     "scripts/adjudicate_output_review.py",
                     "scripts/apply_adaptation.py",
@@ -11003,13 +11001,14 @@
                     "scripts/telemetry_native_host.py",
                     "scripts/trust_check.py",
                     "scripts/upgrade_check.py",
-                    "scripts/verify_package.py"
+                    "scripts/verify_package.py",
+                    "scripts/yao_cli_operator_commands.py"
                   ],
                   "review_reason": "Scripts write local files or generated artifacts."
                 },
                 "subprocess": {
                   "required": true,
-                  "script_count": 12,
+                  "script_count": 13,
                   "scripts": [
                     "scripts/apply_adaptation.py",
                     "scripts/benchmark_release_lock.py",
@@ -11022,6 +11021,7 @@
                     "scripts/sync_local_install.py",
                     "scripts/trust_check.py",
                     "scripts/yao.py",
+                    "scripts/yao_cli_operator_commands.py",
                     "scripts/yao_cli_runtime.py"
                   ],
                   "review_reason": "Scripts spawn local commands and need operator review."
@@ -11052,8 +11052,8 @@
               "trust_summary": {
                 "secret_findings": 0,
                 "network_script_count": 3,
-                "file_write_script_count": 73,
-                "subprocess_script_count": 12,
+                "file_write_script_count": 74,
+                "subprocess_script_count": 13,
                 "interactive_script_count": 0,
                 "help_smoke_failed_count": 0
               }
@@ -11074,8 +11074,8 @@
               ],
               "capability_counts": {
                 "network": 3,
-                "file_write": 73,
-                "subprocess": 12,
+                "file_write": 74,
+                "subprocess": 13,
                 "interactive": 0
               },
               "evidence": "reports/security_trust_report.json",
@@ -11095,7 +11095,7 @@
                 "strategy": "Keep optional directories as relative resources next to SKILL.md.",
                 "counts": {
                   "references": 35,
-                  "scripts": 153,
+                  "scripts": 155,
                   "assets": 6,
                   "reports": 43
                 },
@@ -11106,7 +11106,7 @@
               },
               "scripts": {
                 "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-                "script_count": 153,
+                "script_count": 155,
                 "help_smoke_failed_count": 0
               },
               "permissions": {
@@ -11180,7 +11180,7 @@
               },
               "file_write": {
                 "required": true,
-                "script_count": 73,
+                "script_count": 74,
                 "scripts": [
                   "scripts/adjudicate_output_review.py",
                   "scripts/apply_adaptation.py",
@@ -11254,13 +11254,14 @@
                   "scripts/telemetry_native_host.py",
                   "scripts/trust_check.py",
                   "scripts/upgrade_check.py",
-                  "scripts/verify_package.py"
+                  "scripts/verify_package.py",
+                  "scripts/yao_cli_operator_commands.py"
                 ],
                 "review_reason": "Scripts write local files or generated artifacts."
               },
               "subprocess": {
                 "required": true,
-                "script_count": 12,
+                "script_count": 13,
                 "scripts": [
                   "scripts/apply_adaptation.py",
                   "scripts/benchmark_release_lock.py",
@@ -11273,6 +11274,7 @@
                   "scripts/sync_local_install.py",
                   "scripts/trust_check.py",
                   "scripts/yao.py",
+                  "scripts/yao_cli_operator_commands.py",
                   "scripts/yao_cli_runtime.py"
                 ],
                 "review_reason": "Scripts spawn local commands and need operator review."
@@ -11303,8 +11305,8 @@
             "trust_summary": {
               "secret_findings": 0,
               "network_script_count": 3,
-              "file_write_script_count": 73,
-              "subprocess_script_count": 12,
+              "file_write_script_count": 74,
+              "subprocess_script_count": 13,
               "interactive_script_count": 0,
               "help_smoke_failed_count": 0
             }
@@ -11323,8 +11325,8 @@
             ],
             "capability_counts": {
               "network": 3,
-              "file_write": 73,
-              "subprocess": 12,
+              "file_write": 74,
+              "subprocess": 13,
               "interactive": 0
             },
             "evidence": "reports/security_trust_report.json",
@@ -11344,7 +11346,7 @@
               "strategy": "Keep optional directories as relative resources next to SKILL.md.",
               "counts": {
                 "references": 35,
-                "scripts": 153,
+                "scripts": 155,
                 "assets": 6,
                 "reports": 43
               },
@@ -11355,7 +11357,7 @@
             },
             "scripts": {
               "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-              "script_count": 153,
+              "script_count": 155,
               "help_smoke_failed_count": 0
             },
             "permissions": {
@@ -11694,10 +11696,12 @@
                 "scripts/yao_cli_config.py",
                 "scripts/yao_cli_create_commands.py",
                 "scripts/yao_cli_distribution_commands.py",
+                "scripts/yao_cli_operator_commands.py",
                 "scripts/yao_cli_output_commands.py",
                 "scripts/yao_cli_parser.py",
                 "scripts/yao_cli_parser_evidence.py",
                 "scripts/yao_cli_parser_operations.py",
+                "scripts/yao_cli_parser_operator.py",
                 "scripts/yao_cli_report_commands.py",
                 "scripts/yao_cli_runtime.py",
                 "scripts/yao_cli_telemetry.py"
@@ -11757,7 +11761,7 @@
               ],
               "counts": {
                 "references": 35,
-                "scripts": 153,
+                "scripts": 155,
                 "assets": 6,
                 "reports": 43
               }
@@ -11864,7 +11868,7 @@
                 },
                 "file_write": {
                   "required": true,
-                  "script_count": 73,
+                  "script_count": 74,
                   "scripts": [
                     "scripts/adjudicate_output_review.py",
                     "scripts/apply_adaptation.py",
@@ -11938,13 +11942,14 @@
                     "scripts/telemetry_native_host.py",
                     "scripts/trust_check.py",
                     "scripts/upgrade_check.py",
-                    "scripts/verify_package.py"
+                    "scripts/verify_package.py",
+                    "scripts/yao_cli_operator_commands.py"
                   ],
                   "review_reason": "Scripts write local files or generated artifacts."
                 },
                 "subprocess": {
                   "required": true,
-                  "script_count": 12,
+                  "script_count": 13,
                   "scripts": [
                     "scripts/apply_adaptation.py",
                     "scripts/benchmark_release_lock.py",
@@ -11957,6 +11962,7 @@
                     "scripts/sync_local_install.py",
                     "scripts/trust_check.py",
                     "scripts/yao.py",
+                    "scripts/yao_cli_operator_commands.py",
                     "scripts/yao_cli_runtime.py"
                   ],
                   "review_reason": "Scripts spawn local commands and need operator review."
@@ -11987,8 +11993,8 @@
               "trust_summary": {
                 "secret_findings": 0,
                 "network_script_count": 3,
-                "file_write_script_count": 73,
-                "subprocess_script_count": 12,
+                "file_write_script_count": 74,
+                "subprocess_script_count": 13,
                 "interactive_script_count": 0,
                 "help_smoke_failed_count": 0
               }
@@ -12009,8 +12015,8 @@
               ],
               "capability_counts": {
                 "network": 3,
-                "file_write": 73,
-                "subprocess": 12,
+                "file_write": 74,
+                "subprocess": 13,
                 "interactive": 0
               },
               "evidence": "reports/security_trust_report.json",
@@ -12030,7 +12036,7 @@
                 "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
                 "counts": {
                   "references": 35,
-                  "scripts": 153,
+                  "scripts": 155,
                   "assets": 6,
                   "reports": 43
                 },
@@ -12041,7 +12047,7 @@
               },
               "scripts": {
                 "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
-                "script_count": 153,
+                "script_count": 155,
                 "help_smoke_failed_count": 0
               },
               "permissions": {
@@ -12119,7 +12125,7 @@
               },
               "file_write": {
                 "required": true,
-                "script_count": 73,
+                "script_count": 74,
                 "scripts": [
                   "scripts/adjudicate_output_review.py",
                   "scripts/apply_adaptation.py",
@@ -12193,13 +12199,14 @@
                   "scripts/telemetry_native_host.py",
                   "scripts/trust_check.py",
                   "scripts/upgrade_check.py",
-                  "scripts/verify_package.py"
+                  "scripts/verify_package.py",
+                  "scripts/yao_cli_operator_commands.py"
                 ],
                 "review_reason": "Scripts write local files or generated artifacts."
               },
               "subprocess": {
                 "required": true,
-                "script_count": 12,
+                "script_count": 13,
                 "scripts": [
                   "scripts/apply_adaptation.py",
                   "scripts/benchmark_release_lock.py",
@@ -12212,6 +12219,7 @@
                   "scripts/sync_local_install.py",
                   "scripts/trust_check.py",
                   "scripts/yao.py",
+                  "scripts/yao_cli_operator_commands.py",
                   "scripts/yao_cli_runtime.py"
                 ],
                 "review_reason": "Scripts spawn local commands and need operator review."
@@ -12242,8 +12250,8 @@
             "trust_summary": {
               "secret_findings": 0,
               "network_script_count": 3,
-              "file_write_script_count": 73,
-              "subprocess_script_count": 12,
+              "file_write_script_count": 74,
+              "subprocess_script_count": 13,
               "interactive_script_count": 0,
               "help_smoke_failed_count": 0
             }
@@ -12262,8 +12270,8 @@
             ],
             "capability_counts": {
               "network": 3,
-              "file_write": 73,
-              "subprocess": 12,
+              "file_write": 74,
+              "subprocess": 13,
               "interactive": 0
             },
             "evidence": "reports/security_trust_report.json",
@@ -12283,7 +12291,7 @@
               "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
               "counts": {
                 "references": 35,
-                "scripts": 153,
+                "scripts": 155,
                 "assets": 6,
                 "reports": 43
               },
@@ -12294,7 +12302,7 @@
             },
             "scripts": {
               "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
-              "script_count": 153,
+              "script_count": 155,
               "help_smoke_failed_count": 0
             },
             "permissions": {
@@ -13002,9 +13010,9 @@
       "ok": true,
       "skill_dir": ".",
       "summary": {
-        "scanned_files": 245,
-        "script_count": 153,
-        "internal_module_count": 67,
+        "scanned_files": 247,
+        "script_count": 155,
+        "internal_module_count": 69,
         "secret_findings": 0,
         "dependency_files": [
           "requirements-ci.txt"
@@ -13012,7 +13020,7 @@
         "network_script_count": 3,
         "network_policy_covered_count": 3,
         "network_policy_missing_count": 0,
-        "file_write_script_count": 73,
+        "file_write_script_count": 74,
         "permission_required_count": 3,
         "permission_approved_count": 3,
         "permission_missing_count": 0,
@@ -13022,8 +13030,8 @@
         "help_smoke_failed_count": 0,
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
-        "package_hash_file_count": 245,
-        "package_sha256": "5a99ef3133b0148cd5bbc1cd85fad4830bf34ca2bbac709f1e1fea2f810b1257"
+        "package_hash_file_count": 247,
+        "package_sha256": "e5b4ffc5c3f93f7f8367fd4a021a0a09567d4df4acd0c31d2964d60593f47cbd"
       },
       "failures": [],
       "warnings": [],
@@ -15093,6 +15101,20 @@
           "network_hosts": []
         },
         {
+          "path": "scripts/yao_cli_operator_commands.py",
+          "interface": "internal-module",
+          "interface_declared": true,
+          "interface_reason": "Imported by yao.py for operator-facing install, localized docs, and PR review diagnostics.",
+          "has_argparse": true,
+          "has_main_guard": false,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_file_write": true,
+          "uses_subprocess": true,
+          "network_urls": [],
+          "network_hosts": []
+        },
+        {
           "path": "scripts/yao_cli_output_commands.py",
           "interface": "internal-module",
           "interface_declared": true,
@@ -15139,6 +15161,20 @@
           "interface": "internal-module",
           "interface_declared": true,
           "interface_reason": "Imported by yao_cli_parser.py to keep SkillOps, telemetry, and review-loop command declarations out of the main parser module.",
+          "has_argparse": true,
+          "has_main_guard": false,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_file_write": false,
+          "uses_subprocess": false,
+          "network_urls": [],
+          "network_hosts": []
+        },
+        {
+          "path": "scripts/yao_cli_parser_operator.py",
+          "interface": "internal-module",
+          "interface_declared": true,
+          "interface_reason": "Imported by yao_cli_parser.py to keep operator UX command declarations out of the main parser module.",
           "has_argparse": true,
           "has_main_guard": false,
           "uses_input": false,
@@ -15225,7 +15261,7 @@
         "checked_count": 86,
         "passed_count": 86,
         "failed_count": 0,
-        "skipped_count": 67,
+        "skipped_count": 69,
         "failed_scripts": [],
         "results": [
           {
@@ -16331,6 +16367,10 @@
             "reason": "internal module"
           },
           {
+            "path": "scripts/yao_cli_operator_commands.py",
+            "reason": "internal module"
+          },
+          {
             "path": "scripts/yao_cli_output_commands.py",
             "reason": "internal module"
           },
@@ -16344,6 +16384,10 @@
           },
           {
             "path": "scripts/yao_cli_parser_operations.py",
+            "reason": "internal module"
+          },
+          {
+            "path": "scripts/yao_cli_parser_operator.py",
             "reason": "internal module"
           },
           {
@@ -16484,7 +16528,8 @@
               "scripts/telemetry_native_host.py",
               "scripts/trust_check.py",
               "scripts/upgrade_check.py",
-              "scripts/verify_package.py"
+              "scripts/verify_package.py",
+              "scripts/yao_cli_operator_commands.py"
             ],
             "reviewer": "Yao Team",
             "scope": "Local generated reports, registry metadata, temporary test outputs, and package artifacts under the skill workspace.",
@@ -16518,6 +16563,7 @@
               "scripts/sync_local_install.py",
               "scripts/trust_check.py",
               "scripts/yao.py",
+              "scripts/yao_cli_operator_commands.py",
               "scripts/yao_cli_runtime.py"
             ],
             "reviewer": "Yao Team",
@@ -16551,11 +16597,11 @@
     "python_compatibility": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-17",
+      "generated_at": "2026-06-13",
       "root": ".",
       "summary": {
         "target_python": "3.11",
-        "file_count": 232,
+        "file_count": 234,
         "issue_count": 0,
         "syntax_error_count": 0,
         "fstring_311_violation_count": 0,
@@ -16580,12 +16626,6 @@
         },
         {
           "path": "examples/governed-incident-command/generated-skill/scripts/build_incident_packet.py",
-          "ok": true,
-          "issue_count": 0,
-          "issues": []
-        },
-        {
-          "path": "geo-ranking-article-generator/scripts/build_html_index.py",
           "ok": true,
           "issue_count": 0,
           "issues": []
@@ -17467,6 +17507,12 @@
           "issues": []
         },
         {
+          "path": "scripts/yao_cli_operator_commands.py",
+          "ok": true,
+          "issue_count": 0,
+          "issues": []
+        },
+        {
           "path": "scripts/yao_cli_output_commands.py",
           "ok": true,
           "issue_count": 0,
@@ -17486,6 +17532,12 @@
         },
         {
           "path": "scripts/yao_cli_parser_operations.py",
+          "ok": true,
+          "issue_count": 0,
+          "issues": []
+        },
+        {
+          "path": "scripts/yao_cli_parser_operator.py",
           "ok": true,
           "issue_count": 0,
           "issues": []
@@ -17636,6 +17688,12 @@
         },
         {
           "path": "tests/verify_local_install_sync.py",
+          "ok": true,
+          "issue_count": 0,
+          "issues": []
+        },
+        {
+          "path": "tests/verify_operator_ux.py",
           "ok": true,
           "issue_count": 0,
           "issues": []
@@ -17974,17 +18032,17 @@
     "architecture_maintainability": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-17",
+      "generated_at": "2026-06-13",
       "skill_dir": ".",
       "summary": {
-        "python_file_count": 229,
-        "script_file_count": 153,
-        "test_file_count": 76,
-        "internal_module_count": 69,
+        "python_file_count": 232,
+        "script_file_count": 155,
+        "test_file_count": 77,
+        "internal_module_count": 71,
         "cli_script_count": 86,
-        "command_handler_count": 68,
+        "command_handler_count": 71,
         "entrypoint_command_handler_count": 18,
-        "command_module_count": 6,
+        "command_module_count": 7,
         "warn_line_threshold": 900,
         "watch_line_threshold": 720,
         "early_watch_line_threshold": 600,
@@ -18160,16 +18218,16 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 805,
-        "other_text_tokens": 1156781,
+        "other_text_tokens": 1167829,
         "estimated_initial_load_tokens": 998,
-        "estimated_total_text_tokens": 1157586,
-        "deferred_resource_tokens": 525864,
+        "estimated_total_text_tokens": 1168634,
+        "deferred_resource_tokens": 530464,
         "deferred_resource_warn_threshold": 120000,
         "deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 464561,
-            "file_count": 153
+            "estimated_tokens": 469161,
+            "file_count": 155
           },
           {
             "path": "references",
@@ -18190,8 +18248,8 @@
         "large_deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 464561,
-            "file_count": 153
+            "estimated_tokens": 469161,
+            "file_count": 155
           }
         ],
         "deferred_resource_governance": {
@@ -18213,14 +18271,14 @@
               ],
               "missing": [],
               "path": "scripts",
-              "estimated_tokens": 464561,
-              "file_count": 153,
+              "estimated_tokens": 469161,
+              "file_count": 155,
               "rationale": "Script resources are deterministic deferred tools, not initial-load prompt context."
             }
           ],
           "summary": "Large deferred resources are indexed and backed by evidence."
         },
-        "relevant_file_count": 712,
+        "relevant_file_count": 570,
         "unused_resource_dirs": [],
         "quality_signal_points": 140,
         "quality_density": 140.3
@@ -19025,20 +19083,20 @@
       "ok": true,
       "workspace_root": ".",
       "summary": {
-        "skill_count": 12,
+        "skill_count": 11,
         "actionable_skill_count": 1,
         "route_collision_count": 5,
         "actionable_route_collision_count": 0,
-        "owner_gap_count": 9,
+        "owner_gap_count": 8,
         "actionable_owner_gap_count": 0,
-        "stale_count": 10,
+        "stale_count": 9,
         "actionable_stale_count": 0,
         "shared_resource_count": 0,
         "no_route_opportunity_count": 0,
         "telemetry_report_count": 1,
         "drift_signal_count": 0,
         "actionable_drift_signal_count": 0,
-        "non_actionable_issue_count": 24
+        "non_actionable_issue_count": 22
       },
       "scope_policy": {
         "present": true,
@@ -19233,10 +19291,12 @@
               "scripts/yao_cli_config.py",
               "scripts/yao_cli_create_commands.py",
               "scripts/yao_cli_distribution_commands.py",
+              "scripts/yao_cli_operator_commands.py",
               "scripts/yao_cli_output_commands.py",
               "scripts/yao_cli_parser.py",
               "scripts/yao_cli_parser_evidence.py",
               "scripts/yao_cli_parser_operations.py",
+              "scripts/yao_cli_parser_operator.py",
               "scripts/yao_cli_report_commands.py",
               "scripts/yao_cli_runtime.py",
               "scripts/yao_cli_telemetry.py",
@@ -19653,75 +19713,6 @@
             }
           },
           {
-            "name": "geo-ranking-article-generator",
-            "path": "geo-ranking-article-generator",
-            "description": "Create GEO ranking-article packs from brand briefs. Use when asked to research a brand, find GEO or 生成式引擎优化 keywords and five competitors, generate timely titles, write five ~2000-character articles, and save them to a fixed knowledge-base folder with an HTML index. Do not use for generic SEO advice, one-off copy, or writing without competitor research.",
-            "owner": "",
-            "version": "",
-            "status": "",
-            "maturity": "",
-            "updated_at": "",
-            "review_cadence": "",
-            "targets": [],
-            "resources": [
-              "scripts/build_html_index.py",
-              "references/article-blueprint.md",
-              "references/feishu-benchmark-patterns.md",
-              "references/geo-research-playbook.md",
-              "templates/brand-brief-template.md"
-            ],
-            "token_set": [
-              "2000-character",
-              "advice",
-              "articles",
-              "asked",
-              "brand",
-              "briefs",
-              "competitor",
-              "competitors",
-              "copy",
-              "do",
-              "find",
-              "five",
-              "fixed",
-              "folder",
-              "generate",
-              "generic",
-              "geo",
-              "html",
-              "index",
-              "keywords",
-              "knowledge-base",
-              "not",
-              "one-off",
-              "or",
-              "packs",
-              "ranking-article",
-              "research",
-              "save",
-              "seo",
-              "them",
-              "timely",
-              "titles",
-              "without",
-              "write",
-              "writing",
-              "生成式引擎优化"
-            ],
-            "atlas_scope": "embedded-generated-skill",
-            "actionable": false,
-            "scope_reason": "This nested generated skill is retained as local evidence and should not gate the root Meta Skill release.",
-            "telemetry": {
-              "report_present": false,
-              "report": "geo-ranking-article-generator/reports/adoption_drift_report.json",
-              "risk_band": "missing",
-              "event_count": 0,
-              "adoption_sample_count": 0,
-              "adoption_rate": 0,
-              "candidate_count": 0
-            }
-          },
-          {
             "name": "invalid-governance-skill",
             "path": "tests/fixtures/governance_invalid_manifest",
             "description": "Test fixture for governance validation.",
@@ -19819,20 +19810,20 @@
           }
         ],
         "summary": {
-          "skill_count": 12,
+          "skill_count": 11,
           "actionable_skill_count": 1,
           "route_collision_count": 5,
           "actionable_route_collision_count": 0,
-          "owner_gap_count": 9,
+          "owner_gap_count": 8,
           "actionable_owner_gap_count": 0,
-          "stale_count": 10,
+          "stale_count": 9,
           "actionable_stale_count": 0,
           "shared_resource_count": 0,
           "no_route_opportunity_count": 0,
           "telemetry_report_count": 1,
           "drift_signal_count": 0,
           "actionable_drift_signal_count": 0,
-          "non_actionable_issue_count": 24
+          "non_actionable_issue_count": 22
         }
       },
       "route_collisions": [
@@ -19928,10 +19919,6 @@
             "path": "examples/team-frontend-review/generated-skill"
           },
           {
-            "name": "geo-ranking-article-generator",
-            "path": "geo-ranking-article-generator"
-          },
-          {
             "name": "invalid-governance-skill",
             "path": "tests/fixtures/governance_invalid_manifest"
           },
@@ -19990,13 +19977,6 @@
           "reason": "missing updated_at",
           "actionable": false,
           "scope": "example"
-        },
-        {
-          "name": "geo-ranking-article-generator",
-          "path": "geo-ranking-article-generator",
-          "reason": "missing updated_at",
-          "actionable": false,
-          "scope": "embedded-generated-skill"
         },
         {
           "name": "invalid-governance-skill",
@@ -20078,17 +20058,6 @@
           "scope": "example"
         },
         {
-          "name": "geo-ranking-article-generator",
-          "path": "geo-ranking-article-generator",
-          "missing": [
-            "owner",
-            "review_cadence",
-            "maturity"
-          ],
-          "actionable": false,
-          "scope": "embedded-generated-skill"
-        },
-        {
           "name": "invalid-governance-skill",
           "path": "tests/fixtures/governance_invalid_manifest",
           "missing": [
@@ -20140,7 +20109,7 @@
     "adoption_drift": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-17T08:58:53Z",
+      "generated_at": "2026-06-20T12:35:58Z",
       "skill_dir": ".",
       "privacy_contract": {
         "storage": "local-first",
@@ -20164,14 +20133,14 @@
       },
       "summary": {
         "event_count": 1,
-        "adoption_sample_count": 0,
-        "activation_count": 0,
-        "accepted_count": 0,
+        "adoption_sample_count": 1,
+        "activation_count": 1,
+        "accepted_count": 1,
         "edited_count": 0,
         "rejected_count": 0,
         "missed_count": 0,
         "failed_count": 0,
-        "adoption_rate": 0,
+        "adoption_rate": 100.0,
         "missed_trigger_count": 0,
         "wrong_trigger_count": 0,
         "bad_output_count": 0,
@@ -20180,7 +20149,7 @@
         "review_overdue_count": 0,
         "risk_band": "low",
         "event_types": {
-          "review_event": 1
+          "skill_activation": 1
         },
         "failure_types": {},
         "source_types": {
@@ -20192,31 +20161,31 @@
         {
           "skill": "yao-meta-skill",
           "events": 1,
-          "adoption_events": 0,
-          "accepted": 0,
+          "adoption_events": 1,
+          "accepted": 1,
           "edited": 0,
           "rejected": 0,
           "missed": 0,
-          "adoption_rate": 0
+          "adoption_rate": 100.0
         }
       ],
       "next_iteration_candidates": [],
       "recent_events": [
         {
           "command": "unknown",
-          "event": "review_event",
+          "event": "skill_activation",
           "skill": "yao-meta-skill",
           "source": "manual",
           "version": "1.1.0",
-          "activation_type": "manual",
-          "outcome": "reviewed",
+          "activation_type": "explicit",
+          "outcome": "accepted",
           "failure_type": "none",
-          "timestamp": "2026-06-13T12:00:00Z"
+          "timestamp": "2026-06-13T10:00:00Z"
         }
       ],
       "failures": [],
       "artifacts": {
-        "events_jsonl": "reports/telemetry_events.jsonl",
+        "events_jsonl": "tests/tmp_review_studio/telemetry_events.jsonl",
         "json": "reports/adoption_drift_report.json",
         "markdown": "reports/adoption_drift_report.md"
       }
@@ -20224,7 +20193,7 @@
     "daily_skillops": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-17T08:58:54Z",
+      "generated_at": "2026-06-20T12:35:26Z",
       "skill_dir": ".",
       "decision": "proposal-review",
       "source_supplied": false,
@@ -20237,7 +20206,7 @@
       "local_blueprint_ready": true,
       "public_world_class_ready": false,
       "world_class_pending_count": 4,
-      "release_lock_ready": false,
+      "release_lock_ready": true,
       "evidence_consistency_ok": true,
       "writes_source_files": false,
       "auto_patch_enabled": false,
@@ -20254,7 +20223,7 @@
         "local_blueprint_ready": true,
         "public_world_class_ready": false,
         "world_class_pending_count": 4,
-        "release_lock_ready": false,
+        "release_lock_ready": true,
         "evidence_consistency_ok": true,
         "writes_source_files": false,
         "auto_patch_enabled": false,
@@ -20703,7 +20672,7 @@
         "local_blueprint_ready": true,
         "public_world_class_ready": false,
         "world_class_pending_count": 4,
-        "release_lock_ready": false,
+        "release_lock_ready": true,
         "evidence_consistency_ok": true
       },
       "actions": [
@@ -20730,20 +20699,20 @@
         "benchmark_reproducibility": "reports/benchmark_reproducibility.json"
       },
       "artifacts": {
-        "json": "reports/skillops/daily/2026-06-17.json",
-        "markdown": "reports/skillops/daily/2026-06-17.md"
+        "json": "reports/skillops/daily/2026-06-20.json",
+        "markdown": "reports/skillops/daily/2026-06-20.md"
       },
-      "source_path": "reports/skillops/daily/2026-06-17.json"
+      "source_path": "reports/skillops/daily/2026-06-20.json"
     },
     "weekly_curator": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-17T08:58:54Z",
+      "generated_at": "2026-06-20T12:35:26Z",
       "skill_dir": ".",
       "decision": "curator-review",
       "week_id": "2026-W25",
-      "daily_report_count": 2,
-      "opportunity_count": 10,
+      "daily_report_count": 3,
+      "opportunity_count": 15,
       "unique_opportunity_count": 5,
       "ready_for_approval_review_count": 1,
       "proposal_review_count": 4,
@@ -20752,7 +20721,7 @@
       "top_score": 88,
       "skill_count": 12,
       "actionable_portfolio_issue_count": 0,
-      "release_lock_ready": false,
+      "release_lock_ready": true,
       "evidence_consistency_ok": true,
       "public_world_class_ready": false,
       "world_class_pending_count": 4,
@@ -20762,8 +20731,8 @@
       "summary": {
         "decision": "curator-review",
         "week_id": "2026-W25",
-        "daily_report_count": 2,
-        "opportunity_count": 10,
+        "daily_report_count": 3,
+        "opportunity_count": 15,
         "unique_opportunity_count": 5,
         "ready_for_approval_review_count": 1,
         "proposal_review_count": 4,
@@ -20772,7 +20741,7 @@
         "top_score": 88,
         "skill_count": 12,
         "actionable_portfolio_issue_count": 0,
-        "release_lock_ready": false,
+        "release_lock_ready": true,
         "evidence_consistency_ok": true,
         "public_world_class_ready": false,
         "world_class_pending_count": 4,
@@ -20827,7 +20796,8 @@
       },
       "daily_reports": [
         "reports/skillops/daily/2026-06-16.json",
-        "reports/skillops/daily/2026-06-17.json"
+        "reports/skillops/daily/2026-06-17.json",
+        "reports/skillops/daily/2026-06-20.json"
       ],
       "opportunity_summary": {
         "action_type_counts": {
@@ -21025,7 +20995,7 @@
         "no_route_opportunity_count": 0
       },
       "release_state": {
-        "release_lock_ready": false,
+        "release_lock_ready": true,
         "evidence_consistency_ok": true,
         "public_world_class_ready": false,
         "world_class_pending_count": 4
@@ -21060,7 +21030,7 @@
       "schema_version": "1.0",
       "ok": true,
       "skill_dir": ".",
-      "generated_at": "2026-06-17",
+      "generated_at": "2026-06-13",
       "summary": {
         "waiver_count": 0,
         "active_count": 0,
@@ -21150,7 +21120,7 @@
             "Reviewer links output_review_adjudication or output_execution evidence."
           ],
           "suggested_evidence": "reports/output_review_adjudication.md",
-          "suggested_command": "python3 scripts/yao.py review-waivers . --add-waiver --gate-key output-lab --reviewer \"<reviewer>\" --reason \"Output Lab has pending human/provider evidence; accepted only for this bounded review scope.\" --expires-at 2027-06-17 --evidence reports/output_review_adjudication.md",
+          "suggested_command": "python3 scripts/yao.py review-waivers . --add-waiver --gate-key output-lab --reviewer \"<reviewer>\" --reason \"Output Lab has pending human/provider evidence; accepted only for this bounded review scope.\" --expires-at 2027-06-13 --evidence reports/output_review_adjudication.md",
           "world_class_boundary": "Does not count as provider, human, or public world-class completion evidence."
         },
         {
@@ -21180,7 +21150,7 @@
       "schema_version": "1.0",
       "ok": true,
       "skill_dir": ".",
-      "source": "reports/review_annotations_input.json",
+      "source": "tests/tmp_review_studio/empty_review_annotations_input.json",
       "summary": {
         "annotation_count": 0,
         "open_count": 0,
@@ -21203,7 +21173,7 @@
     "adaptation_proposals": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-17T08:58:54Z",
+      "generated_at": "2026-06-20T12:35:26Z",
       "skill_dir": ".",
       "source_patterns": "reports/user_patterns.json",
       "pattern_count": 5,
@@ -21601,7 +21571,7 @@
     "world_class_evidence_ledger": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-17",
+      "generated_at": "2026-06-20",
       "skill_dir": ".",
       "decision": "evidence-pending",
       "ready_to_claim_world_class": false,
@@ -21616,8 +21586,8 @@
       "missing_submission_count": 4,
       "invalid_submission_count": 0,
       "source_check_count": 19,
-      "source_pass_count": 11,
-      "source_blocked_count": 8,
+      "source_pass_count": 12,
+      "source_blocked_count": 7,
       "submitted_but_pending_count": 0,
       "source_accepted_without_valid_submission_count": 1,
       "overclaim_guard_active": true,
@@ -21633,8 +21603,8 @@
         "missing_submission_count": 4,
         "invalid_submission_count": 0,
         "source_check_count": 19,
-        "source_pass_count": 11,
-        "source_blocked_count": 8,
+        "source_pass_count": 12,
+        "source_blocked_count": 7,
         "submitted_but_pending_count": 0,
         "source_accepted_without_valid_submission_count": 1,
         "overclaim_guard_active": true,
@@ -22086,7 +22056,7 @@
           "status": "pending",
           "source_status": "external_required",
           "source_accepted": false,
-          "current": "external source events 0; adoption samples 0",
+          "current": "external source events 0; adoption samples 1",
           "objective": "Import production metadata-only events from a real external client into the local drift loop.",
           "runbook": [
             "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
@@ -22123,7 +22093,7 @@
           ],
           "observed_state": {
             "external_source_events": 0,
-            "adoption_sample_count": 0,
+            "adoption_sample_count": 1,
             "raw_content_allowed": false,
             "risk_band": "low",
             "accepted": false
@@ -22144,8 +22114,8 @@
               "label": "Adoption sample",
               "field": "adoption_sample_count",
               "expected": ">0",
-              "actual": 0,
-              "status": "blocked",
+              "actual": 1,
+              "status": "pass",
               "source_accepted": false,
               "next_action": "Telemetry must include adoption outcome evidence."
             },
@@ -22161,8 +22131,8 @@
             }
           ],
           "source_check_count": 3,
-          "source_pass_count": 1,
-          "source_blocked_count": 2,
+          "source_pass_count": 2,
+          "source_blocked_count": 1,
           "submission_state": {
             "status": "missing",
             "path": "evidence/world_class/submissions/native-client-telemetry.json",
@@ -22203,7 +22173,7 @@
     "world_class_evidence_intake": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-17",
+      "generated_at": "2026-06-20",
       "skill_dir": ".",
       "summary": {
         "schema_present": true,
@@ -22530,7 +22500,7 @@
           "source_accepted": false,
           "observed_state": {
             "external_source_events": 0,
-            "adoption_sample_count": 0,
+            "adoption_sample_count": 1,
             "raw_content_allowed": false,
             "risk_band": "low",
             "accepted": false
@@ -22601,7 +22571,7 @@
     "world_class_evidence_preflight": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-17",
+      "generated_at": "2026-06-20",
       "skill_dir": ".",
       "summary": {
         "evidence_item_count": 4,
@@ -22614,14 +22584,14 @@
         "collection_ready_count": 1,
         "collection_blocked_count": 3,
         "source_check_count": 19,
-        "source_pass_count": 11,
-        "source_blocked_count": 8,
-        "repair_checklist_count": 12,
-        "repair_blocked_count": 12,
+        "source_pass_count": 12,
+        "source_blocked_count": 7,
+        "repair_checklist_count": 11,
+        "repair_blocked_count": 11,
         "repair_ready_count": 0,
         "repair_phase_counts": {
           "unblock-access": 4,
-          "collect-source": 8
+          "collect-source": 7
         },
         "next_repair_action_id": "human-adjudication-precheck-human-reviewer",
         "next_repair_phase": "unblock-access",
@@ -22630,7 +22600,7 @@
         "repair_counts_as_completion": false,
         "phase_queue_count": 2,
         "phase_queue_blocked_count": 2,
-        "phase_queue_row_count": 12,
+        "phase_queue_row_count": 11,
         "phase_queue_next_phase": "unblock-access",
         "phase_queue_next_action_id": "human-adjudication-precheck-human-reviewer",
         "phase_queue_next_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions",
@@ -23402,8 +23372,8 @@
               "artifact_prefill_counts_as_evidence": false,
               "submission_ref_total_count": 2,
               "submission_ref_ready_count": 2,
-              "supporting_evidence_total_count": 11,
-              "supporting_evidence_ready_count": 11,
+              "supporting_evidence_total_count": 8,
+              "supporting_evidence_ready_count": 7,
               "roles": [
                 {
                   "role": "submission-ref",
@@ -23600,8 +23570,8 @@
               "label": "Adoption sample",
               "field": "adoption_sample_count",
               "expected": ">0",
-              "actual": 0,
-              "status": "blocked",
+              "actual": 1,
+              "status": "pass",
               "source_accepted": false,
               "next_action": "Telemetry must include adoption outcome evidence."
             },
@@ -23686,21 +23656,6 @@
               "counts_as_completion": false
             },
             {
-              "action_id": "native-client-telemetry-source-check-adoption_sample_count",
-              "evidence_key": "native-client-telemetry",
-              "repair_type": "source-check",
-              "target": "adoption_sample_count",
-              "phase": "collect-source",
-              "priority": 40,
-              "owner": "Browser/Chrome/IDE/provider client integrator",
-              "status": "blocked",
-              "blocking_reason": "Current value 0 does not satisfy '>0'.",
-              "next_action": "Telemetry must include adoption outcome evidence.",
-              "verification_command": "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions",
-              "source": "source_checklist",
-              "counts_as_completion": false
-            },
-            {
               "action_id": "native-client-telemetry-source-check-external_source_events",
               "evidence_key": "native-client-telemetry",
               "repair_type": "source-check",
@@ -23757,34 +23712,19 @@
               "label": "Collect source",
               "priority": 40,
               "status": "blocked",
-              "blocked_count": 2,
-              "row_count": 2,
+              "blocked_count": 1,
+              "row_count": 1,
               "owners": [
                 "Browser/Chrome/IDE/provider client integrator"
               ],
               "evidence_keys": [
                 "native-client-telemetry"
               ],
-              "next_action_id": "native-client-telemetry-source-check-adoption_sample_count",
-              "next_action": "Telemetry must include adoption outcome evidence.",
+              "next_action_id": "native-client-telemetry-source-check-external_source_events",
+              "next_action": "Import at least one metadata-only event from a real client.",
               "verification_command": "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions",
               "counts_as_completion": false,
               "rows": [
-                {
-                  "action_id": "native-client-telemetry-source-check-adoption_sample_count",
-                  "evidence_key": "native-client-telemetry",
-                  "repair_type": "source-check",
-                  "target": "adoption_sample_count",
-                  "phase": "collect-source",
-                  "priority": 40,
-                  "owner": "Browser/Chrome/IDE/provider client integrator",
-                  "status": "blocked",
-                  "blocking_reason": "Current value 0 does not satisfy '>0'.",
-                  "next_action": "Telemetry must include adoption outcome evidence.",
-                  "verification_command": "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions",
-                  "source": "source_checklist",
-                  "counts_as_completion": false
-                },
                 {
                   "action_id": "native-client-telemetry-source-check-external_source_events",
                   "evidence_key": "native-client-telemetry",
@@ -24154,8 +24094,8 @@
           "label": "Adoption sample",
           "field": "adoption_sample_count",
           "expected": ">0",
-          "actual": 0,
-          "status": "blocked",
+          "actual": 1,
+          "status": "pass",
           "source_accepted": false,
           "next_action": "Telemetry must include adoption outcome evidence."
         },
@@ -24307,21 +24247,6 @@
           "counts_as_completion": false
         },
         {
-          "action_id": "native-client-telemetry-source-check-adoption_sample_count",
-          "evidence_key": "native-client-telemetry",
-          "repair_type": "source-check",
-          "target": "adoption_sample_count",
-          "phase": "collect-source",
-          "priority": 40,
-          "owner": "Browser/Chrome/IDE/provider client integrator",
-          "status": "blocked",
-          "blocking_reason": "Current value 0 does not satisfy '>0'.",
-          "next_action": "Telemetry must include adoption outcome evidence.",
-          "verification_command": "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions",
-          "source": "source_checklist",
-          "counts_as_completion": false
-        },
-        {
           "action_id": "native-client-telemetry-source-check-external_source_events",
           "evidence_key": "native-client-telemetry",
           "repair_type": "source-check",
@@ -24444,8 +24369,8 @@
           "label": "Collect source",
           "priority": 40,
           "status": "blocked",
-          "blocked_count": 8,
-          "row_count": 8,
+          "blocked_count": 7,
+          "row_count": 7,
           "owners": [
             "Browser/Chrome/IDE/provider client integrator",
             "human reviewer",
@@ -24537,21 +24462,6 @@
               "counts_as_completion": false
             },
             {
-              "action_id": "native-client-telemetry-source-check-adoption_sample_count",
-              "evidence_key": "native-client-telemetry",
-              "repair_type": "source-check",
-              "target": "adoption_sample_count",
-              "phase": "collect-source",
-              "priority": 40,
-              "owner": "Browser/Chrome/IDE/provider client integrator",
-              "status": "blocked",
-              "blocking_reason": "Current value 0 does not satisfy '>0'.",
-              "next_action": "Telemetry must include adoption outcome evidence.",
-              "verification_command": "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions",
-              "source": "source_checklist",
-              "counts_as_completion": false
-            },
-            {
               "action_id": "native-client-telemetry-source-check-external_source_events",
               "evidence_key": "native-client-telemetry",
               "repair_type": "source-check",
@@ -24606,8 +24516,8 @@
           "artifact_prefill_counts_as_evidence": false,
           "submission_ref_total_count": 7,
           "submission_ref_ready_count": 7,
-          "supporting_evidence_total_count": 31,
-          "supporting_evidence_ready_count": 31,
+          "supporting_evidence_total_count": 28,
+          "supporting_evidence_ready_count": 27,
           "roles": [
             {
               "role": "submission-ref",
@@ -24639,7 +24549,7 @@
     "world_class_submission_review": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-17",
+      "generated_at": "2026-06-20",
       "skill_dir": ".",
       "decision": "awaiting-submissions",
       "ready_to_claim_world_class": false,
@@ -24652,8 +24562,8 @@
       "unmatched_submission_count": 0,
       "invalid_submission_count": 0,
       "source_check_count": 19,
-      "source_pass_count": 11,
-      "source_blocked_count": 8,
+      "source_pass_count": 12,
+      "source_blocked_count": 7,
       "review_counts_submission_as_completion": false,
       "summary": {
         "review_item_count": 4,
@@ -24665,8 +24575,8 @@
         "unmatched_submission_count": 0,
         "invalid_submission_count": 0,
         "source_check_count": 19,
-        "source_pass_count": 11,
-        "source_blocked_count": 8,
+        "source_pass_count": 12,
+        "source_blocked_count": 7,
         "ready_to_claim_world_class": false,
         "review_counts_submission_as_completion": false,
         "decision": "awaiting-submissions"
@@ -25016,7 +24926,7 @@
           "intake_errors": [],
           "observed_state": {
             "external_source_events": 0,
-            "adoption_sample_count": 0,
+            "adoption_sample_count": 1,
             "raw_content_allowed": false,
             "risk_band": "low",
             "accepted": false
@@ -25037,8 +24947,8 @@
               "label": "Adoption sample",
               "field": "adoption_sample_count",
               "expected": ">0",
-              "actual": 0,
-              "status": "blocked",
+              "actual": 1,
+              "status": "pass",
               "source_accepted": false,
               "next_action": "Telemetry must include adoption outcome evidence."
             },
@@ -25054,8 +24964,8 @@
             }
           ],
           "source_check_count": 3,
-          "source_pass_count": 1,
-          "source_blocked_count": 2,
+          "source_pass_count": 2,
+          "source_blocked_count": 1,
           "success_checks": [
             "reports/adoption_drift_report.json summary.source_types.external > 0",
             "reports/adoption_drift_report.json summary.adoption_sample_count > 0",
@@ -25081,7 +24991,7 @@
     "world_class_operator_runbook": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-17",
+      "generated_at": "2026-06-20",
       "skill_dir": ".",
       "summary": {
         "evidence_item_count": 4,
@@ -25092,13 +25002,13 @@
         "valid_packet_source_incomplete_count": 0,
         "invalid_submission_count": 0,
         "source_check_count": 19,
-        "source_pass_count": 11,
-        "source_blocked_count": 8,
-        "repair_checklist_count": 12,
-        "repair_blocked_count": 12,
+        "source_pass_count": 12,
+        "source_blocked_count": 7,
+        "repair_checklist_count": 11,
+        "repair_blocked_count": 11,
         "phase_queue_count": 2,
         "phase_queue_blocked_count": 2,
-        "phase_queue_row_count": 12,
+        "phase_queue_row_count": 11,
         "phase_queue_next_phase": "unblock-access",
         "phase_queue_next_action_id": "human-adjudication-precheck-human-reviewer",
         "phase_queue_next_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions",
@@ -25980,7 +25890,7 @@
           "review_state": "awaiting-submission",
           "source_accepted": false,
           "objective": "Import production metadata-only events from a real external client into the local drift loop.",
-          "current": "external source events 0; adoption samples 0",
+          "current": "external source events 0; adoption samples 1",
           "execution_runbook": [
             "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
             "Install the generated native messaging manifest for the real client and send at least one accepted skill_activation or skill_output event.",
@@ -26028,7 +25938,7 @@
           ],
           "observed_state": {
             "external_source_events": 0,
-            "adoption_sample_count": 0,
+            "adoption_sample_count": 1,
             "raw_content_allowed": false,
             "risk_band": "low",
             "accepted": false
@@ -26049,8 +25959,8 @@
               "label": "Adoption sample",
               "field": "adoption_sample_count",
               "expected": ">0",
-              "actual": 0,
-              "status": "blocked",
+              "actual": 1,
+              "status": "pass",
               "source_accepted": false,
               "next_action": "Telemetry must include adoption outcome evidence."
             },
@@ -26065,10 +25975,9 @@
               "next_action": "Telemetry must stay metadata-only."
             }
           ],
-          "blocked_source_check_count": 2,
+          "blocked_source_check_count": 1,
           "next_source_actions": [
-            "Import at least one metadata-only event from a real client.",
-            "Telemetry must include adoption outcome evidence."
+            "Import at least one metadata-only event from a real client."
           ],
           "repair_checklist": [
             {
@@ -26087,21 +25996,6 @@
               "counts_as_completion": false
             },
             {
-              "action_id": "native-client-telemetry-source-check-adoption_sample_count",
-              "evidence_key": "native-client-telemetry",
-              "repair_type": "source-check",
-              "target": "adoption_sample_count",
-              "phase": "collect-source",
-              "priority": 40,
-              "owner": "Browser/Chrome/IDE/provider client integrator",
-              "status": "blocked",
-              "blocking_reason": "Current value 0 does not satisfy '>0'.",
-              "next_action": "Telemetry must include adoption outcome evidence.",
-              "verification_command": "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions",
-              "source": "source_checklist",
-              "counts_as_completion": false
-            },
-            {
               "action_id": "native-client-telemetry-source-check-external_source_events",
               "evidence_key": "native-client-telemetry",
               "repair_type": "source-check",
@@ -26117,7 +26011,7 @@
               "counts_as_completion": false
             }
           ],
-          "repair_blocked_count": 3,
+          "repair_blocked_count": 2,
           "repair_counts_as_completion": false,
           "phase_queue": [
             {
@@ -26160,34 +26054,19 @@
               "label": "Collect source",
               "priority": 40,
               "status": "blocked",
-              "blocked_count": 2,
-              "row_count": 2,
+              "blocked_count": 1,
+              "row_count": 1,
               "owners": [
                 "Browser/Chrome/IDE/provider client integrator"
               ],
               "evidence_keys": [
                 "native-client-telemetry"
               ],
-              "next_action_id": "native-client-telemetry-source-check-adoption_sample_count",
-              "next_action": "Telemetry must include adoption outcome evidence.",
+              "next_action_id": "native-client-telemetry-source-check-external_source_events",
+              "next_action": "Import at least one metadata-only event from a real client.",
               "verification_command": "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions",
               "counts_as_completion": false,
               "rows": [
-                {
-                  "action_id": "native-client-telemetry-source-check-adoption_sample_count",
-                  "evidence_key": "native-client-telemetry",
-                  "repair_type": "source-check",
-                  "target": "adoption_sample_count",
-                  "phase": "collect-source",
-                  "priority": 40,
-                  "owner": "Browser/Chrome/IDE/provider client integrator",
-                  "status": "blocked",
-                  "blocking_reason": "Current value 0 does not satisfy '>0'.",
-                  "next_action": "Telemetry must include adoption outcome evidence.",
-                  "verification_command": "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions",
-                  "source": "source_checklist",
-                  "counts_as_completion": false
-                },
                 {
                   "action_id": "native-client-telemetry-source-check-external_source_events",
                   "evidence_key": "native-client-telemetry",
@@ -26540,21 +26419,6 @@
           "counts_as_completion": false
         },
         {
-          "action_id": "native-client-telemetry-source-check-adoption_sample_count",
-          "evidence_key": "native-client-telemetry",
-          "repair_type": "source-check",
-          "target": "adoption_sample_count",
-          "phase": "collect-source",
-          "priority": 40,
-          "owner": "Browser/Chrome/IDE/provider client integrator",
-          "status": "blocked",
-          "blocking_reason": "Current value 0 does not satisfy '>0'.",
-          "next_action": "Telemetry must include adoption outcome evidence.",
-          "verification_command": "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions",
-          "source": "source_checklist",
-          "counts_as_completion": false
-        },
-        {
           "action_id": "native-client-telemetry-source-check-external_source_events",
           "evidence_key": "native-client-telemetry",
           "repair_type": "source-check",
@@ -26677,8 +26541,8 @@
           "label": "Collect source",
           "priority": 40,
           "status": "blocked",
-          "blocked_count": 8,
-          "row_count": 8,
+          "blocked_count": 7,
+          "row_count": 7,
           "owners": [
             "Browser/Chrome/IDE/provider client integrator",
             "human reviewer",
@@ -26770,21 +26634,6 @@
               "counts_as_completion": false
             },
             {
-              "action_id": "native-client-telemetry-source-check-adoption_sample_count",
-              "evidence_key": "native-client-telemetry",
-              "repair_type": "source-check",
-              "target": "adoption_sample_count",
-              "phase": "collect-source",
-              "priority": 40,
-              "owner": "Browser/Chrome/IDE/provider client integrator",
-              "status": "blocked",
-              "blocking_reason": "Current value 0 does not satisfy '>0'.",
-              "next_action": "Telemetry must include adoption outcome evidence.",
-              "verification_command": "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions",
-              "source": "source_checklist",
-              "counts_as_completion": false
-            },
-            {
               "action_id": "native-client-telemetry-source-check-external_source_events",
               "evidence_key": "native-client-telemetry",
               "repair_type": "source-check",
@@ -26833,15 +26682,15 @@
     "world_class_claim_guard": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-17",
+      "generated_at": "2026-06-20",
       "skill_dir": ".",
       "summary": {
         "ledger_ready_to_claim_world_class": false,
         "ledger_pending_count": 4,
-        "claim_surface_count": 182,
-        "json_claim_surface_count": 89,
-        "metadata_claim_surface_count": 90,
-        "package_claim_surface_count": 17,
+        "claim_surface_count": 175,
+        "json_claim_surface_count": 85,
+        "metadata_claim_surface_count": 86,
+        "package_claim_surface_count": 10,
         "violation_count": 0,
         "overclaim_guard_active": true,
         "decision": "claim-guard-pass-evidence-pending"
@@ -26884,34 +26733,6 @@
         },
         {
           "path": "agents/interface.yaml",
-          "violation_count": 0
-        },
-        {
-          "path": "dist/manifest.json",
-          "violation_count": 0
-        },
-        {
-          "path": "dist/targets/claude/README.md",
-          "violation_count": 0
-        },
-        {
-          "path": "dist/targets/claude/adapter.json",
-          "violation_count": 0
-        },
-        {
-          "path": "dist/targets/generic/adapter.json",
-          "violation_count": 0
-        },
-        {
-          "path": "dist/targets/openai/adapter.json",
-          "violation_count": 0
-        },
-        {
-          "path": "dist/targets/vscode/README.md",
-          "violation_count": 0
-        },
-        {
-          "path": "dist/targets/vscode/adapter.json",
           "violation_count": 0
         },
         {
@@ -27116,10 +26937,6 @@
         },
         {
           "path": "reports/family_summary.md",
-          "violation_count": 0
-        },
-        {
-          "path": "reports/feishu-ranking-pattern-analysis-2026-04-01.md",
           "violation_count": 0
         },
         {
@@ -27459,6 +27276,14 @@
           "violation_count": 0
         },
         {
+          "path": "reports/skillops/daily/2026-06-20.json",
+          "violation_count": 0
+        },
+        {
+          "path": "reports/skillops/daily/2026-06-20.md",
+          "violation_count": 0
+        },
+        {
           "path": "reports/skillops/weekly/2026-W25.json",
           "violation_count": 0
         },
@@ -27559,10 +27384,6 @@
           "violation_count": 0
         },
         {
-          "path": "reports/yao-deploy-bridge-skill-research-plan.md",
-          "violation_count": 0
-        },
-        {
           "path": "security/dependency_policy.md",
           "violation_count": 0
         },
@@ -27636,7 +27457,7 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "5a99ef3133b0148cd5bbc1cd85fad4830bf34ca2bbac709f1e1fea2f810b1257",
+          "package_sha256": "e5b4ffc5c3f93f7f8367fd4a021a0a09567d4df4acd0c31d2964d60593f47cbd",
           "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2"
         },
         "compatibility": {
@@ -27693,7 +27514,7 @@
               "vscode"
             ],
             "package_metadata": "registry/packages/yao-meta-skill.json",
-            "package_sha256": "5a99ef3133b0148cd5bbc1cd85fad4830bf34ca2bbac709f1e1fea2f810b1257"
+            "package_sha256": "e5b4ffc5c3f93f7f8367fd4a021a0a09567d4df4acd0c31d2964d60593f47cbd"
           }
         ]
       },
@@ -28382,7 +28203,7 @@
       "installed_skill_dir": "tests/tmp_review_studio/install-root/simulate-yao-meta-skill/yao-meta-skill",
       "summary": {
         "archive_present": true,
-        "archive_entry_count": 696,
+        "archive_entry_count": 588,
         "archive_extracted": true,
         "entrypoint_loaded": true,
         "manifest_loaded": true,
@@ -28729,7 +28550,7 @@
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "5a99ef3133b0148cd5bbc1cd85fad4830bf34ca2bbac709f1e1fea2f810b1257"
+            "to": "e5b4ffc5c3f93f7f8367fd4a021a0a09567d4df4acd0c31d2964d60593f47cbd"
           }
         ]
       },

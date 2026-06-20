@@ -55,17 +55,6 @@
     "scope": "example"
   },
   {
-    "name": "geo-ranking-article-generator",
-    "path": "geo-ranking-article-generator",
-    "missing": [
-      "owner",
-      "review_cadence",
-      "maturity"
-    ],
-    "actionable": false,
-    "scope": "embedded-generated-skill"
-  },
-  {
     "name": "invalid-governance-skill",
     "path": "tests/fixtures/governance_invalid_manifest",
     "missing": [

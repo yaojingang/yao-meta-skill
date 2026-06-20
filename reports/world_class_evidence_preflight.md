@@ -1,6 +1,6 @@
 # World-Class Evidence Preflight
 
-Generated at: `2026-06-17`
+Generated at: `2026-06-20`
 
 ## Summary
 
@@ -10,10 +10,10 @@ Generated at: `2026-06-17`
 - credential value exposed: `false`
 - collection ready: `1`
 - collection blocked: `3`
-- source checks: `11` pass / `19` total
-- repair rows: `12` blocked / `12` total
+- source checks: `12` pass / `19` total
+- repair rows: `11` blocked / `11` total
 - phase queue: `2` blocked / `2` phases
-- phase queue rows: `12`
+- phase queue rows: `11`
 - next repair action: `human-adjudication-precheck-human-reviewer`
 - next repair owner: `human reviewer`
 - next phase: `unblock-access`
@@ -33,14 +33,14 @@ This preflight report checks whether an operator can start collecting the remain
 - drafts count as evidence: `false`
 - artifact prefill counts as evidence: `false`
 - submission refs ready: `7` / `7`
-- supporting evidence ready: `31` / `31`
+- supporting evidence ready: `27` / `28`
 
 Generate the submission kit after the real provider, human, native-permission, or native-client work exists. The generated JSON drafts remain `template_only: true` until an operator edits them with real aggregate artifact references and matching SHA-256 digests. The prefill command only inserts local artifact SHA-256 digests; it does not make a draft count as evidence.
 
 | Role | Copy to artifact_refs | Ready | Meaning |
 | --- | --- | --- | --- |
 | `submission-ref` | `true` | `7 / 7` | Rows marked submission-ref are the aggregate paths expected in artifact_refs. |
-| `supporting-evidence` | `false` | `31 / 31` | Supporting-evidence rows help reviewers audit the packet but do not all need to be copied into artifact_refs. |
+| `supporting-evidence` | `false` | `27 / 28` | Supporting-evidence rows help reviewers audit the packet but do not all need to be copied into artifact_refs. |
 
 `submission-ref` rows are the only checklist rows expected in `artifact_refs`; `supporting-evidence` rows stay available for audit context and reviewer traceability.
 
@@ -51,7 +51,7 @@ Phase queue rows group the same repair checklist into operator execution phases.
 | Priority | Phase | Status | Rows | Owners | Evidence | Verify | Next action |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | `20` | `unblock-access` | `blocked` | 4 / 4 blocked | Browser/Chrome/IDE/provider client integrator, human reviewer, operator with provider credentials, target client or installer integrator | human-adjudication, native-client-telemetry, native-permission-enforcement, provider-holdout | `python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions` | Assign a real reviewer identity before claiming human adjudication. |
-| `40` | `collect-source` | `blocked` | 8 / 8 blocked | Browser/Chrome/IDE/provider client integrator, human reviewer, target client or installer integrator | human-adjudication, native-client-telemetry, native-permission-enforcement | `python3 scripts/yao.py output-review && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions` | Set reviewer_attestation only after choices are completed before opening the answer key. |
+| `40` | `collect-source` | `blocked` | 7 / 7 blocked | Browser/Chrome/IDE/provider client integrator, human reviewer, target client or installer integrator | human-adjudication, native-client-telemetry, native-permission-enforcement | `python3 scripts/yao.py output-review && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions` | Set reviewer_attestation only after choices are completed before opening the answer key. |
 
 ## Evidence Items
 
@@ -77,7 +77,6 @@ Repair rows convert preflight and source blockers into a prioritized operator qu
 | `40` | `collect-source` | human reviewer | `human-adjudication` | `source-check` | `pending_count` | `blocked` | `python3 scripts/yao.py output-review && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions` | Record a reviewer choice and reason for every pair. |
 | `40` | `collect-source` | human reviewer | `human-adjudication` | `source-check` | `ready_for_human_evidence` | `blocked` | `python3 scripts/yao.py output-review && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions` | Complete all reviewer decisions with metadata and rationale, plus blind-review attestation and integrity fingerprints. |
 | `40` | `collect-source` | human reviewer | `human-adjudication` | `source-check` | `reviewer_metadata_present` | `blocked` | `python3 scripts/yao.py output-review && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions` | Record reviewer and reviewed_at before adjudication can count. |
-| `40` | `collect-source` | Browser/Chrome/IDE/provider client integrator | `native-client-telemetry` | `source-check` | `adoption_sample_count` | `blocked` | `python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions` | Telemetry must include adoption outcome evidence. |
 | `40` | `collect-source` | Browser/Chrome/IDE/provider client integrator | `native-client-telemetry` | `source-check` | `external_source_events` | `blocked` | `python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions` | Import at least one metadata-only event from a real client. |
 | `40` | `collect-source` | target client or installer integrator | `native-permission-enforcement` | `source-check` | `native_enforcement_count` | `blocked` | `python3 scripts/yao.py runtime-permissions . --package-dir dist && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions` | Collect real target-client or external runtime guard proof. |
 
@@ -150,7 +149,7 @@ Repair rows convert preflight and source blockers into a prioritized operator qu
 - prepare draft: `python3 scripts/yao.py world-class-submission-kit . --evidence-key native-permission-enforcement --output-dir evidence/world_class/submissions`
 - prepare draft with artifact SHA prefill: `python3 scripts/yao.py world-class-submission-kit . --evidence-key native-permission-enforcement --output-dir evidence/world_class/submissions --prefill-artifacts`
 - submission refs ready: `2` / `2`
-- supporting evidence ready: `11` / `11`
+- supporting evidence ready: `7` / `8`
 
 ### Prechecks
 
@@ -191,7 +190,7 @@ Repair rows convert preflight and source blockers into a prioritized operator qu
 | Check | Current | Expected | Status | Next action |
 | --- | --- | --- | --- | --- |
 | External events | `0` | `>0` | `blocked` | Import at least one metadata-only event from a real client. |
-| Adoption sample | `0` | `>0` | `blocked` | Telemetry must include adoption outcome evidence. |
+| Adoption sample | `1` | `>0` | `pass` | Telemetry must include adoption outcome evidence. |
 | Raw content blocked | `False` | `false` | `pass` | Telemetry must stay metadata-only. |
 
 ## Boundary

@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "ok": true,
   "skill_dir": ".",
-  "source": "reports/review_annotations_input.json",
+  "source": "tests/tmp_review_studio/empty_review_annotations_input.json",
   "summary": {
     "annotation_count": 0,
     "open_count": 0,

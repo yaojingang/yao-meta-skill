@@ -38,6 +38,11 @@ from yao_cli_output_commands import (
     command_output_review_import,
     command_output_review_kit,
 )
+from yao_cli_operator_commands import (
+    command_install_status,
+    command_localized_doc_sync_check,
+    command_pr_review_report,
+)
 from yao_cli_parser import build_parser as build_cli_parser
 from yao_cli_report_commands import (
     command_artifact_design_profile,

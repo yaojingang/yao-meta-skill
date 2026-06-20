@@ -23,6 +23,7 @@ Use `make ci-test` as the default full verification command before calling a cha
 Common focused checks:
 
 - CLI changes: `python3 tests/verify_yao_cli.py`
+- Operator UX changes: `python3 tests/verify_operator_ux.py`
 - Skill overview report changes: `python3 tests/verify_skill_overview.py`
 - Review Studio changes: `python3 tests/verify_review_studio.py`
 - Trust or script inventory changes: `python3 tests/verify_trust_check.py`
@@ -119,6 +120,8 @@ Clean test-only scratch directories after verification with `find tests -maxdept
 - `scripts/skill_report_model.py`, `scripts/skill_report_metrics.py`, `scripts/skill_report_charts.py`: skill overview data model, scoring, and inline SVG chart generation.
 - `scripts/yao_cli_config.py`: CLI target maps, archetype heuristics, diagnosis copy, and side-effect-free shaping helpers.
 - `scripts/yao_cli_parser.py`: CLI argparse command surface, flags, choices, and command handler binding.
+- `scripts/yao_cli_operator_commands.py`: read-only operator diagnostics for active install status, localized homepage sync, and PR review reports. Keep install checks non-mutating, docs sync explicit, and PR review free of merge/write actions.
+- `scripts/yao_cli_parser_operator.py`: argparse surface for operator UX commands. Keep command names stable and route all behavior into `yao_cli_operator_commands.py`.
 - `scripts/yao_cli_telemetry.py`: opt-in metadata-only CLI run telemetry. Keep it free of prompt, argument, output, transcript, note, or message capture.
 - `scripts/import_telemetry_events.py`: external telemetry importer. Validate the whole input before appending events, and keep raw prompt/output/transcript/message/note fields blocked.
 - `scripts/emit_telemetry_event.py`: external client telemetry emitter. It may append one normalized metadata event to a local spool, but must never accept or write raw prompt, output, transcript, message, note, argument, or private content.

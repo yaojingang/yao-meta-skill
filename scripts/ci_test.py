@@ -34,6 +34,7 @@ DEFAULT_TARGETS = [
     "architecture-maintainability-check",
     "yao-cli-check",
     "yao-cli-world-class-check",
+    "operator-ux-check",
     "skill-overview-check",
     "skill-interpretation-check",
     "skill-report-metrics-check",

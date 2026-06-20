@@ -135,7 +135,7 @@ Next move: add real client or installer permission enforcement integration.
 | Output Eval | `5` cases, DeepSeek provider-backed execution for `10 / 10` variants, with-skill pass rate `43.67`, baseline pass rate `23.67`, delta `20.0`, with file-backed, near-neighbor, boundary coverage, `10` command execution runs, `0` recorded fixture runs, `10` provider model-executed runs in root release evidence, `10` observed token rows, `0` estimated token rows, provider runner v0 available, `5` blind A/B review pairs, a generated `reports/output_review_decisions.json` template, `0 / 5` reviewer decisions pending, `0` answer keys revealed, and `5` pending answers hidden |
 | Runtime Conformance | `5 / 5` targets passing |
 | Target Compiler | `5 / 5` compiled target contracts generated for OpenAI, Claude, generic, Agent Skills compatible, and VS Code / Copilot outputs, including target permission contracts and target-native behavior contracts |
-| Trust | `0` secret findings, `1` pinned dependency file, `67` declared internal modules, `3 / 3` network-capable scripts covered by bounded host policy, `86 / 86` CLI help smoke checks passing across `153` scripts, source-contract hash scope explicit |
+| Trust | `0` secret findings, `1` pinned dependency file, `69` declared internal modules, `3 / 3` network-capable scripts covered by bounded host policy, `86 / 86` CLI help smoke checks passing across `155` scripts, source-contract hash scope explicit |
 | Permission Governance | `3 / 3` required high-permission capabilities approved, `0` missing, `0` invalid, `0` expired |
 | Runtime Permission Probes | `4 / 4` target adapters probed, `0` native-enforcement adapters, `4` explicit metadata fallbacks, `4` residual risks retained for reviewer visibility |
 | Skill Atlas | `12` scanned skills, `1` actionable root skill, `1` telemetry report, `0` actionable route collisions, `0` actionable owner gaps, `0` actionable stale skills, `0` actionable drift signals, `24` scoped non-actionable issue signals retained for visibility |
@@ -153,8 +153,8 @@ Next move: add real client or installer permission enforcement integration.
 | World-Class Evidence Ledger | `4` evidence entries remain pending: `1` human-required and `3` external-required; anti-overclaim guards block planned work, metadata fallbacks, pending review, and local command runners from counting as completion |
 | Benchmark Reproducibility | local reproducibility ready with `25` required artifacts, `0` missing artifacts, `23` reproduction commands, and `3` disclosed failure cases; human review, native permission enforcement, native telemetry, and provider ledger approval remain explicit limitations |
 | IR-first Packaging | `openai`, `claude`, `generic`, and `vscode` adapters include compiler contracts, permission contracts, target-native behavior contracts, IR provenance, semantic parity checks, and install-scope notes where applicable |
-| Context Budget | initial load `998/1000`; deferred `512782/120000`; resource governance governed |
-| CI | `make ci-test` target count is `82` after the dedicated CLI world-class verifier split |
+| Context Budget | initial load `998/1000`; deferred `530167/120000`; resource governance governed |
+| CI | `make ci-test` target count is `83` after adding the dedicated Operator UX verifier |
 
 ## Next Highest-Leverage Moves
 

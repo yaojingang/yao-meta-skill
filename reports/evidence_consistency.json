@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-17",
+  "generated_at": "2026-06-20",
   "skill_dir": ".",
   "summary": {
     "check_count": 39,
@@ -324,12 +324,12 @@
       "status": "pass",
       "expected": {
         "status": "pass",
-        "detail": "initial load 998/1000; deferred 525864/120000; top deferred scripts 464561; resource governance governed; quality density 140.3",
+        "detail": "initial load 998/1000; deferred 530464/120000; top deferred scripts 469161; resource governance governed; quality density 140.3",
         "evidence": "reports/context_budget.json"
       },
       "actual": {
         "status": "pass",
-        "detail": "initial load 998/1000; deferred 525864/120000; top deferred scripts 464561; resource governance governed; quality density 140.3",
+        "detail": "initial load 998/1000; deferred 530464/120000; top deferred scripts 469161; resource governance governed; quality density 140.3",
         "evidence": "reports/context_budget.json"
       },
       "paths": [
@@ -357,7 +357,7 @@
       "actual": {
         "available": true,
         "clean": false,
-        "changed_file_count": 27
+        "changed_file_count": 53
       },
       "paths": [
         "reports/benchmark_reproducibility.json"
@@ -398,8 +398,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "e79050ed12d057811d7d13ab7d8bcc5a06af76d4",
-      "actual": "e79050ed12d057811d7d13ab7d8bcc5a06af76d4",
+      "expected": "f37e78def3464bc818429c47e1ecc9e033c7356c",
+      "actual": "f37e78def3464bc818429c47e1ecc9e033c7356c",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -414,7 +414,7 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "5a99ef3133b0148cd5bbc1cd85fad4830bf34ca2bbac709f1e1fea2f810b1257",
+        "source_contract_sha256": "67fd02c2142a2e27775f10e209ab71c037a9a28698d6f5588c96820cfa8e04cf",
         "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 19,
@@ -430,7 +430,7 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "5a99ef3133b0148cd5bbc1cd85fad4830bf34ca2bbac709f1e1fea2f810b1257",
+        "source_contract_sha256": "67fd02c2142a2e27775f10e209ab71c037a9a28698d6f5588c96820cfa8e04cf",
         "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 19,
@@ -550,8 +550,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "e79050ed12d057811d7d13ab7d8bcc5a06af76d4",
-      "actual": "e79050ed12d057811d7d13ab7d8bcc5a06af76d4",
+      "expected": "f37e78def3464bc818429c47e1ecc9e033c7356c",
+      "actual": "f37e78def3464bc818429c47e1ecc9e033c7356c",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
@@ -566,7 +566,7 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "5a99ef3133b0148cd5bbc1cd85fad4830bf34ca2bbac709f1e1fea2f810b1257",
+        "source_contract_sha256": "67fd02c2142a2e27775f10e209ab71c037a9a28698d6f5588c96820cfa8e04cf",
         "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 19,
@@ -582,7 +582,7 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "5a99ef3133b0148cd5bbc1cd85fad4830bf34ca2bbac709f1e1fea2f810b1257",
+        "source_contract_sha256": "67fd02c2142a2e27775f10e209ab71c037a9a28698d6f5588c96820cfa8e04cf",
         "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 19,
@@ -1670,7 +1670,7 @@
             "path": "scripts",
             "label": "Deterministic helpers or local tooling",
             "kind": "folder",
-            "file_count": 153
+            "file_count": 155
           },
           {
             "path": "evals",
@@ -1682,10 +1682,10 @@
             "path": "reports",
             "label": "Generated evidence and overview artifacts",
             "kind": "folder",
-            "file_count": 235
+            "file_count": 150
           }
         ],
-        "file_count": 456,
+        "file_count": 373,
         "folder_count": 4,
         "distribution": [
           {
@@ -1710,7 +1710,7 @@
           },
           {
             "label": "scripts",
-            "value": 153
+            "value": 155
           },
           {
             "label": "evals",
@@ -1718,7 +1718,7 @@
           },
           {
             "label": "reports",
-            "value": 235
+            "value": 150
           }
         ]
       },
@@ -1758,7 +1758,7 @@
             "path": "scripts",
             "label": "Deterministic helpers or local tooling",
             "kind": "folder",
-            "file_count": 153
+            "file_count": 155
           },
           {
             "path": "evals",
@@ -1770,10 +1770,10 @@
             "path": "reports",
             "label": "Generated evidence and overview artifacts",
             "kind": "folder",
-            "file_count": 235
+            "file_count": 150
           }
         ],
-        "file_count": 456,
+        "file_count": 373,
         "folder_count": 4,
         "distribution": [
           {
@@ -1798,7 +1798,7 @@
           },
           {
             "label": "scripts",
-            "value": 153
+            "value": 155
           },
           {
             "label": "evals",
@@ -1806,7 +1806,7 @@
           },
           {
             "label": "reports",
-            "value": 235
+            "value": 150
           }
         ]
       },
@@ -2141,8 +2141,8 @@
           "artifact_prefill_counts_as_evidence": false,
           "submission_ref_total_count": 2,
           "submission_ref_ready_count": 2,
-          "supporting_evidence_total_count": 11,
-          "supporting_evidence_ready_count": 11,
+          "supporting_evidence_total_count": 8,
+          "supporting_evidence_ready_count": 7,
           "submission_ref_copy_to_artifact_refs": true,
           "supporting_evidence_copy_to_artifact_refs": false
         },
@@ -2187,8 +2187,8 @@
           "artifact_prefill_counts_as_evidence": false,
           "submission_ref_total_count": 2,
           "submission_ref_ready_count": 2,
-          "supporting_evidence_total_count": 11,
-          "supporting_evidence_ready_count": 11,
+          "supporting_evidence_total_count": 8,
+          "supporting_evidence_ready_count": 7,
           "submission_ref_copy_to_artifact_refs": true,
           "supporting_evidence_copy_to_artifact_refs": false
         },
@@ -3202,9 +3202,7 @@
           "agents/interface.yaml": true,
           "evidence/world_class/README.md": true,
           "security/permission_policy.json": true,
-          "reports/world_class_evidence_ledger.json": true,
-          "dist/manifest.json": true,
-          "dist/targets/openai/adapter.json": true
+          "reports/world_class_evidence_ledger.json": true
         },
         "prohibited_surfaces": []
       },
@@ -3223,9 +3221,7 @@
           "agents/interface.yaml": true,
           "evidence/world_class/README.md": true,
           "security/permission_policy.json": true,
-          "reports/world_class_evidence_ledger.json": true,
-          "dist/manifest.json": true,
-          "dist/targets/openai/adapter.json": true
+          "reports/world_class_evidence_ledger.json": true
         },
         "prohibited_surfaces": []
       },
@@ -3579,8 +3575,8 @@
         "score `91`",
         "`16` gates",
         "`3` warnings",
-        "`67` declared internal modules",
-        "`86 / 86` CLI help smoke checks passing across `153` scripts",
+        "`69` declared internal modules",
+        "`86 / 86` CLI help smoke checks passing across `155` scripts",
         "`689` zip entries",
         "archive with `689` entries",
         "`12` installer permission checks enforced",
@@ -3588,7 +3584,7 @@
         "`25` required artifacts",
         "`23` reproduction commands",
         "initial load `998/1000`",
-        "target count is `82`"
+        "target count is `83`"
       ],
       "actual": "all present",
       "paths": [

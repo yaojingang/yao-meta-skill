@@ -68,7 +68,7 @@
       <span class="eyebrow">Evidence Collection</span>
       <h1>World-Class Evidence Preflight</h1>
       <p class="lede">This operator view shows which external and human evidence is still blocked, which commands prepare editable submission drafts, and why preflight never counts as accepted evidence.</p>
-      <div class="stats"><article><span>Decision</span><strong>collection-preflight-blocked</strong></article><article><span>Pending</span><strong>4</strong></article><article><span>Ready</span><strong>1</strong></article><article><span>Blocked</span><strong>3</strong></article><article><span>Source</span><strong>11/19</strong></article><article><span>Repairs</span><strong>12/12</strong></article><article><span>Phases</span><strong>2/2</strong></article></div>
+      <div class="stats"><article><span>Decision</span><strong>collection-preflight-blocked</strong></article><article><span>Pending</span><strong>4</strong></article><article><span>Ready</span><strong>1</strong></article><article><span>Blocked</span><strong>3</strong></article><article><span>Source</span><strong>12/19</strong></article><article><span>Repairs</span><strong>11/11</strong></article><article><span>Phases</span><strong>2/2</strong></article></div>
     </section>
     <section class="section two-col" id="handoff">
       <article class="panel">
@@ -92,7 +92,7 @@
         <article class="role-card">
           <span>Supporting evidence</span>
           <h3>supporting-evidence</h3>
-          <strong>31/31 ready</strong>
+          <strong>27/28 ready</strong>
           <p>Supporting-evidence rows help reviewers audit the packet but do not all need to be copied into artifact_refs.</p>
           <small>copy to artifact_refs: <code>false</code></small>
         </article>
@@ -128,7 +128,7 @@
           </header>
           <dl>
             <dt>Phase</dt><dd><code>collect-source</code></dd>
-            <dt>Rows</dt><dd>8 / 8 blocked</dd>
+            <dt>Rows</dt><dd>7 / 7 blocked</dd>
             <dt>Owners</dt><dd>Browser/Chrome/IDE/provider client integrator, human reviewer, target client or installer integrator</dd>
             <dt>Evidence</dt><dd>human-adjudication, native-client-telemetry, native-permission-enforcement</dd>
             <dt>Next</dt><dd>Set reviewer_attestation only after choices are completed before opening the answer key.</dd>
@@ -667,7 +667,7 @@
         <article class="role-card">
           <span>Supporting evidence</span>
           <h3>supporting-evidence</h3>
-          <strong>11/11 ready</strong>
+          <strong>7/8 ready</strong>
           <p>Supporting-evidence rows help reviewers audit the packet but do not all need to be copied into artifact_refs.</p>
           <small>copy to artifact_refs: <code>false</code></small>
         </article>
@@ -894,15 +894,15 @@
           </dl>
         </article>
 
-        <article class="check-row blocked">
+        <article class="check-row pass">
           <div>
             <span>adoption_sample_count</span>
             <strong>Adoption sample</strong>
           </div>
           <dl>
-            <dt>Current</dt><dd><code>0</code></dd>
+            <dt>Current</dt><dd><code>1</code></dd>
             <dt>Expected</dt><dd><code>&gt;0</code></dd>
-            <dt>Status</dt><dd>blocked</dd>
+            <dt>Status</dt><dd>pass</dd>
             <dt>Action</dt><dd>Telemetry must include adoption outcome evidence.</dd>
           </dl>
         </article>
@@ -937,23 +937,6 @@
 	            <dt>Reason</dt><dd>Required external precheck is external-required.</dd>
 	            <dt>Action</dt><dd>Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events.</dd>
 	            <dt>Verify</dt><dd><code>python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions</code></dd>
-	            <dt>Evidence</dt><dd>does not count as completion</dd>
-	          </dl>
-	        </article>
-
-        <article class="repair-row blocked">
-          <div>
-            <span>source-check</span>
-            <strong>adoption_sample_count</strong>
-	          </div>
-	          <dl>
-	            <dt>Priority</dt><dd>40</dd>
-	            <dt>Phase</dt><dd>collect-source</dd>
-	            <dt>Owner</dt><dd>Browser/Chrome/IDE/provider client integrator</dd>
-	            <dt>Status</dt><dd>blocked</dd>
-	            <dt>Reason</dt><dd>Current value 0 does not satisfy &#x27;&gt;0&#x27;.</dd>
-	            <dt>Action</dt><dd>Telemetry must include adoption outcome evidence.</dd>
-	            <dt>Verify</dt><dd><code>python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl &amp;&amp; python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions</code></dd>
 	            <dt>Evidence</dt><dd>does not count as completion</dd>
 	          </dl>
 	        </article>

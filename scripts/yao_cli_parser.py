@@ -5,6 +5,7 @@ import argparse
 from collections.abc import Callable
 
 from yao_cli_parser_evidence import add_evidence_commands
+from yao_cli_parser_operator import add_operator_commands
 from yao_cli_parser_operations import add_operating_loop_commands
 
 
@@ -299,6 +300,7 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     feedback_cmd.add_argument("--recommended-action", default="review")
     feedback_cmd.set_defaults(func=_handler(command_handlers, "command_feedback"))
 
+    add_operator_commands(subparsers, command_handlers)
     add_operating_loop_commands(subparsers, command_handlers)
 
     baseline_compare_cmd = subparsers.add_parser(

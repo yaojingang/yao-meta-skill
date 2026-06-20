@@ -1,18 +1,18 @@
 # Architecture Maintainability
 
-Generated at: `2026-06-17`
+Generated at: `2026-06-13`
 
 ## Summary
 
 - decision: `pass`
-- python files: `229`
-- scripts: `153`
-- tests: `76`
-- internal modules: `69`
+- python files: `232`
+- scripts: `155`
+- tests: `77`
+- internal modules: `71`
 - CLI scripts: `86`
-- Yao CLI command handlers: `68`
+- Yao CLI command handlers: `71`
 - entrypoint command handlers: `18`
-- command modules: `6`
+- command modules: `7`
 - largest file lines: `719`
 - early watch threshold lines: `600`
 - early watchlist: `6`

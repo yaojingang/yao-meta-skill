@@ -44,13 +44,6 @@
     "scope": "example"
   },
   {
-    "name": "geo-ranking-article-generator",
-    "path": "geo-ranking-article-generator",
-    "reason": "missing updated_at",
-    "actionable": false,
-    "scope": "embedded-generated-skill"
-  },
-  {
     "name": "invalid-governance-skill",
     "path": "tests/fixtures/governance_invalid_manifest",
     "reason": "missing updated_at",

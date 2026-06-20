@@ -130,8 +130,10 @@ def main() -> None:
         "scripts/yao_cli_config.py",
         "scripts/yao_cli_distribution_commands.py",
         "scripts/yao_cli_output_commands.py",
+        "scripts/yao_cli_operator_commands.py",
         "scripts/yao_cli_parser.py",
         "scripts/yao_cli_parser_evidence.py",
+        "scripts/yao_cli_parser_operator.py",
         "scripts/yao_cli_parser_operations.py",
         "scripts/yao_cli_report_commands.py",
         "scripts/yao_cli_telemetry.py",
@@ -173,8 +175,10 @@ def main() -> None:
     assert "yao_cli_config.py" not in warning_text, payload["warnings"]
     assert "yao_cli_distribution_commands.py" not in warning_text, payload["warnings"]
     assert "yao_cli_output_commands.py" not in warning_text, payload["warnings"]
+    assert "yao_cli_operator_commands.py" not in warning_text, payload["warnings"]
     assert "yao_cli_parser.py" not in warning_text, payload["warnings"]
     assert "yao_cli_parser_evidence.py" not in warning_text, payload["warnings"]
+    assert "yao_cli_parser_operator.py" not in warning_text, payload["warnings"]
     assert "yao_cli_parser_operations.py" not in warning_text, payload["warnings"]
     assert "yao_cli_report_commands.py" not in warning_text, payload["warnings"]
     assert "yao_cli_telemetry.py" not in warning_text, payload["warnings"]

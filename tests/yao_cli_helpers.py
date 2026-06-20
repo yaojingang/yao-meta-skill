@@ -17,7 +17,9 @@ import yao_cli_distribution_commands  # noqa: E402
 import yao_cli_output_commands  # noqa: E402
 import yao_cli_parser  # noqa: E402
 import yao_cli_parser_evidence  # noqa: E402
+import yao_cli_parser_operator  # noqa: E402
 import yao_cli_parser_operations  # noqa: E402
+import yao_cli_operator_commands  # noqa: E402
 import yao_cli_report_commands  # noqa: E402
 import yao_cli_runtime  # noqa: E402
 from yao_cli_report_refresh import refresh_root_report_consistency_inputs  # noqa: E402
@@ -89,7 +91,9 @@ def assert_cli_module_contracts() -> None:
         yao_cli_adaptation_commands,
         yao_cli_distribution_commands,
         yao_cli_output_commands,
+        yao_cli_operator_commands,
         yao_cli_report_commands,
+        yao_cli_parser_operator,
     ):
         assert module.SCRIPT_INTERFACE == "internal-module"
     assert callable(yao_cli_module.command_review_studio)
@@ -99,6 +103,7 @@ def assert_help_surface() -> None:
     parser_help = yao_cli_module.build_parser().format_help()
     expected_help = (
         "quickstart skill-interpretation review-studio python-compat architecture-audit skill-os2-audit skill-os2-coverage "
+        "install-status localized-doc-sync-check pr-review-report "
         "world-class-evidence world-class-ledger world-class-intake world-class-preflight world-class-submission-kit world-class-submission-review world-class-runbook world-class-claim-guard "
         "benchmark-reproducibility evidence-consistency output-review-kit output-review-import adapt-scan adapt-propose adapt-apply telemetry-import telemetry-emit telemetry-hooks weekly-curator --record-cli-telemetry"
     ).split()

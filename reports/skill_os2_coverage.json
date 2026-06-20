@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-17",
+  "generated_at": "2026-06-20",
   "skill_dir": ".",
   "summary": {
     "item_count": 21,
@@ -130,7 +130,7 @@
       "label": "Trust Security",
       "status": "pass",
       "objective": "Scripts, dependencies, permissions, secrets, and package hash are reviewable for team distribution.",
-      "current": "153 scripts; secrets 0; help failures 0",
+      "current": "155 scripts; secrets 0; help failures 0",
       "command": "python3 scripts/yao.py trust .",
       "test": "python3 tests/verify_trust_check.py",
       "evidence": [
@@ -167,7 +167,7 @@
       "label": "Skill Atlas",
       "status": "pass",
       "objective": "Team skill portfolio reveals route collisions, stale ownership, dependency graph, and no-route opportunities.",
-      "current": "12 scanned skills; actionable collisions 0",
+      "current": "11 scanned skills; actionable collisions 0",
       "command": "python3 scripts/yao.py skill-atlas --workspace-root .",
       "test": "python3 tests/verify_skill_atlas.py",
       "evidence": [
@@ -513,7 +513,7 @@
       "label": "Skill Atlas Generator",
       "status": "pass",
       "objective": "Recommended Skill OS 2.0 implementation PR from the upgrade plan.",
-      "current": "12 scanned skills",
+      "current": "11 scanned skills",
       "command": "make ci-test",
       "test": "tests/verify_skill_atlas.py",
       "evidence": [
@@ -749,11 +749,11 @@
           "exists": true
         },
         {
-          "path": "reports/skillops/daily/2026-06-17.json",
+          "path": "reports/skillops/daily/2026-06-20.json",
           "exists": true
         },
         {
-          "path": "reports/skillops/daily/2026-06-17.md",
+          "path": "reports/skillops/daily/2026-06-20.md",
           "exists": true
         }
       ],

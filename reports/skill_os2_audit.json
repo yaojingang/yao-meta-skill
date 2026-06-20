@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-17",
+  "generated_at": "2026-06-13",
   "skill_dir": ".",
   "summary": {
     "item_count": 15,
@@ -197,7 +197,7 @@
       "key": "trust-security",
       "label": "Trust Security",
       "status": "pass",
-      "current": "secrets 0; scripts 153; help failures 0",
+      "current": "secrets 0; scripts 155; help failures 0",
       "target": "Secrets, scripts, dependencies, permissions, and package hash are reviewable",
       "evidence": [
         {
@@ -259,7 +259,7 @@
       "key": "skill-atlas",
       "label": "Skill Atlas",
       "status": "pass",
-      "current": "12 skills; actionable collisions 0",
+      "current": "11 skills; actionable collisions 0",
       "target": "Workspace catalog, route overlap, stale/owner gaps, drift, and no-route opportunities",
       "evidence": [
         {
@@ -351,7 +351,7 @@
       "key": "native-client-telemetry",
       "label": "Native Client Telemetry",
       "status": "external_required",
-      "current": "external source events 0; adoption samples 0",
+      "current": "external source events 0; adoption samples 1",
       "target": "A real Browser/Chrome/provider client sends production metadata events",
       "evidence": [
         {
@@ -415,7 +415,7 @@
       "key": "native-client-telemetry",
       "label": "Native Client Telemetry",
       "status": "external_required",
-      "current": "external source events 0; adoption samples 0",
+      "current": "external source events 0; adoption samples 1",
       "target": "A real Browser/Chrome/provider client sends production metadata events",
       "evidence": [
         {

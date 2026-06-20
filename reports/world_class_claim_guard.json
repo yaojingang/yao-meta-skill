@@ -1,15 +1,15 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-17",
+  "generated_at": "2026-06-20",
   "skill_dir": ".",
   "summary": {
     "ledger_ready_to_claim_world_class": false,
     "ledger_pending_count": 4,
-    "claim_surface_count": 182,
-    "json_claim_surface_count": 89,
-    "metadata_claim_surface_count": 90,
-    "package_claim_surface_count": 17,
+    "claim_surface_count": 175,
+    "json_claim_surface_count": 85,
+    "metadata_claim_surface_count": 86,
+    "package_claim_surface_count": 10,
     "violation_count": 0,
     "overclaim_guard_active": true,
     "decision": "claim-guard-pass-evidence-pending"
@@ -52,34 +52,6 @@
     },
     {
       "path": "agents/interface.yaml",
-      "violation_count": 0
-    },
-    {
-      "path": "dist/manifest.json",
-      "violation_count": 0
-    },
-    {
-      "path": "dist/targets/claude/README.md",
-      "violation_count": 0
-    },
-    {
-      "path": "dist/targets/claude/adapter.json",
-      "violation_count": 0
-    },
-    {
-      "path": "dist/targets/generic/adapter.json",
-      "violation_count": 0
-    },
-    {
-      "path": "dist/targets/openai/adapter.json",
-      "violation_count": 0
-    },
-    {
-      "path": "dist/targets/vscode/README.md",
-      "violation_count": 0
-    },
-    {
-      "path": "dist/targets/vscode/adapter.json",
       "violation_count": 0
     },
     {
@@ -284,10 +256,6 @@
     },
     {
       "path": "reports/family_summary.md",
-      "violation_count": 0
-    },
-    {
-      "path": "reports/feishu-ranking-pattern-analysis-2026-04-01.md",
       "violation_count": 0
     },
     {
@@ -627,6 +595,14 @@
       "violation_count": 0
     },
     {
+      "path": "reports/skillops/daily/2026-06-20.json",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/skillops/daily/2026-06-20.md",
+      "violation_count": 0
+    },
+    {
       "path": "reports/skillops/weekly/2026-W25.json",
       "violation_count": 0
     },
@@ -724,10 +700,6 @@
     },
     {
       "path": "reports/world_class_submission_review.md",
-      "violation_count": 0
-    },
-    {
-      "path": "reports/yao-deploy-bridge-skill-research-plan.md",
       "violation_count": 0
     },
     {

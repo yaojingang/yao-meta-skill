@@ -1,22 +1,22 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `245`
-- Scripts: `153`
-- Internal script modules: `67`
+- Scanned files: `247`
+- Scripts: `155`
+- Internal script modules: `69`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
 - Network policy missing scripts: `0`
-- File-write scripts: `73`
+- File-write scripts: `74`
 - Permission approvals: `3 / 3`
 - Permission approval gaps: `0`
 - CLI help smoke checked: `86`
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `245`
-- Package SHA256: `5a99ef3133b0148cd5bbc1cd85fad4830bf34ca2bbac709f1e1fea2f810b1257`
+- Package hash files: `247`
+- Package SHA256: `e5b4ffc5c3f93f7f8367fd4a021a0a09567d4df4acd0c31d2964d60593f47cbd`
 
 ## Failures
 
@@ -208,10 +208,12 @@
 | scripts/yao_cli_config.py | internal-module | True | False | False | False | False | False | False | Imported by yao.py for CLI target maps and side-effect-free shaping helpers. |
 | scripts/yao_cli_create_commands.py | internal-module | True | True | False | False | False | False | False | Imported by yao.py to keep skill creation and quickstart command handlers out of the CLI orchestrator. |
 | scripts/yao_cli_distribution_commands.py | internal-module | True | True | False | False | False | False | False | Imported by yao.py to keep distribution and runtime gate handlers outside the thin CLI orchestrator. |
+| scripts/yao_cli_operator_commands.py | internal-module | True | True | False | False | False | True | True | Imported by yao.py for operator-facing install, localized docs, and PR review diagnostics. |
 | scripts/yao_cli_output_commands.py | internal-module | True | True | False | False | False | False | False | Imported by yao.py to keep output evaluation and review handlers outside the thin CLI orchestrator. |
 | scripts/yao_cli_parser.py | internal-module | True | True | False | False | False | False | False | Imported by yao.py to keep CLI parser declarations separate from command orchestration. |
 | scripts/yao_cli_parser_evidence.py | internal-module | True | True | False | False | False | False | False | Imported by yao_cli_parser.py to keep evidence command declarations out of the main parser module. |
 | scripts/yao_cli_parser_operations.py | internal-module | True | True | False | False | False | False | False | Imported by yao_cli_parser.py to keep SkillOps, telemetry, and review-loop command declarations out of the main parser module. |
+| scripts/yao_cli_parser_operator.py | internal-module | True | True | False | False | False | False | False | Imported by yao_cli_parser.py to keep operator UX command declarations out of the main parser module. |
 | scripts/yao_cli_report_commands.py | internal-module | True | True | False | False | False | False | False | Imported by yao.py to keep report and evidence command handlers out of the CLI orchestrator. |
 | scripts/yao_cli_runtime.py | internal-module | True | False | False | False | False | False | True | Imported by yao.py and command modules for shared subprocess execution and JSON payload parsing. |
 | scripts/yao_cli_telemetry.py | internal-module | True | True | False | False | False | False | False | Imported by yao.py to record opt-in metadata-only CLI run telemetry. |

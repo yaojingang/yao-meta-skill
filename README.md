@@ -12,7 +12,7 @@
 
 `yao-meta-skill` creates, evaluates, packages, and governs reusable agent skills. The 1.0 line focused on turning repeated workflows into installable, readable, cross-platform skill packages. The 2.0 line expands that factory into a Skill OS: a governed system for modeling a skill once, compiling it for multiple targets, testing its behavior, reviewing its release evidence, and tracking the next iteration.
 
-[Quick Start](#quick-start) · [Skill OS 2.0](#skill-os-20-upgrade) · [1.0 vs 2.0](#from-10-to-20) · [Benchmark](#weighted-quality-benchmark) · [Examples](examples/README.md) · [Evals](evals/README.md) · [Failure Library](failures/README.md) · [Method Doctrine](#method-doctrine)
+[Quick Start](#quick-start) · [Skill OS 2.0](#skill-os-20-upgrade) · [1.0 vs 2.0](#from-10-to-20) · [Operator UX](#operator-ux-commands) · [Benchmark](#weighted-quality-benchmark) · [Examples](examples/README.md) · [Evals](evals/README.md) · [Failure Library](failures/README.md) · [Method Doctrine](#method-doctrine)
 
 ## Skill OS 2.0 Upgrade
 
@@ -52,6 +52,20 @@ See the companion artifacts:
 - **Prepare a skill for beta release**: run package verification, install simulation, compatibility checks, runtime permission probes, and evidence consistency checks, then separate beta readiness from stronger public claims.
 - **Keep a skill useful after release**: use metadata-only telemetry, adoption drift, feedback logs, SkillOps reports, and adaptive proposals to decide whether the next move should be documentation, an eval, a skill patch, or a governance update.
 - **Compare with other meta-skill approaches**: keep Anthropic/OpenAI-style conversational creation and lean instruction writing where they fit, then use `yao-meta-skill` when the package needs evidence, portability, release gates, and repeatable maintenance.
+
+## Operator UX Commands
+
+These read-only helper commands turn common maintainer questions into repeatable diagnostics:
+
+```bash
+python3 scripts/yao.py install-status --expected-source .
+python3 scripts/yao.py localized-doc-sync-check
+python3 scripts/yao.py pr-review-report 4 --repo yaojingang/yao-meta-skill
+```
+
+- `install-status` explains whether the active skill is coming from `.codex/skills`, `.agents/skills`, or the disabled mirror, and flags duplicate active installs.
+- `localized-doc-sync-check` verifies that the Chinese README carries the public homepage sections that were added to the English README.
+- `pr-review-report` reads GitHub PR metadata, changed files, status checks, and suggested local commands without merging or mutating the PR.
 
 ## Capability Surface
 
