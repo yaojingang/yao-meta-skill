@@ -1,0 +1,98 @@
+{
+  "schema_version": "1.0",
+  "seed": "blind-human-review-2026-06-29-v1",
+  "generated_by": "Codex 在本地套用两份 skill 说明生成",
+  "evidence_boundary": "人类盲测评审起始包；不是 provider-backed 的独立模型执行证据。",
+  "cases": [
+    {
+      "id": "case-01-support-triage",
+      "title": "客服工单分诊 Skill",
+      "scenario": "一个 B2B SaaS 团队每天都要处理客户工单：判断分类、紧急程度、起草首轮回复，并把账务、安全、故障类问题升级给对应负责人。他们希望把这个重复流程做成一个给支持团队使用的 Codex skill。",
+      "user_prompt": "请把我们反复使用的客服工单分诊流程做成一个团队可复用的 skill。输入包括原始工单文本、客户等级、产品模块和近期故障记录。输出需要包含问题分类、紧急程度、首轮回复草稿、升级负责人和判断依据。不要把 PII 泄露到报告里。",
+      "rubric": [
+        "是否有清楚的触发边界和近邻排除。",
+        "是否是可复用的 skill 包结构，而不只是一个提示词。",
+        "是否定义了分类、紧急程度、回复、升级和证据的输出契约。",
+        "是否处理 PII 和客户内容的隐私风险。",
+        "是否有能发现错误升级和泛泛回复的评测方案。"
+      ],
+      "variants": {
+        "A": "## 建议 Skill：support-triage\n\n### 目的\n创建一个简洁的 skill，帮助 Codex 对 B2B SaaS 客服工单进行分诊，并起草首轮回复。\n\n### 建议包结构\n```\nsupport-triage/\n  SKILL.md\n  agents/openai.yaml\n  references/\n    triage-taxonomy.md\n    escalation-policy.md\n```\n\n### SKILL.md 草稿\n```markdown\n---\nname: support-triage\ndescription: 对 B2B SaaS 客服工单进行分诊并起草首轮回复。当用户提供原始工单文本、客户等级、产品模块、故障记录，或需要紧急程度、分类、升级建议时使用。\n---\n\n# 客服工单分诊\n\n使用这个 skill 对入站工单分类、起草合适的首轮回复，并识别是否需要升级。\n\n## 工作流\n1. 阅读工单文本、客户等级、产品模块和近期故障记录。\n2. 将工单归为一个主分类：账务、访问权限、缺陷、故障、功能请求、安全、数据/隐私、上手问题或其他。\n3. 标记紧急程度：低、普通、高、严重。\n4. 起草首轮回复：确认问题、只询问必要补充信息，并避免没有依据的承诺。\n5. 对安全、隐私、严重故障、数据丢失或企业客户影响问题进行升级。\n6. 汇报判断依据，但不要复制不必要的 PII。\n\n## 输出格式\n- 分类：\n- 紧急程度：\n- 首轮回复：\n- 升级负责人：\n- 判断依据：\n- 缺失信息：\n\n## 参考资料\n- 分类规则见 `references/triage-taxonomy.md`。\n- 升级标准见 `references/escalation-policy.md`。\n```\n\n### agents/openai.yaml\n```yaml\ndisplay_name: 客服工单分诊\nshort_description: 对客服工单分类，并起草首轮回复。\ndefault_prompt: 请分诊这个客服工单，并起草首轮回复。\n```\n\n### 资源\n- `references/triage-taxonomy.md`：分类定义、紧急程度提示和示例。\n- `references/escalation-policy.md`：升级负责人和升级标准。\n\n### 验证\n用账务、安全、故障和功能请求等代表性工单测试。确认输出会最小化 PII，并且严重问题会被升级。\n",
+        "B": "## Skill 包建议：support-triage\n\n### 边界\n负责重复出现的客服工单分诊：用户提供工单文本以及客户/产品上下文，需要结构化路由决策。不要用于一次性文案润色、泛泛的客服同理心训练、CRM 配置，或超出升级范围的法律/安全事件处置。\n\n### 输出契约\n这个 skill 必须返回：\n- `category`\n- `urgency`\n- `first_response_draft`\n- `escalation_owner`\n- `evidence_used`\n- `missing_information`\n- `pii_handling_note`\n\n### 包结构\n```\nsupport-triage/\n  SKILL.md\n  agents/interface.yaml\n  references/\n    triage-taxonomy.md\n    escalation-policy.md\n    privacy-redaction.md\n  evals/\n    trigger_cases.json\n    output/\n      cases.jsonl\n      fixtures/\n  reports/\n    output-risk-profile.md\n    output_quality_scorecard.md\n```\n\n### SKILL.md\n```markdown\n---\nname: support-triage\ndescription: 将重复出现的 B2B SaaS 客服工单分诊为分类、紧急程度、首轮回复、升级负责人、判断依据和缺失信息。当输入包含原始工单、客户等级、产品模块、故障记录或支持队列上下文时使用。不要用于一次性文案润色、CRM 设置、法律建议或最终安全事件处置。\n---\n\n# 客服工单分诊\n\n## 工作流\n1. 确认这是重复的工单分诊任务，而不是一次性文案润色。\n2. 阅读工单文本、客户等级、产品模块和故障记录。\n3. 使用 `references/triage-taxonomy.md` 判断分类和紧急程度。\n4. 按 `references/escalation-policy.md` 检查升级标准。\n5. 起草首轮回复：确认问题、避免无依据承诺，只请求最少的缺失信息。\n6. 按 `references/privacy-redaction.md` 对 PII 做脱敏或摘要。\n7. 严格按输出契约返回。\n\n## 必填输出\n使用这些字段：\n- category\n- urgency\n- first_response_draft\n- escalation_owner\n- evidence_used\n- missing_information\n- pii_handling_note\n```\n\n### agents/interface.yaml\n```yaml\ndisplay_name: 客服工单分诊\nshort_description: 对工单分类、起草首轮回复，并给出升级依据。\ndefault_prompt: 请用分类、紧急程度、回复、升级负责人和依据来分诊这个客服工单。\n```\n\n### 评测用例\n1. 企业客户在已知故障期间提交工单：必须标为 `critical`，并升级给 incident commander。\n2. SMB 客户的账务困惑：不应过度升级。\n3. 带客户邮箱和 token 片段的安全披露：必须脱敏 token，并升级安全团队。\n4. 伪装成投诉的功能请求：应归类为功能请求，紧急程度为普通。\n5. 近邻请求：“把这段回复改得更温和”不应触发包级分诊。\n\n### 发布门禁\n- 触发评测：正例、反例、近邻文案润色。\n- 输出评测：首轮回复不能编造 SLA，升级必须匹配策略。\n- 隐私检查：报告不能保存原始工单 PII。\n- 审查备注：如果分类规则或升级负责人未提供，标记为 `missing evidence`，不要编造。\n\n### 下一步\n加入 3 个匿名工单 fixture，运行输出评测，并记录错误升级、泛泛回复和 PII 泄露的失败分类。\n"
+      },
+      "html_report": "case-01-support-triage.html"
+    },
+    {
+      "id": "case-02-monthly-revenue-reconciliation",
+      "title": "月度收入对账 Skill",
+      "scenario": "一个财务运营团队每个月结账前都要比对 Stripe 导出、数据仓库发票 CSV 和人工调整表，找出金额、币种、发票和调整项的不一致。",
+      "user_prompt": "请创建一个用于月度收入对账的可复用 skill。输入是 Stripe balance export CSV、warehouse invoice CSV 和 adjustments sheet。输出需要标出不一致项、解释可能原因，并生成可用于月结的摘要。准确性比速度更重要。",
+      "rubric": [
+        "是否识别出这是 file-backed 且准确性敏感的任务。",
+        "是否定义了确定性脚本和资源边界。",
+        "是否说明输入/输出 schema 与对账容差。",
+        "是否包含 fixture 和失败用例验证。",
+        "是否避免编造财务事实或隐藏未解决差异。"
+      ],
+      "variants": {
+        "A": "## Skill 包建议：revenue-reconciliation\n\n### 边界\n负责围绕 Stripe balance export、warehouse invoice CSV 和调整表的重复月结对账。排除税务建议、收入确认政策决策、支付渠道配置和一次性表格美化。\n\n### 风险等级\nGoverned，file-backed，准确性敏感。任何可用于月结的结论前，都必须有确定性解析和可见的未解决项目。\n\n### 包结构\n```\nrevenue-reconciliation/\n  SKILL.md\n  agents/interface.yaml\n  scripts/\n    reconcile_revenue.py\n    validate_reconciliation_fixture.py\n  references/\n    input-schema.md\n    tolerance-policy.md\n    close-summary-contract.md\n  evals/\n    output/\n      cases.jsonl\n      fixtures/\n        stripe_sample.csv\n        warehouse_sample.csv\n        adjustments_sample.csv\n  reports/\n    output-risk-profile.md\n    output_quality_scorecard.md\n    trust_report.md\n```\n\n### SKILL.md\n```markdown\n---\nname: revenue-reconciliation\ndescription: 对来自 Stripe 导出、warehouse invoice CSV 和调整表的重复月结收入文件进行对账。用于 file-backed 差异检测、可能原因分析、未解决项目报告和月结摘要。不要用于收入确认建议、税务指导、支付渠道配置或一次性表格格式整理。\n---\n\n# 收入对账\n\n## 工作流\n1. 要求提供所有输入文件；缺失文件必须标记为 `missing evidence`。\n2. 阅读 `references/input-schema.md`，先校验列再分析。\n3. 运行 `scripts/reconcile_revenue.py`，规范化 ID、币种、金额精度、日期和调整项关联。\n4. 审查 JSON 输出，并按缺失发票、金额差异、币种差异、重复项、时间差异或仅调整项分类。\n5. 只基于脚本证据生成月结摘要。\n6. 保持未解决差异可见。不要编造原因、审批或政策判断。\n\n## 输出契约\n- input_files\n- validation_status\n- totals_by_source\n- matched_count\n- mismatch_table\n- likely_causes\n- unresolved_items\n- close_ready_summary\n- missing_evidence\n```\n\n### 确定性脚本契约\n`scripts/reconcile_revenue.py` 应接受：\n```bash\npython3 scripts/reconcile_revenue.py --stripe stripe.csv --warehouse warehouse.csv --adjustments adjustments.csv --output reconciliation.json\n```\n\n它应返回包含源行 ID 的结构化 JSON，让摘要里的每个结论都能追溯到 file-backed fixture。\n\n### 评测\n- Fixture 1：所有记录匹配。\n- Fixture 2：Stripe 有付款，但 warehouse 缺发票。\n- Fixture 3：warehouse 金额超过容差。\n- Fixture 4：人工调整解释了差异。\n- 近邻请求：“把这个表格弄好看一点”不应路由到这里。\n\n### 门禁\n- 汇总前必须通过输入 schema 校验。\n- 如果遗漏未解决差异，输出评测必须失败。\n- Trust check 应标记网络访问为不必要。\n- Review Studio 应在晋级前显示 file-backed fixture 覆盖和未解决差异处理。\n",
+        "B": "## 建议 Skill：revenue-reconciliation\n\n### 目的\n帮助 Codex 对 Stripe、数据仓库发票和人工调整表中的月度收入记录进行对账。\n\n### 建议包结构\n```\nrevenue-reconciliation/\n  SKILL.md\n  agents/openai.yaml\n  scripts/\n    reconcile_revenue.py\n  references/\n    csv-schema.md\n```\n\n### SKILL.md 草稿\n```markdown\n---\nname: revenue-reconciliation\ndescription: 对 Stripe balance export、warehouse invoice CSV 和调整表中的月度收入数据进行对账。当用户要求比较收入文件、找出不一致项或准备月结摘要时使用。\n---\n\n# 收入对账\n\n## 工作流\n1. 确认用户提供了 Stripe 导出、warehouse invoice CSV 和调整表。\n2. 阅读 `references/csv-schema.md`，了解预期列。\n3. 使用用户提供的文件运行 `scripts/reconcile_revenue.py`。\n4. 审查不一致项，并总结可能原因。\n5. 不要编造缺失值。清楚标记未解决记录。\n\n## 输出\n- 已检查文件\n- 匹配总额\n- 不一致项\n- 可能原因\n- 未解决项目\n- 月结摘要\n```\n\n### 脚本\n`scripts/reconcile_revenue.py` 应解析 CSV 输入，规范化 invoice ID 和币种，比较金额，并输出 JSON 供 Codex 总结。\n\n### agents/openai.yaml\n```yaml\ndisplay_name: 收入对账\nshort_description: 比对收入 CSV，并总结月结差异。\ndefault_prompt: 请对这些收入文件进行对账，并生成月结摘要。\n```\n\n### 验证\n使用包含匹配发票、缺失发票、重复发票和仅调整项记录的样例 CSV。确认未解决差异不会被隐藏。\n"
+      },
+      "html_report": "case-02-monthly-revenue-reconciliation.html"
+    },
+    {
+      "id": "case-03-webinar-repurposing",
+      "title": "Webinar 内容复用 Skill",
+      "scenario": "一个市场团队经常把 webinar 逐字稿改写成 LinkedIn 帖子、邮件 teaser 和 newsletter 段落，同时必须保证所有说法都有来源，并避开禁止宣传的 claim。",
+      "user_prompt": "请做一个可复用 skill，把 webinar 逐字稿复用成市场内容。输入包括逐字稿、讲者姓名、产品定位说明和禁止使用的 claim。输出包括 LinkedIn 帖子、邮件 teaser、newsletter 段落、可引用金句和来源依据说明。",
+      "rubric": [
+        "是否保留来源约束，并处理 banned claims。",
+        "是否定义可重复的多渠道输出格式。",
+        "是否把语气和定位资料放到 references，避免入口膨胀。",
+        "是否有针对幻觉 claim 和泛泛市场文案的评测。",
+        "是否在中等治理风险下保持 skill 足够轻量。"
+      ],
+      "variants": {
+        "A": "## 建议 Skill：webinar-repurposer\n\n### 目的\n创建一个 skill，把 webinar 逐字稿转成可复用的市场内容。\n\n### 包结构\n```\nwebinar-repurposer/\n  SKILL.md\n  agents/openai.yaml\n  references/\n    brand-voice.md\n    banned-claims.md\n```\n\n### SKILL.md 草稿\n```markdown\n---\nname: webinar-repurposer\ndescription: 将 webinar 逐字稿复用成 LinkedIn 帖子、邮件 teaser、newsletter 段落、可引用金句和来源依据说明。当用户提供逐字稿、讲者、定位说明或禁止 claim 时使用。\n---\n\n# Webinar 内容复用\n\n## 工作流\n1. 阅读逐字稿、讲者姓名、产品定位说明和禁止 claim。\n2. 提取核心主题、最强的来源支持观点和可用引语。\n3. 起草一条 LinkedIn 帖子、一段邮件 teaser、一段 newsletter 和若干金句。\n4. 对照逐字稿和禁止 claim 检查每个说法。\n5. 为重要 claim 添加来源依据说明。\n\n## 输出\n- LinkedIn 帖子\n- 邮件 teaser\n- Newsletter 段落\n- 可引用金句\n- 来源依据说明\n- 已避免的 claim\n\n## 参考资料\n语气见 `references/brand-voice.md`，禁止 claim 见 `references/banned-claims.md`。\n```\n\n### agents/openai.yaml\n```yaml\ndisplay_name: Webinar 内容复用\nshort_description: 将 webinar 逐字稿转成有来源依据的市场内容。\ndefault_prompt: 请把这份 webinar 逐字稿复用成可发布的多渠道市场内容。\n```\n\n### 验证\n用包含强金句、证据较弱、以及容易误用禁止 claim 的逐字稿测试。确认输出会避免没有依据的 claim。\n",
+        "B": "## Skill 包建议：webinar-repurposer\n\n### 边界\n负责在提供来源逐字稿和定位约束时，把逐字稿复用为市场内容。排除全新 campaign strategy、没有依据的产品 claim、法律审核和一次性文案润色。\n\n### 类型\nProduction-light。它需要输出质量检查和 banned-claim 防护，但除非涉及受监管 claim 或上市公司披露规则，否则不需要做成很重的 governed 包。\n\n### 包结构\n```\nwebinar-repurposer/\n  SKILL.md\n  agents/interface.yaml\n  references/\n    brand-voice.md\n    positioning-notes.md\n    banned-claims.md\n  evals/\n    output/\n      cases.jsonl\n  reports/\n    output-risk-profile.md\n    prompt-quality-profile.md\n```\n\n### SKILL.md\n```markdown\n---\nname: webinar-repurposer\ndescription: 将重复出现的 webinar 逐字稿复用为有来源依据的 LinkedIn 帖子、邮件 teaser、newsletter 段落、金句和 claim 依据说明。当提供逐字稿、讲者、定位说明或禁止 claim 时使用。不要用于无依据的发布 claim、法律审批、全新 campaign strategy 或一次性文案润色。\n---\n\n# Webinar 内容复用\n\n## 工作流\n1. 确认逐字稿是事实来源。\n2. 提取有来源支持的主题、讲者背书的引语和可安全复用的 claim。\n3. 起草前先检查 `references/banned-claims.md`。\n4. 生成各渠道输出，但不要添加逐字稿中没有的性能数字、客户结果或产品承诺。\n5. 添加来源依据说明，把每个主要 claim 绑定到逐字稿证据。\n\n## 必填输出\n- linkedin_post\n- email_teaser\n- newsletter_section\n- pull_quotes\n- source_grounding_notes\n- claims_avoided\n- missing_evidence\n```\n\n### 输出风险画像\n常见失败：\n- 生成任何产品都能用的泛泛市场话术。\n- 编造指标或客户结果。\n- 过度改写金句，导致意思偏离。\n- 因为某个 claim 很有吸引力而忽略 banned claims。\n\n### 输出评测用例\n1. 逐字稿包含诱人的“guaranteed ROI”禁止 claim：输出必须避开。\n2. 逐字稿没有量化证明：输出不能编造数字。\n3. 讲者原话不够顺：可以轻微修语法，但必须保留原意。\n4. 近邻请求：“从零写一个新 campaign idea”不应路由到这里。\n\n### 审查门禁\n- 必填 section 必须全部出现。\n- Banned claim 检查必须显式出现。\n- 来源依据说明必须引用逐字稿位置或原话片段。\n- 缺失证据必须被标出，而不是用通用卖点填补。\n"
+      },
+      "html_report": "case-03-webinar-repurposing.html"
+    },
+    {
+      "id": "case-04-incident-postmortem",
+      "title": "故障复盘 Skill",
+      "scenario": "一个基础设施团队经常把 Slack 故障时间线、告警数据和部署记录整理成故障复盘和后续行动项。",
+      "user_prompt": "请创建一个可复用的 governed skill，用于故障复盘。输入包括告警时间线、Slack 摘要、部署记录、客户影响说明和负责人列表。输出应包含时间线、影响、根因假设、行动项、未解决证据和后续负责人矩阵。",
+      "rubric": [
+        "是否处理 governed/运营风险和未解决证据。",
+        "是否区分假设和已确认根因。",
+        "是否定义行动项负责人矩阵和回滚/跟进边界。",
+        "是否要求 file-backed 或 source-backed 证据。",
+        "是否有针对 blame language 和编造因果的审查门禁。"
+      ],
+      "variants": {
+        "A": "## Skill 包建议：incident-postmortem\n\n### 边界\n负责根据 source-backed 时间线、Slack 摘要、部署记录、客户影响说明和负责人列表起草 governed 故障复盘。不要用于实时 incident command、最终 RCA 签核、HR/归责分析或面向客户的法律声明。\n\n### 类型\nGoverned。这个包会影响运营责任归属，如果证据不足，容易制造虚假因果。\n\n### 包结构\n```\nincident-postmortem/\n  SKILL.md\n  agents/interface.yaml\n  references/\n    postmortem-contract.md\n    severity-policy.md\n    blame-free-language.md\n    action-owner-matrix.md\n  evals/\n    output/\n      cases.jsonl\n      fixtures/\n        alert_timeline.json\n        slack_summary.md\n        deploy_notes.md\n  reports/\n    output-risk-profile.md\n    output_quality_scorecard.md\n    trust_report.md\n    review-studio.html\n```\n\n### SKILL.md\n```markdown\n---\nname: incident-postmortem\ndescription: 根据告警时间线、Slack 摘要、部署记录、影响说明和负责人列表起草 governed 故障复盘。用于 source-backed 时间线重建、影响总结、根因假设、行动项、未解决证据和后续负责人矩阵。不要用于实时故障指挥、最终 RCA 审批、归责或法律/客户承诺。\n---\n\n# 故障复盘\n\n## 工作流\n1. 要求提供 source-backed 故障输入，并把缺失输入列为 `missing evidence`。\n2. 只根据已提供时间戳建立时间线；如需推断顺序，必须明确标注。\n3. 分开列出 `confirmed_facts`、`root_cause_hypotheses` 和 `unresolved_evidence`。\n4. 总结客户影响，但不要编造受影响账户、持续时间或 SLA 违约。\n5. 创建行动项：包含 owner、due date、验证信号和回滚/跟进边界。\n6. 使用 `references/blame-free-language.md` 的无责语言。\n7. 除非 reviewer 明确提供，否则最终 RCA 审批不属于本 skill。\n\n## 输出契约\n- incident_summary\n- source_inputs\n- timeline\n- customer_impact\n- confirmed_facts\n- root_cause_hypotheses\n- unresolved_evidence\n- action_items\n- owner_matrix\n- approval_status\n```\n\n### 输出评测用例\n1. Slack 和部署记录冲突：必须保留为未解决证据。\n2. 告警时间线缺恢复时间：不能编造持续时长。\n3. 用户要求实时故障决策：应路由出去，或说明本 skill 只做复盘。\n4. 来源材料带有归责语言：输出必须改写为系统/流程语言。\n5. 缺负责人列表：行动项 owner 字段应为 `missing evidence`。\n\n### 门禁\n- 时间线和部署记录需要 file-backed fixture 覆盖。\n- 输出评测禁止编造因果和隐藏未解决证据。\n- Review Studio 在人工 reviewer 审批行动负责人矩阵前保持 warning。\n- Trust report 应显示无网络和无破坏性操作。\n",
+        "B": "## 建议 Skill：incident-postmortem\n\n### 目的\n帮助 Codex 根据时间线、Slack 摘要、部署记录、影响说明和负责人列表创建结构化故障复盘。\n\n### 包结构\n```\nincident-postmortem/\n  SKILL.md\n  agents/openai.yaml\n  references/\n    postmortem-template.md\n    severity-policy.md\n```\n\n### SKILL.md 草稿\n```markdown\n---\nname: incident-postmortem\ndescription: 根据告警时间线、Slack 摘要、部署记录、客户影响说明和负责人列表创建故障复盘。当用户需要时间线、影响、根因假设、行动项、未解决证据或负责人矩阵时使用。\n---\n\n# 故障复盘\n\n## 工作流\n1. 收集告警时间线、Slack 摘要、部署记录、客户影响说明和负责人列表。\n2. 建立按时间排序的时间线。\n3. 总结客户和系统影响。\n4. 识别已确认事实和根因假设。\n5. 在提供负责人和截止时间时，起草行动项。\n6. 清楚标记未解决证据。\n7. 避免归责式语言。\n\n## 输出\n- 故障摘要\n- 时间线\n- 影响\n- 根因假设\n- 已确认事实\n- 未解决证据\n- 行动项\n- 负责人矩阵\n```\n\n### agents/openai.yaml\n```yaml\ndisplay_name: 故障复盘\nshort_description: 根据故障证据生成结构化复盘。\ndefault_prompt: 请把这些故障证据整理成复盘和负责人矩阵。\n```\n\n### 验证\n用证据完整、缺部署记录、Slack 说法冲突和暂时没有根因的 case 测试。确认 skill 会区分事实和假设。\n"
+      },
+      "html_report": "case-04-incident-postmortem.html"
+    },
+    {
+      "id": "case-05-pr-review-followup",
+      "title": "PR Review 跟进 Skill",
+      "scenario": "一个小工程团队经常收到 GitHub PR review comments，希望 Codex 能把评论转成补丁、回复摘要和验证记录。",
+      "user_prompt": "请设计一个用于处理 PR review comments 的可复用 skill。输入包括 review comments、变更文件、失败 CI 说明和 maintainer preferences。输出需要分组评论、只修改相关文件、写回复说明并运行验证。必须避免回滚无关的用户改动。",
+      "rubric": [
+        "是否理解 code-review 跟进和 dirty worktree 安全。",
+        "是否定义评论分组、补丁、回复和验证工作流。",
+        "是否避免过度重构和无关 revert。",
+        "是否说明变更后需要的命令和证据。",
+        "是否定义一般 code review 与评论跟进的触发排除。"
+      ],
+      "variants": {
+        "A": "## 建议 Skill：pr-review-followup\n\n### 目的\n创建一个 skill，帮助 Codex 安全处理 PR review comments，并总结回复。\n\n### 包结构\n```\npr-review-followup/\n  SKILL.md\n  agents/openai.yaml\n  references/\n    response-style.md\n```\n\n### SKILL.md 草稿\n```markdown\n---\nname: pr-review-followup\ndescription: 通过分组反馈、修改相关文件、编写回复说明和运行验证来处理 GitHub PR review comments。当用户提供 review comments、变更文件、CI 说明或 maintainer preferences 时使用。\n---\n\n# PR Review 跟进\n\n## 工作流\n1. 阅读所有 review comments，并按文件、主题和严重程度分组。\n2. 编辑前检查受影响文件。\n3. 只修改处理 comments 所需的文件。\n4. 不要回滚无关用户改动。\n5. 运行相关测试或 CI 复现命令。\n6. 总结变更，并为 reviewer 起草回复说明。\n\n## 输出\n- 评论分组\n- 修改文件\n- 验证命令\n- Reviewer 回复说明\n- 剩余问题\n```\n\n### agents/openai.yaml\n```yaml\ndisplay_name: PR Review 跟进\nshort_description: 处理 PR comments 并准备 reviewer 回复。\ndefault_prompt: 请处理这些 PR review comments，并总结验证结果。\n```\n\n### 验证\n用需要代码修改、文档修改、无需修改只需解释、以及 reviewer 要求冲突的 comments 测试。\n",
+        "B": "## Skill 包建议：pr-review-followup\n\n### 边界\n负责 PR 已经有明确 reviewer comments、变更文件或 CI 说明之后的评论跟进。排除首次 code review、大范围重构、issue triage，以及没有绑定评论的推测性清理。\n\n### 包结构\n```\npr-review-followup/\n  SKILL.md\n  agents/interface.yaml\n  references/\n    response-style.md\n    dirty-worktree-safety.md\n    verification-policy.md\n  evals/\n    trigger_cases.json\n    output/\n      cases.jsonl\n  reports/\n    output-risk-profile.md\n    output_quality_scorecard.md\n```\n\n### SKILL.md\n```markdown\n---\nname: pr-review-followup\ndescription: 处理具体 PR review comments：分组反馈、只修改相关文件、保留无关用户改动、起草 reviewer 回复并运行验证。当提供 review comments、变更文件、失败 CI 说明或 maintainer preferences 时使用。不要用于首次 code review、大范围重构、issue triage 或无关清理。\n---\n\n# PR Review 跟进\n\n## 工作流\n1. 编辑前记录 git status，并识别用户已经改动的文件。\n2. 按文件、行为、严重程度，以及是否需要代码、测试、文档或仅解释来分组 review comments。\n3. 修改前阅读受影响代码和附近测试。\n4. 只修改与评论绑定的文件。不要回滚无关改动，也不要格式化未触碰文件。\n5. 运行有针对性的验证，并记录命令和结果。\n6. 起草 reviewer 回复说明，把每组评论映射到变更、无需修改的理由或剩余问题。\n7. 如果评论冲突，停止并询问哪个 reviewer 指令优先。\n\n## 输出契约\n- comment_groups\n- patch_summary\n- files_changed\n- verification\n- reviewer_response_notes\n- unresolved_questions\n- unrelated_changes_preserved\n```\n\n### 输出评测用例\n1. 评论要求添加特定 null check：输出必须只修改受影响函数，并提到测试。\n2. Reviewer 要求与 PR 范围无关的大重构：输出应标出范围风险。\n3. Dirty worktree 中有无关用户文件：输出必须保留它。\n4. 两个 reviewer comments 冲突：输出必须询问优先级，而不是猜。\n5. 近邻请求：“从零 review 这个 PR”不应触发 follow-up mode。\n\n### 门禁\n- 触发评测必须区分首次 review 和评论跟进。\n- 如果回滚或隐藏无关改动，输出评测必须失败。\n- 验证策略必须记录跳过测试的原因。\n- 回复说明必须能追溯到评论分组。\n"
+      },
+      "html_report": "case-05-pr-review-followup.html"
+    }
+  ]
+}

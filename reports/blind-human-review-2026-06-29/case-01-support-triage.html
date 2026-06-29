@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>客服工单分诊 Skill - Skill 盲测评审</title>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f7f8fb;
+  --panel: #ffffff;
+  --ink: #20242c;
+  --muted: #687082;
+  --line: #d9deea;
+  --accent: #2563eb;
+  --accent-2: #0f766e;
+  --warn: #b45309;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.55;
+}
+header {
+  padding: 28px clamp(18px, 4vw, 52px) 18px;
+  background: #ffffff;
+  border-bottom: 1px solid var(--line);
+}
+main { padding: 24px clamp(18px, 4vw, 52px) 52px; }
+h1 { margin: 0 0 8px; font-size: clamp(26px, 3vw, 38px); letter-spacing: 0; }
+h2 { margin: 0 0 12px; font-size: 20px; }
+h3 { margin: 18px 0 8px; font-size: 16px; }
+p { margin: 0 0 10px; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.meta, .note { color: var(--muted); }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: start; }
+.card, .panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 18px;
+}
+.case-list { display: grid; gap: 12px; margin-top: 18px; }
+.case-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #e8f0ff;
+  color: #1d4ed8;
+  font-size: 13px;
+  font-weight: 650;
+}
+.rubric { margin: 0; padding-left: 20px; }
+.rubric li { margin-bottom: 6px; }
+.variant {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.variant-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  background: #f2f5fa;
+}
+.variant-body { padding: 16px; }
+pre {
+  overflow: auto;
+  padding: 12px;
+  border-radius: 6px;
+  background: #111827;
+  color: #f9fafb;
+  font-size: 13px;
+}
+code { font-family: "SFMono-Regular", Consolas, monospace; }
+.review-box {
+  margin-top: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+  background: #fff;
+}
+.controls { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0; }
+button, .button {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink);
+  min-height: 36px;
+  padding: 7px 12px;
+  cursor: pointer;
+  font-weight: 650;
+}
+button.primary, .button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+textarea {
+  width: 100%;
+  min-height: 96px;
+  resize: vertical;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 10px;
+  font: inherit;
+}
+.warn { color: var(--warn); font-weight: 650; }
+.split { display: flex; flex-wrap: wrap; gap: 10px; }
+.small { font-size: 13px; }
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; }
+  .case-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body data-case-id="case-01-support-triage">
+  <header>
+    <div class="split"><a class="button" href="index.html">返回入口</a><a class="button" href="case-02-monthly-revenue-reconciliation.html">下一个</a></div>
+    <h1>客服工单分诊 Skill</h1>
+    <p class="meta">A/B 盲测评审。记录完判断前，不要打开答案钥匙。</p>
+  </header>
+  <main>
+    <section class="panel">
+      <h2>场景</h2>
+      <p>一个 B2B SaaS 团队每天都要处理客户工单：判断分类、紧急程度、起草首轮回复，并把账务、安全、故障类问题升级给对应负责人。他们希望把这个重复流程做成一个给支持团队使用的 Codex skill。</p>
+      <h3>用户请求</h3>
+      <p>请把我们反复使用的客服工单分诊流程做成一个团队可复用的 skill。输入包括原始工单文本、客户等级、产品模块和近期故障记录。输出需要包含问题分类、紧急程度、首轮回复草稿、升级负责人和判断依据。不要把 PII 泄露到报告里。</p>
+      <h3>评审标准</h3>
+      <ol class="rubric"><li>是否有清楚的触发边界和近邻排除。</li>
+<li>是否是可复用的 skill 包结构，而不只是一个提示词。</li>
+<li>是否定义了分类、紧急程度、回复、升级和证据的输出契约。</li>
+<li>是否处理 PII 和客户内容的隐私风险。</li>
+<li>是否有能发现错误升级和泛泛回复的评测方案。</li></ol>
+    </section>
+
+    <div class="grid" style="margin-top:18px">
+
+<section class="variant">
+  <div class="variant-head">
+    <h2>方案 A</h2>
+    <span class="badge">来源已隐藏</span>
+  </div>
+  <div class="variant-body">
+    <h2>建议 Skill：support-triage</h2>
+
+<h3>目的</h3>
+<p>创建一个简洁的 skill，帮助 Codex 对 B2B SaaS 客服工单进行分诊，并起草首轮回复。</p>
+
+<h3>建议包结构</h3>
+<pre><code>support-triage/
+  SKILL.md
+  agents/openai.yaml
+  references/
+    triage-taxonomy.md
+    escalation-policy.md</code></pre>
+
+<h3>SKILL.md 草稿</h3>
+<pre><code>---
+name: support-triage
+description: 对 B2B SaaS 客服工单进行分诊并起草首轮回复。当用户提供原始工单文本、客户等级、产品模块、故障记录，或需要紧急程度、分类、升级建议时使用。
+---
+
+# 客服工单分诊
+
+使用这个 skill 对入站工单分类、起草合适的首轮回复，并识别是否需要升级。
+
+## 工作流
+1. 阅读工单文本、客户等级、产品模块和近期故障记录。
+2. 将工单归为一个主分类：账务、访问权限、缺陷、故障、功能请求、安全、数据/隐私、上手问题或其他。
+3. 标记紧急程度：低、普通、高、严重。
+4. 起草首轮回复：确认问题、只询问必要补充信息，并避免没有依据的承诺。
+5. 对安全、隐私、严重故障、数据丢失或企业客户影响问题进行升级。
+6. 汇报判断依据，但不要复制不必要的 PII。
+
+## 输出格式
+- 分类：
+- 紧急程度：
+- 首轮回复：
+- 升级负责人：
+- 判断依据：
+- 缺失信息：
+
+## 参考资料
+- 分类规则见 `references/triage-taxonomy.md`。
+- 升级标准见 `references/escalation-policy.md`。</code></pre>
+
+<h3>agents/openai.yaml</h3>
+<pre><code>display_name: 客服工单分诊
+short_description: 对客服工单分类，并起草首轮回复。
+default_prompt: 请分诊这个客服工单，并起草首轮回复。</code></pre>
+
+<h3>资源</h3>
+<ul>
+<li>`references/triage-taxonomy.md`：分类定义、紧急程度提示和示例。</li>
+<li>`references/escalation-policy.md`：升级负责人和升级标准。</li>
+</ul>
+
+<h3>验证</h3>
+<p>用账务、安全、故障和功能请求等代表性工单测试。确认输出会最小化 PII，并且严重问题会被升级。</p>
+  </div>
+</section>
+
+
+<section class="variant">
+  <div class="variant-head">
+    <h2>方案 B</h2>
+    <span class="badge">来源已隐藏</span>
+  </div>
+  <div class="variant-body">
+    <h2>Skill 包建议：support-triage</h2>
+
+<h3>边界</h3>
+<p>负责重复出现的客服工单分诊：用户提供工单文本以及客户/产品上下文，需要结构化路由决策。不要用于一次性文案润色、泛泛的客服同理心训练、CRM 配置，或超出升级范围的法律/安全事件处置。</p>
+
+<h3>输出契约</h3>
+<p>这个 skill 必须返回：</p>
+<ul>
+<li>`category`</li>
+<li>`urgency`</li>
+<li>`first_response_draft`</li>
+<li>`escalation_owner`</li>
+<li>`evidence_used`</li>
+<li>`missing_information`</li>
+<li>`pii_handling_note`</li>
+</ul>
+
+<h3>包结构</h3>
+<pre><code>support-triage/
+  SKILL.md
+  agents/interface.yaml
+  references/
+    triage-taxonomy.md
+    escalation-policy.md
+    privacy-redaction.md
+  evals/
+    trigger_cases.json
+    output/
+      cases.jsonl
+      fixtures/
+  reports/
+    output-risk-profile.md
+    output_quality_scorecard.md</code></pre>
+
+<h3>SKILL.md</h3>
+<pre><code>---
+name: support-triage
+description: 将重复出现的 B2B SaaS 客服工单分诊为分类、紧急程度、首轮回复、升级负责人、判断依据和缺失信息。当输入包含原始工单、客户等级、产品模块、故障记录或支持队列上下文时使用。不要用于一次性文案润色、CRM 设置、法律建议或最终安全事件处置。
+---
+
+# 客服工单分诊
+
+## 工作流
+1. 确认这是重复的工单分诊任务，而不是一次性文案润色。
+2. 阅读工单文本、客户等级、产品模块和故障记录。
+3. 使用 `references/triage-taxonomy.md` 判断分类和紧急程度。
+4. 按 `references/escalation-policy.md` 检查升级标准。
+5. 起草首轮回复：确认问题、避免无依据承诺，只请求最少的缺失信息。
+6. 按 `references/privacy-redaction.md` 对 PII 做脱敏或摘要。
+7. 严格按输出契约返回。
+
+## 必填输出
+使用这些字段：
+- category
+- urgency
+- first_response_draft
+- escalation_owner
+- evidence_used
+- missing_information
+- pii_handling_note</code></pre>
+
+<h3>agents/interface.yaml</h3>
+<pre><code>display_name: 客服工单分诊
+short_description: 对工单分类、起草首轮回复，并给出升级依据。
+default_prompt: 请用分类、紧急程度、回复、升级负责人和依据来分诊这个客服工单。</code></pre>
+
+<h3>评测用例</h3>
+<p>1. 企业客户在已知故障期间提交工单：必须标为 `critical`，并升级给 incident commander。</p>
+<p>2. SMB 客户的账务困惑：不应过度升级。</p>
+<p>3. 带客户邮箱和 token 片段的安全披露：必须脱敏 token，并升级安全团队。</p>
+<p>4. 伪装成投诉的功能请求：应归类为功能请求，紧急程度为普通。</p>
+<p>5. 近邻请求：“把这段回复改得更温和”不应触发包级分诊。</p>
+
+<h3>发布门禁</h3>
+<ul>
+<li>触发评测：正例、反例、近邻文案润色。</li>
+<li>输出评测：首轮回复不能编造 SLA，升级必须匹配策略。</li>
+<li>隐私检查：报告不能保存原始工单 PII。</li>
+<li>审查备注：如果分类规则或升级负责人未提供，标记为 `missing evidence`，不要编造。</li>
+</ul>
+
+<h3>下一步</h3>
+<p>加入 3 个匿名工单 fixture，运行输出评测，并记录错误升级、泛泛回复和 PII 泄露的失败分类。</p>
+  </div>
+</section>
+
+    </div>
+
+    <section class="review-box">
+      <h2>你的判断</h2>
+      <p class="note">只根据评审标准和页面里可见的两个输出做判断。选择会保存到当前浏览器的本地存储里，也可以回到入口页导出。</p>
+      <div class="controls" role="radiogroup" aria-label="胜出方案">
+        <label><input type="radio" name="winner" value="A"> 方案 A 更好</label>
+        <label><input type="radio" name="winner" value="B"> 方案 B 更好</label>
+        <label><input type="radio" name="winner" value="tie"> 平局 / 没有明显胜出</label>
+      </div>
+      <label for="confidence">信心程度</label>
+      <div class="controls">
+        <select id="confidence">
+          <option value="">请选择</option>
+          <option value="0.4">0.4，较弱</option>
+          <option value="0.6">0.6，中等</option>
+          <option value="0.8">0.8，较强</option>
+          <option value="1.0">1.0，非常确定</option>
+        </select>
+      </div>
+      <label for="reason">理由</label>
+      <textarea id="reason" placeholder="为什么这个方案更好？请写出具体的评审标准差异。"></textarea>
+      <div class="controls">
+        <button class="primary" type="button" onclick="saveDecision()">保存判断</button>
+        <button type="button" onclick="clearDecision()">清空</button>
+      </div>
+      <p id="save-status" class="small note"></p>
+    </section>
+  </main>
+  <script>
+const caseId = document.body.dataset.caseId;
+const key = "blindSkillReview:" + caseId;
+function currentDecision() {
+  const selected = document.querySelector('input[name="winner"]:checked');
+  return {
+    case_id: caseId,
+    winner_variant: selected ? selected.value : "",
+    confidence: document.getElementById("confidence").value,
+    reason: document.getElementById("reason").value.trim(),
+    reviewed_at: new Date().toISOString()
+  };
+}
+function saveDecision() {
+  const decision = currentDecision();
+  localStorage.setItem(key, JSON.stringify(decision));
+  document.getElementById("save-status").textContent = "已保存：" + decision.reviewed_at;
+}
+function clearDecision() {
+  localStorage.removeItem(key);
+  document.querySelectorAll('input[name="winner"]').forEach(el => el.checked = false);
+  document.getElementById("confidence").value = "";
+  document.getElementById("reason").value = "";
+  document.getElementById("save-status").textContent = "已清空。";
+}
+function loadDecision() {
+  const raw = localStorage.getItem(key);
+  if (!raw) return;
+  const decision = JSON.parse(raw);
+  const selected = document.querySelector('input[name="winner"][value="' + decision.winner_variant + '"]');
+  if (selected) selected.checked = true;
+  document.getElementById("confidence").value = decision.confidence || "";
+  document.getElementById("reason").value = decision.reason || "";
+  document.getElementById("save-status").textContent = "已加载保存过的判断。";
+}
+loadDecision();
+  </script>
+</body>
+</html>

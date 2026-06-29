@@ -121,6 +121,8 @@ flowchart LR
 
 下面是当前项目采用的工程质量评测模型。每个维度按 `0-10` 评分，再按权重折算到 `100` 分。GitHub stars 不计入总分，因为它反映生态热度，不直接代表元 skill 工程质量。
 
+这个分数是本地工程证据，不等同于 world-class ready。公开宣称“已证明优于其他方案”仍要以 world-class ledger 中已接受的外部证据和人工证据为准。
+
 加权总分公式：`sum(单项评分 / 10 * 权重)`。
 
 | 元 Skill | 方法论深度 15 | 上下文纪律 10 | 工具链 15 | Eval/测试 20 | 治理 15 | 可移植 10 | 上手/评审 5 | 本地可靠性 10 | 加权总分 |
@@ -134,6 +136,20 @@ flowchart LR
 | 1 | Yao Meta Skill | 91.5 | 工程化、评测化、治理化、可移植的完整元 skill 系统。 |
 | 2 | Anthropic Skill Creator | 67.5 | 方法论和迭代闭环强，但本地执行可靠性和治理覆盖较弱。 |
 | 3 | OpenAI Skill Creator | 50.5 | 更适合作为精简 skill 写作方法论教材，而不是完整工程系统。 |
+
+## 人工盲测快照
+
+2026-06-29，一位人工评审者在 5 个真实常见的 skill 创建场景里，对比了 `yao-meta-skill` 和内置的 OpenAI `skill-creator`。5 个场景分别是客服工单分诊、月度收入对账、Webinar 内容复用、故障复盘和 PR Review 跟进。评审者确认：所有选择都在揭晓来源前完成。
+
+结果：`yao-meta-skill` 在 `5/5` 个案例中胜出。
+
+证据：
+
+- 盲测入口：[reports/blind-human-review-2026-06-29/index.html](../reports/blind-human-review-2026-06-29/index.html)
+- Adjudication 摘要：[reports/blind-human-review-2026-06-29/adjudication.md](../reports/blind-human-review-2026-06-29/adjudication.md)
+- 已记录判断：[reports/blind-human-review-2026-06-29/review-decisions.recorded.json](../reports/blind-human-review-2026-06-29/review-decisions.recorded.json)
+
+边界：这是单人盲测偏好证据，不是 provider-backed 的独立模型执行证据；每个案例的逐项理由仍为空。
 
 ## 与其他元 Skill 的适用差异
 
@@ -158,6 +174,7 @@ flowchart LR
 - 中文真实表达已经纳入触发评测，覆盖“做一个 skill”“沉淀成可复用能力”“优化已有 skill”“补 trigger 评测”等常见说法
 - registry 记录的目标平台从 OpenAI、Claude、Generic 扩展到 Agent Skills 和 VS Code 相关适配
 - Review Studio 当前汇总 16 个门禁，包体验证、安装模拟、证据一致性和发布声明边界已经进入报告链路
+- 单人盲测快照中，评审者在揭晓来源前完成判断，并在 `5/5` 个真实 skill 创建场景中选择 `yao-meta-skill`；证据见 [reports/blind-human-review-2026-06-29/adjudication.md](../reports/blind-human-review-2026-06-29/adjudication.md)
 
 ## 当前优势
 

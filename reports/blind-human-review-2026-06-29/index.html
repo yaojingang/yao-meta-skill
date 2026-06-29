@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>人工盲测评审包 - Meta Skill 对比</title>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f7f8fb;
+  --panel: #ffffff;
+  --ink: #20242c;
+  --muted: #687082;
+  --line: #d9deea;
+  --accent: #2563eb;
+  --accent-2: #0f766e;
+  --warn: #b45309;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.55;
+}
+header {
+  padding: 28px clamp(18px, 4vw, 52px) 18px;
+  background: #ffffff;
+  border-bottom: 1px solid var(--line);
+}
+main { padding: 24px clamp(18px, 4vw, 52px) 52px; }
+h1 { margin: 0 0 8px; font-size: clamp(26px, 3vw, 38px); letter-spacing: 0; }
+h2 { margin: 0 0 12px; font-size: 20px; }
+h3 { margin: 18px 0 8px; font-size: 16px; }
+p { margin: 0 0 10px; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.meta, .note { color: var(--muted); }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: start; }
+.card, .panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 18px;
+}
+.case-list { display: grid; gap: 12px; margin-top: 18px; }
+.case-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #e8f0ff;
+  color: #1d4ed8;
+  font-size: 13px;
+  font-weight: 650;
+}
+.rubric { margin: 0; padding-left: 20px; }
+.rubric li { margin-bottom: 6px; }
+.variant {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.variant-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  background: #f2f5fa;
+}
+.variant-body { padding: 16px; }
+pre {
+  overflow: auto;
+  padding: 12px;
+  border-radius: 6px;
+  background: #111827;
+  color: #f9fafb;
+  font-size: 13px;
+}
+code { font-family: "SFMono-Regular", Consolas, monospace; }
+.review-box {
+  margin-top: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+  background: #fff;
+}
+.controls { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0; }
+button, .button {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink);
+  min-height: 36px;
+  padding: 7px 12px;
+  cursor: pointer;
+  font-weight: 650;
+}
+button.primary, .button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+textarea {
+  width: 100%;
+  min-height: 96px;
+  resize: vertical;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 10px;
+  font: inherit;
+}
+.warn { color: var(--warn); font-weight: 650; }
+.split { display: flex; flex-wrap: wrap; gap: 10px; }
+.small { font-size: 13px; }
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; }
+  .case-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+  <header>
+    <h1>人工盲测评审包</h1>
+    <p class="meta">5 个真实常见的 skill 创建场景。打开答案钥匙前，方案来源都会保持隐藏。</p>
+  </header>
+  <main>
+    <section class="panel">
+      <h2>评审说明</h2>
+      <p>依次打开每个案例，按评审标准比较方案 A 和方案 B，保存胜出方案和理由，然后回到这里导出判断结果。5 个判断全部保存前，不要打开 <code>DO_NOT_OPEN_answer_key.html</code> 或 <code>DO_NOT_OPEN_answer_key.json</code>。</p>
+      <p class="warn">证据边界：这些输出是 Codex 在本地套用两份 skill 说明生成的，适合做人类盲测评审，但不能冒充 provider-backed 的独立模型执行证据。</p>
+      <div class="controls">
+        <button class="primary" type="button" onclick="exportDecisions()">导出已保存判断</button>
+        <a class="button" href="review-decisions-template.json">判断模板</a>
+        <a class="button" href="blind-pack.json">盲测包 JSON</a>
+      </div>
+      <textarea id="export" placeholder="导出的判断结果会显示在这里。"></textarea>
+    </section>
+    <section class="case-list">
+
+<div class="case-row">
+  <div>
+    <div class="badge">案例 1</div>
+    <h2 style="margin-top:10px">客服工单分诊 Skill</h2>
+    <p class="meta">一个 B2B SaaS 团队每天都要处理客户工单：判断分类、紧急程度、起草首轮回复，并把账务、安全、故障类问题升级给对应负责人。他们希望把这个重复流程做成一个给支持团队使用的 Codex skill。</p>
+  </div>
+  <a class="button primary" href="case-01-support-triage.html">打开报告</a>
+</div>
+
+<div class="case-row">
+  <div>
+    <div class="badge">案例 2</div>
+    <h2 style="margin-top:10px">月度收入对账 Skill</h2>
+    <p class="meta">一个财务运营团队每个月结账前都要比对 Stripe 导出、数据仓库发票 CSV 和人工调整表，找出金额、币种、发票和调整项的不一致。</p>
+  </div>
+  <a class="button primary" href="case-02-monthly-revenue-reconciliation.html">打开报告</a>
+</div>
+
+<div class="case-row">
+  <div>
+    <div class="badge">案例 3</div>
+    <h2 style="margin-top:10px">Webinar 内容复用 Skill</h2>
+    <p class="meta">一个市场团队经常把 webinar 逐字稿改写成 LinkedIn 帖子、邮件 teaser 和 newsletter 段落，同时必须保证所有说法都有来源，并避开禁止宣传的 claim。</p>
+  </div>
+  <a class="button primary" href="case-03-webinar-repurposing.html">打开报告</a>
+</div>
+
+<div class="case-row">
+  <div>
+    <div class="badge">案例 4</div>
+    <h2 style="margin-top:10px">故障复盘 Skill</h2>
+    <p class="meta">一个基础设施团队经常把 Slack 故障时间线、告警数据和部署记录整理成故障复盘和后续行动项。</p>
+  </div>
+  <a class="button primary" href="case-04-incident-postmortem.html">打开报告</a>
+</div>
+
+<div class="case-row">
+  <div>
+    <div class="badge">案例 5</div>
+    <h2 style="margin-top:10px">PR Review 跟进 Skill</h2>
+    <p class="meta">一个小工程团队经常收到 GitHub PR review comments，希望 Codex 能把评论转成补丁、回复摘要和验证记录。</p>
+  </div>
+  <a class="button primary" href="case-05-pr-review-followup.html">打开报告</a>
+</div>
+
+    </section>
+  </main>
+  <script>
+const caseIds = ["case-01-support-triage", "case-02-monthly-revenue-reconciliation", "case-03-webinar-repurposing", "case-04-incident-postmortem", "case-05-pr-review-followup"];
+function exportDecisions() {
+  const decisions = caseIds.map(id => {
+    const raw = localStorage.getItem("blindSkillReview:" + id);
+    return raw ? JSON.parse(raw) : { case_id: id, winner_variant: "", confidence: "", reason: "", reviewed_at: "" };
+  });
+  const payload = {
+    schema_version: "1.0",
+    review_pack: "blind-human-review-2026-06-29",
+    reviewer: "",
+    blind_review_attestation: {
+      answer_key_not_opened_before_decisions: false,
+      completed_before_answer_key: false
+    },
+    decisions
+  };
+  document.getElementById("export").value = JSON.stringify(payload, null, 2);
+}
+  </script>
+</body>
+</html>

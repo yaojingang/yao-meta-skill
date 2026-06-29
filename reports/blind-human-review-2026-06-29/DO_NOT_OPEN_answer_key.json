@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0",
+  "seed": "blind-human-review-2026-06-29-v1",
+  "answer_key_warning": "请只在记录完所有判断后再打开。",
+  "answers": [
+    {
+      "case_id": "case-01-support-triage",
+      "variant_a_source": "official",
+      "variant_b_source": "yao",
+      "variant_a_source_label": "官方 skill-creator",
+      "variant_b_source_label": "yao-meta-skill",
+      "source_paths": {
+        "yao": "/Users/laoyao/AI Coding/03-Development/Skills/yao-meta-skill/SKILL.md",
+        "official": "/Users/laoyao/.codex/skills/.system/skill-creator/SKILL.md"
+      }
+    },
+    {
+      "case_id": "case-02-monthly-revenue-reconciliation",
+      "variant_a_source": "yao",
+      "variant_b_source": "official",
+      "variant_a_source_label": "yao-meta-skill",
+      "variant_b_source_label": "官方 skill-creator",
+      "source_paths": {
+        "yao": "/Users/laoyao/AI Coding/03-Development/Skills/yao-meta-skill/SKILL.md",
+        "official": "/Users/laoyao/.codex/skills/.system/skill-creator/SKILL.md"
+      }
+    },
+    {
+      "case_id": "case-03-webinar-repurposing",
+      "variant_a_source": "official",
+      "variant_b_source": "yao",
+      "variant_a_source_label": "官方 skill-creator",
+      "variant_b_source_label": "yao-meta-skill",
+      "source_paths": {
+        "yao": "/Users/laoyao/AI Coding/03-Development/Skills/yao-meta-skill/SKILL.md",
+        "official": "/Users/laoyao/.codex/skills/.system/skill-creator/SKILL.md"
+      }
+    },
+    {
+      "case_id": "case-04-incident-postmortem",
+      "variant_a_source": "yao",
+      "variant_b_source": "official",
+      "variant_a_source_label": "yao-meta-skill",
+      "variant_b_source_label": "官方 skill-creator",
+      "source_paths": {
+        "yao": "/Users/laoyao/AI Coding/03-Development/Skills/yao-meta-skill/SKILL.md",
+        "official": "/Users/laoyao/.codex/skills/.system/skill-creator/SKILL.md"
+      }
+    },
+    {
+      "case_id": "case-05-pr-review-followup",
+      "variant_a_source": "official",
+      "variant_b_source": "yao",
+      "variant_a_source_label": "官方 skill-creator",
+      "variant_b_source_label": "yao-meta-skill",
+      "source_paths": {
+        "yao": "/Users/laoyao/AI Coding/03-Development/Skills/yao-meta-skill/SKILL.md",
+        "official": "/Users/laoyao/.codex/skills/.system/skill-creator/SKILL.md"
+      }
+    }
+  ]
+}

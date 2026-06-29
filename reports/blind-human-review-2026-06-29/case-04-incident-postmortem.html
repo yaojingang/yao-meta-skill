@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>故障复盘 Skill - Skill 盲测评审</title>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f7f8fb;
+  --panel: #ffffff;
+  --ink: #20242c;
+  --muted: #687082;
+  --line: #d9deea;
+  --accent: #2563eb;
+  --accent-2: #0f766e;
+  --warn: #b45309;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.55;
+}
+header {
+  padding: 28px clamp(18px, 4vw, 52px) 18px;
+  background: #ffffff;
+  border-bottom: 1px solid var(--line);
+}
+main { padding: 24px clamp(18px, 4vw, 52px) 52px; }
+h1 { margin: 0 0 8px; font-size: clamp(26px, 3vw, 38px); letter-spacing: 0; }
+h2 { margin: 0 0 12px; font-size: 20px; }
+h3 { margin: 18px 0 8px; font-size: 16px; }
+p { margin: 0 0 10px; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.meta, .note { color: var(--muted); }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: start; }
+.card, .panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 18px;
+}
+.case-list { display: grid; gap: 12px; margin-top: 18px; }
+.case-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #e8f0ff;
+  color: #1d4ed8;
+  font-size: 13px;
+  font-weight: 650;
+}
+.rubric { margin: 0; padding-left: 20px; }
+.rubric li { margin-bottom: 6px; }
+.variant {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.variant-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  background: #f2f5fa;
+}
+.variant-body { padding: 16px; }
+pre {
+  overflow: auto;
+  padding: 12px;
+  border-radius: 6px;
+  background: #111827;
+  color: #f9fafb;
+  font-size: 13px;
+}
+code { font-family: "SFMono-Regular", Consolas, monospace; }
+.review-box {
+  margin-top: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+  background: #fff;
+}
+.controls { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0; }
+button, .button {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink);
+  min-height: 36px;
+  padding: 7px 12px;
+  cursor: pointer;
+  font-weight: 650;
+}
+button.primary, .button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+textarea {
+  width: 100%;
+  min-height: 96px;
+  resize: vertical;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 10px;
+  font: inherit;
+}
+.warn { color: var(--warn); font-weight: 650; }
+.split { display: flex; flex-wrap: wrap; gap: 10px; }
+.small { font-size: 13px; }
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; }
+  .case-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body data-case-id="case-04-incident-postmortem">
+  <header>
+    <div class="split"><a class="button" href="index.html">返回入口</a><a class="button" href="case-03-webinar-repurposing.html">上一个</a><a class="button" href="case-05-pr-review-followup.html">下一个</a></div>
+    <h1>故障复盘 Skill</h1>
+    <p class="meta">A/B 盲测评审。记录完判断前，不要打开答案钥匙。</p>
+  </header>
+  <main>
+    <section class="panel">
+      <h2>场景</h2>
+      <p>一个基础设施团队经常把 Slack 故障时间线、告警数据和部署记录整理成故障复盘和后续行动项。</p>
+      <h3>用户请求</h3>
+      <p>请创建一个可复用的 governed skill，用于故障复盘。输入包括告警时间线、Slack 摘要、部署记录、客户影响说明和负责人列表。输出应包含时间线、影响、根因假设、行动项、未解决证据和后续负责人矩阵。</p>
+      <h3>评审标准</h3>
+      <ol class="rubric"><li>是否处理 governed/运营风险和未解决证据。</li>
+<li>是否区分假设和已确认根因。</li>
+<li>是否定义行动项负责人矩阵和回滚/跟进边界。</li>
+<li>是否要求 file-backed 或 source-backed 证据。</li>
+<li>是否有针对 blame language 和编造因果的审查门禁。</li></ol>
+    </section>
+
+    <div class="grid" style="margin-top:18px">
+
+<section class="variant">
+  <div class="variant-head">
+    <h2>方案 A</h2>
+    <span class="badge">来源已隐藏</span>
+  </div>
+  <div class="variant-body">
+    <h2>Skill 包建议：incident-postmortem</h2>
+
+<h3>边界</h3>
+<p>负责根据 source-backed 时间线、Slack 摘要、部署记录、客户影响说明和负责人列表起草 governed 故障复盘。不要用于实时 incident command、最终 RCA 签核、HR/归责分析或面向客户的法律声明。</p>
+
+<h3>类型</h3>
+<p>Governed。这个包会影响运营责任归属，如果证据不足，容易制造虚假因果。</p>
+
+<h3>包结构</h3>
+<pre><code>incident-postmortem/
+  SKILL.md
+  agents/interface.yaml
+  references/
+    postmortem-contract.md
+    severity-policy.md
+    blame-free-language.md
+    action-owner-matrix.md
+  evals/
+    output/
+      cases.jsonl
+      fixtures/
+        alert_timeline.json
+        slack_summary.md
+        deploy_notes.md
+  reports/
+    output-risk-profile.md
+    output_quality_scorecard.md
+    trust_report.md
+    review-studio.html</code></pre>
+
+<h3>SKILL.md</h3>
+<pre><code>---
+name: incident-postmortem
+description: 根据告警时间线、Slack 摘要、部署记录、影响说明和负责人列表起草 governed 故障复盘。用于 source-backed 时间线重建、影响总结、根因假设、行动项、未解决证据和后续负责人矩阵。不要用于实时故障指挥、最终 RCA 审批、归责或法律/客户承诺。
+---
+
+# 故障复盘
+
+## 工作流
+1. 要求提供 source-backed 故障输入，并把缺失输入列为 `missing evidence`。
+2. 只根据已提供时间戳建立时间线；如需推断顺序，必须明确标注。
+3. 分开列出 `confirmed_facts`、`root_cause_hypotheses` 和 `unresolved_evidence`。
+4. 总结客户影响，但不要编造受影响账户、持续时间或 SLA 违约。
+5. 创建行动项：包含 owner、due date、验证信号和回滚/跟进边界。
+6. 使用 `references/blame-free-language.md` 的无责语言。
+7. 除非 reviewer 明确提供，否则最终 RCA 审批不属于本 skill。
+
+## 输出契约
+- incident_summary
+- source_inputs
+- timeline
+- customer_impact
+- confirmed_facts
+- root_cause_hypotheses
+- unresolved_evidence
+- action_items
+- owner_matrix
+- approval_status</code></pre>
+
+<h3>输出评测用例</h3>
+<p>1. Slack 和部署记录冲突：必须保留为未解决证据。</p>
+<p>2. 告警时间线缺恢复时间：不能编造持续时长。</p>
+<p>3. 用户要求实时故障决策：应路由出去，或说明本 skill 只做复盘。</p>
+<p>4. 来源材料带有归责语言：输出必须改写为系统/流程语言。</p>
+<p>5. 缺负责人列表：行动项 owner 字段应为 `missing evidence`。</p>
+
+<h3>门禁</h3>
+<ul>
+<li>时间线和部署记录需要 file-backed fixture 覆盖。</li>
+<li>输出评测禁止编造因果和隐藏未解决证据。</li>
+<li>Review Studio 在人工 reviewer 审批行动负责人矩阵前保持 warning。</li>
+<li>Trust report 应显示无网络和无破坏性操作。</li>
+</ul>
+  </div>
+</section>
+
+
+<section class="variant">
+  <div class="variant-head">
+    <h2>方案 B</h2>
+    <span class="badge">来源已隐藏</span>
+  </div>
+  <div class="variant-body">
+    <h2>建议 Skill：incident-postmortem</h2>
+
+<h3>目的</h3>
+<p>帮助 Codex 根据时间线、Slack 摘要、部署记录、影响说明和负责人列表创建结构化故障复盘。</p>
+
+<h3>包结构</h3>
+<pre><code>incident-postmortem/
+  SKILL.md
+  agents/openai.yaml
+  references/
+    postmortem-template.md
+    severity-policy.md</code></pre>
+
+<h3>SKILL.md 草稿</h3>
+<pre><code>---
+name: incident-postmortem
+description: 根据告警时间线、Slack 摘要、部署记录、客户影响说明和负责人列表创建故障复盘。当用户需要时间线、影响、根因假设、行动项、未解决证据或负责人矩阵时使用。
+---
+
+# 故障复盘
+
+## 工作流
+1. 收集告警时间线、Slack 摘要、部署记录、客户影响说明和负责人列表。
+2. 建立按时间排序的时间线。
+3. 总结客户和系统影响。
+4. 识别已确认事实和根因假设。
+5. 在提供负责人和截止时间时，起草行动项。
+6. 清楚标记未解决证据。
+7. 避免归责式语言。
+
+## 输出
+- 故障摘要
+- 时间线
+- 影响
+- 根因假设
+- 已确认事实
+- 未解决证据
+- 行动项
+- 负责人矩阵</code></pre>
+
+<h3>agents/openai.yaml</h3>
+<pre><code>display_name: 故障复盘
+short_description: 根据故障证据生成结构化复盘。
+default_prompt: 请把这些故障证据整理成复盘和负责人矩阵。</code></pre>
+
+<h3>验证</h3>
+<p>用证据完整、缺部署记录、Slack 说法冲突和暂时没有根因的 case 测试。确认 skill 会区分事实和假设。</p>
+  </div>
+</section>
+
+    </div>
+
+    <section class="review-box">
+      <h2>你的判断</h2>
+      <p class="note">只根据评审标准和页面里可见的两个输出做判断。选择会保存到当前浏览器的本地存储里，也可以回到入口页导出。</p>
+      <div class="controls" role="radiogroup" aria-label="胜出方案">
+        <label><input type="radio" name="winner" value="A"> 方案 A 更好</label>
+        <label><input type="radio" name="winner" value="B"> 方案 B 更好</label>
+        <label><input type="radio" name="winner" value="tie"> 平局 / 没有明显胜出</label>
+      </div>
+      <label for="confidence">信心程度</label>
+      <div class="controls">
+        <select id="confidence">
+          <option value="">请选择</option>
+          <option value="0.4">0.4，较弱</option>
+          <option value="0.6">0.6，中等</option>
+          <option value="0.8">0.8，较强</option>
+          <option value="1.0">1.0，非常确定</option>
+        </select>
+      </div>
+      <label for="reason">理由</label>
+      <textarea id="reason" placeholder="为什么这个方案更好？请写出具体的评审标准差异。"></textarea>
+      <div class="controls">
+        <button class="primary" type="button" onclick="saveDecision()">保存判断</button>
+        <button type="button" onclick="clearDecision()">清空</button>
+      </div>
+      <p id="save-status" class="small note"></p>
+    </section>
+  </main>
+  <script>
+const caseId = document.body.dataset.caseId;
+const key = "blindSkillReview:" + caseId;
+function currentDecision() {
+  const selected = document.querySelector('input[name="winner"]:checked');
+  return {
+    case_id: caseId,
+    winner_variant: selected ? selected.value : "",
+    confidence: document.getElementById("confidence").value,
+    reason: document.getElementById("reason").value.trim(),
+    reviewed_at: new Date().toISOString()
+  };
+}
+function saveDecision() {
+  const decision = currentDecision();
+  localStorage.setItem(key, JSON.stringify(decision));
+  document.getElementById("save-status").textContent = "已保存：" + decision.reviewed_at;
+}
+function clearDecision() {
+  localStorage.removeItem(key);
+  document.querySelectorAll('input[name="winner"]').forEach(el => el.checked = false);
+  document.getElementById("confidence").value = "";
+  document.getElementById("reason").value = "";
+  document.getElementById("save-status").textContent = "已清空。";
+}
+function loadDecision() {
+  const raw = localStorage.getItem(key);
+  if (!raw) return;
+  const decision = JSON.parse(raw);
+  const selected = document.querySelector('input[name="winner"][value="' + decision.winner_variant + '"]');
+  if (selected) selected.checked = true;
+  document.getElementById("confidence").value = decision.confidence || "";
+  document.getElementById("reason").value = decision.reason || "";
+  document.getElementById("save-status").textContent = "已加载保存过的判断。";
+}
+loadDecision();
+  </script>
+</body>
+</html>

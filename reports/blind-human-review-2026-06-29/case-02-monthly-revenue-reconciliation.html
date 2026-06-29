@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>月度收入对账 Skill - Skill 盲测评审</title>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f7f8fb;
+  --panel: #ffffff;
+  --ink: #20242c;
+  --muted: #687082;
+  --line: #d9deea;
+  --accent: #2563eb;
+  --accent-2: #0f766e;
+  --warn: #b45309;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.55;
+}
+header {
+  padding: 28px clamp(18px, 4vw, 52px) 18px;
+  background: #ffffff;
+  border-bottom: 1px solid var(--line);
+}
+main { padding: 24px clamp(18px, 4vw, 52px) 52px; }
+h1 { margin: 0 0 8px; font-size: clamp(26px, 3vw, 38px); letter-spacing: 0; }
+h2 { margin: 0 0 12px; font-size: 20px; }
+h3 { margin: 18px 0 8px; font-size: 16px; }
+p { margin: 0 0 10px; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.meta, .note { color: var(--muted); }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: start; }
+.card, .panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 18px;
+}
+.case-list { display: grid; gap: 12px; margin-top: 18px; }
+.case-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #e8f0ff;
+  color: #1d4ed8;
+  font-size: 13px;
+  font-weight: 650;
+}
+.rubric { margin: 0; padding-left: 20px; }
+.rubric li { margin-bottom: 6px; }
+.variant {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.variant-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  background: #f2f5fa;
+}
+.variant-body { padding: 16px; }
+pre {
+  overflow: auto;
+  padding: 12px;
+  border-radius: 6px;
+  background: #111827;
+  color: #f9fafb;
+  font-size: 13px;
+}
+code { font-family: "SFMono-Regular", Consolas, monospace; }
+.review-box {
+  margin-top: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+  background: #fff;
+}
+.controls { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0; }
+button, .button {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink);
+  min-height: 36px;
+  padding: 7px 12px;
+  cursor: pointer;
+  font-weight: 650;
+}
+button.primary, .button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+textarea {
+  width: 100%;
+  min-height: 96px;
+  resize: vertical;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 10px;
+  font: inherit;
+}
+.warn { color: var(--warn); font-weight: 650; }
+.split { display: flex; flex-wrap: wrap; gap: 10px; }
+.small { font-size: 13px; }
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; }
+  .case-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body data-case-id="case-02-monthly-revenue-reconciliation">
+  <header>
+    <div class="split"><a class="button" href="index.html">返回入口</a><a class="button" href="case-01-support-triage.html">上一个</a><a class="button" href="case-03-webinar-repurposing.html">下一个</a></div>
+    <h1>月度收入对账 Skill</h1>
+    <p class="meta">A/B 盲测评审。记录完判断前，不要打开答案钥匙。</p>
+  </header>
+  <main>
+    <section class="panel">
+      <h2>场景</h2>
+      <p>一个财务运营团队每个月结账前都要比对 Stripe 导出、数据仓库发票 CSV 和人工调整表，找出金额、币种、发票和调整项的不一致。</p>
+      <h3>用户请求</h3>
+      <p>请创建一个用于月度收入对账的可复用 skill。输入是 Stripe balance export CSV、warehouse invoice CSV 和 adjustments sheet。输出需要标出不一致项、解释可能原因，并生成可用于月结的摘要。准确性比速度更重要。</p>
+      <h3>评审标准</h3>
+      <ol class="rubric"><li>是否识别出这是 file-backed 且准确性敏感的任务。</li>
+<li>是否定义了确定性脚本和资源边界。</li>
+<li>是否说明输入/输出 schema 与对账容差。</li>
+<li>是否包含 fixture 和失败用例验证。</li>
+<li>是否避免编造财务事实或隐藏未解决差异。</li></ol>
+    </section>
+
+    <div class="grid" style="margin-top:18px">
+
+<section class="variant">
+  <div class="variant-head">
+    <h2>方案 A</h2>
+    <span class="badge">来源已隐藏</span>
+  </div>
+  <div class="variant-body">
+    <h2>Skill 包建议：revenue-reconciliation</h2>
+
+<h3>边界</h3>
+<p>负责围绕 Stripe balance export、warehouse invoice CSV 和调整表的重复月结对账。排除税务建议、收入确认政策决策、支付渠道配置和一次性表格美化。</p>
+
+<h3>风险等级</h3>
+<p>Governed，file-backed，准确性敏感。任何可用于月结的结论前，都必须有确定性解析和可见的未解决项目。</p>
+
+<h3>包结构</h3>
+<pre><code>revenue-reconciliation/
+  SKILL.md
+  agents/interface.yaml
+  scripts/
+    reconcile_revenue.py
+    validate_reconciliation_fixture.py
+  references/
+    input-schema.md
+    tolerance-policy.md
+    close-summary-contract.md
+  evals/
+    output/
+      cases.jsonl
+      fixtures/
+        stripe_sample.csv
+        warehouse_sample.csv
+        adjustments_sample.csv
+  reports/
+    output-risk-profile.md
+    output_quality_scorecard.md
+    trust_report.md</code></pre>
+
+<h3>SKILL.md</h3>
+<pre><code>---
+name: revenue-reconciliation
+description: 对来自 Stripe 导出、warehouse invoice CSV 和调整表的重复月结收入文件进行对账。用于 file-backed 差异检测、可能原因分析、未解决项目报告和月结摘要。不要用于收入确认建议、税务指导、支付渠道配置或一次性表格格式整理。
+---
+
+# 收入对账
+
+## 工作流
+1. 要求提供所有输入文件；缺失文件必须标记为 `missing evidence`。
+2. 阅读 `references/input-schema.md`，先校验列再分析。
+3. 运行 `scripts/reconcile_revenue.py`，规范化 ID、币种、金额精度、日期和调整项关联。
+4. 审查 JSON 输出，并按缺失发票、金额差异、币种差异、重复项、时间差异或仅调整项分类。
+5. 只基于脚本证据生成月结摘要。
+6. 保持未解决差异可见。不要编造原因、审批或政策判断。
+
+## 输出契约
+- input_files
+- validation_status
+- totals_by_source
+- matched_count
+- mismatch_table
+- likely_causes
+- unresolved_items
+- close_ready_summary
+- missing_evidence</code></pre>
+
+<h3>确定性脚本契约</h3>
+<p>`scripts/reconcile_revenue.py` 应接受：</p>
+<pre><code>python3 scripts/reconcile_revenue.py --stripe stripe.csv --warehouse warehouse.csv --adjustments adjustments.csv --output reconciliation.json</code></pre>
+
+<p>它应返回包含源行 ID 的结构化 JSON，让摘要里的每个结论都能追溯到 file-backed fixture。</p>
+
+<h3>评测</h3>
+<ul>
+<li>Fixture 1：所有记录匹配。</li>
+<li>Fixture 2：Stripe 有付款，但 warehouse 缺发票。</li>
+<li>Fixture 3：warehouse 金额超过容差。</li>
+<li>Fixture 4：人工调整解释了差异。</li>
+<li>近邻请求：“把这个表格弄好看一点”不应路由到这里。</li>
+</ul>
+
+<h3>门禁</h3>
+<ul>
+<li>汇总前必须通过输入 schema 校验。</li>
+<li>如果遗漏未解决差异，输出评测必须失败。</li>
+<li>Trust check 应标记网络访问为不必要。</li>
+<li>Review Studio 应在晋级前显示 file-backed fixture 覆盖和未解决差异处理。</li>
+</ul>
+  </div>
+</section>
+
+
+<section class="variant">
+  <div class="variant-head">
+    <h2>方案 B</h2>
+    <span class="badge">来源已隐藏</span>
+  </div>
+  <div class="variant-body">
+    <h2>建议 Skill：revenue-reconciliation</h2>
+
+<h3>目的</h3>
+<p>帮助 Codex 对 Stripe、数据仓库发票和人工调整表中的月度收入记录进行对账。</p>
+
+<h3>建议包结构</h3>
+<pre><code>revenue-reconciliation/
+  SKILL.md
+  agents/openai.yaml
+  scripts/
+    reconcile_revenue.py
+  references/
+    csv-schema.md</code></pre>
+
+<h3>SKILL.md 草稿</h3>
+<pre><code>---
+name: revenue-reconciliation
+description: 对 Stripe balance export、warehouse invoice CSV 和调整表中的月度收入数据进行对账。当用户要求比较收入文件、找出不一致项或准备月结摘要时使用。
+---
+
+# 收入对账
+
+## 工作流
+1. 确认用户提供了 Stripe 导出、warehouse invoice CSV 和调整表。
+2. 阅读 `references/csv-schema.md`，了解预期列。
+3. 使用用户提供的文件运行 `scripts/reconcile_revenue.py`。
+4. 审查不一致项，并总结可能原因。
+5. 不要编造缺失值。清楚标记未解决记录。
+
+## 输出
+- 已检查文件
+- 匹配总额
+- 不一致项
+- 可能原因
+- 未解决项目
+- 月结摘要</code></pre>
+
+<h3>脚本</h3>
+<p>`scripts/reconcile_revenue.py` 应解析 CSV 输入，规范化 invoice ID 和币种，比较金额，并输出 JSON 供 Codex 总结。</p>
+
+<h3>agents/openai.yaml</h3>
+<pre><code>display_name: 收入对账
+short_description: 比对收入 CSV，并总结月结差异。
+default_prompt: 请对这些收入文件进行对账，并生成月结摘要。</code></pre>
+
+<h3>验证</h3>
+<p>使用包含匹配发票、缺失发票、重复发票和仅调整项记录的样例 CSV。确认未解决差异不会被隐藏。</p>
+  </div>
+</section>
+
+    </div>
+
+    <section class="review-box">
+      <h2>你的判断</h2>
+      <p class="note">只根据评审标准和页面里可见的两个输出做判断。选择会保存到当前浏览器的本地存储里，也可以回到入口页导出。</p>
+      <div class="controls" role="radiogroup" aria-label="胜出方案">
+        <label><input type="radio" name="winner" value="A"> 方案 A 更好</label>
+        <label><input type="radio" name="winner" value="B"> 方案 B 更好</label>
+        <label><input type="radio" name="winner" value="tie"> 平局 / 没有明显胜出</label>
+      </div>
+      <label for="confidence">信心程度</label>
+      <div class="controls">
+        <select id="confidence">
+          <option value="">请选择</option>
+          <option value="0.4">0.4，较弱</option>
+          <option value="0.6">0.6，中等</option>
+          <option value="0.8">0.8，较强</option>
+          <option value="1.0">1.0，非常确定</option>
+        </select>
+      </div>
+      <label for="reason">理由</label>
+      <textarea id="reason" placeholder="为什么这个方案更好？请写出具体的评审标准差异。"></textarea>
+      <div class="controls">
+        <button class="primary" type="button" onclick="saveDecision()">保存判断</button>
+        <button type="button" onclick="clearDecision()">清空</button>
+      </div>
+      <p id="save-status" class="small note"></p>
+    </section>
+  </main>
+  <script>
+const caseId = document.body.dataset.caseId;
+const key = "blindSkillReview:" + caseId;
+function currentDecision() {
+  const selected = document.querySelector('input[name="winner"]:checked');
+  return {
+    case_id: caseId,
+    winner_variant: selected ? selected.value : "",
+    confidence: document.getElementById("confidence").value,
+    reason: document.getElementById("reason").value.trim(),
+    reviewed_at: new Date().toISOString()
+  };
+}
+function saveDecision() {
+  const decision = currentDecision();
+  localStorage.setItem(key, JSON.stringify(decision));
+  document.getElementById("save-status").textContent = "已保存：" + decision.reviewed_at;
+}
+function clearDecision() {
+  localStorage.removeItem(key);
+  document.querySelectorAll('input[name="winner"]').forEach(el => el.checked = false);
+  document.getElementById("confidence").value = "";
+  document.getElementById("reason").value = "";
+  document.getElementById("save-status").textContent = "已清空。";
+}
+function loadDecision() {
+  const raw = localStorage.getItem(key);
+  if (!raw) return;
+  const decision = JSON.parse(raw);
+  const selected = document.querySelector('input[name="winner"][value="' + decision.winner_variant + '"]');
+  if (selected) selected.checked = true;
+  document.getElementById("confidence").value = decision.confidence || "";
+  document.getElementById("reason").value = decision.reason || "";
+  document.getElementById("save-status").textContent = "已加载保存过的判断。";
+}
+loadDecision();
+  </script>
+</body>
+</html>

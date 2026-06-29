@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "review_pack": "blind-human-review-2026-06-29",
+  "reviewer": "",
+  "reviewed_at": "",
+  "blind_review_attestation": {
+    "answer_key_not_opened_before_decisions": false,
+    "completed_before_answer_key": false
+  },
+  "decisions": [
+    {
+      "case_id": "case-01-support-triage",
+      "winner_variant": "",
+      "confidence": "",
+      "reason": ""
+    },
+    {
+      "case_id": "case-02-monthly-revenue-reconciliation",
+      "winner_variant": "",
+      "confidence": "",
+      "reason": ""
+    },
+    {
+      "case_id": "case-03-webinar-repurposing",
+      "winner_variant": "",
+      "confidence": "",
+      "reason": ""
+    },
+    {
+      "case_id": "case-04-incident-postmortem",
+      "winner_variant": "",
+      "confidence": "",
+      "reason": ""
+    },
+    {
+      "case_id": "case-05-pr-review-followup",
+      "winner_variant": "",
+      "confidence": "",
+      "reason": ""
+    }
+  ]
+}

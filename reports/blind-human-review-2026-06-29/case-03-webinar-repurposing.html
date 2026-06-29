@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Webinar 内容复用 Skill - Skill 盲测评审</title>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f7f8fb;
+  --panel: #ffffff;
+  --ink: #20242c;
+  --muted: #687082;
+  --line: #d9deea;
+  --accent: #2563eb;
+  --accent-2: #0f766e;
+  --warn: #b45309;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.55;
+}
+header {
+  padding: 28px clamp(18px, 4vw, 52px) 18px;
+  background: #ffffff;
+  border-bottom: 1px solid var(--line);
+}
+main { padding: 24px clamp(18px, 4vw, 52px) 52px; }
+h1 { margin: 0 0 8px; font-size: clamp(26px, 3vw, 38px); letter-spacing: 0; }
+h2 { margin: 0 0 12px; font-size: 20px; }
+h3 { margin: 18px 0 8px; font-size: 16px; }
+p { margin: 0 0 10px; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.meta, .note { color: var(--muted); }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: start; }
+.card, .panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 18px;
+}
+.case-list { display: grid; gap: 12px; margin-top: 18px; }
+.case-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #e8f0ff;
+  color: #1d4ed8;
+  font-size: 13px;
+  font-weight: 650;
+}
+.rubric { margin: 0; padding-left: 20px; }
+.rubric li { margin-bottom: 6px; }
+.variant {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.variant-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  background: #f2f5fa;
+}
+.variant-body { padding: 16px; }
+pre {
+  overflow: auto;
+  padding: 12px;
+  border-radius: 6px;
+  background: #111827;
+  color: #f9fafb;
+  font-size: 13px;
+}
+code { font-family: "SFMono-Regular", Consolas, monospace; }
+.review-box {
+  margin-top: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+  background: #fff;
+}
+.controls { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0; }
+button, .button {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink);
+  min-height: 36px;
+  padding: 7px 12px;
+  cursor: pointer;
+  font-weight: 650;
+}
+button.primary, .button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+textarea {
+  width: 100%;
+  min-height: 96px;
+  resize: vertical;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 10px;
+  font: inherit;
+}
+.warn { color: var(--warn); font-weight: 650; }
+.split { display: flex; flex-wrap: wrap; gap: 10px; }
+.small { font-size: 13px; }
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; }
+  .case-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body data-case-id="case-03-webinar-repurposing">
+  <header>
+    <div class="split"><a class="button" href="index.html">返回入口</a><a class="button" href="case-02-monthly-revenue-reconciliation.html">上一个</a><a class="button" href="case-04-incident-postmortem.html">下一个</a></div>
+    <h1>Webinar 内容复用 Skill</h1>
+    <p class="meta">A/B 盲测评审。记录完判断前，不要打开答案钥匙。</p>
+  </header>
+  <main>
+    <section class="panel">
+      <h2>场景</h2>
+      <p>一个市场团队经常把 webinar 逐字稿改写成 LinkedIn 帖子、邮件 teaser 和 newsletter 段落，同时必须保证所有说法都有来源，并避开禁止宣传的 claim。</p>
+      <h3>用户请求</h3>
+      <p>请做一个可复用 skill，把 webinar 逐字稿复用成市场内容。输入包括逐字稿、讲者姓名、产品定位说明和禁止使用的 claim。输出包括 LinkedIn 帖子、邮件 teaser、newsletter 段落、可引用金句和来源依据说明。</p>
+      <h3>评审标准</h3>
+      <ol class="rubric"><li>是否保留来源约束，并处理 banned claims。</li>
+<li>是否定义可重复的多渠道输出格式。</li>
+<li>是否把语气和定位资料放到 references，避免入口膨胀。</li>
+<li>是否有针对幻觉 claim 和泛泛市场文案的评测。</li>
+<li>是否在中等治理风险下保持 skill 足够轻量。</li></ol>
+    </section>
+
+    <div class="grid" style="margin-top:18px">
+
+<section class="variant">
+  <div class="variant-head">
+    <h2>方案 A</h2>
+    <span class="badge">来源已隐藏</span>
+  </div>
+  <div class="variant-body">
+    <h2>建议 Skill：webinar-repurposer</h2>
+
+<h3>目的</h3>
+<p>创建一个 skill，把 webinar 逐字稿转成可复用的市场内容。</p>
+
+<h3>包结构</h3>
+<pre><code>webinar-repurposer/
+  SKILL.md
+  agents/openai.yaml
+  references/
+    brand-voice.md
+    banned-claims.md</code></pre>
+
+<h3>SKILL.md 草稿</h3>
+<pre><code>---
+name: webinar-repurposer
+description: 将 webinar 逐字稿复用成 LinkedIn 帖子、邮件 teaser、newsletter 段落、可引用金句和来源依据说明。当用户提供逐字稿、讲者、定位说明或禁止 claim 时使用。
+---
+
+# Webinar 内容复用
+
+## 工作流
+1. 阅读逐字稿、讲者姓名、产品定位说明和禁止 claim。
+2. 提取核心主题、最强的来源支持观点和可用引语。
+3. 起草一条 LinkedIn 帖子、一段邮件 teaser、一段 newsletter 和若干金句。
+4. 对照逐字稿和禁止 claim 检查每个说法。
+5. 为重要 claim 添加来源依据说明。
+
+## 输出
+- LinkedIn 帖子
+- 邮件 teaser
+- Newsletter 段落
+- 可引用金句
+- 来源依据说明
+- 已避免的 claim
+
+## 参考资料
+语气见 `references/brand-voice.md`，禁止 claim 见 `references/banned-claims.md`。</code></pre>
+
+<h3>agents/openai.yaml</h3>
+<pre><code>display_name: Webinar 内容复用
+short_description: 将 webinar 逐字稿转成有来源依据的市场内容。
+default_prompt: 请把这份 webinar 逐字稿复用成可发布的多渠道市场内容。</code></pre>
+
+<h3>验证</h3>
+<p>用包含强金句、证据较弱、以及容易误用禁止 claim 的逐字稿测试。确认输出会避免没有依据的 claim。</p>
+  </div>
+</section>
+
+
+<section class="variant">
+  <div class="variant-head">
+    <h2>方案 B</h2>
+    <span class="badge">来源已隐藏</span>
+  </div>
+  <div class="variant-body">
+    <h2>Skill 包建议：webinar-repurposer</h2>
+
+<h3>边界</h3>
+<p>负责在提供来源逐字稿和定位约束时，把逐字稿复用为市场内容。排除全新 campaign strategy、没有依据的产品 claim、法律审核和一次性文案润色。</p>
+
+<h3>类型</h3>
+<p>Production-light。它需要输出质量检查和 banned-claim 防护，但除非涉及受监管 claim 或上市公司披露规则，否则不需要做成很重的 governed 包。</p>
+
+<h3>包结构</h3>
+<pre><code>webinar-repurposer/
+  SKILL.md
+  agents/interface.yaml
+  references/
+    brand-voice.md
+    positioning-notes.md
+    banned-claims.md
+  evals/
+    output/
+      cases.jsonl
+  reports/
+    output-risk-profile.md
+    prompt-quality-profile.md</code></pre>
+
+<h3>SKILL.md</h3>
+<pre><code>---
+name: webinar-repurposer
+description: 将重复出现的 webinar 逐字稿复用为有来源依据的 LinkedIn 帖子、邮件 teaser、newsletter 段落、金句和 claim 依据说明。当提供逐字稿、讲者、定位说明或禁止 claim 时使用。不要用于无依据的发布 claim、法律审批、全新 campaign strategy 或一次性文案润色。
+---
+
+# Webinar 内容复用
+
+## 工作流
+1. 确认逐字稿是事实来源。
+2. 提取有来源支持的主题、讲者背书的引语和可安全复用的 claim。
+3. 起草前先检查 `references/banned-claims.md`。
+4. 生成各渠道输出，但不要添加逐字稿中没有的性能数字、客户结果或产品承诺。
+5. 添加来源依据说明，把每个主要 claim 绑定到逐字稿证据。
+
+## 必填输出
+- linkedin_post
+- email_teaser
+- newsletter_section
+- pull_quotes
+- source_grounding_notes
+- claims_avoided
+- missing_evidence</code></pre>
+
+<h3>输出风险画像</h3>
+<p>常见失败：</p>
+<ul>
+<li>生成任何产品都能用的泛泛市场话术。</li>
+<li>编造指标或客户结果。</li>
+<li>过度改写金句，导致意思偏离。</li>
+<li>因为某个 claim 很有吸引力而忽略 banned claims。</li>
+</ul>
+
+<h3>输出评测用例</h3>
+<p>1. 逐字稿包含诱人的“guaranteed ROI”禁止 claim：输出必须避开。</p>
+<p>2. 逐字稿没有量化证明：输出不能编造数字。</p>
+<p>3. 讲者原话不够顺：可以轻微修语法，但必须保留原意。</p>
+<p>4. 近邻请求：“从零写一个新 campaign idea”不应路由到这里。</p>
+
+<h3>审查门禁</h3>
+<ul>
+<li>必填 section 必须全部出现。</li>
+<li>Banned claim 检查必须显式出现。</li>
+<li>来源依据说明必须引用逐字稿位置或原话片段。</li>
+<li>缺失证据必须被标出，而不是用通用卖点填补。</li>
+</ul>
+  </div>
+</section>
+
+    </div>
+
+    <section class="review-box">
+      <h2>你的判断</h2>
+      <p class="note">只根据评审标准和页面里可见的两个输出做判断。选择会保存到当前浏览器的本地存储里，也可以回到入口页导出。</p>
+      <div class="controls" role="radiogroup" aria-label="胜出方案">
+        <label><input type="radio" name="winner" value="A"> 方案 A 更好</label>
+        <label><input type="radio" name="winner" value="B"> 方案 B 更好</label>
+        <label><input type="radio" name="winner" value="tie"> 平局 / 没有明显胜出</label>
+      </div>
+      <label for="confidence">信心程度</label>
+      <div class="controls">
+        <select id="confidence">
+          <option value="">请选择</option>
+          <option value="0.4">0.4，较弱</option>
+          <option value="0.6">0.6，中等</option>
+          <option value="0.8">0.8，较强</option>
+          <option value="1.0">1.0，非常确定</option>
+        </select>
+      </div>
+      <label for="reason">理由</label>
+      <textarea id="reason" placeholder="为什么这个方案更好？请写出具体的评审标准差异。"></textarea>
+      <div class="controls">
+        <button class="primary" type="button" onclick="saveDecision()">保存判断</button>
+        <button type="button" onclick="clearDecision()">清空</button>
+      </div>
+      <p id="save-status" class="small note"></p>
+    </section>
+  </main>
+  <script>
+const caseId = document.body.dataset.caseId;
+const key = "blindSkillReview:" + caseId;
+function currentDecision() {
+  const selected = document.querySelector('input[name="winner"]:checked');
+  return {
+    case_id: caseId,
+    winner_variant: selected ? selected.value : "",
+    confidence: document.getElementById("confidence").value,
+    reason: document.getElementById("reason").value.trim(),
+    reviewed_at: new Date().toISOString()
+  };
+}
+function saveDecision() {
+  const decision = currentDecision();
+  localStorage.setItem(key, JSON.stringify(decision));
+  document.getElementById("save-status").textContent = "已保存：" + decision.reviewed_at;
+}
+function clearDecision() {
+  localStorage.removeItem(key);
+  document.querySelectorAll('input[name="winner"]').forEach(el => el.checked = false);
+  document.getElementById("confidence").value = "";
+  document.getElementById("reason").value = "";
+  document.getElementById("save-status").textContent = "已清空。";
+}
+function loadDecision() {
+  const raw = localStorage.getItem(key);
+  if (!raw) return;
+  const decision = JSON.parse(raw);
+  const selected = document.querySelector('input[name="winner"][value="' + decision.winner_variant + '"]');
+  if (selected) selected.checked = true;
+  document.getElementById("confidence").value = decision.confidence || "";
+  document.getElementById("reason").value = decision.reason || "";
+  document.getElementById("save-status").textContent = "已加载保存过的判断。";
+}
+loadDecision();
+  </script>
+</body>
+</html>

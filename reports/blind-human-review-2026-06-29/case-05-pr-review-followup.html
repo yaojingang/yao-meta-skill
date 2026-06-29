@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PR Review 跟进 Skill - Skill 盲测评审</title>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f7f8fb;
+  --panel: #ffffff;
+  --ink: #20242c;
+  --muted: #687082;
+  --line: #d9deea;
+  --accent: #2563eb;
+  --accent-2: #0f766e;
+  --warn: #b45309;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.55;
+}
+header {
+  padding: 28px clamp(18px, 4vw, 52px) 18px;
+  background: #ffffff;
+  border-bottom: 1px solid var(--line);
+}
+main { padding: 24px clamp(18px, 4vw, 52px) 52px; }
+h1 { margin: 0 0 8px; font-size: clamp(26px, 3vw, 38px); letter-spacing: 0; }
+h2 { margin: 0 0 12px; font-size: 20px; }
+h3 { margin: 18px 0 8px; font-size: 16px; }
+p { margin: 0 0 10px; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.meta, .note { color: var(--muted); }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: start; }
+.card, .panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 18px;
+}
+.case-list { display: grid; gap: 12px; margin-top: 18px; }
+.case-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #e8f0ff;
+  color: #1d4ed8;
+  font-size: 13px;
+  font-weight: 650;
+}
+.rubric { margin: 0; padding-left: 20px; }
+.rubric li { margin-bottom: 6px; }
+.variant {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.variant-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  background: #f2f5fa;
+}
+.variant-body { padding: 16px; }
+pre {
+  overflow: auto;
+  padding: 12px;
+  border-radius: 6px;
+  background: #111827;
+  color: #f9fafb;
+  font-size: 13px;
+}
+code { font-family: "SFMono-Regular", Consolas, monospace; }
+.review-box {
+  margin-top: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+  background: #fff;
+}
+.controls { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0; }
+button, .button {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink);
+  min-height: 36px;
+  padding: 7px 12px;
+  cursor: pointer;
+  font-weight: 650;
+}
+button.primary, .button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+textarea {
+  width: 100%;
+  min-height: 96px;
+  resize: vertical;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 10px;
+  font: inherit;
+}
+.warn { color: var(--warn); font-weight: 650; }
+.split { display: flex; flex-wrap: wrap; gap: 10px; }
+.small { font-size: 13px; }
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; }
+  .case-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body data-case-id="case-05-pr-review-followup">
+  <header>
+    <div class="split"><a class="button" href="index.html">返回入口</a><a class="button" href="case-04-incident-postmortem.html">上一个</a></div>
+    <h1>PR Review 跟进 Skill</h1>
+    <p class="meta">A/B 盲测评审。记录完判断前，不要打开答案钥匙。</p>
+  </header>
+  <main>
+    <section class="panel">
+      <h2>场景</h2>
+      <p>一个小工程团队经常收到 GitHub PR review comments，希望 Codex 能把评论转成补丁、回复摘要和验证记录。</p>
+      <h3>用户请求</h3>
+      <p>请设计一个用于处理 PR review comments 的可复用 skill。输入包括 review comments、变更文件、失败 CI 说明和 maintainer preferences。输出需要分组评论、只修改相关文件、写回复说明并运行验证。必须避免回滚无关的用户改动。</p>
+      <h3>评审标准</h3>
+      <ol class="rubric"><li>是否理解 code-review 跟进和 dirty worktree 安全。</li>
+<li>是否定义评论分组、补丁、回复和验证工作流。</li>
+<li>是否避免过度重构和无关 revert。</li>
+<li>是否说明变更后需要的命令和证据。</li>
+<li>是否定义一般 code review 与评论跟进的触发排除。</li></ol>
+    </section>
+
+    <div class="grid" style="margin-top:18px">
+
+<section class="variant">
+  <div class="variant-head">
+    <h2>方案 A</h2>
+    <span class="badge">来源已隐藏</span>
+  </div>
+  <div class="variant-body">
+    <h2>建议 Skill：pr-review-followup</h2>
+
+<h3>目的</h3>
+<p>创建一个 skill，帮助 Codex 安全处理 PR review comments，并总结回复。</p>
+
+<h3>包结构</h3>
+<pre><code>pr-review-followup/
+  SKILL.md
+  agents/openai.yaml
+  references/
+    response-style.md</code></pre>
+
+<h3>SKILL.md 草稿</h3>
+<pre><code>---
+name: pr-review-followup
+description: 通过分组反馈、修改相关文件、编写回复说明和运行验证来处理 GitHub PR review comments。当用户提供 review comments、变更文件、CI 说明或 maintainer preferences 时使用。
+---
+
+# PR Review 跟进
+
+## 工作流
+1. 阅读所有 review comments，并按文件、主题和严重程度分组。
+2. 编辑前检查受影响文件。
+3. 只修改处理 comments 所需的文件。
+4. 不要回滚无关用户改动。
+5. 运行相关测试或 CI 复现命令。
+6. 总结变更，并为 reviewer 起草回复说明。
+
+## 输出
+- 评论分组
+- 修改文件
+- 验证命令
+- Reviewer 回复说明
+- 剩余问题</code></pre>
+
+<h3>agents/openai.yaml</h3>
+<pre><code>display_name: PR Review 跟进
+short_description: 处理 PR comments 并准备 reviewer 回复。
+default_prompt: 请处理这些 PR review comments，并总结验证结果。</code></pre>
+
+<h3>验证</h3>
+<p>用需要代码修改、文档修改、无需修改只需解释、以及 reviewer 要求冲突的 comments 测试。</p>
+  </div>
+</section>
+
+
+<section class="variant">
+  <div class="variant-head">
+    <h2>方案 B</h2>
+    <span class="badge">来源已隐藏</span>
+  </div>
+  <div class="variant-body">
+    <h2>Skill 包建议：pr-review-followup</h2>
+
+<h3>边界</h3>
+<p>负责 PR 已经有明确 reviewer comments、变更文件或 CI 说明之后的评论跟进。排除首次 code review、大范围重构、issue triage，以及没有绑定评论的推测性清理。</p>
+
+<h3>包结构</h3>
+<pre><code>pr-review-followup/
+  SKILL.md
+  agents/interface.yaml
+  references/
+    response-style.md
+    dirty-worktree-safety.md
+    verification-policy.md
+  evals/
+    trigger_cases.json
+    output/
+      cases.jsonl
+  reports/
+    output-risk-profile.md
+    output_quality_scorecard.md</code></pre>
+
+<h3>SKILL.md</h3>
+<pre><code>---
+name: pr-review-followup
+description: 处理具体 PR review comments：分组反馈、只修改相关文件、保留无关用户改动、起草 reviewer 回复并运行验证。当提供 review comments、变更文件、失败 CI 说明或 maintainer preferences 时使用。不要用于首次 code review、大范围重构、issue triage 或无关清理。
+---
+
+# PR Review 跟进
+
+## 工作流
+1. 编辑前记录 git status，并识别用户已经改动的文件。
+2. 按文件、行为、严重程度，以及是否需要代码、测试、文档或仅解释来分组 review comments。
+3. 修改前阅读受影响代码和附近测试。
+4. 只修改与评论绑定的文件。不要回滚无关改动，也不要格式化未触碰文件。
+5. 运行有针对性的验证，并记录命令和结果。
+6. 起草 reviewer 回复说明，把每组评论映射到变更、无需修改的理由或剩余问题。
+7. 如果评论冲突，停止并询问哪个 reviewer 指令优先。
+
+## 输出契约
+- comment_groups
+- patch_summary
+- files_changed
+- verification
+- reviewer_response_notes
+- unresolved_questions
+- unrelated_changes_preserved</code></pre>
+
+<h3>输出评测用例</h3>
+<p>1. 评论要求添加特定 null check：输出必须只修改受影响函数，并提到测试。</p>
+<p>2. Reviewer 要求与 PR 范围无关的大重构：输出应标出范围风险。</p>
+<p>3. Dirty worktree 中有无关用户文件：输出必须保留它。</p>
+<p>4. 两个 reviewer comments 冲突：输出必须询问优先级，而不是猜。</p>
+<p>5. 近邻请求：“从零 review 这个 PR”不应触发 follow-up mode。</p>
+
+<h3>门禁</h3>
+<ul>
+<li>触发评测必须区分首次 review 和评论跟进。</li>
+<li>如果回滚或隐藏无关改动，输出评测必须失败。</li>
+<li>验证策略必须记录跳过测试的原因。</li>
+<li>回复说明必须能追溯到评论分组。</li>
+</ul>
+  </div>
+</section>
+
+    </div>
+
+    <section class="review-box">
+      <h2>你的判断</h2>
+      <p class="note">只根据评审标准和页面里可见的两个输出做判断。选择会保存到当前浏览器的本地存储里，也可以回到入口页导出。</p>
+      <div class="controls" role="radiogroup" aria-label="胜出方案">
+        <label><input type="radio" name="winner" value="A"> 方案 A 更好</label>
+        <label><input type="radio" name="winner" value="B"> 方案 B 更好</label>
+        <label><input type="radio" name="winner" value="tie"> 平局 / 没有明显胜出</label>
+      </div>
+      <label for="confidence">信心程度</label>
+      <div class="controls">
+        <select id="confidence">
+          <option value="">请选择</option>
+          <option value="0.4">0.4，较弱</option>
+          <option value="0.6">0.6，中等</option>
+          <option value="0.8">0.8，较强</option>
+          <option value="1.0">1.0，非常确定</option>
+        </select>
+      </div>
+      <label for="reason">理由</label>
+      <textarea id="reason" placeholder="为什么这个方案更好？请写出具体的评审标准差异。"></textarea>
+      <div class="controls">
+        <button class="primary" type="button" onclick="saveDecision()">保存判断</button>
+        <button type="button" onclick="clearDecision()">清空</button>
+      </div>
+      <p id="save-status" class="small note"></p>
+    </section>
+  </main>
+  <script>
+const caseId = document.body.dataset.caseId;
+const key = "blindSkillReview:" + caseId;
+function currentDecision() {
+  const selected = document.querySelector('input[name="winner"]:checked');
+  return {
+    case_id: caseId,
+    winner_variant: selected ? selected.value : "",
+    confidence: document.getElementById("confidence").value,
+    reason: document.getElementById("reason").value.trim(),
+    reviewed_at: new Date().toISOString()
+  };
+}
+function saveDecision() {
+  const decision = currentDecision();
+  localStorage.setItem(key, JSON.stringify(decision));
+  document.getElementById("save-status").textContent = "已保存：" + decision.reviewed_at;
+}
+function clearDecision() {
+  localStorage.removeItem(key);
+  document.querySelectorAll('input[name="winner"]').forEach(el => el.checked = false);
+  document.getElementById("confidence").value = "";
+  document.getElementById("reason").value = "";
+  document.getElementById("save-status").textContent = "已清空。";
+}
+function loadDecision() {
+  const raw = localStorage.getItem(key);
+  if (!raw) return;
+  const decision = JSON.parse(raw);
+  const selected = document.querySelector('input[name="winner"][value="' + decision.winner_variant + '"]');
+  if (selected) selected.checked = true;
+  document.getElementById("confidence").value = decision.confidence || "";
+  document.getElementById("reason").value = decision.reason || "";
+  document.getElementById("save-status").textContent = "已加载保存过的判断。";
+}
+loadDecision();
+  </script>
+</body>
+</html>

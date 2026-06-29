@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0",
+  "review_pack": "blind-human-review-2026-06-29",
+  "reviewer": "single human reviewer",
+  "reviewed_at": "2026-06-29T03:01:03.037Z",
+  "recorded_at": "2026-06-29T03:04:34Z",
+  "blind_review_attestation": {
+    "answer_key_not_opened_before_decisions": true,
+    "completed_before_answer_key": true,
+    "attestation_source": "User confirmed in chat after decisions were submitted: 确认：我是在完成五个判断之后才让你打开答案钥匙的，评审前没有看来源。以上 5 个判断都是揭晓来源前完成的。"
+  },
+  "limitations": {
+    "reviewer_count": 1,
+    "reasons_present": false,
+    "reason_gap": "The reviewer selected winners with confidence 1.0, but per-case rationale fields were left empty.",
+    "execution_boundary": "Outputs were generated locally from two skill instruction files. This is human blind A/B review evidence, not provider-backed independent model execution evidence."
+  },
+  "decisions": [
+    {
+      "case_id": "case-01-support-triage",
+      "winner_variant": "B",
+      "confidence": "1.0",
+      "reason": "",
+      "reviewed_at": "2026-06-29T03:00:00.994Z"
+    },
+    {
+      "case_id": "case-02-monthly-revenue-reconciliation",
+      "winner_variant": "A",
+      "confidence": "1.0",
+      "reason": "",
+      "reviewed_at": "2026-06-29T03:00:18.277Z"
+    },
+    {
+      "case_id": "case-03-webinar-repurposing",
+      "winner_variant": "B",
+      "confidence": "1.0",
+      "reason": "",
+      "reviewed_at": "2026-06-29T03:00:34.343Z"
+    },
+    {
+      "case_id": "case-04-incident-postmortem",
+      "winner_variant": "A",
+      "confidence": "1.0",
+      "reason": "",
+      "reviewed_at": "2026-06-29T03:00:49.160Z"
+    },
+    {
+      "case_id": "case-05-pr-review-followup",
+      "winner_variant": "B",
+      "confidence": "1.0",
+      "reason": "",
+      "reviewed_at": "2026-06-29T03:01:03.037Z"
+    }
+  ]
+}
