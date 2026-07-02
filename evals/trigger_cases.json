@@ -55,6 +55,18 @@
       "family": "iterate_existing_skill"
     },
     {
+      "text": "Migrate this Claude skill into a Codex-ready package with interface metadata and install checks.",
+      "family": "migrate_existing_skill"
+    },
+    {
+      "text": "Make this existing skill release-ready: add manifest/interface metadata, packaging checks, and trigger evals.",
+      "family": "release_packaging"
+    },
+    {
+      "text": "Optimize the activation wording for this skill so broader skill-authoring requests are routed correctly.",
+      "family": "trigger_expansion"
+    },
+    {
       "text": "We have a messy release runbook, export process, and a prompt history; turn all of that into one reusable skill package with evals and packaging checks.",
       "family": "complex_multi_asset"
     },
@@ -133,6 +145,18 @@
     {
       "text": "把这个客服升级流程标准化成一个可执行的 skill，并加上边界测试。",
       "family": "cn_eval_and_package"
+    },
+    {
+      "text": "把这个 Claude skill 迁移成 Codex 可用的 skill 包，补 interface、manifest 和安装验证。",
+      "family": "cn_migrate_existing_skill"
+    },
+    {
+      "text": "把这套提示词和脚本整理成团队能安装复用的 skill，并做打包发布检查。",
+      "family": "cn_release_packaging"
+    },
+    {
+      "text": "扩大这个 skill 的触发范围，同时补路由评测，避免漏触发。",
+      "family": "cn_trigger_expansion"
     }
   ],
   "should_not_trigger": [
@@ -239,6 +263,22 @@
     {
       "text": "先一起头脑风暴几个方向，不要封装成 skill。",
       "family": "cn_brainstorm_only"
+    },
+    {
+      "text": "Polish this release note for publishing, but do not do any skill work.",
+      "family": "document_only"
+    },
+    {
+      "text": "Migrate this wiki article into a new docs folder; do not create an agent skill.",
+      "family": "document_only"
+    },
+    {
+      "text": "把这篇 SOP 改成知识库文档，不需要 agent 执行。",
+      "family": "cn_document_only"
+    },
+    {
+      "text": "检查安装步骤是否清楚，只做 README，不做 skill 包。",
+      "family": "cn_document_only"
     }
   ],
   "near_neighbor": [
@@ -333,6 +373,18 @@
     {
       "text": "这次只给我一个一次性 prompt，不用复用成 skill。",
       "family": "cn_one_off_vs_reusable"
+    },
+    {
+      "text": "Create a reusable onboarding template for humans, not an agent skill.",
+      "family": "document_export_vs_agent_skill"
+    },
+    {
+      "text": "Draft a release checklist for a future skill, but do not package or evaluate the skill yet.",
+      "family": "future_outline_vs_build"
+    },
+    {
+      "text": "整理成团队发布流程文档即可，不要做成 skill，也不要做触发评测。",
+      "family": "cn_document_export_vs_agent_skill"
     }
   ]
 }

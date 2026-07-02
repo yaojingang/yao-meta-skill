@@ -1,6 +1,6 @@
 ---
 name: yao-meta-skill
-description: Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use for skill creation, reusable workflow packaging, skill improvement, evals, and team-ready distribution.
+description: Create, refactor, evaluate, package, migrate, govern, and release agent skills from workflows, prompts, transcripts, docs, notes, SOPs, scripts, or repeated team practices. Use when asked to create/build a skill, turn a repeated process into a reusable agent capability, improve or migrate an existing skill, optimize trigger routing, add evals/tests, add references/scripts/interface/manifest, prepare packaging/installation/release, or make a skill team-ready. Also trigger on Chinese asks such as 做/改/重构/迁移/发布 skill, 把流程/SOP/提示词/对话记录沉淀成可复用能力, 封装成团队可复用的 skill, 优化已有 skill, 补 trigger 评测, 收紧触发边界, or 做打包发布检查. Do not use for summary-only, translation-only, brainstorming-only, or documentation-only requests that explicitly say no skill or agent execution.
 metadata:
   author: Yao Team
 ---
