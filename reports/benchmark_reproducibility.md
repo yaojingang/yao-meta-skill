@@ -1,11 +1,11 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-07-02`
-Commit: `1710a5a3e0177313954758908735c147796e8981`
+Commit: `24bea607a2b16e766bc8f2bc8483f22fae1edc61`
 Working tree dirty at generation: `true`
 Source tree dirty at generation: `true`
 Generated evidence dirty at generation: `true`
-Evidence bundle SHA256: `639707e807e5ec8460f6aa6d1e5ba34874bb3228160555d8a01dbc37620d4873`
+Evidence bundle SHA256: `6c95043c2d8513102b37bc70a01647246933c84e8a27c2748cc2cae20e040158`
 
 ## Summary
 
@@ -14,7 +14,7 @@ Evidence bundle SHA256: `639707e807e5ec8460f6aa6d1e5ba34874bb3228160555d8a01dbc3
 - methodology complete: `true`
 - required artifacts: `25`
 - missing artifacts: `0`
-- source contract sha256: `e0863533e0a0`
+- source contract sha256: `db71157184dc`
 - archive sha256: `c56a8519244c`
 - output cases: `5`
 - disclosed failure cases: `3`
@@ -28,9 +28,9 @@ Evidence bundle SHA256: `639707e807e5ec8460f6aa6d1e5ba34874bb3228160555d8a01dbc3
 - beta deferred evidence: `4`
 - public claim ready: `false`
 - public claim blockers: `4`
-- changed files at generation: `84`
-- source changed files at generation: `2`
-- generated changed files at generation: `82`
+- changed files at generation: `37`
+- source changed files at generation: `1`
+- generated changed files at generation: `36`
 
 This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete. The git commit and dirty samples are generation-time context; the evidence bundle SHA is the durable anchor for the artifacts listed below.
 
@@ -75,7 +75,7 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 - algorithm: `sha256(path,label,exists,artifact_sha256)`
 - artifacts: `25` / `25`
-- sha256: `639707e807e5ec8460f6aa6d1e5ba34874bb3228160555d8a01dbc37620d4873`
+- sha256: `6c95043c2d8513102b37bc70a01647246933c84e8a27c2748cc2cae20e040158`
 
 ## Methodology Sections
 
@@ -102,21 +102,21 @@ This report proves local benchmark reproducibility only. It keeps external provi
 | review_adjudication | `reports/output_review_adjudication.json` | present | `91fd88dd9b0f` |
 | trigger_scorecard | `reports/route_scorecard.json` | present | `53fc22d220dc` |
 | runtime_conformance | `reports/conformance_matrix.json` | present | `97f9ba949c23` |
-| trust_report | `reports/security_trust_report.json` | present | `ffe2c88bbdba` |
+| trust_report | `reports/security_trust_report.json` | present | `108aee597a1f` |
 | python_compatibility | `reports/python_compatibility.json` | present | `4d82942052a2` |
-| registry_audit | `reports/registry_audit.json` | present | `9be6de364d69` |
+| registry_audit | `reports/registry_audit.json` | present | `d307675d5c6c` |
 | package_verification | `reports/package_verification.json` | present | `e2ad726ce048` |
 | install_simulation | `reports/install_simulation.json` | present | `65adf51d8c4b` |
 | skill_os2_audit | `reports/skill_os2_audit.json` | present | `150c0027deaa` |
 | world_class_evidence_plan | `reports/world_class_evidence_plan.json` | present | `483ed2b3bd02` |
 | world_class_evidence_ledger | `reports/world_class_evidence_ledger.json` | present | `b19e7113ec46` |
 | world_class_evidence_intake | `reports/world_class_evidence_intake.json` | present | `885bff9c1c85` |
-| world_class_evidence_preflight | `reports/world_class_evidence_preflight.json` | present | `a0b00eed5450` |
+| world_class_evidence_preflight | `reports/world_class_evidence_preflight.json` | present | `06e93b1c0c99` |
 | world_class_submission_review | `reports/world_class_submission_review.json` | present | `e8df5c72ade7` |
 | world_class_operator_runbook | `reports/world_class_operator_runbook.json` | present | `bb67813244d6` |
 | world_class_operator_runbook_markdown | `reports/world_class_operator_runbook.md` | present | `e8d4dee75413` |
 | world_class_operator_runbook_html | `reports/world_class_operator_runbook.html` | present | `022594013b24` |
-| world_class_claim_guard | `reports/world_class_claim_guard.json` | present | `5eb808496802` |
+| world_class_claim_guard | `reports/world_class_claim_guard.json` | present | `911ba833055a` |
 
 ## Reproduction Commands
 

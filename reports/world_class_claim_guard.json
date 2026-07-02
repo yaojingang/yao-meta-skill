@@ -6,10 +6,10 @@
   "summary": {
     "ledger_ready_to_claim_world_class": false,
     "ledger_pending_count": 4,
-    "claim_surface_count": 194,
-    "json_claim_surface_count": 92,
-    "metadata_claim_surface_count": 93,
-    "package_claim_surface_count": 10,
+    "claim_surface_count": 201,
+    "json_claim_surface_count": 97,
+    "metadata_claim_surface_count": 98,
+    "package_claim_surface_count": 17,
     "violation_count": 0,
     "overclaim_guard_active": true,
     "decision": "claim-guard-pass-evidence-pending"
@@ -52,6 +52,34 @@
     },
     {
       "path": "agents/interface.yaml",
+      "violation_count": 0
+    },
+    {
+      "path": "dist/manifest.json",
+      "violation_count": 0
+    },
+    {
+      "path": "dist/targets/claude/README.md",
+      "violation_count": 0
+    },
+    {
+      "path": "dist/targets/claude/adapter.json",
+      "violation_count": 0
+    },
+    {
+      "path": "dist/targets/generic/adapter.json",
+      "violation_count": 0
+    },
+    {
+      "path": "dist/targets/openai/adapter.json",
+      "violation_count": 0
+    },
+    {
+      "path": "dist/targets/vscode/README.md",
+      "violation_count": 0
+    },
+    {
+      "path": "dist/targets/vscode/adapter.json",
       "violation_count": 0
     },
     {

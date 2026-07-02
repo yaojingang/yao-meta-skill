@@ -65,7 +65,7 @@
       "key": "context-budget",
       "label": "上下文",
       "status": "pass",
-      "detail": "initial load 999/1000; deferred 531767/120000; top deferred scripts 469568; resource governance governed; quality density 140.1",
+      "detail": "initial load 987/1000; deferred 531767/120000; top deferred scripts 469568; resource governance governed; quality density 141.8",
       "evidence": "reports/context_budget.json",
       "link": "context_budget.md",
       "review_action_id": "",
@@ -1194,8 +1194,8 @@
             "artifact_prefill_counts_as_evidence": false,
             "submission_ref_ready_count": 2,
             "submission_ref_total_count": 2,
-            "supporting_evidence_ready_count": 7,
-            "supporting_evidence_total_count": 8,
+            "supporting_evidence_ready_count": 11,
+            "supporting_evidence_total_count": 11,
             "roles": [
               {
                 "role": "submission-ref",
@@ -1208,8 +1208,8 @@
               {
                 "role": "supporting-evidence",
                 "label": "Supporting evidence",
-                "ready_count": 7,
-                "total_count": 8,
+                "ready_count": 11,
+                "total_count": 11,
                 "copy_to_artifact_refs": false,
                 "description": "Supporting-evidence rows help reviewers audit the packet but do not all need to be copied into artifact_refs."
               }
@@ -1523,7 +1523,7 @@
           "label": "可维护性",
           "score": 100,
           "reasons": [
-            "SKILL.md 约 342 个词/字。",
+            "SKILL.md 约 314 个词/字。",
             "入口文件保持克制，可维护性较好。",
             "references/ 已承载扩展指导。",
             "scripts/ 已承载确定性逻辑。",
@@ -1544,7 +1544,7 @@
           "label": "上下文成本",
           "score": 42,
           "reasons": [
-            "入口约 342 个词/字，references 约 16934 个词/字。",
+            "入口约 314 个词/字，references 约 16934 个词/字。",
             "分数越高代表上下文成本越低。",
             "上下文成本偏高，建议压缩入口或拆分 references。"
           ]
@@ -1648,7 +1648,7 @@
           "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
         ],
         "gaps": [
-          "上下文成本需要补强：入口约 342 个词/字，references 约 16934 个词/字。"
+          "上下文成本需要补强：入口约 314 个词/字，references 约 16934 个词/字。"
         ],
         "recommendations": [
           "先改触发边界，再扩展工作流。",
@@ -1713,7 +1713,7 @@
             "name": "包体膨胀风险",
             "impact": 2,
             "probability": 1,
-            "signal": "SKILL.md 约 342 个词/字。",
+            "signal": "SKILL.md 约 314 个词/字。",
             "response": "先补证据和边界，再增加包体复杂度。"
           },
           {
@@ -2077,11 +2077,11 @@
       "display_name": "Yao Meta Skill",
       "description": "Create/improve/evaluate agent skills from workflows, prompts, SOPs, scripts. Use for migration/release/package, routing, evals/tests, install checks, 优化已有 skill, 补 trigger 评测. Exclude no-skill summary/translation/docs.",
       "logic_steps": [
-        "For one-off/no reusable process: `Do not create a skill`; `near-neighbor`; require `repeated use` + `reusable output contract`.",
-        "Capture job, output, exclusions, constraints, standards, and the lightest fit.",
-        "Scan references in order: external benchmark, user source, local fit; surface only uncertainty or conflict.",
-        "Write `description` early, test route quality, then add only earned folders and gates.",
-        "Add output-risk, artifact-design, prompt-quality, system-model, and next directions only when useful."
+        "One-off/no reusable process: `Do not create a skill`; `near-neighbor`; require `repeated use` + `reusable output contract`.",
+        "Capture job, output, exclusions, constraints, standards, lightest fit.",
+        "Scan up to `3-5` references: external, user, local; skip tiny edits; surface only uncertainty/conflict.",
+        "Write `description` early; route/boundary edits need `trigger_eval.py`; releases need risk-matched gates before folders.",
+        "Add output-risk, artifact-design, prompt-quality, system-model, next directions only when earned."
       ],
       "usage_steps": [
         "Use $yao-meta-skill to turn my workflow or notes into a reusable skill with lean structure, clear triggering, and the right evals.",
@@ -2458,8 +2458,8 @@
           "methodology_complete": true,
           "required_artifact_count": 25,
           "missing_artifact_count": 0,
-          "evidence_bundle_sha256": "639707e807e5ec8460f6aa6d1e5ba34874bb3228160555d8a01dbc37620d4873",
-          "source_contract_sha256": "e0863533e0a0f0b5069bace6a24d7adfb43d615453f08cff7578076a3cb1a2a3",
+          "evidence_bundle_sha256": "6c95043c2d8513102b37bc70a01647246933c84e8a27c2748cc2cae20e040158",
+          "source_contract_sha256": "db71157184dc649ee72dfcaf399204d44a366d942393d055571e0137d42c9f7c",
           "archive_sha256": "c56a8519244c0bc8ec17c92d4641c832629cc059f4b51fe177a2c039515253a7",
           "output_case_count": 5,
           "failure_disclosure_count": 3,
@@ -2483,13 +2483,13 @@
           "public_claim_ready": false,
           "public_claim_blocker_count": 4,
           "working_tree_dirty": true,
-          "changed_file_count": 84,
+          "changed_file_count": 37,
           "source_tree_dirty": true,
-          "source_changed_file_count": 2,
+          "source_changed_file_count": 1,
           "generated_tree_dirty": true,
-          "generated_changed_file_count": 82
+          "generated_changed_file_count": 36
         },
-        "commit": "1710a5a3e0177313954758908735c147796e8981",
+        "commit": "24bea607a2b16e766bc8f2bc8483f22fae1edc61",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flags are generation-time context; release lock is blocked by source changes, while generated evidence artifacts are tracked separately.",
@@ -2595,7 +2595,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 247,
-        "package_sha256": "e0863533e0a0f0b5069bace6a24d7adfb43d615453f08cff7578076a3cb1a2a3"
+        "package_sha256": "db71157184dc649ee72dfcaf399204d44a366d942393d055571e0137d42c9f7c"
       },
       "skill_atlas": {
         "skill_count": 11,
@@ -2633,7 +2633,7 @@
           "trust_level": "local",
           "license": "MIT",
           "checksums": {
-            "package_sha256": "e0863533e0a0f0b5069bace6a24d7adfb43d615453f08cff7578076a3cb1a2a3",
+            "package_sha256": "db71157184dc649ee72dfcaf399204d44a366d942393d055571e0137d42c9f7c",
             "archive_sha256": "c56a8519244c0bc8ec17c92d4641c832629cc059f4b51fe177a2c039515253a7"
           },
           "compatibility": {
@@ -2767,7 +2767,7 @@
             {
               "field": "package_sha256",
               "from": "0000000000000000000000000000000000000000000000000000000000000000",
-              "to": "e0863533e0a0f0b5069bace6a24d7adfb43d615453f08cff7578076a3cb1a2a3"
+              "to": "db71157184dc649ee72dfcaf399204d44a366d942393d055571e0137d42c9f7c"
             }
           ]
         },
@@ -6318,32 +6318,31 @@
       "ok": true,
       "generated_at": "2026-07-02",
       "skill_dir": ".",
-      "commit": "1710a5a3e0177313954758908735c147796e8981",
+      "commit": "24bea607a2b16e766bc8f2bc8483f22fae1edc61",
       "git_status": {
         "available": true,
         "dirty": true,
-        "changed_file_count": 84,
+        "changed_file_count": 37,
         "generated_dirty": true,
-        "generated_changed_file_count": 82,
+        "generated_changed_file_count": 36,
         "source_dirty": true,
-        "source_changed_file_count": 2,
+        "source_changed_file_count": 1,
         "sample": [
           " M SKILL.md",
-          " M evals/improved_description.txt",
           " M registry/index.json",
           " M registry/packages/yao-meta-skill.json",
           " M reports/adaptation_proposals.json",
           " M reports/adaptation_proposals.md",
           " M reports/adoption_drift_report.json",
-          " M reports/artifact-design-profile.json",
-          " M reports/artifact-design-profile.md",
-          " M reports/baseline-compare.json",
           " M reports/benchmark_reproducibility.json",
-          " M reports/benchmark_reproducibility.md"
+          " M reports/benchmark_reproducibility.md",
+          " M reports/compiled_targets.json",
+          " M reports/context_budget.json",
+          " M reports/context_budget.md",
+          " M reports/context_budget_summary.json"
         ],
         "source_sample": [
-          " M SKILL.md",
-          " M evals/improved_description.txt"
+          " M SKILL.md"
         ],
         "generated_sample": [
           " M registry/index.json",
@@ -6351,13 +6350,13 @@
           " M reports/adaptation_proposals.json",
           " M reports/adaptation_proposals.md",
           " M reports/adoption_drift_report.json",
-          " M reports/artifact-design-profile.json",
-          " M reports/artifact-design-profile.md",
-          " M reports/baseline-compare.json",
           " M reports/benchmark_reproducibility.json",
           " M reports/benchmark_reproducibility.md",
-          " M reports/candidate_registry.json",
-          " M reports/candidate_registry.md"
+          " M reports/compiled_targets.json",
+          " M reports/context_budget.json",
+          " M reports/context_budget.md",
+          " M reports/context_budget_summary.json",
+          " M reports/evidence_consistency.json"
         ],
         "generated_dirty_prefixes": [
           "dist/",
@@ -6375,8 +6374,8 @@
         "methodology_complete": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "639707e807e5ec8460f6aa6d1e5ba34874bb3228160555d8a01dbc37620d4873",
-        "source_contract_sha256": "e0863533e0a0f0b5069bace6a24d7adfb43d615453f08cff7578076a3cb1a2a3",
+        "evidence_bundle_sha256": "6c95043c2d8513102b37bc70a01647246933c84e8a27c2748cc2cae20e040158",
+        "source_contract_sha256": "db71157184dc649ee72dfcaf399204d44a366d942393d055571e0137d42c9f7c",
         "archive_sha256": "c56a8519244c0bc8ec17c92d4641c832629cc059f4b51fe177a2c039515253a7",
         "output_case_count": 5,
         "failure_disclosure_count": 3,
@@ -6400,11 +6399,11 @@
         "public_claim_ready": false,
         "public_claim_blocker_count": 4,
         "working_tree_dirty": true,
-        "changed_file_count": 84,
+        "changed_file_count": 37,
         "source_tree_dirty": true,
-        "source_changed_file_count": 2,
+        "source_changed_file_count": 1,
         "generated_tree_dirty": true,
-        "generated_changed_file_count": 82
+        "generated_changed_file_count": 36
       },
       "beta_test_release": {
         "ready": false,
@@ -6450,10 +6449,10 @@
       },
       "release_lock": {
         "ready": false,
-        "commit": "1710a5a3e0177313954758908735c147796e8981",
+        "commit": "24bea607a2b16e766bc8f2bc8483f22fae1edc61",
         "status_scope": "generation-time status before this report is written",
-        "source_changed_file_count": 2,
-        "generated_changed_file_count": 82,
+        "source_changed_file_count": 1,
+        "generated_changed_file_count": 36,
         "reason": "source files were dirty at generation time"
       },
       "evidence_bundle": {
@@ -6462,7 +6461,7 @@
         "existing_count": 25,
         "missing_count": 0,
         "missing_paths": [],
-        "sha256": "639707e807e5ec8460f6aa6d1e5ba34874bb3228160555d8a01dbc37620d4873"
+        "sha256": "6c95043c2d8513102b37bc70a01647246933c84e8a27c2748cc2cae20e040158"
       },
       "methodology": {
         "path": "reports/benchmark_methodology.md",
@@ -6571,7 +6570,7 @@
           "path": "reports/security_trust_report.json",
           "exists": true,
           "bytes": 139090,
-          "sha256": "ffe2c88bbdbac4907bf8db8f01b9a6b2da78e83acdffb3d975e99424274cd9f7"
+          "sha256": "108aee597a1f245f73d9b69454b6fa8a144545f905231a7c314364c7066541c6"
         },
         {
           "label": "python_compatibility",
@@ -6585,7 +6584,7 @@
           "path": "reports/registry_audit.json",
           "exists": true,
           "bytes": 3155,
-          "sha256": "9be6de364d69a2ad40b68b460a35c91476e822eb008cfe4d5e8614c1e989d3d4"
+          "sha256": "d307675d5c6c3cd2f104ce7d963b37d36113f35334e4c6895b55fbb8b255e915"
         },
         {
           "label": "package_verification",
@@ -6633,8 +6632,8 @@
           "label": "world_class_evidence_preflight",
           "path": "reports/world_class_evidence_preflight.json",
           "exists": true,
-          "bytes": 90852,
-          "sha256": "a0b00eed5450b33ec29fea6652d41db216931452eeddd0d99f2d90aa20c44d95"
+          "bytes": 90854,
+          "sha256": "06e93b1c0c99107002466d9418a4910c82397bce26c3bbdd5b5cc9875eeb65b2"
         },
         {
           "label": "world_class_submission_review",
@@ -6668,8 +6667,8 @@
           "label": "world_class_claim_guard",
           "path": "reports/world_class_claim_guard.json",
           "exists": true,
-          "bytes": 20102,
-          "sha256": "5eb808496802e8f972e5aa738d99f3b4a37ff34c8ab495f25ff2db3e7237239f"
+          "bytes": 20713,
+          "sha256": "911ba833055ab857250f88d88ccdd0bb652076a81214f725c49d763352035572"
         }
       ],
       "missing_artifacts": [],
@@ -7697,17 +7696,17 @@
             },
             "workflow": {
               "steps": [
-                "For one-off/no reusable process: `Do not create a skill`; `near-neighbor`; require `repeated use` + `reusable output contract`.",
-                "Capture job, output, exclusions, constraints, standards, and the lightest fit.",
-                "Scan references in order: external benchmark, user source, local fit; surface only uncertainty or conflict.",
-                "Write `description` early, test route quality, then add only earned folders and gates.",
-                "Add output-risk, artifact-design, prompt-quality, system-model, and next directions only when useful."
+                "One-off/no reusable process: `Do not create a skill`; `near-neighbor`; require `repeated use` + `reusable output contract`.",
+                "Capture job, output, exclusions, constraints, standards, lightest fit.",
+                "Scan up to `3-5` references: external, user, local; skip tiny edits; surface only uncertainty/conflict.",
+                "Write `description` early; route/boundary edits need `trigger_eval.py`; releases need risk-matched gates before folders.",
+                "Add output-risk, artifact-design, prompt-quality, system-model, next directions only when earned."
               ],
               "decision_points": [
                 "Route by frontmatter `description`.",
                 "Keep `SKILL.md` lean; put guidance in `references/`, logic in `scripts/`, and evidence in `reports/`.",
                 "Use the lightest reliable process.",
-                "`Scaffold`: exploratory/personal. `Production`: team reuse. `Library`: shared infrastructure. `Governed`: high-trust, policy-sensitive, or release-critical.",
+                "`Scaffold`: exploratory/personal. `Production`: team reuse. `Library`: shared infra. `Governed`: high-trust/release-critical.",
                 "Rules: [Method](references/skill-engineering-method.md), [Operating Modes](references/operating-modes.md), [Resource Boundaries](references/resource-boundaries.md).",
                 "Ask one focused clarification when the real job, output, or exclusion boundary is unclear.",
                 "Escalate visible tradeoffs when benchmark patterns conflict with local privacy, naming, or governance constraints.",
@@ -8654,17 +8653,17 @@
             },
             "workflow": {
               "steps": [
-                "For one-off/no reusable process: `Do not create a skill`; `near-neighbor`; require `repeated use` + `reusable output contract`.",
-                "Capture job, output, exclusions, constraints, standards, and the lightest fit.",
-                "Scan references in order: external benchmark, user source, local fit; surface only uncertainty or conflict.",
-                "Write `description` early, test route quality, then add only earned folders and gates.",
-                "Add output-risk, artifact-design, prompt-quality, system-model, and next directions only when useful."
+                "One-off/no reusable process: `Do not create a skill`; `near-neighbor`; require `repeated use` + `reusable output contract`.",
+                "Capture job, output, exclusions, constraints, standards, lightest fit.",
+                "Scan up to `3-5` references: external, user, local; skip tiny edits; surface only uncertainty/conflict.",
+                "Write `description` early; route/boundary edits need `trigger_eval.py`; releases need risk-matched gates before folders.",
+                "Add output-risk, artifact-design, prompt-quality, system-model, next directions only when earned."
               ],
               "decision_points": [
                 "Route by frontmatter `description`.",
                 "Keep `SKILL.md` lean; put guidance in `references/`, logic in `scripts/`, and evidence in `reports/`.",
                 "Use the lightest reliable process.",
-                "`Scaffold`: exploratory/personal. `Production`: team reuse. `Library`: shared infrastructure. `Governed`: high-trust, policy-sensitive, or release-critical.",
+                "`Scaffold`: exploratory/personal. `Production`: team reuse. `Library`: shared infra. `Governed`: high-trust/release-critical.",
                 "Rules: [Method](references/skill-engineering-method.md), [Operating Modes](references/operating-modes.md), [Resource Boundaries](references/resource-boundaries.md).",
                 "Ask one focused clarification when the real job, output, or exclusion boundary is unclear.",
                 "Escalate visible tradeoffs when benchmark patterns conflict with local privacy, naming, or governance constraints.",
@@ -9611,17 +9610,17 @@
             },
             "workflow": {
               "steps": [
-                "For one-off/no reusable process: `Do not create a skill`; `near-neighbor`; require `repeated use` + `reusable output contract`.",
-                "Capture job, output, exclusions, constraints, standards, and the lightest fit.",
-                "Scan references in order: external benchmark, user source, local fit; surface only uncertainty or conflict.",
-                "Write `description` early, test route quality, then add only earned folders and gates.",
-                "Add output-risk, artifact-design, prompt-quality, system-model, and next directions only when useful."
+                "One-off/no reusable process: `Do not create a skill`; `near-neighbor`; require `repeated use` + `reusable output contract`.",
+                "Capture job, output, exclusions, constraints, standards, lightest fit.",
+                "Scan up to `3-5` references: external, user, local; skip tiny edits; surface only uncertainty/conflict.",
+                "Write `description` early; route/boundary edits need `trigger_eval.py`; releases need risk-matched gates before folders.",
+                "Add output-risk, artifact-design, prompt-quality, system-model, next directions only when earned."
               ],
               "decision_points": [
                 "Route by frontmatter `description`.",
                 "Keep `SKILL.md` lean; put guidance in `references/`, logic in `scripts/`, and evidence in `reports/`.",
                 "Use the lightest reliable process.",
-                "`Scaffold`: exploratory/personal. `Production`: team reuse. `Library`: shared infrastructure. `Governed`: high-trust, policy-sensitive, or release-critical.",
+                "`Scaffold`: exploratory/personal. `Production`: team reuse. `Library`: shared infra. `Governed`: high-trust/release-critical.",
                 "Rules: [Method](references/skill-engineering-method.md), [Operating Modes](references/operating-modes.md), [Resource Boundaries](references/resource-boundaries.md).",
                 "Ask one focused clarification when the real job, output, or exclusion boundary is unclear.",
                 "Escalate visible tradeoffs when benchmark patterns conflict with local privacy, naming, or governance constraints.",
@@ -10552,17 +10551,17 @@
             },
             "workflow": {
               "steps": [
-                "For one-off/no reusable process: `Do not create a skill`; `near-neighbor`; require `repeated use` + `reusable output contract`.",
-                "Capture job, output, exclusions, constraints, standards, and the lightest fit.",
-                "Scan references in order: external benchmark, user source, local fit; surface only uncertainty or conflict.",
-                "Write `description` early, test route quality, then add only earned folders and gates.",
-                "Add output-risk, artifact-design, prompt-quality, system-model, and next directions only when useful."
+                "One-off/no reusable process: `Do not create a skill`; `near-neighbor`; require `repeated use` + `reusable output contract`.",
+                "Capture job, output, exclusions, constraints, standards, lightest fit.",
+                "Scan up to `3-5` references: external, user, local; skip tiny edits; surface only uncertainty/conflict.",
+                "Write `description` early; route/boundary edits need `trigger_eval.py`; releases need risk-matched gates before folders.",
+                "Add output-risk, artifact-design, prompt-quality, system-model, next directions only when earned."
               ],
               "decision_points": [
                 "Route by frontmatter `description`.",
                 "Keep `SKILL.md` lean; put guidance in `references/`, logic in `scripts/`, and evidence in `reports/`.",
                 "Use the lightest reliable process.",
-                "`Scaffold`: exploratory/personal. `Production`: team reuse. `Library`: shared infrastructure. `Governed`: high-trust, policy-sensitive, or release-critical.",
+                "`Scaffold`: exploratory/personal. `Production`: team reuse. `Library`: shared infra. `Governed`: high-trust/release-critical.",
                 "Rules: [Method](references/skill-engineering-method.md), [Operating Modes](references/operating-modes.md), [Resource Boundaries](references/resource-boundaries.md).",
                 "Ask one focused clarification when the real job, output, or exclusion boundary is unclear.",
                 "Escalate visible tradeoffs when benchmark patterns conflict with local privacy, naming, or governance constraints.",
@@ -11493,17 +11492,17 @@
             },
             "workflow": {
               "steps": [
-                "For one-off/no reusable process: `Do not create a skill`; `near-neighbor`; require `repeated use` + `reusable output contract`.",
-                "Capture job, output, exclusions, constraints, standards, and the lightest fit.",
-                "Scan references in order: external benchmark, user source, local fit; surface only uncertainty or conflict.",
-                "Write `description` early, test route quality, then add only earned folders and gates.",
-                "Add output-risk, artifact-design, prompt-quality, system-model, and next directions only when useful."
+                "One-off/no reusable process: `Do not create a skill`; `near-neighbor`; require `repeated use` + `reusable output contract`.",
+                "Capture job, output, exclusions, constraints, standards, lightest fit.",
+                "Scan up to `3-5` references: external, user, local; skip tiny edits; surface only uncertainty/conflict.",
+                "Write `description` early; route/boundary edits need `trigger_eval.py`; releases need risk-matched gates before folders.",
+                "Add output-risk, artifact-design, prompt-quality, system-model, next directions only when earned."
               ],
               "decision_points": [
                 "Route by frontmatter `description`.",
                 "Keep `SKILL.md` lean; put guidance in `references/`, logic in `scripts/`, and evidence in `reports/`.",
                 "Use the lightest reliable process.",
-                "`Scaffold`: exploratory/personal. `Production`: team reuse. `Library`: shared infrastructure. `Governed`: high-trust, policy-sensitive, or release-critical.",
+                "`Scaffold`: exploratory/personal. `Production`: team reuse. `Library`: shared infra. `Governed`: high-trust/release-critical.",
                 "Rules: [Method](references/skill-engineering-method.md), [Operating Modes](references/operating-modes.md), [Resource Boundaries](references/resource-boundaries.md).",
                 "Ask one focused clarification when the real job, output, or exclusion boundary is unclear.",
                 "Escalate visible tradeoffs when benchmark patterns conflict with local privacy, naming, or governance constraints.",
@@ -13042,7 +13041,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 247,
-        "package_sha256": "e0863533e0a0f0b5069bace6a24d7adfb43d615453f08cff7578076a3cb1a2a3"
+        "package_sha256": "db71157184dc649ee72dfcaf399204d44a366d942393d055571e0137d42c9f7c"
       },
       "failures": [],
       "warnings": [],
@@ -18234,10 +18233,10 @@
       "stats": {
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
-        "skill_body_tokens": 806,
-        "other_text_tokens": 1200438,
-        "estimated_initial_load_tokens": 999,
-        "estimated_total_text_tokens": 1201244,
+        "skill_body_tokens": 794,
+        "other_text_tokens": 1200569,
+        "estimated_initial_load_tokens": 987,
+        "estimated_total_text_tokens": 1201363,
         "deferred_resource_tokens": 531767,
         "deferred_resource_warn_threshold": 120000,
         "deferred_resource_dirs": [
@@ -18295,10 +18294,10 @@
           ],
           "summary": "Large deferred resources are indexed and backed by evidence."
         },
-        "relevant_file_count": 590,
+        "relevant_file_count": 591,
         "unused_resource_dirs": [],
         "quality_signal_points": 140,
-        "quality_density": 140.1
+        "quality_density": 141.8
       }
     },
     "promotion": {
@@ -20132,7 +20131,7 @@
     "adoption_drift": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-07-02T03:42:30Z",
+      "generated_at": "2026-07-02T06:33:44Z",
       "skill_dir": ".",
       "privacy_contract": {
         "storage": "local-first",
@@ -20216,7 +20215,7 @@
     "daily_skillops": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-07-02T03:41:56Z",
+      "generated_at": "2026-07-02T06:33:07Z",
       "skill_dir": ".",
       "decision": "proposal-review",
       "source_supplied": false,
@@ -20730,7 +20729,7 @@
     "weekly_curator": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-07-02T03:41:56Z",
+      "generated_at": "2026-07-02T06:33:07Z",
       "skill_dir": ".",
       "decision": "curator-review",
       "week_id": "2026-W27",
@@ -21198,7 +21197,7 @@
     "adaptation_proposals": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-07-02T03:41:56Z",
+      "generated_at": "2026-07-02T06:33:07Z",
       "skill_dir": ".",
       "source_patterns": "reports/user_patterns.json",
       "pattern_count": 5,
@@ -23397,8 +23396,8 @@
               "artifact_prefill_counts_as_evidence": false,
               "submission_ref_total_count": 2,
               "submission_ref_ready_count": 2,
-              "supporting_evidence_total_count": 8,
-              "supporting_evidence_ready_count": 7,
+              "supporting_evidence_total_count": 11,
+              "supporting_evidence_ready_count": 11,
               "roles": [
                 {
                   "role": "submission-ref",
@@ -24541,8 +24540,8 @@
           "artifact_prefill_counts_as_evidence": false,
           "submission_ref_total_count": 7,
           "submission_ref_ready_count": 7,
-          "supporting_evidence_total_count": 28,
-          "supporting_evidence_ready_count": 27,
+          "supporting_evidence_total_count": 31,
+          "supporting_evidence_ready_count": 31,
           "roles": [
             {
               "role": "submission-ref",
@@ -26712,10 +26711,10 @@
       "summary": {
         "ledger_ready_to_claim_world_class": false,
         "ledger_pending_count": 4,
-        "claim_surface_count": 194,
-        "json_claim_surface_count": 92,
-        "metadata_claim_surface_count": 93,
-        "package_claim_surface_count": 10,
+        "claim_surface_count": 201,
+        "json_claim_surface_count": 97,
+        "metadata_claim_surface_count": 98,
+        "package_claim_surface_count": 17,
         "violation_count": 0,
         "overclaim_guard_active": true,
         "decision": "claim-guard-pass-evidence-pending"
@@ -26758,6 +26757,34 @@
         },
         {
           "path": "agents/interface.yaml",
+          "violation_count": 0
+        },
+        {
+          "path": "dist/manifest.json",
+          "violation_count": 0
+        },
+        {
+          "path": "dist/targets/claude/README.md",
+          "violation_count": 0
+        },
+        {
+          "path": "dist/targets/claude/adapter.json",
+          "violation_count": 0
+        },
+        {
+          "path": "dist/targets/generic/adapter.json",
+          "violation_count": 0
+        },
+        {
+          "path": "dist/targets/openai/adapter.json",
+          "violation_count": 0
+        },
+        {
+          "path": "dist/targets/vscode/README.md",
+          "violation_count": 0
+        },
+        {
+          "path": "dist/targets/vscode/adapter.json",
           "violation_count": 0
         },
         {
@@ -27558,7 +27585,7 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "e0863533e0a0f0b5069bace6a24d7adfb43d615453f08cff7578076a3cb1a2a3",
+          "package_sha256": "db71157184dc649ee72dfcaf399204d44a366d942393d055571e0137d42c9f7c",
           "archive_sha256": "c56a8519244c0bc8ec17c92d4641c832629cc059f4b51fe177a2c039515253a7"
         },
         "compatibility": {
@@ -27615,7 +27642,7 @@
               "vscode"
             ],
             "package_metadata": "registry/packages/yao-meta-skill.json",
-            "package_sha256": "e0863533e0a0f0b5069bace6a24d7adfb43d615453f08cff7578076a3cb1a2a3"
+            "package_sha256": "db71157184dc649ee72dfcaf399204d44a366d942393d055571e0137d42c9f7c"
           }
         ]
       },
@@ -28663,7 +28690,7 @@
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "e0863533e0a0f0b5069bace6a24d7adfb43d615453f08cff7578076a3cb1a2a3"
+            "to": "db71157184dc649ee72dfcaf399204d44a366d942393d055571e0137d42c9f7c"
           }
         ]
       },

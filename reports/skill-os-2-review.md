@@ -153,7 +153,7 @@ Next move: add real client or installer permission enforcement integration.
 | World-Class Evidence Ledger | `4` evidence entries remain pending: `1` human-required and `3` external-required; anti-overclaim guards block planned work, metadata fallbacks, pending review, and local command runners from counting as completion |
 | Benchmark Reproducibility | local reproducibility ready with `25` required artifacts, `0` missing artifacts, `23` reproduction commands, and `3` disclosed failure cases; human review, native permission enforcement, native telemetry, and provider ledger approval remain explicit limitations |
 | IR-first Packaging | `openai`, `claude`, `generic`, and `vscode` adapters include compiler contracts, permission contracts, target-native behavior contracts, IR provenance, semantic parity checks, and install-scope notes where applicable |
-| Context Budget | initial load `999/1000`; deferred `530167/120000`; resource governance governed |
+| Context Budget | initial load `987/1000`; deferred `530167/120000`; resource governance governed |
 | CI | `make ci-test` target count is `83` after adding the dedicated Operator UX verifier |
 
 ## Next Highest-Leverage Moves
