@@ -40,17 +40,17 @@
   },
   "workflow": {
     "steps": [
-      "For one-off/no reusable process: `Do not create a skill`; `near-neighbor`; require `repeated use` + `reusable output contract`.",
-      "Capture job, output, exclusions, constraints, standards, and the lightest fit.",
-      "Scan references in order: external benchmark, user source, local fit; surface only uncertainty or conflict.",
-      "Write `description` early, test route quality, then add only earned folders and gates.",
-      "Add output-risk, artifact-design, prompt-quality, system-model, and next directions only when useful."
+      "One-off/no reusable process: `Do not create a skill`; `near-neighbor`; require `repeated use` + `reusable output contract`.",
+      "Capture job, output, exclusions, constraints, standards, lightest fit.",
+      "Scan up to `3-5` references: external, user, local; skip tiny edits; surface only uncertainty/conflict.",
+      "Write `description` early; route/boundary edits need `trigger_eval.py`; releases need risk-matched gates before folders.",
+      "Add output-risk, artifact-design, prompt-quality, system-model, next directions only when earned."
     ],
     "decision_points": [
       "Route by frontmatter `description`.",
       "Keep `SKILL.md` lean; put guidance in `references/`, logic in `scripts/`, and evidence in `reports/`.",
       "Use the lightest reliable process.",
-      "`Scaffold`: exploratory/personal. `Production`: team reuse. `Library`: shared infrastructure. `Governed`: high-trust, policy-sensitive, or release-critical.",
+      "`Scaffold`: exploratory/personal. `Production`: team reuse. `Library`: shared infra. `Governed`: high-trust/release-critical.",
       "Rules: [Method](references/skill-engineering-method.md), [Operating Modes](references/operating-modes.md), [Resource Boundaries](references/resource-boundaries.md).",
       "Ask one focused clarification when the real job, output, or exclusion boundary is unclear.",
       "Escalate visible tradeoffs when benchmark patterns conflict with local privacy, naming, or governance constraints.",

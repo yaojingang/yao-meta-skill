@@ -324,12 +324,12 @@
       "status": "pass",
       "expected": {
         "status": "pass",
-        "detail": "initial load 999/1000; deferred 531767/120000; top deferred scripts 469568; resource governance governed; quality density 140.1",
+        "detail": "initial load 987/1000; deferred 531767/120000; top deferred scripts 469568; resource governance governed; quality density 141.8",
         "evidence": "reports/context_budget.json"
       },
       "actual": {
         "status": "pass",
-        "detail": "initial load 999/1000; deferred 531767/120000; top deferred scripts 469568; resource governance governed; quality density 140.1",
+        "detail": "initial load 987/1000; deferred 531767/120000; top deferred scripts 469568; resource governance governed; quality density 141.8",
         "evidence": "reports/context_budget.json"
       },
       "paths": [
@@ -357,7 +357,7 @@
       "actual": {
         "available": true,
         "clean": false,
-        "changed_file_count": 76
+        "changed_file_count": 39
       },
       "paths": [
         "reports/benchmark_reproducibility.json"
@@ -398,8 +398,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "1710a5a3e0177313954758908735c147796e8981",
-      "actual": "1710a5a3e0177313954758908735c147796e8981",
+      "expected": "24bea607a2b16e766bc8f2bc8483f22fae1edc61",
+      "actual": "24bea607a2b16e766bc8f2bc8483f22fae1edc61",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -414,7 +414,7 @@
         "release_lock_ready": false,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "f0333ea256d221c8993809b4366f93d9874defe6c722fbf95c8f524bdf9d3289",
+        "source_contract_sha256": "b5cfa61c532d9ecd55d4d3a91aaf249bab0393251319a0f391422edb07a9e658",
         "archive_sha256": "c56a8519244c0bc8ec17c92d4641c832629cc059f4b51fe177a2c039515253a7",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 19,
@@ -430,7 +430,7 @@
         "release_lock_ready": false,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "f0333ea256d221c8993809b4366f93d9874defe6c722fbf95c8f524bdf9d3289",
+        "source_contract_sha256": "b5cfa61c532d9ecd55d4d3a91aaf249bab0393251319a0f391422edb07a9e658",
         "archive_sha256": "c56a8519244c0bc8ec17c92d4641c832629cc059f4b51fe177a2c039515253a7",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 19,
@@ -550,8 +550,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "1710a5a3e0177313954758908735c147796e8981",
-      "actual": "1710a5a3e0177313954758908735c147796e8981",
+      "expected": "24bea607a2b16e766bc8f2bc8483f22fae1edc61",
+      "actual": "24bea607a2b16e766bc8f2bc8483f22fae1edc61",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
@@ -566,7 +566,7 @@
         "release_lock_ready": false,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "f0333ea256d221c8993809b4366f93d9874defe6c722fbf95c8f524bdf9d3289",
+        "source_contract_sha256": "b5cfa61c532d9ecd55d4d3a91aaf249bab0393251319a0f391422edb07a9e658",
         "archive_sha256": "c56a8519244c0bc8ec17c92d4641c832629cc059f4b51fe177a2c039515253a7",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 19,
@@ -582,7 +582,7 @@
         "release_lock_ready": false,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "f0333ea256d221c8993809b4366f93d9874defe6c722fbf95c8f524bdf9d3289",
+        "source_contract_sha256": "b5cfa61c532d9ecd55d4d3a91aaf249bab0393251319a0f391422edb07a9e658",
         "archive_sha256": "c56a8519244c0bc8ec17c92d4641c832629cc059f4b51fe177a2c039515253a7",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 19,
@@ -739,7 +739,7 @@
           "label": "可维护性",
           "score": 100,
           "reasons": [
-            "SKILL.md 约 342 个词/字。",
+            "SKILL.md 约 314 个词/字。",
             "入口文件保持克制，可维护性较好。",
             "references/ 已承载扩展指导。",
             "scripts/ 已承载确定性逻辑。",
@@ -760,7 +760,7 @@
           "label": "上下文成本",
           "score": 42,
           "reasons": [
-            "入口约 342 个词/字，references 约 16934 个词/字。",
+            "入口约 314 个词/字，references 约 16934 个词/字。",
             "分数越高代表上下文成本越低。",
             "上下文成本偏高，建议压缩入口或拆分 references。"
           ]
@@ -803,7 +803,7 @@
           "label": "可维护性",
           "score": 100,
           "reasons": [
-            "SKILL.md 约 342 个词/字。",
+            "SKILL.md 约 314 个词/字。",
             "入口文件保持克制，可维护性较好。",
             "references/ 已承载扩展指导。",
             "scripts/ 已承载确定性逻辑。",
@@ -824,7 +824,7 @@
           "label": "上下文成本",
           "score": 42,
           "reasons": [
-            "入口约 342 个词/字，references 约 16934 个词/字。",
+            "入口约 314 个词/字，references 约 16934 个词/字。",
             "分数越高代表上下文成本越低。",
             "上下文成本偏高，建议压缩入口或拆分 references。"
           ]
@@ -1056,7 +1056,7 @@
           "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
         ],
         "gaps": [
-          "上下文成本需要补强：入口约 342 个词/字，references 约 16934 个词/字。"
+          "上下文成本需要补强：入口约 314 个词/字，references 约 16934 个词/字。"
         ],
         "recommendations": [
           "先改触发边界，再扩展工作流。",
@@ -1104,7 +1104,7 @@
           "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
         ],
         "gaps": [
-          "上下文成本需要补强：入口约 342 个词/字，references 约 16934 个词/字。"
+          "上下文成本需要补强：入口约 314 个词/字，references 约 16934 个词/字。"
         ],
         "recommendations": [
           "先改触发边界，再扩展工作流。",
@@ -1179,7 +1179,7 @@
             "name": "包体膨胀风险",
             "impact": 2,
             "probability": 1,
-            "signal": "SKILL.md 约 342 个词/字。",
+            "signal": "SKILL.md 约 314 个词/字。",
             "response": "先补证据和边界，再增加包体复杂度。"
           },
           {
@@ -1338,7 +1338,7 @@
             "name": "包体膨胀风险",
             "impact": 2,
             "probability": 1,
-            "signal": "SKILL.md 约 342 个词/字。",
+            "signal": "SKILL.md 约 314 个词/字。",
             "response": "先补证据和边界，再增加包体复杂度。"
           },
           {
@@ -2139,8 +2139,8 @@
           "artifact_prefill_counts_as_evidence": false,
           "submission_ref_total_count": 2,
           "submission_ref_ready_count": 2,
-          "supporting_evidence_total_count": 8,
-          "supporting_evidence_ready_count": 7,
+          "supporting_evidence_total_count": 11,
+          "supporting_evidence_ready_count": 11,
           "submission_ref_copy_to_artifact_refs": true,
           "supporting_evidence_copy_to_artifact_refs": false
         },
@@ -2185,8 +2185,8 @@
           "artifact_prefill_counts_as_evidence": false,
           "submission_ref_total_count": 2,
           "submission_ref_ready_count": 2,
-          "supporting_evidence_total_count": 8,
-          "supporting_evidence_ready_count": 7,
+          "supporting_evidence_total_count": 11,
+          "supporting_evidence_ready_count": 11,
           "submission_ref_copy_to_artifact_refs": true,
           "supporting_evidence_copy_to_artifact_refs": false
         },
@@ -3200,7 +3200,9 @@
           "agents/interface.yaml": true,
           "evidence/world_class/README.md": true,
           "security/permission_policy.json": true,
-          "reports/world_class_evidence_ledger.json": true
+          "reports/world_class_evidence_ledger.json": true,
+          "dist/manifest.json": true,
+          "dist/targets/openai/adapter.json": true
         },
         "prohibited_surfaces": []
       },
@@ -3219,7 +3221,9 @@
           "agents/interface.yaml": true,
           "evidence/world_class/README.md": true,
           "security/permission_policy.json": true,
-          "reports/world_class_evidence_ledger.json": true
+          "reports/world_class_evidence_ledger.json": true,
+          "dist/manifest.json": true,
+          "dist/targets/openai/adapter.json": true
         },
         "prohibited_surfaces": []
       },
@@ -3581,7 +3585,7 @@
         "`0` permission failures",
         "`25` required artifacts",
         "`23` reproduction commands",
-        "initial load `999/1000`",
+        "initial load `987/1000`",
         "target count is `83`"
       ],
       "actual": "all present",

@@ -802,8 +802,8 @@
           "artifact_prefill_counts_as_evidence": false,
           "submission_ref_total_count": 2,
           "submission_ref_ready_count": 2,
-          "supporting_evidence_total_count": 8,
-          "supporting_evidence_ready_count": 7,
+          "supporting_evidence_total_count": 11,
+          "supporting_evidence_ready_count": 11,
           "roles": [
             {
               "role": "submission-ref",
@@ -1946,8 +1946,8 @@
       "artifact_prefill_counts_as_evidence": false,
       "submission_ref_total_count": 7,
       "submission_ref_ready_count": 7,
-      "supporting_evidence_total_count": 28,
-      "supporting_evidence_ready_count": 27,
+      "supporting_evidence_total_count": 31,
+      "supporting_evidence_ready_count": 31,
       "roles": [
         {
           "role": "submission-ref",
