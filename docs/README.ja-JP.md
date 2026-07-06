@@ -69,6 +69,20 @@ flowchart LR
 
 ## クイックスタート
 
+Codex でこの skill を直接使う場合は、まず global skills にインストールします。
+
+```bash
+npx -y skills add yaojingang/yao-meta-skill -a codex -g -y
+```
+
+対応しているすべての agent にインストールする場合は、`-a codex` を `-a '*'` に置き換えます。
+
+```bash
+npx -y skills add yaojingang/yao-meta-skill -a '*' -g -y
+```
+
+インストール後にクライアントを再起動してください。その後、"create a skill from this workflow"、"improve this existing skill"、"evaluate this skill"、"add evals to this skill" のような依頼で `yao-meta-skill` を起動できます。
+
 1. skill 化したい workflow、prompt 集合、または反復タスクを説明します。
 2. まず短いが人間味のある intent dialogue で、実際の job、outputs、boundary、constraints、重視する品質基準を明確にします。
 3. まず `quickstart` で意図を澄ませ、その後 benchmark scan と reference synthesis を静かに実行します。意図がまだ曖昧なとき、または設計ルートに本当の衝突があるときだけ、追加確認を明示します。

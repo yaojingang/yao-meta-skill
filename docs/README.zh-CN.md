@@ -46,6 +46,8 @@ flowchart LR
 
 下面是当前项目采用的工程质量评测模型。每个维度按 `0-10` 评分，再按权重折算到 `100` 分。GitHub stars 不计入总分，因为它反映生态热度，不直接代表元 skill 工程质量。
 
+这个分数是本地工程证据，不等同于 world-class ready。公开宣称“已证明优于其他方案”仍要以 world-class ledger 中已接受的外部证据和人工证据为准。
+
 加权总分公式：`sum(单项评分 / 10 * 权重)`。
 
 | 元 Skill | 方法论深度 15 | 上下文纪律 10 | 工具链 15 | Eval/测试 20 | 治理 15 | 可移植 10 | 上手/评审 5 | 本地可靠性 10 | 加权总分 |
@@ -60,6 +62,20 @@ flowchart LR
 | 2 | Anthropic Skill Creator | 67.5 | 方法论和迭代闭环强，但本地执行可靠性和治理覆盖较弱。 |
 | 3 | OpenAI Skill Creator | 50.5 | 更适合作为精简 skill 写作方法论教材，而不是完整工程系统。 |
 
+## 人工盲测快照
+
+2026-06-29，一位人工评审者在 5 个真实常见的 skill 创建场景里，对比了 `yao-meta-skill` 和内置的 OpenAI `skill-creator`。5 个场景分别是客服工单分诊、月度收入对账、Webinar 内容复用、故障复盘和 PR Review 跟进。评审者确认：所有选择都在揭晓来源前完成。
+
+结果：`yao-meta-skill` 在 `5/5` 个案例中胜出。
+
+证据：
+
+- 盲测入口：[reports/blind-human-review-2026-06-29/index.html](../reports/blind-human-review-2026-06-29/index.html)
+- Adjudication 摘要：[reports/blind-human-review-2026-06-29/adjudication.md](../reports/blind-human-review-2026-06-29/adjudication.md)
+- 已记录判断：[reports/blind-human-review-2026-06-29/review-decisions.recorded.json](../reports/blind-human-review-2026-06-29/review-decisions.recorded.json)
+
+边界：这是单人盲测偏好证据，不是 provider-backed 的独立模型执行证据；每个案例的逐项理由仍为空。
+
 ## 适用场景
 
 - 如果你要的是**团队复用、显式边界、质量门、治理、可移植性和长期维护**，更适合 `Yao Meta Skill`。
@@ -68,6 +84,20 @@ flowchart LR
 - 一个很实用的组合方式是：先用更对话式的系统做第一版，再用 `yao-meta-skill` 把它加固成团队可复用的正式资产。
 
 ## 快速开始
+
+如果你想直接在 Codex 里使用这个 skill，先安装到全局 skills：
+
+```bash
+npx -y skills add yaojingang/yao-meta-skill -a codex -g -y
+```
+
+如果要安装到全部支持的 agent，把 `-a codex` 换成 `-a '*'`：
+
+```bash
+npx -y skills add yaojingang/yao-meta-skill -a '*' -g -y
+```
+
+安装完成后重启客户端，再用“创建 skill”“改进已有 skill”“评估 skill”“给 skill 增加 eval”这类任务触发 `yao-meta-skill`。
 
 1. 先描述你想沉淀成 skill 的 workflow、prompt 集合或重复任务。
 2. 先做一轮简短但更有人味的意图对话，把真实任务、输出物、边界、约束和你在意的质量标准说清楚。
@@ -82,6 +112,7 @@ flowchart LR
 - train / dev / holdout 三层评测均通过
 - 中文真实表达已经纳入触发评测，覆盖“做一个 skill”“沉淀成可复用能力”“优化已有 skill”“补 trigger 评测”等常见说法
 - `openai`、`claude`、`generic` 三个目标的 packaging contract 校验通过
+- 单人盲测快照中，评审者在揭晓来源前完成判断，并在 `5/5` 个真实 skill 创建场景中选择 `yao-meta-skill`；证据见 [reports/blind-human-review-2026-06-29/adjudication.md](../reports/blind-human-review-2026-06-29/adjudication.md)
 
 ## 当前优势
 

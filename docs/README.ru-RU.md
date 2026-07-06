@@ -69,6 +69,20 @@ flowchart LR
 
 ## Быстрый старт
 
+Чтобы использовать эту skill напрямую в Codex, сначала установите ее в global skills:
+
+```bash
+npx -y skills add yaojingang/yao-meta-skill -a codex -g -y
+```
+
+Чтобы установить ее во все поддерживаемые agents, замените `-a codex` на `-a '*'`:
+
+```bash
+npx -y skills add yaojingang/yao-meta-skill -a '*' -g -y
+```
+
+После установки перезапустите клиент. Затем используйте запросы вроде "create a skill from this workflow", "improve this existing skill", "evaluate this skill" или "add evals to this skill", чтобы вызвать `yao-meta-skill`.
+
 1. Опишите workflow, набор prompts или повторяющуюся задачу, которую хотите превратить в skill.
 2. Сначала проведите короткий, но более человечный intent dialogue, чтобы уточнить реальную job-to-be-done, outputs, exclusions, constraints и те стандарты качества, которые для вас важны.
 3. Сначала позвольте `quickstart` прояснить намерение, затем тихо выполнить benchmark scan и reference synthesis. Явные уточнения поднимаются только тогда, когда intent все еще неясен или между маршрутами проектирования есть реальный конфликт.

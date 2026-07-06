@@ -8,7 +8,7 @@
 [![Français](https://img.shields.io/badge/Docs-Fran%C3%A7ais-green)](docs/README.fr-FR.md)
 [![Русский](https://img.shields.io/badge/Docs-%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9-purple)](docs/README.ru-RU.md)
 
-`YAO` stands for `Yielding AI Outcomes` — the goal is not to generate more prompt text, but to produce reusable AI assets and real operational outcomes.
+`YAO` stands for `Yielding AI Outcomes`: the goal is not to generate more prompt text, but to produce reusable AI assets and real operational outcomes.
 
 `yao-meta-skill` is a lightweight but rigorous system for creating, evaluating, packaging, and governing reusable agent skills.
 
@@ -79,6 +79,8 @@ Read it in 10 seconds:
 
 This benchmark is a project-level engineering review, scored from `0-10` per dimension and weighted to `100`. GitHub stars are intentionally excluded because they measure ecosystem heat, not meta-skill engineering quality.
 
+The score is local engineering evidence, not a claim of world-class readiness. Public superiority claims still depend on accepted external and human evidence in the world-class ledger.
+
 Weighted score formula: `sum(score / 10 * weight)`.
 
 | Meta Skill | Method Depth 15 | Context Discipline 10 | Toolchain 15 | Eval/Test Rigor 20 | Governance 15 | Portability 10 | Onboarding/Review 5 | Local Reliability 10 | Weighted Score |
@@ -93,6 +95,20 @@ Weighted score formula: `sum(score / 10 * weight)`.
 | 2 | Anthropic Skill Creator | 67.5 | Strong methodology and iteration loop, with weaker local execution reliability and governance coverage. |
 | 3 | OpenAI Skill Creator | 50.5 | Best treated as a concise skill-writing method guide rather than a full engineering system. |
 
+## Human Blind A/B Review Snapshot
+
+On 2026-06-29, a single human reviewer compared `yao-meta-skill` with the bundled OpenAI `skill-creator` across five realistic skill-creation scenarios: support triage, revenue reconciliation, webinar repurposing, incident postmortems, and PR review follow-up. The reviewer confirmed decisions were completed before the answer key was opened.
+
+Result: `yao-meta-skill` was selected in `5/5` cases.
+
+Evidence:
+
+- Review entrypoint: [reports/blind-human-review-2026-06-29/index.html](reports/blind-human-review-2026-06-29/index.html)
+- Adjudication summary: [reports/blind-human-review-2026-06-29/adjudication.md](reports/blind-human-review-2026-06-29/adjudication.md)
+- Recorded decisions: [reports/blind-human-review-2026-06-29/review-decisions.recorded.json](reports/blind-human-review-2026-06-29/review-decisions.recorded.json)
+
+Boundary: this is single-reviewer blind preference evidence. It is not provider-backed independent model execution evidence, and the per-case rationale fields are still empty.
+
 ## Best-Fit Scenarios
 
 - Choose **Yao Meta Skill** when the target is a reusable team asset with explicit boundaries, trigger evaluation, governance, packaging, portability, and local execution checks.
@@ -101,6 +117,20 @@ Weighted score formula: `sum(score / 10 * weight)`.
 - A practical hybrid pattern is still useful: draft conversationally, then use `yao-meta-skill` to harden the package, add evidence, and make it team-ready.
 
 ## Quick Start
+
+Install the skill globally for Codex first:
+
+```bash
+npx -y skills add yaojingang/yao-meta-skill -a codex -g -y
+```
+
+To install it for every supported agent, replace `-a codex` with `-a '*'`:
+
+```bash
+npx -y skills add yaojingang/yao-meta-skill -a '*' -g -y
+```
+
+After installation, restart the client. Then ask for tasks such as "create a skill from this workflow", "improve this existing skill", "evaluate this skill", or "add evals to this skill" to trigger `yao-meta-skill`.
 
 1. Describe the workflow, prompt set, or repeated task you want to turn into a skill.
 2. Start with a short, human intent dialogue so the real job, outputs, exclusions, constraints, and standards are explicit.
@@ -294,6 +324,7 @@ Full reports: [reports/eval_suite.json](reports/eval_suite.json) and [reports/fa
 - portability score: `100/100` with neutral activation, execution, trust, and degradation metadata preserved across all exported targets
 - description optimization suite: root, team frontend review, and governed incident command pass blind and adversarial holdout gates; governed incident command still carries one visible holdout miss, and adversarial calibration plus family drift are now tracked separately
 - judge-backed blind eval: root, team frontend review, and governed incident command now pass an independent rubric judge on blind holdout prompts
+- human blind A/B snapshot: a single reviewer selected `yao-meta-skill` over the bundled OpenAI `skill-creator` in `5/5` realistic skill-creation scenarios; evidence is published in [reports/blind-human-review-2026-06-29/adjudication.md](reports/blind-human-review-2026-06-29/adjudication.md)
 - packaging failure fixtures: invalid metadata, invalid YAML, and unsupported targets fail as expected
 - failure library regressions: anti-pattern families pass automated checks
 - governance and resource-boundary checks are part of the default test path

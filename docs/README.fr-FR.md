@@ -69,6 +69,20 @@ Formule du score pondéré : `sum(score / 10 * poids)`.
 
 ## Démarrage rapide
 
+Pour utiliser cette skill directement dans Codex, installez-la d'abord dans les skills globales :
+
+```bash
+npx -y skills add yaojingang/yao-meta-skill -a codex -g -y
+```
+
+Pour l'installer dans tous les agents pris en charge, remplacez `-a codex` par `-a '*'` :
+
+```bash
+npx -y skills add yaojingang/yao-meta-skill -a '*' -g -y
+```
+
+Après l'installation, redémarrez le client. Demandez ensuite des tâches comme "create a skill from this workflow", "improve this existing skill", "evaluate this skill" ou "add evals to this skill" pour déclencher `yao-meta-skill`.
+
 1. Décrivez le workflow, l'ensemble de prompts ou la tâche répétée que vous voulez transformer en skill.
 2. Commencez par un court dialogue d'intention plus humain pour clarifier le vrai travail, les sorties attendues, les exclusions, les contraintes et les standards qui comptent pour vous.
 3. Laissez d'abord `quickstart` clarifier l'intention, puis lancer silencieusement benchmark scan et reference synthesis ; des questions explicites ne remontent que si l'intention reste ambiguë ou si deux directions de conception se contredisent réellement.
