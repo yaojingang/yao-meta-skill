@@ -3,7 +3,7 @@
   "failures": [],
   "warnings": [],
   "details": {
-    "skill_dir": "/Users/laoyao/AI Coding/03-Development/Skills/yao-meta-skill/examples/governed-incident-command/generated-skill",
+    "skill_dir": ".",
     "manifest_present": true,
     "frontmatter_name": "incident-command-governor",
     "manifest_name": "incident-command-governor",

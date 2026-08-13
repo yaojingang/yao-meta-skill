@@ -141,7 +141,7 @@
       "status": "warn",
       "detail": "promotion decisions are missing; release notes need reviewer confirmation",
       "evidence": "reports/promotion_decisions.json + reports/upgrade_check.json + docs/migration-v2.md",
-      "link": "/Users/laoyao/AI Coding/03-Development/Skills/yao-meta-skill/docs/migration-v2.md"
+      "link": "docs/migration-v2.md"
     }
   ],
   "blockers": [],
@@ -248,7 +248,7 @@
       "status": "warn",
       "detail": "promotion decisions are missing; release notes need reviewer confirmation",
       "evidence": "reports/promotion_decisions.json + reports/upgrade_check.json + docs/migration-v2.md",
-      "link": "/Users/laoyao/AI Coding/03-Development/Skills/yao-meta-skill/docs/migration-v2.md"
+      "link": "docs/migration-v2.md"
     }
   ],
   "review_actions": [
@@ -743,7 +743,7 @@
         }
       ],
       "evidence": "reports/promotion_decisions.json + reports/upgrade_check.json + docs/migration-v2.md",
-      "evidence_link": "/Users/laoyao/AI Coding/03-Development/Skills/yao-meta-skill/docs/migration-v2.md",
+      "evidence_link": "docs/migration-v2.md",
       "verification_command": "python3 scripts/upgrade_check.py . --previous-package-json registry/examples/yao-meta-skill-1.0.0.json"
     }
   ],

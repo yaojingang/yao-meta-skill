@@ -10,8 +10,8 @@
       "variant_a_source_label": "官方 skill-creator",
       "variant_b_source_label": "yao-meta-skill",
       "source_paths": {
-        "yao": "/Users/laoyao/AI Coding/03-Development/Skills/yao-meta-skill/SKILL.md",
-        "official": "/Users/laoyao/.codex/skills/.system/skill-creator/SKILL.md"
+        "yao": "SKILL.md",
+        "official": "[system-skill-root]/skill-creator/SKILL.md"
       }
     },
     {
@@ -21,8 +21,8 @@
       "variant_a_source_label": "yao-meta-skill",
       "variant_b_source_label": "官方 skill-creator",
       "source_paths": {
-        "yao": "/Users/laoyao/AI Coding/03-Development/Skills/yao-meta-skill/SKILL.md",
-        "official": "/Users/laoyao/.codex/skills/.system/skill-creator/SKILL.md"
+        "yao": "SKILL.md",
+        "official": "[system-skill-root]/skill-creator/SKILL.md"
       }
     },
     {
@@ -32,8 +32,8 @@
       "variant_a_source_label": "官方 skill-creator",
       "variant_b_source_label": "yao-meta-skill",
       "source_paths": {
-        "yao": "/Users/laoyao/AI Coding/03-Development/Skills/yao-meta-skill/SKILL.md",
-        "official": "/Users/laoyao/.codex/skills/.system/skill-creator/SKILL.md"
+        "yao": "SKILL.md",
+        "official": "[system-skill-root]/skill-creator/SKILL.md"
       }
     },
     {
@@ -43,8 +43,8 @@
       "variant_a_source_label": "yao-meta-skill",
       "variant_b_source_label": "官方 skill-creator",
       "source_paths": {
-        "yao": "/Users/laoyao/AI Coding/03-Development/Skills/yao-meta-skill/SKILL.md",
-        "official": "/Users/laoyao/.codex/skills/.system/skill-creator/SKILL.md"
+        "yao": "SKILL.md",
+        "official": "[system-skill-root]/skill-creator/SKILL.md"
       }
     },
     {
@@ -54,8 +54,8 @@
       "variant_a_source_label": "官方 skill-creator",
       "variant_b_source_label": "yao-meta-skill",
       "source_paths": {
-        "yao": "/Users/laoyao/AI Coding/03-Development/Skills/yao-meta-skill/SKILL.md",
-        "official": "/Users/laoyao/.codex/skills/.system/skill-creator/SKILL.md"
+        "yao": "SKILL.md",
+        "official": "[system-skill-root]/skill-creator/SKILL.md"
       }
     }
   ]

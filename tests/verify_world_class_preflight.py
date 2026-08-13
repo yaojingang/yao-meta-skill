@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SCRIPT = ROOT / "scripts" / "render_world_class_preflight.py"
 CLI = ROOT / "scripts" / "yao.py"
 TMP = ROOT / "tests" / "tmp_world_class_preflight"
+FAKE_PROVIDER_SECRET = "sk-" + "test-secret"
 
 
 def run_preflight(extra_env: dict[str, str] | None = None, *extra: str) -> subprocess.CompletedProcess[str]:
@@ -186,7 +187,7 @@ def main() -> None:
     assert provider_checks["provider-api-key"]["actual"] == "not-set", provider_checks
     assert provider_checks["provider-api-key"]["secret_value_redacted"] is True, provider_checks
     assert provider_checks["provider-api-key"]["env_any"] == ["OPENAI_API_KEY", "DEEPSEEK_API_KEY"], provider_checks
-    assert "sk-test-secret" not in proc.stdout, proc.stdout
+    assert FAKE_PROVIDER_SECRET not in proc.stdout, proc.stdout
     assert "OPENAI_API_KEY" in proc.stdout, proc.stdout
     assert "DEEPSEEK_API_KEY" in proc.stdout, proc.stdout
     provider_repairs = {item["target"]: item for item in provider["repair_checklist"]}
@@ -290,7 +291,7 @@ def main() -> None:
 
     env_json = TMP / "preflight_with_env.json"
     env_proc = run_preflight(
-        {"DEEPSEEK_API_KEY": "sk-test-secret", "YAO_OUTPUT_EVAL_MODEL": "deepseek-test"},
+        {"DEEPSEEK_API_KEY": FAKE_PROVIDER_SECRET, "YAO_OUTPUT_EVAL_MODEL": "deepseek-test"},
         "--output-json",
         str(env_json),
         "--output-md",
@@ -305,8 +306,8 @@ def main() -> None:
     assert env_provider_checks["provider-api-key"]["actual"] == "set", env_provider_checks
     assert env_provider_checks["provider-api-key"]["set_envs"] == ["DEEPSEEK_API_KEY"], env_provider_checks
     assert env_provider_checks["provider-model"]["status"] == "pass", env_provider_checks
-    assert "sk-test-secret" not in env_proc.stdout, env_proc.stdout
-    assert "sk-test-secret" not in (TMP / "preflight_with_env.html").read_text(encoding="utf-8"), env_payload
+    assert FAKE_PROVIDER_SECRET not in env_proc.stdout, env_proc.stdout
+    assert FAKE_PROVIDER_SECRET not in (TMP / "preflight_with_env.html").read_text(encoding="utf-8"), env_payload
     assert env_payload["summary"]["credential_value_exposed"] is False, env_payload
     assert env_payload["summary"]["ready_to_claim_world_class"] is False, env_payload
     assert env_payload["summary"]["repair_checklist_count"] == payload["summary"]["repair_checklist_count"] - 1, env_payload

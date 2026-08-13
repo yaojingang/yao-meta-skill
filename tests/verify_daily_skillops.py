@@ -10,6 +10,9 @@ ROOT = Path(__file__).resolve().parent.parent
 SCRIPT = ROOT / "scripts" / "render_daily_skillops_report.py"
 CLI = ROOT / "scripts" / "yao.py"
 TMP = ROOT / "tests" / "tmp_daily_skillops"
+FAKE_API_SECRET = "sk-" + "1234567890abcdef"
+FAKE_INLINE_TOKEN = "token=" + "abc123456789"
+FAKE_LOCAL_PATH = "/Users/" + "fixture-user/private/path"
 
 
 def run_command(*args: str) -> subprocess.CompletedProcess[str]:
@@ -79,10 +82,14 @@ def seed_release_reports(skill_dir: Path) -> None:
 
 
 def write_signal_source(path: Path) -> None:
+    sensitive_text = (
+        "报告默认中文简体，同时右上角提供英文切换；敏感内容 "
+        f"{FAKE_INLINE_TOKEN}、{FAKE_API_SECRET} 和 {FAKE_LOCAL_PATH} 必须脱敏。"
+    )
     path.write_text(
         "\n".join(
             [
-                json.dumps({"text": "报告默认中文简体，同时右上角提供英文切换；敏感内容 token=abc123456789、sk-1234567890abcdef 和 /Users/laoyao/private/path 必须脱敏。"}, ensure_ascii=False),
+                json.dumps({"text": sensitive_text}, ensure_ascii=False),
                 json.dumps({"message": "新的 HTML 报告要双语，但默认中文简体。"}, ensure_ascii=False),
                 json.dumps({"content": "报告 UI 需要 Kami 白底排版、图表模块和清晰导航。"}, ensure_ascii=False),
                 json.dumps({"excerpt": "HTML 报告还是白底 Kami 风格，图表不要挤在一起。"}, ensure_ascii=False),
@@ -169,9 +176,9 @@ def main() -> None:
     assert source.read_text(encoding="utf-8") == source_before, source
 
     serialized = json.dumps(payload, ensure_ascii=False)
-    assert "sk-1234567890abcdef" not in serialized, serialized
-    assert "token=abc123456789" not in serialized, serialized
-    assert "/Users/laoyao/private" not in serialized, serialized
+    assert FAKE_API_SECRET not in serialized, serialized
+    assert FAKE_INLINE_TOKEN not in serialized, serialized
+    assert FAKE_LOCAL_PATH not in serialized, serialized
     assert "[REDACTED_SECRET]" in serialized, serialized
     assert "[LOCAL_PATH]" in serialized, serialized
     markdown = output_md.read_text(encoding="utf-8")

@@ -49,7 +49,7 @@ def native_telemetry_submission(skill_root: Path) -> dict:
         ],
         "provenance": {
             "client": "Chrome extension production build",
-            "native_host_manifest": "/Users/laoyao/.config/chrome/native-hosts/yao-meta-skill.json",
+            "native_host_manifest": "[user-config]/chrome/native-hosts/yao-meta-skill.json",
             "event_source": "external",
             "metadata_only": True,
         },

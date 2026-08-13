@@ -13,6 +13,9 @@ SCAN_SCRIPT = ROOT / "scripts" / "summarize_user_signals.py"
 PROPOSE_SCRIPT = ROOT / "scripts" / "propose_adaptation.py"
 APPLY_SCRIPT = ROOT / "scripts" / "apply_adaptation.py"
 TMP = ROOT / "tests" / "tmp_adaptation_safety"
+FAKE_API_SECRET = "sk-" + "1234567890abcdef"
+FAKE_INLINE_TOKEN = "token=" + "abc123456789"
+FAKE_LOCAL_PATH = "/Users/" + "fixture-user/private/path"
 
 
 def run_script(*args: str) -> subprocess.CompletedProcess[str]:
@@ -53,7 +56,15 @@ def main() -> None:
                 json.dumps({"excerpt": "HTML 报告还是白底 Kami 风格，图表不要挤在一起。"}, ensure_ascii=False),
                 json.dumps({"note": "不要自动扫描私人日志；必须由用户提供明确路径。"}, ensure_ascii=False),
                 json.dumps({"body": "自适应升级需要先输出提案，授权后再修改，并能回滚。"}, ensure_ascii=False),
-                json.dumps({"text": "隐私证据里也要保护 token=abc123456789、sk-1234567890abcdef 和 /Users/laoyao/private/path。"}, ensure_ascii=False),
+                json.dumps(
+                    {
+                        "text": (
+                            "隐私证据里也要保护 "
+                            f"{FAKE_INLINE_TOKEN}、{FAKE_API_SECRET} 和 {FAKE_LOCAL_PATH}。"
+                        )
+                    },
+                    ensure_ascii=False,
+                ),
                 json.dumps({"text": "PDF 只提过一次，不能当作稳定偏好。"}, ensure_ascii=False),
             ]
         )
@@ -80,9 +91,9 @@ def main() -> None:
     pattern_ids = {item["pattern_id"] for item in scan_payload["patterns"]}
     assert {"language_default", "report_ui", "approval_safety"} <= pattern_ids, scan_payload
     serialized = json.dumps(scan_payload, ensure_ascii=False)
-    assert "sk-1234567890abcdef" not in serialized, serialized
-    assert "token=abc123456789" not in serialized, serialized
-    assert "/Users/laoyao/private" not in serialized, serialized
+    assert FAKE_API_SECRET not in serialized, serialized
+    assert FAKE_INLINE_TOKEN not in serialized, serialized
+    assert FAKE_LOCAL_PATH not in serialized, serialized
     assert "[REDACTED_SECRET]" in serialized, serialized
     assert "[LOCAL_PATH]" in serialized, serialized
     assert (reports_dir / "user_patterns.json").exists(), reports_dir

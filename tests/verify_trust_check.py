@@ -200,8 +200,9 @@ def main() -> None:
         encoding="utf-8",
     )
     (secret_skill / "agents" / "interface.yaml").write_text(INTERFACE, encoding="utf-8")
+    fake_github_token = "ghp_" + "1234567890abcdefghijklmnopqrstuv"
     (secret_skill / "scripts" / "leaky.py").write_text(
-        "TOKEN = 'ghp_1234567890abcdefghijklmnopqrstuv'\n",
+        f"TOKEN = '{fake_github_token}'\n",
         encoding="utf-8",
     )
     secret_proc = subprocess.run(

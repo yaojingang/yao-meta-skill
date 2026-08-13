@@ -7,8 +7,8 @@ from pathlib import Path
 
 
 OUT_DIR = Path(__file__).resolve().parent
-YAO_SKILL_PATH = "/Users/laoyao/AI Coding/03-Development/Skills/yao-meta-skill/SKILL.md"
-OFFICIAL_SKILL_PATH = "/Users/laoyao/.codex/skills/.system/skill-creator/SKILL.md"
+YAO_SKILL_PATH = "SKILL.md"
+OFFICIAL_SKILL_PATH = "[system-skill-root]/skill-creator/SKILL.md"
 SEED = "blind-human-review-2026-06-29-v1"
 
 
