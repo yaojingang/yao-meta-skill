@@ -21,6 +21,15 @@ from evidence_resolver import resolve_evidence_path  # noqa: E402
 from evidence_store import EvidenceError, EvidenceStore  # noqa: E402
 
 
+def try_symlink(link: Path, target: Path, *, target_is_directory: bool = False) -> bool:
+    """False when the platform refuses symlinks (Windows without Developer Mode or admin)."""
+    try:
+        link.symlink_to(target, target_is_directory=target_is_directory)
+    except OSError:
+        return False
+    return True
+
+
 def write_skill(root: Path, name: str, marker: str) -> None:
     (root / "reports").mkdir(parents=True)
     (root / "agents").mkdir()
@@ -101,14 +110,16 @@ def main() -> None:
 
         outside = temp_root / "outside.json"
         outside.write_text("{}", encoding="utf-8")
-        (alpha / "reports" / "escape.json").symlink_to(outside)
-        try:
-            alpha_store.build("symlink-run")
-        except EvidenceError as exc:
-            assert exc.code == "unsafe-artifact", exc
+        if try_symlink(alpha / "reports" / "escape.json", outside):
+            try:
+                alpha_store.build("symlink-run")
+            except EvidenceError as exc:
+                assert exc.code == "unsafe-artifact", exc
+            else:
+                raise AssertionError("symlink artifact was accepted")
+            (alpha / "reports" / "escape.json").unlink()
         else:
-            raise AssertionError("symlink artifact was accepted")
-        (alpha / "reports" / "escape.json").unlink()
+            print("skipped symlink artifact case: platform does not permit symlinks")
 
         (alpha_run.run_dir / "raw-outputs").mkdir()
         (alpha_run.run_dir / "raw-outputs" / "private.txt").write_text("raw provider output", encoding="utf-8")
@@ -395,14 +406,16 @@ def main() -> None:
         published_reports = beta / ".yao" / "releases" / "cli-publish" / "artifacts" / "reports"
         external_published_reports = temp_root / "external-published-reports"
         shutil.move(str(published_reports), external_published_reports)
-        published_reports.symlink_to(external_published_reports, target_is_directory=True)
-        try:
-            resolve_evidence_path(beta, "reports/quality.json")
-        except EvidenceError as exc:
-            assert exc.code == "unsafe-evidence-path", exc
+        if try_symlink(published_reports, external_published_reports, target_is_directory=True):
+            try:
+                resolve_evidence_path(beta, "reports/quality.json")
+            except EvidenceError as exc:
+                assert exc.code == "unsafe-evidence-path", exc
+            else:
+                raise AssertionError("evidence resolver followed a symlink outside the immutable release")
+            published_reports.unlink()
         else:
-            raise AssertionError("evidence resolver followed a symlink outside the immutable release")
-        published_reports.unlink()
+            print("skipped symlink evidence-path case: platform does not permit symlinks")
         shutil.move(str(external_published_reports), published_reports)
         (beta / "SKILL.md").write_text((beta / "SKILL.md").read_text(encoding="utf-8") + "\nDirty.\n", encoding="utf-8")
         rejected = subprocess.run(

@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import contextlib
-import fcntl
 import hashlib
 import json
 import os
@@ -17,6 +16,32 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterator
+
+try:
+    import fcntl
+except ModuleNotFoundError:  # Windows has no fcntl; fall back to msvcrt region locks.
+    fcntl = None
+    import msvcrt
+
+
+def _lock_exclusive_nonblocking(descriptor: int) -> None:
+    """Raises BlockingIOError when the lock is held elsewhere, on both platforms."""
+    if fcntl is not None:
+        fcntl.flock(descriptor, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        return
+    os.lseek(descriptor, 0, os.SEEK_SET)
+    try:
+        msvcrt.locking(descriptor, msvcrt.LK_NBLCK, 1)
+    except OSError as exc:
+        raise BlockingIOError(exc.errno, str(exc)) from exc
+
+
+def _unlock(descriptor: int) -> None:
+    if fcntl is not None:
+        fcntl.flock(descriptor, fcntl.LOCK_UN)
+        return
+    os.lseek(descriptor, 0, os.SEEK_SET)
+    msvcrt.locking(descriptor, msvcrt.LK_UNLCK, 1)
 
 
 SCRIPT_INTERFACE = "internal-module"
@@ -364,7 +389,7 @@ class EvidenceStore:
         descriptor = os.open(lock_path, os.O_CREAT | os.O_RDWR, 0o600)
         try:
             try:
-                fcntl.flock(descriptor, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                _lock_exclusive_nonblocking(descriptor)
             except BlockingIOError as exc:
                 raise EvidenceError("publish-locked", f"Another evidence publish holds {lock_path}") from exc
             os.ftruncate(descriptor, 0)
@@ -372,7 +397,7 @@ class EvidenceStore:
             yield
         finally:
             with contextlib.suppress(OSError):
-                fcntl.flock(descriptor, fcntl.LOCK_UN)
+                _unlock(descriptor)
             os.close(descriptor)
 
     def _restore_bundle(self, bundle_dir: Path, *, expected_index_sha256: str | None = None) -> None:
