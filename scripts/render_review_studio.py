@@ -573,7 +573,7 @@ def render_review_studio(skill_dir: Path, output_html: Path | None = None, outpu
         },
     }
     output_html.write_text(render_html(report), encoding="utf-8")
-    output_json.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    output_json.write_text(json.dumps(report, ensure_ascii=False, indent=2, default=str) + "\n", encoding="utf-8")
     return {key: value for key, value in report.items() if key != "data"}
 
 
