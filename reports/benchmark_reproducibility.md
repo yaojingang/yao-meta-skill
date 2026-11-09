@@ -1,11 +1,11 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-11-09`
-Commit: `8b9d6672a90b6e087ee242fdadb9b991018b3d47`
+Commit: `6486184211a9c781f618bb953d8c2f1f65293f41`
 Working tree dirty at generation: `true`
 Source tree dirty at generation: `false`
 Generated evidence dirty at generation: `true`
-Evidence bundle SHA256: `f2e0c8313219647a01b6441e143573e22ce208215d1dc6339bbf89621a452e42`
+Evidence bundle SHA256: `2aa47595df55a42b807c3104bef81847ade87d9f3925389fb8d23787ece124c0`
 
 ## Summary
 
@@ -14,8 +14,8 @@ Evidence bundle SHA256: `f2e0c8313219647a01b6441e143573e22ce208215d1dc6339bbf896
 - methodology complete: `true`
 - required artifacts: `25`
 - missing artifacts: `0`
-- source contract sha256: `2b2b5ed0c96b`
-- archive sha256: `67c247d88bff`
+- source contract sha256: `9a19145cea00`
+- archive sha256: `ddf302b53d41`
 - output cases: `5`
 - disclosed failure cases: `3`
 - reproduction commands: `23`
@@ -31,9 +31,9 @@ Evidence bundle SHA256: `f2e0c8313219647a01b6441e143573e22ce208215d1dc6339bbf896
 - beta deferred evidence: `4`
 - public claim ready: `false`
 - public claim blockers: `3`
-- changed files at generation: `72`
+- changed files at generation: `13`
 - source changed files at generation: `0`
-- generated changed files at generation: `72`
+- generated changed files at generation: `13`
 
 This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete. The git commit and dirty samples are generation-time context; the evidence bundle SHA is the durable anchor for the artifacts listed below.
 
@@ -77,7 +77,7 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 - algorithm: `sha256(path,label,exists,artifact_sha256)`
 - artifacts: `25` / `25`
-- sha256: `f2e0c8313219647a01b6441e143573e22ce208215d1dc6339bbf89621a452e42`
+- sha256: `2aa47595df55a42b807c3104bef81847ade87d9f3925389fb8d23787ece124c0`
 
 ## Methodology Sections
 
@@ -104,12 +104,12 @@ This report proves local benchmark reproducibility only. It keeps external provi
 | review_adjudication | `reports/output_review_adjudication.json` | present | `510fc207bf20` |
 | trigger_scorecard | `reports/route_scorecard.json` | present | `06d7ad6eb002` |
 | runtime_conformance | `reports/conformance_matrix.json` | present | `de8093861e68` |
-| trust_report | `reports/security_trust_report.json` | present | `26e839759c44` |
-| python_compatibility | `reports/python_compatibility.json` | present | `78ba3d8a90a8` |
-| registry_audit | `reports/registry_audit.json` | present | `dd7a51bf7aee` |
-| package_verification | `reports/package_verification.json` | present | `c18c381423d5` |
-| install_simulation | `reports/install_simulation.json` | present | `837ac5026ec6` |
-| skill_os2_audit | `reports/skill_os2_audit.json` | present | `7cfa545be70a` |
+| trust_report | `reports/security_trust_report.json` | present | `47d470550872` |
+| python_compatibility | `reports/python_compatibility.json` | present | `cb2f2fbe8e29` |
+| registry_audit | `reports/registry_audit.json` | present | `c393f7940435` |
+| package_verification | `reports/package_verification.json` | present | `945edf619fdf` |
+| install_simulation | `reports/install_simulation.json` | present | `7522f58bd1a2` |
+| skill_os2_audit | `reports/skill_os2_audit.json` | present | `fa5e989c6864` |
 | world_class_evidence_plan | `reports/world_class_evidence_plan.json` | present | `9a27ba542b7c` |
 | world_class_evidence_ledger | `reports/world_class_evidence_ledger.json` | present | `e93c9f790b29` |
 | world_class_evidence_intake | `reports/world_class_evidence_intake.json` | present | `116429bac1af` |

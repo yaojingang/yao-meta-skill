@@ -1016,9 +1016,9 @@
       "methodology_complete": true,
       "required_artifact_count": 25,
       "missing_artifact_count": 0,
-      "evidence_bundle_sha256": "f2e0c8313219647a01b6441e143573e22ce208215d1dc6339bbf89621a452e42",
-      "source_contract_sha256": "2b2b5ed0c96b97d5a32efe63c644a9f9c8ba343c991329d08820430d0bc279e6",
-      "archive_sha256": "67c247d88bff0939b9d79bc627ffa239df3efe6b6f7bd8698d6a7bd6a8646e57",
+      "evidence_bundle_sha256": "2aa47595df55a42b807c3104bef81847ade87d9f3925389fb8d23787ece124c0",
+      "source_contract_sha256": "9a19145cea00d1645c5d1d7303b3065840fe2c1e636caf903b475748fe6a4bef",
+      "archive_sha256": "ddf302b53d41a008388cd36639754183d6de00b8895f1f7deb1c38a5545a9f3b",
       "output_case_count": 5,
       "failure_disclosure_count": 3,
       "command_count": 23,
@@ -1045,13 +1045,13 @@
       "public_claim_ready": false,
       "public_claim_blocker_count": 3,
       "working_tree_dirty": true,
-      "changed_file_count": 72,
+      "changed_file_count": 13,
       "source_tree_dirty": false,
       "source_changed_file_count": 0,
       "generated_tree_dirty": true,
-      "generated_changed_file_count": 72
+      "generated_changed_file_count": 13
     },
-    "commit": "8b9d6672a90b6e087ee242fdadb9b991018b3d47",
+    "commit": "6486184211a9c781f618bb953d8c2f1f65293f41",
     "missing_artifacts": [],
     "limitations": [
       "The git commit and dirty flags are generation-time context; release lock is blocked by source changes, while generated evidence artifacts are tracked separately.",
@@ -1157,7 +1157,7 @@
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
     "package_hash_file_count": 278,
-    "package_sha256": "2b2b5ed0c96b97d5a32efe63c644a9f9c8ba343c991329d08820430d0bc279e6"
+    "package_sha256": "9a19145cea00d1645c5d1d7303b3065840fe2c1e636caf903b475748fe6a4bef"
   },
   "skill_atlas": {
     "skill_count": 11,
@@ -1195,8 +1195,8 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "2b2b5ed0c96b97d5a32efe63c644a9f9c8ba343c991329d08820430d0bc279e6",
-        "archive_sha256": "67c247d88bff0939b9d79bc627ffa239df3efe6b6f7bd8698d6a7bd6a8646e57"
+        "package_sha256": "9a19145cea00d1645c5d1d7303b3065840fe2c1e636caf903b475748fe6a4bef",
+        "archive_sha256": "ddf302b53d41a008388cd36639754183d6de00b8895f1f7deb1c38a5545a9f3b"
       },
       "compatibility": {
         "openai": "pass",
@@ -1227,7 +1227,7 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "67c247d88bff0939b9d79bc627ffa239df3efe6b6f7bd8698d6a7bd6a8646e57",
+        "archive_sha256": "ddf302b53d41a008388cd36639754183d6de00b8895f1f7deb1c38a5545a9f3b",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
@@ -1243,8 +1243,8 @@
       "target_count": 4,
       "adapter_count": 4,
       "archive_present": true,
-      "archive_sha256": "67c247d88bff0939b9d79bc627ffa239df3efe6b6f7bd8698d6a7bd6a8646e57",
-      "archive_entry_count": 664,
+      "archive_sha256": "ddf302b53d41a008388cd36639754183d6de00b8895f1f7deb1c38a5545a9f3b",
+      "archive_entry_count": 665,
       "nested_skill_entry_count": 0,
       "failure_count": 0,
       "warning_count": 0
@@ -1256,7 +1256,7 @@
     "ok": true,
     "summary": {
       "archive_present": true,
-      "archive_entry_count": 664,
+      "archive_entry_count": 665,
       "nested_skill_entry_count": 0,
       "archive_extracted": true,
       "entrypoint_loaded": true,
@@ -1324,12 +1324,12 @@
         {
           "field": "archive_sha256",
           "from": "",
-          "to": "67c247d88bff0939b9d79bc627ffa239df3efe6b6f7bd8698d6a7bd6a8646e57"
+          "to": "689018a8bea701199a92e109fb73cebaedee9b3b59c1e6455aa00dba46934b30"
         },
         {
           "field": "package_sha256",
           "from": "0000000000000000000000000000000000000000000000000000000000000000",
-          "to": "2b2b5ed0c96b97d5a32efe63c644a9f9c8ba343c991329d08820430d0bc279e6"
+          "to": "9a19145cea00d1645c5d1d7303b3065840fe2c1e636caf903b475748fe6a4bef"
         }
       ]
     },

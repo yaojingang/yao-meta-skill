@@ -5,9 +5,9 @@ Generated at: `2026-11-09`
 ## Summary
 
 - decision: `pass`
-- python files: `260`
+- python files: `261`
 - scripts: `174`
-- tests: `86`
+- tests: `87`
 - internal modules: `83`
 - CLI scripts: `96`
 - Yao CLI command handlers: `74`

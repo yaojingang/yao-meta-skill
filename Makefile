@@ -123,6 +123,7 @@ review-viewer-check:
 	$(PYTHON) tests/verify_review_viewer.py
 
 review-studio-check:
+	$(PYTHON) tests/verify_review_studio_serialization.py
 	$(PYTHON) tests/verify_review_studio.py
 
 skill-os2-audit-check:
