@@ -6,7 +6,7 @@
   "package": {
     "schema_version": "2.0",
     "name": "yao-meta-skill",
-    "version": "2.1.0",
+    "version": "2.1.1",
     "description": "Create, improve, or evaluate an existing skill from workflows, prompts, SOPs, scripts. Use for migration/release/package, routing, evals/tests, install/trust checks, 优化已有 skill, 补 trigger 评测. Exclude summary/translation/docs, brainstorming, one-off prompts, copy-only edits, outline-only requests.",
     "targets": [
       "openai",
@@ -21,8 +21,8 @@
     "trust_level": "local",
     "license": "MIT",
     "checksums": {
-      "package_sha256": "54d1fb49b5de9d73a5a312204ffdfad76937ed8e877571521c569139d9630bd8",
-      "archive_sha256": "f5275f7471c04e62dfc862d714e5d752a688d66952277bee848364634c0046e7"
+      "package_sha256": "2b2b5ed0c96b97d5a32efe63c644a9f9c8ba343c991329d08820430d0bc279e6",
+      "archive_sha256": "67c247d88bff0939b9d79bc627ffa239df3efe6b6f7bd8698d6a7bd6a8646e57"
     },
     "compatibility": {
       "openai": "pass",
@@ -53,21 +53,21 @@
     },
     "distribution": {
       "archive_verified": true,
-      "archive_sha256": "f5275f7471c04e62dfc862d714e5d752a688d66952277bee848364634c0046e7",
+      "archive_sha256": "67c247d88bff0939b9d79bc627ffa239df3efe6b6f7bd8698d6a7bd6a8646e57",
       "package_verification": "reports/package_verification.json",
       "install_simulated": true,
       "install_simulation": "reports/install_simulation.json"
     },
-    "generated_at": "2026-08-17"
+    "generated_at": "2026-11-09"
   },
   "index": {
     "schema_version": "2.0",
-    "generated_at": "2026-08-17",
+    "generated_at": "2026-11-09",
     "package_count": 1,
     "packages": [
       {
         "name": "yao-meta-skill",
-        "version": "2.1.0",
+        "version": "2.1.1",
         "maturity": "governed",
         "owner": "Yao Team",
         "targets": [
@@ -78,7 +78,7 @@
           "vscode"
         ],
         "package_metadata": "registry/packages/yao-meta-skill.json",
-        "package_sha256": "54d1fb49b5de9d73a5a312204ffdfad76937ed8e877571521c569139d9630bd8"
+        "package_sha256": "2b2b5ed0c96b97d5a32efe63c644a9f9c8ba343c991329d08820430d0bc279e6"
       }
     ]
   },

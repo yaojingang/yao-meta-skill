@@ -1,14 +1,14 @@
 {
   "ok": true,
   "schema_version": "2.0",
-  "generated_at": "2026-08-17",
+  "generated_at": "2026-11-09",
   "skill_dir": ".",
   "package_dir": "dist",
   "install_root": "dist/install-simulation/simulate-yao-meta-skill",
   "installed_skill_dir": "dist/install-simulation/simulate-yao-meta-skill/yao-meta-skill",
   "summary": {
     "archive_present": true,
-    "archive_entry_count": 658,
+    "archive_entry_count": 664,
     "nested_skill_entry_count": 0,
     "archive_extracted": true,
     "entrypoint_loaded": true,

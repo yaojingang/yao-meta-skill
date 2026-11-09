@@ -2,7 +2,7 @@
 
 - OK: `True`
 - Previous: `yao-meta-skill 1.0.0`
-- Current: `yao-meta-skill 2.1.0`
+- Current: `yao-meta-skill 2.1.1`
 - Declared bump: `major`
 - Recommended bump: `minor`
 - Breaking changes: `0`

@@ -1,6 +1,6 @@
 {
   "skill_name": "yao-meta-skill",
-  "relevance": "prompt-aware",
+  "relevance": "prompt-heavy",
   "primary_task_family": {
     "key": "creative_generation",
     "label": "Creative generation",
@@ -35,26 +35,27 @@
       "format_guidance": "Return a runbook-like handoff with commands, checks, owners, and next actions when relevant."
     },
     {
-      "key": "analytical_reasoning",
-      "label": "Analytical reasoning",
-      "score": 1,
-      "matched_keywords": [
-        "decision"
-      ],
-      "role_guidance": "Use an analyst role that separates evidence, inference, uncertainty, and recommendation.",
-      "task_guidance": "State assumptions, compare alternatives, and make the decision path inspectable.",
-      "format_guidance": "Return findings, evidence, tradeoffs, recommendation, and residual risks."
-    },
-    {
       "key": "dialogue_interaction",
       "label": "Dialogue interaction",
-      "score": 1,
+      "score": 2,
       "matched_keywords": [
-        "dialogue"
+        "dialogue",
+        "support"
       ],
       "role_guidance": "Use a conversational role that asks only high-leverage questions and remembers the user's goal.",
       "task_guidance": "Clarify intent, resolve uncertainty, and converge toward a recommendation instead of a long option list.",
       "format_guidance": "Return concise prompts, decision points, and reviewer-visible assumptions."
+    },
+    {
+      "key": "prompt_engineering",
+      "label": "Prompt engineering",
+      "score": 1,
+      "matched_keywords": [
+        "prompt"
+      ],
+      "role_guidance": "Use a prompt engineer role only when role design materially improves execution.",
+      "task_guidance": "Map Role, Task, and Format into skill behavior rather than copying a large prompt template.",
+      "format_guidance": "Return a compact prompt contract plus tests, quality matrix, and usage notes."
     }
   ],
   "complexity": {

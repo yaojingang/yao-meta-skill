@@ -1,6 +1,6 @@
 # World-Class Evidence Preflight
 
-Generated at: `2026-08-17`
+Generated at: `2026-11-09`
 
 ## Summary
 

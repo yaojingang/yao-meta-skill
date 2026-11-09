@@ -1,6 +1,6 @@
 # Skill OS 2.0 Audit
 
-Generated at: `2026-08-17`
+Generated at: `2026-11-09`
 
 ## Summary
 
@@ -27,8 +27,8 @@ Generated at: `2026-08-17`
 | Permission Metadata | pass | 4/4 target probes pass; metadata fallback 4; installer enforcement 4 | Packaged adapters expose explicit permission metadata, residual risks, and installer enforcement evidence when available | Preserve residual-risk notes until real native enforcement exists. |
 | Native Permission Enforcement | external-required | native-enforced targets 0; installer-enforced targets 4 | At least one target/client enforces approved permissions at runtime | Integrate a real target-client or external installer runtime guard before claiming native permission enforcement. |
 | Skill Atlas | pass | 11 skills; actionable collisions 0 | Workspace catalog, route overlap, stale/owner gaps, drift, and no-route opportunities | Feed real drift data into Atlas once client telemetry is installed. |
-| Registry Distribution | pass | zip entries 658; install failures 0; permission failures 0 | Package metadata, archive checksum, package verification, and install simulation pass | Regenerate registry after package verification so checksums stay aligned. |
-| Review Studio | pass | decision review; warnings 3; score 91 | One page shows gates, evidence paths, blockers, warnings, actions, waivers, and annotations | Resolve human/external warning gates before claiming full release readiness. |
+| Registry Distribution | pass | zip entries 664; install failures 0; permission failures 0 | Package metadata, archive checksum, package verification, and install simulation pass | Regenerate registry after package verification so checksums stay aligned. |
+| Review Studio | pass | decision review; warnings 5; score 86 | One page shows gates, evidence paths, blockers, warnings, actions, waivers, and annotations | Resolve human/external warning gates before claiming full release readiness. |
 | Telemetry Drift | pass | events 0; risk no-data; recipes 5 | Local-first metadata-only event contract, aggregate drift report, hook recipes, and import path | Keep raw JSONL out of distributed packages and use aggregate reports for Atlas. |
 | Native Client Telemetry | external-required | external source events 0; adoption samples 0 | A real Browser/Chrome/provider client sends production metadata events | Install a real client against the native host and import production metadata-only events. |
 

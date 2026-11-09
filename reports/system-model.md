@@ -67,8 +67,8 @@ Skill: `yao-meta-skill`
   - Markdown readability
   - Tone and specificity
   - Citation and footnote clutter
-  - Screenshot and visual capture
   - Code and command safety
+  - Screenshot and visual capture
 
 ### Reviewer feedback loop
 
@@ -99,8 +99,8 @@ Skill: `yao-meta-skill`
   - Markdown readability
   - Tone and specificity
   - Citation and footnote clutter
-  - Screenshot and visual capture
   - Code and command safety
+  - Screenshot and visual capture
 
 ### Reference drift
 
@@ -134,8 +134,8 @@ Skill: `yao-meta-skill`
   - Markdown readability
   - Tone and specificity
   - Citation and footnote clutter
-  - Screenshot and visual capture
   - Code and command safety
+  - Screenshot and visual capture
 
 ### Prompt-behavior mismatch
 

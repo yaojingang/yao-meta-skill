@@ -44,17 +44,17 @@
   },
   "catalog": {
     "workspace_root": ".",
-    "generated_at": "2026-08-17",
+    "generated_at": "2026-11-09",
     "skills": [
       {
         "name": "yao-meta-skill",
         "path": ".",
         "description": "Create, improve, or evaluate an existing skill from workflows, prompts, SOPs, scripts. Use for migration/release/package, routing, evals/tests, install/trust checks, 优化已有 skill, 补 trigger 评测. Exclude summary/translation/docs, brainstorming, one-off prompts, copy-only edits, outline-only requests.",
         "owner": "Yao Team",
-        "version": "2.1.0",
+        "version": "2.1.1",
         "status": "active",
         "maturity": "governed",
-        "updated_at": "2026-08-17",
+        "updated_at": "2026-11-09",
         "review_cadence": "quarterly",
         "targets": [
           "openai",
@@ -277,6 +277,7 @@
           "references/trust-security-method.md",
           "references/update-delivery.md",
           "references/user-memory-policy.md",
+          "references/workbuddy.md",
           "assets/review-studio.css",
           "assets/review-viewer.css",
           "assets/skill-overview.css",
@@ -894,7 +895,7 @@
       "name": "release-orchestrator",
       "path": "examples/complex-release-orchestrator/generated-skill",
       "reason": "review overdue by cadence quarterly",
-      "age_days": 139,
+      "age_days": 223,
       "allowed_days": 100,
       "actionable": false,
       "scope": "example"
@@ -924,7 +925,7 @@
       "name": "incident-command-governor",
       "path": "examples/governed-incident-command/generated-skill",
       "reason": "review overdue by cadence monthly",
-      "age_days": 139,
+      "age_days": 223,
       "allowed_days": 31,
       "actionable": false,
       "scope": "example"

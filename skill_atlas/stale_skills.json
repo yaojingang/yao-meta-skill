@@ -3,7 +3,7 @@
     "name": "release-orchestrator",
     "path": "examples/complex-release-orchestrator/generated-skill",
     "reason": "review overdue by cadence quarterly",
-    "age_days": 139,
+    "age_days": 223,
     "allowed_days": 100,
     "actionable": false,
     "scope": "example"
@@ -33,7 +33,7 @@
     "name": "incident-command-governor",
     "path": "examples/governed-incident-command/generated-skill",
     "reason": "review overdue by cadence monthly",
-    "age_days": 139,
+    "age_days": 223,
     "allowed_days": 31,
     "actionable": false,
     "scope": "example"

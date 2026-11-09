@@ -38,7 +38,7 @@
 - waiver allowed: `true`
 - risk: review pending 5; model-executed 10; output failures 0
 - evidence: `reports/output_review_adjudication.md`
-- verification: `python3 scripts/yao.py review-waivers . --add-waiver --gate-key output-lab --reviewer "<reviewer>" --reason "Output Lab has pending human/provider evidence; accepted only for this bounded review scope." --expires-at 2027-08-17 --evidence reports/output_review_adjudication.md --self`
+- verification: `python3 scripts/yao.py review-waivers . --add-waiver --gate-key output-lab --reviewer "<reviewer>" --reason "Output Lab has pending human/provider evidence; accepted only for this bounded review scope." --expires-at 2027-11-09 --evidence reports/output_review_adjudication.md --self`
 - world-class boundary: Does not count as provider, human, or public world-class completion evidence.
 
 #### Required Review

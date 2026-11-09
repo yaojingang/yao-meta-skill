@@ -1,15 +1,15 @@
 {
   "ok": true,
   "schema_version": "2.0",
-  "generated_at": "2026-08-17",
+  "generated_at": "2026-11-09",
   "skill_dir": ".",
   "package_dir": "dist",
   "summary": {
     "target_count": 4,
     "adapter_count": 4,
     "archive_present": true,
-    "archive_sha256": "f5275f7471c04e62dfc862d714e5d752a688d66952277bee848364634c0046e7",
-    "archive_entry_count": 658,
+    "archive_sha256": "67c247d88bff0939b9d79bc627ffa239df3efe6b6f7bd8698d6a7bd6a8646e57",
+    "archive_entry_count": 664,
     "nested_skill_entry_count": 0,
     "failure_count": 0,
     "warning_count": 0
@@ -624,6 +624,11 @@
       "id": "archive-excludes-generated",
       "status": "pass",
       "detail": "Archive excludes local caches, platform noise, .yao state, external submission drafts, local evidence pointers, generated dist/, .previews/, and tests/tmp* contents"
+    },
+    {
+      "id": "archive-source-snapshot",
+      "status": "pass",
+      "detail": "Archive payload matches current source files, except its generated portable pointer and index"
     },
     {
       "id": "archive-portable-evidence-index",

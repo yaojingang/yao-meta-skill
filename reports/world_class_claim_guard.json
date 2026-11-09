@@ -1,14 +1,14 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-08-17",
+  "generated_at": "2026-11-09",
   "skill_dir": ".",
   "summary": {
     "ledger_ready_to_claim_world_class": false,
     "ledger_pending_count": 4,
-    "claim_surface_count": 232,
-    "json_claim_surface_count": 114,
-    "metadata_claim_surface_count": 115,
+    "claim_surface_count": 236,
+    "json_claim_surface_count": 116,
+    "metadata_claim_surface_count": 117,
     "package_claim_surface_count": 17,
     "violation_count": 0,
     "overclaim_guard_active": true,
@@ -799,6 +799,14 @@
       "violation_count": 0
     },
     {
+      "path": "reports/skillops/daily/2026-11-09.json",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/skillops/daily/2026-11-09.md",
+      "violation_count": 0
+    },
+    {
       "path": "reports/skillops/weekly/2026-W25.json",
       "violation_count": 0
     },
@@ -836,6 +844,14 @@
     },
     {
       "path": "reports/skillops/weekly/2026-W34.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/skillops/weekly/2026-W46.json",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/skillops/weekly/2026-W46.md",
       "violation_count": 0
     },
     {

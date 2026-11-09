@@ -74,6 +74,29 @@
       ]
     },
     {
+      "key": "code_or_command_safety",
+      "label": "Code and command safety",
+      "matched_keywords": [
+        "code",
+        "script"
+      ],
+      "score": 2,
+      "risks": [
+        "Commands can omit environment assumptions, working directory, or rollback notes.",
+        "Code snippets can look runnable while missing required inputs.",
+        "Error handling can be either absent or over-engineered."
+      ],
+      "constraints": [
+        "Name the working directory, required inputs, and expected output for each command.",
+        "Mark destructive or external side-effect operations explicitly.",
+        "Prefer the smallest runnable snippet over broad framework code."
+      ],
+      "self_repair": [
+        "Scan each command for cwd, input, output, and side-effect assumptions.",
+        "Remove speculative error handling that is not tied to a real failure mode."
+      ]
+    },
+    {
       "key": "visual_capture",
       "label": "Screenshot and visual capture",
       "matched_keywords": [
@@ -93,28 +116,6 @@
       "self_repair": [
         "Check that every screenshot reference points to a real provided or generated asset.",
         "Reword any visual instruction that depends on an unseen screen state."
-      ]
-    },
-    {
-      "key": "code_or_command_safety",
-      "label": "Code and command safety",
-      "matched_keywords": [
-        "script"
-      ],
-      "score": 1,
-      "risks": [
-        "Commands can omit environment assumptions, working directory, or rollback notes.",
-        "Code snippets can look runnable while missing required inputs.",
-        "Error handling can be either absent or over-engineered."
-      ],
-      "constraints": [
-        "Name the working directory, required inputs, and expected output for each command.",
-        "Mark destructive or external side-effect operations explicitly.",
-        "Prefer the smallest runnable snippet over broad framework code."
-      ],
-      "self_repair": [
-        "Scan each command for cwd, input, output, and side-effect assumptions.",
-        "Remove speculative error handling that is not tied to a real failure mode."
       ]
     }
   ],

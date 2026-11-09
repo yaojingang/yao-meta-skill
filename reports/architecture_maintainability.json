@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-08-17",
+  "generated_at": "2026-11-09",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 259,
+    "python_file_count": 260,
     "script_file_count": 174,
-    "test_file_count": 85,
+    "test_file_count": 86,
     "internal_module_count": 83,
     "cli_script_count": 96,
     "command_handler_count": 74,
@@ -82,7 +82,7 @@
     },
     {
       "path": "scripts/build_skill_atlas.py",
-      "lines": 597,
+      "lines": 598,
       "kind": "cli-script",
       "severity": "pass",
       "early_watch": false,
