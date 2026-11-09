@@ -194,6 +194,14 @@ npx -y skills add yaojingang/yao-meta-skill -a '*' -g -y
 
 After installation, restart the client. Then ask for tasks such as "create a skill from this workflow", "improve this existing skill", "evaluate this skill", or "add evals to this skill" to trigger `yao-meta-skill`.
 
+### WorkBuddy
+
+The generic Skill package supports WorkBuddy's documented Skill format. Version 2.1.1 adds the bilingual display fields, author, and version required by the WorkBuddy open platform. The existing CLI, Skill IR, and packaging targets remain the shared implementation.
+
+Build the existing generic ZIP with `python3 scripts/yao.py package . --platform generic --output-dir dist --zip --self`, then import `dist/yao-meta-skill.zip` through WorkBuddy's **Add Skill → Upload Skill** flow. See [WorkBuddy compatibility](references/workbuddy.md) for workspace paths, Python prerequisites, creating WorkBuddy skills, and update handling.
+
+Run `make workbuddy-compat-check` to check the actual ZIP metadata, bundled resources, isolated CLI execution, and explicit output directory. Native WorkBuddy import and conversation routing remain client acceptance checks.
+
 ### Update notifications and one-confirmation update
 
 Each activation can run a cached update preflight. It checks the official GitHub `VERSION` at most once every 24 hours and shows each newer stable version once. Network failures leave the active Skill task unchanged.

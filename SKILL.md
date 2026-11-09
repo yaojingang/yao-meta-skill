@@ -1,6 +1,12 @@
 ---
 name: yao-meta-skill
+display_name: Yao 技能工厂
+display_name_en: Yao Meta Skill
 description: Create, improve, or evaluate an existing skill from workflows, prompts, SOPs, scripts. Use for migration/release/package, routing, evals/tests, install/trust checks, 优化已有 skill, 补 trigger 评测. Exclude summary/translation/docs, brainstorming, one-off prompts, copy-only edits, outline-only requests.
+description_zh: 将重复流程整理为可复用技能，支持创建、优化、评测、打包和安装检查。
+description_en: Create, improve, evaluate, and package reusable agent skills.
+version: "2.1.1"
+author: Yao Team
 metadata:
   author: Yao Team
 ---
@@ -28,9 +34,13 @@ metadata:
 
 Playbooks: [Target Safety](references/target-safety.md), [Intent](references/intent-dialogue.md), [Skill IR](references/skill-ir-method.md), [Output Eval](references/output-eval-method.md), [Review Studio](references/review-studio-method.md).
 
+## WorkBuddy
+
+Use [WorkBuddy](references/workbuddy.md) for import, runtime, output metadata and updates.
+
 ## Updates
 
-Activation: `scripts/yao.py check-update --notice --self`; show `notice_text` if requested; continue. “更新”: `scripts/yao.py self-update --self --yes`.
+Activation: `scripts/yao.py check-update --notice --self`; show `notice_text` if requested; continue. WorkBuddy updates use ZIP re-import. For supported managed Agent Skills/Codex installs, “更新”: `scripts/yao.py self-update --self --yes`.
 
 ## Skill OS 2.0 Gates
 
@@ -38,9 +48,7 @@ For production/library/governed releases, run Skill IR, compiler, trigger/output
 
 ## Governed Package Boundary
 
-Governed/file-backed packages: label `input_files` a `file-backed fixture`; include `owner`, `review cadence`, `output contract`, `rollback boundary`; require `trust report` and `reports/output_quality_scorecard.md`; mark unavailable telemetry/approvals/metrics/benchmarks as `missing evidence`; never fabricate evidence.
-
-Preserve labels literally when they apply: `file-backed fixture`, `input_files`, `output contract`, `rollback boundary`, `trust report`, `reports/output_quality_scorecard.md`, `missing evidence`.
+Governed/file-backed packages require `owner`, `review cadence`, `input_files` (`file-backed fixture`), `output contract`, `rollback boundary`, `trust report`, and `reports/output_quality_scorecard.md`. Preserve these labels; mark unavailable evidence as `missing evidence`; never fabricate evidence.
 
 ## First-Turn Style
 
@@ -50,7 +58,3 @@ Preserve labels literally when they apply: `file-backed fixture`, `input_files`,
 ## Output Contract
 
 Builds: `SKILL.md`, aligned interface, justified assets, boundary/gate summary. Audits: findings + fixes; edit only when asked. No-skill: no files.
-
-## Reference Map
-
-Primary: [Method](references/skill-engineering-method.md), [Artifact Design](references/artifact-design-doctrine.md), [Systems](references/systems-thinking-doctrine.md), [Governance](references/governance.md), [SkillOps](references/skillops-decision-policy.md).

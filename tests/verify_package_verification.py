@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from cross_packager_sources import archive_source_paths  # noqa: E402
+from verify_package import stale_source_entries  # noqa: E402
 
 
 TMP = ROOT / "tests" / "tmp_package_verification"
@@ -173,9 +174,25 @@ def source_skill_entries(root: Path) -> list[Path]:
     return sorted(entries)
 
 
+def verify_deleted_source_snapshot() -> None:
+    with tempfile.TemporaryDirectory(prefix="archive-deleted-source-") as temp_root:
+        root = Path(temp_root).resolve()
+        source = root / "resource.txt"
+        source.write_text("current resource\n", encoding="utf-8")
+        archive_path = root / "demo.zip"
+        with zipfile.ZipFile(archive_path, "w") as archive:
+            archive.write(source, "demo/resource.txt")
+        with zipfile.ZipFile(archive_path) as archive:
+            assert stale_source_entries(root, archive, "demo") == []
+        source.unlink()
+        with zipfile.ZipFile(archive_path) as archive:
+            assert stale_source_entries(root, archive, "demo") == ["resource.txt"]
+
+
 def main() -> None:
     verify_source_entrypoint_scan()
     verify_git_archive_source_boundary()
+    verify_deleted_source_snapshot()
     source_entries = source_skill_entries(ROOT)
     assert source_entries == [Path("SKILL.md")], source_entries
 
@@ -249,6 +266,19 @@ def main() -> None:
         assert not [name for name in names if name.endswith("/SKILL.md") and name != "yao-meta-skill/SKILL.md"], names
         renamed_valid = verify_package(renamed_dir, TMP / "renamed_package_verification.json", TMP / "renamed_package_verification.md", renamed_root)
         assert renamed_valid["ok"], renamed_valid
+
+        renamed_entry = renamed_root / "SKILL.md"
+        renamed_entry.write_text(renamed_entry.read_text(encoding="utf-8") + "\nUpdated after packaging.\n", encoding="utf-8")
+        stale = verify_package(renamed_dir, TMP / "stale_snapshot.json", TMP / "stale_snapshot.md", renamed_root)
+        assert stale["returncode"] == 2, stale
+        assert any(
+            check["id"] == "archive-source-snapshot" and check["status"] == "fail"
+            for check in stale["payload"]["checks"]
+        ), stale
+        refreshed_build = build_package(renamed_dir, renamed_root)
+        assert refreshed_build["ok"], refreshed_build
+        refreshed = verify_package(renamed_dir, TMP / "refreshed_snapshot.json", TMP / "refreshed_snapshot.md", renamed_root)
+        assert refreshed["ok"], refreshed
 
     nested_skill_dir = TMP / "nested-skill-dist"
     shutil.copytree(valid_dir, nested_skill_dir)

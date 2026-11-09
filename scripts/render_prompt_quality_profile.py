@@ -130,8 +130,7 @@ def normalized_context(skill_dir: Path) -> tuple[str, dict]:
     intent = load_json(skill_dir / "reports" / "intent-confidence.json")
     context = intent.get("context", {}) if isinstance(intent, dict) else {}
     parts = [
-        skill_dir.name,
-        str(frontmatter.get("name", "")),
+        str(frontmatter.get("name") or skill_dir.name),
         str(frontmatter.get("description", "")),
         body,
         str(context.get("job", "")),
@@ -226,7 +225,7 @@ def build_summary(skill_dir: Path) -> dict:
         "format": primary["format_guidance"],
     }
     return {
-        "skill_name": skill_dir.name,
+        "skill_name": str(frontmatter.get("name") or skill_dir.name),
         "relevance": "prompt-heavy" if any(item["key"] == "prompt_engineering" for item in matched) else "prompt-aware",
         "primary_task_family": {
             "key": primary["key"],

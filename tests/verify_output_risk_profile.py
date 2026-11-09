@@ -53,6 +53,16 @@ def main() -> None:
     markdown = (skill_dir / "reports" / "output-risk-profile.md").read_text(encoding="utf-8")
     assert "Likely Output Mistakes" in markdown, markdown[:800]
     assert "Self-Repair Checks" in markdown, markdown[:1200]
+    renamed = tmp_root / "renamed prompt screenshot data secret"
+    skill_dir.rename(renamed)
+    renamed_proc = subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "render_output_risk_profile.py"), str(renamed)],
+        cwd=ROOT, check=True, capture_output=True, text=True,
+    )
+    renamed_summary = json.loads(renamed_proc.stdout)["summary"]
+    assert renamed_summary["skill_name"] == "tutorial-risk-demo", renamed_summary
+    assert renamed_summary == summary, (summary, renamed_summary)
+    assert "Skill: `tutorial-risk-demo`" in (renamed / "reports/output-risk-profile.md").read_text()
     print(json.dumps({"ok": True}, ensure_ascii=False, indent=2))
 
 

@@ -158,6 +158,13 @@ def main() -> None:
         encoding="utf-8",
     )
 
+    for private_root in [
+        tmp_root / ".yao" / "backups",
+        alpha / ".yao" / "runs" / "candidate" / "source",
+        tmp_root / ".yao" / "releases" / "candidate",
+    ]:
+        write_skill(private_root, alpha.name, "Private validation copy.", {"name": alpha.name})
+
     output_dir = tmp_root / "atlas"
     report_html = tmp_root / "skill_atlas.html"
     report_json = tmp_root / "skill_atlas.json"
@@ -211,6 +218,7 @@ def main() -> None:
     assert "Missed-trigger telemetry" in html, html
     catalog = json.loads((output_dir / "catalog.json").read_text(encoding="utf-8"))
     assert catalog["summary"]["skill_count"] == 3, catalog
+    assert all(".yao" not in Path(item["path"]).parts for item in catalog["skills"]), catalog
     alpha_catalog = next(item for item in catalog["skills"] if item["name"] == alpha.name)
     assert alpha_catalog["telemetry"]["risk_band"] == "missing", alpha_catalog
     drift = json.loads((output_dir / "drift_signals.json").read_text(encoding="utf-8"))

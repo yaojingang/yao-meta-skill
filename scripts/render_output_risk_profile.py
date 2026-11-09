@@ -162,8 +162,7 @@ def normalized_text(skill_dir: Path) -> str:
     intent = load_json(skill_dir / "reports" / "intent-confidence.json")
     context = intent.get("context", {}) if isinstance(intent, dict) else {}
     parts = [
-        skill_dir.name,
-        str(frontmatter.get("name", "")),
+        str(frontmatter.get("name") or skill_dir.name),
         str(frontmatter.get("description", "")),
         body,
         str(context.get("job", "")),
@@ -185,6 +184,7 @@ def match_family(text: str, family: dict) -> tuple[int, list[str]]:
 
 def build_summary(skill_dir: Path) -> dict:
     text = normalized_text(skill_dir)
+    frontmatter, _ = parse_frontmatter((skill_dir / "SKILL.md").read_text(encoding="utf-8"))
     matched = []
     for family in RISK_FAMILIES:
         score, hits = match_family(text, family)
@@ -212,7 +212,7 @@ def build_summary(skill_dir: Path) -> dict:
         constraints.extend(item["constraints"][:2])
         self_repair.extend(item["self_repair"][:2])
     return {
-        "skill_name": skill_dir.name,
+        "skill_name": str(frontmatter.get("name") or skill_dir.name),
         "risk_families": [
             {
                 "key": item["key"],

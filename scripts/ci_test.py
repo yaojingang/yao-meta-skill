@@ -56,6 +56,7 @@ DEFAULT_TARGETS = [
     "package-check",
     "registry-audit-check",
     "package-verify-check",
+    "workbuddy-compat-check",
     "install-simulation-check",
     "upgrade-check",
     "review-viewer-check",
