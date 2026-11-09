@@ -1021,9 +1021,9 @@
       "methodology_complete": true,
       "required_artifact_count": 25,
       "missing_artifact_count": 0,
-      "evidence_bundle_sha256": "f1b5ed44def36787a6c252b0cef3aef77a9843f47ae37b7aa0ff349e7222d2a2",
+      "evidence_bundle_sha256": "2aa47595df55a42b807c3104bef81847ade87d9f3925389fb8d23787ece124c0",
       "source_contract_sha256": "9a19145cea00d1645c5d1d7303b3065840fe2c1e636caf903b475748fe6a4bef",
-      "archive_sha256": "689018a8bea701199a92e109fb73cebaedee9b3b59c1e6455aa00dba46934b30",
+      "archive_sha256": "ddf302b53d41a008388cd36639754183d6de00b8895f1f7deb1c38a5545a9f3b",
       "output_case_count": 5,
       "failure_disclosure_count": 3,
       "command_count": 23,
@@ -1050,13 +1050,13 @@
       "public_claim_ready": false,
       "public_claim_blocker_count": 3,
       "working_tree_dirty": true,
-      "changed_file_count": 25,
+      "changed_file_count": 13,
       "source_tree_dirty": false,
       "source_changed_file_count": 0,
       "generated_tree_dirty": true,
-      "generated_changed_file_count": 25
+      "generated_changed_file_count": 13
     },
-    "commit": "193cc9e6267832a6972a9007291b62899cb7ef8a",
+    "commit": "6486184211a9c781f618bb953d8c2f1f65293f41",
     "missing_artifacts": [],
     "limitations": [
       "The git commit and dirty flags are generation-time context; release lock is blocked by source changes, while generated evidence artifacts are tracked separately.",
@@ -1201,7 +1201,7 @@
       "license": "MIT",
       "checksums": {
         "package_sha256": "9a19145cea00d1645c5d1d7303b3065840fe2c1e636caf903b475748fe6a4bef",
-        "archive_sha256": "689018a8bea701199a92e109fb73cebaedee9b3b59c1e6455aa00dba46934b30"
+        "archive_sha256": "ddf302b53d41a008388cd36639754183d6de00b8895f1f7deb1c38a5545a9f3b"
       },
       "compatibility": {
         "openai": "pass",
@@ -1232,7 +1232,7 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "689018a8bea701199a92e109fb73cebaedee9b3b59c1e6455aa00dba46934b30",
+        "archive_sha256": "ddf302b53d41a008388cd36639754183d6de00b8895f1f7deb1c38a5545a9f3b",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
@@ -1248,7 +1248,7 @@
       "target_count": 4,
       "adapter_count": 4,
       "archive_present": true,
-      "archive_sha256": "689018a8bea701199a92e109fb73cebaedee9b3b59c1e6455aa00dba46934b30",
+      "archive_sha256": "ddf302b53d41a008388cd36639754183d6de00b8895f1f7deb1c38a5545a9f3b",
       "archive_entry_count": 665,
       "nested_skill_entry_count": 0,
       "failure_count": 0,
