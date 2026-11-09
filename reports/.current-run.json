@@ -1,9 +1,9 @@
 {
   "artifact_index": "reports/artifact-index.json",
-  "artifact_index_sha256": "8e1799d27e5f134b7fa739ad7ee5fce169519a38b3e0a181461b359d5c867d22",
-  "published_at": "2026-08-17T09:11:18Z",
-  "release_dir": ".yao/releases/20260817T091118Z-a801d44aee",
-  "run_id": "20260817T091118Z-a801d44aee",
+  "artifact_index_sha256": "6bd39c63a5d7bb06161854d2b31fe910dab9197a2ad18c1651664fdb53c6c63a",
+  "published_at": "2026-11-09T05:17:31Z",
+  "release_dir": ".yao/releases/20261109-workbuddy-2.1.1-sourcepush",
+  "run_id": "20261109-workbuddy-2.1.1-sourcepush",
   "schema_version": "1.0",
   "skill_name": "yao-meta-skill"
 }
