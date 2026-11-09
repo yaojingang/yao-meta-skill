@@ -1,9 +1,9 @@
 # Skill OS 2.0 Review
 
 Review date: 2026-11-09
-Scope: WorkBuddy compatibility patch 2.1.1 on the existing Skill OS 2.0 foundation.
+Scope: Review Studio YAML date serialization fix and regression coverage on Skill OS 2.1.1.
 
-Review basis: current local gate figures are refreshed below. Provider and independent-reviewer results remain historical evidence from f5d8f68; this compatibility update adds no new provider or human-review runs.
+Review basis: current local gate figures are refreshed below. Provider and independent-reviewer results remain historical evidence from f5d8f68; this serialization fix adds no new provider or human-review runs.
 
 ## Verdict
 
@@ -140,10 +140,10 @@ Next move: add real client or installer permission enforcement integration.
 | Trust | `0` secret findings, `1` pinned dependency file, `81` declared internal modules, `3 / 3` network-capable scripts covered by bounded host policy, `93 / 93` CLI help smoke checks passing across `174` scripts, source-contract hash scope explicit |
 | Permission Governance | `3 / 3` required high-permission capabilities approved, `0` missing, `0` invalid, `0` expired |
 | Runtime Permission Probes | `4 / 4` target adapters probed, `0` native-enforcement adapters, `4` explicit metadata fallbacks, `4` residual risks retained for reviewer visibility |
-| Skill Atlas | `12` scanned skills, `1` actionable root skill, `1` telemetry report, `0` actionable route collisions, `0` actionable owner gaps, `0` actionable stale skills, `0` actionable drift signals, `25` scoped non-actionable issue signals retained for visibility |
+| Skill Atlas | `11` scanned skills, `1` actionable root skill, `1` telemetry report, `0` actionable route collisions, `0` actionable owner gaps, `0` actionable stale skills, `1` actionable drift signal, `23` scoped non-actionable issue signals retained for visibility |
 | Registry Audit | package metadata generated with version, owner, license, source checksum, archive checksum, Skill IR provenance, and compatibility matrix |
-| Package Verification | `4 / 4` target adapters present, archive verified, `664` zip entries, `0` nested SKILL.md entries, `0` failures, `0` warnings |
-| Install Simulation | archive with `664` entries extracted into a local verification root, `0` nested SKILL.md entries, entrypoint/manifest/interface loaded, reports present, `4` adapters readable, `12` installer permission checks enforced, `0` permission failures, `0` failures, `0` warnings |
+| Package Verification | `4 / 4` target adapters present, archive verified, `665` zip entries, `0` nested SKILL.md entries, `0` failures, `0` warnings |
+| Install Simulation | archive with `665` entries extracted into a local verification root, `0` nested SKILL.md entries, entrypoint/manifest/interface loaded, reports present, `4` adapters readable, `12` installer permission checks enforced, `0` permission failures, `0` failures, `0` warnings |
 | Local Install Sync Preflight | `make sync-local-install` and `make sync-active-install` rebuild the package first, then sync only after install simulation passes with `12` enforced installer permission checks and `0` permission failures |
 | Upgrade Check | current package declares `major` over the 1.0.0 baseline, recommended bump is `minor`, and release notes include added targets plus checksum changes |
 | Adoption Drift | `0` metadata-only production events, `0` adoption samples, adoption `0`, risk band `no-data`; optional `yao.py` CLI capture, external client `telemetry-emit`, `5` `telemetry-hooks` recipes, Browser/Chrome native messaging host, and validated external JSONL import are available but off by default for reproducible release evidence; raw `reports/telemetry_events.jsonl` is gitignored and blocked from zip packages |

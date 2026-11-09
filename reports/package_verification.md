@@ -4,7 +4,7 @@
 - Package directory: `dist`
 - Targets: `4 / 4` adapters present
 - Archive present: `True`
-- Archive SHA256: `67c247d88bff0939b9d79bc627ffa239df3efe6b6f7bd8698d6a7bd6a8646e57`
+- Archive SHA256: `689018a8bea701199a92e109fb73cebaedee9b3b59c1e6455aa00dba46934b30`
 - Nested SKILL.md entries: `0`
 - Failures: `0`
 - Warnings: `0`

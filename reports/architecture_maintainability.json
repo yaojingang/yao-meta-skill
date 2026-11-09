@@ -4,9 +4,9 @@
   "generated_at": "2026-11-09",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 260,
+    "python_file_count": 261,
     "script_file_count": 174,
-    "test_file_count": 86,
+    "test_file_count": 87,
     "internal_module_count": 83,
     "cli_script_count": 96,
     "command_handler_count": 74,
