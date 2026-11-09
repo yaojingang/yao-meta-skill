@@ -109,6 +109,10 @@ registry-audit-check:
 package-verify-check:
 	$(PYTHON) tests/verify_package_verification.py
 
+.PHONY: workbuddy-compat-check
+workbuddy-compat-check:
+	$(PYTHON) tests/verify_workbuddy_compat.py
+
 install-simulation-check:
 	$(PYTHON) tests/verify_install_simulation.py
 
@@ -286,7 +290,7 @@ sync-local-install:
 sync-active-install:
 	$(PYTHON) scripts/sync_local_install.py --install-dir "$(ACTIVE_SKILL_INSTALL_DIR)"
 
-test: update-delivery-check
+test: update-delivery-check workbuddy-compat-check
 test: python-version-check eval eval-suite route-scorecard route-confusion-check description-optimization description-optimization-check promotion-check python-compat-check architecture-maintainability-check target-safety-check yao-cli-check operator-ux-check skill-overview-check skill-interpretation-check skill-report-metrics-check skill-report-charts-check html-rendering-check skill-ir-check compiler-check output-eval-check output-execution-check output-review-adjudication-check runtime-conformance-check runtime-permission-check trust-check skill-atlas-check package-check registry-audit-check package-verify-check install-simulation-check upgrade-check review-viewer-check review-studio-check skill-os2-audit-check skill-os2-coverage-check world-class-evidence-check world-class-ledger-check world-class-intake-check world-class-submission-kit-check world-class-preflight-check world-class-submission-review-check world-class-runbook-check world-class-claim-guard-check benchmark-reproducibility-check evidence-consistency-check feedback-check adaptation-safety-check skillops-opportunity-check daily-skillops-check weekly-curator-check adoption-drift-check telemetry-import-check telemetry-emit-check telemetry-hooks-check telemetry-native-host-check review-waivers-check review-annotations-check baseline-compare-check reference-scan-check github-benchmark-scan-check intent-confidence-check intent-quickstart-check reference-synthesis-check output-risk-profile-check artifact-design-profile-check prompt-quality-profile-check system-model-check iteration-directions-check description-drift-history iteration-ledger regression-history context-reports portability-report portability-check failure-regression-check package-failure-check security-boundary-check local-install-sync-check snapshot-check validate lint governance-check resource-boundary-check quality-check
 
 ci-test: python-version-check

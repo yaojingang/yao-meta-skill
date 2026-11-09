@@ -5,21 +5,21 @@ Design system: `metric editorial`
 
 ## Primary Artifact Direction
 
-**Dashboard or metrics page**
+**Review viewer**
 
-Metric-first dashboard with stable dimensions, short labels, visible deltas, and narrative callouts only where they change interpretation.
+Side-by-side reviewer studio with explicit tradeoffs, evidence readiness, and fast paths for approving, blocking, or requesting one focused fix.
 
 ## Matched Artifact Families
-
-### Dashboard or metrics page
-- Matched keywords: metric, score, table, scorecard
-- Score: `4`
-- Direction: Metric-first dashboard with stable dimensions, short labels, visible deltas, and narrative callouts only where they change interpretation.
 
 ### Review viewer
 - Matched keywords: review, viewer, audit
 - Score: `3`
 - Direction: Side-by-side reviewer studio with explicit tradeoffs, evidence readiness, and fast paths for approving, blocking, or requesting one focused fix.
+
+### Dashboard or metrics page
+- Matched keywords: score, table, scorecard
+- Score: `3`
+- Direction: Metric-first dashboard with stable dimensions, short labels, visible deltas, and narrative callouts only where they change interpretation.
 
 ### Code, CLI, or implementation guide
 - Matched keywords: code, script, command
@@ -38,14 +38,14 @@ Metric-first dashboard with stable dimensions, short labels, visible deltas, and
 
 ## Layout Patterns To Prefer
 
-- metric board
-- ranked signals
-- comparison rows
-- interpretation
-- action queue
 - summary
 - variant comparison
 - evidence
+- risks
+- review decision
+- metric board
+- ranked signals
+- comparison rows
 
 ## Design Tokens
 
@@ -71,12 +71,12 @@ Metric-first dashboard with stable dimensions, short labels, visible deltas, and
 
 ## Quality Gates
 
-- Avoid paragraph-heavy table cells.
-- Keep charts tied to one analytical question each.
-- Preserve stable color meaning across metrics and entities.
 - Make differences visible instead of hiding them in prose.
 - Separate author-facing recommendations from reviewer-only evidence.
 - Surface conflicts clearly and keep routine benchmark synthesis quiet.
+- Avoid paragraph-heavy table cells.
+- Keep charts tied to one analytical question each.
+- Preserve stable color meaning across metrics and entities.
 - Name the working directory and required inputs for commands.
 - Mark destructive, networked, or external side-effect operations.
 

@@ -1,7 +1,9 @@
 # Skill OS 2.0 Review
 
-Review date: 2026-08-17
-Scope: Yao Meta Skill against the user-provided Skill OS 2.0 upgrade plan.
+Review date: 2026-11-09
+Scope: WorkBuddy compatibility patch 2.1.1 on the existing Skill OS 2.0 foundation.
+
+Review basis: current local gate figures are refreshed below. Provider and independent-reviewer results remain historical evidence from f5d8f68; this compatibility update adds no new provider or human-review runs.
 
 ## Verdict
 
@@ -140,8 +142,8 @@ Next move: add real client or installer permission enforcement integration.
 | Runtime Permission Probes | `4 / 4` target adapters probed, `0` native-enforcement adapters, `4` explicit metadata fallbacks, `4` residual risks retained for reviewer visibility |
 | Skill Atlas | `12` scanned skills, `1` actionable root skill, `1` telemetry report, `0` actionable route collisions, `0` actionable owner gaps, `0` actionable stale skills, `0` actionable drift signals, `25` scoped non-actionable issue signals retained for visibility |
 | Registry Audit | package metadata generated with version, owner, license, source checksum, archive checksum, Skill IR provenance, and compatibility matrix |
-| Package Verification | `4 / 4` target adapters present, archive verified, `658` zip entries, `0` nested SKILL.md entries, `0` failures, `0` warnings |
-| Install Simulation | archive with `658` entries extracted into a local verification root, `0` nested SKILL.md entries, entrypoint/manifest/interface loaded, reports present, `4` adapters readable, `12` installer permission checks enforced, `0` permission failures, `0` failures, `0` warnings |
+| Package Verification | `4 / 4` target adapters present, archive verified, `664` zip entries, `0` nested SKILL.md entries, `0` failures, `0` warnings |
+| Install Simulation | archive with `664` entries extracted into a local verification root, `0` nested SKILL.md entries, entrypoint/manifest/interface loaded, reports present, `4` adapters readable, `12` installer permission checks enforced, `0` permission failures, `0` failures, `0` warnings |
 | Local Install Sync Preflight | `make sync-local-install` and `make sync-active-install` rebuild the package first, then sync only after install simulation passes with `12` enforced installer permission checks and `0` permission failures |
 | Upgrade Check | current package declares `major` over the 1.0.0 baseline, recommended bump is `minor`, and release notes include added targets plus checksum changes |
 | Adoption Drift | `0` metadata-only production events, `0` adoption samples, adoption `0`, risk band `no-data`; optional `yao.py` CLI capture, external client `telemetry-emit`, `5` `telemetry-hooks` recipes, Browser/Chrome native messaging host, and validated external JSONL import are available but off by default for reproducible release evidence; raw `reports/telemetry_events.jsonl` is gitignored and blocked from zip packages |
@@ -153,8 +155,8 @@ Next move: add real client or installer permission enforcement integration.
 | World-Class Evidence Ledger | `4` evidence entries remain pending: `1` human-required and `3` external-required; anti-overclaim guards block planned work, metadata fallbacks, pending review, and local command runners from counting as completion |
 | Benchmark Reproducibility | local reproducibility ready with `25` required artifacts, `0` missing artifacts, `23` reproduction commands, and `3` disclosed failure cases; human review, native permission enforcement, native telemetry, and provider ledger approval remain explicit limitations |
 | IR-first Packaging | `openai`, `claude`, `generic`, and `vscode` adapters include compiler contracts, permission contracts, target-native behavior contracts, IR provenance, semantic parity checks, and install-scope notes where applicable |
-| Context Budget | initial load `945/1000`; deferred resources remain governed |
-| CI | `make ci-test` target count is `87` after adding dedicated intent-confidence and intent-quickstart verification |
+| Context Budget | initial load `923/1000`; deferred resources remain governed |
+| CI | `make ci-test` target count is `88` including WorkBuddy archive and isolated-runtime verification |
 
 ## Next Highest-Leverage Moves
 

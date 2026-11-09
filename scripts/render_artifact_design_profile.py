@@ -158,8 +158,7 @@ def normalized_text(skill_dir: Path) -> str:
     context = intent.get("context", {}) if isinstance(intent, dict) else {}
     risk_labels = " ".join(item.get("label", "") for item in output_risk.get("risk_families", []))
     parts = [
-        skill_dir.name,
-        str(frontmatter.get("name", "")),
+        str(frontmatter.get("name") or skill_dir.name),
         str(frontmatter.get("description", "")),
         body,
         str(context.get("job", "")),
@@ -210,6 +209,7 @@ def design_system_name(matched: list[dict]) -> str:
 
 def build_summary(skill_dir: Path) -> dict:
     text = normalized_text(skill_dir)
+    frontmatter, _ = parse_frontmatter((skill_dir / "SKILL.md").read_text(encoding="utf-8"))
     matched = []
     for family in ARTIFACT_FAMILIES:
         score, hits = match_family(text, family)
@@ -233,7 +233,7 @@ def build_summary(skill_dir: Path) -> dict:
         "Do not invent screenshots, citations, charts, or UI states.",
     ]
     return {
-        "skill_name": skill_dir.name,
+        "skill_name": str(frontmatter.get("name") or skill_dir.name),
         "design_system": design_system_name(matched),
         "primary_artifact": {
             "key": primary["key"],

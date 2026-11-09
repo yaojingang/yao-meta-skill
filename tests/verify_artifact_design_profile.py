@@ -55,6 +55,16 @@ def main() -> None:
     assert "Artifact Design Profile" in markdown, markdown[:500]
     assert "Quality Gates" in markdown, markdown[:1200]
     assert "Do not copy Kami" in markdown, markdown[:2000]
+    renamed = tmp_root / "renamed prompt screenshot data secret"
+    skill_dir.rename(renamed)
+    renamed_proc = subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "render_artifact_design_profile.py"), str(renamed)],
+        cwd=ROOT, check=True, capture_output=True, text=True,
+    )
+    renamed_summary = json.loads(renamed_proc.stdout)["summary"]
+    assert renamed_summary["skill_name"] == "visual-report-demo", renamed_summary
+    assert renamed_summary == summary, (summary, renamed_summary)
+    assert "Skill: `visual-report-demo`" in (renamed / "reports/artifact-design-profile.md").read_text()
     print(json.dumps({"ok": True}, ensure_ascii=False, indent=2))
 
 

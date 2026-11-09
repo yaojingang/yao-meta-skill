@@ -75,10 +75,10 @@ def main() -> None:
     assert stats["estimated_initial_load_tokens"] < 950, stats
 
     manifest = json.loads((ROOT / "manifest.json").read_text(encoding="utf-8"))
-    assert manifest["version"] == "2.1.0", manifest
-    assert manifest["updated_at"] == "2026-08-17", manifest
+    assert manifest["version"] == "2.1.1", manifest
+    assert manifest["updated_at"] == "2026-11-09", manifest
     assert manifest["review_due"] == "2026-11-15", manifest
-    assert (ROOT / "VERSION").read_text(encoding="utf-8").strip() == "2.1.0"
+    assert (ROOT / "VERSION").read_text(encoding="utf-8").strip() == "2.1.1"
     migration = (ROOT / "docs" / "migration-1.2.0.md").read_text(encoding="utf-8")
     assert "embedding" in migration.lower() and "phase 2" in migration.lower(), migration
     rendered = build_report(ROOT, "2026-08-12")

@@ -2,7 +2,7 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 277,
+    "scanned_files": 278,
     "script_count": 174,
     "internal_module_count": 81,
     "secret_findings": 0,
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 277,
-    "package_sha256": "54d1fb49b5de9d73a5a312204ffdfad76937ed8e877571521c569139d9630bd8"
+    "package_hash_file_count": 278,
+    "package_sha256": "2b2b5ed0c96b97d5a32efe63c644a9f9c8ba343c991329d08820430d0bc279e6"
   },
   "failures": [],
   "warnings": [],
@@ -2535,7 +2535,7 @@
         "timed_out": false,
         "passed": true,
         "has_help_text": true,
-        "stdout_excerpt": "usage: adjudicate_multi_reviewer.py [-h] --answer-key ANSWER_KEY\n                                    --decisions DECISIONS\n                                    --reviewer-registry REVIEWER_REGISTRY\n                                    [--outp",
+        "stdout_excerpt": "usage: adjudicate_multi_reviewer.py [-h] --answer-key ANSWER_KEY --decisions\n                                    DECISIONS --reviewer-registry\n                                    REVIEWER_REGISTRY\n                                    [--outp",
         "stderr_excerpt": ""
       },
       {
@@ -2685,7 +2685,7 @@
         "timed_out": false,
         "passed": true,
         "has_help_text": true,
-        "stdout_excerpt": "usage: finalize_provider_review.py [-h] --source-run SOURCE_RUN\n                                   --decisions DECISIONS\n                                   --reviewer-registry REVIEWER_REGISTRY\n                                   [--run-id R",
+        "stdout_excerpt": "usage: finalize_provider_review.py [-h] --source-run SOURCE_RUN --decisions\n                                   DECISIONS --reviewer-registry\n                                   REVIEWER_REGISTRY [--run-id RUN_ID]\n                            ",
         "stderr_excerpt": ""
       },
       {
@@ -3790,7 +3790,7 @@
     "present": true,
     "path": "security/permission_policy.json",
     "schema_version": "1.0",
-    "reviewed_at": "2026-06-13",
+    "reviewed_at": "2026-11-09",
     "required_capabilities": [
       "file_write",
       "network",
@@ -3818,10 +3818,10 @@
           "scripts/github_benchmark_scan.py",
           "scripts/provider_output_eval_runner.py"
         ],
-        "reviewer": "Yao Team",
+        "reviewer": "Codex (repository permission review)",
         "scope": "Only scripts declared in security/network_policy.json may perform outbound requests.",
         "reason": "Network use is bounded to public GitHub metadata, benchmark discovery, update checks, and reviewed provider output-eval endpoints, with allowed hosts reviewed in security/network_policy.json.",
-        "expires_at": "2026-09-30",
+        "expires_at": "2027-02-09",
         "evidence": [
           "security/network_policy.json",
           "reports/security_trust_report.md"
@@ -3920,10 +3920,10 @@
           "scripts/verify_package.py",
           "scripts/yao_cli_operator_commands.py"
         ],
-        "reviewer": "Yao Team",
-        "scope": "Local generated reports, registry metadata, temporary test outputs, package artifacts, user-level update cache, and explicitly confirmed managed Skill installations.",
+        "reviewer": "Codex (repository permission review)",
+        "scope": "Local generated reports, registry metadata, temporary test outputs, package artifacts, user-level update cache, and explicitly authorized verified Skill installations. Controlled-wrapper resources remain linked; update only its attested regular entry file.",
         "reason": "File writes create auditable reports and package artifacts, persist metadata-only update state, and allow a verified installer to replace one managed Skill only after explicit confirmation.",
-        "expires_at": "2026-09-30",
+        "expires_at": "2027-02-09",
         "evidence": [
           "reports/package_verification.md",
           "reports/install_simulation.md",
@@ -3961,10 +3961,10 @@
           "scripts/yao_cli_operator_commands.py",
           "scripts/yao_cli_runtime.py"
         ],
-        "reviewer": "Yao Team",
+        "reviewer": "Codex (repository permission review)",
         "scope": "Local deterministic validation, packaging, install simulation, CI orchestration, read-only install discovery, and explicitly confirmed managed Skill updates.",
         "reason": "Subprocess use covers reviewed local tooling plus allowlisted argument-array update commands for Agent Skills CLI or a verified Codex plugin marketplace; mutation requires --yes and post-update verification.",
-        "expires_at": "2026-09-30",
+        "expires_at": "2027-02-09",
         "evidence": [
           "reports/security_trust_report.md",
           "reports/review-studio.html"

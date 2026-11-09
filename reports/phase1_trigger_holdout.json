@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-08-12",
+  "generated_at": "2026-11-09",
   "summary": {
     "precision": 1.0,
     "recall": 0.917,
@@ -11,8 +11,8 @@
     "existing_suite_case_count": 66,
     "existing_suite_false_positives": 0,
     "existing_suite_false_negatives": 0,
-    "skill_body_tokens": 767,
-    "initial_load_tokens": 945,
+    "skill_body_tokens": 745,
+    "initial_load_tokens": 923,
     "decision": "pass"
   },
   "thresholds": {

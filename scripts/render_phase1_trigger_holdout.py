@@ -70,8 +70,8 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
         "skill_body_tokens": int(stats.get("skill_body_tokens", 10**9)) <= 780,
         "initial_load_tokens": int(stats.get("estimated_initial_load_tokens", 10**9)) < 950,
         "release_metadata": (
-            manifest.get("version") == "2.1.0"
-            and manifest.get("updated_at") == "2026-08-17"
+            manifest.get("version") == "2.1.1"
+            and manifest.get("updated_at") == "2026-11-09"
             and manifest.get("review_due") == "2026-11-15"
         ),
     }

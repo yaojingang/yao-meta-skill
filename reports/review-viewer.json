@@ -6,7 +6,7 @@
       "display_name": "Yao Meta Skill",
       "description": "Create, improve, or evaluate an existing skill from workflows, prompts, SOPs, scripts. Use for migration/release/package, routing, evals/tests, install/trust checks, 优化已有 skill, 补 trigger 评测. Exclude summary/translation/docs, brainstorming, one-off prompts, copy-only edits, outline-only requests.",
       "maturity": "governed",
-      "updated_at": "2026-08-17",
+      "updated_at": "2026-11-09",
       "core_value": "把一次性经验沉淀为可复用、可评估、可迁移的 Skill 包体。",
       "audience": "Skill 作者、复用团队和后续 reviewer。",
       "deliverables": [
@@ -81,7 +81,7 @@
         "label": "可维护性",
         "score": 100,
         "reasons": [
-          "SKILL.md 约 316 个词/字。",
+          "SKILL.md 约 365 个词/字。",
           "入口文件保持克制，可维护性较好。",
           "references/ 已承载扩展指导。",
           "scripts/ 已承载确定性逻辑。",
@@ -102,7 +102,7 @@
         "label": "上下文成本",
         "score": 42,
         "reasons": [
-          "入口约 316 个词/字，references 约 18854 个词/字。",
+          "入口约 365 个词/字，references 约 19499 个词/字。",
           "分数越高代表上下文成本越低。",
           "上下文成本偏高，建议压缩入口或拆分 references。"
         ]
@@ -206,7 +206,7 @@
         "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
       ],
       "gaps": [
-        "上下文成本需要补强：入口约 316 个词/字，references 约 18854 个词/字。"
+        "上下文成本需要补强：入口约 365 个词/字，references 约 19499 个词/字。"
       ],
       "recommendations": [
         "先改触发边界，再扩展工作流。",
@@ -216,10 +216,10 @@
       "artifact_design": {
         "design_system": "metric editorial",
         "highlights": [
-          "Metric-first dashboard with stable dimensions, short labels, visible deltas, and narrative callouts only where they change interpretation.",
-          "Avoid paragraph-heavy table cells.",
-          "Keep charts tied to one analytical question each.",
-          "Preserve stable color meaning across metrics and entities."
+          "Side-by-side reviewer studio with explicit tradeoffs, evidence readiness, and fast paths for approving, blocking, or requesting one focused fix.",
+          "Make differences visible instead of hiding them in prose.",
+          "Separate author-facing recommendations from reviewer-only evidence.",
+          "Surface conflicts clearly and keep routine benchmark synthesis quiet."
         ]
       },
       "prompt_quality": {
@@ -271,7 +271,7 @@
           "name": "包体膨胀风险",
           "impact": 2,
           "probability": 1,
-          "signal": "SKILL.md 约 316 个词/字。",
+          "signal": "SKILL.md 约 365 个词/字。",
           "response": "先补证据和边界，再增加包体复杂度。"
         },
         {
@@ -356,6 +356,29 @@
           ]
         },
         {
+          "key": "code_or_command_safety",
+          "label": "Code and command safety",
+          "matched_keywords": [
+            "code",
+            "script"
+          ],
+          "score": 2,
+          "risks": [
+            "Commands can omit environment assumptions, working directory, or rollback notes.",
+            "Code snippets can look runnable while missing required inputs.",
+            "Error handling can be either absent or over-engineered."
+          ],
+          "constraints": [
+            "Name the working directory, required inputs, and expected output for each command.",
+            "Mark destructive or external side-effect operations explicitly.",
+            "Prefer the smallest runnable snippet over broad framework code."
+          ],
+          "self_repair": [
+            "Scan each command for cwd, input, output, and side-effect assumptions.",
+            "Remove speculative error handling that is not tied to a real failure mode."
+          ]
+        },
+        {
           "key": "visual_capture",
           "label": "Screenshot and visual capture",
           "matched_keywords": [
@@ -375,28 +398,6 @@
           "self_repair": [
             "Check that every screenshot reference points to a real provided or generated asset.",
             "Reword any visual instruction that depends on an unseen screen state."
-          ]
-        },
-        {
-          "key": "code_or_command_safety",
-          "label": "Code and command safety",
-          "matched_keywords": [
-            "script"
-          ],
-          "score": 1,
-          "risks": [
-            "Commands can omit environment assumptions, working directory, or rollback notes.",
-            "Code snippets can look runnable while missing required inputs.",
-            "Error handling can be either absent or over-engineered."
-          ],
-          "constraints": [
-            "Name the working directory, required inputs, and expected output for each command.",
-            "Mark destructive or external side-effect operations explicitly.",
-            "Prefer the smallest runnable snippet over broad framework code."
-          ],
-          "self_repair": [
-            "Scan each command for cwd, input, output, and side-effect assumptions.",
-            "Remove speculative error handling that is not tied to a real failure mode."
           ]
         }
       ],
@@ -504,7 +505,7 @@
           "path": "references",
           "label": "Extended guidance and reusable notes",
           "kind": "folder",
-          "file_count": 39
+          "file_count": 40
         },
         {
           "path": "scripts",
@@ -522,10 +523,10 @@
           "path": "reports",
           "label": "Generated evidence and overview artifacts",
           "kind": "folder",
-          "file_count": 195
+          "file_count": 199
         }
       ],
-      "file_count": 446,
+      "file_count": 451,
       "folder_count": 4,
       "distribution": [
         {
@@ -546,7 +547,7 @@
         },
         {
           "label": "references",
-          "value": 39
+          "value": 40
         },
         {
           "label": "scripts",
@@ -558,7 +559,7 @@
         },
         {
           "label": "reports",
-          "value": 195
+          "value": 199
         }
       ]
     },
@@ -674,7 +675,7 @@
         "path": "references",
         "label": "Extended guidance and reusable notes",
         "kind": "folder",
-        "file_count": 39
+        "file_count": 40
       },
       {
         "path": "scripts",
@@ -692,7 +693,7 @@
         "path": "reports",
         "label": "Generated evidence and overview artifacts",
         "kind": "folder",
-        "file_count": 195
+        "file_count": 199
       }
     ],
     "strengths": [
@@ -1016,9 +1017,9 @@
         "methodology_complete": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "ec52890423f7cb86c63078e55f4df33df8728efe5f84807902ba8b178fa436dd",
-        "source_contract_sha256": "54d1fb49b5de9d73a5a312204ffdfad76937ed8e877571521c569139d9630bd8",
-        "archive_sha256": "f5275f7471c04e62dfc862d714e5d752a688d66952277bee848364634c0046e7",
+        "evidence_bundle_sha256": "f2e0c8313219647a01b6441e143573e22ce208215d1dc6339bbf89621a452e42",
+        "source_contract_sha256": "2b2b5ed0c96b97d5a32efe63c644a9f9c8ba343c991329d08820430d0bc279e6",
+        "archive_sha256": "67c247d88bff0939b9d79bc627ffa239df3efe6b6f7bd8698d6a7bd6a8646e57",
         "output_case_count": 5,
         "failure_disclosure_count": 3,
         "command_count": 23,
@@ -1045,13 +1046,13 @@
         "public_claim_ready": false,
         "public_claim_blocker_count": 3,
         "working_tree_dirty": true,
-        "changed_file_count": 24,
+        "changed_file_count": 72,
         "source_tree_dirty": false,
         "source_changed_file_count": 0,
         "generated_tree_dirty": true,
-        "generated_changed_file_count": 24
+        "generated_changed_file_count": 72
       },
-      "commit": "4f77b8a6ee7e59284219d0adcbbceef4dcdcdca9",
+      "commit": "8b9d6672a90b6e087ee242fdadb9b991018b3d47",
       "missing_artifacts": [],
       "limitations": [
         "The git commit and dirty flags are generation-time context; release lock is blocked by source changes, while generated evidence artifacts are tracked separately.",
@@ -1136,7 +1137,7 @@
       "failures": []
     },
     "trust_security": {
-      "scanned_files": 277,
+      "scanned_files": 278,
       "script_count": 174,
       "internal_module_count": 81,
       "secret_findings": 0,
@@ -1156,8 +1157,8 @@
       "help_smoke_failed_count": 0,
       "interactive_script_count": 0,
       "package_hash_scope": "source-contract-without-generated-reports",
-      "package_hash_file_count": 277,
-      "package_sha256": "54d1fb49b5de9d73a5a312204ffdfad76937ed8e877571521c569139d9630bd8"
+      "package_hash_file_count": 278,
+      "package_sha256": "2b2b5ed0c96b97d5a32efe63c644a9f9c8ba343c991329d08820430d0bc279e6"
     },
     "skill_atlas": {
       "skill_count": 11,
@@ -1180,7 +1181,7 @@
       "package": {
         "schema_version": "2.0",
         "name": "yao-meta-skill",
-        "version": "2.1.0",
+        "version": "2.1.1",
         "description": "Create, improve, or evaluate an existing skill from workflows, prompts, SOPs, scripts. Use for migration/release/package, routing, evals/tests, install/trust checks, 优化已有 skill, 补 trigger 评测. Exclude summary/translation/docs, brainstorming, one-off prompts, copy-only edits, outline-only requests.",
         "targets": [
           "openai",
@@ -1195,8 +1196,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "54d1fb49b5de9d73a5a312204ffdfad76937ed8e877571521c569139d9630bd8",
-          "archive_sha256": "f5275f7471c04e62dfc862d714e5d752a688d66952277bee848364634c0046e7"
+          "package_sha256": "2b2b5ed0c96b97d5a32efe63c644a9f9c8ba343c991329d08820430d0bc279e6",
+          "archive_sha256": "67c247d88bff0939b9d79bc627ffa239df3efe6b6f7bd8698d6a7bd6a8646e57"
         },
         "compatibility": {
           "openai": "pass",
@@ -1227,12 +1228,12 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "f5275f7471c04e62dfc862d714e5d752a688d66952277bee848364634c0046e7",
+          "archive_sha256": "67c247d88bff0939b9d79bc627ffa239df3efe6b6f7bd8698d6a7bd6a8646e57",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
         },
-        "generated_at": "2026-08-17"
+        "generated_at": "2026-11-09"
       },
       "failures": [],
       "warnings": []
@@ -1243,8 +1244,8 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "f5275f7471c04e62dfc862d714e5d752a688d66952277bee848364634c0046e7",
-        "archive_entry_count": 658,
+        "archive_sha256": "67c247d88bff0939b9d79bc627ffa239df3efe6b6f7bd8698d6a7bd6a8646e57",
+        "archive_entry_count": 664,
         "nested_skill_entry_count": 0,
         "failure_count": 0,
         "warning_count": 0
@@ -1256,7 +1257,7 @@
       "ok": true,
       "summary": {
         "archive_present": true,
-        "archive_entry_count": 658,
+        "archive_entry_count": 664,
         "nested_skill_entry_count": 0,
         "archive_extracted": true,
         "entrypoint_loaded": true,
@@ -1324,12 +1325,12 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "f5275f7471c04e62dfc862d714e5d752a688d66952277bee848364634c0046e7"
+            "to": "67c247d88bff0939b9d79bc627ffa239df3efe6b6f7bd8698d6a7bd6a8646e57"
           },
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "54d1fb49b5de9d73a5a312204ffdfad76937ed8e877571521c569139d9630bd8"
+            "to": "2b2b5ed0c96b97d5a32efe63c644a9f9c8ba343c991329d08820430d0bc279e6"
           }
         ]
       },
@@ -2162,10 +2163,10 @@
     "artifact_design": {
       "design_system": "metric editorial",
       "highlights": [
-        "Metric-first dashboard with stable dimensions, short labels, visible deltas, and narrative callouts only where they change interpretation.",
-        "Avoid paragraph-heavy table cells.",
-        "Keep charts tied to one analytical question each.",
-        "Preserve stable color meaning across metrics and entities."
+        "Side-by-side reviewer studio with explicit tradeoffs, evidence readiness, and fast paths for approving, blocking, or requesting one focused fix.",
+        "Make differences visible instead of hiding them in prose.",
+        "Separate author-facing recommendations from reviewer-only evidence.",
+        "Surface conflicts clearly and keep routine benchmark synthesis quiet."
       ]
     },
     "prompt_quality": {
@@ -2199,7 +2200,7 @@
       ],
       "maturity_tier": "governed",
       "skill_archetype": "governed",
-      "updated_at": "2026-08-17"
+      "updated_at": "2026-11-09"
     }
   },
   "intent_confidence": {
@@ -14421,6 +14422,29 @@
         ]
       },
       {
+        "key": "code_or_command_safety",
+        "label": "Code and command safety",
+        "matched_keywords": [
+          "code",
+          "script"
+        ],
+        "score": 2,
+        "risks": [
+          "Commands can omit environment assumptions, working directory, or rollback notes.",
+          "Code snippets can look runnable while missing required inputs.",
+          "Error handling can be either absent or over-engineered."
+        ],
+        "constraints": [
+          "Name the working directory, required inputs, and expected output for each command.",
+          "Mark destructive or external side-effect operations explicitly.",
+          "Prefer the smallest runnable snippet over broad framework code."
+        ],
+        "self_repair": [
+          "Scan each command for cwd, input, output, and side-effect assumptions.",
+          "Remove speculative error handling that is not tied to a real failure mode."
+        ]
+      },
+      {
         "key": "visual_capture",
         "label": "Screenshot and visual capture",
         "matched_keywords": [
@@ -14440,28 +14464,6 @@
         "self_repair": [
           "Check that every screenshot reference points to a real provided or generated asset.",
           "Reword any visual instruction that depends on an unseen screen state."
-        ]
-      },
-      {
-        "key": "code_or_command_safety",
-        "label": "Code and command safety",
-        "matched_keywords": [
-          "script"
-        ],
-        "score": 1,
-        "risks": [
-          "Commands can omit environment assumptions, working directory, or rollback notes.",
-          "Code snippets can look runnable while missing required inputs.",
-          "Error handling can be either absent or over-engineered."
-        ],
-        "constraints": [
-          "Name the working directory, required inputs, and expected output for each command.",
-          "Mark destructive or external side-effect operations explicitly.",
-          "Prefer the smallest runnable snippet over broad framework code."
-        ],
-        "self_repair": [
-          "Scan each command for cwd, input, output, and side-effect assumptions.",
-          "Remove speculative error handling that is not tied to a real failure mode."
         ]
       }
     ],
@@ -14495,29 +14497,16 @@
     "skill_name": "yao-meta-skill",
     "design_system": "metric editorial",
     "primary_artifact": {
-      "key": "dashboard",
-      "label": "Dashboard or metrics page",
-      "direction": "Metric-first dashboard with stable dimensions, short labels, visible deltas, and narrative callouts only where they change interpretation.",
+      "key": "review_viewer",
+      "label": "Review viewer",
+      "direction": "Side-by-side reviewer studio with explicit tradeoffs, evidence readiness, and fast paths for approving, blocking, or requesting one focused fix.",
       "matched_keywords": [
-        "metric",
-        "score",
-        "table",
-        "scorecard"
+        "review",
+        "viewer",
+        "audit"
       ]
     },
     "artifact_families": [
-      {
-        "key": "dashboard",
-        "label": "Dashboard or metrics page",
-        "score": 4,
-        "matched_keywords": [
-          "metric",
-          "score",
-          "table",
-          "scorecard"
-        ],
-        "direction": "Metric-first dashboard with stable dimensions, short labels, visible deltas, and narrative callouts only where they change interpretation."
-      },
       {
         "key": "review_viewer",
         "label": "Review viewer",
@@ -14528,6 +14517,17 @@
           "audit"
         ],
         "direction": "Side-by-side reviewer studio with explicit tradeoffs, evidence readiness, and fast paths for approving, blocking, or requesting one focused fix."
+      },
+      {
+        "key": "dashboard",
+        "label": "Dashboard or metrics page",
+        "score": 3,
+        "matched_keywords": [
+          "score",
+          "table",
+          "scorecard"
+        ],
+        "direction": "Metric-first dashboard with stable dimensions, short labels, visible deltas, and narrative callouts only where they change interpretation."
       },
       {
         "key": "code_or_cli",
@@ -14561,14 +14561,14 @@
       }
     ],
     "layout_patterns": [
-      "metric board",
-      "ranked signals",
-      "comparison rows",
-      "interpretation",
-      "action queue",
       "summary",
       "variant comparison",
-      "evidence"
+      "evidence",
+      "risks",
+      "review decision",
+      "metric board",
+      "ranked signals",
+      "comparison rows"
     ],
     "design_tokens": {
       "type": [
@@ -14593,12 +14593,12 @@
       ]
     },
     "quality_gates": [
-      "Avoid paragraph-heavy table cells.",
-      "Keep charts tied to one analytical question each.",
-      "Preserve stable color meaning across metrics and entities.",
       "Make differences visible instead of hiding them in prose.",
       "Separate author-facing recommendations from reviewer-only evidence.",
       "Surface conflicts clearly and keep routine benchmark synthesis quiet.",
+      "Avoid paragraph-heavy table cells.",
+      "Keep charts tied to one analytical question each.",
+      "Preserve stable color meaning across metrics and entities.",
       "Name the working directory and required inputs for commands.",
       "Mark destructive, networked, or external side-effect operations."
     ],
@@ -14613,7 +14613,7 @@
   },
   "prompt_quality": {
     "skill_name": "yao-meta-skill",
-    "relevance": "prompt-aware",
+    "relevance": "prompt-heavy",
     "primary_task_family": {
       "key": "creative_generation",
       "label": "Creative generation",
@@ -14648,26 +14648,27 @@
         "format_guidance": "Return a runbook-like handoff with commands, checks, owners, and next actions when relevant."
       },
       {
-        "key": "analytical_reasoning",
-        "label": "Analytical reasoning",
-        "score": 1,
-        "matched_keywords": [
-          "decision"
-        ],
-        "role_guidance": "Use an analyst role that separates evidence, inference, uncertainty, and recommendation.",
-        "task_guidance": "State assumptions, compare alternatives, and make the decision path inspectable.",
-        "format_guidance": "Return findings, evidence, tradeoffs, recommendation, and residual risks."
-      },
-      {
         "key": "dialogue_interaction",
         "label": "Dialogue interaction",
-        "score": 1,
+        "score": 2,
         "matched_keywords": [
-          "dialogue"
+          "dialogue",
+          "support"
         ],
         "role_guidance": "Use a conversational role that asks only high-leverage questions and remembers the user's goal.",
         "task_guidance": "Clarify intent, resolve uncertainty, and converge toward a recommendation instead of a long option list.",
         "format_guidance": "Return concise prompts, decision points, and reviewer-visible assumptions."
+      },
+      {
+        "key": "prompt_engineering",
+        "label": "Prompt engineering",
+        "score": 1,
+        "matched_keywords": [
+          "prompt"
+        ],
+        "role_guidance": "Use a prompt engineer role only when role design materially improves execution.",
+        "task_guidance": "Map Role, Task, and Format into skill behavior rather than copying a large prompt template.",
+        "format_guidance": "Return a compact prompt contract plus tests, quality matrix, and usage notes."
       }
     ],
     "complexity": {
@@ -14778,7 +14779,7 @@
       {
         "label": "Artifact design profile",
         "status": "ready",
-        "detail": "Metric-first dashboard with stable dimensions, short labels, visible deltas, and narrative callouts only where they change interpretation."
+        "detail": "Side-by-side reviewer studio with explicit tradeoffs, evidence readiness, and fast paths for approving, blocking, or requesting one focused fix."
       },
       {
         "label": "Prompt quality profile",

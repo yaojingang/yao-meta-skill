@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-08-17",
+  "generated_at": "2026-11-09",
   "skill_dir": ".",
   "summary": {
     "check_count": 41,
@@ -396,13 +396,13 @@
       "label": "Release archive hash matches package, registry, and benchmark evidence",
       "status": "pass",
       "expected": {
-        "all_equal_to_actual_archive": "f5275f7471c04e62dfc862d714e5d752a688d66952277bee848364634c0046e7"
+        "all_equal_to_actual_archive": "67c247d88bff0939b9d79bc627ffa239df3efe6b6f7bd8698d6a7bd6a8646e57"
       },
       "actual": {
-        "actual_archive": "f5275f7471c04e62dfc862d714e5d752a688d66952277bee848364634c0046e7",
-        "package_verification": "f5275f7471c04e62dfc862d714e5d752a688d66952277bee848364634c0046e7",
-        "registry": "f5275f7471c04e62dfc862d714e5d752a688d66952277bee848364634c0046e7",
-        "benchmark": "f5275f7471c04e62dfc862d714e5d752a688d66952277bee848364634c0046e7"
+        "actual_archive": "67c247d88bff0939b9d79bc627ffa239df3efe6b6f7bd8698d6a7bd6a8646e57",
+        "package_verification": "67c247d88bff0939b9d79bc627ffa239df3efe6b6f7bd8698d6a7bd6a8646e57",
+        "registry": "67c247d88bff0939b9d79bc627ffa239df3efe6b6f7bd8698d6a7bd6a8646e57",
+        "benchmark": "67c247d88bff0939b9d79bc627ffa239df3efe6b6f7bd8698d6a7bd6a8646e57"
       },
       "paths": [
         "dist/yao-meta-skill.zip",
@@ -437,12 +437,12 @@
       "status": "pass",
       "expected": {
         "status": "pass",
-        "detail": "initial load 945/1000; deferred 595301/120000; top deferred scripts 527937; resource governance governed; quality density 137.6",
+        "detail": "initial load 923/1000; deferred 596985/120000; top deferred scripts 528380; resource governance governed; quality density 140.8",
         "evidence": "reports/context_budget.json"
       },
       "actual": {
         "status": "pass",
-        "detail": "initial load 945/1000; deferred 595301/120000; top deferred scripts 527937; resource governance governed; quality density 137.6",
+        "detail": "initial load 923/1000; deferred 596985/120000; top deferred scripts 528380; resource governance governed; quality density 140.8",
         "evidence": "reports/context_budget.json"
       },
       "paths": [
@@ -470,7 +470,7 @@
       "actual": {
         "available": true,
         "clean": false,
-        "changed_file_count": 24
+        "changed_file_count": 72
       },
       "paths": [
         "reports/benchmark_reproducibility.json"
@@ -511,8 +511,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "4f77b8a6ee7e59284219d0adcbbceef4dcdcdca9",
-      "actual": "4f77b8a6ee7e59284219d0adcbbceef4dcdcdca9",
+      "expected": "8b9d6672a90b6e087ee242fdadb9b991018b3d47",
+      "actual": "8b9d6672a90b6e087ee242fdadb9b991018b3d47",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -527,8 +527,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "54d1fb49b5de9d73a5a312204ffdfad76937ed8e877571521c569139d9630bd8",
-        "archive_sha256": "f5275f7471c04e62dfc862d714e5d752a688d66952277bee848364634c0046e7",
+        "source_contract_sha256": "2b2b5ed0c96b97d5a32efe63c644a9f9c8ba343c991329d08820430d0bc279e6",
+        "archive_sha256": "67c247d88bff0939b9d79bc627ffa239df3efe6b6f7bd8698d6a7bd6a8646e57",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 14,
         "world_class_source_pass_count": 11,
@@ -543,8 +543,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "54d1fb49b5de9d73a5a312204ffdfad76937ed8e877571521c569139d9630bd8",
-        "archive_sha256": "f5275f7471c04e62dfc862d714e5d752a688d66952277bee848364634c0046e7",
+        "source_contract_sha256": "2b2b5ed0c96b97d5a32efe63c644a9f9c8ba343c991329d08820430d0bc279e6",
+        "archive_sha256": "67c247d88bff0939b9d79bc627ffa239df3efe6b6f7bd8698d6a7bd6a8646e57",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 14,
         "world_class_source_pass_count": 11,
@@ -655,8 +655,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "4f77b8a6ee7e59284219d0adcbbceef4dcdcdca9",
-      "actual": "4f77b8a6ee7e59284219d0adcbbceef4dcdcdca9",
+      "expected": "8b9d6672a90b6e087ee242fdadb9b991018b3d47",
+      "actual": "8b9d6672a90b6e087ee242fdadb9b991018b3d47",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
@@ -671,8 +671,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "54d1fb49b5de9d73a5a312204ffdfad76937ed8e877571521c569139d9630bd8",
-        "archive_sha256": "f5275f7471c04e62dfc862d714e5d752a688d66952277bee848364634c0046e7",
+        "source_contract_sha256": "2b2b5ed0c96b97d5a32efe63c644a9f9c8ba343c991329d08820430d0bc279e6",
+        "archive_sha256": "67c247d88bff0939b9d79bc627ffa239df3efe6b6f7bd8698d6a7bd6a8646e57",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 14,
         "world_class_source_pass_count": 11,
@@ -687,8 +687,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "54d1fb49b5de9d73a5a312204ffdfad76937ed8e877571521c569139d9630bd8",
-        "archive_sha256": "f5275f7471c04e62dfc862d714e5d752a688d66952277bee848364634c0046e7",
+        "source_contract_sha256": "2b2b5ed0c96b97d5a32efe63c644a9f9c8ba343c991329d08820430d0bc279e6",
+        "archive_sha256": "67c247d88bff0939b9d79bc627ffa239df3efe6b6f7bd8698d6a7bd6a8646e57",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 14,
         "world_class_source_pass_count": 11,
@@ -836,7 +836,7 @@
           "label": "可维护性",
           "score": 100,
           "reasons": [
-            "SKILL.md 约 316 个词/字。",
+            "SKILL.md 约 365 个词/字。",
             "入口文件保持克制，可维护性较好。",
             "references/ 已承载扩展指导。",
             "scripts/ 已承载确定性逻辑。",
@@ -857,7 +857,7 @@
           "label": "上下文成本",
           "score": 42,
           "reasons": [
-            "入口约 316 个词/字，references 约 18854 个词/字。",
+            "入口约 365 个词/字，references 约 19499 个词/字。",
             "分数越高代表上下文成本越低。",
             "上下文成本偏高，建议压缩入口或拆分 references。"
           ]
@@ -900,7 +900,7 @@
           "label": "可维护性",
           "score": 100,
           "reasons": [
-            "SKILL.md 约 316 个词/字。",
+            "SKILL.md 约 365 个词/字。",
             "入口文件保持克制，可维护性较好。",
             "references/ 已承载扩展指导。",
             "scripts/ 已承载确定性逻辑。",
@@ -921,7 +921,7 @@
           "label": "上下文成本",
           "score": 42,
           "reasons": [
-            "入口约 316 个词/字，references 约 18854 个词/字。",
+            "入口约 365 个词/字，references 约 19499 个词/字。",
             "分数越高代表上下文成本越低。",
             "上下文成本偏高，建议压缩入口或拆分 references。"
           ]
@@ -1153,7 +1153,7 @@
           "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
         ],
         "gaps": [
-          "上下文成本需要补强：入口约 316 个词/字，references 约 18854 个词/字。"
+          "上下文成本需要补强：入口约 365 个词/字，references 约 19499 个词/字。"
         ],
         "recommendations": [
           "先改触发边界，再扩展工作流。",
@@ -1163,10 +1163,10 @@
         "artifact_design": {
           "design_system": "metric editorial",
           "highlights": [
-            "Metric-first dashboard with stable dimensions, short labels, visible deltas, and narrative callouts only where they change interpretation.",
-            "Avoid paragraph-heavy table cells.",
-            "Keep charts tied to one analytical question each.",
-            "Preserve stable color meaning across metrics and entities."
+            "Side-by-side reviewer studio with explicit tradeoffs, evidence readiness, and fast paths for approving, blocking, or requesting one focused fix.",
+            "Make differences visible instead of hiding them in prose.",
+            "Separate author-facing recommendations from reviewer-only evidence.",
+            "Surface conflicts clearly and keep routine benchmark synthesis quiet."
           ]
         },
         "prompt_quality": {
@@ -1201,7 +1201,7 @@
           "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
         ],
         "gaps": [
-          "上下文成本需要补强：入口约 316 个词/字，references 约 18854 个词/字。"
+          "上下文成本需要补强：入口约 365 个词/字，references 约 19499 个词/字。"
         ],
         "recommendations": [
           "先改触发边界，再扩展工作流。",
@@ -1211,10 +1211,10 @@
         "artifact_design": {
           "design_system": "metric editorial",
           "highlights": [
-            "Metric-first dashboard with stable dimensions, short labels, visible deltas, and narrative callouts only where they change interpretation.",
-            "Avoid paragraph-heavy table cells.",
-            "Keep charts tied to one analytical question each.",
-            "Preserve stable color meaning across metrics and entities."
+            "Side-by-side reviewer studio with explicit tradeoffs, evidence readiness, and fast paths for approving, blocking, or requesting one focused fix.",
+            "Make differences visible instead of hiding them in prose.",
+            "Separate author-facing recommendations from reviewer-only evidence.",
+            "Surface conflicts clearly and keep routine benchmark synthesis quiet."
           ]
         },
         "prompt_quality": {
@@ -1276,7 +1276,7 @@
             "name": "包体膨胀风险",
             "impact": 2,
             "probability": 1,
-            "signal": "SKILL.md 约 316 个词/字。",
+            "signal": "SKILL.md 约 365 个词/字。",
             "response": "先补证据和边界，再增加包体复杂度。"
           },
           {
@@ -1361,6 +1361,29 @@
             ]
           },
           {
+            "key": "code_or_command_safety",
+            "label": "Code and command safety",
+            "matched_keywords": [
+              "code",
+              "script"
+            ],
+            "score": 2,
+            "risks": [
+              "Commands can omit environment assumptions, working directory, or rollback notes.",
+              "Code snippets can look runnable while missing required inputs.",
+              "Error handling can be either absent or over-engineered."
+            ],
+            "constraints": [
+              "Name the working directory, required inputs, and expected output for each command.",
+              "Mark destructive or external side-effect operations explicitly.",
+              "Prefer the smallest runnable snippet over broad framework code."
+            ],
+            "self_repair": [
+              "Scan each command for cwd, input, output, and side-effect assumptions.",
+              "Remove speculative error handling that is not tied to a real failure mode."
+            ]
+          },
+          {
             "key": "visual_capture",
             "label": "Screenshot and visual capture",
             "matched_keywords": [
@@ -1380,28 +1403,6 @@
             "self_repair": [
               "Check that every screenshot reference points to a real provided or generated asset.",
               "Reword any visual instruction that depends on an unseen screen state."
-            ]
-          },
-          {
-            "key": "code_or_command_safety",
-            "label": "Code and command safety",
-            "matched_keywords": [
-              "script"
-            ],
-            "score": 1,
-            "risks": [
-              "Commands can omit environment assumptions, working directory, or rollback notes.",
-              "Code snippets can look runnable while missing required inputs.",
-              "Error handling can be either absent or over-engineered."
-            ],
-            "constraints": [
-              "Name the working directory, required inputs, and expected output for each command.",
-              "Mark destructive or external side-effect operations explicitly.",
-              "Prefer the smallest runnable snippet over broad framework code."
-            ],
-            "self_repair": [
-              "Scan each command for cwd, input, output, and side-effect assumptions.",
-              "Remove speculative error handling that is not tied to a real failure mode."
             ]
           }
         ],
@@ -1438,7 +1439,7 @@
             "name": "包体膨胀风险",
             "impact": 2,
             "probability": 1,
-            "signal": "SKILL.md 约 316 个词/字。",
+            "signal": "SKILL.md 约 365 个词/字。",
             "response": "先补证据和边界，再增加包体复杂度。"
           },
           {
@@ -1523,6 +1524,29 @@
             ]
           },
           {
+            "key": "code_or_command_safety",
+            "label": "Code and command safety",
+            "matched_keywords": [
+              "code",
+              "script"
+            ],
+            "score": 2,
+            "risks": [
+              "Commands can omit environment assumptions, working directory, or rollback notes.",
+              "Code snippets can look runnable while missing required inputs.",
+              "Error handling can be either absent or over-engineered."
+            ],
+            "constraints": [
+              "Name the working directory, required inputs, and expected output for each command.",
+              "Mark destructive or external side-effect operations explicitly.",
+              "Prefer the smallest runnable snippet over broad framework code."
+            ],
+            "self_repair": [
+              "Scan each command for cwd, input, output, and side-effect assumptions.",
+              "Remove speculative error handling that is not tied to a real failure mode."
+            ]
+          },
+          {
             "key": "visual_capture",
             "label": "Screenshot and visual capture",
             "matched_keywords": [
@@ -1542,28 +1566,6 @@
             "self_repair": [
               "Check that every screenshot reference points to a real provided or generated asset.",
               "Reword any visual instruction that depends on an unseen screen state."
-            ]
-          },
-          {
-            "key": "code_or_command_safety",
-            "label": "Code and command safety",
-            "matched_keywords": [
-              "script"
-            ],
-            "score": 1,
-            "risks": [
-              "Commands can omit environment assumptions, working directory, or rollback notes.",
-              "Code snippets can look runnable while missing required inputs.",
-              "Error handling can be either absent or over-engineered."
-            ],
-            "constraints": [
-              "Name the working directory, required inputs, and expected output for each command.",
-              "Mark destructive or external side-effect operations explicitly.",
-              "Prefer the smallest runnable snippet over broad framework code."
-            ],
-            "self_repair": [
-              "Scan each command for cwd, input, output, and side-effect assumptions.",
-              "Remove speculative error handling that is not tied to a real failure mode."
             ]
           }
         ],
@@ -1759,7 +1761,7 @@
             "path": "references",
             "label": "Extended guidance and reusable notes",
             "kind": "folder",
-            "file_count": 39
+            "file_count": 40
           },
           {
             "path": "scripts",
@@ -1777,10 +1779,10 @@
             "path": "reports",
             "label": "Generated evidence and overview artifacts",
             "kind": "folder",
-            "file_count": 195
+            "file_count": 199
           }
         ],
-        "file_count": 446,
+        "file_count": 451,
         "folder_count": 4,
         "distribution": [
           {
@@ -1801,7 +1803,7 @@
           },
           {
             "label": "references",
-            "value": 39
+            "value": 40
           },
           {
             "label": "scripts",
@@ -1813,7 +1815,7 @@
           },
           {
             "label": "reports",
-            "value": 195
+            "value": 199
           }
         ]
       },
@@ -1847,7 +1849,7 @@
             "path": "references",
             "label": "Extended guidance and reusable notes",
             "kind": "folder",
-            "file_count": 39
+            "file_count": 40
           },
           {
             "path": "scripts",
@@ -1865,10 +1867,10 @@
             "path": "reports",
             "label": "Generated evidence and overview artifacts",
             "kind": "folder",
-            "file_count": 195
+            "file_count": 199
           }
         ],
-        "file_count": 446,
+        "file_count": 451,
         "folder_count": 4,
         "distribution": [
           {
@@ -1889,7 +1891,7 @@
           },
           {
             "label": "references",
-            "value": 39
+            "value": 40
           },
           {
             "label": "scripts",
@@ -1901,7 +1903,7 @@
           },
           {
             "label": "reports",
-            "value": 195
+            "value": 199
           }
         ]
       },
@@ -3572,14 +3574,14 @@
         "`5` warnings",
         "`81` declared internal modules",
         "`93 / 93` CLI help smoke checks passing across `174` scripts",
-        "`658` zip entries",
-        "archive with `658` entries",
+        "`664` zip entries",
+        "archive with `664` entries",
         "`12` installer permission checks enforced",
         "`0` permission failures",
         "`25` required artifacts",
         "`23` reproduction commands",
-        "initial load `945/1000`",
-        "target count is `87`"
+        "initial load `923/1000`",
+        "target count is `88`"
       ],
       "actual": "all present",
       "paths": [

@@ -4,7 +4,7 @@
 - Package directory: `dist`
 - Targets: `4 / 4` adapters present
 - Archive present: `True`
-- Archive SHA256: `f5275f7471c04e62dfc862d714e5d752a688d66952277bee848364634c0046e7`
+- Archive SHA256: `67c247d88bff0939b9d79bc627ffa239df3efe6b6f7bd8698d6a7bd6a8646e57`
 - Nested SKILL.md entries: `0`
 - Failures: `0`
 - Warnings: `0`
@@ -135,6 +135,7 @@
 | `archive-entry-yao-meta-skill/agents/interface.yaml` | `pass` | Archive contains yao-meta-skill/agents/interface.yaml |
 | `archive-single-skill-entrypoint` | `pass` | Archive exposes only the root SKILL.md entrypoint |
 | `archive-excludes-generated` | `pass` | Archive excludes local caches, platform noise, .yao state, external submission drafts, local evidence pointers, generated dist/, .previews/, and tests/tmp* contents |
+| `archive-source-snapshot` | `pass` | Archive payload matches current source files, except its generated portable pointer and index |
 | `archive-portable-evidence-index` | `pass` | Archive includes a self-contained portable evidence pointer and verified report index |
 | `registry-name-match` | `pass` | Registry package name matches package manifest |
 | `registry-version-match` | `pass` | Registry package version matches package manifest |

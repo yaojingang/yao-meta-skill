@@ -20,12 +20,12 @@ Generated skills often fail in small output details: generic headings, cluttered
 - Matched keywords: source, reference
 - Score: `2`
 
+### Code and command safety
+- Matched keywords: code, script
+- Score: `2`
+
 ### Screenshot and visual capture
 - Matched keywords: capture
-- Score: `1`
-
-### Code and command safety
-- Matched keywords: script
 - Score: `1`
 
 ## Likely Output Mistakes

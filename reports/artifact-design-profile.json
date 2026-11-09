@@ -2,29 +2,16 @@
   "skill_name": "yao-meta-skill",
   "design_system": "metric editorial",
   "primary_artifact": {
-    "key": "dashboard",
-    "label": "Dashboard or metrics page",
-    "direction": "Metric-first dashboard with stable dimensions, short labels, visible deltas, and narrative callouts only where they change interpretation.",
+    "key": "review_viewer",
+    "label": "Review viewer",
+    "direction": "Side-by-side reviewer studio with explicit tradeoffs, evidence readiness, and fast paths for approving, blocking, or requesting one focused fix.",
     "matched_keywords": [
-      "metric",
-      "score",
-      "table",
-      "scorecard"
+      "review",
+      "viewer",
+      "audit"
     ]
   },
   "artifact_families": [
-    {
-      "key": "dashboard",
-      "label": "Dashboard or metrics page",
-      "score": 4,
-      "matched_keywords": [
-        "metric",
-        "score",
-        "table",
-        "scorecard"
-      ],
-      "direction": "Metric-first dashboard with stable dimensions, short labels, visible deltas, and narrative callouts only where they change interpretation."
-    },
     {
       "key": "review_viewer",
       "label": "Review viewer",
@@ -35,6 +22,17 @@
         "audit"
       ],
       "direction": "Side-by-side reviewer studio with explicit tradeoffs, evidence readiness, and fast paths for approving, blocking, or requesting one focused fix."
+    },
+    {
+      "key": "dashboard",
+      "label": "Dashboard or metrics page",
+      "score": 3,
+      "matched_keywords": [
+        "score",
+        "table",
+        "scorecard"
+      ],
+      "direction": "Metric-first dashboard with stable dimensions, short labels, visible deltas, and narrative callouts only where they change interpretation."
     },
     {
       "key": "code_or_cli",
@@ -68,14 +66,14 @@
     }
   ],
   "layout_patterns": [
-    "metric board",
-    "ranked signals",
-    "comparison rows",
-    "interpretation",
-    "action queue",
     "summary",
     "variant comparison",
-    "evidence"
+    "evidence",
+    "risks",
+    "review decision",
+    "metric board",
+    "ranked signals",
+    "comparison rows"
   ],
   "design_tokens": {
     "type": [
@@ -100,12 +98,12 @@
     ]
   },
   "quality_gates": [
-    "Avoid paragraph-heavy table cells.",
-    "Keep charts tied to one analytical question each.",
-    "Preserve stable color meaning across metrics and entities.",
     "Make differences visible instead of hiding them in prose.",
     "Separate author-facing recommendations from reviewer-only evidence.",
     "Surface conflicts clearly and keep routine benchmark synthesis quiet.",
+    "Avoid paragraph-heavy table cells.",
+    "Keep charts tied to one analytical question each.",
+    "Preserve stable color meaning across metrics and entities.",
     "Name the working directory and required inputs for commands.",
     "Mark destructive, networked, or external side-effect operations."
   ],

@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-08-17",
+  "generated_at": "2026-11-09",
   "skill_dir": ".",
   "summary": {
     "item_count": 21,
@@ -204,7 +204,7 @@
       "label": "Registry Distribution",
       "status": "pass",
       "objective": "Skill packages are installable, versioned, checksumed, and upgrade-reviewable.",
-      "current": "archive entries 658; install failures 0",
+      "current": "archive entries 664; install failures 0",
       "command": "python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip --self && python3 scripts/yao.py registry-audit . --self",
       "test": "python3 tests/verify_registry_audit.py",
       "evidence": [
@@ -749,11 +749,11 @@
           "exists": true
         },
         {
-          "path": "reports/skillops/daily/2026-08-17.json",
+          "path": "reports/skillops/daily/2026-11-09.json",
           "exists": true
         },
         {
-          "path": "reports/skillops/daily/2026-08-17.md",
+          "path": "reports/skillops/daily/2026-11-09.md",
           "exists": true
         }
       ],
@@ -776,11 +776,11 @@
           "exists": true
         },
         {
-          "path": "reports/skillops/weekly/2026-W34.json",
+          "path": "reports/skillops/weekly/2026-W46.json",
           "exists": true
         },
         {
-          "path": "reports/skillops/weekly/2026-W34.md",
+          "path": "reports/skillops/weekly/2026-W46.md",
           "exists": true
         }
       ],

@@ -16,6 +16,10 @@
 - `reports/`: generated review, trust, conformance, registry, overview, and release evidence.
 - `docs/`: durable public docs such as migration notes and localized READMEs.
 
+Profile identity and keyword classification must use the canonical `SKILL.md` frontmatter `name`. Use the directory name only when the frontmatter name is absent; moving a checkout must preserve profile results.
+
+Skill Atlas discovery must skip `.yao/` at every project depth, keeping private backups, validation copies, evidence runs, and releases outside the portfolio catalog.
+
 ## Verification
 
 Use `make ci-test` as the default full verification command before calling a change done. For focused work, run the smallest relevant target first, then finish with `make ci-test` when generated artifacts, packaging, registry, trust, or report UI changed.
@@ -45,10 +49,10 @@ After source changes that affect scripts, package contents, trust evidence, Revi
 
 ```bash
 GENERATED_AT="${GENERATED_AT:-$(date +%F)}"
+python3 scripts/trust_check.py . --output-json reports/security_trust_report.json --output-md reports/security_trust_report.md
 python3 scripts/compile_skill.py . --generated-at "$GENERATED_AT"
 python3 scripts/cross_packager.py . --platform openai --platform claude --platform generic --platform vscode --expectations evals/packaging_expectations.json --output-dir dist --zip
 python3 scripts/simulate_install.py . --package-dir dist --install-root dist/install-simulation --output-json reports/install_simulation.json --output-md reports/install_simulation.md --generated-at "$GENERATED_AT"
-python3 scripts/trust_check.py . --output-json reports/security_trust_report.json --output-md reports/security_trust_report.md
 python3 scripts/registry_audit.py . --generated-at "$GENERATED_AT"
 python3 scripts/verify_package.py . --package-dir dist --expectations evals/packaging_expectations.json --registry-json reports/registry_audit.json --output-json reports/package_verification.json --output-md reports/package_verification.md --require-zip --generated-at "$GENERATED_AT"
 python3 scripts/registry_audit.py . --generated-at "$GENERATED_AT"
@@ -98,6 +102,8 @@ python3 scripts/render_evidence_consistency.py . --generated-at "$GENERATED_AT"
 ```
 
 If `reports/benchmark_reproducibility.json` reports `release_lock_ready: false`, do not commit that benchmark as release evidence. Restore the transient dirty-lock reports, commit the source/generated evidence that caused the dirty state, and regenerate the clean-lock reports on the resulting clean tree.
+
+Before delivering an archive, rebuild it after the final generated report refresh. Refresh the package, registry, and checksum-consuming evidence for those final bytes, then run `verify_package.py` again after all generation has finished. Its `archive-source-snapshot` gate must pass: included source and report files match the archive, with only the generated portable evidence pointer and index exempted. Keep archive-attestation consumers excluded from the archive to avoid checksum cycles.
 
 Local sync into `~/.agents/skills.disabled/yao-meta-skill` or `~/.agents/skills/yao-meta-skill` must keep the install preflight enabled unless the user explicitly requests a diagnostic bypass. Build and verify the archive before invoking `make sync-local-install` or `make sync-active-install`. The sync targets preserve the attested archive. `scripts/sync_local_install.py` checks the archive bytes against `reports/package_verification.json`, installs those exact bytes, and refuses the copy when the hash, install simulation, or installer permission enforcement fails.
 

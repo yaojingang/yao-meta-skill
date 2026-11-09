@@ -69,6 +69,32 @@ def non_root_skill_entries(names: list[str], package_root: str) -> list[str]:
     return sorted(name for name in names if PurePosixPath(name).name == "SKILL.md" and name != root_entry)
 
 
+def stale_source_entries(skill_dir: Path, archive: zipfile.ZipFile, package_root: str) -> list[str]:
+    portable_entries = {"reports/.current-run.json", "reports/artifact-index.json"}
+    stale = []
+    for name in archive.namelist():
+        if unsafe_zip_entries([name]):
+            continue
+        member = PurePosixPath(name)
+        if not member.parts or member.parts[0] != package_root:
+            continue
+        relative = PurePosixPath(*member.parts[1:])
+        if relative.as_posix() in portable_entries:
+            continue
+        source = skill_dir.joinpath(*relative.parts)
+        if source.is_symlink() or not source.resolve().is_relative_to(skill_dir):
+            stale.append(relative.as_posix())
+        elif not source.is_file():
+            stale.append(relative.as_posix())
+        else:
+            try:
+                if source.read_bytes() != archive.read(name):
+                    stale.append(relative.as_posix())
+            except OSError:
+                stale.append(relative.as_posix())
+    return sorted(stale)
+
+
 def required_targets(expectations: dict[str, Any], package_dir: Path) -> list[str]:
     targets = expectations.get("required_targets") or []
     if targets:
@@ -162,6 +188,12 @@ def verify_package(
             generated_entries = generated_zip_entries(archive_entries)
             add_check(checks, failures, "archive-excludes-generated", not generated_entries, "Archive excludes local caches, platform noise, .yao state, external submission drafts, local evidence pointers, generated dist/, .previews/, and tests/tmp* contents")
             with zipfile.ZipFile(archive_path) as archive:
+                stale_entries = stale_source_entries(skill_dir, archive, package_root)
+                add_check(
+                    checks, failures, "archive-source-snapshot", not stale_entries,
+                    "Archive payload matches current source files, except its generated portable pointer and index"
+                    + (f": stale files: {', '.join(stale_entries)}" if stale_entries else ""),
+                )
                 pointer_name = f"{package_root}/reports/.current-run.json"
                 index_name = f"{package_root}/reports/artifact-index.json"
                 try:

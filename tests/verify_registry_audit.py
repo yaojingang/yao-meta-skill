@@ -39,7 +39,7 @@ def main() -> None:
     assert payload["ok"], payload
     assert payload["schema_version"] == "2.0", payload
     assert package["name"] == "yao-meta-skill", package
-    assert package["version"] == "2.1.0", package
+    assert package["version"] == "2.1.1", package
     assert package["license"] == "MIT", package
     assert package["checksums"]["package_sha256"], package
     assert package["source"]["ir_schema_version"] == "2.0.0", package

@@ -72,6 +72,17 @@ def main() -> None:
     assert "RTF To Skill Mapping" in markdown, markdown[:1200]
     assert "Quality Matrix" in markdown, markdown[:1600]
 
+    renamed = tmp_root / "renamed prompt screenshot data secret"
+    skill_dir.rename(renamed)
+    renamed_proc = subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "render_prompt_quality_profile.py"), str(renamed)],
+        cwd=ROOT, check=True, capture_output=True, text=True,
+    )
+    renamed_summary = json.loads(renamed_proc.stdout)["summary"]
+    assert renamed_summary["skill_name"] == "prompt-quality-demo", renamed_summary
+    assert renamed_summary == summary, (summary, renamed_summary)
+    assert "Skill: `prompt-quality-demo`" in (renamed / "reports/prompt-quality-profile.md").read_text()
+
     print(json.dumps({"ok": True}, ensure_ascii=False, indent=2))
 
 

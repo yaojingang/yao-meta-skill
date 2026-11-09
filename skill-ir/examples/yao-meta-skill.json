@@ -109,7 +109,8 @@
       "references/telemetry-drift-method.md",
       "references/trust-security-method.md",
       "references/update-delivery.md",
-      "references/user-memory-policy.md"
+      "references/user-memory-policy.md",
+      "references/workbuddy.md"
     ],
     "scripts": [
       "scripts/adaptation_patch_safety.py",
